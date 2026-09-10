@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://multigrainintl.github.io/nebraskabeans/sitemap.xml
