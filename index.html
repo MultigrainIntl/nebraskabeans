@@ -1,116 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nebraska Dry Bean Intelligence | NebraskaBeans</title>
-<meta name="description" content="Nebraska dry bean production geography, crop intelligence, reports and commercial connections.">
-<meta property="og:title" content="Nebraska Dry Bean Intelligence">
-<meta property="og:description" content="A map-led intelligence platform for Nebraska dry beans.">
-<meta property="og:type" content="website">
-<link rel="canonical" href="https://multigrainintl.github.io/nebraskabeans/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
-<script defer src="assets/site.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"NebraskaBeans","url":"https://multigrainintl.github.io/nebraskabeans/","description":"Nebraska dry bean market intelligence and commercial gateway"}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NebraskaBeans.com | Dry Bean Intelligence & Commercial Terminal</title>
+  <meta name="description" content="Authoritative market intelligence, USDA crop data, geospatial production maps, and commercial trading gateway for Nebraska dry edible beans.">
+  <link rel="canonical" href="https://multigrainintl.github.io/nebraskabeans/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <style>
+    :root{--bg-main:#0B0F17;--bg-panel:#131B2A;--bg-panel-border:#1E293B;--bg-element:#1E293D;--text-main:#E2E8F0;--text-muted:#94A3B8;--text-bright:#FFF;--accent-green:#10B981;--accent-amber:#F59E0B;--accent-blue:#3B82F6;--accent-red:#EF4444;--brand-gold:#D97706;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--font-mono:'JetBrains Mono',monospace;--border-radius:4px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg-main);color:var(--text-main);font-family:var(--font-sans);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}a{color:inherit}
+    header{background:#080B11;border-bottom:1px solid var(--bg-panel-border);padding:0 1rem;display:flex;justify-content:space-between;align-items:center;height:48px;position:sticky;top:0;z-index:1000}.brand-group{display:flex;align-items:center;gap:1rem}.logo{font-family:var(--font-mono);font-weight:700;font-size:1rem;color:var(--text-bright);letter-spacing:-.5px;display:flex;align-items:center;gap:.5rem}.logo-badge{background:var(--brand-gold);color:#000;font-size:.65rem;padding:1px 5px;border-radius:2px;font-weight:800;text-transform:uppercase}.site-selector{background:var(--bg-element);border:1px solid var(--bg-panel-border);color:var(--text-muted);font-size:.75rem;padding:2px 8px;border-radius:var(--border-radius)}nav ul{display:flex;list-style:none;gap:1.25rem}nav a{color:var(--text-muted);text-decoration:none;font-size:.8rem;font-weight:500;transition:color .15s}nav a:hover,nav a.active{color:var(--text-bright)}.header-actions{display:flex;align-items:center;gap:.75rem}.btn-action{background:var(--accent-blue);color:#fff;border:none;padding:5px 12px;font-size:.75rem;font-weight:600;border-radius:var(--border-radius);cursor:pointer}.btn-outline{background:transparent;border:1px solid var(--bg-panel-border);color:var(--text-main);padding:4px 10px;font-size:.75rem;border-radius:var(--border-radius);cursor:pointer}
+    .ticker-bar{background:#0D131F;border-bottom:1px solid var(--bg-panel-border);font-family:var(--font-mono);font-size:.7rem;padding:4px 1rem;display:flex;gap:2rem;overflow-x:auto;white-space:nowrap}.ticker-item{display:flex;gap:.5rem;align-items:center}.ticker-label{color:var(--text-muted)}.ticker-val{color:var(--text-bright);font-weight:600}.ticker-status{font-size:.65rem;padding:1px 4px;border-radius:2px}.status-verified{background:rgba(16,185,129,.15);color:var(--accent-green)}.status-pending{background:rgba(245,158,11,.15);color:var(--accent-amber)}
+    .terminal-container{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1rem;padding:1rem;max-width:1600px;margin:0 auto}.panel{background:var(--bg-panel);border:1px solid var(--bg-panel-border);border-radius:var(--border-radius);margin-bottom:1rem;overflow:hidden}.panel-header{background:rgba(255,255,255,.02);border-bottom:1px solid var(--bg-panel-border);padding:8px 12px;display:flex;justify-content:space-between;align-items:center;gap:1rem}.panel-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-bright);display:flex;align-items:center;gap:.5rem}.panel-title::before{content:'';display:inline-block;width:6px;height:6px;background:var(--brand-gold);flex:none}.panel-body{padding:12px}.snapshot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.snap-card{background:var(--bg-main);border:1px solid var(--bg-panel-border);padding:10px;border-radius:var(--border-radius);min-height:86px}.snap-label{font-size:.7rem;color:var(--text-muted);text-transform:uppercase}.snap-value{font-family:var(--font-mono);font-size:1.05rem;font-weight:600;color:var(--text-bright);margin:2px 0}.snap-sub{font-size:.68rem;color:var(--text-muted);display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+    #map-container{height:420px;width:100%;border-radius:var(--border-radius);background:#0A0E17}.map-note{font-size:.68rem;color:var(--text-muted);margin-top:6px}.map-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:.68rem;color:var(--text-muted)}.legend-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}.legend-hub{background:var(--brand-gold)}.legend-city{background:var(--accent-blue)}
+    .data-table{width:100%;border-collapse:collapse;font-size:.75rem;text-align:left}.data-table th{background:#0D131F;color:var(--text-muted);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--bg-panel-border);text-transform:uppercase;font-size:.68rem}.data-table td{padding:8px;border-bottom:1px solid var(--bg-panel-border);color:var(--text-main)}.data-table tr:hover{background:rgba(255,255,255,.02)}.num-col{font-family:var(--font-mono);text-align:right}.tab-bar{display:flex;border-bottom:1px solid var(--bg-panel-border);gap:2px;overflow:auto}.tab-btn{background:transparent;border:none;color:var(--text-muted);padding:6px 12px;font-size:.75rem;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}.tab-btn.active{color:var(--text-bright);border-bottom-color:var(--brand-gold);background:rgba(255,255,255,.02)}
+    .calc-box{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.form-group{display:flex;flex-direction:column;gap:4px}.form-group label{font-size:.68rem;color:var(--text-muted)}.form-control{background:var(--bg-main);border:1px solid var(--bg-panel-border);color:var(--text-bright);padding:6px;font-size:.8rem;font-family:var(--font-mono);border-radius:var(--border-radius)}.source-link{color:#93c5fd;text-decoration:none}.source-link:hover{text-decoration:underline}.integrity{padding:8px 10px;background:#0D131F;border-top:1px solid var(--bg-panel-border);font-size:.68rem;color:var(--text-muted)}
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;align-items:center;justify-content:center;padding:1rem}.modal-content{background:var(--bg-panel);border:1px solid var(--bg-panel-border);padding:1.5rem;width:100%;max-width:500px;border-radius:var(--border-radius)}
+    @media(max-width:1180px){nav{display:none}.snapshot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:1024px){.terminal-container{grid-template-columns:1fr}.site-selector{display:none}}@media(max-width:700px){header{height:auto;min-height:48px;padding:.65rem 1rem;align-items:flex-start}.header-actions{display:none}.snapshot-grid{grid-template-columns:1fr 1fr}.panel-header{align-items:flex-start;flex-direction:column}.panel-header>div:last-child{font-size:.65rem!important}.ticker-bar{gap:1rem}#map-container{height:360px}}@media(max-width:480px){.snapshot-grid{grid-template-columns:1fr}.logo-badge{display:none}.terminal-container{padding:.5rem}.panel{margin-bottom:.5rem}}
+  </style>
 </head>
-<body class="home">
-<a class="skip" href="#main">Skip to content</a>
-<header class="top">
-  <div class="brand"><a href="index.html"><b>NEBRASKA</b><span>BEANS</span></a><small>FIELD + MARKET INTELLIGENCE</small></div>
-  <button class="menu" aria-expanded="false" aria-controls="nav">MENU</button>
-  <nav id="nav"><a href="#map-intel">Map</a><a href="#pulse">Crop Pulse</a><a href="#classes">Bean Classes</a><a href="reports.html">Reports</a><a href="resources.html">Sources</a><a class="nav-trade" href="commercial.html">BUY / SELL ↗</a></nav>
+<body>
+<header>
+  <div class="brand-group"><div class="logo">NEBRASKABEANS<span class="logo-badge">INTELLIGENCE</span></div><select class="site-selector" title="Platform Gateway Selector"><option selected>NebraskaBeans.com</option><option disabled>MichiganBeans.com — future</option><option disabled>AlbertaBeans.com — future</option></select></div>
+  <nav><ul><li><a href="#snapshot" class="active">Market Snapshot</a></li><li><a href="#geospatial">Production Map</a></li><li><a href="#classes">Bean Classes</a></li><li><a href="#intelligence">Crop Data</a></li><li><a href="#resources">Sources</a></li></ul></nav>
+  <div class="header-actions"><button class="btn-outline" onclick="openModal('offer')">Offer Product</button><button class="btn-action" onclick="openModal('rfq')">Request Quote</button></div>
 </header>
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">NE-GREAT NORTHERN:</span><span class="ticker-val">Signature Nebraska class</span><span class="ticker-status status-verified">Public source</span></div>
+  <div class="ticker-item"><span class="ticker-label">2026 INTENTIONS:</span><span class="ticker-val">101,000 acres</span><span class="ticker-status status-verified">USDA NASS</span></div>
+  <div class="ticker-item"><span class="ticker-label">2026 PRODUCTION:</span><span class="ticker-val">Pending official bean-specific figure</span><span class="ticker-status status-pending">Pending</span></div>
+  <div class="ticker-item"><span class="ticker-label">DROUGHT:</span><span class="ticker-val">Use current U.S. Drought Monitor layer</span><span class="ticker-status status-verified">Official source</span></div>
+</div>
+<main class="terminal-container">
+<section>
+  <div class="panel" id="snapshot"><div class="panel-header"><div class="panel-title">Nebraska Dry Bean Intelligence Snapshot</div><div style="font-size:.7rem;color:var(--text-muted)">Verified public data only</div></div><div class="panel-body"><div class="snapshot-grid">
+    <div class="snap-card"><div class="snap-label">2026 Planted Area</div><div class="snap-value">101,000 Ac</div><div class="snap-sub"><span>Intentions, Mar. 31</span><span class="status-verified">USDA NASS</span></div></div>
+    <div class="snap-card"><div class="snap-label">2025 Comparison</div><div class="snap-value">106,000 Ac</div><div class="snap-sub"><span>Prior-year value</span><span>2026 = 95%</span></div></div>
+    <div class="snap-card"><div class="snap-label">Core Geography</div><div class="snap-value">Western Nebraska</div><div class="snap-sub"><span>Panhandle / North Platte Valley</span><span class="status-verified">Public sources</span></div></div>
+    <div class="snap-card"><div class="snap-label">Commercial Status</div><div class="snap-value">Quote on Request</div><div class="snap-sub"><span>No public static pricing</span><span class="status-pending">Live availability not published</span></div></div>
+  </div></div></div>
 
-<main id="main">
-<section class="mast">
-  <div class="mast-copy">
-    <div class="kicker"><span>2026 CROP</span><span>WESTERN NEBRASKA</span><span>UPDATED 10 SEP</span></div>
-    <h1>Know the crop.<br><em>Know the ground.</em></h1>
-    <p class="mast-lead">A map-led intelligence platform for Nebraska dry beans—production geography, crop conditions, official data and physical-market connections.</p>
-    <div class="mast-actions"><a href="#map-intel">Explore the production map ↓</a><a href="commercial.html">Request / offer beans ↗</a></div>
-  </div>
-  <aside class="brief" aria-label="Current market brief">
-    <div class="brief-label">FIELD NOTE / 026</div>
-    <p>Intended Nebraska dry bean area is lower than the prior year. Statewide late-season topsoil moisture is tight. Bean-specific 2026 production remains pending official USDA release.</p>
-    <div class="brief-source">VERIFIED PUBLIC SIGNALS ONLY</div>
-  </aside>
-  <div class="crop-number"><small>USDA 2026 INTENTIONS</small><strong>101,000</strong><span>ACRES</span><i>−4.7% vs 2025 intentions</i></div>
-</section>
+  <div class="panel" id="geospatial"><div class="panel-header"><div class="panel-title">Nebraska Dry Bean Production Geography</div><div style="font-size:.7rem;color:var(--accent-amber)">Public intelligence context — not a county acreage heat map</div></div><div class="panel-body"><div id="map-container"></div><div class="map-legend"><span><i class="legend-dot legend-hub"></i>UNL dry-bean research geography examples</span><span><i class="legend-dot legend-city"></i>Regional city reference</span></div><div class="map-note">Western Nebraska is the principal dry edible bean production region. County markers shown here identify public research geography examples, not current acreage or facility locations. Nebraska NASS county dry-bean estimates are discontinued, so the site does not imply a current county-level production ranking.</div></div></div>
 
-<section id="map-intel" class="map-stage">
-  <div class="map-head">
-    <div><p class="section-code">01 / PRODUCTION GEOGRAPHY</p><h2>The bean country is west.</h2></div>
-    <p>Nebraska dry edible bean production is concentrated in the arid west. The map uses real Nebraska county boundaries; highlighted counties are verified examples used in UNL dry-bean yield analysis, not a complete acreage map.</p>
-  </div>
-  <div class="map-layout">
-    <div class="map-frame">
-      <div class="map-toolbar"><button class="active" data-mapmode="production">Production context</button><button data-mapmode="risk">2026 field context</button><span id="mapStatus">LOADING COUNTY GEOMETRY…</span></div>
-      <svg id="nebraskaMap" role="img" aria-label="Interactive map of Nebraska counties showing verified western dry bean production context"></svg>
-      <div id="mapTooltip" class="map-tooltip" hidden></div>
-      <div class="map-legend"><span><i class="swatch core"></i>Verified dry-bean county examples</span><span><i class="swatch other"></i>Other Nebraska counties</span><span>Hover a county</span></div>
-    </div>
-    <aside class="map-rail">
-      <div class="rail-top"><span>SELECTED</span><b id="countyName">WESTERN NEBRASKA</b><p id="countyNote">UNL and Nebraska agriculture sources identify western Nebraska as the core dry-bean production geography.</p></div>
-      <div class="rail-list">
-        <button data-county="31013"><span>BOX BUTTE</span><small>Alliance</small></button>
-        <button data-county="31123"><span>MORRILL</span><small>North Platte Valley</small></button>
-        <button data-county="31157"><span>SCOTTS BLUFF</span><small>Gering · Mitchell</small></button>
-        <button data-county="31161"><span>SHERIDAN</span><small>Panhandle</small></button>
-      </div>
-      <div class="rail-foot">These four counties are specifically documented in UNL's 2026 drought/yield comparison for dry beans. County highlighting does not imply exclusive production.</div>
-    </aside>
-  </div>
-</section>
+  <div class="panel" id="classes"><div class="panel-header"><div class="panel-title">Nebraska Bean Classes & Public Specification Context</div></div><div class="tab-bar"><button class="tab-btn active" onclick="switchSpec('gn',this)">Great Northern</button><button class="tab-btn" onclick="switchSpec('pinto',this)">Pinto</button><button class="tab-btn" onclick="switchSpec('lrk',this)">Light Red Kidney</button><button class="tab-btn" onclick="switchSpec('black',this)">Black / Navy</button></div><div class="panel-body" id="spec-content"></div></div>
 
-<section id="pulse" class="pulse">
-  <div class="pulse-title"><p class="section-code">02 / CROP PULSE</p><h2>Four numbers.<br>One crop story.</h2></div>
-  <div class="pulse-strip">
-    <article><span>AREA</span><b>101K</b><p>2026 intended acres</p><small>USDA NASS · MAR 31</small></article>
-    <article><span>TOPSOIL</span><b>54%</b><p>short / very short statewide</p><small>UNL / NASS · SEP 6</small></article>
-    <article><span>HARVEST</span><b>—</b><p>bean-specific progress pending</p><small>DO NOT INFER</small></article>
-    <article><span>PRODUCTION</span><b>—</b><p>2026 estimate pending</p><small>USDA RELEASE · SEP 11</small></article>
-  </div>
-  <div class="interpretation"><b>READ:</b><p>Less intended area does not by itself define final supply. Late-season statewide moisture is a risk signal, but this site will not turn statewide conditions into an unverified bean-yield claim.</p><a href="methodology.html">How we classify evidence →</a></div>
+  <div class="panel" id="intelligence"><div class="panel-header"><div class="panel-title">Nebraska Dry Edible Bean Area — USDA NASS</div><div style="font-size:.7rem;color:var(--text-muted)">2026 is prospective planting intentions, not final acreage</div></div><div class="panel-body"><canvas id="cropChart" style="max-height:230px;width:100%"></canvas></div></div>
 </section>
-
-<section class="timeline" aria-label="Nebraska dry bean acreage trend">
-  <div class="timeline-copy"><p class="section-code">03 / AREA DIRECTION</p><h2>A smaller footprint.</h2><p>Planted area moved from 130,000 acres in 2024 to 106,000 in 2025. USDA's March 2026 intentions indicate 101,000 acres.</p></div>
-  <div class="area-viz">
-    <div class="area-line"><span style="--x:0%"><i></i><b>130K</b><small>2024</small></span><span style="--x:82%"><i></i><b>106K</b><small>2025</small></span><span style="--x:100%"><i></i><b>101K*</b><small>2026</small></span></div>
-    <p>*2026 is Prospective Plantings intentions, not final planted acreage.</p>
-  </div>
-</section>
-
-<section id="classes" class="bean-field">
-  <div class="bean-title"><p class="section-code">04 / COMMERCIAL CLASSES</p><h2>Six classes.<br><em>Different markets.</em></h2><p>Start with the class. Move into production context, specifications, packaging and physical-market routing.</p></div>
-  <div class="bean-index">
-    <a href="bean.html?class=great-northern"><span>01</span><strong>Great Northern</strong><small>Nebraska signature class</small><i>→</i></a>
-    <a href="bean.html?class=pinto"><span>02</span><strong>Pinto</strong><small>Major regional class</small><i>→</i></a>
-    <a href="bean.html?class=light-red-kidney"><span>03</span><strong>Light Red Kidney</strong><small>Specialty color bean</small><i>→</i></a>
-    <a href="bean.html?class=black"><span>04</span><strong>Black</strong><small>Commercial context</small><i>→</i></a>
-    <a href="bean.html?class=navy"><span>05</span><strong>Navy</strong><small>Regional comparison</small><i>→</i></a>
-    <a href="bean.html?class=garbanzo"><span>06</span><strong>Garbanzo</strong><small>Pulse-market context</small><i>→</i></a>
-  </div>
-</section>
-
-<section class="trade-band">
-  <div><p class="section-code">05 / PHYSICAL MARKET</p><h2>Beans move.<br>Intelligence should too.</h2></div>
-  <div class="trade-route"><span>WESTERN NEBRASKA</span><i>→</i><span>PACK / PROCESS</span><i>→</i><span>TRUCK + RAIL</span><i>→</i><span>GLOBAL BUYER</span></div>
-  <p>Current availability, specifications, packaging, shipment windows and freight are handled as live commercial inquiries—not static website claims.</p>
-  <div class="trade-actions"><a href="commercial.html#buy">I need product →</a><a href="commercial.html#sell">I have beans to offer →</a></div>
-</section>
+<aside>
+  <div class="panel"><div class="panel-header"><div class="panel-title">Commercial Trade Gateway</div></div><div class="panel-body"><p style="font-size:.75rem;color:var(--text-muted);margin-bottom:10px">Route a structured buyer RFQ or seller offer. Current availability and price are confirmed case by case.</p><button class="btn-action" style="width:100%;padding:8px;margin-bottom:6px" onclick="openModal('rfq')">Request Commercial Quote</button><button class="btn-outline" style="width:100%;padding:8px" onclick="openModal('offer')">Submit Product Offer</button></div><div class="integrity">STAGING: submission transport is not configured; no claim of transmission is made.</div></div>
+  <div class="panel"><div class="panel-header"><div class="panel-title">Commodity Unit Conversion</div></div><div class="panel-body"><div class="form-group"><label>USD per Hundredweight (USD / cwt)</label><input type="number" id="cwt-val" class="form-control" value="38.00" oninput="convertFromCwt()"></div><div class="calc-box"><div class="form-group"><label>USD / Metric Ton</label><input type="text" id="mt-val" class="form-control" readonly></div><div class="form-group"><label>USD / Pound</label><input type="text" id="lb-val" class="form-control" readonly></div></div><div style="font-size:.65rem;color:var(--text-muted);margin-top:6px">1 metric ton = 22.0462 cwt = 2,204.62 lb.</div></div></div>
+  <div class="panel" id="resources"><div class="panel-header"><div class="panel-title">Authoritative Source Registry</div></div><div class="panel-body" style="padding:0"><table class="data-table"><thead><tr><th>Agency</th><th>Dataset</th><th>Status</th></tr></thead><tbody>
+    <tr><td><a class="source-link" href="https://www.nass.usda.gov/" target="_blank" rel="noopener">USDA NASS</a></td><td>Crop reports / Quick Stats</td><td><span class="status-verified">Traceable</span></td></tr>
+    <tr><td><a class="source-link" href="https://apps.fas.usda.gov/gats/default.aspx" target="_blank" rel="noopener">USDA FAS</a></td><td>GATS trade data</td><td><span class="status-verified">Traceable</span></td></tr>
+    <tr><td><a class="source-link" href="https://cropwatch.unl.edu/dry-beans/" target="_blank" rel="noopener">UNL CropWatch</a></td><td>Dry bean agronomy</td><td><span class="status-verified">Traceable</span></td></tr>
+    <tr><td><a class="source-link" href="https://droughtmonitor.unl.edu/" target="_blank" rel="noopener">U.S. Drought Monitor</a></td><td>Climate risk</td><td><span class="status-verified">Traceable</span></td></tr>
+  </tbody></table></div></div>
+  <div class="panel"><div class="panel-header"><div class="panel-title">Methodology & Integrity</div></div><div class="panel-body" style="font-size:.7rem;color:var(--text-muted)">NebraskaBeans separates verified government/public baseline data from analysis and commercial information. Unknown or pending values are labeled instead of filled with estimates.</div></div>
+</aside>
 </main>
-
-<footer>
-  <div class="brand"><a href="index.html"><b>NEBRASKA</b><span>BEANS</span></a><small>FIELD + MARKET INTELLIGENCE</small></div>
-  <p>Independent agricultural intelligence and commercial discovery. Public figures are source-attributed; unknowns stay unknown.</p>
-  <div><a href="methodology.html">Methodology</a><a href="resources.html">Sources</a><a href="privacy.html">Privacy & Disclaimer</a></div>
-  <small>© 2026 NebraskaBeans · STAGING V2</small>
-</footer>
-</body>
-</html>
+<div class="modal-overlay" id="tradeModal"><div class="modal-content"><div class="panel-header" style="margin:-1.5rem -1.5rem 1rem"><div class="panel-title" id="modalTitle">Commercial Inquiry</div><button onclick="closeModal()" style="background:none;border:none;color:#fff;cursor:pointer">✕</button></div><form id="commercialForm" onsubmit="handleFormSubmit(event)"><div class="form-group" style="margin-bottom:8px"><label>Bean Class</label><select class="form-control"><option>Great Northern</option><option>Pinto</option><option>Light Red Kidney</option><option>Black</option><option>Navy</option></select></div><div class="form-group" style="margin-bottom:8px"><label>Quantity / Volume</label><input type="text" class="form-control" placeholder="e.g. 2 x 20ft containers / 44 MT" required></div><div class="form-group" style="margin-bottom:8px"><label>Company / Contact Name</label><input type="text" class="form-control" placeholder="Company or contact" required></div><div class="form-group" style="margin-bottom:12px"><label>Email / Phone / WhatsApp</label><input type="text" class="form-control" placeholder="Contact information" required></div><div style="font-size:.68rem;color:var(--text-muted);margin-bottom:12px">Staging only: no Formspree or WhatsApp transport is configured.</div><button type="submit" class="btn-action" style="width:100%;padding:8px">Review Staging Inquiry</button></form></div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const siteConfig={domain:'NebraskaBeans.com',region:'Nebraska, United States',primaryCommodity:'Dry Edible Beans',formspreeEndpoint:null,whatsAppContact:null};
+const specData={
+  gn:{title:'Great Northern Beans',desc:'Nebraska is nationally recognized for Great Northern production. This terminal does not publish contract specifications unless they are tied to a current source or seller lot.',grade:'Use current USDA grade standards / seller certificate',moisture:'Contract-specific — verify lot',defects:'Contract-specific — verify lot',markets:'Domestic and export channels; destination mix is not hard-coded'},
+  pinto:{title:'Pinto Beans',desc:'Pinto is a major Nebraska dry-bean class. Quality, sizing and grade are lot- and contract-specific.',grade:'Use current USDA grade standards / seller certificate',moisture:'Contract-specific — verify lot',defects:'Contract-specific — verify lot',markets:'Domestic and export channels'},
+  lrk:{title:'Light Red Kidney Beans',desc:'Light Red Kidney is a Nebraska specialty class. Current commercial specifications must be verified against the offered lot and buyer contract.',grade:'Use current USDA grade standards / seller certificate',moisture:'Contract-specific — verify lot',defects:'Contract-specific — verify lot',markets:'Domestic and export channels'},
+  black:{title:'Black & Navy Beans',desc:'These classes are included for market context. Recent Nebraska class-level values may be withheld or unavailable in public datasets.',grade:'Use current USDA grade standards / seller certificate',moisture:'Contract-specific — verify lot',defects:'Contract-specific — verify lot',markets:'Domestic and export channels'}
+};
+function switchSpec(key,btn){const d=specData[key];document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('spec-content').innerHTML=`<h4 style="color:var(--text-bright);margin-bottom:6px">${d.title}</h4><p style="color:var(--text-muted);font-size:.75rem;margin-bottom:10px">${d.desc}</p><table class="data-table"><tr><th>Grade</th><td>${d.grade}</td></tr><tr><th>Moisture</th><td>${d.moisture}</td></tr><tr><th>Defect tolerance</th><td>${d.defects}</td></tr><tr><th>Market context</th><td>${d.markets}</td></tr></table>`}
+function convertFromCwt(){const cwt=parseFloat(document.getElementById('cwt-val').value)||0;document.getElementById('mt-val').value='$'+(cwt*22.0462).toFixed(2);document.getElementById('lb-val').value='$'+(cwt/100).toFixed(4)}
+function openModal(type){document.getElementById('modalTitle').innerText=type==='rfq'?'Request Commercial Quote (Buyer)':'Submit Grower / Processor Offer';document.getElementById('tradeModal').style.display='flex'}function closeModal(){document.getElementById('tradeModal').style.display='none'}function handleFormSubmit(e){e.preventDefault();alert('STAGING ONLY: submission transport is not configured. No data was transmitted.');closeModal()}
+function initMap(){if(typeof L==='undefined'){document.getElementById('map-container').innerHTML='<div style="padding:20px;color:#94A3B8">Map library unavailable in this environment.</div>';return}const map=L.map('map-container',{zoomControl:true}).setView([41.75,-103.15],7);L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',subdomains:'abcd',maxZoom:12}).addTo(map);const research=[{name:'Scotts Bluff County',coords:[41.87,-103.66],desc:'Western Nebraska dry-bean research / production context'},{name:'Box Butte County',coords:[42.20,-103.08],desc:'Western Nebraska dry-bean research geography'},{name:'Morrill County',coords:[41.69,-103.01],desc:'North Platte Valley dry-bean research geography'},{name:'Sheridan County',coords:[42.50,-102.45],desc:'Western Nebraska dry-bean research geography'}];research.forEach(h=>L.circleMarker(h.coords,{radius:8,fillColor:'#D97706',color:'#FFF',weight:1,opacity:1,fillOpacity:.85}).addTo(map).bindPopup(`<b>${h.name}</b><br>${h.desc}`));L.circleMarker([41.8666,-103.6672],{radius:4,fillColor:'#3B82F6',color:'#FFF',weight:1,fillOpacity:.95}).addTo(map).bindPopup('<b>Scottsbluff</b><br>Regional reference city')}
+function renderChart(){if(typeof Chart==='undefined')return;const ctx=document.getElementById('cropChart').getContext('2d');new Chart(ctx,{type:'bar',data:{labels:['2024','2025','2026 intentions'],datasets:[{label:'Area (1,000 acres)',data:[130,106,101],backgroundColor:['#64748B','#64748B','#D97706']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#94A3B8',font:{family:'Inter',size:10}}},tooltip:{callbacks:{afterLabel:(c)=>c.dataIndex===2?'Prospective Plantings, Mar. 31, 2026':''}}},scales:{x:{ticks:{color:'#94A3B8'},grid:{color:'#1E293B'}},y:{beginAtZero:false,ticks:{color:'#94A3B8'},grid:{color:'#1E293B'}}}}})}
+document.addEventListener('DOMContentLoaded',()=>{switchSpec('gn',document.querySelector('.tab-btn'));convertFromCwt();initMap();renderChart()});
+</script>
+</body></html>
