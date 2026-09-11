@@ -1,12 +1,20 @@
-# NebraskaBeans V1
+# NebraskaBeans
 
-Nebraska dry bean market intelligence and commercial gateway.
+Nebraska dry bean GIS intelligence and physical-trade decision-support prototype.
 
-## Architecture
-Static, dependency-free V1 designed for GitHub Pages and reuse across specialized agriculture domains. Public intelligence is separated from future private/commercial integrations.
+## Current isolated build
+- Branch: `gisit-nebraska-v1`
+- UI: dark intelligence terminal with GIS-centered workflow
+- Evidence classes: VERIFIED / DIRECT OBSERVATION / MODEL / ESTIMATED / UNKNOWN
+- Live browser dependencies: Leaflet, CARTO, NASA GIBS, Esri, Open-Meteo, NOAA NCEI
 
-## Staging
-Branch: `staging-v1`. Production DNS/custom-domain configuration is intentionally excluded.
+## Verification completed before staging
+- HTML structural checks passed: required controls and unique IDs present.
+- JavaScript syntax checked with `node --check` and passed.
+- Git tree verified to contain the exact updated `index.html`, `assets/site.css`, and `assets/site.js` blobs.
+- Previous deployed staging commit retained as rollback point: `d053c356b6ecc3b1108daa9efd906f2c4a6cd329`.
 
-## Data policy
-Never fabricate current agricultural or commercial values. Public facts must be source-attributed. Formspree, WhatsApp, private inventory, private GIS and live pricing are not configured in V1.
+## Verification limitation
+Headless Chromium in the execution environment timed out before producing a rendered screenshot. Do not treat the UI as independently visually verified until inspected in a normal browser.
+
+Production DNS, GoDaddy, custom domain, and `main` are outside this staging gate.
