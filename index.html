@@ -1,54 +1,44 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NebraskaBeans | Nebraska Dry Bean Intelligence</title>
-<meta name="description" content="Nebraska dry bean GIS intelligence, weather, soil moisture, radar, satellite context, crop timing and physical trade decision support by Multigrain and GISit.">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NebraskaBeans | Professional Dry Bean Decision Support</title>
+<meta name="description" content="Answer-first Nebraska dry bean production and physical-trade decision support by Multigrain and GISit.">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="assets/site.css?v=20260910-2146">
+<link rel="stylesheet" href="assets/site.css?v=20260910-2215">
 </head>
 <body>
-<div class="app">
-<header class="topbar"><div class="brand"><div class="logo">NEBRASKA<span>BEANS</span></div><div class="subbrand">Multigrain Market Intelligence · GISit</div></div><div class="top-actions"><a class="action" href="#sources">Sources</a><a class="action" href="#tools">Tools</a><a class="action primary" href="#trade">Physical Trade</a></div></header>
-<div class="ticker"><div class="item"><span class="label">2026 Intended Area</span><span class="value">101,000 ac</span><span class="status verified">Verified</span></div><div class="item"><span class="label">vs 2025</span><span class="value">−4.7%</span></div><div class="item"><span class="label">Basemap</span><span class="status verified">GISit OSM / Esri</span></div><div class="item"><span class="label">Radar</span><span class="status verified">RainViewer</span></div><div class="item"><span class="label">Weather / Soil</span><span class="status model">Open-Meteo</span></div><div class="item"><span class="label">Satellite</span><span class="status model">NASA GIBS</span></div></div>
-<div class="shell">
-<aside class="rail">
-<div class="rail-title">Workspace</div>
-<button class="navbtn active" data-action="situation"><strong>Situation</strong><small>Map + local evidence</small></button>
-<button class="navbtn" data-action="crop"><strong>Crop</strong><small>Stage & water demand</small></button>
-<button class="navbtn" data-action="weather"><strong>Weather</strong><small>Radar + rain · ET₀</small></button>
-<button class="navbtn" data-action="satellite"><strong>Satellite</strong><small>NDVI + imagery</small></button>
-<button class="navbtn" data-action="stations"><strong>Stations</strong><small>Direct observations</small></button>
-<button class="navbtn" data-action="trade"><strong>Trade</strong><small>Supply & offers</small></button>
-<div class="rail-card"><div class="label">2026 Nebraska</div><div class="big">101K</div><div class="label">intended acres</div><div class="delta">−5,000 ac vs 2025 intentions</div></div>
-<div class="rail-card"><div class="label">GISit Stack</div><div style="font-size:10px;color:#68776d;margin-top:6px">Leaflet · OSM · RainViewer · NASA GIBS · Esri · Open-Meteo · NOAA</div></div>
-</aside>
-<main class="main">
-<section class="hero"><div><h1>Nebraska Dry Bean Situation — Right Now</h1><p>Search a Nebraska location, choose a western Nebraska production reference, or click directly on the map. The selected point drives weather, soil moisture, forecast risk and station evidence below.</p></div><div class="asof" id="updated">Loading intelligence…</div></section>
-<section class="map-stage" id="situationView">
-<div id="map"></div>
-<div class="map-top"><div class="map-chip"><strong id="mapContext">Western Nebraska production context</strong><span id="mapSub">Regional references only — not current county acreage.</span></div><div class="map-search"><input id="locationSearch" type="search" placeholder="Search Nebraska location…" autocomplete="off"><button id="locationSearchBtn" type="button">Search</button><div id="searchResults" class="search-results"></div></div></div>
-<div class="map-controls"><div class="control-head">GISit Map Layers</div><div class="layer-row"><span>Production references</span><button class="switch on" disabled>ON</button></div><div class="layer-row"><span>Rain radar</span><button class="switch" id="radarBtn">OFF</button></div><div class="layer-row"><span>NASA MODIS NDVI</span><button class="switch" id="ndviBtn">OFF</button></div><div class="layer-row"><span>Esri World Imagery</span><button class="switch" id="satBtn">OFF</button></div><div class="layer-row"><span>Point weather + soil</span><button class="switch on" disabled>LIVE</button></div></div>
-<div class="station-banner" id="stationBanner"><b>Direct observation check:</b> NOAA GHCN-Daily is queried around the selected point. If the browser query cannot return a suitable station, it is shown as unavailable rather than replaced by modeled data.</div>
-<div class="interaction-status" id="interactionStatus">Map ready. Search, select a region, or click the map.</div>
+<header class="topbar"><div><div class="logo">NEBRASKA<span>BEANS</span></div><div class="sub">Multigrain Market Intelligence · GISit</div></div><div class="toplinks"><a href="#evidence">Evidence</a><a href="#mapSection">GIS</a><a href="#trade">Physical Trade</a></div></header>
+<main>
+<section class="brief">
+<div class="eyebrow">NEBRASKA DRY BEANS · DECISION BRIEF</div>
+<div class="briefhead"><div><h1>Smaller supply base. Dry statewide backdrop. No verified production shortfall.</h1><p id="briefAsOf">Loading local evidence…</p></div><span class="riskbadge watch" id="stateRisk">WATCH</span></div>
+<div class="answers">
+<article><span>SUPPLY BASE</span><strong>101,000 acres</strong><p>2026 intended area, down 5,000 acres / 4.7% from 2025 intentions.</p><b class="verified">VERIFIED</b></article>
+<article><span>MOISTURE BACKDROP</span><strong>54% / 61%</strong><p>Topsoil / subsoil rated short + very short statewide, week ending Sep. 6.</p><b class="verified">VERIFIED STATEWIDE</b></article>
+<article><span>PRODUCTION RISK</span><strong id="headlineRisk">WATCH — not confirmed loss</strong><p id="headlineWhy">Dryness raises exposure, but statewide moisture does not prove dry-bean yield loss.</p><b class="model" id="riskClass">INTERPRETATION</b></article>
+<article><span>COMMERCIAL POSTURE</span><strong id="commercialPosture">Protect coverage; verify availability</strong><p id="commercialWhy">Confirm grower/processor availability and harvest status. Do not price an unverified shortage.</p><b class="decision">DECISION SUPPORT</b></article>
+</div>
+<div class="why"><h2>Why this is the current answer</h2><div class="whygrid"><div><b>1</b><p>Nebraska's intended dry-bean area is smaller year over year.</p></div><div><b>2</b><p>Statewide soil-moisture ratings are materially dry, but they are not bean-field measurements.</p></div><div><b>3</b><p>2026 direct dry-bean field evidence exists in Box Butte, Scotts Bluff and Dundy counties.</p></div><div><b>4</b><p>Current official county dry-bean acreage estimates are discontinued, so no acreage heatmap is invented.</p></div></div></div>
 </section>
-<section class="evidence-strip" id="weatherView"><div class="metric"><div class="k">30-day precipitation</div><div class="v" id="rain30">—</div><div class="s">Open-Meteo model estimate</div></div><div class="metric"><div class="k">10-day forecast precip</div><div class="v" id="rain10">—</div><div class="s">forecast scenario</div></div><div class="metric"><div class="k">30-day ET₀</div><div class="v" id="et30">—</div><div class="s">reference evapotranspiration</div></div><div class="metric"><div class="k">Soil moisture 9–27 cm</div><div class="v" id="soil27">—</div><div class="s">modeled volumetric water</div></div><div class="metric"><div class="k">NOAA station precip</div><div class="v" id="stationRain">—</div><div class="s" id="stationShort">direct observation</div></div></section>
-<section class="bottom" id="tools"><div class="module" id="stationsView"><h3>Evidence Stack</h3><div class="module-body"><table class="mini-table"><thead><tr><th>Layer</th><th>Status</th><th>Role</th></tr></thead><tbody><tr><td>USDA acreage</td><td class="good">VERIFIED</td><td>state production base</td></tr><tr><td>NOAA GHCN-Daily</td><td class="good">DIRECT WHEN RETURNED</td><td>observation check</td></tr><tr><td>Open-Meteo</td><td class="info">MODEL</td><td>weather / soil / forecast</td></tr><tr><td>RainViewer</td><td class="good">GISIT LAYER</td><td>recent radar</td></tr><tr><td>NASA NDVI</td><td class="info">SATELLITE</td><td>vegetation context</td></tr><tr><td>Crop position</td><td class="warn">ESTIMATED</td><td>timing context</td></tr></tbody></table></div></div><div class="module" id="cropView"><h3>Crop Timing Tool</h3><div class="module-body"><div class="toolrow"><input id="plantDate" type="date"><button id="stageBtn">Estimate</button></div><div class="result" id="stageResult">Enter the best-known planting or emergence date. Field observation outranks this estimate.</div></div></div><div class="module" id="sources"><h3>Provenance Rules</h3><div class="module-body"><div class="result">No county acreage heat map is shown because current NASS county dry-bean estimates are discontinued. Satellite greenness is not labeled bean stress without verified crop identity. Modeled values remain models.</div></div></div></section>
+<section class="localDecision" id="evidence">
+<div class="sectionhead"><div><div class="eyebrow">SELECTED LOCATION</div><h2 id="selectedName">Scotts Bluff County / North Platte Valley</h2></div><span class="confidence" id="confidence">CONFIDENCE: BUILDING</span></div>
+<div class="decisiongrid">
+<div class="decisionpanel primary"><span>LOCAL DECISION</span><strong id="localDecision">Loading evidence…</strong><p id="localExplanation">Weather, station, crop-class and county evidence are being evaluated separately.</p></div>
+<div class="decisionpanel"><span>CROP IDENTITY</span><strong id="cropIdentity">Checking USDA CDL…</strong><p id="cropIdentitySub">USDA Cropland Data Layer point classification; Dry Beans = class 42.</p></div>
+<div class="decisionpanel"><span>DIRECT FIELD CONTEXT</span><strong id="countyEvidence">Checking county…</strong><p>2026 direct-field evidence means a dry-bean monitoring/research field is documented; it is not acreage.</p></div>
+<div class="decisionpanel"><span>STATION CHECK</span><strong id="station">Checking NOAA…</strong><p id="stationSub">Direct precipitation observation when returned.</p></div>
+</div>
+<div class="metrics"><div><span>30-DAY RAIN</span><strong id="rain30">—</strong></div><div><span>30-DAY ET₀</span><strong id="et30">—</strong></div><div><span>RAIN − ET₀</span><strong id="waterBalance">—</strong></div><div><span>SOIL 9–27 CM</span><strong id="soil27">—</strong></div><div><span>10-DAY RAIN</span><strong id="rain10">—</strong></div><div><span>HEAT / FROST</span><strong id="weatherFlag">—</strong></div></div>
+</section>
+<section class="mapsection" id="mapSection">
+<div class="sectionhead"><div><div class="eyebrow">DRILL INTO THE EVIDENCE</div><h2>Nebraska production geography</h2><p>County polygons are U.S. Census geometry. Highlighted counties have documented 2026 dry-bean field evidence; highlight intensity does not represent acreage.</p></div><div class="mapactions"><button id="radarBtn">Radar</button><button id="ndviBtn">NDVI</button><button id="satBtn">Imagery</button></div></div>
+<div class="mapwrap"><div id="map"></div><div class="legend"><div><i class="field"></i>2026 dry-bean field evidence</div><div><i class="county"></i>Nebraska county</div><small id="geometryStatus">Loading Census county polygons…</small></div></div>
+<div class="maptools"><select id="region"><option value="41.87,-103.66,Scotts Bluff County / North Platte Valley">Scotts Bluff</option><option value="42.22,-103.08,Box Butte County / Panhandle">Box Butte</option><option value="40.05,-101.68,Dundy County">Dundy</option><option value="41.69,-103.01,Morrill County / North Platte Valley">Morrill</option><option value="42.50,-102.98,Sheridan County / Panhandle">Sheridan</option></select><input id="locationSearch" placeholder="Search Nebraska place…"><button id="searchBtn">Go</button><span id="interactionStatus">Click a county or point to recalculate.</span></div>
+</section>
+<section class="evidenceLedger"><div class="sectionhead"><div><div class="eyebrow">EVIDENCE LEDGER</div><h2>What is proven, modeled, estimated or unknown</h2></div></div><table><thead><tr><th>Evidence</th><th>Class</th><th>Use</th><th>Limit</th></tr></thead><tbody><tr><td>2026 intended acres</td><td class="verified">VERIFIED</td><td>State supply base</td><td>Intentions, not final harvested acres</td></tr><tr><td>State soil-moisture ratings</td><td class="verified">VERIFIED</td><td>Statewide backdrop</td><td>Not bean-field specific</td></tr><tr><td>Census county polygons</td><td class="verified">VERIFIED GEOMETRY</td><td>Vector geography</td><td>Does not imply bean acreage</td></tr><tr><td>USDA CDL class 42</td><td class="model">CROP CLASSIFICATION</td><td>Point crop identity</td><td>Raster classification, not a field survey</td></tr><tr><td>NOAA station</td><td class="verified">DIRECT OBS</td><td>Independent precipitation check</td><td>Station may be distant/incomplete</td></tr><tr><td>Open-Meteo</td><td class="model">MODEL</td><td>Weather / soil / ET₀</td><td>Not direct field observation</td></tr><tr><td>Current county bean acreage</td><td class="unknown">UNKNOWN</td><td>Not used</td><td>NASS county estimates discontinued</td></tr></tbody></table></section>
+<section class="trade" id="trade"><div><div class="eyebrow">PHYSICAL TRADE</div><h2>Convert evidence into action</h2><p>Buyer: confirm near-term coverage, processor availability, class/spec and shipment window. Seller: verify actual harvest/ownership before representing tightness. The system does not turn weather signals into an invented shortage.</p></div><div><a href="mailto:info@multigrain.com?subject=Nebraska%20Dry%20Bean%20Supply%20Inquiry">REQUEST SUPPLY</a><a href="mailto:info@multigrain.com?subject=Nebraska%20Dry%20Bean%20Offer">OFFER PRODUCT</a></div></section>
 </main>
-<aside class="side">
-<div class="side-head"><h2>Situation Analysis</h2><span class="confidence" id="confidence">CONFIDENCE: LIMITED</span></div>
-<div class="selector"><select id="region"><option value="41.87,-103.66">Scotts Bluff / North Platte Valley</option><option value="41.69,-103.01">Morrill / North Platte Valley</option><option value="42.22,-103.08">Box Butte / Panhandle</option><option value="42.50,-102.98">Sheridan / Panhandle</option><option value="40.845,-101.705">Grant / Perkins County research site</option></select></div>
-<div class="side-section"><div class="section-title">Selected Geography</div><div class="reading"><div class="rlabel">Location</div><div class="rvalue" id="loc">Scotts Bluff / North Platte Valley</div></div><div class="reading"><div class="rlabel">Production evidence</div><div class="rvalue">Western Nebraska <span class="rsub">regional context, not county acreage</span></div></div><div class="reading"><div class="rlabel">NOAA station</div><div class="rvalue" id="station">Querying…</div></div></div>
-<div class="side-section"><div class="section-title">Crop & Water</div><div class="reading"><div class="rlabel">Estimated position</div><div class="rvalue" id="cropStage">Unknown <span class="rsub">needs planting/emergence date</span></div></div><div class="reading"><div class="rlabel">Water demand</div><div class="rvalue" id="waterNeed">Unknown <span class="rsub">stage-dependent Nebraska context</span></div></div></div>
-<div class="side-section"><div class="section-title">Weather Risk</div><div class="reading"><div class="rlabel">Heat flag</div><div class="rvalue" id="heatFlag">Loading…</div></div><div class="reading"><div class="rlabel">Frost flag</div><div class="rvalue" id="frostFlag">Loading…</div></div><div class="reading"><div class="rlabel">Rain − ET₀</div><div class="rvalue" id="waterBalance">Loading…</div></div></div>
-<div class="synthesis" id="interpret"><strong>Interpretation</strong><br>Loading local evidence.</div>
-<div class="decision"><div class="section-title" style="margin:-10px -12px 9px">Decision Support</div><div class="decision-grid"><div class="decision-card"><div class="dlabel">Production base</div><div class="dvalue">Lower YoY</div></div><div class="decision-card"><div class="dlabel">Local stress</div><div class="dvalue" id="stressDecision">Unproven</div></div><div class="decision-card"><div class="dlabel">Weather exposure</div><div class="dvalue" id="weatherDecision">Loading</div></div><div class="decision-card"><div class="dlabel">Commercial implication</div><div class="dvalue" id="commercialDecision">Monitor</div></div></div></div>
-<div class="trade-box" id="trade"><b>Turn intelligence into physical trade.</b><p>Current availability, specification, packaging, origin and shipment window remain lot-specific and must be confirmed.</p><div class="trade-actions"><a href="mailto:info@multigrain.com?subject=Nebraska%20Bean%20Purchase%20Inquiry">REQUEST SUPPLY</a><a href="mailto:info@multigrain.com?subject=Nebraska%20Bean%20Offer">OFFER PRODUCT</a></div></div>
-</aside>
-</div>
-<footer class="footer"><span>Staging build · Multigrain / GISit · production DNS and main unchanged.</span><span>Existing GISit components reused: Leaflet · OSM · RainViewer · NASA GIBS · Esri · Open-Meteo · NOAA</span></footer>
-</div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="assets/site.js?v=20260910-2146"></script>
+<footer>Staging · Multigrain / GISit · Evidence classes: VERIFIED · DIRECT · MODEL/CLASSIFICATION · ESTIMATED · UNKNOWN</footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="assets/site.js?v=20260910-2215"></script>
 </body></html>
