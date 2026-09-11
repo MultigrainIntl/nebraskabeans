@@ -3,7 +3,7 @@
   "generated_as_of":"2026-09-11",
   "retrieved_at_utc":"2026-09-11T18:00:00Z",
   "evidence_class":"OBSERVED",
-  "provenance_status":"PARTIAL — official URLs verified; raw PDF checksums not yet captured",
+  "provenance_status":"PARTIAL — official URLs verified; September Crop Production PDF checksum captured; earlier raw PDF checksums not yet captured",
   "notes":[
     "Values in this file are transcribed from named USDA NASS publications and are not GISit forecasts.",
     "Use the newest published estimate for current-state displays while preserving older estimates as forecast history.",
@@ -14,6 +14,7 @@
     "prospective_plantings_2026":{"title":"Prospective Plantings","release_date":"2026-03-31","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/pspl0326.pdf","rights":"U.S. government public data","artifact_sha256":null},
     "acreage_2026":{"title":"Acreage","release_date":"2026-06-30","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/acrg0626.pdf","rights":"U.S. government public data","artifact_sha256":null},
     "crop_august_2026":{"title":"Crop Production","release_date":"2026-08-12","forecast_as_of":"2026-08-01","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/crop0826.pdf","rights":"U.S. government public data","artifact_sha256":null},
+    "crop_september_2026":{"title":"Crop Production","release_date":"2026-09-11","forecast_as_of":"2026-09-01","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/crop0926.pdf","rights":"U.S. government public data","artifact_sha256":"20eae6558f04763ad77976c0538b918beb8e121a35e89697c883f6074ee5868d"},
     "crop_summary_2025":{"title":"Crop Production 2025 Summary","release_date":"2026-01-12","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/cropan26.pdf","rights":"U.S. government public data","artifact_sha256":null},
     "crop_august_2025":{"title":"Crop Production","release_date":"2025-08-12","publisher":"USDA National Agricultural Statistics Service","url":"https://release.nass.usda.gov/reports/crop0825.pdf","rights":"U.S. government public data","artifact_sha256":null}
   },
@@ -24,7 +25,11 @@
       {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"planted_acres","value":1153000,"status":"estimate","source":"crop_august_2026"},
       {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"harvested_acres","value":1123000,"status":"forecast","source":"crop_august_2026"},
       {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"yield_lb_ac","value":2079,"status":"forecast","source":"crop_august_2026"},
-      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"production_cwt","value":23347000,"status":"forecast","source":"crop_august_2026"}
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"production_cwt","value":23347000,"status":"forecast","source":"crop_august_2026"},
+      {"issue_date":"2026-09-11","valid_date":"2026-09-01","metric":"planted_acres","value":1153000,"status":"estimate","source":"crop_september_2026"},
+      {"issue_date":"2026-09-11","valid_date":"2026-09-01","metric":"harvested_acres","value":1123000,"status":"forecast","source":"crop_september_2026"},
+      {"issue_date":"2026-09-11","valid_date":"2026-09-01","metric":"yield_lb_ac","value":2079,"status":"forecast","source":"crop_september_2026"},
+      {"issue_date":"2026-09-11","valid_date":"2026-09-01","metric":"production_cwt","value":23347000,"status":"forecast","source":"crop_september_2026"}
     ],
     "Nebraska":[
       {"issue_date":"2026-03-31","metric":"planted_acres","value":101000,"status":"intended","source":"prospective_plantings_2026"},

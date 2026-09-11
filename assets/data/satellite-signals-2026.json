@@ -1,0 +1,1556 @@
+{
+  "schema_version": "nebraskabeans.satellite_signals.v1",
+  "generated_at_utc": "2026-09-11T22:13:42Z",
+  "analysis_start": "2026-04-15",
+  "analysis_end": "2026-09-09",
+  "cadence": "weekly checkpoints plus analysis end; UI uses the latest checkpoint on or before the selected date",
+  "study_bounds": [
+    [
+      36.75,
+      -111.0
+    ],
+    [
+      45.25,
+      -94.25
+    ]
+  ],
+  "classification": "MODELED",
+  "layers": {
+    "smap_anomaly": {
+      "scale": "1",
+      "radius": 1,
+      "classification": "MODELED",
+      "meaning": "NASA SMAP L4 0\u2013100 cm soil-moisture anomaly; sign is relative to the source climatology"
+    },
+    "ndvi": {
+      "scale": "0.05",
+      "radius": 3,
+      "classification": "MODELED",
+      "meaning": "Source-encoded daily NDVI index; used only for within-source direction of change because scale metadata is not published in the service guide"
+    }
+  },
+  "grids": {
+    "ndvi": {
+      "width": 247,
+      "height": 171,
+      "pixel_size_degrees": [
+        0.06781421088261005,
+        0.049708454810495586
+      ],
+      "nodata": 255.0
+    },
+    "smap_anomaly": {
+      "width": 137,
+      "height": 95,
+      "pixel_size_degrees": [
+        0.12226277372262766,
+        0.08947368421052626
+      ],
+      "nodata": -9999.0
+    }
+  },
+  "areas": {
+    "ne-panhandle": {
+      "name": "Nebraska Panhandle",
+      "center": [
+        41.75,
+        -103.2
+      ],
+      "dates": {
+        "2026-04-15": {
+          "ndvi": 156.0,
+          "ndvi_valid_date": "2026-04-15",
+          "smap_anomaly": -0.372,
+          "smap_anomaly_valid_date": "2026-04-15",
+          "ndvi_change_encoded": null
+        },
+        "2026-04-22": {
+          "ndvi": 136.0,
+          "ndvi_valid_date": "2026-04-22",
+          "smap_anomaly": -0.4298,
+          "smap_anomaly_valid_date": "2026-04-22",
+          "ndvi_change_encoded": -20.0
+        },
+        "2026-04-29": {
+          "ndvi": 150.0,
+          "ndvi_valid_date": "2026-04-29",
+          "smap_anomaly": -0.357,
+          "smap_anomaly_valid_date": "2026-04-29",
+          "ndvi_change_encoded": 14.0
+        },
+        "2026-05-06": {
+          "ndvi": 151.0,
+          "ndvi_valid_date": "2026-05-06",
+          "smap_anomaly": -0.4052,
+          "smap_anomaly_valid_date": "2026-05-06",
+          "ndvi_change_encoded": 1.0
+        },
+        "2026-05-13": {
+          "ndvi": 152.0,
+          "ndvi_valid_date": "2026-05-13",
+          "smap_anomaly": -0.5331,
+          "smap_anomaly_valid_date": "2026-05-13",
+          "ndvi_change_encoded": 1.0
+        },
+        "2026-05-20": {
+          "ndvi": 126.0,
+          "ndvi_valid_date": "2026-05-20",
+          "smap_anomaly": -0.5247,
+          "smap_anomaly_valid_date": "2026-05-20",
+          "ndvi_change_encoded": -26.0
+        },
+        "2026-05-27": {
+          "ndvi": 133.0,
+          "ndvi_valid_date": "2026-05-27",
+          "smap_anomaly": -0.5619,
+          "smap_anomaly_valid_date": "2026-05-27",
+          "ndvi_change_encoded": 7.0
+        },
+        "2026-06-03": {
+          "ndvi": 154.0,
+          "ndvi_valid_date": "2026-06-03",
+          "smap_anomaly": -0.4021,
+          "smap_anomaly_valid_date": "2026-06-03",
+          "ndvi_change_encoded": 21.0
+        },
+        "2026-06-10": {
+          "ndvi": 158.0,
+          "ndvi_valid_date": "2026-06-10",
+          "smap_anomaly": -0.1767,
+          "smap_anomaly_valid_date": "2026-06-10",
+          "ndvi_change_encoded": 4.0
+        },
+        "2026-06-17": {
+          "ndvi": 161.0,
+          "ndvi_valid_date": "2026-06-17",
+          "smap_anomaly": -0.3934,
+          "smap_anomaly_valid_date": "2026-06-17",
+          "ndvi_change_encoded": 3.0
+        },
+        "2026-06-24": {
+          "ndvi": 125.0,
+          "ndvi_valid_date": "2026-06-23",
+          "smap_anomaly": -0.2529,
+          "smap_anomaly_valid_date": "2026-06-24",
+          "ndvi_change_encoded": -36.0
+        },
+        "2026-07-01": {
+          "ndvi": 175.0,
+          "ndvi_valid_date": "2026-07-01",
+          "smap_anomaly": -0.1367,
+          "smap_anomaly_valid_date": "2026-07-01",
+          "ndvi_change_encoded": 50.0
+        },
+        "2026-07-08": {
+          "ndvi": 179.0,
+          "ndvi_valid_date": "2026-07-08",
+          "smap_anomaly": -0.194,
+          "smap_anomaly_valid_date": "2026-07-08",
+          "ndvi_change_encoded": 4.0
+        },
+        "2026-07-15": {
+          "ndvi": 178.0,
+          "ndvi_valid_date": "2026-07-15",
+          "smap_anomaly": -0.2793,
+          "smap_anomaly_valid_date": "2026-07-15",
+          "ndvi_change_encoded": -1.0
+        },
+        "2026-07-22": {
+          "ndvi": 180.0,
+          "ndvi_valid_date": "2026-07-22",
+          "smap_anomaly": -0.3828,
+          "smap_anomaly_valid_date": "2026-07-22",
+          "ndvi_change_encoded": 2.0
+        },
+        "2026-07-29": {
+          "ndvi": 187.0,
+          "ndvi_valid_date": "2026-07-29",
+          "smap_anomaly": -0.2297,
+          "smap_anomaly_valid_date": "2026-07-29",
+          "ndvi_change_encoded": 7.0
+        },
+        "2026-08-05": {
+          "ndvi": 140.0,
+          "ndvi_valid_date": "2026-08-05",
+          "smap_anomaly": -0.3761,
+          "smap_anomaly_valid_date": "2026-08-05",
+          "ndvi_change_encoded": -47.0
+        },
+        "2026-08-12": {
+          "ndvi": 165.0,
+          "ndvi_valid_date": "2026-08-12",
+          "smap_anomaly": -0.3605,
+          "smap_anomaly_valid_date": "2026-08-12",
+          "ndvi_change_encoded": 25.0
+        },
+        "2026-08-19": {
+          "ndvi": 177.0,
+          "ndvi_valid_date": "2026-08-19",
+          "smap_anomaly": 0.0856,
+          "smap_anomaly_valid_date": "2026-08-19",
+          "ndvi_change_encoded": 12.0
+        },
+        "2026-08-26": {
+          "ndvi": 190.0,
+          "ndvi_valid_date": "2026-08-26",
+          "smap_anomaly": -0.1861,
+          "smap_anomaly_valid_date": "2026-08-26",
+          "ndvi_change_encoded": 13.0
+        },
+        "2026-09-02": {
+          "ndvi": 128.0,
+          "ndvi_valid_date": "2026-09-01",
+          "smap_anomaly": -0.2277,
+          "smap_anomaly_valid_date": "2026-09-02",
+          "ndvi_change_encoded": -62.0
+        },
+        "2026-09-09": {
+          "ndvi": 177.0,
+          "ndvi_valid_date": "2026-09-09",
+          "smap_anomaly": -0.0607,
+          "smap_anomaly_valid_date": "2026-09-09",
+          "ndvi_change_encoded": 49.0
+        }
+      }
+    },
+    "sw-nebraska": {
+      "name": "Southwest Nebraska",
+      "center": [
+        40.25,
+        -101.55
+      ],
+      "dates": {
+        "2026-04-15": {
+          "ndvi": 144.0,
+          "ndvi_valid_date": "2026-04-15",
+          "smap_anomaly": -0.0576,
+          "smap_anomaly_valid_date": "2026-04-15",
+          "ndvi_change_encoded": null
+        },
+        "2026-04-22": {
+          "ndvi": 155.0,
+          "ndvi_valid_date": "2026-04-22",
+          "smap_anomaly": -0.1288,
+          "smap_anomaly_valid_date": "2026-04-22",
+          "ndvi_change_encoded": 11.0
+        },
+        "2026-04-29": {
+          "ndvi": 131.0,
+          "ndvi_valid_date": "2026-04-29",
+          "smap_anomaly": -0.073,
+          "smap_anomaly_valid_date": "2026-04-29",
+          "ndvi_change_encoded": -24.0
+        },
+        "2026-05-06": {
+          "ndvi": 126.0,
+          "ndvi_valid_date": "2026-05-06",
+          "smap_anomaly": -0.0554,
+          "smap_anomaly_valid_date": "2026-05-06",
+          "ndvi_change_encoded": -5.0
+        },
+        "2026-05-13": {
+          "ndvi": 158.0,
+          "ndvi_valid_date": "2026-05-13",
+          "smap_anomaly": -0.1998,
+          "smap_anomaly_valid_date": "2026-05-13",
+          "ndvi_change_encoded": 32.0
+        },
+        "2026-05-20": {
+          "ndvi": 124.0,
+          "ndvi_valid_date": "2026-05-20",
+          "smap_anomaly": -0.1657,
+          "smap_anomaly_valid_date": "2026-05-20",
+          "ndvi_change_encoded": -34.0
+        },
+        "2026-05-27": {
+          "ndvi": 137.0,
+          "ndvi_valid_date": "2026-05-27",
+          "smap_anomaly": -0.1539,
+          "smap_anomaly_valid_date": "2026-05-27",
+          "ndvi_change_encoded": 13.0
+        },
+        "2026-06-03": {
+          "ndvi": 128.0,
+          "ndvi_valid_date": "2026-06-03",
+          "smap_anomaly": -0.1074,
+          "smap_anomaly_valid_date": "2026-06-03",
+          "ndvi_change_encoded": -9.0
+        },
+        "2026-06-10": {
+          "ndvi": 180.0,
+          "ndvi_valid_date": "2026-06-10",
+          "smap_anomaly": -0.1375,
+          "smap_anomaly_valid_date": "2026-06-10",
+          "ndvi_change_encoded": 52.0
+        },
+        "2026-06-17": {
+          "ndvi": 169.0,
+          "ndvi_valid_date": "2026-06-17",
+          "smap_anomaly": -0.1659,
+          "smap_anomaly_valid_date": "2026-06-17",
+          "ndvi_change_encoded": -11.0
+        },
+        "2026-06-24": {
+          "ndvi": 125.5,
+          "ndvi_valid_date": "2026-06-23",
+          "smap_anomaly": 0.2039,
+          "smap_anomaly_valid_date": "2026-06-24",
+          "ndvi_change_encoded": -43.5
+        },
+        "2026-07-01": {
+          "ndvi": 200.0,
+          "ndvi_valid_date": "2026-07-01",
+          "smap_anomaly": 0.1216,
+          "smap_anomaly_valid_date": "2026-07-01",
+          "ndvi_change_encoded": 74.5
+        },
+        "2026-07-08": {
+          "ndvi": 196.0,
+          "ndvi_valid_date": "2026-07-08",
+          "smap_anomaly": 0.0284,
+          "smap_anomaly_valid_date": "2026-07-08",
+          "ndvi_change_encoded": -4.0
+        },
+        "2026-07-15": {
+          "ndvi": 193.0,
+          "ndvi_valid_date": "2026-07-15",
+          "smap_anomaly": 0.0357,
+          "smap_anomaly_valid_date": "2026-07-15",
+          "ndvi_change_encoded": -3.0
+        },
+        "2026-07-22": {
+          "ndvi": 182.0,
+          "ndvi_valid_date": "2026-07-22",
+          "smap_anomaly": -0.1008,
+          "smap_anomaly_valid_date": "2026-07-22",
+          "ndvi_change_encoded": -11.0
+        },
+        "2026-07-29": {
+          "ndvi": 193.0,
+          "ndvi_valid_date": "2026-07-29",
+          "smap_anomaly": 0.0011,
+          "smap_anomaly_valid_date": "2026-07-29",
+          "ndvi_change_encoded": 11.0
+        },
+        "2026-08-05": {
+          "ndvi": 125.0,
+          "ndvi_valid_date": "2026-08-05",
+          "smap_anomaly": -0.0847,
+          "smap_anomaly_valid_date": "2026-08-05",
+          "ndvi_change_encoded": -68.0
+        },
+        "2026-08-12": {
+          "ndvi": 130.0,
+          "ndvi_valid_date": "2026-08-12",
+          "smap_anomaly": -0.1302,
+          "smap_anomaly_valid_date": "2026-08-12",
+          "ndvi_change_encoded": 5.0
+        },
+        "2026-08-19": {
+          "ndvi": 184.0,
+          "ndvi_valid_date": "2026-08-19",
+          "smap_anomaly": 0.0546,
+          "smap_anomaly_valid_date": "2026-08-19",
+          "ndvi_change_encoded": 54.0
+        },
+        "2026-08-26": {
+          "ndvi": 128.0,
+          "ndvi_valid_date": "2026-08-26",
+          "smap_anomaly": -0.0139,
+          "smap_anomaly_valid_date": "2026-08-26",
+          "ndvi_change_encoded": -56.0
+        },
+        "2026-09-02": {
+          "ndvi": 179.0,
+          "ndvi_valid_date": "2026-09-01",
+          "smap_anomaly": -0.0495,
+          "smap_anomaly_valid_date": "2026-09-02",
+          "ndvi_change_encoded": 51.0
+        },
+        "2026-09-09": {
+          "ndvi": 178.0,
+          "ndvi_valid_date": "2026-09-09",
+          "smap_anomaly": -0.0612,
+          "smap_anomaly_valid_date": "2026-09-09",
+          "ndvi_change_encoded": -1.0
+        }
+      }
+    },
+    "ne-colorado": {
+      "name": "Northeast / East-Central Colorado",
+      "center": [
+        40.4,
+        -103.4
+      ],
+      "dates": {
+        "2026-04-15": {
+          "ndvi": 170.0,
+          "ndvi_valid_date": "2026-04-15",
+          "smap_anomaly": -0.031,
+          "smap_anomaly_valid_date": "2026-04-15",
+          "ndvi_change_encoded": null
+        },
+        "2026-04-22": {
+          "ndvi": 130.0,
+          "ndvi_valid_date": "2026-04-22",
+          "smap_anomaly": -0.1255,
+          "smap_anomaly_valid_date": "2026-04-22",
+          "ndvi_change_encoded": -40.0
+        },
+        "2026-04-29": {
+          "ndvi": 157.0,
+          "ndvi_valid_date": "2026-04-29",
+          "smap_anomaly": -0.1354,
+          "smap_anomaly_valid_date": "2026-04-29",
+          "ndvi_change_encoded": 27.0
+        },
+        "2026-05-06": {
+          "ndvi": 132.0,
+          "ndvi_valid_date": "2026-05-06",
+          "smap_anomaly": -0.0679,
+          "smap_anomaly_valid_date": "2026-05-06",
+          "ndvi_change_encoded": -25.0
+        },
+        "2026-05-13": {
+          "ndvi": 164.0,
+          "ndvi_valid_date": "2026-05-13",
+          "smap_anomaly": -0.2229,
+          "smap_anomaly_valid_date": "2026-05-13",
+          "ndvi_change_encoded": 32.0
+        },
+        "2026-05-20": {
+          "ndvi": 126.0,
+          "ndvi_valid_date": "2026-05-20",
+          "smap_anomaly": -0.2549,
+          "smap_anomaly_valid_date": "2026-05-20",
+          "ndvi_change_encoded": -38.0
+        },
+        "2026-05-27": {
+          "ndvi": 134.0,
+          "ndvi_valid_date": "2026-05-27",
+          "smap_anomaly": -0.2591,
+          "smap_anomaly_valid_date": "2026-05-27",
+          "ndvi_change_encoded": 8.0
+        },
+        "2026-06-03": {
+          "ndvi": 135.0,
+          "ndvi_valid_date": "2026-06-03",
+          "smap_anomaly": -0.2464,
+          "smap_anomaly_valid_date": "2026-06-03",
+          "ndvi_change_encoded": 1.0
+        },
+        "2026-06-10": {
+          "ndvi": 159.0,
+          "ndvi_valid_date": "2026-06-10",
+          "smap_anomaly": -0.1675,
+          "smap_anomaly_valid_date": "2026-06-10",
+          "ndvi_change_encoded": 24.0
+        },
+        "2026-06-17": {
+          "ndvi": 166.0,
+          "ndvi_valid_date": "2026-06-17",
+          "smap_anomaly": -0.2394,
+          "smap_anomaly_valid_date": "2026-06-17",
+          "ndvi_change_encoded": 7.0
+        },
+        "2026-06-24": {
+          "ndvi": 147.0,
+          "ndvi_valid_date": "2026-06-23",
+          "smap_anomaly": -0.0937,
+          "smap_anomaly_valid_date": "2026-06-24",
+          "ndvi_change_encoded": -19.0
+        },
+        "2026-07-01": {
+          "ndvi": 178.0,
+          "ndvi_valid_date": "2026-07-01",
+          "smap_anomaly": 0.0919,
+          "smap_anomaly_valid_date": "2026-07-01",
+          "ndvi_change_encoded": 31.0
+        },
+        "2026-07-08": {
+          "ndvi": 175.0,
+          "ndvi_valid_date": "2026-07-08",
+          "smap_anomaly": -0.033,
+          "smap_anomaly_valid_date": "2026-07-08",
+          "ndvi_change_encoded": -3.0
+        },
+        "2026-07-15": {
+          "ndvi": 177.0,
+          "ndvi_valid_date": "2026-07-15",
+          "smap_anomaly": -0.0336,
+          "smap_anomaly_valid_date": "2026-07-15",
+          "ndvi_change_encoded": 2.0
+        },
+        "2026-07-22": {
+          "ndvi": 175.0,
+          "ndvi_valid_date": "2026-07-22",
+          "smap_anomaly": -0.1568,
+          "smap_anomaly_valid_date": "2026-07-22",
+          "ndvi_change_encoded": -2.0
+        },
+        "2026-07-29": {
+          "ndvi": 187.0,
+          "ndvi_valid_date": "2026-07-29",
+          "smap_anomaly": -0.0673,
+          "smap_anomaly_valid_date": "2026-07-29",
+          "ndvi_change_encoded": 12.0
+        },
+        "2026-08-05": {
+          "ndvi": 172.0,
+          "ndvi_valid_date": "2026-08-05",
+          "smap_anomaly": -0.1237,
+          "smap_anomaly_valid_date": "2026-08-05",
+          "ndvi_change_encoded": -15.0
+        },
+        "2026-08-12": {
+          "ndvi": 172.0,
+          "ndvi_valid_date": "2026-08-12",
+          "smap_anomaly": -0.1753,
+          "smap_anomaly_valid_date": "2026-08-12",
+          "ndvi_change_encoded": 0.0
+        },
+        "2026-08-19": {
+          "ndvi": 177.0,
+          "ndvi_valid_date": "2026-08-19",
+          "smap_anomaly": 0.3355,
+          "smap_anomaly_valid_date": "2026-08-19",
+          "ndvi_change_encoded": 5.0
+        },
+        "2026-08-26": {
+          "ndvi": 184.5,
+          "ndvi_valid_date": "2026-08-26",
+          "smap_anomaly": 0.0996,
+          "smap_anomaly_valid_date": "2026-08-26",
+          "ndvi_change_encoded": 7.5
+        },
+        "2026-09-02": {
+          "ndvi": 133.0,
+          "ndvi_valid_date": "2026-09-01",
+          "smap_anomaly": 0.0369,
+          "smap_anomaly_valid_date": "2026-09-02",
+          "ndvi_change_encoded": -51.5
+        },
+        "2026-09-09": {
+          "ndvi": 179.0,
+          "ndvi_valid_date": "2026-09-09",
+          "smap_anomaly": -0.0011,
+          "smap_anomaly_valid_date": "2026-09-09",
+          "ndvi_change_encoded": 46.0
+        }
+      }
+    },
+    "western-colorado": {
+      "name": "Western Colorado",
+      "center": [
+        38.55,
+        -108.3
+      ],
+      "dates": {
+        "2026-04-15": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-04-15",
+          "smap_anomaly": -0.06,
+          "smap_anomaly_valid_date": "2026-04-15",
+          "ndvi_change_encoded": null
+        },
+        "2026-04-22": {
+          "ndvi": 178.0,
+          "ndvi_valid_date": "2026-04-22",
+          "smap_anomaly": -0.0653,
+          "smap_anomaly_valid_date": "2026-04-22",
+          "ndvi_change_encoded": 36.0
+        },
+        "2026-04-29": {
+          "ndvi": 167.0,
+          "ndvi_valid_date": "2026-04-29",
+          "smap_anomaly": -0.0432,
+          "smap_anomaly_valid_date": "2026-04-29",
+          "ndvi_change_encoded": -11.0
+        },
+        "2026-05-06": {
+          "ndvi": 127.0,
+          "ndvi_valid_date": "2026-05-06",
+          "smap_anomaly": -0.0553,
+          "smap_anomaly_valid_date": "2026-05-06",
+          "ndvi_change_encoded": -40.0
+        },
+        "2026-05-13": {
+          "ndvi": 184.0,
+          "ndvi_valid_date": "2026-05-13",
+          "smap_anomaly": -0.0733,
+          "smap_anomaly_valid_date": "2026-05-13",
+          "ndvi_change_encoded": 57.0
+        },
+        "2026-05-20": {
+          "ndvi": 161.5,
+          "ndvi_valid_date": "2026-05-20",
+          "smap_anomaly": -0.0504,
+          "smap_anomaly_valid_date": "2026-05-20",
+          "ndvi_change_encoded": -22.5
+        },
+        "2026-05-27": {
+          "ndvi": 182.0,
+          "ndvi_valid_date": "2026-05-27",
+          "smap_anomaly": -0.0552,
+          "smap_anomaly_valid_date": "2026-05-27",
+          "ndvi_change_encoded": 20.5
+        },
+        "2026-06-03": {
+          "ndvi": 176.0,
+          "ndvi_valid_date": "2026-06-03",
+          "smap_anomaly": -0.0584,
+          "smap_anomaly_valid_date": "2026-06-03",
+          "ndvi_change_encoded": -6.0
+        },
+        "2026-06-10": {
+          "ndvi": 178.0,
+          "ndvi_valid_date": "2026-06-10",
+          "smap_anomaly": -0.0682,
+          "smap_anomaly_valid_date": "2026-06-10",
+          "ndvi_change_encoded": 2.0
+        },
+        "2026-06-17": {
+          "ndvi": 202.0,
+          "ndvi_valid_date": "2026-06-17",
+          "smap_anomaly": -0.0706,
+          "smap_anomaly_valid_date": "2026-06-17",
+          "ndvi_change_encoded": 24.0
+        },
+        "2026-06-24": {
+          "ndvi": 180.0,
+          "ndvi_valid_date": "2026-06-23",
+          "smap_anomaly": -0.0695,
+          "smap_anomaly_valid_date": "2026-06-24",
+          "ndvi_change_encoded": -22.0
+        },
+        "2026-07-01": {
+          "ndvi": 189.0,
+          "ndvi_valid_date": "2026-07-01",
+          "smap_anomaly": -0.067,
+          "smap_anomaly_valid_date": "2026-07-01",
+          "ndvi_change_encoded": 9.0
+        },
+        "2026-07-08": {
+          "ndvi": 186.0,
+          "ndvi_valid_date": "2026-07-08",
+          "smap_anomaly": -0.0729,
+          "smap_anomaly_valid_date": "2026-07-08",
+          "ndvi_change_encoded": -3.0
+        },
+        "2026-07-15": {
+          "ndvi": 178.0,
+          "ndvi_valid_date": "2026-07-15",
+          "smap_anomaly": -0.0796,
+          "smap_anomaly_valid_date": "2026-07-15",
+          "ndvi_change_encoded": -8.0
+        },
+        "2026-07-22": {
+          "ndvi": 178.5,
+          "ndvi_valid_date": "2026-07-22",
+          "smap_anomaly": -0.0391,
+          "smap_anomaly_valid_date": "2026-07-22",
+          "ndvi_change_encoded": 0.5
+        },
+        "2026-07-29": {
+          "ndvi": 194.0,
+          "ndvi_valid_date": "2026-07-29",
+          "smap_anomaly": -0.016,
+          "smap_anomaly_valid_date": "2026-07-29",
+          "ndvi_change_encoded": 15.5
+        },
+        "2026-08-05": {
+          "ndvi": 182.0,
+          "ndvi_valid_date": "2026-08-05",
+          "smap_anomaly": -0.0688,
+          "smap_anomaly_valid_date": "2026-08-05",
+          "ndvi_change_encoded": -12.0
+        },
+        "2026-08-12": {
+          "ndvi": 147.0,
+          "ndvi_valid_date": "2026-08-12",
+          "smap_anomaly": -0.0684,
+          "smap_anomaly_valid_date": "2026-08-12",
+          "ndvi_change_encoded": -35.0
+        },
+        "2026-08-19": {
+          "ndvi": 171.5,
+          "ndvi_valid_date": "2026-08-19",
+          "smap_anomaly": -0.0458,
+          "smap_anomaly_valid_date": "2026-08-19",
+          "ndvi_change_encoded": 24.5
+        },
+        "2026-08-26": {
+          "ndvi": 184.0,
+          "ndvi_valid_date": "2026-08-26",
+          "smap_anomaly": -0.0646,
+          "smap_anomaly_valid_date": "2026-08-26",
+          "ndvi_change_encoded": 12.5
+        },
+        "2026-09-02": {
+          "ndvi": 164.0,
+          "ndvi_valid_date": "2026-09-01",
+          "smap_anomaly": -0.0481,
+          "smap_anomaly_valid_date": "2026-09-02",
+          "ndvi_change_encoded": -20.0
+        },
+        "2026-09-09": {
+          "ndvi": 183.0,
+          "ndvi_valid_date": "2026-09-09",
+          "smap_anomaly": -0.0658,
+          "smap_anomaly_valid_date": "2026-09-09",
+          "ndvi_change_encoded": 19.0
+        }
+      }
+    },
+    "big-horn": {
+      "name": "Big Horn Basin",
+      "center": [
+        44.1,
+        -108.2
+      ],
+      "dates": {
+        "2026-04-15": {
+          "ndvi": 129.0,
+          "ndvi_valid_date": "2026-04-15",
+          "smap_anomaly": -0.1061,
+          "smap_anomaly_valid_date": "2026-04-15",
+          "ndvi_change_encoded": null
+        },
+        "2026-04-22": {
+          "ndvi": 143.0,
+          "ndvi_valid_date": "2026-04-22",
+          "smap_anomaly": -0.1337,
+          "smap_anomaly_valid_date": "2026-04-22",
+          "ndvi_change_encoded": 14.0
+        },
+        "2026-04-29": {
+          "ndvi": 139.0,
+          "ndvi_valid_date": "2026-04-29",
+          "smap_anomaly": -0.1347,
+          "smap_anomaly_valid_date": "2026-04-29",
+          "ndvi_change_encoded": -4.0
+        },
+        "2026-05-06": {
+          "ndvi": 146.0,
+          "ndvi_valid_date": "2026-05-06",
+          "smap_anomaly": -0.1591,
+          "smap_anomaly_valid_date": "2026-05-06",
+          "ndvi_change_encoded": 7.0
+        },
+        "2026-05-13": {
+          "ndvi": 149.0,
+          "ndvi_valid_date": "2026-05-13",
+          "smap_anomaly": -0.1909,
+          "smap_anomaly_valid_date": "2026-05-13",
+          "ndvi_change_encoded": 3.0
+        },
+        "2026-05-20": {
+          "ndvi": 145.0,
+          "ndvi_valid_date": "2026-05-20",
+          "smap_anomaly": -0.2387,
+          "smap_anomaly_valid_date": "2026-05-20",
+          "ndvi_change_encoded": -4.0
+        },
+        "2026-05-27": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-05-27",
+          "smap_anomaly": -0.2847,
+          "smap_anomaly_valid_date": "2026-05-27",
+          "ndvi_change_encoded": -3.0
+        },
+        "2026-06-03": {
+          "ndvi": 143.0,
+          "ndvi_valid_date": "2026-06-03",
+          "smap_anomaly": -0.2995,
+          "smap_anomaly_valid_date": "2026-06-03",
+          "ndvi_change_encoded": 1.0
+        },
+        "2026-06-10": {
+          "ndvi": 143.0,
+          "ndvi_valid_date": "2026-06-10",
+          "smap_anomaly": -0.3154,
+          "smap_anomaly_valid_date": "2026-06-10",
+          "ndvi_change_encoded": 0.0
+        },
+        "2026-06-17": {
+          "ndvi": 144.0,
+          "ndvi_valid_date": "2026-06-17",
+          "smap_anomaly": -0.3453,
+          "smap_anomaly_valid_date": "2026-06-17",
+          "ndvi_change_encoded": 1.0
+        },
+        "2026-06-24": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-06-23",
+          "smap_anomaly": -0.3369,
+          "smap_anomaly_valid_date": "2026-06-24",
+          "ndvi_change_encoded": -2.0
+        },
+        "2026-07-01": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-07-01",
+          "smap_anomaly": -0.326,
+          "smap_anomaly_valid_date": "2026-07-01",
+          "ndvi_change_encoded": 0.0
+        },
+        "2026-07-08": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-07-08",
+          "smap_anomaly": -0.2693,
+          "smap_anomaly_valid_date": "2026-07-08",
+          "ndvi_change_encoded": 0.0
+        },
+        "2026-07-15": {
+          "ndvi": 143.0,
+          "ndvi_valid_date": "2026-07-15",
+          "smap_anomaly": -0.2883,
+          "smap_anomaly_valid_date": "2026-07-15",
+          "ndvi_change_encoded": 1.0
+        },
+        "2026-07-22": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-07-22",
+          "smap_anomaly": -0.2536,
+          "smap_anomaly_valid_date": "2026-07-22",
+          "ndvi_change_encoded": -1.0
+        },
+        "2026-07-29": {
+          "ndvi": 140.0,
+          "ndvi_valid_date": "2026-07-29",
+          "smap_anomaly": -0.2278,
+          "smap_anomaly_valid_date": "2026-07-29",
+          "ndvi_change_encoded": -2.0
+        },
+        "2026-08-05": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-08-05",
+          "smap_anomaly": -0.2399,
+          "smap_anomaly_valid_date": "2026-08-05",
+          "ndvi_change_encoded": 2.0
+        },
+        "2026-08-12": {
+          "ndvi": 126.0,
+          "ndvi_valid_date": "2026-08-12",
+          "smap_anomaly": -0.2422,
+          "smap_anomaly_valid_date": "2026-08-12",
+          "ndvi_change_encoded": -16.0
+        },
+        "2026-08-19": {
+          "ndvi": 144.0,
+          "ndvi_valid_date": "2026-08-19",
+          "smap_anomaly": -0.1995,
+          "smap_anomaly_valid_date": "2026-08-19",
+          "ndvi_change_encoded": 18.0
+        },
+        "2026-08-26": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-08-26",
+          "smap_anomaly": -0.2319,
+          "smap_anomaly_valid_date": "2026-08-26",
+          "ndvi_change_encoded": -2.0
+        },
+        "2026-09-02": {
+          "ndvi": 141.0,
+          "ndvi_valid_date": "2026-09-01",
+          "smap_anomaly": -0.2195,
+          "smap_anomaly_valid_date": "2026-09-02",
+          "ndvi_change_encoded": -1.0
+        },
+        "2026-09-09": {
+          "ndvi": 140.0,
+          "ndvi_valid_date": "2026-09-09",
+          "smap_anomaly": -0.2761,
+          "smap_anomaly_valid_date": "2026-09-09",
+          "ndvi_change_encoded": -1.0
+        }
+      }
+    },
+    "se-wyoming": {
+      "name": "Southeast Wyoming",
+      "center": [
+        42.0,
+        -104.5
+      ],
+      "dates": {
+        "2026-04-15": {
+          "ndvi": 151.0,
+          "ndvi_valid_date": "2026-04-15",
+          "smap_anomaly": -0.1748,
+          "smap_anomaly_valid_date": "2026-04-15",
+          "ndvi_change_encoded": null
+        },
+        "2026-04-22": {
+          "ndvi": 132.0,
+          "ndvi_valid_date": "2026-04-22",
+          "smap_anomaly": -0.2231,
+          "smap_anomaly_valid_date": "2026-04-22",
+          "ndvi_change_encoded": -19.0
+        },
+        "2026-04-29": {
+          "ndvi": 148.0,
+          "ndvi_valid_date": "2026-04-29",
+          "smap_anomaly": -0.1704,
+          "smap_anomaly_valid_date": "2026-04-29",
+          "ndvi_change_encoded": 16.0
+        },
+        "2026-05-06": {
+          "ndvi": 149.0,
+          "ndvi_valid_date": "2026-05-06",
+          "smap_anomaly": -0.175,
+          "smap_anomaly_valid_date": "2026-05-06",
+          "ndvi_change_encoded": 1.0
+        },
+        "2026-05-13": {
+          "ndvi": 152.0,
+          "ndvi_valid_date": "2026-05-13",
+          "smap_anomaly": -0.233,
+          "smap_anomaly_valid_date": "2026-05-13",
+          "ndvi_change_encoded": 3.0
+        },
+        "2026-05-20": {
+          "ndvi": 157.0,
+          "ndvi_valid_date": "2026-05-20",
+          "smap_anomaly": -0.1926,
+          "smap_anomaly_valid_date": "2026-05-20",
+          "ndvi_change_encoded": 5.0
+        },
+        "2026-05-27": {
+          "ndvi": 134.0,
+          "ndvi_valid_date": "2026-05-27",
+          "smap_anomaly": -0.2698,
+          "smap_anomaly_valid_date": "2026-05-27",
+          "ndvi_change_encoded": -23.0
+        },
+        "2026-06-03": {
+          "ndvi": 157.0,
+          "ndvi_valid_date": "2026-06-03",
+          "smap_anomaly": -0.1536,
+          "smap_anomaly_valid_date": "2026-06-03",
+          "ndvi_change_encoded": 23.0
+        },
+        "2026-06-10": {
+          "ndvi": 161.0,
+          "ndvi_valid_date": "2026-06-10",
+          "smap_anomaly": -0.208,
+          "smap_anomaly_valid_date": "2026-06-10",
+          "ndvi_change_encoded": 4.0
+        },
+        "2026-06-17": {
+          "ndvi": 164.0,
+          "ndvi_valid_date": "2026-06-17",
+          "smap_anomaly": -0.2385,
+          "smap_anomaly_valid_date": "2026-06-17",
+          "ndvi_change_encoded": 3.0
+        },
+        "2026-06-24": {
+          "ndvi": 128.0,
+          "ndvi_valid_date": "2026-06-23",
+          "smap_anomaly": -0.2843,
+          "smap_anomaly_valid_date": "2026-06-24",
+          "ndvi_change_encoded": -36.0
+        },
+        "2026-07-01": {
+          "ndvi": 170.0,
+          "ndvi_valid_date": "2026-07-01",
+          "smap_anomaly": 0.029,
+          "smap_anomaly_valid_date": "2026-07-01",
+          "ndvi_change_encoded": 42.0
+        },
+        "2026-07-08": {
+          "ndvi": 162.0,
+          "ndvi_valid_date": "2026-07-08",
+          "smap_anomaly": -0.1449,
+          "smap_anomaly_valid_date": "2026-07-08",
+          "ndvi_change_encoded": -8.0
+        },
+        "2026-07-15": {
+          "ndvi": 159.0,
+          "ndvi_valid_date": "2026-07-15",
+          "smap_anomaly": -0.1593,
+          "smap_anomaly_valid_date": "2026-07-15",
+          "ndvi_change_encoded": -3.0
+        },
+        "2026-07-22": {
+          "ndvi": 158.0,
+          "ndvi_valid_date": "2026-07-22",
+          "smap_anomaly": -0.2114,
+          "smap_anomaly_valid_date": "2026-07-22",
+          "ndvi_change_encoded": -1.0
+        },
+        "2026-07-29": {
+          "ndvi": 142.0,
+          "ndvi_valid_date": "2026-07-29",
+          "smap_anomaly": -0.185,
+          "smap_anomaly_valid_date": "2026-07-29",
+          "ndvi_change_encoded": -16.0
+        },
+        "2026-08-05": {
+          "ndvi": 155.0,
+          "ndvi_valid_date": "2026-08-05",
+          "smap_anomaly": -0.2188,
+          "smap_anomaly_valid_date": "2026-08-05",
+          "ndvi_change_encoded": 13.0
+        },
+        "2026-08-12": {
+          "ndvi": 134.0,
+          "ndvi_valid_date": "2026-08-12",
+          "smap_anomaly": -0.201,
+          "smap_anomaly_valid_date": "2026-08-12",
+          "ndvi_change_encoded": -21.0
+        },
+        "2026-08-19": {
+          "ndvi": 158.0,
+          "ndvi_valid_date": "2026-08-19",
+          "smap_anomaly": 0.2057,
+          "smap_anomaly_valid_date": "2026-08-19",
+          "ndvi_change_encoded": 24.0
+        },
+        "2026-08-26": {
+          "ndvi": 167.0,
+          "ndvi_valid_date": "2026-08-26",
+          "smap_anomaly": -0.0137,
+          "smap_anomaly_valid_date": "2026-08-26",
+          "ndvi_change_encoded": 9.0
+        },
+        "2026-09-02": {
+          "ndvi": 131.0,
+          "ndvi_valid_date": "2026-09-01",
+          "smap_anomaly": -0.0399,
+          "smap_anomaly_valid_date": "2026-09-02",
+          "ndvi_change_encoded": -36.0
+        },
+        "2026-09-09": {
+          "ndvi": 156.0,
+          "ndvi_valid_date": "2026-09-09",
+          "smap_anomaly": -0.0141,
+          "smap_anomaly_valid_date": "2026-09-09",
+          "ndvi_change_encoded": 25.0
+        }
+      }
+    },
+    "nw-kansas": {
+      "name": "Northwest / West-Central Kansas",
+      "center": [
+        39.25,
+        -101.6
+      ],
+      "dates": {
+        "2026-04-15": {
+          "ndvi": 150.0,
+          "ndvi_valid_date": "2026-04-15",
+          "smap_anomaly": -0.0975,
+          "smap_anomaly_valid_date": "2026-04-15",
+          "ndvi_change_encoded": null
+        },
+        "2026-04-22": {
+          "ndvi": 145.0,
+          "ndvi_valid_date": "2026-04-22",
+          "smap_anomaly": -0.1767,
+          "smap_anomaly_valid_date": "2026-04-22",
+          "ndvi_change_encoded": -5.0
+        },
+        "2026-04-29": {
+          "ndvi": 126.0,
+          "ndvi_valid_date": "2026-04-29",
+          "smap_anomaly": -0.1672,
+          "smap_anomaly_valid_date": "2026-04-29",
+          "ndvi_change_encoded": -19.0
+        },
+        "2026-05-06": {
+          "ndvi": 126.0,
+          "ndvi_valid_date": "2026-05-06",
+          "smap_anomaly": -0.0862,
+          "smap_anomaly_valid_date": "2026-05-06",
+          "ndvi_change_encoded": 0.0
+        },
+        "2026-05-13": {
+          "ndvi": 157.0,
+          "ndvi_valid_date": "2026-05-13",
+          "smap_anomaly": -0.2076,
+          "smap_anomaly_valid_date": "2026-05-13",
+          "ndvi_change_encoded": 31.0
+        },
+        "2026-05-20": {
+          "ndvi": 129.0,
+          "ndvi_valid_date": "2026-05-20",
+          "smap_anomaly": -0.2274,
+          "smap_anomaly_valid_date": "2026-05-20",
+          "ndvi_change_encoded": -28.0
+        },
+        "2026-05-27": {
+          "ndvi": 130.0,
+          "ndvi_valid_date": "2026-05-27",
+          "smap_anomaly": -0.208,
+          "smap_anomaly_valid_date": "2026-05-27",
+          "ndvi_change_encoded": 1.0
+        },
+        "2026-06-03": {
+          "ndvi": 133.0,
+          "ndvi_valid_date": "2026-06-03",
+          "smap_anomaly": -0.1443,
+          "smap_anomaly_valid_date": "2026-06-03",
+          "ndvi_change_encoded": 3.0
+        },
+        "2026-06-10": {
+          "ndvi": 163.0,
+          "ndvi_valid_date": "2026-06-10",
+          "smap_anomaly": -0.1777,
+          "smap_anomaly_valid_date": "2026-06-10",
+          "ndvi_change_encoded": 30.0
+        },
+        "2026-06-17": {
+          "ndvi": 155.0,
+          "ndvi_valid_date": "2026-06-17",
+          "smap_anomaly": -0.1959,
+          "smap_anomaly_valid_date": "2026-06-17",
+          "ndvi_change_encoded": -8.0
+        },
+        "2026-06-24": {
+          "ndvi": 143.0,
+          "ndvi_valid_date": "2026-06-23",
+          "smap_anomaly": -0.0009,
+          "smap_anomaly_valid_date": "2026-06-24",
+          "ndvi_change_encoded": -12.0
+        },
+        "2026-07-01": {
+          "ndvi": 173.0,
+          "ndvi_valid_date": "2026-07-01",
+          "smap_anomaly": 0.0277,
+          "smap_anomaly_valid_date": "2026-07-01",
+          "ndvi_change_encoded": 30.0
+        },
+        "2026-07-08": {
+          "ndvi": 185.0,
+          "ndvi_valid_date": "2026-07-08",
+          "smap_anomaly": 0.0032,
+          "smap_anomaly_valid_date": "2026-07-08",
+          "ndvi_change_encoded": 12.0
+        },
+        "2026-07-15": {
+          "ndvi": 188.0,
+          "ndvi_valid_date": "2026-07-15",
+          "smap_anomaly": -0.0036,
+          "smap_anomaly_valid_date": "2026-07-15",
+          "ndvi_change_encoded": 3.0
+        },
+        "2026-07-22": {
+          "ndvi": 179.0,
+          "ndvi_valid_date": "2026-07-22",
+          "smap_anomaly": -0.1058,
+          "smap_anomaly_valid_date": "2026-07-22",
+          "ndvi_change_encoded": -9.0
+        },
+        "2026-07-29": {
+          "ndvi": 161.0,
+          "ndvi_valid_date": "2026-07-29",
+          "smap_anomaly": -0.1588,
+          "smap_anomaly_valid_date": "2026-07-29",
+          "ndvi_change_encoded": -18.0
+        },
+        "2026-08-05": {
+          "ndvi": 128.0,
+          "ndvi_valid_date": "2026-08-05",
+          "smap_anomaly": -0.131,
+          "smap_anomaly_valid_date": "2026-08-05",
+          "ndvi_change_encoded": -33.0
+        },
+        "2026-08-12": {
+          "ndvi": 137.0,
+          "ndvi_valid_date": "2026-08-12",
+          "smap_anomaly": -0.2216,
+          "smap_anomaly_valid_date": "2026-08-12",
+          "ndvi_change_encoded": 9.0
+        },
+        "2026-08-19": {
+          "ndvi": 171.0,
+          "ndvi_valid_date": "2026-08-19",
+          "smap_anomaly": 0.0415,
+          "smap_anomaly_valid_date": "2026-08-19",
+          "ndvi_change_encoded": 34.0
+        },
+        "2026-08-26": {
+          "ndvi": 137.5,
+          "ndvi_valid_date": "2026-08-26",
+          "smap_anomaly": -0.0053,
+          "smap_anomaly_valid_date": "2026-08-26",
+          "ndvi_change_encoded": -33.5
+        },
+        "2026-09-02": {
+          "ndvi": 173.5,
+          "ndvi_valid_date": "2026-09-01",
+          "smap_anomaly": -0.0491,
+          "smap_anomaly_valid_date": "2026-09-02",
+          "ndvi_change_encoded": 36.0
+        },
+        "2026-09-09": {
+          "ndvi": 181.0,
+          "ndvi_valid_date": "2026-09-09",
+          "smap_anomaly": -0.0948,
+          "smap_anomaly_valid_date": "2026-09-09",
+          "ndvi_change_encoded": 7.5
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Neighborhoods are centered on generalized analytical points and are not clipped to dry-bean pixels.",
+    "SMAP is a modeled root-zone product and NDVI is a modeled/composited vegetation product; neither is a field measurement.",
+    "NDVI is retained in the service's encoded values and is used only for direction of change, not as a physical-unit claim.",
+    "A crop-health classification requires both a released GISit weather/GDD outlook and these two corroborating evidence families."
+  ],
+  "provenance": [
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-04-15",
+      "valid_date": "2026-04-15",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.04.15&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "8f691ffaded6239bb94a85cf3dca4ff5070009009377144a6894f4280553e096",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-04-15",
+      "valid_date": "2026-04-15",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.04.15&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "bd65df40ca3bbe40cd9f14fe881d83aff750c01e0f49af612ffcdbaa14205685",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-04-22",
+      "valid_date": "2026-04-22",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.04.22&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "c9f85922704bd5ee80fc503749df3a62da899175b6d7ba980d4d0212e259fe98",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-04-22",
+      "valid_date": "2026-04-22",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.04.22&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "f092cc87052b8aa22275a51472959f2f66363210552662f2664bcb455f198a8c",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-04-29",
+      "valid_date": "2026-04-29",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.04.29&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "9a7beface77eec8db2a882ccd5c93f6002ddb954feda8a48767e32ce29a74a69",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-04-29",
+      "valid_date": "2026-04-29",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.04.29&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "d2d498521e8ba8d80538b49b9cbf5b7571fb18fdf74bfec6c6d7e7f32c780ebd",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-05-06",
+      "valid_date": "2026-05-06",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.05.06&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "1d53de1785969c503dd43b1d6f05a7690fe58101eef147242d4e80c854181418",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-05-06",
+      "valid_date": "2026-05-06",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.05.06&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "550ddf1282e8506428378c999eda977c5b403d663e64ae1fb787cb011d950c21",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-05-13",
+      "valid_date": "2026-05-13",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.05.13&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "bb70bd576f2ba63e75143f3af4e4c798e79fa6b88ec4a741c9ff0ed7ba4b3162",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-05-13",
+      "valid_date": "2026-05-13",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.05.13&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "a747d466a67797afc7a7231bded3386c14efe18daef1e5f11b18f26e85ebb4bc",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-05-20",
+      "valid_date": "2026-05-20",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.05.20&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "5ce02960a3d60254d1085b3679bb4b02f075044ef0bea7bf57a0782c0d805875",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-05-20",
+      "valid_date": "2026-05-20",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.05.20&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "adcc28155871da89b57415b6eb1cfff7f7cdf518015a91515d384165b15bae12",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-05-27",
+      "valid_date": "2026-05-27",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.05.27&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "ede9b0bb28eeb521f1d9b56e5d93df9040e14bd32426d66b8018ddedf2333ce9",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-05-27",
+      "valid_date": "2026-05-27",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.05.27&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "5f22482aa9f71413da6da1776762b405e9f9c92ec3e79b38e14869c9c7ebb7fd",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-06-03",
+      "valid_date": "2026-06-03",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.06.03&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "4b8f6292d7e0545f69ef7480ac02124e5beade0a21b181cae3d1bce262a15406",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-06-03",
+      "valid_date": "2026-06-03",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.06.03&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "0b09d2b294cf66d2128b3c7a5ba18f258035780c171d5e8e0e1ed1f8716790c6",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-06-10",
+      "valid_date": "2026-06-10",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.06.10&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "c95059b2e736b34394ddf59152c60b9653862a6bffa7a1175c700905fa5d5a8b",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-06-10",
+      "valid_date": "2026-06-10",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.06.10&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "04cba52b23ad2ef2e360a92f2629a95cd303ec01a619637dcb5570bd0a63f16a",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-06-17",
+      "valid_date": "2026-06-17",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.06.17&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "df6aea5fb177540253943c40fb2d21ebaecd0cea9b3e5f75ff3fdf4152bb85c6",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-06-17",
+      "valid_date": "2026-06-17",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.06.17&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "d949b58e02581417472055ff3ca81a051ab564c18d9c894b0c36e79f5ab90419",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-06-24",
+      "valid_date": "2026-06-23",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.06.23&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "d96e843f4f2fffce80ab2d4474d46718d79410c807f8bc6a82bb0d056a538159",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-06-24",
+      "valid_date": "2026-06-24",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.06.24&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "0eee64faf6df88f1f4e8ca163aa5a00aac5e47da79cabbd45262507a0a62b9f2",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-01",
+      "valid_date": "2026-07-01",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.01&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "215a108bb45959d5ebca70e832d6edda85a59c765002e754f7f3a77ce27298a4",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-01",
+      "valid_date": "2026-07-01",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.01&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "1f1f7fda531096b8115ef5659c0b3487b04dc2af2c9c97ab11f7e64ddcc65b97",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-08",
+      "valid_date": "2026-07-08",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.08&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "833c18cd0e136051bf7dbcdda9916d135253b5758f577ab9076b24c6a1ce3c4a",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-08",
+      "valid_date": "2026-07-08",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.08&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "ca4466796c7a47634836536ea1dae9669c9a310ff7684f777d7017d787138c52",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-15",
+      "valid_date": "2026-07-15",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.15&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "7d80643809d46c447456bc671563ca14c347c6d848b549276427e88c218e06d9",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-15",
+      "valid_date": "2026-07-15",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.15&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "91ed907f4057873c33c177860953ec5d23abdc911ba2a62ffccab4f9be3872cc",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-22",
+      "valid_date": "2026-07-22",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.22&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "dc61161a08edea327f121e9deb5f60f5027e8051c78449da4c43eca9e44f1d1b",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-22",
+      "valid_date": "2026-07-22",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.22&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "3bc9b864094aaf4d44feb93ecd96b81e01377851d089b59dcfd7d53188743fa2",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-29",
+      "valid_date": "2026-07-29",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.29&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "44eaff9fde5cb7e8b85f1c35240004631e6a71057edd39879dedab59f51125f9",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-29",
+      "valid_date": "2026-07-29",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.29&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "d9324283f3f78bda8c40878f87f20ef1f15a434da2b97504acf1972d22f229e7",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-08-05",
+      "valid_date": "2026-08-05",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.08.05&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "f56b028e38eda2c5b1c554a3a5e39ba89cd95b48de6120ae619ab6a389f5a8dc",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-08-05",
+      "valid_date": "2026-08-05",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.08.05&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "446f6188b8c0b66c8a6e0aea40586f26a00dae7fc738f9b2c68a237c2748e92b",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-08-12",
+      "valid_date": "2026-08-12",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.08.12&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "827af2f637311e0ed3c480851e7124bc3f36c7004e8f7f52339aaf2cb8204c13",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-08-12",
+      "valid_date": "2026-08-12",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.08.12&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "4b1771da3cb132d84ce9342aa1b436473db513ded43ed1fc8a0c3d832b6dd9fd",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-08-19",
+      "valid_date": "2026-08-19",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.08.19&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "81476cdd77925bf0e7ea02a452b1620740d562643594e3d26ac2704d1fc57a17",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-08-19",
+      "valid_date": "2026-08-19",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.08.19&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "3725b3429ccf56c03c37a54285bc5638ee3352e7134bf40079158237cd99917f",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-08-26",
+      "valid_date": "2026-08-26",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.08.26&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "bb5df66bf9cd47eb9ec826719e759853750e57b2375d84cac297d8ca2d38d979",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-08-26",
+      "valid_date": "2026-08-26",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.08.26&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "9f49d3d9473b83cb2707af0a66974fc3d92d312ef307a2df0d27480e460233e0",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-09-02",
+      "valid_date": "2026-09-01",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.09.01&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "537ea5472fa95bbe532453232e0de6e59a3461e7765e0e31a5fd411dc9f05b3d",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-09-02",
+      "valid_date": "2026-09-02",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.09.02&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "1fc9c5faea4b7dd298340b6ef723892048d8a725255dd8a832af0afd736cb115",
+      "bytes": 52539
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-09-09",
+      "valid_date": "2026-09-09",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.09.09&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=0.05",
+      "sha256": "9b41bf13c3f71b6d2d59f49166ccefbd39cc3026082570c90842ef558fbbcd01",
+      "bytes": 42704
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-09-09",
+      "valid_date": "2026-09-09",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.09.09&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "ae4a57e84ecb18bb9602502c09e711b1e6dca24a23f6e408d5c8796b1b76b0d9",
+      "bytes": 52539
+    }
+  ],
+  "artifact_sha256": "b17ae8a8feb6cf060245c108fc0eddc98ffaa522b4fc33fdfe91ebcf65ad49a3"
+}

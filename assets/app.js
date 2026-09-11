@@ -1,9 +1,6 @@
 'use strict';
 (()=>{
   const $=id=>document.getElementById(id),DAY=86400000;
-  const utcDay=new Date().toISOString().slice(0,10);
-  const TODAY=new Date(`${utcDay}T12:00:00Z`),SEASON_START=new Date(`${TODAY.getUTCFullYear()}-04-15T12:00:00Z`);
-  const STATES={Nebraska:'31',Colorado:'08',Wyoming:'56',Kansas:'20'};
   const STUDY_AREAS=[
     {id:'ne-panhandle',name:'Nebraska Panhandle',state:'Nebraska',center:[41.75,-103.20]},
     {id:'sw-nebraska',name:'Southwest Nebraska',state:'Nebraska',center:[40.25,-101.55]},
@@ -13,109 +10,125 @@
     {id:'se-wyoming',name:'Southeast Wyoming',state:'Wyoming',center:[42.00,-104.50]},
     {id:'nw-kansas',name:'Northwest / West-Central Kansas',state:'Kansas',center:[39.25,-101.60]}
   ];
-  const state={date:new Date(TODAY),playing:false,selected:'ne-panhandle',weather:new Map(),request:0,baseline:null,build:null};
-  const map=L.map('map',{zoomControl:true,preferCanvas:true}).setView([41.25,-103.3],6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'}).addTo(map);
-  const countyLayer=L.layerGroup().addTo(map),studyLayer=L.layerGroup().addTo(map),evidenceLayer=L.layerGroup().addTo(map);
-  const iso=d=>d.toISOString().slice(0,10),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const fmt=(v,d=1)=>Number.isFinite(v)?Number(v).toFixed(d):'—',source=id=>window.NB_SOURCES?.[id]||null;
-  const evidenceTag=(classification,text='')=>`<span class="evidence ${classification.toLowerCase()}">${classification}</span>${text}`;
-  const statusTag=(status,text='')=>`<span class="workstatus">${status}</span>${text}`;
+  const STATES={Nebraska:'31',Colorado:'08',Wyoming:'56',Kansas:'20'};
+  const state={date:null,start:null,end:null,playing:false,selected:'ne-panhandle',mode:'yield',request:0,baseline:null,build:null,catalog:null,model:null,satellite:null,raster:null,yieldLayer:null};
+  const map=L.map('map',{zoomControl:true,preferCanvas:true,minZoom:4,zoomSnap:.25,zoomDelta:.5}).setView([41.1,-102.5],6);
+  map.createPane('rasterPane');map.getPane('rasterPane').style.zIndex=320;map.getPane('rasterPane').style.pointerEvents='none';
+  map.createPane('yieldPane');map.getPane('yieldPane').style.zIndex=390;
+  map.createPane('boundaryPane');map.getPane('boundaryPane').style.zIndex=430;map.getPane('boundaryPane').style.pointerEvents='none';
+  map.createPane('selectionPane');map.getPane('selectionPane').style.zIndex=500;
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,opacity:.72,attribution:'© OpenStreetMap'}).addTo(map);
+  const countyLayer=L.layerGroup({pane:'boundaryPane'}).addTo(map),selectionLayer=L.layerGroup({pane:'selectionPane'}).addTo(map);
+  const iso=d=>d.toISOString().slice(0,10),dotDate=d=>iso(d).replaceAll('-','.'),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const fmt=(v,d=1)=>Number.isFinite(v)?Number(v).toFixed(d):'—',signed=v=>`${v>=0?'+':''}${Number(v).toLocaleString()}`;
+  const source=id=>window.NB_SOURCES?.[id]||null,evidenceTag=(classification,text='')=>`<span class="evidence ${classification.toLowerCase()}">${classification}</span>${text}`;
   const setText=(id,value)=>{const el=$(id);if(el)el.textContent=value};
   const setHTML=(id,value)=>{const el=$(id);if(el)el.innerHTML=value};
   const selectedArea=()=>STUDY_AREAS.find(r=>r.id===state.selected)||STUDY_AREAS[0];
+  const parseDay=value=>new Date(`${value}T12:00:00Z`);
+  const modelRegion=area=>state.model?.regions?.[area.id]||null;
+  const modelRow=(area,date=state.date)=>modelRegion(area)?.dates?.[iso(date)]||null;
 
-  async function loadBaseline(){
-    const r=await fetch('assets/data/official-baseline.json',{cache:'no-store'});
-    if(!r.ok)throw Error(`official baseline ${r.status}`);
-    state.baseline=await r.json();
-  }
-  async function loadBuildManifest(){
-    const r=await fetch('assets/data/build-manifest.json',{cache:'no-store'});
-    if(!r.ok)throw Error(`build manifest ${r.status}`);
-    state.build=await r.json();
-    setText('buildStatus',`Data build ${state.build.data_build_id} · model: none accepted`);
+  async function loadJson(path,label){const response=await fetch(path,{cache:'no-store'});if(!response.ok)throw Error(`${label} ${response.status}`);return response.json()}
+  async function loadInputs(){
+    const [baseline,build,catalog,model,satellite]=await Promise.all([
+      loadJson('assets/data/official-baseline.json','official baseline'),loadJson('assets/data/build-manifest.json','build manifest'),loadJson('assets/data/temporal-layer-catalog.json','temporal layer catalog'),loadJson('assets/data/gisit-outlook-2026.json','GISit model outlook'),loadJson('assets/data/satellite-signals-2026.json','satellite evidence series')
+    ]);
+    state.baseline=baseline;state.build=build;state.catalog=catalog;state.model=model;state.satellite=satellite;
+    state.start=parseDay(model.analysis_start);state.end=parseDay(model.analysis_end);state.date=new Date(state.end);
+    setText('buildStatus',`Data build ${build.data_build_id} · model ${model.model.version} · ${model.model.training_state_years} calibration seasons`);syncSliderFromDate();
   }
   function officialAsOf(stateName,date){
-    const rows=state.baseline?.forecast_history?.[stateName]||[],cut=iso(date);
-    const available=rows.filter(x=>x.issue_date<=cut);
+    const rows=state.baseline?.forecast_history?.[stateName]||[],cut=iso(date),available=rows.filter(x=>x.issue_date<=cut);
     const latest=metric=>available.filter(x=>x.metric===metric).sort((a,b)=>a.issue_date.localeCompare(b.issue_date)).at(-1)||null;
     return {planted:latest('planted_acres'),harvested:latest('harvested_acres'),yield:latest('yield_lb_ac'),production:latest('production_cwt')};
   }
-  async function countyGeo(name,code){
-    const url='https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where='+encodeURIComponent(`STATE='${code}'`)+'&outFields=NAME,BASENAME,GEOID&returnGeometry=true&outSR=4326&f=geojson';
-    const r=await fetch(url);if(!r.ok)throw Error(`${name} county geometry ${r.status}`);return r.json();
+  function acreageRevision(stateName,date){
+    const cut=iso(date),rows=(state.baseline?.forecast_history?.[stateName]||[]).filter(x=>x.metric==='planted_acres'&&x.issue_date<=cut).sort((a,b)=>a.issue_date.localeCompare(b.issue_date));
+    if(!rows.length)return null;const latest=rows.at(-1),previous=rows.at(-2);return {latest,previous,delta:previous?latest.value-previous.value:null};
   }
-  async function loadCounties(){
-    const results=await Promise.allSettled(Object.entries(STATES).map(async([name,code])=>[name,await countyGeo(name,code)]));
-    let n=0;
-    results.forEach(x=>{if(x.status!=='fulfilled')return;const [,gj]=x.value;L.geoJSON(gj,{interactive:false,style:{fill:false,fillOpacity:0,color:'#7c8982',weight:.65,opacity:.68}}).addTo(countyLayer);n+=(gj.features||[]).length});
-    setText('countyStatus',n?`${n} county boundaries loaded as reference only`:'County boundary service unavailable');
+  async function boundaryGeo(layer,where,outFields){
+    const params=new URLSearchParams({where,outFields,returnGeometry:'true',outSR:'4326',f:'geojson'}),response=await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/${layer}/query?${params}`);
+    if(!response.ok)throw Error(`Census TIGERweb geometry ${response.status}`);return response.json();
   }
-  function drawStudyAreas(){
-    studyLayer.clearLayers();
-    STUDY_AREAS.forEach(r=>{const selected=r.id===state.selected,m=L.circleMarker(r.center,{radius:selected?7:5,color:selected?'#183f5b':'#516c59',weight:selected?2:1.2,fillColor:'#fff',fillOpacity:.9});m.bindTooltip(`${r.name} · candidate location only`,{direction:'top'});m.on('click',()=>selectArea(r.id));m.addTo(studyLayer)});
+  async function loadBoundaries(){
+    const codes=Object.values(STATES).map(code=>`'${code}'`).join(','),counties=await boundaryGeo(1,`STATE IN (${codes})`,'NAME,BASENAME,GEOID,STATE');
+    L.geoJSON(counties,{pane:'boundaryPane',interactive:false,style:{fill:false,fillOpacity:0,color:'#455b50',weight:.65,opacity:.58}}).addTo(countyLayer);setText('countyStatus',`${counties.features?.length||0} county boundaries · reference only`);
   }
-  function dateFromSlider(){const span=Math.max(1,Math.round((TODAY-SEASON_START)/DAY));return new Date(SEASON_START.getTime()+Number($('timeSlider').value||0)/100*span*DAY)}
-  function syncSliderFromDate(){const span=Math.max(1,(TODAY-SEASON_START)/DAY);$('timeSlider').value=clamp(Math.round((state.date-SEASON_START)/DAY/span*100),0,100)}
-  async function fallbackWeather(area,date,token){
-    const key=`${area.id}:${iso(date)}`;if(state.weather.has(key))return state.weather.get(key);
-    const start=new Date(date.getTime()-29*DAY),params=new URLSearchParams({latitude:area.center[0],longitude:area.center[1],start_date:iso(start),end_date:iso(date),timezone:'UTC',daily:'precipitation_sum,et0_fao_evapotranspiration,temperature_2m_max,temperature_2m_min'});
-    const r=await fetch('https://archive-api.open-meteo.com/v1/archive?'+params);if(!r.ok)throw Error(`temporary weather fallback ${r.status}`);
-    const j=await r.json();if(token!==state.request)throw Error('stale request');
-    const d=j.daily||{},rain=(d.precipitation_sum||[]).filter(Number.isFinite),et=(d.et0_fao_evapotranspiration||[]).filter(Number.isFinite),tx=(d.temperature_2m_max||[]).filter(Number.isFinite),tn=(d.temperature_2m_min||[]).filter(Number.isFinite);
-    const value={rain30:rain.reduce((a,b)=>a+b,0),et30:et.reduce((a,b)=>a+b,0),maxT:tx.length?Math.max(...tx):null,minT:tn.length?Math.min(...tn):null,validThrough:(d.time||[]).at(-1)||null,source:'open-meteo-fallback'};
-    state.weather.set(key,value);return value;
+  function drawSelection(){selectionLayer.clearLayers();const area=selectedArea();L.circleMarker(area.center,{pane:'selectionPane',radius:7,color:'#fff',weight:2.5,fillColor:'#173f5a',fillOpacity:1}).bindTooltip(`${area.name} · selected analytical area`,{direction:'top'}).addTo(selectionLayer)}
+  function dateFromSlider(){const span=Math.max(1,Math.round((state.end-state.start)/DAY));return new Date(state.start.getTime()+Math.round(Number($('timeSlider').value||0)/100*span)*DAY)}
+  function syncSliderFromDate(){if(!state.start||!state.end||!state.date)return;const span=Math.max(1,(state.end-state.start)/DAY);$('timeSlider').value=clamp(Math.round((state.date-state.start)/DAY/span*100),0,100)}
+  function wmsUrl(layer,date,request='GetMap'){
+    const layerName=layer.layer_template.replace('{date}',dotDate(date)),url=new URL(state.catalog.wms_endpoint),params={SERVICE:'WMS',VERSION:'1.1.1',REQUEST:request,MAP:layer.map_file,LAYERS:layerName,LAYER:layerName,FORMAT:'image/png'};
+    Object.entries(params).forEach(([key,value])=>url.searchParams.set(key,value));
+    if(request==='GetMap'){const [[south,west],[north,east]]=state.catalog.study_bounds;Object.entries({TRANSPARENT:'true',SRS:'EPSG:4326',BBOX:`${west},${south},${east},${north}`,WIDTH:'1600',HEIGHT:'900'}).forEach(([key,value])=>url.searchParams.set(key,value))}return url.toString();
   }
-  function renderEvidence(area,w){
-    evidenceLayer.clearLayers();
-    L.circleMarker(area.center,{radius:9,color:'#fff',weight:2,fillColor:'#526d7b',fillOpacity:.86}).bindTooltip(`${area.name}\nweather data only`,{direction:'top'}).bindPopup(`<b>${area.name}</b><br>${evidenceTag('MODELED',' temporary weather input')}<br><br><b>Selected date:</b> ${iso(state.date)}<br><b>Valid through:</b> ${w?.validThrough||'—'}<br><b>30-day precipitation:</b> ${fmt(w?.rain30,0)} mm<br><b>30-day reference ET₀:</b> ${fmt(w?.et30,0)} mm<br><b>30-day maximum temperature:</b> ${fmt(w?.maxT,1)} °C<br><b>30-day minimum temperature:</b> ${fmt(w?.minT,1)} °C<br><br><small>No stress class, crop condition, or yield impact is inferred.</small>`).addTo(evidenceLayer);
+  function rasterLegend(layer,date){setHTML('mapLegend',`<b>${layer.label}</b><div class="legendDate">VALID ${iso(date)} · MODELED SOURCE GRID</div><img class="legendScale" src="${wmsUrl(layer,date,'GetLegendGraphic')}" alt="${layer.label} color scale"><small>${layer.source}<br>${layer.source_role}<br>${state.catalog.coverage_note}</small>`)}
+  function clearDataLayers(){if(state.raster){map.removeLayer(state.raster);state.raster=null}if(state.yieldLayer){map.removeLayer(state.yieldLayer);state.yieldLayer=null}}
+  function renderRaster(token,attempt=0){
+    clearDataLayers();const layer=state.catalog.layers[state.mode],date=new Date(state.date.getTime()-attempt*DAY),minimum=parseDay(layer.available_start);
+    if(date<minimum){setText('status',`${layer.label} is unavailable for the selected date.`);setText('layerBadge','SOURCE DATE UNAVAILABLE');return}
+    const overlay=L.imageOverlay(wmsUrl(layer,date),state.catalog.study_bounds,{pane:'rasterPane',opacity:layer.opacity,interactive:false,className:'temporal-raster',alt:`${layer.label} for ${iso(date)}`});
+    state.raster=overlay;rasterLegend(layer,date);setText('layerBadge',`LOADING · ${iso(date)}`);setText('status',`Loading ${layer.label.toLowerCase()} for ${iso(date)}…`);
+    overlay.on('load',()=>{if(token!==state.request||overlay!==state.raster)return;setText('layerBadge',`MODELED · ${iso(date)}`);setText('status',`${layer.label} · source valid ${iso(date)} · full four-state source coverage.`)});
+    overlay.on('error',()=>{if(token!==state.request||overlay!==state.raster)return;if(attempt<7)renderRaster(token,attempt+1);else{clearDataLayers();setText('layerBadge','RASTER UNAVAILABLE');setText('status',`${layer.label} could not be loaded for ${iso(state.date)} or the prior seven days.`)}});overlay.addTo(map);
   }
-  function updateSourcePanel(){
-    const ids=['cdl','nass','noaa','era5','smap','cropcasma','ssurgo','hls','usdm','irrigation','nbm'];
-    setHTML('sourceList',ids.map(id=>{const s=source(id);return `<div class="sourceRow"><div><b>${s.name}</b><small>${s.role}</small></div><span>${s.classification}</span></div>`}).join(''));
-  }
-  function updateCalendar(){
-    const phases=['Planting','Emergence','Vegetative','Flowering','Pod Set','Seed Fill','Maturity','Harvest'];
-    setHTML('calendar',phases.map(p=>`<div class="phase future"><b>${p}</b><span>Stage model pending official progress + sourced bean-GDD integration</span><em>${evidenceTag('UNKNOWN')}</em></div>`).join(''));
-  }
-  function updateTruthPanel(area,w){
-    const official=officialAsOf(area.state,state.date),hasYield=official.yield?.value!=null;
-    setText('asOfLabel',iso(state.date));setText('sliderDate',iso(state.date));setText('regionName',area.name);setText('stageTag','STAGE: UNKNOWN');
-    if(hasYield){
-      setText('plainAnswer',`${area.state}: USDA's latest available dry-bean yield forecast was ${official.yield.value.toLocaleString()} lb/ac for ${official.yield.valid_date}.`);
-      setText('narrative',`This is an OBSERVED published NASS forecast record released ${official.yield.issue_date}, not a GISit forecast. No independent crop-condition, yield, or production model is accepted yet.`);
-      setText('yieldNow',`${official.yield.value.toLocaleString()} lb/ac`);setText('yieldRange','OBSERVED USDA/NASS forecast record · GISit range not implemented');setText('yieldDelta','Official forecast record, not GISit estimate');
-      setText('regionYield',`${official.yield.value.toLocaleString()} lb/ac`);setText('regionYieldWhy',`OBSERVED NASS publication record; forecast valid ${official.yield.valid_date}, released ${official.yield.issue_date}.`);
-    }else{
-      setText('plainAnswer','The selected date predates an available official dry-bean yield forecast for this state.');setText('narrative','Later USDA forecasts are withheld from earlier dates. Missing current state records remain UNKNOWN, not zero.');setText('yieldNow','—');setText('yieldRange','NO DATE-CORRECT OFFICIAL YIELD FORECAST');setText('yieldDelta','No future-data leakage');setText('regionYield','—');setText('regionYieldWhy','No yield forecast was available to the system by the selected date.');
+  function yieldColor(value){if(!Number.isFinite(value))return '#b9c0bc';const t=clamp((value-1600)/1100,0,1),a=t<.5?[205,108,70]:[241,207,99],b=t<.5?[241,207,99]:[49,116,81],u=t<.5?t*2:(t-.5)*2;return `rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*u)).join(',')})`}
+  function renderYield(){
+    clearDataLayers();state.yieldLayer=L.layerGroup({pane:'yieldPane'});let released=0;
+    for(const area of STUDY_AREAS){
+      const row=modelRow(area),value=row?.yield_lb_ac,color=yieldColor(value),selected=area.id===state.selected;if(Number.isFinite(value))released++;
+      const circle=L.circle(area.center,{pane:'yieldPane',radius:selected?82000:68000,color:selected?'#173f5a':'#fff',weight:selected?3:1.5,opacity:.98,fill:true,fillColor:color,fillOpacity:Number.isFinite(value)?.83:.55});
+      const body=Number.isFinite(value)?`<b>${area.name}</b><br>GISit: ${value.toLocaleString()} lb/ac<br>80% empirical error band: ${row.yield_interval_lb_ac[0].toLocaleString()}–${row.yield_interval_lb_ac[1].toLocaleString()}<br>Stage: ${row.stage}<br>USDA current yield is not a predictor.`:`<b>${area.name}</b><br>${row?.eligibility||'No model state'}`;
+      circle.bindTooltip(body,{sticky:true}).on('click',()=>selectArea(area.id)).addTo(state.yieldLayer);
     }
-    setText('condition','NOT IMPLEMENTED');setText('conditionWhy','Requires crop mask + root-zone water + phenology + vegetation');
-    setText('soilState','NOT IMPLEMENTED');setText('soilValue','SMAP L4 0–100 cm pipeline is not connected');
-    setText('healthState',w?'MODELED INPUT':'UNKNOWN');setText('healthWhy','Raw temporary weather values only; no stress or crop condition inferred');
-    setText('yieldVsBase','—');setText('confidence','UNKNOWN');setText('confidenceWhy','No accepted confidence model or calibrated crop model');
-    const acreage=official.planted?.value!=null?`${official.planted.value.toLocaleString()} planted acres (${official.planted.status}, released ${official.planted.issue_date})`:'no published state acreage in the governed evidence set';
-    setText('plainEnglish',`Official state evidence as of this date: ${acreage}. Weather remains an input, not a crop conclusion.`);
-    setText('regionSoil','—');setText('regionSoilWhy','NOT IMPLEMENTED — SMAP root-zone moisture and historical distribution required.');
-    setText('regionWater',w?`${fmt(w.rain30,0)} / ${fmt(w.et30,0)} mm`:'—');setText('regionWaterWhy','MODELED temporary fallback: 30-day precipitation / reference ET₀; no crop-water class.');
-    setText('regionHeat',w?`${fmt(w.minT,1)} to ${fmt(w.maxT,1)} °C`:'—');setText('regionHeatWhy','MODELED 30-day temperature extrema; no damage threshold or stage overlap applied.');
-    setText('seasonRain','—');setText('modelChange','—');
-    setHTML('drivers',[`<div class="driver"><b>Official acreage/yield</b><br>${official.planted?evidenceTag('OBSERVED',` ${acreage}`):evidenceTag('UNKNOWN',' state record unavailable')}</div>`,`<div class="driver"><b>Crop geography</b><br>${statusTag('NOT IMPLEMENTED',' 2025 CDL class-42 processing required.')}</div>`,`<div class="driver"><b>Root-zone water</b><br>${statusTag('NOT IMPLEMENTED',' SMAP percentile/anomaly integration required.')}</div>`,`<div class="driver"><b>Phenology + vegetation</b><br>${statusTag('NOT IMPLEMENTED',' official progress + bean GDD + HLS required.')}</div>`].join(''));
-    setText('storyTitle',`Season narrative · ${area.name}`);setText('storyText','A crop narrative is withheld until crop footprint, progress, root-zone moisture, vegetation trajectory, and dated provenance are connected for the selected date.');
-    setHTML('mapLegend','<b>Evidence map — staging prototype</b><div><span class="sw neutral"></span>Candidate location; not crop geography</div><div><span class="sw outline"></span>County boundary; reference only</div><small>No crop-condition or production fill is rendered.</small>');
-    setText('status',`${area.name} · ${iso(state.date)} · temporary weather ${w?'loaded':'unavailable'} · official history issue-date filtered.`);
+    state.yieldLayer.addTo(map);setHTML('mapLegend','<b>GISit in-season pinto-basis yield outlook</b><div class="legendDate">SELECTED-DATE MODEL · NOT USDA YIELD</div><div class="yieldRamp"><span>1,600</span><span>2,150</span><span>2,700 lb/ac</span></div><div><span class="sw unknown"></span>Withheld by validation/data gate</div><small>Circles are generalized analytical neighborhoods, not planted-acre or crop polygons. Yield uses weather/GDD through the selected date plus historical-median completion.</small>');setText('layerBadge',`GISIT MODEL · ${iso(state.date)}`);setText('status',`${released} of 7 analytical-area outlooks released for ${iso(state.date)}; withheld values failed the selected-date validation or target-history gate.`);
   }
-  async function refresh(){
-    const token=++state.request,area=selectedArea();drawStudyAreas();setText('status',`Loading selected-date evidence for ${area.name}…`);
-    let w=null;try{w=await fallbackWeather(area,state.date,token)}catch(e){if(String(e.message)!=='stale request')console.warn(e)}
-    if(token!==state.request)return;renderEvidence(area,w);updateTruthPanel(area,w);
+  function renderMap(token){state.mode==='yield'?renderYield():renderRaster(token)}
+  function satelliteAt(area,date){const rows=state.satellite?.areas?.[area.id]?.dates||{},keys=Object.keys(rows).filter(key=>key<=iso(date)).sort();if(!keys.length)return null;const requested=keys.at(-1);return {requested,...rows[requested]}}
+  function vegetationSignal(satellite,stage){
+    const change=satellite?.ndvi_change_encoded;if(!Number.isFinite(change))return {label:'NO TREND YET',text:'A prior weekly checkpoint is required.'};if(change===0)return {label:'FLAT',text:'Encoded NDVI is unchanged from the prior weekly checkpoint.'};
+    const direction=change>0?'RISING':'DECLINING',mature=/Maturity|Harvest/.test(stage||'');return {label:direction,text:`Encoded NDVI is ${direction.toLowerCase()} from the prior weekly checkpoint${mature&&change<0?' during the modeled maturity window':''}.`};
   }
-  function selectArea(id){state.selected=id;$('region').value=id;drawStudyAreas();refresh()}
-  $('region').innerHTML=STUDY_AREAS.map(r=>`<option value="${r.id}">${r.name}</option>`).join('');
-  $('region').addEventListener('change',e=>{state.selected=e.target.value;refresh()});
-  $('timeSlider').addEventListener('input',()=>{state.date=dateFromSlider();setText('sliderDate',iso(state.date))});$('timeSlider').addEventListener('change',refresh);
-  $('playBtn').addEventListener('click',()=>{if(state.playing){state.playing=false;$('playBtn').textContent='▶ PLAY';return}state.playing=true;$('playBtn').textContent='■ STOP';const tick=()=>{if(!state.playing)return;state.date=new Date(state.date.getTime()+7*DAY);if(state.date>TODAY)state.date=new Date(SEASON_START);syncSliderFromDate();refresh().finally(()=>setTimeout(tick,900))};tick()});
-  ['yieldBtn','moistureBtn','healthBtn','satBtn'].forEach(id=>$(id)?.addEventListener('click',()=>{document.querySelectorAll('.mapactions button').forEach(b=>b.classList.remove('on'));$(id).classList.add('on');const labels={yieldBtn:'Official NASS forecast history is available; independent GISit yield is NOT IMPLEMENTED.',moistureBtn:'SMAP root-zone moisture integration is NOT IMPLEMENTED.',healthBtn:'Crop-condition synthesis is NOT IMPLEMENTED.',satBtn:'HLS vegetation trajectory is NOT IMPLEMENTED.'};setText('status',labels[id])}));
-  updateSourcePanel();updateCalendar();syncSliderFromDate();drawStudyAreas();
-  Promise.allSettled([loadCounties(),loadBaseline(),loadBuildManifest()]).then(results=>{if(results[1].status==='rejected')console.error(results[1].reason);if(results[2].status==='rejected')setText('buildStatus','Data build manifest unavailable');return refresh()}).then(()=>setText('runtimeStatus','Single-controller recovery runtime loaded; mandatory crop analytics remain incomplete.')).catch(e=>{console.error(e);setText('runtimeStatus','Runtime partially loaded; see console.')});
+  function potentialClass(region,row){if(!Number.isFinite(row?.yield_lb_ac))return 'NOT RELEASED';const d=region.historical_yield_distribution_lb_ac;return row.yield_lb_ac>d.q75?'ABOVE-TYPICAL POTENTIAL':row.yield_lb_ac<d.q25?'BELOW-TYPICAL POTENTIAL':'TYPICAL-RANGE POTENTIAL'}
+  function evidenceSynthesis(released,anomaly,ndviChange,potential){
+    if(!released||!Number.isFinite(anomaly)||!Number.isFinite(ndviChange))return 'NOT RELEASED';
+    if(anomaly>=0&&ndviChange>=0)return `SUPPORTED · ${potential}`;
+    if(anomaly<0&&ndviChange<0)return `WATCH · ${potential}`;
+    return `MIXED · ${potential}`;
+  }
+  function updateSourcePanel(){const ids=['nass','openmeteo','smap','cropcasma','cdl','noaa','ssurgo','hls','usdm','irrigation'];setHTML('sourceList',ids.map(id=>{const item=source(id);return `<div class="sourceRow"><div><b>${item.name}</b><small>${item.role}</small></div><span>${item.classification}</span></div>`}).join(''))}
+  function updateCalendar(row){
+    const phases=['Planting','Emergence','Vegetative','Flowering','Pod Set','Seed Fill','Maturity','Harvest'],stageIndex={'Pre-planting':0,'Establishment':1,'Vegetative':2,'Flowering / pod development':3,'Pod fill':5,'Maturity / seed maturation':6,'Harvest readiness':7}[row?.stage]??0;
+    setHTML('calendar',phases.map((phase,index)=>`<div class="phase ${index<stageIndex?'past':index===stageIndex?'current':'future'}"><b>${phase}</b><span>${index===stageIndex?`${row?.observed_gdd_f||0} base-50°F GDD · selected-date model`:'Thermal stage boundary'}</span><em>${evidenceTag(index<=stageIndex?'DERIVED':'UNKNOWN')}</em></div>`).join(''));
+  }
+  function productionScenario(area,date){
+    const official=officialAsOf(area.state,date),rows=STUDY_AREAS.filter(x=>x.state===area.state).map(x=>modelRow(x,date)).filter(x=>Number.isFinite(x?.yield_lb_ac));if(!rows.length)return {value:null,text:'No state production scenario: the regional yield outlook is withheld.'};
+    const stateYield=rows.reduce((sum,row)=>sum+row.yield_lb_ac,0)/rows.length,acres=official.harvested||official.planted;if(!acres)return {value:null,text:'No production scenario: a date-correct USDA acreage input is unavailable for this state.'};
+    const production=stateYield*acres.value/100,label=acres.metric==='harvested_acres'?'expected-harvested-acre scenario':'planted-acre gross-potential scenario';return {value:Math.round(production),text:`${label}; GISit state-average yield ${Math.round(stateYield).toLocaleString()} lb/ac × USDA ${acres.status} ${acres.value.toLocaleString()} acres (released ${acres.issue_date}).`};
+  }
+  function updateTruthPanel(area){
+    const region=modelRegion(area),row=modelRow(area),sat=satelliteAt(area,state.date),official=officialAsOf(area.state,state.date),revision=acreageRevision(area.state,state.date),vegetation=vegetationSignal(sat,row?.stage),potential=potentialClass(region,row),production=productionScenario(area,state.date),released=Number.isFinite(row?.yield_lb_ac);
+    setText('asOfLabel',iso(state.date));setText('sliderDate',iso(state.date));setText('sliderStage',row?.stage||'Model state unavailable');setText('regionName',area.name);setText('stageTag',`MODELED STAGE: ${String(row?.stage||'UNKNOWN').toUpperCase()}`);updateCalendar(row);
+    if(released){
+      const [low,high]=row.yield_interval_lb_ac,change=row.change_vs_historical_median_lb_ac;setText('plainAnswer',`${area.name}: GISit projects ${row.yield_lb_ac.toLocaleString()} lb/ac as of ${iso(state.date)}.`);setText('narrative',`${potential}. The estimate uses selected-date weather, a base-50°F GDD stage model, and historical-median completion of the unobserved season. It was calibrated against final NASS pinto outcomes; no current USDA yield forecast enters the equation.`);setText('yieldNow',`${row.yield_lb_ac.toLocaleString()} lb/ac`);setText('yieldRange',`${low.toLocaleString()}–${high.toLocaleString()} lb/ac · empirical p80 error band`);setText('yieldDelta',`${signed(change)} lb/ac vs ${row.historical_median_lb_ac.toLocaleString()} historical state median`);setText('regionYield',`${row.yield_lb_ac.toLocaleString()} lb/ac`);setText('regionYieldWhy',`ESTIMATED by ${state.model.model.id}; selected-date hindcast MAE ${row.hindcast_mae_lb_ac} vs ${row.baseline_mae_lb_ac} lb/ac baseline.`);setText('yieldVsBase',`${signed(change)} lb/ac`);setText('confidence','BACKTEST GATE PASS');setText('confidenceWhy',`Leave-one-year-out MAE ${row.hindcast_mae_lb_ac} lb/ac; n=${state.model.model.training_state_years} state-years. No confidence percentage invented.`);
+    }else{
+      setText('plainAnswer',`${area.name}: GISit yield is not released for ${iso(state.date)}.`);setText('narrative',row?.eligibility||'The selected-date evidence gate is incomplete.');setText('yieldNow','WITHHELD');setText('yieldRange','No operational number outside the validation gate');setText('yieldDelta',row?.eligibility||'Model unavailable');setText('regionYield','WITHHELD');setText('regionYieldWhy',row?.eligibility||'Required model state unavailable.');setText('yieldVsBase','—');setText('confidence','GATE NOT PASSED');setText('confidenceWhy',`Selected-date hindcast MAE ${row?.hindcast_mae_lb_ac??'—'} vs ${row?.baseline_mae_lb_ac??'—'} lb/ac baseline.`);
+    }
+    const anomaly=sat?.smap_anomaly,soilLabel=Number.isFinite(anomaly)?(anomaly>=0?'WETTER THAN CLIMATOLOGY':'DRIER THAN CLIMATOLOGY'):'NO SAMPLE';setText('soilState',soilLabel);setText('soilValue',Number.isFinite(anomaly)?`SMAP root-zone anomaly ${fmt(anomaly,3)} · source valid ${sat.smap_anomaly_valid_date}`:'Weekly SMAP sample unavailable');setText('healthState',vegetation.label);setText('healthWhy',sat?`${vegetation.text} Source valid ${sat.ndvi_valid_date}; generalized regional neighborhood.`:vegetation.text);
+    const twoFamilies=released&&Number.isFinite(anomaly)&&Number.isFinite(sat?.ndvi_change_encoded),synthesis=evidenceSynthesis(released,anomaly,sat?.ndvi_change_encoded,potential);setText('condition',synthesis);setText('conditionWhy',twoFamilies?`Two-family synthesis at ${sat.requested}: ${soilLabel.toLowerCase()} + ${vegetation.label.toLowerCase()}; yield class ${potential.toLowerCase()}. Not a field measurement.`:'Requires a released yield outlook plus SMAP and NDVI checkpoints.');
+    setText('plainEnglish',released?`This is GISit's own in-season estimate. USDA yield remains outside the model. ${revision?`${revision.latest.value.toLocaleString()} planted acres is the latest date-correct USDA acreage input${revision.previous?`, a ${signed(revision.delta)} revision from ${revision.previous.issue_date}`:''}.`:'No date-correct USDA acreage is available for a production scenario.'}`:'The website is withholding the estimate because the selected-date validation or history gate does not pass.');
+    setText('regionSoil',soilLabel);setText('regionSoilWhy',Number.isFinite(anomaly)?`MODELED Crop-CASMA / NASA SMAP L4 regional median; anomaly ${fmt(anomaly,3)}, valid ${sat.smap_anomaly_valid_date}.`:'No governed satellite checkpoint.');setText('regionWater',row?`${fmt(row.observed_precip_mm,0)} / ${fmt(row.observed_et0_mm,0)} mm`:'—');setText('regionWaterWhy','MODELED selected-date precipitation / reference ET₀ since modeled thermal onset; irrigation application is not observed.');setText('regionHeat',row?`${row.observed_gdd_f.toLocaleString()} GDD`:'—');setText('regionHeatWhy',row?`DERIVED base-50°F GDD since ${row.modeled_thermal_onset}; onset ${row.onset_status}.`:'No stage row.');setText('seasonRain',row?`${fmt(row.observed_precip_mm,0)} mm`:'—');setText('seasonRainWhy','Observed portion of the modeled season at the analytical centroid; modeled reanalysis field.');setText('productionNow',production.value?`${production.value.toLocaleString()} cwt`:'WITHHELD');setText('productionWhy',production.text);
+    const usdaComparison=official.yield?'Final USDA outcome is pending. A contemporaneous USDA forecast exists but is neither a predictor nor scored as truth.':'Final USDA outcome is pending; nothing is backfilled.';
+    setHTML('drivers',[`<div class="driver pos"><b>GISit yield model</b><br>${released?evidenceTag('ESTIMATED',` ${row.yield_lb_ac.toLocaleString()} lb/ac; p80 band ${row.yield_interval_lb_ac[0].toLocaleString()}–${row.yield_interval_lb_ac[1].toLocaleString()}.`):evidenceTag('UNKNOWN',` ${row?.eligibility||'not available'}`)}</div>`,`<div class="driver ${Number.isFinite(anomaly)&&anomaly<0?'neg':'pos'}"><b>Root-zone water</b><br>${Number.isFinite(anomaly)?evidenceTag('MODELED',` SMAP anomaly ${fmt(anomaly,3)}; valid ${sat.smap_anomaly_valid_date}.`):evidenceTag('UNKNOWN')}</div>`,`<div class="driver"><b>Vegetation direction</b><br>${sat?evidenceTag('MODELED',` ${vegetation.label}; NDVI source valid ${sat.ndvi_valid_date}.`):evidenceTag('UNKNOWN')}</div>`,`<div class="driver"><b>USDA outcome comparison</b><br>${evidenceTag(official.yield?'OBSERVED':'UNKNOWN',` ${usdaComparison}`)}</div>`].join(''));
+    setText('storyTitle',`${row?.stage||'Unknown stage'} · ${area.name}`);setText('storyText',row?`Modeled thermal onset: ${row.modeled_thermal_onset} (${row.onset_status}). Through ${iso(state.date)}: ${row.observed_gdd_f.toLocaleString()} base-50°F GDD, ${fmt(row.observed_precip_mm,0)} mm precipitation and ${fmt(row.observed_climatic_deficit_mm,0)} mm climatic deficit. Latest corroborating satellite checkpoint: ${sat?.requested||'unavailable'}.`:'Model state unavailable.');
+  }
+  async function refresh(){if(!state.catalog||!state.model||!state.date)return;const token=++state.request,area=selectedArea();drawSelection();renderMap(token);updateTruthPanel(area)}
+  function selectArea(id){state.selected=id;$('region').value=id;drawSelection();map.flyTo(selectedArea().center,7,{duration:.45});refresh()}
+  function setMode(mode,button){state.mode=mode;document.querySelectorAll('.mapactions button').forEach(x=>x.classList.remove('on'));$(button).classList.add('on');refresh()}
+  $('region').innerHTML=STUDY_AREAS.map(area=>`<option value="${area.id}">${area.name}</option>`).join('');$('region').addEventListener('change',event=>selectArea(event.target.value));
+  let sliderTimer;$('timeSlider').addEventListener('input',()=>{state.date=dateFromSlider();setText('sliderDate',iso(state.date));clearTimeout(sliderTimer);sliderTimer=setTimeout(refresh,120)});$('timeSlider').addEventListener('change',refresh);
+  $('playBtn').addEventListener('click',()=>{if(state.playing){state.playing=false;$('playBtn').textContent='▶ PLAY';return}state.playing=true;$('playBtn').textContent='■ STOP';const tick=()=>{if(!state.playing)return;state.date=new Date(state.date.getTime()+7*DAY);if(state.date>state.end)state.date=new Date(state.start);syncSliderFromDate();refresh().finally(()=>setTimeout(tick,1050))};tick()});
+  $('yieldBtn').addEventListener('click',()=>setMode('yield','yieldBtn'));$('moistureBtn').addEventListener('click',()=>setMode('moisture','moistureBtn'));$('healthBtn').addEventListener('click',()=>setMode('anomaly','healthBtn'));$('satBtn').addEventListener('click',()=>setMode('ndvi','satBtn'));
+  updateSourcePanel();Promise.allSettled([loadInputs(),loadBoundaries()]).then(async results=>{if(results[0].status==='rejected')throw results[0].reason;if(results[1].status==='rejected'){console.warn(results[1].reason);setText('countyStatus','Census boundary service unavailable')}map.fitBounds(state.catalog.study_bounds,{padding:[6,6]});drawSelection();await refresh();setText('runtimeStatus','GISit model + GDD + weather + SMAP + NDVI runtime loaded.')}).catch(error=>{console.error(error);setText('runtimeStatus','Runtime partially loaded; see console.');setText('status','Required governed inputs could not be loaded.')});
 })();

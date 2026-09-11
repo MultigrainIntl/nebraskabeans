@@ -50,11 +50,18 @@ main{max-width:1500px;margin:auto}
 .timebar span{font-size:10px;color:#5d6b62}
 .mapwrap{height:580px;position:relative;margin-top:9px;border:1px solid var(--line);overflow:hidden}
 .mapwrap #map{height:100%;width:100%;background:#e8ede8}
-.legend{position:absolute;z-index:600;left:12px;bottom:12px;background:rgba(255,255,255,.96);border:1px solid #cbd4cd;padding:9px 11px;box-shadow:var(--shadow);font-size:10px;line-height:1.55;min-width:215px}
+.layerbadge{position:absolute;z-index:600;top:12px;right:12px;background:rgba(23,32,25,.88);color:#fff;border:1px solid rgba(255,255,255,.55);padding:7px 10px;font-size:9px;font-weight:900;letter-spacing:.08em;box-shadow:var(--shadow)}
+.legend{position:absolute;z-index:600;left:12px;bottom:12px;background:rgba(255,255,255,.97);border:1px solid #cbd4cd;padding:10px 12px;box-shadow:var(--shadow);font-size:10px;line-height:1.45;width:250px;max-height:360px;overflow:auto}
 .legend b{display:block;margin-bottom:3px}
+.legend small{display:block;margin-top:6px;color:#4e5e54;line-height:1.35}
+.legendDate{font-size:8px;font-weight:850;letter-spacing:.07em;color:#647168;margin:2px 0 5px}
+.legendScale{display:block;max-height:205px;max-width:118px;margin:4px 0 5px;background:#fff}
+.yieldRamp{height:24px;margin:8px 0 6px;background:linear-gradient(90deg,#cd6c46 0%,#f1cf63 50%,#317451 100%);display:flex;justify-content:space-between;align-items:flex-end;padding:2px 4px;color:#172019;font-size:8px;font-weight:850;text-shadow:0 1px 1px rgba(255,255,255,.75)}
 .sw{display:inline-block;width:13px;height:9px;margin-right:5px}
 .sw.neutral{background:#526d7b}
 .sw.outline{background:#fff;border:1px solid #7c8982}
+.sw.unknown{background:#d9ddd9;border:1px solid #9ba59e}
+.temporal-raster{image-rendering:auto;filter:saturate(1.08) contrast(1.03)}
 .maptools{display:grid;grid-template-columns:280px 1fr;gap:9px;margin-top:9px;align-items:center}
 .maptools select{height:34px;border:1px solid #cbd4cd;background:#fff;padding:5px 8px;font-size:11px}
 .maptools span{font-size:10px;color:#637169}

@@ -1,8 +1,8 @@
 # NebraskaBeans
 
 Evidence-driven dry-edible-bean crop intelligence for Nebraska, Colorado, Wyoming,
-and Kansas. The current public GitHub Pages site is a **staging prototype**, not a
-completed crop model and not the production `nebraskabeans.com` website.
+and Kansas. The public GitHub Pages site is an **experimental staging model**, not the
+production `nebraskabeans.com` website.
 
 ## Governed baseline
 
@@ -25,6 +25,7 @@ node scripts/build_manifest.mjs --check
 node scripts/verify_foundation.mjs
 node tests/temporal-evidence.test.js
 node tests/evidence-store.test.js
+NB_OFFLINE_FIXTURES=1 NB_BASE_URL=http://127.0.0.1:4173/ node tests/browser-smoke.mjs
 ```
 
 Browser QA is defined in `tests/browser-smoke.mjs` and runs in the staging workflow.
@@ -32,7 +33,13 @@ The allowed agricultural evidence classes are `OBSERVED`, `DERIVED`, `MODELED`,
 `ESTIMATED`, `ASSUMED`, and `UNKNOWN`. Work status uses the separate controlled
 vocabulary in the master contract.
 
-The displayed NASS numbers are source records that retain their published
-estimate/forecast status; they are not GISit forecasts. Crop geography, root-zone
-moisture, phenology, vegetation, condition, calibrated confidence, GISit yield,
-production, and scenario analytics remain mandatory but not implemented.
+GISit v1 calculates its own pinto-basis in-season regional yield from governed
+weather/GDD features and a 92-state-year NASS final-outcome calibration set. Current
+USDA yield forecasts are excluded. Selected dates publish only when leave-one-year-out
+error beats a state historical-median baseline. The current build also carries weekly
+SMAP/NDVI evidence and dated USDA acreage production scenarios.
+
+Crop-derived geography, current irrigation, soils, official-progress overrides,
+class-specific models, forecast scenarios, scheduled refresh, and independent
+scientific verification remain mandatory incomplete work. See
+`docs/TEMPLATE-PORTABILITY.md` before adapting the pipeline to another crop/site.

@@ -1,0 +1,47 @@
+{
+  "schema_version": "nebraskabeans.temporal_layers.v1",
+  "study_bounds": [[36.75, -111.0], [45.25, -94.25]],
+  "analysis_start": "2026-04-15",
+  "analysis_end": "2026-09-09",
+  "wms_endpoint": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv",
+  "classification": "MODELED",
+  "coverage_note": "Regional landscape evidence for Nebraska, Colorado, Wyoming, and Kansas; not yet clipped to the USDA CDL dry-bean footprint.",
+  "layers": {
+    "anomaly": {
+      "label": "Root-zone soil-moisture anomaly",
+      "short_label": "Moisture anomaly",
+      "source": "USDA Crop-CASMA / NASA SMAP L4",
+      "source_role": "Daily 0–100 cm soil-moisture anomaly",
+      "map_file": "/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map",
+      "layer_template": "SMAP-9KM-ANOMALY-DAILY-SUB_{date}",
+      "available_start": "2026-01-01",
+      "available_end": "2026-09-09",
+      "opacity": 0.76,
+      "documentation_url": "https://nassgeo.csiss.gmu.edu/Crop-CASMA-Developer/wms/SMAP-9KM-ANOMALY/"
+    },
+    "moisture": {
+      "label": "Root-zone soil moisture",
+      "short_label": "Soil moisture",
+      "source": "USDA Crop-CASMA / NASA SMAP L4",
+      "source_role": "Daily average 0–100 cm soil moisture",
+      "map_file": "/WMS/SMAP-9KM-DAILY-SUB_2026.map",
+      "layer_template": "SMAP-9KM-DAILY-SUB_{date}_AVERAGE",
+      "available_start": "2026-01-01",
+      "available_end": "2026-09-09",
+      "opacity": 0.74,
+      "documentation_url": "https://nassgeo.csiss.gmu.edu/Crop-CASMA-Developer/wms/SMAP-9KM/"
+    },
+    "ndvi": {
+      "label": "Normalized Difference Vegetation Index",
+      "short_label": "NDVI",
+      "source": "USDA Crop-CASMA vegetation index",
+      "source_role": "Daily remotely sensed vegetation index",
+      "map_file": "/WMS/NDVI-DAILY_2026.map",
+      "layer_template": "NDVI-DAILY_{date}",
+      "available_start": "2026-01-01",
+      "available_end": "2026-09-10",
+      "opacity": 0.68,
+      "documentation_url": "https://nassgeo.csiss.gmu.edu/Crop-CASMA-Developer/wms/VI/"
+    }
+  }
+}

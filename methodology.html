@@ -1,1 +1,41 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Methodology | NebraskaBeans</title><meta name="description" content="NebraskaBeans sourcing, classification and publication methodology."><link rel="stylesheet" href="assets/site.css"><script defer src="assets/shell.js"></script></head><body><header class="top"><div class="brand"><a href="index.html"><b>NEBRASKA</b><span>BEANS</span></a><small>MARKET INTELLIGENCE</small></div><button class="menu" aria-expanded="false" aria-controls="nav">Menu</button><nav id="nav"><a href="index.html">Market</a><a href="reports.html">Reports</a><a href="resources.html">Sources</a></nav></header><main><section class="pagehero"><p class="eyebrow">EDITORIAL CONTROL</p><h1>Methodology</h1><p class="lead">How NebraskaBeans separates evidence, interpretation and commercial information.</p></section><article class="content"><h2>Source hierarchy</h2><p>Primary government statistics and official university extension material are preferred for production, crop and weather facts. Important figures retain source, units, observation period and publication context.</p><h2>Classification</h2><p><b>Observed</b> is a directly obtained source record or measurement. <b>Derived</b>, <b>Modeled</b>, <b>Estimated</b>, <b>Assumed</b>, and <b>Unknown</b> retain the meanings in the master execution contract. Verified is reserved for work status.</p><h2>No fabricated completeness</h2><p>Unavailable crop progress, production, price, freight, processor or trade figures are not filled with plausible values. Empty states are intentional when the source does not support a current number.</p><h2>Maps and visualization</h2><p>The V1 Nebraska map is geographic context, not a measured county production surface. A future production layer must preserve the underlying public dataset, vintage and methodology.</p><h2>Commercial separation</h2><p>Public agricultural intelligence is structurally separate from private buyer, seller, grower, processor, logistics and GIS intelligence. No private commercial records are embedded in browser-delivered data.</p><h2>Future publication workflow</h2><p>Source → Ingest → Curate → Draft → Cite → Verify → Approve → Publish. Automated scraping or AI drafting does not authorize automatic publication.</p></article></main><footer><div class="brand"><a href="index.html"><b>NEBRASKA</b><span>BEANS</span></a><small>MARKET INTELLIGENCE</small></div><p>Evidence before interpretation.</p><div><a href="resources.html">Government Resources</a><a href="privacy.html">Privacy & Disclaimer</a></div><small>© 2026 NebraskaBeans. Public staging prototype.</small></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Methodology | NebraskaBeans</title>
+  <meta name="description" content="NebraskaBeans sourcing, GISit model, validation and publication methodology.">
+  <link rel="stylesheet" href="assets/site.css">
+  <script defer src="assets/shell.js"></script>
+</head>
+<body>
+<header class="top"><div class="brand"><a href="index.html"><b>NEBRASKA</b><span>BEANS</span></a><small>MARKET INTELLIGENCE</small></div><button class="menu" aria-expanded="false" aria-controls="nav">Menu</button><nav id="nav"><a href="index.html">Market</a><a href="reports.html">Reports</a><a href="resources.html">Sources</a></nav></header>
+<main>
+  <section class="pagehero"><p class="eyebrow">MODEL CONTROL</p><h1>Methodology</h1><p class="lead">How GISit calculates an independent in-season dry-bean outlook and keeps USDA inputs, forecasts and final outcomes in their proper roles.</p></section>
+  <article class="content">
+    <h2>What the GISit estimate is</h2>
+    <p>GISit v1 is an experimental, pinto-basis regional yield model. It uses a regularized equation trained on 92 published state-year pinto-yield outcomes and daily weather features: thermal onset, base-50°F growing degree days, precipitation, reference evapotranspiration and critical-stage climatic deficit.</p>
+    <h2>What USDA data does—and does not—do</h2>
+    <p>Current USDA yield forecasts are not predictors. Final USDA yield outcomes are used only as historical calibration and post-season validation targets. USDA planted and expected-harvested acres are separate, date-correct production inputs. Every acreage update retains its issue date, status and prior value.</p>
+    <h2>Selected-date discipline</h2>
+    <p>The model uses weather available through the selected date. Later days are completed with the 2000–2025 day-of-year median, excluding a held season during backtesting. April and early-June estimates are withheld because their hindcast does not beat the historical-median baseline; the 2026 release gate first passes at the June 15 checkpoint.</p>
+    <h2>Validation and uncertainty</h2>
+    <p>Each calendar year is held out from model training and from its completion climatology. The terminal hindcast mean absolute error is 167 lb/ac versus 179 lb/ac for the state historical-median baseline. The displayed interval is the empirical 80th-percentile absolute-error band at the latest completed validation checkpoint; it is not a probability invented by the interface.</p>
+    <h2>Crop-health evidence</h2>
+    <p>A crop-health outlook is released only when the yield gate passes and two separate Crop-CASMA evidence families are present: NASA SMAP L4 root-zone moisture anomaly and the direction of change in encoded NDVI. Weekly neighborhood samples retain requested and actual source-valid dates. These generalized neighborhoods are not field measurements.</p>
+    <h2>Phenology</h2>
+    <p>The planting-onset proxy is the first day local cumulative GDD reaches the historical Nebraska Panhandle thermal total associated with a sourced June 7 planting reference. Stage boundaries are scaled to the sourced 1,550–1,700 GDD maturity range. A reported local planting date or official crop-progress observation should override this weaker proxy when available.</p>
+    <h2>Maps and geography</h2>
+    <p>County boundaries are reference only. Yield circles are analytical neighborhoods, and SMAP/NDVI layers are landscape evidence. None is represented as planted-acre geography. A USDA Cropland Data Layer class-42 mask remains required before field-like or crop-footprint display.</p>
+    <h2>Known limitations</h2>
+    <p>The current model does not observe irrigation application, cultivar, disease, hail, soil constraints or management. It uses pinto outcomes as the training target and therefore is not a universal dry-bean class model. Kansas output is withheld because its published pinto-yield series ends in 2015.</p>
+    <h2>Classification</h2>
+    <p><b>Observed</b> is a directly obtained source record or measurement. <b>Derived</b>, <b>Modeled</b>, <b>Estimated</b>, <b>Assumed</b>, and <b>Unknown</b> retain the meanings in the master execution contract. Verified is reserved for work status.</p>
+    <h2>Publication workflow</h2>
+    <p>Source → ingest → preserve checksum and dates → build → backtest → apply release gate → render → verify exact deployed build → publish. A source update does not silently rewrite the history shown for an earlier date.</p>
+  </article>
+</main>
+<footer><div class="brand"><a href="index.html"><b>NEBRASKA</b><span>BEANS</span></a><small>MARKET INTELLIGENCE</small></div><p>Evidence before interpretation.</p><div><a href="resources.html">Government Resources</a><a href="privacy.html">Privacy & Disclaimer</a></div><small>© 2026 NebraskaBeans. Public staging prototype.</small></footer>
+</body>
+</html>
