@@ -1,6 +1,6 @@
 (function(global){
   'use strict';
-  const CLASSES=new Set(['VERIFIED','MODELED','ESTIMATED','ASSUMED','UNKNOWN']);
+  const CLASSES=new Set(['OBSERVED','DERIVED','MODELED','ESTIMATED','ASSUMED','UNKNOWN']);
   const REQUIRED=['id','variable','geography_id','valid_time','issue_time','classification','source_id'];
   const iso=x=>new Date(x).toISOString();
 
@@ -44,13 +44,17 @@
     }
   }
 
-  function confidence(components){
+  function confidence(components,modelContract){
+    if(!modelContract?.id||!modelContract?.version||!Number.isFinite(modelContract?.thresholds?.high)||!Number.isFinite(modelContract?.thresholds?.moderate)){
+      return {score:null,label:'UNKNOWN',classification:'UNKNOWN',components:[],weaknesses:['registered confidence model contract not supplied']};
+    }
     const rows=(components||[]).filter(x=>Number.isFinite(x.score)&&x.score>=0&&x.score<=1&&Number.isFinite(x.weight)&&x.weight>0);
-    if(!rows.length)return {score:null,label:'LOW',classification:'UNKNOWN',weaknesses:['no confidence components']};
+    if(!rows.length)return {score:null,label:'UNKNOWN',classification:'UNKNOWN',components:[],weaknesses:['no confidence components'],model_id:modelContract.id,model_version:modelContract.version};
     const weight=rows.reduce((a,b)=>a+b.weight,0),score=rows.reduce((a,b)=>a+b.score*b.weight,0)/weight;
-    const label=score>=.75?'HIGH':score>=.5?'MODERATE':'LOW';
-    const weaknesses=rows.filter(x=>x.score<.6).sort((a,b)=>a.score-b.score).map(x=>x.name);
-    return {score:Math.round(score*100)/100,label,classification:'ESTIMATED',components:rows,weaknesses};
+    const label=score>=modelContract.thresholds.high?'HIGH':score>=modelContract.thresholds.moderate?'MODERATE':'LOW';
+    const weakBelow=Number.isFinite(modelContract.weak_below)?modelContract.weak_below:modelContract.thresholds.moderate;
+    const weaknesses=rows.filter(x=>x.score<weakBelow).sort((a,b)=>a.score-b.score).map(x=>x.name);
+    return {score:Math.round(score*100)/100,label,classification:'ESTIMATED',components:rows,weaknesses,model_id:modelContract.id,model_version:modelContract.version};
   }
 
   const api={CLASSES,validate,EvidenceStore,confidence};

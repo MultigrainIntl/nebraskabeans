@@ -1,4 +1,4 @@
 User-agent: *
-Allow: /
+Disallow: /
 
-Sitemap: https://multigrainintl.github.io/nebraskabeans/sitemap.xml
+# Public staging prototype. Product Authority must approve production indexing.

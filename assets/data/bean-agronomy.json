@@ -5,7 +5,7 @@
     "base_f":50,
     "base_c":10,
     "great_northern_maturity_gdd_f":{"min":1550,"max":1700},
-    "classification":"VERIFIED agronomic guidance",
+    "classification":"OBSERVED",
     "source":{
       "publisher":"University of Nebraska-Lincoln CropWatch",
       "title":"Dry Beans / Growing Degree Days",
@@ -17,7 +17,7 @@
     "average_planting_date_reference":"June 7",
     "stage_lengths_days":{"establishment":21,"vegetative":21,"flowering_pod_development":21,"pod_fill":21,"maturity_seed_maturation":21},
     "historical_stage_gdd_f":{"establishment":364,"vegetative":456,"flowering_pod_development":483,"pod_fill":445,"maturity_seed_maturation":343},
-    "classification":"VERIFIED research reference, not current-year planting fact",
+    "classification":"OBSERVED",
     "source":{
       "title":"Documenting a Fifth Stage for Continued Growth and Development in Dry Beans",
       "organization":"UNL Panhandle Research and Extension Center",
@@ -27,7 +27,7 @@
   "water":{
     "seasonal_crop_et_inches":{"min":14,"max":18},
     "stage_sensitivity":"Severe concentrated stress at flowering, pod development or seed fill can cause disproportionate yield loss; a uniform moderate deficit is not equivalent to a critical-stage severe deficit.",
-    "classification":"VERIFIED research guidance",
+    "classification":"OBSERVED",
     "source":{
       "publisher":"University of Nebraska-Lincoln CropWatch",
       "title":"How Corn, Dry Beans, Sugar Beets and Alfalfa Respond to Deficit Irrigation in the Nebraska Panhandle",

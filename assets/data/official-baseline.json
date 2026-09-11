@@ -1,7 +1,9 @@
 {
-  "schema_version":"nebraskabeans.official_baseline.v2",
+  "schema_version":"nebraskabeans.official_baseline.v3",
   "generated_as_of":"2026-09-11",
-  "classification":"VERIFIED",
+  "retrieved_at_utc":"2026-09-11T18:00:00Z",
+  "evidence_class":"OBSERVED",
+  "provenance_status":"PARTIAL — official URLs verified; raw PDF checksums not yet captured",
   "notes":[
     "Values in this file are transcribed from named USDA NASS publications and are not GISit forecasts.",
     "Use the newest published estimate for current-state displays while preserving older estimates as forecast history.",
@@ -9,11 +11,11 @@
     "Kansas is not separately published in the current dry edible bean state table; absence is not zero and must not be fabricated."
   ],
   "sources":{
-    "prospective_plantings_2026":{"title":"Prospective Plantings","release_date":"2026-03-31","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/pspl0326.pdf"},
-    "acreage_2026":{"title":"Acreage","release_date":"2026-06-30","publisher":"USDA National Agricultural Statistics Service","url":"https://esmis.nal.usda.gov/publication/acreage"},
-    "crop_august_2026":{"title":"Crop Production","release_date":"2026-08-12","forecast_as_of":"2026-08-01","publisher":"USDA National Agricultural Statistics Service","url":"https://esmis.nal.usda.gov/publication/crop-production"},
-    "crop_summary_2025":{"title":"Crop Production 2025 Summary","release_date":"2026-01-12","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/cropan26.pdf"},
-    "crop_august_2025":{"title":"Crop Production","release_date":"2025-08-12","publisher":"USDA National Agricultural Statistics Service","url":"https://release.nass.usda.gov/reports/crop0825.pdf"}
+    "prospective_plantings_2026":{"title":"Prospective Plantings","release_date":"2026-03-31","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/pspl0326.pdf","rights":"U.S. government public data","artifact_sha256":null},
+    "acreage_2026":{"title":"Acreage","release_date":"2026-06-30","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/acrg0626.pdf","rights":"U.S. government public data","artifact_sha256":null},
+    "crop_august_2026":{"title":"Crop Production","release_date":"2026-08-12","forecast_as_of":"2026-08-01","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/crop0826.pdf","rights":"U.S. government public data","artifact_sha256":null},
+    "crop_summary_2025":{"title":"Crop Production 2025 Summary","release_date":"2026-01-12","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/cropan26.pdf","rights":"U.S. government public data","artifact_sha256":null},
+    "crop_august_2025":{"title":"Crop Production","release_date":"2025-08-12","publisher":"USDA National Agricultural Statistics Service","url":"https://release.nass.usda.gov/reports/crop0825.pdf","rights":"U.S. government public data","artifact_sha256":null}
   },
   "forecast_history":{
     "United States":[
@@ -34,6 +36,7 @@
     ],
     "Colorado":[
       {"issue_date":"2026-03-31","metric":"planted_acres","value":30000,"status":"intended","source":"prospective_plantings_2026"},
+      {"issue_date":"2026-06-30","metric":"planted_acres","value":33000,"status":"estimate","source":"acreage_2026"},
       {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"planted_acres","value":31000,"status":"estimate","source":"crop_august_2026"},
       {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"harvested_acres","value":27000,"status":"forecast","source":"crop_august_2026"},
       {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"yield_lb_ac","value":1850,"status":"forecast","source":"crop_august_2026"},

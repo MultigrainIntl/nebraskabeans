@@ -1,0 +1,40 @@
+{
+  "schema_version": "nebraskabeans.data_build.v1",
+  "data_build_id": "nbd-v1-4f971a6e9bd6b3247524",
+  "input_set_sha256": "4f971a6e9bd6b324752417fc03e40c6b3415a2563e02e780b33a597909abcf93",
+  "generated_at_utc": "2026-09-11T18:00:00Z",
+  "evidence_cutoff_date": "2026-09-11",
+  "material_inputs": [
+    {
+      "path": "assets/data/official-baseline.json",
+      "kind": "normalized-data",
+      "bytes": 6530,
+      "sha256": "a7c638e27adcc0b56aa001881d3ccfa0c2010dd6bab041c69348722fd9439ff6"
+    },
+    {
+      "path": "assets/data/bean-agronomy.json",
+      "kind": "source-contract",
+      "bytes": 3614,
+      "sha256": "65ade652ce72ba7fd896e6413257000582a03b39324d754f448ef94958c5fc17"
+    },
+    {
+      "path": "assets/source-registry.js",
+      "kind": "source-registry",
+      "bytes": 6122,
+      "sha256": "653b84bdce202686db4f3af07139fadc0a5afbd8cc4d4f82447cea4ced6a3ab0"
+    },
+    {
+      "path": "NEBRASKABEANS-SCIENTIFIC-SPEC.md",
+      "kind": "scientific-contract",
+      "bytes": 8352,
+      "sha256": "058391129bdb470849bfe9dd93a4acda6d293de6150b237fee8c25ec3766f79c"
+    }
+  ],
+  "accepted_model_ids": [],
+  "limitations": [
+    "No crop-condition, confidence, yield, or production model is accepted in this foundation build.",
+    "Original USDA PDF bytes and checksums are not yet stored; official URL/table transcription was independently checked.",
+    "Temporary browser weather responses are not inputs to this governed data build."
+  ],
+  "manifest_sha256": "10d69049c0fd16541456f2bf66ad15b2de13160bc0d058b6fa91ec89bfbbfb1d"
+}

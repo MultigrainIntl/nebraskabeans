@@ -1,23 +1,37 @@
 # NebraskaBeans
 
-Nebraska dry bean crop-intelligence and physical-trade decision-support staging build.
+Evidence-driven dry-edible-bean crop intelligence for Nebraska, Colorado, Wyoming,
+and Kansas. The current public GitHub Pages site is a **staging prototype**, not a
+completed crop model and not the production `nebraskabeans.com` website.
 
-## Current isolated build
-- Branch: `gisit-nebraska-v1`
-- UI: answer-first crop outlook + temporal GIS
-- Evidence classes: VERIFIED / MODELED / ESTIMATED / ASSUMED / UNKNOWN
-- Existing GISit/Pea-map patterns reused: Leaflet, polygon-aware sampling, shared as-of date, stage-aware temporal cadence, Open-Meteo historical weather, Esri imagery.
+## Governed baseline
 
-## Temporal polygon behavior
-- Five monitored western Nebraska county polygons are currently analytical containers: Scotts Bluff, Box Butte, Morrill, Sheridan, Dundy.
-- Multiple sample points are generated inside each polygon using point-in-polygon logic; values are averaged by polygon.
-- Historical Open-Meteo soil moisture is requested at 7–28 cm and 28–100 cm and converted to daily polygon averages.
-- One shared as-of date drives soil-moisture color, crop-condition interpretation, projected yield, narrative and selected-region detail.
-- Playback uses coarser steps outside critical growth periods and 2-day steps during Flowering / Pod Set / Seed Fill, following the Pea-map cadence pattern.
-- Yield remains an ESTIMATED decision-support model using an explicit 2,300 lb/ac baseline and June 1 planting anchor until authoritative regional history replaces those assumptions.
+- Deployed staging: `gh-pages@4fd1e43e9f6d50c9db2b7250702f914f8f1505f3`
+- Working recovery branch: `staging/foundation-recovery-20260911`
+- Production, `main`, DNS, and GoDaddy are out of scope without Product Authority.
 
-## Important limits
-- County polygons are not represented as dry-bean planted acreage or field boundaries.
-- Soil moisture is model-derived, not a direct field probe.
-- Projected yield is not an official USDA forecast.
-- Production DNS, GoDaddy, custom domain and `main` remain outside this staging gate.
+Read these before implementation:
+
+1. `MASTER-EXECUTION-CONTRACT.md`
+2. `NEBRASKABEANS-SCIENTIFIC-SPEC.md`
+3. `FACTS-OF-RECORD.md`
+4. `WORK-ORDER.md`
+
+## Foundation checks
+
+```bash
+node scripts/build_manifest.mjs --check
+node scripts/verify_foundation.mjs
+node tests/temporal-evidence.test.js
+node tests/evidence-store.test.js
+```
+
+Browser QA is defined in `tests/browser-smoke.mjs` and runs in the staging workflow.
+The allowed agricultural evidence classes are `OBSERVED`, `DERIVED`, `MODELED`,
+`ESTIMATED`, `ASSUMED`, and `UNKNOWN`. Work status uses the separate controlled
+vocabulary in the master contract.
+
+The displayed NASS numbers are source records that retain their published
+estimate/forecast status; they are not GISit forecasts. Crop geography, root-zone
+moisture, phenology, vegetation, condition, calibrated confidence, GISit yield,
+production, and scenario analytics remain mandatory but not implemented.
