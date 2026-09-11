@@ -1,0 +1,8 @@
+{
+  "url": "https://www.nass.usda.gov/Research_and_Science/Cropland/Release/datasets/2025_10m_cdls.zip",
+  "archive_sha256": "decb52a7c472ce9ac855b295b7185c87c019a07cdb1f33a3d81fa1611de10e03",
+  "archive_bytes": 10104684890,
+  "retrieved_at_utc": "2026-09-11T23:19:00Z",
+  "member": "2025_10m_cdls.tif",
+  "member_bytes": 14919231017
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "gisit.crop-footprint.v1",
+  "crop_year": 2025,
+  "evidence_class": "MODELED",
+  "class_value": 42,
+  "class_name": "Dry Beans",
+  "source_url": "https://www.nass.usda.gov/Research_and_Science/Cropland/Release/datasets/2025_10m_cdls.zip",
+  "source_sha256": "decb52a7c472ce9ac855b295b7185c87c019a07cdb1f33a3d81fa1611de10e03",
+  "source_crs": "EPSG:5070",
+  "pixel_size_m": [
+    10.0,
+    10.0
+  ],
+  "state_boundaries_sha256": "c8edb5421deee3564a1b56f8b4edc66fe62b5264a69e7ea3e63df61fb5abd128",
+  "method": "native class-42 pixels; state membership by pixel centre; all patches retained",
+  "limitations": [
+    "Historical classified footprint; not current-season crop identity.",
+    "Tile-edge parts are not fields or cadastral boundaries.",
+    "No market-class identity; no local yield assigned."
+  ],
+  "states": [
+    {
+      "state": "Kansas",
+      "state_fips": "20",
+      "class_pixels": 123148,
+      "mapped_acres": 3043.0533516918476,
+      "polygon_area_m2": 12314800.0,
+      "polygon_parts": 7163,
+      "file": "cdl-2025-20.geojson.gz",
+      "sha256": "e01469b03ce6e55a99168f2b81074367c5bf41f2bd33771932314a5cf3a58c6c",
+      "uncompressed_sha256": "f1ee01c132a2c06f2ec60d044140cdc84b9a4bf020810d10ee681cbc2f24ebbc"
+    },
+    {
+      "state": "Colorado",
+      "state_fips": "08",
+      "class_pixels": 1298567,
+      "mapped_acres": 32088.28938956725,
+      "polygon_area_m2": 129856700.0,
+      "polygon_parts": 49127,
+      "file": "cdl-2025-08.geojson.gz",
+      "sha256": "f1f3143c54f62812ad6e3526bdb4947a05cef120267451b430e3ae82f93e5614",
+      "uncompressed_sha256": "4bc427e586ee7cf8a79a3e20f76d9d77c760d7bf2324c0eb9e1bb66e4499f2da"
+    },
+    {
+      "state": "Nebraska",
+      "state_fips": "31",
+      "class_pixels": 3782368,
+      "mapped_acres": 93464.34874891992,
+      "polygon_area_m2": 378236800.0,
+      "polygon_parts": 66471,
+      "file": "cdl-2025-31.geojson.gz",
+      "sha256": "cbe484b17c71c064a46a11aa29a1500c834b07fd1f0679173442145500abf3b0",
+      "uncompressed_sha256": "1cca97e297026c343ea47b8b678c7b00b601c929c634c02c3f02143fe686c20d"
+    },
+    {
+      "state": "Wyoming",
+      "state_fips": "56",
+      "class_pixels": 597855,
+      "mapped_acres": 14773.318783705214,
+      "polygon_area_m2": 59785500.0,
+      "polygon_parts": 16649,
+      "file": "cdl-2025-56.geojson.gz",
+      "sha256": "f301e064857e54ea5c754cd17e18bd641fe8b54a6fa95a68c1389f2053c33bd2",
+      "uncompressed_sha256": "99c39b273cc4fbb8e533a8ecb38f2b79c8c8446cce69f62f4d49f090967f062b"
+    }
+  ]
+}

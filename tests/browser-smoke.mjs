@@ -21,8 +21,8 @@ if(process.env.NB_OFFLINE_FIXTURES==='1'){
 try{
   const response=await page.goto(BASE,{waitUntil:'domcontentloaded',timeout:45000});
   assert(response && response.ok(),`page response not OK: ${response?.status()}`);
-  await page.waitForFunction(()=>document.querySelector('#runtimeStatus')?.textContent.includes('GISit model + GDD + weather + SMAP + NDVI runtime loaded'),null,{timeout:45000});
-  await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('6 of 7 analytical-area outlooks released'),null,{timeout:45000});
+  await page.waitForFunction(()=>document.querySelector('#runtimeStatus')?.textContent.includes('Experimental model and evidence loaded'),null,{timeout:45000});
+  await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('6 of 7 experimental point outlooks released'),null,{timeout:45000});
 
   const scripts=await page.$$eval('script[src]',els=>els.map(e=>e.getAttribute('src')));
   for(const dead of ['assets/site.js','assets/bean-regions.js','assets/map-refine.js','assets/visual-evidence.js']){
@@ -38,10 +38,20 @@ try{
   assert.match(await page.locator('#soilState').textContent(),/DRIER THAN CLIMATOLOGY/,'sampled SMAP anomaly state is not visible');
   assert.match(await page.locator('#healthState').textContent(),/RISING/,'sampled NDVI direction is not visible');
   assert.match(await page.locator('#confidence').textContent(),/BACKTEST GATE PASS/,'selected-date validation state missing');
-  assert.match(await page.locator('#productionNow').textContent(),/1,850,600 cwt/,'GISit yield × date-correct acreage production scenario missing');
-  assert.match(await page.locator('#mapLegend').textContent(),/GISit in-season pinto-basis yield outlook/,'default GISit map legend missing');
-  assert.match(await page.locator('#mapLegend').textContent(),/not planted-acre or crop polygons/,'regional/crop-specific scope boundary missing');
+  assert.match(await page.locator('#productionNow').textContent(),/WITHHELD/,'State production must not pass before spatial weights and class compatibility');
+  assert.match(await page.locator('#productionWhy').textContent(),/76,000 acres/,'Date-correct acreage must remain visible while production is gated');
+  assert.match(await page.locator('#mapLegend').textContent(),/Experimental pinto-basis yield at analytical points/,'default GISit map legend missing');
+  assert.match(await page.locator('#mapLegend').textContent(),/not a field-scale yield surface/,'regional/crop-specific scope boundary missing');
   assert.match(await page.locator('#buildStatus').textContent(),/Data build nbd-v1-/,'content-derived data build identity is not visible');
+  await page.waitForFunction(()=>document.querySelector('#cropStatus')?.textContent.includes('4 states'),null,{timeout:90000});
+  await page.waitForFunction(()=>document.querySelector('#stationStatus')?.textContent.includes('/222 stations'),null,{timeout:90000});
+  assert.match(await page.locator('#cropStatus').textContent(),/10 m source/,'native crop resolution missing');
+  assert(await page.locator('.leaflet-crop-pane canvas').count()>0,'crop polygons did not create a rendered layer');
+  assert(await page.locator('.leaflet-station-pane canvas').count()>0,'station points did not create a rendered layer');
+  await page.locator('#stationToggle').uncheck();
+  await page.locator('#stationToggle').check();
+  await page.locator('#cropToggle').uncheck();
+  await page.locator('#cropToggle').check();
 
   // Move before the selected-date backtest gate passes; no model value may be released.
   await page.$eval('#timeSlider',el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))});
@@ -49,7 +59,8 @@ try{
   const historicalDate=await page.locator('#sliderDate').textContent();
   assert.equal((await page.locator('#yieldNow').textContent()).trim(),'WITHHELD','pre-gate GISit yield was released');
   assert.match(await page.locator('#yieldDelta').textContent(),/hindcast does not beat the historical-median baseline/,'pre-gate state does not explain withholding');
-  assert.match(await page.locator('#status').textContent(),/0 of 7 analytical-area outlooks released/,'map did not move to the same pre-gate model state');
+  assert.match(await page.locator('#status').textContent(),/0 of 7 experimental point outlooks released/,'map did not move to the same pre-gate model state');
+  assert.match(await page.locator('#stationStatus').textContent(),/2026-04-15/,'station date does not follow the slider');
 
   // Return to current date and test that PLAY uses the same date/evidence path.
   await page.$eval('#timeSlider',el=>{el.value='100';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))});
@@ -71,9 +82,9 @@ try{
   await page.waitForFunction(()=>document.querySelector('img.temporal-raster')?.src.includes('NDVI-DAILY_2026'),null,{timeout:45000});
   assert.match(await page.locator('#mapLegend').textContent(),/Normalized Difference Vegetation Index/);
   await page.click('#yieldBtn');
-  await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('6 of 7 analytical-area outlooks released'),null,{timeout:45000});
-  assert.match(await page.locator('#status').textContent(),/6 of 7 analytical-area outlooks released/,'regional GISit coverage must expose withheld Kansas');
-  assert.match(await page.locator('#mapLegend').textContent(),/generalized analytical neighborhoods/i);
+  await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('6 of 7 experimental point outlooks released'),null,{timeout:45000});
+  assert.match(await page.locator('#status').textContent(),/6 of 7 experimental point outlooks released/,'regional GISit coverage must expose withheld Kansas');
+  assert.match(await page.locator('#mapLegend').textContent(),/historical crop identity only/i);
 
   // Mobile smoke: product remains legible and map/control region remains rendered.
   await page.setViewportSize({width:390,height:844});

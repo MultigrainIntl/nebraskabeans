@@ -1,7 +1,7 @@
 {
   "schema_version": "nebraskabeans.data_build.v1",
-  "data_build_id": "nbd-v1-a626240da393257d143f",
-  "input_set_sha256": "a626240da393257d143f7643417b5dc13ec43b5078fc5d28f0707a22d7fa705e",
+  "data_build_id": "nbd-v1-fd30075cedc101dd15eb",
+  "input_set_sha256": "fd30075cedc101dd15eb01f50388213be007f91d8a00cac8ab7111549e7d2456",
   "generated_at_utc": "2026-09-11T18:00:00Z",
   "evidence_cutoff_date": "2026-09-11",
   "material_inputs": [
@@ -36,6 +36,72 @@
       "sha256": "65ade652ce72ba7fd896e6413257000582a03b39324d754f448ef94958c5fc17"
     },
     {
+      "path": "assets/data/cdl-source.json",
+      "kind": "crop-source-archive",
+      "bytes": 336,
+      "sha256": "1efcebb98de68865f1e7aa0095bd91cec2e897a6b1e121adee51ba124e4fe287"
+    },
+    {
+      "path": "assets/data/state-study-area.geojson",
+      "kind": "reference-boundaries",
+      "bytes": 1769529,
+      "sha256": "c8edb5421deee3564a1b56f8b4edc66fe62b5264a69e7ea3e63df61fb5abd128"
+    },
+    {
+      "path": "assets/data/crop-footprint/crop-footprint-manifest.json",
+      "kind": "spatial-contract",
+      "bytes": 2539,
+      "sha256": "0a398053f593a5d88fda55c794cd50093ed6f1574cc46323392f6ed9518c8be4"
+    },
+    {
+      "path": "assets/data/crop-footprint/cdl-2025-08.geojson.gz",
+      "kind": "historical-crop-polygons",
+      "bytes": 6628807,
+      "sha256": "f1f3143c54f62812ad6e3526bdb4947a05cef120267451b430e3ae82f93e5614"
+    },
+    {
+      "path": "assets/data/crop-footprint/cdl-2025-20.geojson.gz",
+      "kind": "historical-crop-polygons",
+      "bytes": 839163,
+      "sha256": "e01469b03ce6e55a99168f2b81074367c5bf41f2bd33771932314a5cf3a58c6c"
+    },
+    {
+      "path": "assets/data/crop-footprint/cdl-2025-31.geojson.gz",
+      "kind": "historical-crop-polygons",
+      "bytes": 10345362,
+      "sha256": "cbe484b17c71c064a46a11aa29a1500c834b07fd1f0679173442145500abf3b0"
+    },
+    {
+      "path": "assets/data/crop-footprint/cdl-2025-56.geojson.gz",
+      "kind": "historical-crop-polygons",
+      "bytes": 2273216,
+      "sha256": "f301e064857e54ea5c754cd17e18bd641fe8b54a6fa95a68c1389f2053c33bd2"
+    },
+    {
+      "path": "assets/data/stations/station-observations.json.gz",
+      "kind": "direct-station-observations",
+      "bytes": 413872,
+      "sha256": "ac3653d1d29b5b508500ead123304e28152f4af22a0246c134d37c63c9e53ebc"
+    },
+    {
+      "path": "scripts/build_crop_footprint.py",
+      "kind": "spatial-transform",
+      "bytes": 6964,
+      "sha256": "e1643f283dce7cc9ddc95359fce5689aaadb388cd322d8dcf5dd4d531fe321ed"
+    },
+    {
+      "path": "scripts/build_station_observations.py",
+      "kind": "station-transform",
+      "bytes": 4756,
+      "sha256": "4cce65732ceb7b5258968d26a7bd1265e8563f73c2b262c9d5e40a2903df27df"
+    },
+    {
+      "path": "docs/SPATIAL-SOURCE-CONTRACT.md",
+      "kind": "source-contract",
+      "bytes": 3448,
+      "sha256": "fd5066a6aca4532232236002f0142d911a02ddec4f8052f30124ee4ce98cc03d"
+    },
+    {
       "path": "assets/source-registry.js",
       "kind": "source-registry",
       "bytes": 6322,
@@ -64,5 +130,5 @@
     "Original USDA PDF bytes and checksums are not yet stored; official URL/table transcription was independently checked.",
     "Open-Meteo historical-weather responses are governed modeled inputs with exact queries and response checksums in the model artifact."
   ],
-  "manifest_sha256": "3d127ab7b8371e2a34f8f323548932056a507849f7896834c145b93734889b5b"
+  "manifest_sha256": "b2be5e331ce2b68878e152f98d5527bd5bea118e2b842d994d222122e217a8e2"
 }

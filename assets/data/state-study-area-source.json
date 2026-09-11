@@ -1,0 +1,5 @@
+{
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0/query?where=STATE+IN+%28%2731%27%2C%2708%27%2C%2756%27%2C%2720%27%29&outFields=NAME%2CSTATE%2CGEOID&outSR=4326&returnGeometry=true&f=geojson",
+  "sha256": "c8edb5421deee3564a1b56f8b4edc66fe62b5264a69e7ea3e63df61fb5abd128",
+  "role": "reference state boundaries; not crop geography"
+}

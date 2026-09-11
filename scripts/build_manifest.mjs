@@ -10,6 +10,17 @@ export const MATERIAL_INPUTS=[
   ['assets/data/gisit-outlook-2026.json','versioned-model-output'],
   ['assets/data/satellite-signals-2026.json','sampled-temporal-evidence'],
   ['assets/data/bean-agronomy.json','source-contract'],
+  ['assets/data/cdl-source.json','crop-source-archive'],
+  ['assets/data/state-study-area.geojson','reference-boundaries'],
+  ['assets/data/crop-footprint/crop-footprint-manifest.json','spatial-contract'],
+  ['assets/data/crop-footprint/cdl-2025-08.geojson.gz','historical-crop-polygons'],
+  ['assets/data/crop-footprint/cdl-2025-20.geojson.gz','historical-crop-polygons'],
+  ['assets/data/crop-footprint/cdl-2025-31.geojson.gz','historical-crop-polygons'],
+  ['assets/data/crop-footprint/cdl-2025-56.geojson.gz','historical-crop-polygons'],
+  ['assets/data/stations/station-observations.json.gz','direct-station-observations'],
+  ['scripts/build_crop_footprint.py','spatial-transform'],
+  ['scripts/build_station_observations.py','station-transform'],
+  ['docs/SPATIAL-SOURCE-CONTRACT.md','source-contract'],
   ['assets/source-registry.js','source-registry'],
   ['NEBRASKABEANS-SCIENTIFIC-SPEC.md','scientific-contract']
 ];

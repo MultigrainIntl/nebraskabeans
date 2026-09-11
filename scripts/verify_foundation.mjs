@@ -18,10 +18,11 @@ assert.match(read('robots.txt'),/Disallow: \/\s/);
 const app=read('assets/app.js');
 for(const forbidden of ['classifyWater','heatDays','frostDays',"new Date('2026-09-11"])assert(!app.includes(forbidden),`unsupported/fixed runtime construct remains: ${forbidden}`);
 assert.match(app,/L\.imageOverlay\(wmsUrl\(layer,date\)/);
-assert.match(app,/GISit in-season pinto-basis yield outlook/);
+assert.match(app,/Experimental pinto-basis yield at analytical points/);
 assert.match(app,/USDA current yield is not a predictor/);
 assert.match(app,/BACKTEST GATE PASS/);
-assert.match(app,/planted-acre gross-potential scenario/);
+assert.match(app,/Production requires validated crop-area weights/);
+assert.doesNotMatch(app,/const stateYield=rows.reduce/,'unweighted regional averages must not generate state production');
 
 const require=createRequire(import.meta.url),store=require('../assets/model/evidence-store.js');
 assert.deepEqual([...store.CLASSES].sort(),['ASSUMED','DERIVED','ESTIMATED','MODELED','OBSERVED','UNKNOWN']);

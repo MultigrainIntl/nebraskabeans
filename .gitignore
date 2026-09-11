@@ -1,3 +1,5 @@
 node_modules/
 __pycache__/
 *.pyc
+assets/data/crop-footprint/*.geojson
+assets/data/stations/station-observations.json

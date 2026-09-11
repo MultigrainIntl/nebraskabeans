@@ -159,3 +159,8 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 .formgrid,.converter{grid-template-columns:1fr}
 .report{grid-template-columns:1fr;gap:8px}
 }
+.spatialControls{display:flex;flex-wrap:wrap;gap:12px 24px;padding:14px 0;font-size:14px}
+.spatialControls label{display:flex;align-items:center;gap:8px;font-weight:600}
+.spatialControls input{width:18px;height:18px}
+.spatialControls [role=status]{flex-basis:100%;color:#46534e}
+.cropKey{color:#793fa0}.stationKey{color:#175a8b}
