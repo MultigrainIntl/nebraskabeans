@@ -1,0 +1,73 @@
+name: NebraskaBeans staging QA
+
+on:
+  push:
+    branches: [gh-pages]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nebraskabeans-staging-qa
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact staging head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify staging-only architecture
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e assets/site.js
+          test ! -e assets/bean-regions.js
+          test ! -e assets/map-refine.js
+          test ! -e assets/visual-evidence.js
+          ! grep -Eq 'assets/(site|bean-regions|map-refine|visual-evidence)\.js' index.html
+          grep -q 'assets/app.js' index.html
+          grep -q 'assets/source-registry.js' index.html
+
+      - name: Run temporal evidence regression tests
+        run: node tests/temporal-evidence.test.js
+
+      - name: Install Chromium verifier
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Render exact checkout locally
+        shell: bash
+        run: |
+          python3 -m http.server 4173 >/tmp/nebraskabeans-http.log 2>&1 &
+          echo $! >/tmp/nebraskabeans-http.pid
+          for i in {1..20}; do curl -fsS http://127.0.0.1:4173/index.html >/dev/null && break; sleep 1; done
+          NB_BASE_URL='http://127.0.0.1:4173/' node tests/browser-smoke.mjs
+
+      - name: Verify deployed GitHub Pages rendering
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://multigrainintl.github.io/nebraskabeans/?qa=${GITHUB_SHA}"
+          ok=0
+          for i in {1..15}; do
+            if curl -fsSL "$URL" | grep -q 'NebraskaBeans | Crop Intelligence Recovery'; then ok=1; break; fi
+            sleep 4
+          done
+          test "$ok" = 1
+          NB_BASE_URL="$URL" node tests/browser-smoke.mjs
+
+      - name: Report exact verified SHA
+        run: |
+          echo "VERIFIED_STAGING_SHA=${GITHUB_SHA}"
+          echo "ROLLBACK_SHA=63b205efb68f0428c9a3f34170694e735e2dfeaa"
