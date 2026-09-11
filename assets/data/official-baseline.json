@@ -1,53 +1,49 @@
 {
-  "schema_version":"nebraskabeans.official_baseline.v1",
+  "schema_version":"nebraskabeans.official_baseline.v2",
   "generated_as_of":"2026-09-11",
   "classification":"VERIFIED",
   "notes":[
     "Values in this file are transcribed from named USDA NASS publications and are not GISit forecasts.",
-    "Wyoming dry edible bean state estimates were discontinued beginning in 2024 in the NASS Prospective Plantings series; absence is not zero.",
-    "Kansas is not listed as a separate state in the 2026 NASS dry edible bean intended-plantings table; absence is not zero and must not be fabricated.",
-    "2026 intended plantings are March survey intentions and must not be treated as final planted or harvested acreage."
+    "Use the newest published estimate for current-state displays while preserving older estimates as forecast history.",
+    "Wyoming dry edible bean state estimates were discontinued from the current NASS estimating program; absence is not zero.",
+    "Kansas is not separately published in the current dry edible bean state table; absence is not zero and must not be fabricated."
   ],
   "sources":{
-    "prospective_plantings_2026":{
-      "title":"Prospective Plantings",
-      "release_date":"2026-03-31",
-      "publisher":"USDA National Agricultural Statistics Service",
-      "url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/pspl0326.pdf"
-    },
-    "crop_summary_2025":{
-      "title":"Crop Production 2025 Summary",
-      "release_date":"2026-01-12",
-      "publisher":"USDA National Agricultural Statistics Service",
-      "url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/cropan26.pdf"
-    },
-    "crop_august_2025":{
-      "title":"Crop Production",
-      "release_date":"2025-08-12",
-      "publisher":"USDA National Agricultural Statistics Service",
-      "url":"https://release.nass.usda.gov/reports/crop0825.pdf"
-    }
+    "prospective_plantings_2026":{"title":"Prospective Plantings","release_date":"2026-03-31","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/pspl0326.pdf"},
+    "acreage_2026":{"title":"Acreage","release_date":"2026-06-30","publisher":"USDA National Agricultural Statistics Service","url":"https://esmis.nal.usda.gov/publication/acreage"},
+    "crop_august_2026":{"title":"Crop Production","release_date":"2026-08-12","forecast_as_of":"2026-08-01","publisher":"USDA National Agricultural Statistics Service","url":"https://esmis.nal.usda.gov/publication/crop-production"},
+    "crop_summary_2025":{"title":"Crop Production 2025 Summary","release_date":"2026-01-12","publisher":"USDA National Agricultural Statistics Service","url":"https://www.nass.usda.gov/Publications/Todays_Reports/reports/cropan26.pdf"},
+    "crop_august_2025":{"title":"Crop Production","release_date":"2025-08-12","publisher":"USDA National Agricultural Statistics Service","url":"https://release.nass.usda.gov/reports/crop0825.pdf"}
+  },
+  "forecast_history":{
+    "United States":[
+      {"issue_date":"2026-03-31","metric":"planted_acres","value":1236000,"status":"intended","source":"prospective_plantings_2026"},
+      {"issue_date":"2026-06-30","metric":"planted_acres","value":1161000,"status":"estimate","source":"acreage_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"planted_acres","value":1153000,"status":"estimate","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"harvested_acres","value":1123000,"status":"forecast","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"yield_lb_ac","value":2079,"status":"forecast","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"production_cwt","value":23347000,"status":"forecast","source":"crop_august_2026"}
+    ],
+    "Nebraska":[
+      {"issue_date":"2026-03-31","metric":"planted_acres","value":101000,"status":"intended","source":"prospective_plantings_2026"},
+      {"issue_date":"2026-06-30","metric":"planted_acres","value":95000,"status":"estimate","source":"acreage_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"planted_acres","value":80000,"status":"estimate","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"harvested_acres","value":76000,"status":"forecast","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"yield_lb_ac","value":2500,"status":"forecast","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"production_cwt","value":1900000,"status":"forecast","source":"crop_august_2026"}
+    ],
+    "Colorado":[
+      {"issue_date":"2026-03-31","metric":"planted_acres","value":30000,"status":"intended","source":"prospective_plantings_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"planted_acres","value":31000,"status":"estimate","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"harvested_acres","value":27000,"status":"forecast","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"yield_lb_ac","value":1850,"status":"forecast","source":"crop_august_2026"},
+      {"issue_date":"2026-08-12","valid_date":"2026-08-01","metric":"production_cwt","value":500000,"status":"forecast","source":"crop_august_2026"}
+    ]
   },
   "states":{
-    "Nebraska":{
-      "2026":{"intended_planted_acres":101000,"status":"March intended plantings","source":"prospective_plantings_2026"},
-      "2025":{"planted_acres":106000,"pinto_planted_acres":51000,"pinto_harvested_acres":47800,"source":"crop_summary_2025"},
-      "2024":{"august_harvested_acres":122800,"august_yield_lb_ac":2260,"august_production_cwt":2779000,"source":"crop_august_2025"},
-      "2023":{"pinto_planted_acres":49100,"pinto_harvested_acres":44800,"source":"crop_summary_2025"}
-    },
-    "Colorado":{
-      "2026":{"intended_planted_acres":30000,"status":"March intended plantings","source":"prospective_plantings_2026"},
-      "2025":{"planted_acres":40000,"pinto_planted_acres":18600,"pinto_harvested_acres":15200,"source":"crop_summary_2025"},
-      "2024":{"august_harvested_acres":48000,"august_yield_lb_ac":1940,"august_production_cwt":929000,"source":"crop_august_2025"},
-      "2023":{"pinto_planted_acres":17200,"pinto_harvested_acres":15700,"source":"crop_summary_2025"}
-    },
-    "Wyoming":{
-      "2026":{"status":"NASS state dry-bean estimate not published in 2026 intended-plantings table","value":null,"source":"prospective_plantings_2026"},
-      "2025":{"status":"NASS estimate discontinued / not available","value":null,"source":"crop_summary_2025"},
-      "2023":{"pinto_planted_acres":11700,"pinto_harvested_acres":11200,"source":"crop_summary_2025"}
-    },
-    "Kansas":{
-      "2026":{"status":"Not separately published in NASS 2026 intended-plantings dry-bean table","value":null,"source":"prospective_plantings_2026"}
-    }
+    "Nebraska":{"2026":{"planted_acres":80000,"harvested_acres_forecast":76000,"yield_lb_ac_forecast":2500,"production_cwt_forecast":1900000,"forecast_as_of":"2026-08-01","release_date":"2026-08-12","source":"crop_august_2026"},"2025":{"planted_acres":106000,"harvested_acres":99100,"yield_lb_ac":2520,"production_cwt":2502000,"pinto_planted_acres":51000,"pinto_harvested_acres":47800,"source":"crop_summary_2025"},"2024":{"harvested_acres":122800,"yield_lb_ac":2260,"production_cwt":2779000,"source":"crop_august_2025"},"2023":{"pinto_planted_acres":49100,"pinto_harvested_acres":44800,"source":"crop_summary_2025"}},
+    "Colorado":{"2026":{"planted_acres":31000,"harvested_acres_forecast":27000,"yield_lb_ac_forecast":1850,"production_cwt_forecast":500000,"forecast_as_of":"2026-08-01","release_date":"2026-08-12","source":"crop_august_2026"},"2025":{"planted_acres":40000,"harvested_acres":34300,"yield_lb_ac":1700,"production_cwt":584000,"pinto_planted_acres":18600,"pinto_harvested_acres":15200,"source":"crop_summary_2025"},"2024":{"harvested_acres":48000,"yield_lb_ac":1940,"production_cwt":929000,"source":"crop_august_2025"},"2023":{"pinto_planted_acres":17200,"pinto_harvested_acres":15700,"source":"crop_summary_2025"}},
+    "Wyoming":{"2026":{"status":"NASS current dry-bean state estimate not published","value":null},"2025":{"status":"NASS current dry-bean state estimate not published","value":null},"2023":{"pinto_planted_acres":11700,"pinto_harvested_acres":11200,"source":"crop_summary_2025"}},
+    "Kansas":{"2026":{"status":"Not separately published in current NASS dry edible bean state table","value":null}}
   }
 }
