@@ -1,0 +1,60 @@
+{
+  "schema_version":"nebraskabeans.bean_agronomy.v1",
+  "status":"evidence-backed model inputs; not a calibrated yield equation",
+  "gdd":{
+    "base_f":50,
+    "base_c":10,
+    "great_northern_maturity_gdd_f":{"min":1550,"max":1700},
+    "classification":"VERIFIED agronomic guidance",
+    "source":{
+      "publisher":"University of Nebraska-Lincoln CropWatch",
+      "title":"Dry Beans / Growing Degree Days",
+      "url":"https://cropwatch.unl.edu/8-21-09-dry-beans/"
+    },
+    "caution":"Maturity requirement is variety- and stress-dependent. Do not map one fixed threshold to every bean class or region without variety evidence."
+  },
+  "western_nebraska_stage_reference":{
+    "average_planting_date_reference":"June 7",
+    "stage_lengths_days":{"establishment":21,"vegetative":21,"flowering_pod_development":21,"pod_fill":21,"maturity_seed_maturation":21},
+    "historical_stage_gdd_f":{"establishment":364,"vegetative":456,"flowering_pod_development":483,"pod_fill":445,"maturity_seed_maturation":343},
+    "classification":"VERIFIED research reference, not current-year planting fact",
+    "source":{
+      "title":"Documenting a Fifth Stage for Continued Growth and Development in Dry Beans",
+      "organization":"UNL Panhandle Research and Extension Center",
+      "url":"https://www.bic.uprm.edu/wp-content/uploads/2020/02/BIC-Vol-62-2019.pdf"
+    }
+  },
+  "water":{
+    "seasonal_crop_et_inches":{"min":14,"max":18},
+    "stage_sensitivity":"Severe concentrated stress at flowering, pod development or seed fill can cause disproportionate yield loss; a uniform moderate deficit is not equivalent to a critical-stage severe deficit.",
+    "classification":"VERIFIED research guidance",
+    "source":{
+      "publisher":"University of Nebraska-Lincoln CropWatch",
+      "title":"How Corn, Dry Beans, Sugar Beets and Alfalfa Respond to Deficit Irrigation in the Nebraska Panhandle",
+      "url":"https://cropwatch.unl.edu/how-corn-dry-beans-sugar-beets-and-alfalfa-respond-deficit-irrigation-nebraska-panhandle/"
+    },
+    "root_zone_management_reference":[
+      {"phase":"stand establishment","rooting_depth_in":12,"management_allowed_depletion_pct":60},
+      {"phase":"rapid vegetative","rooting_depth_in":20,"management_allowed_depletion_pct":60},
+      {"phase":"flowering / pod development","rooting_depth_in":30,"management_allowed_depletion_pct":50},
+      {"phase":"pod fill / maturation","rooting_depth_in":30,"management_allowed_depletion_pct":70}
+    ],
+    "root_zone_source":{
+      "publisher":"Colorado State University Extension",
+      "title":"Irrigation Scheduling: The Water Balance Approach",
+      "url":"https://extension.colostate.edu/resource/irrigation-scheduling-the-water-balance-approach/"
+    },
+    "late_season_reference":[
+      {"stage":"R5 Early seed fill","approx_days_to_maturity":35,"water_use_to_maturity_in":7.0},
+      {"stage":"R6 Mid-seed fill","approx_days_to_maturity":25,"water_use_to_maturity_in":4.2},
+      {"stage":"R7 Beginning maturity","approx_days_to_maturity":15,"water_use_to_maturity_in":2.0},
+      {"stage":"R8 Harvest maturity","approx_days_to_maturity":0,"water_use_to_maturity_in":0.0}
+    ],
+    "late_season_source":{
+      "publisher":"University of Nebraska-Lincoln Water",
+      "title":"Predicting Late-Season Irrigation Needs",
+      "url":"https://water.unl.edu/article/agricultural-irrigation/predicting-late-season-irrigation-needs/"
+    }
+  },
+  "yield_model_rule":"These agronomic references may define stage, rooting-depth and sensitivity structure. They do not authorize arbitrary yield-loss coefficients. Yield-response coefficients require calibration/backtesting or explicit ASSUMED sensitivity bands."
+}
