@@ -8,11 +8,14 @@ Observed: 2026-09-11 UTC
 - Default branch: `main`; observed SHA
   `83f1f1f720dc0757a1988b2c675a65330806a5b0`; contains only the initial README and is
   not the recovery application.
-- Deployed staging branch: `gh-pages`; observed and browser-confirmed SHA
+- Gate-0 deployed staging baseline: `gh-pages` at
   `4fd1e43e9f6d50c9db2b7250702f914f8f1505f3`.
+- Verified foundation promotion: `gh-pages` at
+  `59bb4ed0e5835a5609073a56a04584a6a573420e`; Pages deployment and exact-checkout plus
+  deployed-browser QA completed successfully. Rollback remains `4fd1e43…`.
 - Staging URL: `https://multigrainintl.github.io/nebraskabeans/`.
-- Isolated working branch: `staging/foundation-recovery-20260911`, based on that exact
-  deployed staging SHA.
+- Isolated working branch: `staging/foundation-recovery-20260911`, created from the
+  gate-0 deployed staging SHA and used to verify the foundation tree before promotion.
 - Production URL: `https://nebraskabeans.com/`; observed as a separate GoDaddy-hosted
   commercial site. No redirect or deployment link to the GitHub Pages recovery app was
   observed. Production and DNS are out of scope.

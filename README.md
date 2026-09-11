@@ -6,7 +6,8 @@ completed crop model and not the production `nebraskabeans.com` website.
 
 ## Governed baseline
 
-- Deployed staging: `gh-pages@4fd1e43e9f6d50c9db2b7250702f914f8f1505f3`
+- Verified staging foundation: `gh-pages@59bb4ed0e5835a5609073a56a04584a6a573420e`
+- Rollback baseline: `4fd1e43e9f6d50c9db2b7250702f914f8f1505f3`
 - Working recovery branch: `staging/foundation-recovery-20260911`
 - Production, `main`, DNS, and GoDaddy are out of scope without Product Authority.
 
