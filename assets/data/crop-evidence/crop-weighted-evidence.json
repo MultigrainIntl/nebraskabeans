@@ -1,0 +1,2861 @@
+{
+  "schema": "gisit.crop-weighted-evidence.v1",
+  "classification": "DERIVED",
+  "source_classification": "MODELED",
+  "crop_year": 2025,
+  "model_input": false,
+  "weights_sha256": "78ea8b809af385f1a2e1a68ffd92780fdafbf8770f86ac9bb8883e56826a80ed",
+  "states": {
+    "20": {
+      "state": "Kansas",
+      "mapped_acres": 3043.0533516918476,
+      "dates": {
+        "2026-04-15": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 121877,
+            "nodata_crop_pixels": 1271,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9896790853282229,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2923,
+            "mean": 164.41758494219582,
+            "median": 163.0,
+            "valid_date": "2026-04-15"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.07289873978728607,
+            "median": -0.08299022167921066,
+            "valid_date": "2026-04-15"
+          }
+        },
+        "2026-04-22": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2932,
+            "mean": 170.99735277877025,
+            "median": 170.0,
+            "valid_date": "2026-04-22"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.14998783467595647,
+            "median": -0.14425158500671387,
+            "valid_date": "2026-04-22"
+          }
+        },
+        "2026-04-29": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 121017,
+            "nodata_crop_pixels": 2131,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.982695618280443,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2916,
+            "mean": 136.9526678070023,
+            "median": 133.0,
+            "valid_date": "2026-04-29"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.17394017593623456,
+            "median": -0.16708055138587952,
+            "valid_date": "2026-04-29"
+          }
+        },
+        "2026-05-06": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 118809,
+            "nodata_crop_pixels": 4339,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9647659726507941,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2834,
+            "mean": 126.84076122179296,
+            "median": 126.0,
+            "valid_date": "2026-05-06"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.1303928615746685,
+            "median": -0.10080935060977936,
+            "valid_date": "2026-05-06"
+          }
+        },
+        "2026-05-13": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2932,
+            "mean": 175.77248513983176,
+            "median": 170.0,
+            "valid_date": "2026-05-13"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.1828530743255254,
+            "median": -0.16090606153011322,
+            "valid_date": "2026-05-13"
+          }
+        },
+        "2026-05-20": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123139,
+            "nodata_crop_pixels": 9,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999269172053139,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2930,
+            "mean": 136.21717733618107,
+            "median": 131.0,
+            "valid_date": "2026-05-20"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.2182408463390155,
+            "median": -0.20543761551380157,
+            "valid_date": "2026-05-20"
+          }
+        },
+        "2026-05-27": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2932,
+            "mean": 132.52711371682852,
+            "median": 130.0,
+            "valid_date": "2026-05-27"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.23222620537823455,
+            "median": -0.21225257217884064,
+            "valid_date": "2026-05-27"
+          }
+        },
+        "2026-06-03": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2932,
+            "mean": 132.77603371552928,
+            "median": 131.0,
+            "valid_date": "2026-06-03"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.04332902189219148,
+            "median": -0.09511745721101761,
+            "valid_date": "2026-06-03"
+          }
+        },
+        "2026-06-10": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123101,
+            "nodata_crop_pixels": 47,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9996183454055283,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2926,
+            "mean": 173.23436040324611,
+            "median": 169.0,
+            "valid_date": "2026-06-10"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.10550354769511908,
+            "median": -0.1253935992717743,
+            "valid_date": "2026-06-10"
+          }
+        },
+        "2026-06-17": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2932,
+            "mean": 168.02798259005425,
+            "median": 162.0,
+            "valid_date": "2026-06-17"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.16598326752655299,
+            "median": -0.16877974569797516,
+            "valid_date": "2026-06-17"
+          }
+        },
+        "2026-06-24": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 107854,
+            "nodata_crop_pixels": 15294,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.8758079708968071,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2590,
+            "mean": 136.44327516828304,
+            "median": 128.0,
+            "valid_date": "2026-06-23"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.01550489183419212,
+            "median": -0.06873026490211487,
+            "valid_date": "2026-06-24"
+          }
+        },
+        "2026-07-01": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123147,
+            "nodata_crop_pixels": 1,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999918796894793,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2931,
+            "mean": 179.7079181790868,
+            "median": 172.0,
+            "valid_date": "2026-07-01"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.004856093996514125,
+            "median": -0.017517657950520515,
+            "valid_date": "2026-07-01"
+          }
+        },
+        "2026-07-08": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2932,
+            "mean": 175.8914395686491,
+            "median": 171.0,
+            "valid_date": "2026-07-08"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.11675787729299547,
+            "median": -0.08841263502836227,
+            "valid_date": "2026-07-08"
+          }
+        },
+        "2026-07-15": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 121654,
+            "nodata_crop_pixels": 1494,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9878682560821126,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2911,
+            "mean": 185.18416163874596,
+            "median": 179.0,
+            "valid_date": "2026-07-15"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.11376414203500357,
+            "median": -0.0823272317647934,
+            "valid_date": "2026-07-15"
+          }
+        },
+        "2026-07-22": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123113,
+            "nodata_crop_pixels": 35,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9997157891317764,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2927,
+            "mean": 181.18697456807973,
+            "median": 179.0,
+            "valid_date": "2026-07-22"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.1647625809930609,
+            "median": -0.1383982002735138,
+            "valid_date": "2026-07-22"
+          }
+        },
+        "2026-07-29": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 122956,
+            "nodata_crop_pixels": 192,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9984409003800305,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2884,
+            "mean": 182.45954650444062,
+            "median": 186.0,
+            "valid_date": "2026-07-29"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.18936818507823738,
+            "median": -0.15057137608528137,
+            "valid_date": "2026-07-29"
+          }
+        },
+        "2026-08-05": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123138,
+            "nodata_crop_pixels": 10,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999187968947932,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2927,
+            "mean": 129.14947457324303,
+            "median": 128.0,
+            "valid_date": "2026-08-05"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.17760538010818167,
+            "median": -0.13985149562358856,
+            "valid_date": "2026-08-05"
+          }
+        },
+        "2026-08-12": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 120439,
+            "nodata_crop_pixels": 2709,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9780020787994933,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2920,
+            "mean": 163.66216923089698,
+            "median": 162.0,
+            "valid_date": "2026-08-12"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.23415368709457618,
+            "median": -0.22602862119674683,
+            "valid_date": "2026-08-12"
+          }
+        },
+        "2026-08-19": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 114179,
+            "nodata_crop_pixels": 8969,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9271689349400721,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2743,
+            "mean": 161.81314427346535,
+            "median": 157.0,
+            "valid_date": "2026-08-19"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.10250448663183218,
+            "median": -0.08711553364992142,
+            "valid_date": "2026-08-19"
+          }
+        },
+        "2026-08-26": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123092,
+            "nodata_crop_pixels": 56,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9995452626108422,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2927,
+            "mean": 170.34518084034707,
+            "median": 171.0,
+            "valid_date": "2026-08-26"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.12460040644657377,
+            "median": -0.08432402461767197,
+            "valid_date": "2026-08-26"
+          }
+        },
+        "2026-09-02": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 122689,
+            "nodata_crop_pixels": 459,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9962727774710105,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2928,
+            "mean": 183.93424023343576,
+            "median": 180.0,
+            "valid_date": "2026-09-01"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.14449855612442353,
+            "median": -0.10763780772686005,
+            "valid_date": "2026-09-02"
+          }
+        },
+        "2026-09-09": {
+          "ndvi": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 119248,
+            "nodata_crop_pixels": 3900,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9683307889693702,
+            "source_cells_with_crop": 2932,
+            "valid_source_cells": 2831,
+            "mean": 165.41484972494297,
+            "median": 163.0,
+            "valid_date": "2026-09-09"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 123148,
+            "valid_crop_pixels": 123148,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 209,
+            "valid_source_cells": 209,
+            "mean": -0.18636446690578218,
+            "median": -0.15381748974323273,
+            "valid_date": "2026-09-09"
+          }
+        }
+      }
+    },
+    "08": {
+      "state": "Colorado",
+      "mapped_acres": 32088.28938956725,
+      "dates": {
+        "2026-04-15": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1297830,
+            "nodata_crop_pixels": 737,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.99943245130979,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19556,
+            "mean": 170.30483499379733,
+            "median": 168.0,
+            "valid_date": "2026-04-15"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.056424630908437814,
+            "median": -0.06469593197107315,
+            "valid_date": "2026-04-15"
+          }
+        },
+        "2026-04-22": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19567,
+            "mean": 148.84246018880813,
+            "median": 144.0,
+            "valid_date": "2026-04-22"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.11570394214279857,
+            "median": -0.11049218475818634,
+            "valid_date": "2026-04-22"
+          }
+        },
+        "2026-04-29": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1297832,
+            "nodata_crop_pixels": 735,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9994339914690579,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19505,
+            "mean": 150.4078170364115,
+            "median": 148.0,
+            "valid_date": "2026-04-29"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.10170936695751095,
+            "median": -0.10045644640922546,
+            "valid_date": "2026-04-29"
+          }
+        },
+        "2026-05-06": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1279590,
+            "nodata_crop_pixels": 18977,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9853861987868165,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19353,
+            "mean": 127.1819168639955,
+            "median": 126.0,
+            "valid_date": "2026-05-06"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.033417899787340374,
+            "median": -0.04260740056633949,
+            "valid_date": "2026-05-06"
+          }
+        },
+        "2026-05-13": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19567,
+            "mean": 167.77562189706038,
+            "median": 165.0,
+            "valid_date": "2026-05-13"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.14183108688177923,
+            "median": -0.12810355424880981,
+            "valid_date": "2026-05-13"
+          }
+        },
+        "2026-05-20": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298550,
+            "nodata_crop_pixels": 17,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999869086462231,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19561,
+            "mean": 143.72811751569057,
+            "median": 130.0,
+            "valid_date": "2026-05-20"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.13397927733772683,
+            "median": -0.14472658932209015,
+            "valid_date": "2026-05-20"
+          }
+        },
+        "2026-05-27": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19567,
+            "mean": 144.35020295448751,
+            "median": 136.0,
+            "valid_date": "2026-05-27"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.11270917780759403,
+            "median": -0.09094865620136261,
+            "valid_date": "2026-05-27"
+          }
+        },
+        "2026-06-03": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1297286,
+            "nodata_crop_pixels": 1281,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9990135279889293,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19535,
+            "mean": 148.77621203034644,
+            "median": 147.0,
+            "valid_date": "2026-06-03"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.08962052770998798,
+            "median": -0.06555914878845215,
+            "valid_date": "2026-06-03"
+          }
+        },
+        "2026-06-10": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298550,
+            "nodata_crop_pixels": 17,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999869086462231,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19563,
+            "mean": 166.62072080397365,
+            "median": 164.0,
+            "valid_date": "2026-06-10"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.11766150549155281,
+            "median": -0.09062477946281433,
+            "valid_date": "2026-06-10"
+          }
+        },
+        "2026-06-17": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19567,
+            "mean": 173.52224952582347,
+            "median": 171.0,
+            "valid_date": "2026-06-17"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.14433366880972234,
+            "median": -0.14017626643180847,
+            "valid_date": "2026-06-17"
+          }
+        },
+        "2026-06-24": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1291030,
+            "nodata_crop_pixels": 7537,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9941959097990323,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19470,
+            "mean": 150.7231915602271,
+            "median": 152.0,
+            "valid_date": "2026-06-23"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": 0.018707756059114365,
+            "median": -0.07099070399999619,
+            "valid_date": "2026-06-24"
+          }
+        },
+        "2026-07-01": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1296537,
+            "nodata_crop_pixels": 2030,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9984367383431121,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19545,
+            "mean": 182.5910876434687,
+            "median": 179.0,
+            "valid_date": "2026-07-01"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.006753489957508206,
+            "median": -0.0581287257373333,
+            "valid_date": "2026-07-01"
+          }
+        },
+        "2026-07-08": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1297687,
+            "nodata_crop_pixels": 880,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9993223299221372,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19533,
+            "mean": 180.26156153217224,
+            "median": 175.0,
+            "valid_date": "2026-07-08"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.09088680838212349,
+            "median": -0.07763075083494186,
+            "valid_date": "2026-07-08"
+          }
+        },
+        "2026-07-15": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298501,
+            "nodata_crop_pixels": 66,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999491747441603,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19564,
+            "mean": 181.65913156786172,
+            "median": 180.0,
+            "valid_date": "2026-07-15"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.06737354349550206,
+            "median": -0.06916285306215286,
+            "valid_date": "2026-07-15"
+          }
+        },
+        "2026-07-22": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298564,
+            "nodata_crop_pixels": 3,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999976897610982,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19565,
+            "mean": 176.66381787882614,
+            "median": 180.0,
+            "valid_date": "2026-07-22"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.07512383239827303,
+            "median": -0.08533214777708054,
+            "valid_date": "2026-07-22"
+          }
+        },
+        "2026-07-29": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19567,
+            "mean": 192.24300863952342,
+            "median": 194.0,
+            "valid_date": "2026-07-29"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.09479856739530076,
+            "median": -0.08452444523572922,
+            "valid_date": "2026-07-29"
+          }
+        },
+        "2026-08-05": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1293511,
+            "nodata_crop_pixels": 5056,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9961064773708249,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19504,
+            "mean": 153.15585951723642,
+            "median": 150.0,
+            "valid_date": "2026-08-05"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.12290486952321326,
+            "median": -0.10438203066587448,
+            "valid_date": "2026-08-05"
+          }
+        },
+        "2026-08-12": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1293329,
+            "nodata_crop_pixels": 5238,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9959663228774488,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19516,
+            "mean": 165.34428826694523,
+            "median": 157.0,
+            "valid_date": "2026-08-12"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.14286249373077475,
+            "median": -0.106899693608284,
+            "valid_date": "2026-08-12"
+          }
+        },
+        "2026-08-19": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298408,
+            "nodata_crop_pixels": 159,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9998775573382044,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19551,
+            "mean": 178.07588138705245,
+            "median": 173.0,
+            "valid_date": "2026-08-19"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": 0.03807867723611363,
+            "median": -0.013365603983402252,
+            "valid_date": "2026-08-19"
+          }
+        },
+        "2026-08-26": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1263894,
+            "nodata_crop_pixels": 34673,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9732990288525737,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19250,
+            "mean": 173.43932165197398,
+            "median": 170.0,
+            "valid_date": "2026-08-26"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.06446063604558942,
+            "median": -0.06592051684856415,
+            "valid_date": "2026-08-26"
+          }
+        },
+        "2026-09-02": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1296106,
+            "nodata_crop_pixels": 2461,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9981048340208861,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19494,
+            "mean": 154.11678674429407,
+            "median": 151.0,
+            "valid_date": "2026-09-01"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.05798448138000992,
+            "median": -0.04541907086968422,
+            "valid_date": "2026-09-02"
+          }
+        },
+        "2026-09-09": {
+          "ndvi": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298542,
+            "nodata_crop_pixels": 25,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999807480091516,
+            "source_cells_with_crop": 19567,
+            "valid_source_cells": 19566,
+            "mean": 186.30555653956515,
+            "median": 182.0,
+            "valid_date": "2026-09-09"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 1298567,
+            "valid_crop_pixels": 1298567,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 540,
+            "valid_source_cells": 540,
+            "mean": -0.08078768022541666,
+            "median": -0.0665821060538292,
+            "valid_date": "2026-09-09"
+          }
+        }
+      }
+    },
+    "31": {
+      "state": "Nebraska",
+      "mapped_acres": 93464.34874891992,
+      "dates": {
+        "2026-04-15": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3776303,
+            "nodata_crop_pixels": 6065,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9983965071616511,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31890,
+            "mean": 170.5334418345138,
+            "median": 168.0,
+            "valid_date": "2026-04-15"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.20087469525288315,
+            "median": -0.209742933511734,
+            "valid_date": "2026-04-15"
+          }
+        },
+        "2026-04-22": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31983,
+            "mean": 145.4931558748382,
+            "median": 140.0,
+            "valid_date": "2026-04-22"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.25347304960420763,
+            "median": -0.25277432799339294,
+            "valid_date": "2026-04-22"
+          }
+        },
+        "2026-04-29": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782244,
+            "nodata_crop_pixels": 124,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999672163047064,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31975,
+            "mean": 165.67762048138619,
+            "median": 158.0,
+            "valid_date": "2026-04-29"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.1956678954939462,
+            "median": -0.21241062879562378,
+            "valid_date": "2026-04-29"
+          }
+        },
+        "2026-05-06": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3778669,
+            "nodata_crop_pixels": 3699,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9990220412186228,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31940,
+            "mean": 162.81712608328488,
+            "median": 156.0,
+            "valid_date": "2026-05-06"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.21087011591134355,
+            "median": -0.22077204287052155,
+            "valid_date": "2026-05-06"
+          }
+        },
+        "2026-05-13": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31983,
+            "mean": 169.450322655014,
+            "median": 163.0,
+            "valid_date": "2026-05-13"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.33519779396748606,
+            "median": -0.3262116312980652,
+            "valid_date": "2026-05-13"
+          }
+        },
+        "2026-05-20": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3764028,
+            "nodata_crop_pixels": 18340,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.995151185712231,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31722,
+            "mean": 126.4207370402133,
+            "median": 125.0,
+            "valid_date": "2026-05-20"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.303633913534002,
+            "median": -0.3165356516838074,
+            "valid_date": "2026-05-20"
+          }
+        },
+        "2026-05-27": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782357,
+            "nodata_crop_pixels": 11,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999970917689659,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31981,
+            "mean": 141.32490402148713,
+            "median": 136.0,
+            "valid_date": "2026-05-27"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.2892450198271771,
+            "median": -0.28190168738365173,
+            "valid_date": "2026-05-27"
+          }
+        },
+        "2026-06-03": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3777963,
+            "nodata_crop_pixels": 4405,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9988353856631613,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31951,
+            "mean": 161.02992617979584,
+            "median": 154.0,
+            "valid_date": "2026-06-03"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.17235066128552923,
+            "median": -0.17019249498844147,
+            "valid_date": "2026-06-03"
+          }
+        },
+        "2026-06-10": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782363,
+            "nodata_crop_pixels": 5,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999986780768026,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31981,
+            "mean": 171.66918299486326,
+            "median": 165.0,
+            "valid_date": "2026-06-10"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.19856425531532318,
+            "median": -0.2225584089756012,
+            "valid_date": "2026-06-10"
+          }
+        },
+        "2026-06-17": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31983,
+            "mean": 169.74003692924643,
+            "median": 167.0,
+            "valid_date": "2026-06-17"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.25930617770688663,
+            "median": -0.2609197199344635,
+            "valid_date": "2026-06-17"
+          }
+        },
+        "2026-06-24": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3718842,
+            "nodata_crop_pixels": 63526,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9832047013934128,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31256,
+            "mean": 130.85067555975758,
+            "median": 127.0,
+            "valid_date": "2026-06-23"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.10115397097207203,
+            "median": -0.18897521495819092,
+            "valid_date": "2026-06-24"
+          }
+        },
+        "2026-07-01": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3780958,
+            "nodata_crop_pixels": 1410,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9996272176583558,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31964,
+            "mean": 183.4014990380745,
+            "median": 181.0,
+            "valid_date": "2026-07-01"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.06716181169398068,
+            "median": -0.10819295793771744,
+            "valid_date": "2026-07-01"
+          }
+        },
+        "2026-07-08": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3763737,
+            "nodata_crop_pixels": 18631,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9950742497821471,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31817,
+            "mean": 182.1238412779639,
+            "median": 177.0,
+            "valid_date": "2026-07-08"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.14888487792222552,
+            "median": -0.16334745287895203,
+            "valid_date": "2026-07-08"
+          }
+        },
+        "2026-07-15": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782227,
+            "nodata_crop_pixels": 141,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999627217658356,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31978,
+            "mean": 188.44308075639034,
+            "median": 185.0,
+            "valid_date": "2026-07-15"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.17394610754340628,
+            "median": -0.19242896139621735,
+            "valid_date": "2026-07-15"
+          }
+        },
+        "2026-07-22": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3697312,
+            "nodata_crop_pixels": 85056,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9775125001057539,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31343,
+            "mean": 186.45553769873896,
+            "median": 188.0,
+            "valid_date": "2026-07-22"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.2253354114190183,
+            "median": -0.21534353494644165,
+            "valid_date": "2026-07-22"
+          }
+        },
+        "2026-07-29": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3781964,
+            "nodata_crop_pixels": 404,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9998931886056566,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31969,
+            "mean": 202.91777579056807,
+            "median": 205.0,
+            "valid_date": "2026-07-29"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.1712855063418395,
+            "median": -0.16815604269504547,
+            "valid_date": "2026-07-29"
+          }
+        },
+        "2026-08-05": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3781937,
+            "nodata_crop_pixels": 431,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.999886050220391,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31979,
+            "mean": 184.56144721606944,
+            "median": 191.0,
+            "valid_date": "2026-08-05"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.19951168674096853,
+            "median": -0.20241940021514893,
+            "valid_date": "2026-08-05"
+          }
+        },
+        "2026-08-12": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3684629,
+            "nodata_crop_pixels": 97739,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9741593097234326,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31272,
+            "mean": 162.888393376918,
+            "median": 153.0,
+            "valid_date": "2026-08-12"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.19871140670568269,
+            "median": -0.19896751642227173,
+            "valid_date": "2026-08-12"
+          }
+        },
+        "2026-08-19": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3765567,
+            "nodata_crop_pixels": 16801,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.995558073672366,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31493,
+            "mean": 198.05406941371643,
+            "median": 206.0,
+            "valid_date": "2026-08-19"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": 0.142884433421573,
+            "median": 0.12465117126703262,
+            "valid_date": "2026-08-19"
+          }
+        },
+        "2026-08-26": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31983,
+            "mean": 199.04531367651165,
+            "median": 208.0,
+            "valid_date": "2026-08-26"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.05099481294734331,
+            "median": -0.03888341784477234,
+            "valid_date": "2026-08-26"
+          }
+        },
+        "2026-09-02": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3766294,
+            "nodata_crop_pixels": 16074,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9957502813052563,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31781,
+            "mean": 147.31274642924848,
+            "median": 135.0,
+            "valid_date": "2026-09-01"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.07949729422716112,
+            "median": -0.06252305209636688,
+            "valid_date": "2026-09-02"
+          }
+        },
+        "2026-09-09": {
+          "ndvi": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3774337,
+            "nodata_crop_pixels": 8031,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.997876726960465,
+            "source_cells_with_crop": 31983,
+            "valid_source_cells": 31944,
+            "mean": 199.0568205753752,
+            "median": 203.0,
+            "valid_date": "2026-09-09"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 3782368,
+            "valid_crop_pixels": 3782368,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 697,
+            "valid_source_cells": 697,
+            "mean": -0.07763868466691537,
+            "median": -0.05630660429596901,
+            "valid_date": "2026-09-09"
+          }
+        }
+      }
+    },
+    "56": {
+      "state": "Wyoming",
+      "mapped_acres": 14773.318783705214,
+      "dates": {
+        "2026-04-15": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8122,
+            "mean": 142.94310827876325,
+            "median": 127.0,
+            "valid_date": "2026-04-15"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.1190474490390067,
+            "median": -0.09762264043092728,
+            "valid_date": "2026-04-15"
+          }
+        },
+        "2026-04-22": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 596804,
+            "nodata_crop_pixels": 1051,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9982420486572832,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8105,
+            "mean": 146.58388181044364,
+            "median": 145.0,
+            "valid_date": "2026-04-22"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.15784921572780455,
+            "median": -0.1391725242137909,
+            "valid_date": "2026-04-22"
+          }
+        },
+        "2026-04-29": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 595849,
+            "nodata_crop_pixels": 2006,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.996644671366803,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8052,
+            "mean": 146.897265918043,
+            "median": 143.0,
+            "valid_date": "2026-04-29"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.144494548049452,
+            "median": -0.10908503085374832,
+            "valid_date": "2026-04-29"
+          }
+        },
+        "2026-05-06": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597071,
+            "nodata_crop_pixels": 784,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9986886452400666,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8119,
+            "mean": 157.20879593884143,
+            "median": 153.0,
+            "valid_date": "2026-05-06"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.15133071779679835,
+            "median": -0.12194278091192245,
+            "valid_date": "2026-05-06"
+          }
+        },
+        "2026-05-13": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8122,
+            "mean": 168.84605297271077,
+            "median": 166.0,
+            "valid_date": "2026-05-13"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.18476674770388268,
+            "median": -0.15426123142242432,
+            "valid_date": "2026-05-13"
+          }
+        },
+        "2026-05-20": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 596159,
+            "nodata_crop_pixels": 1696,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9971631917438175,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8108,
+            "mean": 159.9903381480444,
+            "median": 157.0,
+            "valid_date": "2026-05-20"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.18985701598163904,
+            "median": -0.15488912165164948,
+            "valid_date": "2026-05-20"
+          }
+        },
+        "2026-05-27": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 596482,
+            "nodata_crop_pixels": 1373,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.997703456523739,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8110,
+            "mean": 156.19506540012944,
+            "median": 151.0,
+            "valid_date": "2026-05-27"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.235900226220298,
+            "median": -0.2069242000579834,
+            "valid_date": "2026-05-27"
+          }
+        },
+        "2026-06-03": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 595777,
+            "nodata_crop_pixels": 2078,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9965242408276255,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8110,
+            "mean": 175.83655797387277,
+            "median": 171.0,
+            "valid_date": "2026-06-03"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.20049759761700542,
+            "median": -0.19047069549560547,
+            "valid_date": "2026-06-03"
+          }
+        },
+        "2026-06-10": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 595618,
+            "nodata_crop_pixels": 2237,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9962582900536083,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8092,
+            "mean": 176.06661988052744,
+            "median": 174.0,
+            "valid_date": "2026-06-10"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.22876341206928674,
+            "median": -0.21056312322616577,
+            "valid_date": "2026-06-10"
+          }
+        },
+        "2026-06-17": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597802,
+            "nodata_crop_pixels": 53,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9999113497419942,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8115,
+            "mean": 177.99476917106333,
+            "median": 176.0,
+            "valid_date": "2026-06-17"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.2569698436966271,
+            "median": -0.23092296719551086,
+            "valid_date": "2026-06-17"
+          }
+        },
+        "2026-06-24": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 590526,
+            "nodata_crop_pixels": 7329,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9877411746995509,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8041,
+            "mean": 166.01416364393776,
+            "median": 166.0,
+            "valid_date": "2026-06-23"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.2601732114716028,
+            "median": -0.23431691527366638,
+            "valid_date": "2026-06-24"
+          }
+        },
+        "2026-07-01": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597483,
+            "nodata_crop_pixels": 372,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9993777755475826,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8111,
+            "mean": 189.23630463126148,
+            "median": 188.0,
+            "valid_date": "2026-07-01"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.1224754226729137,
+            "median": -0.15722844004631042,
+            "valid_date": "2026-07-01"
+          }
+        },
+        "2026-07-08": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597747,
+            "nodata_crop_pixels": 108,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9998193541912337,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8119,
+            "mean": 189.40870970494205,
+            "median": 190.0,
+            "valid_date": "2026-07-08"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.169840941885324,
+            "median": -0.15584050118923187,
+            "valid_date": "2026-07-08"
+          }
+        },
+        "2026-07-15": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 592872,
+            "nodata_crop_pixels": 4983,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9916652031010864,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8049,
+            "mean": 173.5112132129701,
+            "median": 173.0,
+            "valid_date": "2026-07-15"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.17358268133492066,
+            "median": -0.1555469036102295,
+            "valid_date": "2026-07-15"
+          }
+        },
+        "2026-07-22": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8122,
+            "mean": 174.24135116374373,
+            "median": 168.0,
+            "valid_date": "2026-07-22"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.15093714911749026,
+            "median": -0.1361829936504364,
+            "valid_date": "2026-07-22"
+          }
+        },
+        "2026-07-29": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8122,
+            "mean": 170.0128793771065,
+            "median": 168.0,
+            "valid_date": "2026-07-29"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.13004999367114398,
+            "median": -0.12301436066627502,
+            "valid_date": "2026-07-29"
+          }
+        },
+        "2026-08-05": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8122,
+            "mean": 186.8473425830678,
+            "median": 184.0,
+            "valid_date": "2026-08-05"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.15564724370397212,
+            "median": -0.13372254371643066,
+            "valid_date": "2026-08-05"
+          }
+        },
+        "2026-08-12": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 578728,
+            "nodata_crop_pixels": 19127,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9680072927382057,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 7908,
+            "mean": 133.38004900402262,
+            "median": 126.0,
+            "valid_date": "2026-08-12"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.1659295195449612,
+            "median": -0.1445971429347992,
+            "valid_date": "2026-08-12"
+          }
+        },
+        "2026-08-19": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8122,
+            "mean": 195.21006933119236,
+            "median": 197.0,
+            "valid_date": "2026-08-19"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": 0.07304692968144402,
+            "median": 0.05356390401721001,
+            "valid_date": "2026-08-19"
+          }
+        },
+        "2026-08-26": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 596516,
+            "nodata_crop_pixels": 1339,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9977603265005729,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8119,
+            "mean": 195.54236432886964,
+            "median": 197.0,
+            "valid_date": "2026-08-26"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.049203780311236615,
+            "median": -0.03559432178735733,
+            "valid_date": "2026-08-26"
+          }
+        },
+        "2026-09-02": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 594996,
+            "nodata_crop_pixels": 2859,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9952179040068244,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8083,
+            "mean": 148.23052087745128,
+            "median": 139.0,
+            "valid_date": "2026-09-01"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.04915468590196039,
+            "median": -0.060796670615673065,
+            "valid_date": "2026-09-02"
+          }
+        },
+        "2026-09-09": {
+          "ndvi": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597626,
+            "nodata_crop_pixels": 229,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 0.9996169639795602,
+            "source_cells_with_crop": 8122,
+            "valid_source_cells": 8119,
+            "mean": 186.10578689682177,
+            "median": 184.0,
+            "valid_date": "2026-09-09"
+          },
+          "smap_anomaly": {
+            "total_crop_pixels": 597855,
+            "valid_crop_pixels": 597855,
+            "nodata_crop_pixels": 0,
+            "outside_grid_crop_pixels": 0,
+            "valid_crop_area_fraction": 1.0,
+            "source_cells_with_crop": 233,
+            "valid_source_cells": 233,
+            "mean": -0.0758210720090601,
+            "median": -0.06830714643001556,
+            "valid_date": "2026-09-09"
+          }
+        }
+      }
+    }
+  },
+  "sources": [
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-04-15",
+      "valid_date": "2026-04-15",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.04.15&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "b08103f62aa1f9a7107b44e42862b1850afaed0dea84d87ef37fa1284eb0329a",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-04-15.tif.gz",
+      "raw_gzip_sha256": "fe09f19ba3fbcdc33a20931dfcaf5f4741db2bd9deecf52592c6a84311bef081",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-04-15",
+      "valid_date": "2026-04-15",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.04.15&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "bd65df40ca3bbe40cd9f14fe881d83aff750c01e0f49af612ffcdbaa14205685",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-04-15.tif.gz",
+      "raw_gzip_sha256": "57e5909c7ba3e5bd78be07f0833072f4819d21d0bd57a660e0d8fa3c70cb7ea9",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-04-22",
+      "valid_date": "2026-04-22",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.04.22&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "0bf003eee9f499b430c3b26e90dde99c1d184b1ef1289e2c103b8712b4d6f707",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-04-22.tif.gz",
+      "raw_gzip_sha256": "0393dd0f65f3ca1807c7f02626ffe14baab7acc0bf679174a509d36a6bdde8cd",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-04-22",
+      "valid_date": "2026-04-22",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.04.22&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "f092cc87052b8aa22275a51472959f2f66363210552662f2664bcb455f198a8c",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-04-22.tif.gz",
+      "raw_gzip_sha256": "29b4ff98e5c843199ec3b01a853b8edd9619fefa5091af007e399bcd282bf1e7",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-04-29",
+      "valid_date": "2026-04-29",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.04.29&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "83526cc82f96178e018deb5abb47e166776e1254f82006a4d7038898eb4bf570",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-04-29.tif.gz",
+      "raw_gzip_sha256": "6e4d62c3f70b84e5e5a6fc3d10f1d6e465f7bc88e6b52bdc91d388a35a909c19",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-04-29",
+      "valid_date": "2026-04-29",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.04.29&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "d2d498521e8ba8d80538b49b9cbf5b7571fb18fdf74bfec6c6d7e7f32c780ebd",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-04-29.tif.gz",
+      "raw_gzip_sha256": "0025eca99a87e9c166f708eec557e33fdce86acf26a04b899dcdc3aa12f286f2",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-05-06",
+      "valid_date": "2026-05-06",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.05.06&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "fe9208a1af984b1cfbb6f7b7122988b5f3ea151244df4b59faae67445a249039",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-05-06.tif.gz",
+      "raw_gzip_sha256": "19d46a48aa0bbdba2a3b4dd0735e763d3453c8ec6751bcf85a850083aa307ea4",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-05-06",
+      "valid_date": "2026-05-06",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.05.06&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "550ddf1282e8506428378c999eda977c5b403d663e64ae1fb787cb011d950c21",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-05-06.tif.gz",
+      "raw_gzip_sha256": "add42e9c82a2ad50f55f3fe470121513d8b47c7fc94dc274aa2135a4b9fdcbd7",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-05-13",
+      "valid_date": "2026-05-13",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.05.13&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "db84685d06f7e16fe3f02551361ee4f83699ddd0ff93fb05a3040b55a056db7f",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-05-13.tif.gz",
+      "raw_gzip_sha256": "840097f0f25870c8de8fee43a7518d5dd68b0a37ce1e44ad9944d81cd6ca331b",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-05-13",
+      "valid_date": "2026-05-13",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.05.13&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "a747d466a67797afc7a7231bded3386c14efe18daef1e5f11b18f26e85ebb4bc",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-05-13.tif.gz",
+      "raw_gzip_sha256": "639429262b9d1311e9a21c1c39bddaa0ffca11a67268af768e524291b6a5848d",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-05-20",
+      "valid_date": "2026-05-20",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.05.20&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "bd9e927fc362ce5aaf5ec54a895b5460807868d165c4cc27c78c1b03e859a834",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-05-20.tif.gz",
+      "raw_gzip_sha256": "3c638ad92dcf1a34917df8e89fbf2b693c66598d53d3ab4967ae23cee6a8702e",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-05-20",
+      "valid_date": "2026-05-20",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.05.20&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "adcc28155871da89b57415b6eb1cfff7f7cdf518015a91515d384165b15bae12",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-05-20.tif.gz",
+      "raw_gzip_sha256": "cadbe74e7b467c485a9fb554c7f36b2d9649a234a538f7dd1a64d39cfbca8572",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-05-27",
+      "valid_date": "2026-05-27",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.05.27&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "c62bdb762f8d08b93992c2893fb0caa39f6a6ba7329f82ec23369f3f5572d0f1",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-05-27.tif.gz",
+      "raw_gzip_sha256": "20a7ffd18767cbd06624efe9a2e8a39334e61b2f3896703d79ea07218ae9ce76",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-05-27",
+      "valid_date": "2026-05-27",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.05.27&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "5f22482aa9f71413da6da1776762b405e9f9c92ec3e79b38e14869c9c7ebb7fd",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-05-27.tif.gz",
+      "raw_gzip_sha256": "ce090bac4788489ffe04b8fa2efe1f07a44dcfe4780181f0658eb464f27515a2",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-06-03",
+      "valid_date": "2026-06-03",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.06.03&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "a2a34ed0386a2966d1dfb75fcc6d6b750371293f50b2cbb9954232c9e2c15995",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-06-03.tif.gz",
+      "raw_gzip_sha256": "d21b738bd79337b3691f5b6e87bdae6032edaffc0165db09fd3f2d17fb333aca",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-06-03",
+      "valid_date": "2026-06-03",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.06.03&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "0b09d2b294cf66d2128b3c7a5ba18f258035780c171d5e8e0e1ed1f8716790c6",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-06-03.tif.gz",
+      "raw_gzip_sha256": "95c4d19b221b20918189c39cda3f2204896c792576cf21c1f5a259fb25223cbb",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-06-10",
+      "valid_date": "2026-06-10",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.06.10&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "8d5a3536968538ab61431e2626292f3642ec71923a459525ed4d15d8254f66c0",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-06-10.tif.gz",
+      "raw_gzip_sha256": "fe8cb8dd381c897ba7e9da8a3ee567e80e9419e4ef6f2f159fbf31ad4d69548d",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-06-10",
+      "valid_date": "2026-06-10",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.06.10&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "04cba52b23ad2ef2e360a92f2629a95cd303ec01a619637dcb5570bd0a63f16a",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-06-10.tif.gz",
+      "raw_gzip_sha256": "24895d35891b3630258228ad67594166cfb581de1c469aa10acfb110ab7bdde0",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-06-17",
+      "valid_date": "2026-06-17",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.06.17&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "b352c48bc2a03016ac657f69d05cb3702ed6d4fd6a5bde3947d2d3c91a054d74",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-06-17.tif.gz",
+      "raw_gzip_sha256": "ba5c4f142c3435e85f466ebb2c2c4e465c6cef676a1e0906ce24606db10f9f1b",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-06-17",
+      "valid_date": "2026-06-17",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.06.17&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "d949b58e02581417472055ff3ca81a051ab564c18d9c894b0c36e79f5ab90419",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-06-17.tif.gz",
+      "raw_gzip_sha256": "c391ef25843e8290c4c84063ce4cb4ad30255cc8c37d9523876be93f6ad7ed31",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-06-24",
+      "valid_date": "2026-06-23",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.06.23&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "82c374b1f1a1a130adb80141ea2bd2117951e076a4d002719a9cc1ae0fb0a13b",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-06-23.tif.gz",
+      "raw_gzip_sha256": "47b2c38e7000c775080d6b3af9b37804992759e99249ada672571245a0d2b6fe",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-06-24",
+      "valid_date": "2026-06-24",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.06.24&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "0eee64faf6df88f1f4e8ca163aa5a00aac5e47da79cabbd45262507a0a62b9f2",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-06-24.tif.gz",
+      "raw_gzip_sha256": "e686e58e52ea22dace9deb2404d11671f86d0f63e8d5ac6858fd6924b049f168",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-01",
+      "valid_date": "2026-07-01",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.01&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "a4a5d46a897ef21068f720f1cbf88bf66ff53c2743d0f63a4055aaa264ff299f",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-07-01.tif.gz",
+      "raw_gzip_sha256": "aaf2d8cae88747533cefc23aed3269b6bfa689409436f5e06a8b6bd44ce41c0c",
+      "retrieved_at_utc": "2026-09-12T00:28:14.835649+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-01",
+      "valid_date": "2026-07-01",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.01&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "1f1f7fda531096b8115ef5659c0b3487b04dc2af2c9c97ab11f7e64ddcc65b97",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-07-01.tif.gz",
+      "raw_gzip_sha256": "38a62f79046f6113f087ccd068cf06663e7118fea05500c2a282e04784ac5be9",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-08",
+      "valid_date": "2026-07-08",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.08&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "9da6bd10833bdf72e7675f363b5fcd5a355090b7a4c4ab8893cfb17187547144",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-07-08.tif.gz",
+      "raw_gzip_sha256": "86593a7a2cd3de515ef3e25d8c18dd8e9547ad175f2d63fd5924f3870bd225a0",
+      "retrieved_at_utc": "2026-09-12T00:28:15.432499+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-08",
+      "valid_date": "2026-07-08",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.08&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "ca4466796c7a47634836536ea1dae9669c9a310ff7684f777d7017d787138c52",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-07-08.tif.gz",
+      "raw_gzip_sha256": "5bb6cc858a0c173004f6cabef666a3951d17b791d6964889698f4d216c236168",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-15",
+      "valid_date": "2026-07-15",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.15&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "1b4d11f28b55a134d3e4f3c537a357a95e1c8df1d3ec827e0d7f9bbcbb6c412c",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-07-15.tif.gz",
+      "raw_gzip_sha256": "84ec0637910fef9729973f04140ccb4cf566f92a2a99c9d33d5a4836793fa133",
+      "retrieved_at_utc": "2026-09-12T00:28:15.000245+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-15",
+      "valid_date": "2026-07-15",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.15&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "91ed907f4057873c33c177860953ec5d23abdc911ba2a62ffccab4f9be3872cc",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-07-15.tif.gz",
+      "raw_gzip_sha256": "7708d17781e1e72e8ed6665429b0c28fa7a4c4bb3b760b8c19492a226c12be75",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-22",
+      "valid_date": "2026-07-22",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.22&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "8a0a89f08d1c98d927fc490d2c4a7f6258a1634a7bba36796239b1c96afb359d",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-07-22.tif.gz",
+      "raw_gzip_sha256": "5580743198109325f7d05f20ad60c5f025fcdd1fcdb85293ee473a72f364fa22",
+      "retrieved_at_utc": "2026-09-12T00:28:14.761882+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-22",
+      "valid_date": "2026-07-22",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.22&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "3bc9b864094aaf4d44feb93ecd96b81e01377851d089b59dcfd7d53188743fa2",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-07-22.tif.gz",
+      "raw_gzip_sha256": "dd3b902faa06ad719790b724b6387bffdc1b5cf45479cf838e61d0869e27f3ae",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-07-29",
+      "valid_date": "2026-07-29",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.07.29&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "c6817466d11ed56d9605fc100bf1165143084cd6862fc018fc7b522ad37757d5",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-07-29.tif.gz",
+      "raw_gzip_sha256": "acfc73f579383138bb816e60c17ac7d7457a4eb6ff1b1fa3f98b4b7b5bc3c04d",
+      "retrieved_at_utc": "2026-09-12T00:28:23.734560+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-07-29",
+      "valid_date": "2026-07-29",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.07.29&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "d9324283f3f78bda8c40878f87f20ef1f15a434da2b97504acf1972d22f229e7",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-07-29.tif.gz",
+      "raw_gzip_sha256": "9f03971ac6846045a06b9f09cab64dff557d4b4983e89debdc9df815b7587603",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-08-05",
+      "valid_date": "2026-08-05",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.08.05&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "458e366ba6c450a82f0c2c324a91923f42fd903331cfc41a744c6b688bccc915",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-08-05.tif.gz",
+      "raw_gzip_sha256": "29ea65c9e997f09ac6a096a9dd0226f9d0cb7a7d7667b2108d358328ecfdb953",
+      "retrieved_at_utc": "2026-09-12T00:28:25.086818+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-08-05",
+      "valid_date": "2026-08-05",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.08.05&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "446f6188b8c0b66c8a6e0aea40586f26a00dae7fc738f9b2c68a237c2748e92b",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-08-05.tif.gz",
+      "raw_gzip_sha256": "c0cc8f38cd1509fb7a4f230989e28f8cf93ac925b37c5587546e26ee85a2096a",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-08-12",
+      "valid_date": "2026-08-12",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.08.12&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "c1b3587ae4abc68f932524eba65215de14fe30af578338f5d3f0eaed0c5621e5",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-08-12.tif.gz",
+      "raw_gzip_sha256": "a5a3e54f418348a16aed855f6ae9fbc1ac679b32f8b7a4ef1b5cea0bf4884eb8",
+      "retrieved_at_utc": "2026-09-12T00:28:25.240160+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-08-12",
+      "valid_date": "2026-08-12",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.08.12&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "4b1771da3cb132d84ce9342aa1b436473db513ded43ed1fc8a0c3d832b6dd9fd",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-08-12.tif.gz",
+      "raw_gzip_sha256": "794d146eb92c7ba69bc13a4acc3a860fd08d0c3fb2836ac67a34e3c41a707f3b",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-08-19",
+      "valid_date": "2026-08-19",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.08.19&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "26a4db0f5bd82972cf74f16305305aa43fc5275e65a580c22ad9de6a5eaed878",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-08-19.tif.gz",
+      "raw_gzip_sha256": "b0fa948561b005021d362e6629ade51c296daa7cac517589df445e6acf3d1cbd",
+      "retrieved_at_utc": "2026-09-12T00:28:25.510225+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-08-19",
+      "valid_date": "2026-08-19",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.08.19&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "3725b3429ccf56c03c37a54285bc5638ee3352e7134bf40079158237cd99917f",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-08-19.tif.gz",
+      "raw_gzip_sha256": "2082967ee62afa2b519dc67cf9d4146fb8db8190c5d4bfc9fc62e702f4189c9e",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-08-26",
+      "valid_date": "2026-08-26",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.08.26&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "b8f110683532c5eea0b1a6c9940e19d4005e28832a9781bc6fbe951e0675ec82",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-08-26.tif.gz",
+      "raw_gzip_sha256": "6a1437346d8fd2e72c8165303a65e1221bd7b1fd8db1d5011ba56ab5f0caac5d",
+      "retrieved_at_utc": "2026-09-12T00:28:33.754687+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-08-26",
+      "valid_date": "2026-08-26",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.08.26&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "9f49d3d9473b83cb2707af0a66974fc3d92d312ef307a2df0d27480e460233e0",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-08-26.tif.gz",
+      "raw_gzip_sha256": "9a2809149f779e10f1225b8b4d6043e3f3e63befc5a23bdd44a50f27db9fc13e",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-09-02",
+      "valid_date": "2026-09-01",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.09.01&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "2814ac2cd123111badc771df5d3ee81f998881b8b62f941c35a3299451348e29",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-09-01.tif.gz",
+      "raw_gzip_sha256": "5a0fc7910874ac46d2029c337854d211b91d71a9409eff1a3d32b6d090985e23",
+      "retrieved_at_utc": "2026-09-12T00:28:33.785877+00:00",
+      "retrieval_time_status": "captured on download"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-09-02",
+      "valid_date": "2026-09-02",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.09.02&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "1fc9c5faea4b7dd298340b6ef723892048d8a725255dd8a832af0afd736cb115",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-09-02.tif.gz",
+      "raw_gzip_sha256": "fcd053671869d013a26fc90c5426670f202ba1fe97324d276eee2997ace04f3f",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "ndvi",
+      "requested_date": "2026-09-09",
+      "valid_date": "2026-09-09",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_2026.map&COVERAGEID=NDVI-DAILY_2026.09.09&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "7e7c907c6646ee74aa1162347cf78e598e048c2bb659a90de7b8957b5032db96",
+      "bytes": 16992651,
+      "raw_file": "raw/ndvi-2026-09-09.tif.gz",
+      "raw_gzip_sha256": "7bd23db396b0557f6bbb60aef54ffaecb309daae475c74efaa948496d8a00627",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    },
+    {
+      "layer": "smap_anomaly",
+      "requested_date": "2026-09-09",
+      "valid_date": "2026-09-09",
+      "url": "https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&MAP=/WMS/SMAP-9KM-ANOMALY-DAILY-SUB_2026.map&COVERAGEID=SMAP-9KM-ANOMALY-DAILY-SUB_2026.09.09&FORMAT=image/tiff&SUBSET=x(-111.0,-94.25)&SUBSET=y(36.75,45.25)&SUBSETTINGCRS=http://www.opengis.net/def/crs/EPSG/0/4326&SCALEFACTOR=1",
+      "sha256": "ae4a57e84ecb18bb9602502c09e711b1e6dca24a23f6e408d5c8796b1b76b0d9",
+      "bytes": 52539,
+      "raw_file": "raw/smap_anomaly-2026-09-09.tif.gz",
+      "raw_gzip_sha256": "b3b359fd7ff5ddf6d802c4cf0a9182f4c323db7f89e74fb7f463e434a4d2eeb4",
+      "retrieved_at_utc": null,
+      "retrieval_time_status": "not captured for cached source bytes"
+    }
+  ],
+  "limitations": [
+    "Historical 2025 crop footprint, not confirmed 2026 planted acreage.",
+    "Crop-area-weighted source cells still contain mixed land cover; not bean-only measurements.",
+    "NDVI uses the unscaled service grid, not HLS; source-encoded index has no asserted physical unit.",
+    "Source QA masks beyond declared nodata are unavailable; coverage is not calibrated confidence.",
+    "Weekly checkpoints; requested and actual source dates are distinct. Historical receipt times unavailable.",
+    "No yield model coefficients or prediction outputs are changed by this artifact."
+  ],
+  "weight_statistics_method": "Area-weighted arithmetic mean and lower weighted median; nodata excluded with coverage disclosed."
+}

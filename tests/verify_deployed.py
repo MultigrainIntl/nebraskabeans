@@ -10,7 +10,7 @@ import urllib.parse
 base = sys.argv[1]
 paths = ['index.html', 'assets/app.js', 'assets/frame-buffer.js',
          'assets/spatial-evidence.js', 'assets/site.css',
-         'assets/data/build-manifest.json']
+         'assets/data/build-manifest.json', 'assets/data/crop-evidence/crop-weighted-evidence.json']
 expected = {p: hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths}
 
 def check(path, attempt):

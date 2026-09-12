@@ -84,3 +84,24 @@ Branch: `staging/fluid-map`. Data/model inputs are unchanged.
 Acceptance: daily stepping; loading/date atomicity; stale-response rejection;
 polygon/station persistence; source-resolution disclosure; desktop/mobile controls;
 exact candidate QA and separately inspected staging deployment.
+
+## Crop-weighted evidence continuation
+
+Starting deployed staging / rollback: `bee444e0f301666fe6c877d733e923991c8e4cc8`.
+Branch: `staging/crop-weighted-evidence`.
+
+W03/W04: exact native crop-pixel conservation into state/source-grid weights;
+current-year field identity and market-class production weights remain incomplete.
+W08: full available Crop-CASMA NDVI service grid replaces the earlier 5% sampling
+resolution for this new evidence package. HLS and additional QA remain mandatory.
+W09/W10: state-weighted evidence is displayed separately and is not automatically
+fed into the existing weather/GDD yield equation without validation.
+
+Local reconciliation passes: 40 source-cell clips, all 44 raw-source archives,
+final-date expanded-weight statistics, and nodata/coverage fixtures. Exact-candidate
+assembly, browser testing, and public staging verification must precede release.
+
+The map/playback release `bee444e0f301666fe6c877d733e923991c8e4cc8` is deployed;
+GitHub Pages and post-deployment QA run 34661286537 passed. The direct browser
+confirmed all four crop footprints, daily playback, buffer behavior, and crop-detail
+zoom. The stale cached-script failure was repaired with versioned runtime URLs.

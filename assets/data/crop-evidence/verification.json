@@ -1,0 +1,248 @@
+{
+  "status": "PASS",
+  "independent_source_cell_clips": 40,
+  "checks": [
+    {
+      "state": "20",
+      "grid": "ndvi",
+      "cell": 15242758,
+      "pixels": 825
+    },
+    {
+      "state": "20",
+      "grid": "ndvi",
+      "cell": 14664650,
+      "pixels": 822
+    },
+    {
+      "state": "20",
+      "grid": "ndvi",
+      "cell": 15084675,
+      "pixels": 29
+    },
+    {
+      "state": "20",
+      "grid": "ndvi",
+      "cell": 12349614,
+      "pixels": 3
+    },
+    {
+      "state": "20",
+      "grid": "ndvi",
+      "cell": 11031922,
+      "pixels": 228
+    },
+    {
+      "state": "20",
+      "grid": "smap_anomaly",
+      "cell": 9252,
+      "pixels": 12919
+    },
+    {
+      "state": "20",
+      "grid": "smap_anomaly",
+      "cell": 8981,
+      "pixels": 7819
+    },
+    {
+      "state": "20",
+      "grid": "smap_anomaly",
+      "cell": 11457,
+      "pixels": 2904
+    },
+    {
+      "state": "20",
+      "grid": "smap_anomaly",
+      "cell": 8704,
+      "pixels": 1
+    },
+    {
+      "state": "20",
+      "grid": "smap_anomaly",
+      "cell": 8026,
+      "pixels": 18
+    },
+    {
+      "state": "08",
+      "grid": "ndvi",
+      "cell": 15304793,
+      "pixels": 825
+    },
+    {
+      "state": "08",
+      "grid": "ndvi",
+      "cell": 15072264,
+      "pixels": 823
+    },
+    {
+      "state": "08",
+      "grid": "ndvi",
+      "cell": 9590959,
+      "pixels": 1
+    },
+    {
+      "state": "08",
+      "grid": "ndvi",
+      "cell": 9141457,
+      "pixels": 1
+    },
+    {
+      "state": "08",
+      "grid": "ndvi",
+      "cell": 10224365,
+      "pixels": 15
+    },
+    {
+      "state": "08",
+      "grid": "smap_anomaly",
+      "cell": 11662,
+      "pixels": 63064
+    },
+    {
+      "state": "08",
+      "grid": "smap_anomaly",
+      "cell": 7312,
+      "pixels": 61768
+    },
+    {
+      "state": "08",
+      "grid": "smap_anomaly",
+      "cell": 7322,
+      "pixels": 13
+    },
+    {
+      "state": "08",
+      "grid": "smap_anomaly",
+      "cell": 6647,
+      "pixels": 30
+    },
+    {
+      "state": "08",
+      "grid": "smap_anomaly",
+      "cell": 8424,
+      "pixels": 1
+    },
+    {
+      "state": "31",
+      "grid": "ndvi",
+      "cell": 10195667,
+      "pixels": 799
+    },
+    {
+      "state": "31",
+      "grid": "ndvi",
+      "cell": 10210511,
+      "pixels": 798
+    },
+    {
+      "state": "31",
+      "grid": "ndvi",
+      "cell": 7642108,
+      "pixels": 4
+    },
+    {
+      "state": "31",
+      "grid": "ndvi",
+      "cell": 5494764,
+      "pixels": 11
+    },
+    {
+      "state": "31",
+      "grid": "ndvi",
+      "cell": 4767929,
+      "pixels": 6
+    },
+    {
+      "state": "31",
+      "grid": "smap_anomaly",
+      "cell": 5268,
+      "pixels": 130454
+    },
+    {
+      "state": "31",
+      "grid": "smap_anomaly",
+      "cell": 5265,
+      "pixels": 123335
+    },
+    {
+      "state": "31",
+      "grid": "smap_anomaly",
+      "cell": 7623,
+      "pixels": 9
+    },
+    {
+      "state": "31",
+      "grid": "smap_anomaly",
+      "cell": 4038,
+      "pixels": 44
+    },
+    {
+      "state": "31",
+      "grid": "smap_anomaly",
+      "cell": 3633,
+      "pixels": 31
+    },
+    {
+      "state": "56",
+      "grid": "ndvi",
+      "cell": 8121705,
+      "pixels": 784
+    },
+    {
+      "state": "56",
+      "grid": "ndvi",
+      "cell": 8329500,
+      "pixels": 783
+    },
+    {
+      "state": "56",
+      "grid": "ndvi",
+      "cell": 6102758,
+      "pixels": 1
+    },
+    {
+      "state": "56",
+      "grid": "ndvi",
+      "cell": 916108,
+      "pixels": 50
+    },
+    {
+      "state": "56",
+      "grid": "ndvi",
+      "cell": 668721,
+      "pixels": 1
+    },
+    {
+      "state": "56",
+      "grid": "smap_anomaly",
+      "cell": 703,
+      "pixels": 66245
+    },
+    {
+      "state": "56",
+      "grid": "smap_anomaly",
+      "cell": 1117,
+      "pixels": 54795
+    },
+    {
+      "state": "56",
+      "grid": "smap_anomaly",
+      "cell": 4986,
+      "pixels": 1195
+    },
+    {
+      "state": "56",
+      "grid": "smap_anomaly",
+      "cell": 836,
+      "pixels": 6
+    },
+    {
+      "state": "56",
+      "grid": "smap_anomaly",
+      "cell": 429,
+      "pixels": 4
+    }
+  ],
+  "raw_sources_verified": 44,
+  "scope": "Engineering reconciliation, not independent agronomic/model validation"
+}

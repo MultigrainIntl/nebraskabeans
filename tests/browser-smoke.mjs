@@ -54,10 +54,13 @@ try{
   await page.locator('#cropToggle').uncheck();
   await page.locator('#cropToggle').check();
 
+  assert.equal(await page.locator('#weightedRows tr').count(),4,'Crop-weighted state coverage must include all four states');
+  assert.match(await page.locator('#weightedAsOf').textContent(),/2026-09-09/);
   // Move before the selected-date backtest gate passes; no model value may be released.
   await page.$eval('#timeSlider',el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))});
   await page.waitForFunction(()=>document.querySelector('#sliderDate')?.textContent==='2026-04-15');
   const historicalDate=await page.locator('#sliderDate').textContent();
+  assert.match(await page.locator('#weightedAsOf').textContent(),/2026-04-15/,'Weighted evidence did not follow the shared date');
   assert.equal((await page.locator('#yieldNow').textContent()).trim(),'WITHHELD','pre-gate GISit yield was released');
   assert.match(await page.locator('#yieldDelta').textContent(),/hindcast does not beat the historical-median baseline/,'pre-gate state does not explain withholding');
   assert.match(await page.locator('#status').textContent(),/0 of 7 experimental point outlooks released/,'map did not move to the same pre-gate model state');

@@ -54,3 +54,17 @@ stale-response rejection after mode switching, layer toggles, and mobile visibil
 Existing temporal/evidence regression suites and build contract passed.
 No scientific input, yield coefficient, spatial downscaling, or source class changed.
 Remote exact-candidate QA and deployed interaction checks remain to be recorded.
+
+## Completed rendering release and crop-weighted candidate
+
+- `gh-pages@bee444e0f301666fe6c877d733e923991c8e4cc8`: Pages deployment and
+  public-site QA run 34661286537 succeeded. Served application bytes matched the
+  tested checkout. Direct browser confirmed 148 daily states, all four polygon
+  sets, station-date synchronization, buffered moisture, and native-detail zoom.
+- Crop-weighted candidate: all 5,801,938 historical class-42 pixels conserved;
+  40 separately clipped source-grid cells match native CDL counts exactly;
+  44 compressed/raw checksum pairs pass; final-date expanded-weight means and
+  lower medians reconcile for all four states and both source families.
+- These are engineering/spatial checks. Scientific model completion, HLS QA,
+  calibrated confidence, current-year/class weights, and independent agronomic
+  validation remain open.

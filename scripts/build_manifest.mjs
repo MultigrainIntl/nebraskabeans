@@ -21,9 +21,19 @@ export const MATERIAL_INPUTS=[
   ['scripts/build_crop_footprint.py','spatial-transform'],
   ['scripts/build_station_observations.py','station-transform'],
   ['docs/SPATIAL-SOURCE-CONTRACT.md','source-contract'],
+  ['assets/data/crop-evidence/crop-grid-weights.json','crop-area-weights'],
+  ['assets/data/crop-evidence/crop-weighted-evidence.json','crop-weighted-source-evidence'],
+  ['assets/data/crop-evidence/verification.json','spatial-reconciliation'],
+  ['scripts/build_crop_weighted_evidence.py','crop-weighted-transform'],
+  ['scripts/verify_crop_weighted_evidence.py','spatial-verification'],
+  ['scripts/archive_crop_sources.py','source-archive-transform'],
+  ['scripts/requirements-geospatial.txt','geospatial-dependencies'],
+  ['docs/CROP-WEIGHTED-EVIDENCE.md','crop-weighting-contract'],
   ['assets/source-registry.js','source-registry'],
   ['NEBRASKABEANS-SCIENTIFIC-SPEC.md','scientific-contract']
 ];
+const cropEvidence=JSON.parse(readFileSync(resolve(root,'assets/data/crop-evidence/crop-weighted-evidence.json'),'utf8'));
+for(const path of [...new Set(cropEvidence.sources.map(source=>'assets/data/crop-evidence/'+source.raw_file))].sort()) MATERIAL_INPUTS.push([path,'immutable-source-archive']);
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const canonical=value=>JSON.stringify(value,null,2)+'\n';
 

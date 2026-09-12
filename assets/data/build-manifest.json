@@ -1,7 +1,7 @@
 {
   "schema_version": "nebraskabeans.data_build.v1",
-  "data_build_id": "nbd-v1-fd30075cedc101dd15eb",
-  "input_set_sha256": "fd30075cedc101dd15eb01f50388213be007f91d8a00cac8ab7111549e7d2456",
+  "data_build_id": "nbd-v1-b2dce3069170c5113196",
+  "input_set_sha256": "b2dce3069170c51131966b1b7f38e0f267339e86bf43c4630e51752b18d1e2f3",
   "generated_at_utc": "2026-09-11T18:00:00Z",
   "evidence_cutoff_date": "2026-09-11",
   "material_inputs": [
@@ -102,6 +102,54 @@
       "sha256": "fd5066a6aca4532232236002f0142d911a02ddec4f8052f30124ee4ce98cc03d"
     },
     {
+      "path": "assets/data/crop-evidence/crop-grid-weights.json",
+      "kind": "crop-area-weights",
+      "bytes": 828290,
+      "sha256": "78ea8b809af385f1a2e1a68ffd92780fdafbf8770f86ac9bb8883e56826a80ed"
+    },
+    {
+      "path": "assets/data/crop-evidence/crop-weighted-evidence.json",
+      "kind": "crop-weighted-source-evidence",
+      "bytes": 119109,
+      "sha256": "191fd07201948bf7cfbd76b7991e0d047a25233887b0c89252af7a6282e96be2"
+    },
+    {
+      "path": "assets/data/crop-evidence/verification.json",
+      "kind": "spatial-reconciliation",
+      "bytes": 4248,
+      "sha256": "eea6a41a0fe1dc015ee893b40afac4a9998918438e85f70fef65e2b193d0f70d"
+    },
+    {
+      "path": "scripts/build_crop_weighted_evidence.py",
+      "kind": "crop-weighted-transform",
+      "bytes": 11718,
+      "sha256": "7026306c3b5bbaaf754465af8fbbdfdff4eb32386e7130f6fc88894760fd514d"
+    },
+    {
+      "path": "scripts/verify_crop_weighted_evidence.py",
+      "kind": "spatial-verification",
+      "bytes": 4178,
+      "sha256": "c2581e14f729fa4aa8cdb394182e413008222f6aa79a372bfa486be30854bb9c"
+    },
+    {
+      "path": "scripts/archive_crop_sources.py",
+      "kind": "source-archive-transform",
+      "bytes": 1670,
+      "sha256": "8f36b333a8eab42b94a9d4bc1147a1036f0236e9be4f8f41eeb4208d42a6a33c"
+    },
+    {
+      "path": "scripts/requirements-geospatial.txt",
+      "kind": "geospatial-dependencies",
+      "bytes": 58,
+      "sha256": "a9db36761690c0ec84aa0e317e45be46dab1a80113630147e8bb67de280eef1c"
+    },
+    {
+      "path": "docs/CROP-WEIGHTED-EVIDENCE.md",
+      "kind": "crop-weighting-contract",
+      "bytes": 3998,
+      "sha256": "3ac8e0bef0a86af8d85c1b036e9e32a8d2d3b45af70292d873946cac29b20c0b"
+    },
+    {
       "path": "assets/source-registry.js",
       "kind": "source-registry",
       "bytes": 6322,
@@ -112,6 +160,270 @@
       "kind": "scientific-contract",
       "bytes": 8352,
       "sha256": "058391129bdb470849bfe9dd93a4acda6d293de6150b237fee8c25ec3766f79c"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-04-15.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 9527355,
+      "sha256": "fe09f19ba3fbcdc33a20931dfcaf5f4741db2bd9deecf52592c6a84311bef081"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-04-22.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 9171374,
+      "sha256": "0393dd0f65f3ca1807c7f02626ffe14baab7acc0bf679174a509d36a6bdde8cd"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-04-29.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 10597373,
+      "sha256": "6e4d62c3f70b84e5e5a6fc3d10f1d6e465f7bc88e6b52bdc91d388a35a909c19"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-05-06.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 9269403,
+      "sha256": "19d46a48aa0bbdba2a3b4dd0735e763d3453c8ec6751bcf85a850083aa307ea4"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-05-13.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 11121966,
+      "sha256": "840097f0f25870c8de8fee43a7518d5dd68b0a37ce1e44ad9944d81cd6ca331b"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-05-20.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 9277652,
+      "sha256": "3c638ad92dcf1a34917df8e89fbf2b693c66598d53d3ab4967ae23cee6a8702e"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-05-27.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 9676993,
+      "sha256": "20a7ffd18767cbd06624efe9a2e8a39334e61b2f3896703d79ea07218ae9ce76"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-06-03.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 10372986,
+      "sha256": "d21b738bd79337b3691f5b6e87bdae6032edaffc0165db09fd3f2d17fb333aca"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-06-10.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 12083803,
+      "sha256": "fe8cb8dd381c897ba7e9da8a3ee567e80e9419e4ef6f2f159fbf31ad4d69548d"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-06-17.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 11611894,
+      "sha256": "ba5c4f142c3435e85f466ebb2c2c4e465c6cef676a1e0906ce24606db10f9f1b"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-06-23.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 9996865,
+      "sha256": "47b2c38e7000c775080d6b3af9b37804992759e99249ada672571245a0d2b6fe"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-07-01.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 11696810,
+      "sha256": "aaf2d8cae88747533cefc23aed3269b6bfa689409436f5e06a8b6bd44ce41c0c"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-07-08.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 11881800,
+      "sha256": "86593a7a2cd3de515ef3e25d8c18dd8e9547ad175f2d63fd5924f3870bd225a0"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-07-15.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 12004534,
+      "sha256": "84ec0637910fef9729973f04140ccb4cf566f92a2a99c9d33d5a4836793fa133"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-07-22.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 9692086,
+      "sha256": "5580743198109325f7d05f20ad60c5f025fcdd1fcdb85293ee473a72f364fa22"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-07-29.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 9745425,
+      "sha256": "acfc73f579383138bb816e60c17ac7d7457a4eb6ff1b1fa3f98b4b7b5bc3c04d"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-08-05.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 10512514,
+      "sha256": "29ea65c9e997f09ac6a096a9dd0226f9d0cb7a7d7667b2108d358328ecfdb953"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-08-12.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 10285109,
+      "sha256": "a5a3e54f418348a16aed855f6ae9fbc1ac679b32f8b7a4ef1b5cea0bf4884eb8"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-08-19.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 10548455,
+      "sha256": "b0fa948561b005021d362e6629ade51c296daa7cac517589df445e6acf3d1cbd"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-08-26.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 11249287,
+      "sha256": "6a1437346d8fd2e72c8165303a65e1221bd7b1fd8db1d5011ba56ab5f0caac5d"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-09-01.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 10169267,
+      "sha256": "5a0fc7910874ac46d2029c337854d211b91d71a9409eff1a3d32b6d090985e23"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/ndvi-2026-09-09.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 11854872,
+      "sha256": "7bd23db396b0557f6bbb60aef54ffaecb309daae475c74efaa948496d8a00627"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-04-15.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44338,
+      "sha256": "57e5909c7ba3e5bd78be07f0833072f4819d21d0bd57a660e0d8fa3c70cb7ea9"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-04-22.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 43951,
+      "sha256": "29b4ff98e5c843199ec3b01a853b8edd9619fefa5091af007e399bcd282bf1e7"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-04-29.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44462,
+      "sha256": "0025eca99a87e9c166f708eec557e33fdce86acf26a04b899dcdc3aa12f286f2"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-05-06.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44146,
+      "sha256": "add42e9c82a2ad50f55f3fe470121513d8b47c7fc94dc274aa2135a4b9fdcbd7"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-05-13.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 43435,
+      "sha256": "639429262b9d1311e9a21c1c39bddaa0ffca11a67268af768e524291b6a5848d"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-05-20.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44043,
+      "sha256": "cadbe74e7b467c485a9fb554c7f36b2d9649a234a538f7dd1a64d39cfbca8572"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-05-27.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 43702,
+      "sha256": "ce090bac4788489ffe04b8fa2efe1f07a44dcfe4780181f0658eb464f27515a2"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-06-03.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44371,
+      "sha256": "95c4d19b221b20918189c39cda3f2204896c792576cf21c1f5a259fb25223cbb"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-06-10.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44289,
+      "sha256": "24895d35891b3630258228ad67594166cfb581de1c469aa10acfb110ab7bdde0"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-06-17.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 43946,
+      "sha256": "c391ef25843e8290c4c84063ce4cb4ad30255cc8c37d9523876be93f6ad7ed31"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-06-24.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44425,
+      "sha256": "e686e58e52ea22dace9deb2404d11671f86d0f63e8d5ac6858fd6924b049f168"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-07-01.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44742,
+      "sha256": "38a62f79046f6113f087ccd068cf06663e7118fea05500c2a282e04784ac5be9"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-07-08.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44246,
+      "sha256": "5bb6cc858a0c173004f6cabef666a3951d17b791d6964889698f4d216c236168"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-07-15.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44036,
+      "sha256": "7708d17781e1e72e8ed6665429b0c28fa7a4c4bb3b760b8c19492a226c12be75"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-07-22.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 43955,
+      "sha256": "dd3b902faa06ad719790b724b6387bffdc1b5cf45479cf838e61d0869e27f3ae"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-07-29.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44132,
+      "sha256": "9f03971ac6846045a06b9f09cab64dff557d4b4983e89debdc9df815b7587603"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-08-05.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44123,
+      "sha256": "c0cc8f38cd1509fb7a4f230989e28f8cf93ac925b37c5587546e26ee85a2096a"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-08-12.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 43746,
+      "sha256": "794d146eb92c7ba69bc13a4acc3a860fd08d0c3fb2836ac67a34e3c41a707f3b"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-08-19.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44811,
+      "sha256": "2082967ee62afa2b519dc67cf9d4146fb8db8190c5d4bfc9fc62e702f4189c9e"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-08-26.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44576,
+      "sha256": "9a2809149f779e10f1225b8b4d6043e3f3e63befc5a23bdd44a50f27db9fc13e"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-09-02.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44587,
+      "sha256": "fcd053671869d013a26fc90c5426670f202ba1fe97324d276eee2997ace04f3f"
+    },
+    {
+      "path": "assets/data/crop-evidence/raw/smap_anomaly-2026-09-09.tif.gz",
+      "kind": "immutable-source-archive",
+      "bytes": 44666,
+      "sha256": "b3b359fd7ff5ddf6d802c4cf0a9182f4c323db7f89e74fb7f463e434a4d2eeb4"
     }
   ],
   "accepted_model_ids": [
@@ -130,5 +442,5 @@
     "Original USDA PDF bytes and checksums are not yet stored; official URL/table transcription was independently checked.",
     "Open-Meteo historical-weather responses are governed modeled inputs with exact queries and response checksums in the model artifact."
   ],
-  "manifest_sha256": "b2be5e331ce2b68878e152f98d5527bd5bea118e2b842d994d222122e217a8e2"
+  "manifest_sha256": "ad47eabfb02f03f3239de5e9a1c461803350878edba3cab7b228a891ab5a1677"
 }

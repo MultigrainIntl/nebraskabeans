@@ -34,10 +34,10 @@
 
   async function loadJson(path,label){const response=await fetch(path,{cache:'no-store'});if(!response.ok)throw Error(`${label} ${response.status}`);return response.json()}
   async function loadInputs(){
-    const [baseline,build,catalog,model,satellite]=await Promise.all([
-      loadJson('assets/data/official-baseline.json','official baseline'),loadJson('assets/data/build-manifest.json','build manifest'),loadJson('assets/data/temporal-layer-catalog.json','temporal layer catalog'),loadJson('assets/data/gisit-outlook-2026.json','GISit model outlook'),loadJson('assets/data/satellite-signals-2026.json','satellite evidence series')
+    const [baseline,build,catalog,model,satellite,weighted]=await Promise.all([
+      loadJson('assets/data/official-baseline.json','official baseline'),loadJson('assets/data/build-manifest.json','build manifest'),loadJson('assets/data/temporal-layer-catalog.json','temporal layer catalog'),loadJson('assets/data/gisit-outlook-2026.json','GISit model outlook'),loadJson('assets/data/satellite-signals-2026.json','satellite evidence series'),loadJson('assets/data/crop-evidence/crop-weighted-evidence.json','crop-weighted evidence')
     ]);
-    state.baseline=baseline;state.build=build;state.catalog=catalog;state.model=model;state.satellite=satellite;
+    state.baseline=baseline;state.build=build;state.catalog=catalog;state.model=model;state.satellite=satellite;state.weighted=weighted;
     state.start=parseDay(model.analysis_start);state.end=parseDay(model.analysis_end);state.date=new Date(state.end);
     $('timeSlider').max=Math.round((state.end-state.start)/DAY);$('timeSlider').step=1;
     setText('buildStatus',`Data build ${build.data_build_id} · model ${model.model.version} · ${model.model.training_state_years} calibration seasons`);syncSliderFromDate();
@@ -129,7 +129,18 @@
     const official=officialAsOf(area.state,date),acres=official.harvested||official.planted;
     return {value:null,text:`Production requires validated crop-area weights, matching yield/acreage market classes, and propagated uncertainty. ${acres?`Latest USDA ${acres.metric==='harvested_acres'?'expected-harvested':'planted'} acreage: ${acres.value.toLocaleString()} acres, released ${acres.issue_date}.`:'No date-correct USDA acreage available.'}`};
   }
+  function updateWeightedEvidence(area){
+    const date=iso(state.date);setText('weightedAsOf',`Selected date ${date} · historical 2025 crop footprint`);
+    const percent=x=>Number.isFinite(x)?`${(x*100).toFixed(1)}%`:'Unavailable';
+    setHTML('weightedRows',Object.values(state.weighted.states).map(record=>{
+      const checkpoint=Object.keys(record.dates).filter(key=>key<=date).sort().at(-1),row=record.dates[checkpoint];
+      if(!row)return `<tr><th scope="row">${record.state}</th><td>${Math.round(record.mapped_acres).toLocaleString()}</td><td colspan="3">No checkpoint on or before this date</td></tr>`;
+      const water=row.smap_anomaly,vegetation=row.ndvi;
+      return `<tr class="${record.state===area.state?'selectedState':''}"><th scope="row">${record.state}</th><td>${Math.round(record.mapped_acres).toLocaleString()}</td><td>${fmt(water.mean,3)}<small>${percent(water.valid_crop_area_fraction)} crop-area coverage</small></td><td>${percent(vegetation.valid_crop_area_fraction)}<small>${vegetation.valid_source_cells.toLocaleString()} source cells with crop</small></td><td><small>Moisture ${water.valid_date}<br>Vegetation ${vegetation.valid_date}</small></td></tr>`;
+    }).join(''));
+  }
   function updateTruthPanel(area){
+    updateWeightedEvidence(area);
     const region=modelRegion(area),row=modelRow(area),sat=satelliteAt(area,state.date),official=officialAsOf(area.state,state.date),revision=acreageRevision(area.state,state.date),vegetation=vegetationSignal(sat,row?.stage),potential=potentialClass(region,row),production=productionScenario(area,state.date),released=Number.isFinite(row?.yield_lb_ac);
     setText('asOfLabel',iso(state.date));setText('sliderDate',iso(state.date));setText('sliderStage',row?.stage||'Model state unavailable');setText('regionName',area.name);setText('stageTag',`MODELED STAGE: ${String(row?.stage||'UNKNOWN').toUpperCase()}`);updateCalendar(row);
     if(released){
