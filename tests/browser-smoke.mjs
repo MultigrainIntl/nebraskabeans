@@ -6,6 +6,7 @@ const BASE=process.env.NB_BASE_URL || 'http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1000}});
 const errors=[];
+let frameDelay=0;
 page.on('pageerror',e=>errors.push(`pageerror: ${e.message}`));
 page.on('console',m=>{if(m.type()==='error')errors.push(`console: ${m.text()}`)});
 
@@ -15,7 +16,7 @@ if(process.env.NB_OFFLINE_FIXTURES==='1'){
   await page.route('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',route=>route.fulfill({path:resolve('node_modules/leaflet/dist/leaflet.js'),contentType:'application/javascript'}));
   await page.route('https://*.tile.openstreetmap.org/**',route=>route.fulfill({body:transparent,contentType:'image/png'}));
   await page.route('https://tigerweb.geo.census.gov/**',route=>route.fulfill({body:JSON.stringify({type:'FeatureCollection',features:[]}),contentType:'application/json'}));
-  await page.route('https://cloud.csiss.gmu.edu/**',route=>route.fulfill({body:transparent,contentType:'image/png'}));
+  await page.route('https://cloud.csiss.gmu.edu/**',async route=>{if(frameDelay)await new Promise(resolve=>setTimeout(resolve,frameDelay));await route.fulfill({body:transparent,contentType:'image/png'})});
 }
 
 try{
@@ -63,23 +64,42 @@ try{
   assert.match(await page.locator('#stationStatus').textContent(),/2026-04-15/,'station date does not follow the slider');
 
   // Return to current date and test that PLAY uses the same date/evidence path.
-  await page.$eval('#timeSlider',el=>{el.value='100';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))});
+  await page.$eval('#timeSlider',el=>{el.value=el.max;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))});
   await page.waitForFunction(()=>document.querySelector('#sliderDate')?.textContent==='2026-09-09');
+  assert.equal(await page.locator('#timeSlider').getAttribute('max'),'147','Every daily state must be individually selectable');
   const before=await page.locator('#sliderDate').textContent();
   await page.click('#playBtn');
   await page.waitForTimeout(1800);
   const after=await page.locator('#sliderDate').textContent();
   await page.click('#playBtn');
   assert.notEqual(after,before,'PLAY did not advance/wrap the shared temporal state');
-  await page.$eval('#timeSlider',el=>{el.value='100';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))});
+  assert(after>='2026-04-15'&&after<='2026-04-18','Playback must use daily steps, not weekly jumps');
+  await page.$eval('#timeSlider',el=>{el.value=el.max;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))});
   await page.waitForFunction(()=>document.querySelector('#sliderDate')?.textContent==='2026-09-09');
 
   // Each map control must switch the one shared temporal renderer to a real source layer.
   await page.click('#moistureBtn');
   await page.waitForFunction(()=>document.querySelector('img.temporal-raster')?.src.includes('SMAP-9KM-DAILY-SUB_2026'),null,{timeout:45000});
+  await page.waitForFunction(()=>document.querySelector('#mapLegend')?.textContent.includes('Root-zone soil moisture'));
   assert.match(await page.locator('#mapLegend').textContent(),/Root-zone soil moisture/);
+  if(process.env.NB_OFFLINE_FIXTURES==='1'){
+    const displayed=await page.locator('#sliderDate').textContent();
+    const imageBefore=await page.locator('img.temporal-raster').getAttribute('src');
+    frameDelay=700;
+    await page.$eval('#timeSlider',el=>{el.value='130';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))});
+    await page.waitForTimeout(200);
+    assert.equal(await page.locator('#sliderDate').textContent(),displayed,'The displayed date advanced before the source image was ready');
+    assert.equal(await page.locator('img.temporal-raster').getAttribute('src'),imageBefore,'The visible image was removed during buffering');
+    // A late raster response must not replace a subsequently selected yield layer.
+    await page.click('#yieldBtn');
+    await page.waitForTimeout(900);
+    assert.equal(await page.locator('img.temporal-raster').count(),0,'A stale raster request overwrote the yield view');
+    assert.match(await page.locator('#layerBadge').textContent(),/GISIT MODEL/);
+    frameDelay=0;
+  }
   await page.click('#satBtn');
   await page.waitForFunction(()=>document.querySelector('img.temporal-raster')?.src.includes('NDVI-DAILY_2026'),null,{timeout:45000});
+  await page.waitForFunction(()=>document.querySelector('#mapLegend')?.textContent.includes('Normalized Difference Vegetation Index'));
   assert.match(await page.locator('#mapLegend').textContent(),/Normalized Difference Vegetation Index/);
   await page.click('#yieldBtn');
   await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('6 of 7 experimental point outlooks released'),null,{timeout:45000});

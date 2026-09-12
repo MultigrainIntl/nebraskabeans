@@ -66,3 +66,21 @@ Acceptance checks:
 
 Rollback for the current deployed staging state:
 `4fd1e43e9f6d50c9db2b7250702f914f8f1505f3`.
+
+## Active rendering correction — daily playback and polygon fidelity
+
+Starting deployed staging / rollback: `f1ac4880f3be04b3d2aa91fae710bfaa3ae625b4`.
+Branch: `staging/fluid-map`. Data/model inputs are unchanged.
+
+- All 148 daily model states individually selectable; playback advances one day.
+- Bounded image cache, two-frame prefetch, retain visible image/date while buffering,
+  and reject stale responses after mode/date changes. No silent prior-date substitution.
+- Viewport-specific WMS requests on pan/zoom, device-density-aware bounded dimensions.
+- Unsimplified crop paths above reference boundaries, stronger contrast, explicit
+  raster-opacity control and crop-detail zoom. Station markers update in place.
+- Display fidelity does not imply a finer scientific source grid or calibrated local yield.
+- Remaining W03–W13 scientific integration and W14–W15 refresh/verification remain open.
+
+Acceptance: daily stepping; loading/date atomicity; stale-response rejection;
+polygon/station persistence; source-resolution disclosure; desktop/mobile controls;
+exact candidate QA and separately inspected staging deployment.

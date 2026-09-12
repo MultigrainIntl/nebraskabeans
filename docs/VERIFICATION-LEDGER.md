@@ -44,3 +44,13 @@ independent clean-sheet verification or proof of an operational complete product
 
 Independent scientific/model verification has not occurred. Engineering checks do not
 substitute for it.
+
+## Daily map rendering candidate
+
+Rollback: `f1ac4880f3be04b3d2aa91fae710bfaa3ae625b4`.
+Local Chromium checks passed using actual crop/station assets and fixture external
+services: all 148 day positions, one-day playback, buffered-image/date consistency,
+stale-response rejection after mode switching, layer toggles, and mobile visibility.
+Existing temporal/evidence regression suites and build contract passed.
+No scientific input, yield coefficient, spatial downscaling, or source class changed.
+Remote exact-candidate QA and deployed interaction checks remain to be recorded.

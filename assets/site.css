@@ -164,3 +164,10 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 .spatialControls input{width:18px;height:18px}
 .spatialControls [role=status]{flex-basis:100%;color:#46534e}
 .cropKey{color:#793fa0}.stationKey{color:#175a8b}
+
+.playbackControls{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;padding:12px;background:#f3f6f3;border:1px solid #d8e0da}
+.playbackControls label{display:flex;align-items:center;gap:8px;font-size:13px}
+.playbackControls select,.playbackControls button{padding:8px;border:1px solid #becdc1;background:white;color:#193724}
+.playbackControls input{width:110px}.playbackControls [role=status]{flex-basis:100%;font-size:12px;color:#4b5c50}
+.temporal-raster{transition:none}
+@media(prefers-reduced-motion:reduce){.temporal-raster{transition:none}}
