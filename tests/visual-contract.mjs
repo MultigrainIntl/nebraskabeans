@@ -25,10 +25,16 @@ try{
  assert(await visible('#mapLegend'),'map legend is not visible');
  assert((await page.locator('#mapLegend').textContent()).trim().length>20,'map legend is empty');
 
+ // At-a-glance season state must be visible before the user reads analytical detail.
+ await page.waitForSelector('#nbSeasonSnapshot',{state:'visible',timeout:10000});
+ for(const id of ['#nbSnapStage','#nbSnapCondition','#nbSnapWater','#nbSnapVeg','#nbSnapRisk']){
+   assert((await page.locator(id).textContent()).trim().length>0,`${id} is empty`);
+ }
+
  // Crop calendar and GDD timeline are required directly in the temporal decision flow.
- await page.waitForSelector('.recoveryTimeline',{state:'visible',timeout:10000});
- assert((await page.locator('.recoveryTimeline').count())>=2,'broad crop calendar and GDD timeline are not both rendered');
- const timeline=await box('.recoveryTimelines');
+ await page.waitForSelector('.nbTimeline',{state:'visible',timeout:10000});
+ assert((await page.locator('.nbTimeline').count())>=2,'broad crop calendar and GDD timeline are not both rendered');
+ const timeline=await box('.nbTimelines');
  assert(timeline&&timeline.y>=slider.y,'crop timeline is not below slider');
 
  // Legend must never disappear while repeated temporal input is dispatched.
@@ -44,7 +50,7 @@ try{
  }
  assert(!blankLegend,'legend became blank/hidden during temporal scrubbing');
 
- // Temporal source must change with selected date for raster layers, while the old frame remains during loading.
+ // Temporal source must change with selected date for raster layers.
  await page.click('#moistureBtn');
  await page.waitForSelector('img.temporal-raster',{state:'visible',timeout:45000});
  const srcA=await page.locator('img.temporal-raster').last().getAttribute('src');
@@ -64,17 +70,23 @@ try{
  const ndviB=await page.locator('img.temporal-raster').last().getAttribute('src');
  assert.notEqual(ndviA,ndviB,'NDVI temporal source did not change with date');
 
- // Decision interpretation must remain present and date-linked.
- assert(await visible('.recoveryDecision'),'seven-day decision panel is not visible');
- assert((await page.locator('.recoveryDecision').textContent()).includes('WHAT CHANGED'),'decision panel lacks change interpretation');
+ // Decision interpretation must be visible, simplified and date-linked.
+ await page.waitForSelector('#nbDecisionPanel',{state:'visible',timeout:10000});
+ const decisionText=await page.locator('#nbDecisionPanel').textContent();
+ for(const heading of ['WHAT CHANGED','AGRONOMIC IMPACT','MARKET MEANING','WATCH NEXT']) assert(decisionText.includes(heading),`decision panel missing ${heading}`);
+ assert((await page.locator('#nbChanged').textContent()).trim().length>10,'what changed is not explained');
+ assert((await page.locator('#nbWhy').textContent()).trim().length>10,'agronomic impact is not explained');
+ assert((await page.locator('#nbCommercial').textContent()).trim().length>10,'market meaning is not explained');
+ assert((await page.locator('#nbMonitor').textContent()).trim().length>10,'watch next is not explained');
 
  await page.screenshot({path:`${OUT}/desktop-current.png`,fullPage:true});
  await page.setViewportSize({width:390,height:844});
  assert(await visible('#map'),'map hidden on mobile');
  assert(await visible('.timebar'),'slider hidden on mobile');
+ assert(await visible('#nbSeasonSnapshot'),'season snapshot hidden on mobile');
  await page.screenshot({path:`${OUT}/mobile.png`,fullPage:true});
 
  const fatal=errors.filter(x=>!x.includes('Failed to load resource'));
  assert.equal(fatal.length,0,`browser errors: ${fatal.join(' | ')}`);
- console.log(JSON.stringify({status:'PASS',base:BASE,sliderGapPx:slider.y-(map.y+map.height),moistureSourcesDiffer:srcA!==srcB,ndviSourcesDiffer:ndviA!==ndviB,legendPersistent:!blankLegend,screenshots:['desktop-current.png','mobile.png']},null,2));
+ console.log(JSON.stringify({status:'PASS',base:BASE,sliderGapPx:slider.y-(map.y+map.height),moistureSourcesDiffer:srcA!==srcB,ndviSourcesDiffer:ndviA!==ndviB,legendPersistent:!blankLegend,instantDecisionHierarchy:true,screenshots:['desktop-current.png','mobile.png']},null,2));
 } finally { await browser.close(); }
