@@ -44,7 +44,7 @@ try{
   assert.match(await page.locator('#mapLegend').textContent(),/Experimental pinto-basis yield at analytical points/,'default GISit map legend missing');
   assert.match(await page.locator('#mapLegend').textContent(),/not a field-scale yield surface/,'regional/crop-specific scope boundary missing');
   assert.match(await page.locator('#buildStatus').textContent(),/Data build nbd-v1-/,'content-derived data build identity is not visible');
-  await page.waitForFunction(()=>document.querySelector('#cropStatus')?.textContent.includes('4 states'),null,{timeout:90000});
+  await page.waitForFunction(()=>document.querySelector('#cropStatus')?.textContent.includes('m source · 4 states ·'),null,{timeout:90000});
   await page.waitForFunction(()=>document.querySelector('#stationStatus')?.textContent.includes('/222 stations'),null,{timeout:90000});
   assert.match(await page.locator('#cropStatus').textContent(),/10 m source/,'native crop resolution missing');
   assert(await page.locator('.leaflet-crop-pane canvas').count()>0,'crop polygons did not create a rendered layer');
