@@ -2,6 +2,7 @@
 (()=>{
   const $=id=>document.getElementById(id);
   const text=id=>($(id)?.textContent||'—').trim();
+  let lastSignature='';
   function classify(){
     const condition=text('condition'),soil=text('soilState'),veg=text('healthState'),stage=text('sliderStage').replace(/^MODELED STAGE:\s*/i,'');
     let risk='MIXED / WATCH';
@@ -24,16 +25,23 @@
     }
     return true;
   }
+  function setText(id,value){const el=$(id);if(el&&el.textContent!==value)el.textContent=value;}
   function refresh(){
     if(!$('nbSeasonSnapshot')&&!install())return;
-    const s=classify();
-    $('nbSnapStage').textContent=s.stage;$('nbSnapCondition').textContent=s.condition;$('nbSnapWater').textContent=s.soil;$('nbSnapVeg').textContent=s.veg;$('nbSnapRisk').textContent=s.risk;
-    const area=text('regionName'),date=text('sliderDate');
-    $('nbSnapshotBottom').textContent=`${area} · ${date} · ${s.stage} · ${s.risk} attention`;
+    const s=classify(),area=text('regionName'),date=text('sliderDate');
+    const signature=[s.stage,s.condition,s.soil,s.veg,s.risk,area,date].join('|');
+    if(signature===lastSignature)return;
+    lastSignature=signature;
+    setText('nbSnapStage',s.stage);setText('nbSnapCondition',s.condition);setText('nbSnapWater',s.soil);setText('nbSnapVeg',s.veg);setText('nbSnapRisk',s.risk);
+    setText('nbSnapshotBottom',`${area} · ${date} · ${s.stage} · ${s.risk} attention`);
   }
   function start(){
-    const root=document.body;new MutationObserver(refresh).observe(root,{subtree:true,childList:true,characterData:true});
-    document.addEventListener('input',refresh);document.addEventListener('change',refresh);setInterval(refresh,1000);refresh();
+    // Observe only the source fields that drive the snapshot. Observing the whole body
+    // caused the snapshot's own writes to recursively schedule more writes and starve app startup.
+    const sourceIds=['condition','soilState','healthState','sliderStage','regionName','sliderDate'];
+    const observer=new MutationObserver(refresh);
+    sourceIds.forEach(id=>{const el=$(id);if(el)observer.observe(el,{subtree:true,childList:true,characterData:true});});
+    document.addEventListener('input',refresh);document.addEventListener('change',refresh);refresh();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,50));else setTimeout(start,50);
 })();
