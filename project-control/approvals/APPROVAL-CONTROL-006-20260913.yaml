@@ -1,0 +1,35 @@
+schema_version: 3
+id: APPROVAL-CONTROL-006-20260913
+authority: GAJ
+authorization_type: execution_scope
+gate: CONTROL-006
+authorized_at: 2026-09-13T13:35:00-06:00
+base_sha: 0cbfb3b86028d7ab8226283a8eccf07ec76ea134
+candidate_sha: null
+countersigned_by: GAJ
+signature_provenance: github_commit_author_and_current_chat_explicit_authorization
+scope:
+  allow:
+    - joieos/**
+    - project-control/**
+    - scripts/validate-control-plane.mjs
+    - tests/control-plane/**
+    - .github/workflows/staging-qa.yml
+    - package.json
+    - package-lock.json
+  prohibit:
+    - product functionality changes
+    - application asset changes
+    - map changes
+    - yield model changes
+    - gh-pages changes
+    - main changes
+    - production changes
+    - DNS or GoDaddy changes
+source:
+  type: current_chat_explicit_authorization
+  authority: GAJ
+  statement: CONTROL-005 RESULT FAIL; NEW GATE CONTROL-006 control-plane authority hardening; staging only; complete items 1-15 in order; do not touch product code assets main gh-pages production DNS GoDaddy map or yield model.
+notes:
+  - This approval records execution scope only; it is not acceptance of the resulting candidate.
+  - The approval was introduced in a commit that must contain no other changed path.
