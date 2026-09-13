@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "validate:control": "node scripts/validate-control-plane.mjs",
-    "test:control": "node tests/control-plane/control-plane-negative.test.mjs"
+    "test:control": "node tests/control-plane/validator-style.test.mjs && node tests/control-plane/control-plane-negative.test.mjs"
   },
   "dependencies": {
     "yaml": "2.8.1"
