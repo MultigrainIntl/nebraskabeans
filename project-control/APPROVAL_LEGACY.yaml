@@ -1,8 +1,9 @@
 schema_version: 1
+legacy_baseline_sha: 0cbfb3b86028d7ab8226283a8eccf07ec76ea134
 legacy_approval_ids:
   - APPROVAL-CONTROL-002-20260913
   - APPROVAL-CONTROL-004-20260913
 rules:
   referenceable: false
-  immutable: true
-  reason: pre-CONTROL-006 approvals predate mandatory countersign and append-only canonical approval schema
+  immutable_from_legacy_baseline: true
+  reason: pre-CONTROL-006 approvals predate mandatory countersign and canonical first-introduction append-only schema
