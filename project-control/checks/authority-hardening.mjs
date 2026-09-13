@@ -15,6 +15,21 @@ export function runAuthorityHardeningChecks(ctx) {
     encoding: 'utf8'
   }).trim();
 
+  const runGit = args => {
+    try {
+      return execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
+    } catch (error) {
+      fail(`CONTROL-AUTH-GIT-101 git ${args.join(' ')} failed: ${error.message}`);
+      return '';
+    }
+  };
+
+  const pathAllowed = (file, rules) => rules.some(rule => {
+    if (rule.endsWith('/**')) return file.startsWith(rule.slice(0, -3));
+    if (rule.endsWith('/')) return file.startsWith(rule);
+    return file === rule;
+  });
+
   const project = readYaml('project-control/PROJECT.yaml');
   if (requirements?.canonical_status_source !== true) {
     fail('CONTROL-CANONICAL-101 REQUIREMENTS.canonical_status_source must be true');
@@ -24,9 +39,36 @@ export function runAuthorityHardeningChecks(ctx) {
   }
 
   for (const [name, rel] of Object.entries(project?.canonical_sources || {})) {
-    const absolute = path.join(root, rel);
-    if (!fs.existsSync(absolute)) {
+    if (!fs.existsSync(path.join(root, rel))) {
       fail(`CONTROL-CANONICAL-103 canonical source ${name} does not exist: ${rel}`);
+    }
+  }
+
+  const lock = readYaml('project-control/EXECUTION_LOCK.yaml');
+  if (lock?.approval_ref) {
+    const approvalRel = `project-control/approvals/${lock.approval_ref}.yaml`;
+    const introduction = runGit([
+      'log', '--diff-filter=A', '--format=%H', '--', approvalRel
+    ]).split(/\n+/).filter(Boolean);
+
+    if (introduction.length !== 1) {
+      fail(
+        `CONTROL-SCOPE-101 active approval ${lock.approval_ref} must have exactly ` +
+        `one introducing commit; found ${introduction.length}`
+      );
+    } else {
+      const changed = runGit([
+        'diff', '--name-only', `${introduction[0]}..HEAD`
+      ]).split(/\n+/).filter(Boolean);
+      const allow = Array.isArray(lock.scope?.allow) ? lock.scope.allow : [];
+      for (const file of changed) {
+        if (!pathAllowed(file, allow)) {
+          fail(
+            `CONTROL-SCOPE-102 changed path outside approval-introduction ` +
+            `audit window allow-list: ${file}`
+          );
+        }
+      }
     }
   }
 
