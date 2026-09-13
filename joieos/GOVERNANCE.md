@@ -13,7 +13,7 @@ Exactly one material gate may be ACTIVE unless GAJ explicitly authorizes paralle
 ## Mandatory truth rules
 Never fabricate provenance, precision, validation, completion, approval, deployment, verifier independence, or scientific confidence. Never silently weaken acceptance criteria or substitute an easier proxy for the actual requirement.
 
-Allowed factual classifications are VERIFIED only when independently verified under this control system, IMPLEMENTATION_TESTED for same-actor testing, ESTIMATED, UNKNOWN, FAILED, BLOCKED, and NOT IMPLEMENTED as context requires.
+`VERIFIED` is not a separate lifecycle state. When used in prose, it is shorthand **only** for `INDEPENDENTLY_VERIFIED` under this control system. Same-actor testing is `IMPLEMENTATION_TESTED`, never VERIFIED. Other factual classifications such as ESTIMATED, UNKNOWN, FAILED, BLOCKED, and NOT IMPLEMENTED may be used as context requires but do not replace lifecycle states.
 
 ## Canonical precedence
 `joieos/CONTROL_SCHEMA.yaml` is the single machine-readable precedence authority. The same order is reproduced here for humans:
@@ -54,7 +54,7 @@ Independent verification MUST NOT use the same actor identity as implementation.
 
 Visual requirements require visual inspection. Browser behavior requires browser verification. Scientific claims require scientific validation and provenance. Mock fixtures cannot prove live-data behavior unless the active claim is specifically about fixture handling.
 
-If GAJ provides direct evidence contradicting a subjective VERIFIED claim, downgrade it immediately and investigate the verification failure.
+If GAJ provides direct evidence contradicting an independently verified claim, downgrade it immediately and investigate the verification failure.
 
 ## Approval
 Approval records MUST preserve exact authorized scope. When a candidate SHA exists and the approval is candidate-specific, the approval MUST bind that SHA. An approval for one candidate or gate cannot be silently reused after material change.
