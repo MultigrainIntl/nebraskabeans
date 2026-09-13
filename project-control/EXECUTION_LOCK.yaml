@@ -1,16 +1,18 @@
-schema_version: 2
+schema_version: 3
 gate: CONTROL-004
 status: ACTIVE
 approval_ref: APPROVAL-CONTROL-004-20260913
 authorized_by: GAJ
 authorized_at: 2026-09-13T12:23:00-06:00
+base_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
 scope:
   allow:
-    - remediate the JoieOS and NebraskaBeans control plane under CONTROL-004 items 1 through 21
-    - update governance and project-control files required by CONTROL-004
-    - update scripts and add control-plane test fixtures required by CONTROL-004
-    - update staging QA workflow to run the control-plane validator first
-    - verify repository-only control changes on staging/recover-5fa3f42
+    - joieos/**
+    - project-control/**
+    - scripts/**
+    - tests/control-plane/**
+    - .github/workflows/staging-qa.yml
+    - package.json
   prohibit:
     - product functionality changes
     - application asset changes
