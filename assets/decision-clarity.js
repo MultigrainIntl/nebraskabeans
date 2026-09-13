@@ -36,8 +36,8 @@
     setText('nbSnapshotBottom',`${area} · ${date} · ${s.stage} · ${s.risk} attention`);
   }
   function loadCurrentState(){
-    if(!document.querySelector('link[data-nb-responsive]')){const l=document.createElement('link');l.rel='stylesheet';l.href='assets/responsive-shell.css?v=current-state-1';l.dataset.nbResponsive='1';document.head.appendChild(l);}
-    if(!document.querySelector('script[data-nb-current-state]')){const s=document.createElement('script');s.src='assets/current-state.js?v=current-state-1';s.dataset.nbCurrentState='1';document.body.appendChild(s);}
+    if(!document.querySelector('link[data-nb-responsive]')){const l=document.createElement('link');l.rel='stylesheet';l.href='assets/responsive-shell.css?v=current-state-2';l.dataset.nbResponsive='1';document.head.appendChild(l);}
+    if(!document.querySelector('script[data-nb-current-state]')){const s=document.createElement('script');s.src='assets/current-state.js?v=current-state-2';s.dataset.nbCurrentState='1';document.body.appendChild(s);}
   }
   function start(){
     const sourceIds=['condition','soilState','healthState','sliderStage','regionName','sliderDate'];
