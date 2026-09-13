@@ -1,6 +1,6 @@
-schema_version: 4
+schema_version: 5
 project: NebraskaBeans
-recorded_at: 2026-09-13T12:23:00-06:00
+recorded_at: 2026-09-13T13:35:00-06:00
 repository: MultigrainIntl/nebraskabeans
 branches:
   production_main:
@@ -16,7 +16,7 @@ branches:
     name: gh-pages
     last_observed_sha: 5b97f01c84e808f65a9df81f09884a05ae77e9d2
     role: staging deployment
-active_gate: CONTROL-004
+active_gate: CONTROL-006
 active_gate_status: ACTIVE
 known_open_p0: [UX-001, MAP-001, YIELD-001, MAP-002]
 source_of_truth:
