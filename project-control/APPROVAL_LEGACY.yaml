@@ -1,0 +1,8 @@
+schema_version: 1
+legacy_approval_ids:
+  - APPROVAL-CONTROL-002-20260913
+  - APPROVAL-CONTROL-004-20260913
+rules:
+  referenceable: false
+  immutable: true
+  reason: pre-CONTROL-006 approvals predate mandatory countersign and append-only canonical approval schema
