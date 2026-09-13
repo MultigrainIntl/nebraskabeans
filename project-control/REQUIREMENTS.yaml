@@ -1,4 +1,4 @@
-schema_version: 5
+schema_version: 6
 project: NebraskaBeans
 status_values: [OPEN, ACTIVE, IMPLEMENTED, IMPLEMENTATION_TESTED, DEPLOYED, INDEPENDENTLY_VERIFIED, GAJ_ACCEPTED, CLOSED, FAILED, BLOCKED]
 canonical_status_source: true
@@ -7,6 +7,7 @@ requirements:
     priority: P0
     requirement: Establish persistent JoieOS and NebraskaBeans project-control foundation without changing product functionality or deployment.
     history_start_status: IMPLEMENTATION_TESTED
+    history_anchor_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     transitions: []
     status: IMPLEMENTATION_TESTED
     candidate_sha: 6102f9f5109adea9640d095b432504a764ce7b92
@@ -17,11 +18,12 @@ requirements:
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
-    note: Same-actor checking is IMPLEMENTATION_TESTED only; transition history begins with schema-version-3 adoption.
+    note: Same-actor checking is IMPLEMENTATION_TESTED only; transition history begins with schema-version-3 adoption and is anchored to the first durable requirement state.
   - id: CONTROL-002
     priority: P0
     requirement: Harden the control plane so stale verification, ambiguous approval, inconsistent state, same-actor independent verification, and unauthorized scope expansion are mechanically detectable.
     history_start_status: ACTIVE
+    history_anchor_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     transitions:
       - from: ACTIVE
         to: FAILED
@@ -88,6 +90,7 @@ requirements:
     priority: P0
     requirement: Opening interface is immediately understandable and map-dominant rather than a long repetitive analytical page.
     history_start_status: FAILED
+    history_anchor_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     transitions: []
     status: FAILED
     implementer: null
@@ -100,6 +103,7 @@ requirements:
     priority: P0
     requirement: Temporal moisture surface is visually interpretable without distracting coarse blockiness while preserving honest native-resolution disclosure.
     history_start_status: FAILED
+    history_anchor_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     transitions: []
     status: FAILED
     implementer: null
@@ -112,6 +116,7 @@ requirements:
     priority: P0
     requirement: Precise current yield forecast is scientifically defensible before it is prominent in the primary interface.
     history_start_status: FAILED
+    history_anchor_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     transitions: []
     status: FAILED
     implementer: null
@@ -124,6 +129,7 @@ requirements:
     priority: P0
     requirement: Temporal animation makes change understandable with synchronized date map crop stage and interpretation.
     history_start_status: FAILED
+    history_anchor_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     transitions: []
     status: FAILED
     implementer: null
