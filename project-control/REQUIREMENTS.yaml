@@ -6,9 +6,23 @@ requirements:
   - id: CONTROL-001
     priority: P0
     requirement: Establish persistent JoieOS and NebraskaBeans project-control foundation without changing product functionality or deployment.
-    history_start_status: IMPLEMENTATION_TESTED
-    history_anchor_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
-    transitions: []
+    history_start_status: OPEN
+    transitions:
+      - from: OPEN
+        to: ACTIVE
+        sha: 6102f9f5109adea9640d095b432504a764ce7b92
+        actor: ChatGPT
+        timestamp: 2026-09-13T11:30:00-06:00
+      - from: ACTIVE
+        to: IMPLEMENTED
+        sha: 6102f9f5109adea9640d095b432504a764ce7b92
+        actor: ChatGPT
+        timestamp: 2026-09-13T11:31:00-06:00
+      - from: IMPLEMENTED
+        to: IMPLEMENTATION_TESTED
+        sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
+        actor: ChatGPT
+        timestamp: 2026-09-13T12:00:16-06:00
     status: IMPLEMENTATION_TESTED
     candidate_sha: 6102f9f5109adea9640d095b432504a764ce7b92
     implementation_sha: 6102f9f5109adea9640d095b432504a764ce7b92
@@ -18,7 +32,7 @@ requirements:
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
-    note: Same-actor checking is IMPLEMENTATION_TESTED only; transition history begins with schema-version-3 adoption and is anchored to the first durable requirement state.
+    note: Same-actor checking is IMPLEMENTATION_TESTED only; lifecycle is reconstructed from the control-foundation commit and later hardening commit rather than teleporting into a late state.
   - id: CONTROL-002
     priority: P0
     requirement: Harden the control plane so stale verification, ambiguous approval, inconsistent state, same-actor independent verification, and unauthorized scope expansion are mechanically detectable.
