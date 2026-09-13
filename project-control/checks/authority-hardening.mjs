@@ -1,3 +1,7 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+
 export function runAuthorityHardeningChecks(ctx) {
   const {
     requirements,
@@ -6,6 +10,25 @@ export function runAuthorityHardeningChecks(ctx) {
     fail,
     nonEmpty
   } = ctx;
+
+  const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+    encoding: 'utf8'
+  }).trim();
+
+  const project = readYaml('project-control/PROJECT.yaml');
+  if (requirements?.canonical_status_source !== true) {
+    fail('CONTROL-CANONICAL-101 REQUIREMENTS.canonical_status_source must be true');
+  }
+  if (!project || project.status_authority !== 'REQUIREMENTS.yaml') {
+    fail('CONTROL-CANONICAL-102 PROJECT.status_authority must equal REQUIREMENTS.yaml');
+  }
+
+  for (const [name, rel] of Object.entries(project?.canonical_sources || {})) {
+    const absolute = path.join(root, rel);
+    if (!fs.existsSync(absolute)) {
+      fail(`CONTROL-CANONICAL-103 canonical source ${name} does not exist: ${rel}`);
+    }
+  }
 
   if (!requirements) return;
 
@@ -45,8 +68,11 @@ export function runAuthorityHardeningChecks(ctx) {
     if (sameVendor(requirementVerifier, requirementImplementer)) {
       fail(`CONTROL-IV-103 ${requirement.id} requirement actors share vendor`);
     }
-    if (recordVerifier && requirementVerifier &&
-        String(recordVerifier.vendor).toLowerCase() !== String(requirementVerifier.vendor).toLowerCase()) {
+    if (
+      recordVerifier && requirementVerifier &&
+      String(recordVerifier.vendor).toLowerCase() !==
+        String(requirementVerifier.vendor).toLowerCase()
+    ) {
       fail(`CONTROL-IV-104 ${requirement.id} verifier vendor differs between requirement and record`);
     }
   }
