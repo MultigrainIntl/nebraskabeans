@@ -1,18 +1,19 @@
-schema_version: 3
-gate: CONTROL-004
+schema_version: 4
+gate: CONTROL-006
 status: ACTIVE
-approval_ref: APPROVAL-CONTROL-004-20260913
+approval_ref: APPROVAL-CONTROL-006-20260913
 authorized_by: GAJ
-authorized_at: 2026-09-13T12:23:00-06:00
-base_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
+authorized_at: 2026-09-13T13:35:00-06:00
+base_sha: 0cbfb3b86028d7ab8226283a8eccf07ec76ea134
 scope:
   allow:
     - joieos/**
     - project-control/**
-    - scripts/**
+    - scripts/validate-control-plane.mjs
     - tests/control-plane/**
     - .github/workflows/staging-qa.yml
     - package.json
+    - package-lock.json
   prohibit:
     - product functionality changes
     - application asset changes
@@ -22,4 +23,4 @@ scope:
     - main changes
     - production changes
     - DNS or GoDaddy changes
-stop_condition: complete CONTROL-004 items 1-21, run the full fixture suite, report the exact final SHA and results, then stop for independent re-verification
+stop_condition: complete CONTROL-006 items 1-15, run the full implementer-authored and implementer-run fixture suite, report the exact final SHA and results, then stop for independent re-verification
