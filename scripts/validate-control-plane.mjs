@@ -272,12 +272,27 @@ function yamlAtCommit(commit, rel) {
   return parseYamlText(raw, `${commit}:${rel}`);
 }
 
+function scopeRuleRegex(rule) {
+  const pattern = rule.endsWith('/') ? `${rule}**` : rule;
+  let source = '^';
+  for (let index = 0; index < pattern.length; index += 1) {
+    const character = pattern[index];
+    if (character === '*' && pattern[index + 1] === '*') {
+      source += '.*';
+      index += 1;
+    } else if (character === '*') {
+      source += '[^/]*';
+    } else if (character === '?') {
+      source += '[^/]';
+    } else {
+      source += character.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+  }
+  return new RegExp(`${source}$`);
+}
+
 function pathAllowed(file, rules) {
-  return rules.some(rule => {
-    if (rule.endsWith('/**')) return file.startsWith(rule.slice(0, -3));
-    if (rule.endsWith('/')) return file.startsWith(rule);
-    return file === rule;
-  });
+  return rules.some(rule => scopeRuleRegex(rule).test(file));
 }
 
 function sameOrdered(left, right) {
@@ -307,15 +322,67 @@ function governancePrecedence() {
     .filter(Boolean);
 }
 
-function productScopeRule(rule) {
-  const value = String(rule || '').toLowerCase();
-  if (value === 'assets/**' || value.startsWith('assets/')) return true;
-  if (value === '*.html' || value.endsWith('.html') || value.includes('*.html')) return true;
-  if (value === 'scripts/build_*' || value.startsWith('scripts/build_')) return true;
-  if (value === 'tests/**') return true;
+function productPath(file) {
+  const value = String(file || '').toLowerCase();
+  if (value.startsWith('assets/')) return true;
+  if (!value.includes('/') && value.endsWith('.html')) return true;
+  if (value.startsWith('scripts/build_')) return true;
   if (value.startsWith('tests/') && !value.startsWith('tests/control-plane/')) return true;
   if (value.startsWith('data/') || value.startsWith('docs/')) return true;
   return false;
+}
+
+const trackedFiles = String(git(['ls-files', '-z'], { trim: false }) || '')
+  .split('\0')
+  .filter(Boolean);
+const trackedDirectories = new Set();
+for (const file of trackedFiles) {
+  const segments = file.split('/');
+  for (let length = 1; length < segments.length; length += 1) {
+    trackedDirectories.add(segments.slice(0, length).join('/'));
+  }
+}
+
+function expandScopeRule(rule, label) {
+  if (
+    typeof rule !== 'string' ||
+    rule !== rule.trim() ||
+    rule.startsWith('/') ||
+    rule.startsWith('./') ||
+    rule.includes('\\') ||
+    rule.includes('//') ||
+    rule.split('/').some(segment => segment === '.' || segment === '..')
+  ) {
+    fail(`CONTROL-SCOPE-008 ${label} invalid scope rule: ${String(rule)}`);
+    return [];
+  }
+  if (rule.endsWith('/**') || rule.endsWith('/')) {
+    const suffixLength = rule.endsWith('/**') ? 3 : 1;
+    const prefix = rule.slice(0, -suffixLength);
+    if (!prefix || /[*?]/.test(prefix) || !trackedDirectories.has(prefix)) {
+      fail(`CONTROL-SCOPE-008 ${label} prefix is not a tracked directory: ${rule}`);
+      return [];
+    }
+  } else if (!/[*?]/.test(rule) && trackedDirectories.has(rule)) {
+    fail(`CONTROL-SCOPE-008 ${label} directory rule must end in /**: ${rule}`);
+    return [];
+  }
+  const matches = trackedFiles.filter(file => scopeRuleRegex(rule).test(file));
+  if (matches.length === 0) {
+    fail(`CONTROL-SCOPE-008 ${label} matches no tracked path: ${rule}`);
+  }
+  return matches;
+}
+
+function analyzeScopeRules(rules, label) {
+  return rules.map(rule => {
+    const matches = expandScopeRule(rule, label);
+    return {
+      rule,
+      matches,
+      productMatches: matches.filter(productPath)
+    };
+  });
 }
 
 function walkControl() {
@@ -795,6 +862,9 @@ function validateApprovals() {
       approval.scope?.prohibit,
       `approval.${name}.scope.prohibit`
     );
+    const analyzedAllow = isLegacy
+      ? []
+      : analyzeScopeRules(allow, `approval.${name}.scope.allow`);
     checkSha(approval.base_sha, `approval.${name}.base_sha`);
     checkSha(approval.candidate_sha, `approval.${name}.candidate_sha`, true);
     if (approval.authority !== 'GAJ') {
@@ -804,18 +874,18 @@ function validateApprovals() {
       approval.authorization_type === 'production_scope' &&
       nonEmpty(approval.countersigned_by) &&
       nonEmpty(approval.signature_provenance);
-    for (const rule of allow) {
-      if (productScopeRule(rule) && !productionClass) {
+    for (const { rule, productMatches } of analyzedAllow) {
+      if (productMatches.length > 0 && !productionClass) {
         fail(
           `CONTROL-SCOPE-004 ${name} product-path allow forbidden without ` +
-          `countersigned production_scope: ${rule}`
+          `countersigned production_scope: ${rule} -> ${productMatches.join(',')}`
         );
       }
     }
     if (
       (prohibit.includes('application asset changes') ||
        prohibit.includes('product functionality changes')) &&
-      allow.some(productScopeRule)
+      analyzedAllow.some(item => item.productMatches.length > 0)
     ) {
       fail(`CONTROL-SCOPE-005 ${name} allow-list contradicts product prohibit`);
     }
@@ -948,6 +1018,7 @@ function validateGateAndScope(byApproval) {
   }
   const allow = checkStringList(lock.scope.allow, 'EXECUTION_LOCK.scope.allow');
   const prohibit = checkStringList(lock.scope.prohibit, 'EXECUTION_LOCK.scope.prohibit');
+  const analyzedAllow = analyzeScopeRules(allow, 'EXECUTION_LOCK.scope.allow');
   for (const required of [
     'main changes',
     'production changes',
@@ -958,15 +1029,18 @@ function validateGateAndScope(byApproval) {
       fail(`CONTROL-SCOPE-001 prohibit missing ${required}`);
     }
   }
-  for (const rule of allow) {
-    if (productScopeRule(rule)) {
-      fail(`CONTROL-SCOPE-006 execution lock may not allow product path: ${rule}`);
+  for (const { rule, productMatches } of analyzedAllow) {
+    if (productMatches.length > 0) {
+      fail(
+        `CONTROL-SCOPE-006 execution lock may not allow product path: ` +
+        `${rule} -> ${productMatches.join(',')}`
+      );
     }
   }
   if (
     (prohibit.includes('application asset changes') ||
      prohibit.includes('product functionality changes')) &&
-    allow.some(productScopeRule)
+    analyzedAllow.some(item => item.productMatches.length > 0)
   ) {
     fail('CONTROL-SCOPE-007 lock allow-list contradicts product prohibit categories');
   }
@@ -1085,7 +1159,8 @@ runAuthorityHardeningChecks({
   actorRegistry,
   readYaml,
   fail,
-  nonEmpty
+  nonEmpty,
+  pathAllowed
 });
 
 if (shaOk(head)) {

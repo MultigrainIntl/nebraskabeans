@@ -28,7 +28,8 @@ export function runAuthorityHardeningChecks(ctx) {
     actorRegistry,
     readYaml,
     fail,
-    nonEmpty
+    nonEmpty,
+    pathAllowed
   } = ctx;
 
   const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
@@ -43,12 +44,6 @@ export function runAuthorityHardeningChecks(ctx) {
       return '';
     }
   };
-
-  const pathAllowed = (file, rules) => rules.some(rule => {
-    if (rule.endsWith('/**')) return file.startsWith(rule.slice(0, -3));
-    if (rule.endsWith('/')) return file.startsWith(rule);
-    return file === rule;
-  });
 
   for (const [rel, expected] of EXPECTED_SCHEMA_VERSIONS) {
     const record = readYaml(rel);

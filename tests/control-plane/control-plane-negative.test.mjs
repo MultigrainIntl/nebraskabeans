@@ -429,7 +429,29 @@ add('N8-self-authored-assets-scope-expansion', 1, () => {
   l.scope.allow.push('assets/**', 'index.html');
   saveLock(l);
   fs.appendFileSync(p('assets/site.css'), '\n/* unauthorized fixture */\n');
-});
+}, [
+  'CONTROL-SCOPE-004',
+  'CONTROL-SCOPE-005',
+  'CONTROL-SCOPE-006',
+  'CONTROL-SCOPE-007'
+]);
+for (const [id, rule] of [
+  ['a-prefix', 'a/**'],
+  ['i-prefix', 'i/**'],
+  ['as-prefix', 'as/**'],
+  ['bare-assets-directory', 'assets'],
+  ['dot-assets-prefix', './assets/**'],
+  ['asse-prefix', 'asse/**']
+]) {
+  add(`S1-${id}`, 1, () => {
+    const a = approval();
+    a.scope.allow.push(rule);
+    saveApproval(a);
+    const l = lock();
+    l.scope.allow.push(rule);
+    saveLock(l);
+  }, 'CONTROL-SCOPE-008');
+}
 add('N9b-history-start-teleport', 1, () => {
   const r = req();
   const x = other(r);
@@ -464,13 +486,17 @@ for (const fixture of fixtures) {
   const actual = run.status ?? 1;
   const combinedOutput = `${run.stdout}\n${run.stderr}`;
   const exitOk = fixture.expect === 0 ? actual === 0 : actual !== 0;
-  const outputOk = !fixture.requiredOutput ||
-    combinedOutput.includes(fixture.requiredOutput);
+  const requiredOutputs = fixture.requiredOutput
+    ? [fixture.requiredOutput].flat()
+    : [];
+  const outputOk = requiredOutputs.every(expected =>
+    combinedOutput.includes(expected)
+  );
   const ok = exitOk && outputOk;
   console.log(
     `${ok ? 'PASS' : 'FAIL'} ${fixture.id} expected ` +
     `${fixture.expect === 0 ? 'zero' : 'non-zero'} got ${actual}` +
-    `${fixture.requiredOutput ? ` with ${fixture.requiredOutput}` : ''}`
+    `${requiredOutputs.length ? ` with ${requiredOutputs.join(',')}` : ''}`
   );
   if (!ok) {
     wrong += 1;
