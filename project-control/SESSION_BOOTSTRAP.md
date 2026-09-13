@@ -5,7 +5,7 @@ At the start of every NebraskaBeans execution session:
 1. Read `joieos/GOVERNANCE.md`, `joieos/CONTROL_SCHEMA.yaml`, and `joieos/STATE_MACHINE.yaml`.
 2. Read `project-control/PROJECT.yaml`, `CURRENT_STATE.yaml`, `REQUIREMENTS.yaml`, `EXECUTION_LOCK.yaml`, and `VERIFICATION_PROTOCOL.md`.
 3. Resolve live Git SHAs for `main`, `staging/recover-5fa3f42`, and `gh-pages`. Do not treat recorded branch SHAs as current without checking.
-4. Run `node scripts/validate-control-plane.mjs` before any implementation. Any non-zero exit or control inconsistency is blocking.
+4. Run `node scripts/validate-control-plane.mjs` before any implementation. The validator resolves the repository root with `git rev-parse --show-toplevel`, so invoking it from a subdirectory must not change what it validates. Missing/unreadable required files must produce `FAIL ...` output and a non-zero exit rather than a raw Node stack trace.
 5. Confirm exactly one ACTIVE gate exists and matches `EXECUTION_LOCK.yaml`.
 6. Do not autonomously activate a different material gate. You may recommend the next gate; activation requires existing durable authority or GAJ authorization.
 7. Re-anchor every material action to the active gate, exact live candidate SHA, authorized scope, and staging-only boundary.
