@@ -101,8 +101,9 @@
     btn.addEventListener('click',()=>apply(btn.getAttribute('aria-expanded')!=='true'));
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&btn.getAttribute('aria-expanded')==='true')apply(false)});
     wrap.appendChild(btn);
-    const mq=matchMedia('(max-width: 620px)');apply(!mq.matches);
-    mq.addEventListener?.('change',e=>apply(!e.matches));
+    const syncToViewport=()=>apply(window.innerWidth>620);
+    syncToViewport();
+    window.addEventListener('resize',syncToViewport,{passive:true});
   }
 
   function consolidateTemporalControls(){
