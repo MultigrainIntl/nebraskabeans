@@ -16,14 +16,20 @@ Never fabricate provenance, precision, validation, completion, approval, deploym
 Allowed factual classifications are VERIFIED only when independently verified under this control system, IMPLEMENTATION_TESTED for same-actor testing, ESTIMATED, UNKNOWN, FAILED, BLOCKED, and NOT IMPLEMENTED as context requires.
 
 ## Canonical precedence
+`joieos/CONTROL_SCHEMA.yaml` is the single machine-readable precedence authority. The same order is reproduced here for humans:
+
 1. Current explicit GAJ authorization.
-2. This governance file and machine-readable control schema/state machine.
+2. JoieOS governance and its machine-readable schema/state machine.
 3. Live repository truth and exact Git SHAs.
-4. CURRENT_STATE.yaml and canonical REQUIREMENTS.yaml after reconciliation with live Git.
-5. SHA-bound approval and verification records.
-6. Decision and contradiction records.
-7. Human-readable generated summaries.
-8. Chat history.
+4. Canonical requirement records in `project-control/REQUIREMENTS.yaml`.
+5. `project-control/CURRENT_STATE.yaml` after reconciliation with live Git and requirements.
+6. SHA-bound approval records.
+7. SHA-bound verification records.
+8. Contradiction and decision records.
+9. Generated or non-authoritative human summaries.
+10. Chat history.
+
+`PROJECT.yaml` may identify which file owns a particular field (for example requirement status), but it does not define a competing precedence order.
 
 If sources conflict, do not choose the convenient one. Reconcile the conflict before product implementation.
 
