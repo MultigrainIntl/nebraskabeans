@@ -35,13 +35,15 @@
     setText('nbSnapStage',s.stage);setText('nbSnapCondition',s.condition);setText('nbSnapWater',s.soil);setText('nbSnapVeg',s.veg);setText('nbSnapRisk',s.risk);
     setText('nbSnapshotBottom',`${area} · ${date} · ${s.stage} · ${s.risk} attention`);
   }
+  function loadCurrentState(){
+    if(!document.querySelector('link[data-nb-responsive]')){const l=document.createElement('link');l.rel='stylesheet';l.href='assets/responsive-shell.css?v=current-state-1';l.dataset.nbResponsive='1';document.head.appendChild(l);}
+    if(!document.querySelector('script[data-nb-current-state]')){const s=document.createElement('script');s.src='assets/current-state.js?v=current-state-1';s.dataset.nbCurrentState='1';document.body.appendChild(s);}
+  }
   function start(){
-    // Observe only the source fields that drive the snapshot. Observing the whole body
-    // caused the snapshot's own writes to recursively schedule more writes and starve app startup.
     const sourceIds=['condition','soilState','healthState','sliderStage','regionName','sliderDate'];
     const observer=new MutationObserver(refresh);
     sourceIds.forEach(id=>{const el=$(id);if(el)observer.observe(el,{subtree:true,childList:true,characterData:true});});
-    document.addEventListener('input',refresh);document.addEventListener('change',refresh);refresh();
+    document.addEventListener('input',refresh);document.addEventListener('change',refresh);refresh();loadCurrentState();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,50));else setTimeout(start,50);
 })();
