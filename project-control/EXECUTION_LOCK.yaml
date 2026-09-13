@@ -1,20 +1,23 @@
-schema_version: 1
-gate: CONTROL-002
+schema_version: 2
+gate: CONTROL-004
 status: ACTIVE
+approval_ref: APPROVAL-CONTROL-004-20260913
 authorized_by: GAJ
-authorized_at: 2026-09-13T11:56:00-06:00
+authorized_at: 2026-09-13T12:23:00-06:00
 scope:
   allow:
-    - harden persistent JoieOS and NebraskaBeans control plane
-    - add or update governance and project-control files
-    - add validator and control-plane tests
-    - verify repository-only control changes
+    - remediate the JoieOS and NebraskaBeans control plane under CONTROL-004 items 1 through 21
+    - update governance and project-control files required by CONTROL-004
+    - update scripts and add control-plane test fixtures required by CONTROL-004
+    - update staging QA workflow to run the control-plane validator first
+    - verify repository-only control changes on staging/recover-5fa3f42
   prohibit:
     - product functionality changes
     - application asset changes
-    - staging deployment changes
+    - map changes
+    - yield model changes
     - gh-pages changes
     - main changes
     - production changes
     - DNS or GoDaddy changes
-stop_condition: report exact implementation SHA and verification evidence, then stop for review
+stop_condition: complete CONTROL-004 items 1-21, run the full fixture suite, report the exact final SHA and results, then stop for independent re-verification
