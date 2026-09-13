@@ -27,6 +27,46 @@ const LATE_HISTORY_STARTS = new Set([
   'CLOSED'
 ]);
 
+const CONTROL_RULE_NAMES = [
+  'exactly_one_active_gate',
+  'active_gate_must_exist',
+  'approval_must_bind_exact_sha_when_sha_exists',
+  'verification_must_bind_exact_sha',
+  'deployed_verification_requires_deployed_sha',
+  'independent_verifier_must_differ_from_implementer',
+  'gaj_acceptance_requires_independent_verification',
+  'contradictory_evidence_reopens_requirement',
+  'branch_name_never_substitutes_for_sha',
+  'production_requires_explicit_GAJ_authorization',
+  'stale_verification_after_candidate_change',
+  'control_files_must_not_self_reference_containing_commit'
+];
+
+const CONTROL_PRECEDENCE = [
+  ['current_explicit_GAJ_approval', 'Current explicit GAJ authorization.'],
+  [
+    'joieos_governance',
+    'JoieOS governance and its machine-readable schema/state machine.'
+  ],
+  ['live_repository_truth_and_exact_git_shas', 'Live repository truth and exact Git SHAs.'],
+  [
+    'requirements',
+    'Canonical requirement records in `project-control/REQUIREMENTS.yaml`.'
+  ],
+  [
+    'current_state',
+    '`project-control/CURRENT_STATE.yaml` after reconciliation with live Git and requirements.'
+  ],
+  ['approval_records', 'SHA-bound approval records.'],
+  ['verification_records', 'SHA-bound verification records.'],
+  ['contradiction_and_decision_records', 'Contradiction and decision records.'],
+  [
+    'generated_human_summaries',
+    'Generated or non-authoritative human summaries.'
+  ],
+  ['chat_history', 'Chat history.']
+];
+
 const requireHead = process.argv.includes('--require-head');
 let failures = 0;
 
@@ -251,6 +291,20 @@ function sameMembers(left, right) {
   const a = [...left].sort();
   const b = [...right].sort();
   return a.every((value, index) => value === b[index]);
+}
+
+function governancePrecedence() {
+  const raw = readText('joieos/GOVERNANCE.md');
+  if (raw === null) return [];
+  const section = raw.match(/(?:^|\n)## Canonical precedence\n([\s\S]*?)(?=\n## |$)/);
+  if (!section) {
+    fail('CONTROL-SCHEMA-006 GOVERNANCE.md lacks Canonical precedence section');
+    return [];
+  }
+  return section[1]
+    .split('\n')
+    .map(line => line.match(/^\d+\.\s+(.+)$/)?.[1])
+    .filter(Boolean);
 }
 
 function productScopeRule(rule) {
@@ -658,6 +712,36 @@ function validateSchemas() {
     checkStringList(lock.scope?.allow, 'EXECUTION_LOCK.scope.allow');
     checkStringList(lock.scope?.prohibit, 'EXECUTION_LOCK.scope.prohibit');
     if (lock.base_sha) checkSha(lock.base_sha, 'EXECUTION_LOCK.base_sha');
+  }
+  if (control) {
+    checkKeys(control, ['schema_version','precedence','rules','fail_closed'], 'CONTROL_SCHEMA');
+    requireKeys(
+      control,
+      ['schema_version','precedence','rules','fail_closed'],
+      'CONTROL_SCHEMA'
+    );
+    const precedence = checkStringList(
+      control.precedence,
+      'CONTROL_SCHEMA.precedence'
+    );
+    const expectedPrecedence = CONTROL_PRECEDENCE.map(([key]) => key);
+    if (!sameOrdered(precedence, expectedPrecedence)) {
+      fail('CONTROL-SCHEMA-006 CONTROL_SCHEMA.precedence must equal canonical order');
+    }
+    const documentedPrecedence = governancePrecedence();
+    const expectedDocumentation = CONTROL_PRECEDENCE.map(([, text]) => text);
+    if (!sameOrdered(documentedPrecedence, expectedDocumentation)) {
+      fail('CONTROL-SCHEMA-006 CONTROL_SCHEMA.precedence does not match GOVERNANCE.md');
+    }
+    checkKeys(control.rules, CONTROL_RULE_NAMES, 'CONTROL_SCHEMA.rules');
+    requireKeys(control.rules, CONTROL_RULE_NAMES, 'CONTROL_SCHEMA.rules');
+    if (isObject(control.rules)) {
+      for (const name of CONTROL_RULE_NAMES) {
+        if (control.rules[name] !== true) {
+          fail(`CONTROL-SCHEMA-006 CONTROL_SCHEMA.rules.${name} must be === true`);
+        }
+      }
+    }
   }
   if (control?.fail_closed !== true) {
     fail('CONTROL-SCHEMA-007 fail_closed must true');

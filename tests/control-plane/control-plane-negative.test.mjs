@@ -103,7 +103,9 @@ function makeVerification(requirement, options = {}) {
 }
 
 const fixtures = [];
-const add = (id, expect, mutate) => fixtures.push({ id, expect, mutate });
+const add = (id, expect, mutate, requiredOutput = null) => {
+  fixtures.push({ id, expect, mutate, requiredOutput });
+};
 
 add('A01-canonical', 0, () => {});
 add('A02-two-active', 1, () => {
@@ -335,6 +337,46 @@ add('A38-missing-identity-provenance', 1, () => {
   saveReq(r);
 });
 
+add('S2-empty-control-rules', 1, () => {
+  const control = load('joieos/CONTROL_SCHEMA.yaml');
+  control.rules = {};
+  save('joieos/CONTROL_SCHEMA.yaml', control);
+}, 'CONTROL-SCHEMA-006');
+add('S2-empty-control-precedence', 1, () => {
+  const control = load('joieos/CONTROL_SCHEMA.yaml');
+  control.precedence = [];
+  save('joieos/CONTROL_SCHEMA.yaml', control);
+}, 'CONTROL-SCHEMA-006');
+add('S2-reordered-control-precedence', 1, () => {
+  const control = load('joieos/CONTROL_SCHEMA.yaml');
+  [control.precedence[0], control.precedence[1]] =
+    [control.precedence[1], control.precedence[0]];
+  save('joieos/CONTROL_SCHEMA.yaml', control);
+}, 'CONTROL-SCHEMA-006');
+add('S2-disabled-control-rule', 1, () => {
+  const control = load('joieos/CONTROL_SCHEMA.yaml');
+  control.rules.exactly_one_active_gate = false;
+  save('joieos/CONTROL_SCHEMA.yaml', control);
+}, 'CONTROL-SCHEMA-006');
+add('S2-missing-control-rule', 1, () => {
+  const control = load('joieos/CONTROL_SCHEMA.yaml');
+  delete control.rules.exactly_one_active_gate;
+  save('joieos/CONTROL_SCHEMA.yaml', control);
+}, 'CONTROL-SCHEMA-006');
+add('S2-unknown-control-rule', 1, () => {
+  const control = load('joieos/CONTROL_SCHEMA.yaml');
+  control.rules.unknown_rule = true;
+  save('joieos/CONTROL_SCHEMA.yaml', control);
+}, 'CONTROL-SCHEMA-002 unknown key CONTROL_SCHEMA.rules.unknown_rule');
+add('S2-governance-precedence-drift', 1, () => {
+  const rel = 'joieos/GOVERNANCE.md';
+  const raw = fs.readFileSync(p(rel), 'utf8');
+  fs.writeFileSync(
+    p(rel),
+    raw.replace('10. Chat history.', '10. Chat recollection.')
+  );
+}, 'CONTROL-SCHEMA-006');
+
 for (const alias of ['GPT5', 'G.P.T.-5', 'Codex', 'o3', 'Assistant']) {
   add(`N1-unregistered-verifier-${alias}`, 1, () => {
     const r = req();
@@ -420,10 +462,15 @@ for (const fixture of fixtures) {
     { cwd: work, encoding: 'utf8' }
   );
   const actual = run.status ?? 1;
-  const ok = fixture.expect === 0 ? actual === 0 : actual !== 0;
+  const combinedOutput = `${run.stdout}\n${run.stderr}`;
+  const exitOk = fixture.expect === 0 ? actual === 0 : actual !== 0;
+  const outputOk = !fixture.requiredOutput ||
+    combinedOutput.includes(fixture.requiredOutput);
+  const ok = exitOk && outputOk;
   console.log(
     `${ok ? 'PASS' : 'FAIL'} ${fixture.id} expected ` +
-    `${fixture.expect === 0 ? 'zero' : 'non-zero'} got ${actual}`
+    `${fixture.expect === 0 ? 'zero' : 'non-zero'} got ${actual}` +
+    `${fixture.requiredOutput ? ` with ${fixture.requiredOutput}` : ''}`
   );
   if (!ok) {
     wrong += 1;
