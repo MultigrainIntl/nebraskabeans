@@ -1,4 +1,4 @@
-schema_version: 2
+schema_version: 3
 project: NebraskaBeans
 status_values: [OPEN, ACTIVE, IMPLEMENTED, IMPLEMENTATION_TESTED, DEPLOYED, INDEPENDENTLY_VERIFIED, GAJ_ACCEPTED, CLOSED, FAILED, BLOCKED]
 canonical_status_source: true
@@ -6,6 +6,8 @@ requirements:
   - id: CONTROL-001
     priority: P0
     requirement: Establish persistent JoieOS and NebraskaBeans project-control foundation without changing product functionality or deployment.
+    history_start_status: IMPLEMENTATION_TESTED
+    transitions: []
     status: IMPLEMENTATION_TESTED
     candidate_sha: 6102f9f5109adea9640d095b432504a764ce7b92
     implementation_sha: 6102f9f5109adea9640d095b432504a764ce7b92
@@ -13,10 +15,17 @@ requirements:
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
-    note: Same-actor checking is IMPLEMENTATION_TESTED only; independent verification remains outstanding.
+    note: Same-actor checking is IMPLEMENTATION_TESTED only; transition history begins with schema-version-3 adoption.
   - id: CONTROL-002
     priority: P0
     requirement: Harden the control plane so stale verification, ambiguous approval, inconsistent state, same-actor independent verification, and unauthorized scope expansion are mechanically detectable.
+    history_start_status: ACTIVE
+    transitions:
+      - from: ACTIVE
+        to: FAILED
+        sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
+        actor: independent-verifier-Claude-Opus-5
+        timestamp: 2026-09-13T12:23:00-06:00
     status: FAILED
     candidate_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     implementation_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
@@ -25,21 +34,17 @@ requirements:
     gaj_acceptance_required: true
     gaj_acceptance_record: null
     evidence: CONTROL-003 independent adversarial audit by Claude Opus 5 failed the candidate with 4 CRITICAL and 10 HIGH findings; 24 material bypasses across 38 fixtures.
-    acceptance:
-      - machine-readable precedence and state-transition rules exist
-      - exactly one active gate is mechanically enforced
-      - active gate must exist in canonical requirements
-      - verification must bind an exact candidate SHA
-      - independent verifier must differ from implementer
-      - GAJ acceptance cannot precede independent verification
-      - execution scope is explicitly locked
-      - production authorization is explicit and fail-closed
-      - contradictory evidence has a defined downgrade path
-      - validator includes negative self-tests that deliberately fail invalid states
-      - product files gh-pages and main remain unchanged
+    acceptance: [machine-readable precedence and state-transition rules exist, exactly one active gate is mechanically enforced, active gate must exist in canonical requirements, verification must bind an exact candidate SHA, independent verifier must differ from implementer, GAJ acceptance cannot precede independent verification, execution scope is explicitly locked, production authorization is explicit and fail-closed, contradictory evidence has a defined downgrade path, validator includes negative self-tests that deliberately fail invalid states, product files gh-pages and main remain unchanged]
   - id: CONTROL-004
     priority: P0
     requirement: Remediate all CONTROL-003 CRITICAL HIGH and specified MEDIUM findings in items 1-21 without changing product code deployment production DNS or GoDaddy.
+    history_start_status: OPEN
+    transitions:
+      - from: OPEN
+        to: ACTIVE
+        sha: e9c71c58366b79da2ff3ea7395a261dbb670e351
+        actor: ChatGPT
+        timestamp: 2026-09-13T12:23:00-06:00
     status: ACTIVE
     candidate_sha: null
     implementation_sha: null
@@ -51,6 +56,8 @@ requirements:
   - id: UX-001
     priority: P0
     requirement: Opening interface is immediately understandable and map-dominant rather than a long repetitive analytical page.
+    history_start_status: FAILED
+    transitions: []
     status: FAILED
     evidence: GAJ screenshots and direct observation showed excessive complexity after prior claimed simplification.
     gaj_acceptance_required: true
@@ -58,6 +65,8 @@ requirements:
   - id: MAP-001
     priority: P0
     requirement: Temporal moisture surface is visually interpretable without distracting coarse blockiness while preserving honest native-resolution disclosure.
+    history_start_status: FAILED
+    transitions: []
     status: FAILED
     evidence: GAJ screenshot showed visible coarse raster cells after prior implementation claims.
     gaj_acceptance_required: true
@@ -65,6 +74,8 @@ requirements:
   - id: YIELD-001
     priority: P0
     requirement: Precise current yield forecast is scientifically defensible before it is prominent in the primary interface.
+    history_start_status: FAILED
+    transitions: []
     status: FAILED
     evidence: Approximate 2416 lb/acre output was challenged as commercially implausible and remains unvalidated.
     gaj_acceptance_required: true
@@ -72,6 +83,8 @@ requirements:
   - id: MAP-002
     priority: P0
     requirement: Temporal animation makes change understandable with synchronized date map crop stage and interpretation.
+    history_start_status: FAILED
+    transitions: []
     status: FAILED
     evidence: Prior proxy tests do not establish Pea-Trader-quality rendered behavior or GAJ acceptance.
     gaj_acceptance_required: true
@@ -79,25 +92,35 @@ requirements:
   - id: SCI-001
     priority: P1
     requirement: Crop conclusions use defensible crop masking so surrounding non-bean landscapes are not interpreted as the crop.
+    history_start_status: OPEN
+    transitions: []
     status: OPEN
     gaj_acceptance_required: false
   - id: SCI-002
     priority: P1
     requirement: Irrigation is treated explicitly where defensible and rainfall deficit is not automatically equated with crop water stress.
+    history_start_status: OPEN
+    transitions: []
     status: OPEN
     gaj_acceptance_required: false
   - id: SCI-003
     priority: P1
     requirement: Vegetation response is crop-masked where possible stage-aware temporally comparable and provenance-bound.
+    history_start_status: OPEN
+    transitions: []
     status: OPEN
     gaj_acceptance_required: false
   - id: SCI-004
     priority: P1
     requirement: Disease-favorable weather is separated from confirmed disease occurrence.
+    history_start_status: OPEN
+    transitions: []
     status: OPEN
     gaj_acceptance_required: false
   - id: SCI-005
     priority: P1
     requirement: Production significance is not claimed without defensible acreage or production weighting.
+    history_start_status: OPEN
+    transitions: []
     status: OPEN
     gaj_acceptance_required: false
