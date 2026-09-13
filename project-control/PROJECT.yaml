@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 project: NebraskaBeans
 repository: MultigrainIntl/nebraskabeans
 product_authority: GAJ
@@ -16,5 +16,5 @@ canonical_sources:
   approvals: project-control/approvals/
   verification: project-control/verification/
   contradictions: project-control/contradictions/
-status_authority: REQUIREMENTS.yaml
+status_authority: REQUIREMENTS.yaml owns requirement status only; overall source precedence is CONTROL_SCHEMA.yaml
 human_readable_summaries_are_non_authoritative: true
