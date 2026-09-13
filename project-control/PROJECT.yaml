@@ -1,4 +1,4 @@
-schema_version: 2
+schema_version: 3
 project: NebraskaBeans
 repository: MultigrainIntl/nebraskabeans
 product_authority: GAJ
@@ -10,11 +10,13 @@ canonical_sources:
   governance: joieos/GOVERNANCE.md
   control_schema: joieos/CONTROL_SCHEMA.yaml
   state_machine: joieos/STATE_MACHINE.yaml
+  actors: joieos/ACTORS.yaml
   current_state: project-control/CURRENT_STATE.yaml
   requirements: project-control/REQUIREMENTS.yaml
   execution_lock: project-control/EXECUTION_LOCK.yaml
   approvals: project-control/approvals/
   verification: project-control/verification/
   contradictions: project-control/contradictions/
-status_authority: REQUIREMENTS.yaml owns requirement status only; overall source precedence is CONTROL_SCHEMA.yaml
+  non_impact_rules: project-control/non-impact-rules/
+status_authority: REQUIREMENTS.yaml
 human_readable_summaries_are_non_authoritative: true
