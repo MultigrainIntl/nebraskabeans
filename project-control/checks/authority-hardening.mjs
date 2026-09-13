@@ -2,6 +2,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
+const PROSE_LEDGER_PATHS = new Set([
+  'project-control/FAILURES.md',
+  'project-control/STATUS.md',
+  'project-control/CURRENT_STATUS.md',
+  'project-control/REQUIREMENTS.md',
+  'project-control/generated/FAILURES.md',
+  'project-control/generated/STATUS.md'
+]);
+
 export function runAuthorityHardeningChecks(ctx) {
   const {
     requirements,
@@ -69,6 +78,33 @@ export function runAuthorityHardeningChecks(ctx) {
           );
         }
       }
+    }
+  }
+
+  for (const rel of PROSE_LEDGER_PATHS) {
+    if (fs.existsSync(path.join(root, rel))) {
+      fail(`CONTROL-LEDGER-101 prohibited prose status ledger exists: ${rel}`);
+    }
+  }
+
+  const controlRoot = path.join(root, 'project-control');
+  const markdownPaths = [];
+  const collectMarkdown = dir => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const absolute = path.join(dir, entry.name);
+      if (entry.isDirectory()) collectMarkdown(absolute);
+      else if (entry.name.toLowerCase().endsWith('.md')) markdownPaths.push(absolute);
+    }
+  };
+  collectMarkdown(controlRoot);
+
+  const ledgerLine = /^\s*[-*]?\s*(CONTROL|UX|MAP|YIELD|SCI)-\d+\b.*\b(OPEN|ACTIVE|IMPLEMENTED|IMPLEMENTATION_TESTED|DEPLOYED|INDEPENDENTLY_VERIFIED|GAJ_ACCEPTED|CLOSED|FAILED|BLOCKED)\b/im;
+  for (const absolute of markdownPaths) {
+    const rel = path.relative(root, absolute).split(path.sep).join('/');
+    const raw = fs.readFileSync(absolute, 'utf8');
+    const matchingLines = raw.split(/\r?\n/).filter(line => ledgerLine.test(line));
+    if (matchingLines.length >= 2) {
+      fail(`CONTROL-LEDGER-102 prose requirement-status ledger detected: ${rel}`);
     }
   }
 
