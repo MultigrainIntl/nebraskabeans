@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import YAML from 'yaml';
 
 const root = process.cwd();
@@ -21,7 +22,6 @@ function readYaml(rel) {
   try { return doc.toJS({ maxAliasCount: 0 }); }
   catch (error) { fail(`CONTROL-YAML-002 ${rel}: ${error.message}`); return null; }
 }
-
 function object(value) { return value && typeof value === 'object' && !Array.isArray(value); }
 function keysOnly(obj, allowed, where) {
   if (!object(obj)) { fail(`CONTROL-SCHEMA-001 ${where} must be a mapping`); return; }
@@ -30,6 +30,13 @@ function keysOnly(obj, allowed, where) {
 function requireKeys(obj, required, where) {
   if (!object(obj)) return;
   for (const key of required) if (!(key in obj)) fail(`CONTROL-SCHEMA-003 missing key ${where}.${key}`);
+}
+function nonEmpty(value) { return value !== null && value !== undefined && String(value).trim().length > 0; }
+function validSha(sha) { return typeof sha === 'string' && /^[0-9a-f]{40}$/.test(sha); }
+function gitCommitExists(sha) {
+  if (!validSha(sha)) return false;
+  try { execFileSync('git', ['cat-file','-e',`${sha}^{commit}`], { cwd: root, stdio: 'ignore' }); return true; }
+  catch { return false; }
 }
 
 const requirements = readYaml('project-control/REQUIREMENTS.yaml');
@@ -44,7 +51,7 @@ if (requirements) {
   requireKeys(requirements, ['schema_version','project','status_values','requirements'], 'REQUIREMENTS');
   if (!Array.isArray(requirements.requirements)) fail('CONTROL-SCHEMA-004 REQUIREMENTS.requirements must be a list');
   for (const [index, r] of (requirements.requirements || []).entries()) {
-    keysOnly(r, new Set(['id','priority','requirement','status','implementation_sha','implementer','independent_verification_record','gaj_acceptance_required','gaj_acceptance_record','note','acceptance','evidence']), `REQUIREMENTS.requirements[${index}]`);
+    keysOnly(r, new Set(['id','priority','requirement','status','candidate_sha','implementation_sha','implementer','independent_verification_record','gaj_acceptance_required','gaj_acceptance_record','note','acceptance','evidence']), `REQUIREMENTS.requirements[${index}]`);
     requireKeys(r, ['id','priority','requirement','status','gaj_acceptance_required'], `REQUIREMENTS.requirements[${index}]`);
   }
 }
@@ -82,6 +89,24 @@ if (requirements && state && lock) {
   if (!requirements.requirements.some(r => r.id === state.active_gate)) fail(`CONTROL-STATE-002 active gate ${state.active_gate} does not exist in REQUIREMENTS`); else pass(`active gate exists: ${state.active_gate}`);
   if (active.length === 1 && state.active_gate !== active[0].id) fail(`CONTROL-STATE-003 CURRENT_STATE gate ${state.active_gate} != canonical ACTIVE ${active[0].id}`); else if (active.length === 1) pass('CURRENT_STATE matches canonical ACTIVE gate');
   if (lock.gate !== state.active_gate) fail(`CONTROL-LOCK-001 execution lock ${lock.gate} != active gate ${state.active_gate}`); else pass('execution lock matches active gate');
+
+  for (const r of requirements.requirements) {
+    if (!['INDEPENDENTLY_VERIFIED','GAJ_ACCEPTED','CLOSED'].includes(r.status)) continue;
+    if (!nonEmpty(r.independent_verification_record)) { fail(`CONTROL-VERIFY-001 ${r.id} ${r.status} requires independent_verification_record`); continue; }
+    const rel = `project-control/verification/${r.independent_verification_record}.yaml`;
+    const record = readYaml(rel);
+    if (!record) continue;
+    keysOnly(record, new Set(['schema_version','id','requirement','candidate_sha','result','verifier','implementer','timestamp','evidence','limitations']), `verification.${r.independent_verification_record}`);
+    requireKeys(record, ['schema_version','id','requirement','candidate_sha','result','verifier','implementer','timestamp','evidence','limitations'], `verification.${r.independent_verification_record}`);
+    const currentCandidate = r.candidate_sha || r.implementation_sha;
+    if (record.requirement !== r.id) fail(`CONTROL-VERIFY-002 ${r.id} verification requirement mismatch`);
+    if (!validSha(record.candidate_sha)) fail(`CONTROL-SHA-VERIFY-001 ${r.id} verification candidate_sha must be 40 lowercase hex`);
+    else if (!gitCommitExists(record.candidate_sha)) fail(`CONTROL-SHA-VERIFY-002 ${r.id} verification candidate_sha does not exist as a commit`);
+    if (!validSha(currentCandidate)) fail(`CONTROL-SHA-VERIFY-003 ${r.id} current candidate is missing or invalid`);
+    else if (record.candidate_sha !== currentCandidate) fail(`CONTROL-SHA-VERIFY-004 ${r.id} verification SHA does not equal current candidate`);
+    if (record.result !== 'PASS') fail(`CONTROL-VERIFY-003 ${r.id} verification result must be PASS`);
+    for (const field of ['verifier','implementer','timestamp','evidence','limitations']) if (!nonEmpty(record[field])) fail(`CONTROL-VERIFY-004 ${r.id} verification ${field} must be non-empty`);
+  }
 }
 if (schema && schema.fail_closed !== true) fail('CONTROL-SCHEMA-006 fail_closed must be true');
 
