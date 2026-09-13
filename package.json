@@ -1,7 +1,6 @@
 {
   "name": "nebraskabeans-control-plane",
   "private": true,
-  "type": "module",
   "scripts": {
     "validate:control": "node scripts/validate-control-plane.mjs",
     "test:control": "node tests/control-plane/control-plane-negative.test.mjs"
