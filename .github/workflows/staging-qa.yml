@@ -34,7 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           npm ci --ignore-scripts --no-audit --no-fund
-          node scripts/validate-control-plane.mjs
+          node scripts/validate-control-plane.mjs --require-head
           npm run test:control
 
       - name: Verify staging-only architecture
