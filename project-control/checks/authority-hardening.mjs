@@ -11,6 +11,17 @@ const PROSE_LEDGER_PATHS = new Set([
   'project-control/generated/STATUS.md'
 ]);
 
+const EXPECTED_SCHEMA_VERSIONS = new Map([
+  ['joieos/CONTROL_SCHEMA.yaml', 2],
+  ['joieos/STATE_MACHINE.yaml', 1],
+  ['joieos/ACTORS.yaml', 1],
+  ['project-control/PROJECT.yaml', 3],
+  ['project-control/CURRENT_STATE.yaml', 5],
+  ['project-control/REQUIREMENTS.yaml', 6],
+  ['project-control/EXECUTION_LOCK.yaml', 4],
+  ['project-control/APPROVAL_LEGACY.yaml', 2]
+]);
+
 export function runAuthorityHardeningChecks(ctx) {
   const {
     requirements,
@@ -39,6 +50,15 @@ export function runAuthorityHardeningChecks(ctx) {
     return file === rule;
   });
 
+  for (const [rel, expected] of EXPECTED_SCHEMA_VERSIONS) {
+    const record = readYaml(rel);
+    if (!record || record.schema_version !== expected) {
+      fail(
+        `CONTROL-SCHEMA-VERSION-101 ${rel} schema_version must equal ${expected}`
+      );
+    }
+  }
+
   const project = readYaml('project-control/PROJECT.yaml');
   if (requirements?.canonical_status_source !== true) {
     fail('CONTROL-CANONICAL-101 REQUIREMENTS.canonical_status_source must be true');
@@ -53,7 +73,63 @@ export function runAuthorityHardeningChecks(ctx) {
     }
   }
 
+  const legacy = readYaml('project-control/APPROVAL_LEGACY.yaml');
+  const legacyRecords = legacy?.legacy_records || {};
+  for (const id of legacy?.legacy_approval_ids || []) {
+    const definition = legacyRecords[id];
+    if (!definition || definition.referenceable !== false) {
+      fail(`CONTROL-LEGACY-101 legacy approval ${id} must be explicitly non-referenceable`);
+      continue;
+    }
+    const approval = readYaml(`project-control/approvals/${id}.yaml`);
+    if (!approval || approval.schema_version !== definition.schema_version) {
+      fail(`CONTROL-LEGACY-102 legacy approval ${id} schema version mismatch`);
+    }
+    if (!nonEmpty(definition.path_convention)) {
+      fail(`CONTROL-LEGACY-103 legacy approval ${id} path convention must be declared`);
+    }
+  }
+
+  const scanRecordDirectory = (rel, expectedVersion) => {
+    const absolute = path.join(root, rel);
+    if (!fs.existsSync(absolute)) return;
+    for (const entry of fs.readdirSync(absolute, { withFileTypes: true })) {
+      if (!entry.isFile() || !entry.name.endsWith('.yaml')) continue;
+      const recordRel = path.posix.join(rel, entry.name);
+      const record = readYaml(recordRel);
+      if (!record || record.schema_version !== expectedVersion) {
+        fail(
+          `CONTROL-SCHEMA-VERSION-102 ${recordRel} schema_version ` +
+          `must equal ${expectedVersion}`
+        );
+      }
+    }
+  };
+
+  scanRecordDirectory('project-control/verification', 1);
+  scanRecordDirectory('project-control/contradictions', 1);
+  scanRecordDirectory('project-control/non-impact-rules', 1);
+
+  const approvalDir = path.join(root, 'project-control/approvals');
+  for (const entry of fs.readdirSync(approvalDir, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith('.yaml')) continue;
+    const rel = `project-control/approvals/${entry.name}`;
+    const approval = readYaml(rel);
+    if (!approval) continue;
+    const legacyDefinition = legacyRecords[approval.id];
+    const expected = legacyDefinition?.schema_version ?? 3;
+    if (approval.schema_version !== expected) {
+      fail(
+        `CONTROL-SCHEMA-VERSION-103 ${rel} schema_version must equal ${expected}`
+      );
+    }
+  }
+
   const lock = readYaml('project-control/EXECUTION_LOCK.yaml');
+  if (legacy?.legacy_approval_ids?.includes(lock?.approval_ref)) {
+    fail(`CONTROL-LEGACY-104 lock references legacy approval ${lock.approval_ref}`);
+  }
+
   if (lock?.approval_ref) {
     const approvalRel = `project-control/approvals/${lock.approval_ref}.yaml`;
     const introduction = runGit([
@@ -98,7 +174,12 @@ export function runAuthorityHardeningChecks(ctx) {
   };
   collectMarkdown(controlRoot);
 
-  const ledgerLine = /^\s*[-*]?\s*(CONTROL|UX|MAP|YIELD|SCI)-\d+\b.*\b(OPEN|ACTIVE|IMPLEMENTED|IMPLEMENTATION_TESTED|DEPLOYED|INDEPENDENTLY_VERIFIED|GAJ_ACCEPTED|CLOSED|FAILED|BLOCKED)\b/im;
+  const ledgerLine = new RegExp(
+    '^\\s*[-*]?\\s*(CONTROL|UX|MAP|YIELD|SCI)-\\d+\\b.*\\b' +
+    '(OPEN|ACTIVE|IMPLEMENTED|IMPLEMENTATION_TESTED|DEPLOYED|' +
+    'INDEPENDENTLY_VERIFIED|GAJ_ACCEPTED|CLOSED|FAILED|BLOCKED)\\b',
+    'i'
+  );
   for (const absolute of markdownPaths) {
     const rel = path.relative(root, absolute).split(path.sep).join('/');
     const raw = fs.readFileSync(absolute, 'utf8');
@@ -172,13 +253,26 @@ export function runAuthorityHardeningChecks(ctx) {
       );
     }
 
-    const requirementImplementer = actor(requirement.implementer, `${requirement.id}.implementer`);
-    const requirementVerifier = actor(requirement.verifier, `${requirement.id}.verifier`);
-    const recordImplementer = actor(verification.implementer, `${requirement.id}.verification.implementer`);
-    const recordVerifier = actor(verification.verifier, `${requirement.id}.verification.verifier`);
+    const requirementImplementer = actor(
+      requirement.implementer,
+      `${requirement.id}.implementer`
+    );
+    const requirementVerifier = actor(
+      requirement.verifier,
+      `${requirement.id}.verifier`
+    );
+    const recordImplementer = actor(
+      verification.implementer,
+      `${requirement.id}.verification.implementer`
+    );
+    const recordVerifier = actor(
+      verification.verifier,
+      `${requirement.id}.verification.verifier`
+    );
 
     const sameVendor = (left, right) =>
-      left && right && String(left.vendor).toLowerCase() === String(right.vendor).toLowerCase();
+      left && right &&
+      String(left.vendor).toLowerCase() === String(right.vendor).toLowerCase();
 
     if (sameVendor(recordVerifier, recordImplementer)) {
       fail(`CONTROL-IV-102 ${requirement.id} verification actors share vendor`);
