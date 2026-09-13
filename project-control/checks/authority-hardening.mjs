@@ -72,6 +72,46 @@ export function runAuthorityHardeningChecks(ctx) {
     }
   }
 
+  const head = runGit(['rev-parse', 'HEAD']);
+  const selfShaFiles = new Set();
+  const collectTree = rel => {
+    const absolute = path.join(root, rel);
+    if (!fs.existsSync(absolute)) return;
+    const stat = fs.statSync(absolute);
+    if (stat.isFile()) {
+      selfShaFiles.add(rel);
+      return;
+    }
+    for (const entry of fs.readdirSync(absolute, { withFileTypes: true })) {
+      const child = path.posix.join(rel, entry.name);
+      if (entry.isDirectory()) collectTree(child);
+      else selfShaFiles.add(child);
+    }
+  };
+
+  for (const rel of ['joieos', 'project-control', 'scripts', 'tests', '.github']) {
+    collectTree(rel);
+  }
+  collectTree('package.json');
+  collectTree('package-lock.json');
+  for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
+    if (entry.isFile() && entry.name.toLowerCase().endsWith('.md')) {
+      selfShaFiles.add(entry.name);
+    }
+  }
+
+  for (const rel of selfShaFiles) {
+    let raw;
+    try {
+      raw = fs.readFileSync(path.join(root, rel), 'utf8');
+    } catch {
+      continue;
+    }
+    if (raw.includes(head)) {
+      fail(`CONTROL-SELF-SHA-101 ${rel} contains its own containing HEAD ${head}`);
+    }
+  }
+
   if (!requirements) return;
 
   const actor = (id, where) => {
