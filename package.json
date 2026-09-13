@@ -1,0 +1,11 @@
+{
+  "name": "nebraskabeans-control-plane",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate:control": "node scripts/validate-control-plane.mjs"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1"
+  }
+}
