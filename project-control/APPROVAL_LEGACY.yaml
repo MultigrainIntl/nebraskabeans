@@ -1,8 +1,17 @@
-schema_version: 1
+schema_version: 2
 legacy_baseline_sha: 0cbfb3b86028d7ab8226283a8eccf07ec76ea134
 legacy_approval_ids:
   - APPROVAL-CONTROL-002-20260913
   - APPROVAL-CONTROL-004-20260913
+legacy_records:
+  APPROVAL-CONTROL-002-20260913:
+    schema_version: 1
+    path_convention: legacy_pre_path_glob
+    referenceable: false
+  APPROVAL-CONTROL-004-20260913:
+    schema_version: 2
+    path_convention: path_glob_legacy_pre_countersign
+    referenceable: false
 rules:
   referenceable: false
   immutable_from_legacy_baseline: true
