@@ -1,0 +1,27 @@
+schema_version: 1
+project: NebraskaBeans
+recorded_at: 2026-09-13
+repository: MultigrainIntl/nebraskabeans
+branches:
+  production_main:
+    name: main
+    sha: 83f1f1f720dc0757a1988b2c675a65330806a5b0
+    role: production
+  development_recovery:
+    name: staging/recover-5fa3f42
+    sha_before_control_foundation: 5b97f01c84e808f65a9df81f09884a05ae77e9d2
+    role: staging development and recovery
+  staging_deployment:
+    name: gh-pages
+    sha: 5b97f01c84e808f65a9df81f09884a05ae77e9d2
+    role: staging deployment
+production_modified_by_this_foundation: false
+staging_deployment_modified_by_this_foundation: false
+active_gate: CONTROL-001
+active_gate_description: Establish persistent JoieOS and NebraskaBeans project-control foundation without changing product functionality or deployment.
+known_open_p0: [UX-001, MAP-001, YIELD-001, MAP-002]
+next_product_gate: UNKNOWN
+next_product_gate_rule: After CONTROL-001 is verified and accepted, audit actual current product and select exactly one highest-impact gate using evidence and product impact.
+notes:
+  - Branch SHAs must be re-verified at the start of every future execution session.
+  - This file records observed state at foundation creation; it is not a substitute for live repository inspection.

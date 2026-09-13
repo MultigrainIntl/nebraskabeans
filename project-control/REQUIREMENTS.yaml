@@ -1,0 +1,80 @@
+schema_version: 1
+project: NebraskaBeans
+product_authority: GAJ
+status_values: [OPEN, ACTIVE, IMPLEMENTED, TESTED, DEPLOYED, INDEPENDENTLY_VERIFIED, GAJ_ACCEPTED, CLOSED, FAILED, BLOCKED, UNKNOWN, NOT_IMPLEMENTED]
+requirements:
+  - id: UX-001
+    priority: P0
+    requirement: Opening interface is immediately understandable and map-dominant rather than a long repetitive analytical page.
+    status: FAILED
+    evidence: GAJ screenshots and direct observation showed excessive complexity after prior claimed simplification.
+    acceptance:
+      - map appears near the top of the experience
+      - opening crop state is concise
+      - redundant analytical cards are removed or moved behind progressive disclosure
+      - primary view selector and temporal controls are obvious
+      - advanced controls are secondary
+      - desktop tablet and phone rendered views show intentional hierarchy
+      - no important agricultural intelligence is lost
+    gaj_acceptance_required: true
+  - id: MAP-001
+    priority: P0
+    requirement: Temporal moisture surface is visually interpretable without distracting coarse blockiness while preserving honest native-resolution disclosure.
+    status: FAILED
+    evidence: GAJ screenshot showed visible coarse raster cells after prior implementation claims.
+    acceptance:
+      - full rendering pipeline source-to-browser is diagnosed
+      - smoothing or interpolation method is documented if used
+      - native measurement resolution remains explicit
+      - no false spatial precision is implied
+      - rendered desktop tablet and phone maps are visually inspected
+      - boundaries crop polygons and labels remain appropriately sharp
+    gaj_acceptance_required: true
+  - id: YIELD-001
+    priority: P0
+    requirement: Precise current yield forecast is scientifically defensible before it is prominent in the primary interface.
+    status: FAILED
+    evidence: Approximate 2416 lb/acre output was challenged as commercially implausible and remains unvalidated.
+    acceptance:
+      - existing model inputs calibration validation and leakage risk are audited
+      - historical back-testing and out-of-sample skill are established
+      - uncertainty and regional bias are quantified
+      - crop-response evidence is incorporated where scientifically justified
+      - displayed precision is justified
+    gaj_acceptance_required: true
+  - id: MAP-002
+    priority: P0
+    requirement: Temporal animation makes change understandable with synchronized date map crop stage and interpretation.
+    status: NOT_IMPLEMENTED
+    evidence: Prior proxy tests do not establish Pea-Trader-quality rendered behavior.
+    acceptance:
+      - no legend blinking
+      - no blank intermediate map
+      - no unexplained stale frame
+      - no date-map mismatch
+      - rendered transitions are visually smooth and understandable
+      - crop-stage indicator stays synchronized
+    gaj_acceptance_required: true
+  - id: SCI-001
+    priority: P1
+    requirement: Crop conclusions use defensible crop masking so surrounding non-bean landscapes are not interpreted as the crop.
+    status: NOT_IMPLEMENTED
+    acceptance:
+      - source year class definition spatial resolution and limitations documented
+      - current-season versus historical crop identity distinguished
+  - id: SCI-002
+    priority: P1
+    requirement: Irrigation is treated explicitly where defensible and rainfall deficit is not automatically equated with crop water stress.
+    status: NOT_IMPLEMENTED
+  - id: SCI-003
+    priority: P1
+    requirement: Vegetation response is crop-masked where possible stage-aware temporally comparable and provenance-bound.
+    status: NOT_IMPLEMENTED
+  - id: SCI-004
+    priority: P1
+    requirement: Disease-favorable weather is separated from confirmed disease occurrence.
+    status: NOT_IMPLEMENTED
+  - id: SCI-005
+    priority: P1
+    requirement: Production significance is not claimed without defensible acreage or production weighting.
+    status: NOT_IMPLEMENTED
