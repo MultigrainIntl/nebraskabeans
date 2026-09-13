@@ -1,39 +1,25 @@
 # Verification Protocol
 
-## Principle
-Verification must prove the actual requirement for the exact candidate, not merely a convenient proxy.
+## Mandatory record
+Every significant verification MUST capture: requirement ID; candidate SHA; deployed SHA when applicable; verification type; exact claim; evidence; implementer identity; verifier identity; timestamp; result; known limitations; GAJ acceptance state when required.
 
-## Verification record
-Every important verification record should capture:
-- requirement ID;
-- candidate SHA;
-- deployed SHA when applicable;
-- verification type;
-- exact claim tested;
-- evidence location or description;
-- verifier;
-- timestamp;
-- result;
-- known limitations;
-- GAJ acceptance state when required.
+## Independence
+A verification may be classified INDEPENDENTLY_VERIFIED only when verifier identity/process is genuinely distinct from the implementer. Same-session self-review is IMPLEMENTATION_TESTED, not independent verification.
+
+## Exact candidate
+Verification is bound to the exact candidate SHA. Branch names are insufficient. A changed candidate invalidates prior candidate-specific verification unless a documented non-impact rule applies.
 
 ## Test classes
-Use appropriate combinations of static architecture tests, data contract tests, evidence regression tests, scientific model tests, temporal consistency tests, browser runtime tests, responsive tests, visual tests, live deployment tests, and exact-commit tests.
+Use the claim-appropriate combination of static architecture, control-plane validation, data contract, evidence regression, scientific model, temporal consistency, browser runtime, responsive, visual, live deployment, and exact-commit tests.
 
-## Visual acceptance
-For significant UX work, inspect rendered desktop, tablet, and phone output against the active gate. Screenshot generation without inspection is insufficient.
-
-## Browser acceptance
-Browser behavior must be verified in the actual browser/runtime of the exact candidate or exact deployed candidate.
+## Visual and browser acceptance
+Visual requirements require rendered inspection at the relevant desktop/tablet/phone sizes. Browser requirements require the actual runtime of the exact candidate or deployed candidate. Screenshot generation without inspection is insufficient.
 
 ## Scientific acceptance
-Scientific claims require provenance, method validation, limitations, and uncertainty appropriate to the claim. A model producing a number is not evidence that the number is useful.
+Scientific claims require provenance, method validation, limitations, and uncertainty appropriate to the claim. A model producing a number does not establish usefulness or accuracy.
 
-## Failure handling
-If a test or live verification fails, mark the active gate FAILED, record the exact requirement, observed failure, candidate SHA, and whether production is untouched. Diagnose before making unrelated changes.
+## Contradiction handling
+Contradictory direct evidence MUST create or update a contradiction record and downgrade the affected requirement when the prior verification no longer holds.
 
-## Staleness
-Any code change after verification invalidates verification of the changed candidate. Verification is SHA-bound, not branch-name-bound.
-
-## Product Authority contradiction
-If GAJ presents direct evidence contradicting a verified subjective requirement, downgrade it immediately and record why prior verification was insufficient.
+## Machine validation boundary
+The control-plane validator proves internal consistency of control records. It does not prove the product itself. Product verification evidence remains separately required.

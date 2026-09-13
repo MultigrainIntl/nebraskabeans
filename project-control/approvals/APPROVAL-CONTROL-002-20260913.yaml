@@ -1,0 +1,20 @@
+schema_version: 1
+id: APPROVAL-CONTROL-002-20260913
+authority: GAJ
+authorization_type: execution_scope
+gate: CONTROL-002
+authorized_at: 2026-09-13T11:56:00-06:00
+base_sha: 6102f9f5109adea9640d095b432504a764ce7b92
+candidate_sha: null
+scope:
+  allow:
+    - harden the JoieOS/NebraskaBeans control plane
+    - add or update governance and project-control files
+    - add validator and control-plane tests
+  prohibit:
+    - product functionality changes
+    - staging deployment changes
+    - production changes
+notes:
+  - This approval authorizes implementation from the stated base SHA; it is not a post-implementation acceptance of the resulting candidate.
+  - Any later product/deployment action requires the authorization applicable to that gate.

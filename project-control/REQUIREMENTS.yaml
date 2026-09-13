@@ -1,80 +1,89 @@
-schema_version: 1
+schema_version: 2
 project: NebraskaBeans
-product_authority: GAJ
-status_values: [OPEN, ACTIVE, IMPLEMENTED, TESTED, DEPLOYED, INDEPENDENTLY_VERIFIED, GAJ_ACCEPTED, CLOSED, FAILED, BLOCKED, UNKNOWN, NOT_IMPLEMENTED]
+status_values: [OPEN, ACTIVE, IMPLEMENTED, IMPLEMENTATION_TESTED, DEPLOYED, INDEPENDENTLY_VERIFIED, GAJ_ACCEPTED, CLOSED, FAILED, BLOCKED]
+canonical_status_source: true
 requirements:
+  - id: CONTROL-001
+    priority: P0
+    requirement: Establish persistent JoieOS and NebraskaBeans project-control foundation without changing product functionality or deployment.
+    status: IMPLEMENTATION_TESTED
+    implementation_sha: 6102f9f5109adea9640d095b432504a764ce7b92
+    implementer: ChatGPT
+    independent_verification_record: null
+    gaj_acceptance_required: true
+    gaj_acceptance_record: null
+    note: Prior report used VERIFIED too strongly; because the same agent implemented and checked the work, CONTROL-001 is corrected to IMPLEMENTATION_TESTED pending independent verification.
+  - id: CONTROL-002
+    priority: P0
+    requirement: Harden the control plane so stale verification, ambiguous approval, inconsistent state, same-actor independent verification, and unauthorized scope expansion are mechanically detectable.
+    status: ACTIVE
+    implementation_sha: null
+    implementer: ChatGPT
+    independent_verification_record: null
+    gaj_acceptance_required: true
+    gaj_acceptance_record: null
+    acceptance:
+      - machine-readable precedence and state-transition rules exist
+      - exactly one active gate is mechanically enforced
+      - active gate must exist in canonical requirements
+      - verification must bind an exact candidate SHA
+      - independent verifier must differ from implementer
+      - GAJ acceptance cannot precede independent verification
+      - execution scope is explicitly locked
+      - production authorization is explicit and fail-closed
+      - contradictory evidence has a defined downgrade path
+      - validator includes negative self-tests that deliberately fail invalid states
+      - product files gh-pages and main remain unchanged
   - id: UX-001
     priority: P0
     requirement: Opening interface is immediately understandable and map-dominant rather than a long repetitive analytical page.
     status: FAILED
     evidence: GAJ screenshots and direct observation showed excessive complexity after prior claimed simplification.
-    acceptance:
-      - map appears near the top of the experience
-      - opening crop state is concise
-      - redundant analytical cards are removed or moved behind progressive disclosure
-      - primary view selector and temporal controls are obvious
-      - advanced controls are secondary
-      - desktop tablet and phone rendered views show intentional hierarchy
-      - no important agricultural intelligence is lost
     gaj_acceptance_required: true
+    acceptance: [map near top, concise opening crop state, progressive disclosure, obvious primary view and temporal controls, advanced controls secondary, intentional desktop tablet phone hierarchy, no important agricultural intelligence lost]
   - id: MAP-001
     priority: P0
     requirement: Temporal moisture surface is visually interpretable without distracting coarse blockiness while preserving honest native-resolution disclosure.
     status: FAILED
     evidence: GAJ screenshot showed visible coarse raster cells after prior implementation claims.
-    acceptance:
-      - full rendering pipeline source-to-browser is diagnosed
-      - smoothing or interpolation method is documented if used
-      - native measurement resolution remains explicit
-      - no false spatial precision is implied
-      - rendered desktop tablet and phone maps are visually inspected
-      - boundaries crop polygons and labels remain appropriately sharp
     gaj_acceptance_required: true
+    acceptance: [diagnose source-to-browser pipeline, document smoothing or interpolation, disclose native measurement resolution, imply no false precision, visually inspect desktop tablet phone maps]
   - id: YIELD-001
     priority: P0
     requirement: Precise current yield forecast is scientifically defensible before it is prominent in the primary interface.
     status: FAILED
     evidence: Approximate 2416 lb/acre output was challenged as commercially implausible and remains unvalidated.
-    acceptance:
-      - existing model inputs calibration validation and leakage risk are audited
-      - historical back-testing and out-of-sample skill are established
-      - uncertainty and regional bias are quantified
-      - crop-response evidence is incorporated where scientifically justified
-      - displayed precision is justified
     gaj_acceptance_required: true
+    acceptance: [audit model inputs calibration validation and leakage, establish historical and out-of-sample skill, quantify uncertainty and regional bias, incorporate defensible crop-response evidence, justify displayed precision]
   - id: MAP-002
     priority: P0
     requirement: Temporal animation makes change understandable with synchronized date map crop stage and interpretation.
-    status: NOT_IMPLEMENTED
-    evidence: Prior proxy tests do not establish Pea-Trader-quality rendered behavior.
-    acceptance:
-      - no legend blinking
-      - no blank intermediate map
-      - no unexplained stale frame
-      - no date-map mismatch
-      - rendered transitions are visually smooth and understandable
-      - crop-stage indicator stays synchronized
+    status: FAILED
+    evidence: Prior proxy tests do not establish Pea-Trader-quality rendered behavior or GAJ acceptance.
     gaj_acceptance_required: true
+    acceptance: [no legend blinking, no blank intermediate map, no unexplained stale frame, no date-map mismatch, visually smooth understandable transitions, synchronized crop-stage indicator]
   - id: SCI-001
     priority: P1
     requirement: Crop conclusions use defensible crop masking so surrounding non-bean landscapes are not interpreted as the crop.
-    status: NOT_IMPLEMENTED
-    acceptance:
-      - source year class definition spatial resolution and limitations documented
-      - current-season versus historical crop identity distinguished
+    status: OPEN
+    gaj_acceptance_required: false
   - id: SCI-002
     priority: P1
     requirement: Irrigation is treated explicitly where defensible and rainfall deficit is not automatically equated with crop water stress.
-    status: NOT_IMPLEMENTED
+    status: OPEN
+    gaj_acceptance_required: false
   - id: SCI-003
     priority: P1
     requirement: Vegetation response is crop-masked where possible stage-aware temporally comparable and provenance-bound.
-    status: NOT_IMPLEMENTED
+    status: OPEN
+    gaj_acceptance_required: false
   - id: SCI-004
     priority: P1
     requirement: Disease-favorable weather is separated from confirmed disease occurrence.
-    status: NOT_IMPLEMENTED
+    status: OPEN
+    gaj_acceptance_required: false
   - id: SCI-005
     priority: P1
     requirement: Production significance is not claimed without defensible acreage or production weighting.
-    status: NOT_IMPLEMENTED
+    status: OPEN
+    gaj_acceptance_required: false

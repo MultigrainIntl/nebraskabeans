@@ -1,0 +1,19 @@
+schema_version: 1
+states: [OPEN, ACTIVE, IMPLEMENTED, IMPLEMENTATION_TESTED, DEPLOYED, INDEPENDENTLY_VERIFIED, GAJ_ACCEPTED, CLOSED, FAILED, BLOCKED]
+transitions:
+  OPEN: [ACTIVE, BLOCKED]
+  ACTIVE: [IMPLEMENTED, FAILED, BLOCKED]
+  IMPLEMENTED: [IMPLEMENTATION_TESTED, FAILED, BLOCKED]
+  IMPLEMENTATION_TESTED: [DEPLOYED, INDEPENDENTLY_VERIFIED, FAILED, BLOCKED]
+  DEPLOYED: [INDEPENDENTLY_VERIFIED, FAILED, BLOCKED]
+  INDEPENDENTLY_VERIFIED: [GAJ_ACCEPTED, CLOSED, FAILED]
+  GAJ_ACCEPTED: [CLOSED, FAILED]
+  CLOSED: [FAILED]
+  FAILED: [ACTIVE, BLOCKED]
+  BLOCKED: [ACTIVE, FAILED]
+constraints:
+  - INDEPENDENTLY_VERIFIED requires a verification record for the exact candidate SHA.
+  - DEPLOYED verification requires candidate_sha == deployed_sha unless the requirement explicitly permits artifact transformation and records its hash chain.
+  - GAJ_ACCEPTED requires gaj_acceptance_required == true and an approval record bound to the exact accepted SHA.
+  - A contradictory direct observation may transition INDEPENDENTLY_VERIFIED, GAJ_ACCEPTED, or CLOSED to FAILED.
+  - A new candidate SHA invalidates prior candidate-specific verification and acceptance.

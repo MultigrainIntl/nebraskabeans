@@ -1,0 +1,20 @@
+schema_version: 1
+project: NebraskaBeans
+repository: MultigrainIntl/nebraskabeans
+product_authority: GAJ
+production_branch: main
+staging_development_branch: staging/recover-5fa3f42
+staging_deployment_branch: gh-pages
+production_policy: explicit_GAJ_authorization_required
+canonical_sources:
+  governance: joieos/GOVERNANCE.md
+  control_schema: joieos/CONTROL_SCHEMA.yaml
+  state_machine: joieos/STATE_MACHINE.yaml
+  current_state: project-control/CURRENT_STATE.yaml
+  requirements: project-control/REQUIREMENTS.yaml
+  execution_lock: project-control/EXECUTION_LOCK.yaml
+  approvals: project-control/approvals/
+  verification: project-control/verification/
+  contradictions: project-control/contradictions/
+status_authority: REQUIREMENTS.yaml
+human_readable_summaries_are_non_authoritative: true

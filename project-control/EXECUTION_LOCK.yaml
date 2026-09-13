@@ -1,0 +1,20 @@
+schema_version: 1
+gate: CONTROL-002
+status: ACTIVE
+authorized_by: GAJ
+authorized_at: 2026-09-13T11:56:00-06:00
+scope:
+  allow:
+    - harden persistent JoieOS and NebraskaBeans control plane
+    - add or update governance and project-control files
+    - add validator and control-plane tests
+    - verify repository-only control changes
+  prohibit:
+    - product functionality changes
+    - application asset changes
+    - staging deployment changes
+    - gh-pages changes
+    - main changes
+    - production changes
+    - DNS or GoDaddy changes
+stop_condition: report exact implementation SHA and verification evidence, then stop for review

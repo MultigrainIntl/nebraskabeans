@@ -1,0 +1,24 @@
+schema_version: 1
+precedence:
+  - current_explicit_GAJ_approval
+  - joieos_governance
+  - current_state
+  - requirements
+  - approval_records
+  - verification_records
+  - decision_records
+  - generated_human_summaries
+  - chat_history
+rules:
+  exactly_one_active_gate: true
+  active_gate_must_exist: true
+  approval_must_bind_exact_sha_when_sha_exists: true
+  verification_must_bind_exact_sha: true
+  deployed_verification_requires_deployed_sha: true
+  independent_verifier_must_differ_from_implementer: true
+  gaj_acceptance_requires_independent_verification: true
+  contradictory_evidence_reopens_requirement: true
+  branch_name_never_substitutes_for_sha: true
+  production_requires_explicit_GAJ_authorization: true
+  stale_verification_after_candidate_change: true
+fail_closed: true

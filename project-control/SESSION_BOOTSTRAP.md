@@ -1,18 +1,18 @@
 # Session Bootstrap
 
-Use this at the start of every NebraskaBeans execution session.
+At the start of every NebraskaBeans execution session:
 
-1. Read `joieos/GOVERNANCE.md`.
-2. Read all files under `project-control/`, especially `CURRENT_STATE.yaml`, `REQUIREMENTS.yaml`, `FAILURES.md`, and `VERIFICATION_PROTOCOL.md`.
-3. Independently verify the live repository branch SHAs and deployed staging SHA. Do not assume `CURRENT_STATE.yaml` is still current.
-4. Reconcile any discrepancy before implementation. Record the observed truth.
-5. Identify the single ACTIVE requirement. If no product requirement is ACTIVE, select exactly one highest-impact unresolved requirement using the prioritization rules and establish concise PASS criteria before changing product code.
-6. Re-anchor before every material action to: primary product goal; active requirement; active acceptance gate; exact candidate SHA; staging-only boundary.
-7. Follow Observe → Prove → Classify → Act and the JoieOS gate flow.
-8. Do not modify production/main, merge to main, alter DNS/GoDaddy, or broaden scope without explicit GAJ authorization.
-9. Do not call a requirement VERIFIED unless its prescribed verification evidence exists for the exact candidate/deployed SHA.
-10. If evidence conflicts with a prior claim, downgrade the claim and investigate.
-11. Keep execution updates short and factual. Execute when authorized rather than producing another large planning document.
-12. At each completed gate report: ACTIVE GATE, STATUS, EXACT SHA, PROVED, NOT YET PROVED, PRODUCTION, NEXT — then stop for reassessment when required.
+1. Read `joieos/GOVERNANCE.md`, `joieos/CONTROL_SCHEMA.yaml`, and `joieos/STATE_MACHINE.yaml`.
+2. Read `project-control/PROJECT.yaml`, `CURRENT_STATE.yaml`, `REQUIREMENTS.yaml`, `EXECUTION_LOCK.yaml`, `FAILURES.md`, and `VERIFICATION_PROTOCOL.md`.
+3. Resolve live Git SHAs for `main`, `staging/recover-5fa3f42`, and `gh-pages`. Do not treat recorded branch SHAs as current without checking.
+4. Run or inspect the control-plane validator before product implementation. Any control inconsistency is a blocking defect.
+5. Confirm exactly one ACTIVE gate exists and matches `EXECUTION_LOCK.yaml`.
+6. Do not autonomously activate a different material gate. You may recommend the next gate; activation requires existing durable authority or GAJ authorization.
+7. Re-anchor every material action to the active gate, exact live candidate SHA, authorized scope, and staging-only boundary.
+8. Use Observe → Prove → Classify → Act and the JoieOS gate flow.
+9. Never modify `main`, `gh-pages`, production, DNS, or GoDaddy unless the current explicit authorization allows it.
+10. Do not call same-actor testing independent verification. Use IMPLEMENTATION_TESTED until a genuinely separate verifier/process reviews the exact candidate.
+11. Contradictory evidence overrides stale acceptance and must be recorded.
+12. Report completed gates with ACTIVE GATE, STATUS, EXACT SHA, PROVED, NOT YET PROVED, PRODUCTION, NEXT, then stop when the gate requires reassessment.
 
-Repository truth outranks chat memory. Direct evidence outranks proxy tests. Scientific validity outranks convenient outputs.
+Repository truth outranks chat memory. Exact evidence outranks proxy evidence. Passing governance checks does not substitute for product verification.
