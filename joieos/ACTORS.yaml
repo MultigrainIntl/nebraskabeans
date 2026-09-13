@@ -1,0 +1,17 @@
+schema_version: 1
+actors:
+  openai-chatgpt:
+    vendor: OpenAI
+    organization: OpenAI
+    kind: model
+  anthropic-claude-opus-5:
+    vendor: Anthropic
+    organization: Anthropic
+    kind: model
+  gaj-product-authority:
+    vendor: HUMAN
+    organization: MultigrainIntl
+    kind: human
+rules:
+  unknown_actor_rejected: true
+  independence_compared_at_vendor_level: true
