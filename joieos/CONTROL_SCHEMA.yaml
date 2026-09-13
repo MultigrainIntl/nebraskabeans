@@ -1,12 +1,13 @@
-schema_version: 1
+schema_version: 2
 precedence:
   - current_explicit_GAJ_approval
   - joieos_governance
-  - current_state
+  - live_repository_truth_and_exact_git_shas
   - requirements
+  - current_state
   - approval_records
   - verification_records
-  - decision_records
+  - contradiction_and_decision_records
   - generated_human_summaries
   - chat_history
 rules:
@@ -21,4 +22,5 @@ rules:
   branch_name_never_substitutes_for_sha: true
   production_requires_explicit_GAJ_authorization: true
   stale_verification_after_candidate_change: true
+  control_files_must_not_self_reference_containing_commit: true
 fail_closed: true
