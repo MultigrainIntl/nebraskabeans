@@ -3,12 +3,14 @@ name: NebraskaBeans staging QA
 on:
   push:
     branches: [gh-pages, 'staging/**']
+  pull_request:
+    branches: [main, gh-pages, 'staging/**']
 
 permissions:
   contents: read
 
 concurrency:
-  group: nebraskabeans-staging-qa
+  group: nebraskabeans-staging-qa-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -16,10 +18,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout exact staging head
+      - name: Checkout exact candidate head
         uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: CONTROL PLANE — FIRST QA GATE
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --ignore-scripts --no-audit --no-fund
+          node scripts/validate-control-plane.mjs
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -96,5 +106,5 @@ jobs:
 
       - name: Report exact verified SHA
         run: |
-          echo "VERIFIED_STAGING_SHA=${GITHUB_SHA}"
+          echo "VALIDATED_CANDIDATE_SHA=${GITHUB_SHA}"
           echo "ROLLBACK_SHA=f1ac4880f3be04b3d2aa91fae710bfaa3ae625b4"
