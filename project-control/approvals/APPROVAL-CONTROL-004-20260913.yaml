@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 id: APPROVAL-CONTROL-004-20260913
 authority: GAJ
 authorization_type: execution_scope
@@ -8,11 +8,12 @@ base_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
 candidate_sha: null
 scope:
   allow:
-    - remediate the JoieOS and NebraskaBeans control plane under CONTROL-004 items 1 through 21
-    - update governance and project-control files required by CONTROL-004
-    - update scripts and add control-plane test fixtures required by CONTROL-004
-    - update staging QA workflow to run the control-plane validator first
-    - verify repository-only control changes on staging/recover-5fa3f42
+    - joieos/**
+    - project-control/**
+    - scripts/**
+    - tests/control-plane/**
+    - .github/workflows/staging-qa.yml
+    - package.json
   prohibit:
     - product functionality changes
     - application asset changes
@@ -27,4 +28,5 @@ source:
   authority: GAJ
   statement: CONTROL-003 RESULT FAIL; NEW GATE CONTROL-004 control-plane remediation; staging only; do not touch main gh-pages production DNS GoDaddy or product code; perform items 1-21 in order.
 notes:
-  - This record preserves GAJ's explicit authorization from the current conversation. It is not post-implementation acceptance.
+  - The path allow-list is the technical encoding of the explicitly authorized CONTROL-004 scope; it does not broaden that authorization.
+  - This approval is not post-implementation acceptance.
