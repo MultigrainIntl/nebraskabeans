@@ -37,7 +37,7 @@
         <label class="nbPrimaryView">PRIMARY VIEW<select id="nbPrimaryView"><option value="crop-status">Crop status</option><option value="soil-moisture">Soil moisture</option><option value="moisture-anomaly">Moisture anomaly</option><option value="vegetation">Vegetation / NDVI</option></select></label>
         <div id="nbQuickViews"></div>
         <div class="nbQuestionTabs" aria-label="Decision-support sections"><button type="button" data-target="nbSeasonSnapshot">Current state</button><button type="button" data-target="nbDecisionPanel">What changed?</button><button type="button" data-target="sources">Evidence</button></div>
-        <details class="nbAdvanced"><summary>More map controls</summary><div id="nbAdvancedSlot"></div></details>
+        <details class="nbAdvanced" open><summary>More map controls</summary><div id="nbAdvancedSlot"></div></details>
       </div>`;
     mapWrap.appendChild(panel);
 
