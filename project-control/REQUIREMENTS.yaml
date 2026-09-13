@@ -7,21 +7,24 @@ requirements:
     priority: P0
     requirement: Establish persistent JoieOS and NebraskaBeans project-control foundation without changing product functionality or deployment.
     status: IMPLEMENTATION_TESTED
+    candidate_sha: 6102f9f5109adea9640d095b432504a764ce7b92
     implementation_sha: 6102f9f5109adea9640d095b432504a764ce7b92
     implementer: ChatGPT
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
-    note: Prior report used VERIFIED too strongly; because the same agent implemented and checked the work, CONTROL-001 is corrected to IMPLEMENTATION_TESTED pending independent verification.
+    note: Same-actor checking is IMPLEMENTATION_TESTED only; independent verification remains outstanding.
   - id: CONTROL-002
     priority: P0
     requirement: Harden the control plane so stale verification, ambiguous approval, inconsistent state, same-actor independent verification, and unauthorized scope expansion are mechanically detectable.
-    status: ACTIVE
-    implementation_sha: null
+    status: FAILED
+    candidate_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
+    implementation_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     implementer: ChatGPT
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
+    evidence: CONTROL-003 independent adversarial audit by Claude Opus 5 failed the candidate with 4 CRITICAL and 10 HIGH findings; 24 material bypasses across 38 fixtures.
     acceptance:
       - machine-readable precedence and state-transition rules exist
       - exactly one active gate is mechanically enforced
@@ -34,6 +37,17 @@ requirements:
       - contradictory evidence has a defined downgrade path
       - validator includes negative self-tests that deliberately fail invalid states
       - product files gh-pages and main remain unchanged
+  - id: CONTROL-004
+    priority: P0
+    requirement: Remediate all CONTROL-003 CRITICAL HIGH and specified MEDIUM findings in items 1-21 without changing product code deployment production DNS or GoDaddy.
+    status: ACTIVE
+    candidate_sha: null
+    implementation_sha: null
+    implementer: ChatGPT
+    independent_verification_record: null
+    gaj_acceptance_required: true
+    gaj_acceptance_record: null
+    evidence: GAJ explicitly opened CONTROL-004 after CONTROL-003 failed exact SHA b5c3aa1b06f3175917b76f46a1935f9db2279b48.
   - id: UX-001
     priority: P0
     requirement: Opening interface is immediately understandable and map-dominant rather than a long repetitive analytical page.
