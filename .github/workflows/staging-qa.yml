@@ -1,0 +1,111 @@
+name: NebraskaBeans staging QA
+
+on:
+  push:
+    branches: [gh-pages, 'staging/**']
+  pull_request:
+    branches: [main, gh-pages, 'staging/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nebraskabeans-staging-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: CONTROL PLANE — FIRST QA GATE
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci --ignore-scripts --no-audit --no-fund
+          node scripts/validate-control-plane.mjs --require-head
+          npm run test:control
+
+      - name: Verify staging-only architecture
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e assets/site.js
+          test ! -e assets/bean-regions.js
+          test ! -e assets/map-refine.js
+          test ! -e assets/visual-evidence.js
+          ! grep -Eq 'assets/(site|bean-regions|map-refine|visual-evidence)\.js' index.html
+          grep -q 'assets/app.js' index.html
+          grep -q 'assets/source-registry.js' index.html
+          grep -q 'assets/shell.js' commercial.html
+
+      - name: Verify governed foundation and build identity
+        run: |
+          node scripts/build_manifest.mjs --check
+          node scripts/verify_foundation.mjs
+
+      - name: Run evidence regression tests
+        run: |
+          node tests/temporal-evidence.test.js
+          node tests/evidence-store.test.js
+
+      - name: Install Chromium verifier
+        run: |
+          npm install --no-save playwright@1.55.0 leaflet@1.9.4
+          npx playwright install --with-deps chromium
+
+      - name: Render exact checkout locally
+        shell: bash
+        run: |
+          python3 -m http.server 4173 >/tmp/nebraskabeans-http.log 2>&1 &
+          echo $! >/tmp/nebraskabeans-http.pid
+          for i in {1..20}; do curl -fsS http://127.0.0.1:4173/index.html >/dev/null && break; sleep 1; done
+          NB_OFFLINE_FIXTURES=1 NB_BASE_URL='http://127.0.0.1:4173/' node tests/browser-smoke.mjs
+
+      - name: Prove map visual contract
+        shell: bash
+        run: |
+          NB_BASE_URL='http://127.0.0.1:4173/' NB_VISUAL_OUT='artifacts/visual-proof' node tests/visual-contract.mjs
+
+      - name: Upload visual proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: nebraskabeans-visual-proof-${{ github.sha }}
+          path: artifacts/visual-proof/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Verify deployed GitHub Pages rendering
+        if: github.ref == 'refs/heads/gh-pages'
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://multigrainintl.github.io/nebraskabeans/?qa=${GITHUB_SHA}"
+          python3 tests/verify_deployed.py "$URL"
+          NB_BASE_URL="$URL" node tests/browser-smoke.mjs
+          NB_BASE_URL="$URL" NB_VISUAL_OUT='artifacts/live-visual-proof' node tests/visual-contract.mjs
+
+      - name: Upload live visual proof
+        if: github.ref == 'refs/heads/gh-pages'
+        uses: actions/upload-artifact@v4
+        with:
+          name: nebraskabeans-live-visual-proof-${{ github.sha }}
+          path: artifacts/live-visual-proof/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Report exact validated SHA
+        run: |
+          echo "VALIDATED_CANDIDATE_SHA=${GITHUB_SHA}"
+          echo "ROLLBACK_SHA=f1ac4880f3be04b3d2aa91fae710bfaa3ae625b4"
