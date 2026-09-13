@@ -56,25 +56,36 @@ function approvalIntroduction(rel) {
   return commits[0];
 }
 
-function validateApprovalAppendOnly(rel, isLegacy) {
+function validateApprovalAppendOnly(rel, isLegacy, legacyBaselineSha) {
+  const current = text(rel);
+  if (current === null) return;
+  if (isLegacy) {
+    if (!shaOk(legacyBaselineSha)) {
+      fail('CONTROL-APPROVAL-012 legacy baseline SHA is missing or invalid');
+      return;
+    }
+    const baseline = git(['show',`${legacyBaselineSha}:${rel}`], root, false);
+    if (baseline === null || baseline !== current) {
+      fail(`CONTROL-APPROVAL-013 legacy approval ${rel} changed after baseline ${legacyBaselineSha}`);
+    }
+    return;
+  }
   const intro = approvalIntroduction(rel);
   if (!intro) return;
   const original = git(['show',`${intro}:${rel}`], root, false);
-  const current = text(rel);
-  if (original === null || current === null || original !== current) {
+  if (original === null || original !== current) {
     fail(`CONTROL-APPROVAL-008 ${rel} differs from first-introducing commit ${intro}`);
   }
-  if (!isLegacy) {
-    const changed = String(git(['diff-tree','--root','--no-commit-id','--name-only','-r',intro], root) || '').split(/\n+/).filter(Boolean);
-    if (changed.length !== 1 || changed[0] !== rel) {
-      fail(`CONTROL-APPROVAL-009 ${rel} must be introduced in an approval-only commit; changed: ${changed.join(',')}`);
-    }
+  const changed = String(git(['diff-tree','--root','--no-commit-id','--name-only','-r',intro], root) || '').split(/\n+/).filter(Boolean);
+  if (changed.length !== 1 || changed[0] !== rel) {
+    fail(`CONTROL-APPROVAL-009 ${rel} must be introduced in an approval-only commit; changed: ${changed.join(',')}`);
   }
 }
 
 const reqs=yaml('project-control/REQUIREMENTS.yaml'),state=yaml('project-control/CURRENT_STATE.yaml'),lock=yaml('project-control/EXECUTION_LOCK.yaml'),control=yaml('joieos/CONTROL_SCHEMA.yaml'),machine=yaml('joieos/STATE_MACHINE.yaml'),project=yaml('project-control/PROJECT.yaml'),legacyApprovalConfig=yaml('project-control/APPROVAL_LEGACY.yaml');
 const approvalFiles=dirYaml('project-control/approvals',true),contradictionFiles=dirYaml('project-control/contradictions',false);
 const legacyApprovalIds=new Set(legacyApprovalConfig?.legacy_approval_ids||[]);
+const legacyApprovalBaseline=legacyApprovalConfig?.legacy_baseline_sha;
 
 if(reqs){keys(reqs,['schema_version','project','status_values','canonical_status_source','requirements'],'REQUIREMENTS');required(reqs,['schema_version','project','status_values','canonical_status_source','requirements'],'REQUIREMENTS');if(!sameSet(reqs.status_values,CANONICAL_STATUSES))fail('CONTROL-STATUS-000 status_values must exactly equal the closed canonical enum');if(!Array.isArray(reqs.requirements))fail('CONTROL-SCHEMA-005 REQUIREMENTS.requirements must be list');for(const[i,r]of(reqs.requirements||[]).entries()){keys(r,['id','priority','requirement','history_start_status','transitions','status','candidate_sha','implementation_sha','implementer','verifier','identity_provenance','independent_verification_record','non_impact_rule_ref','gaj_acceptance_required','gaj_acceptance_record','note','acceptance','evidence'],`requirement[${i}]`);required(r,['id','priority','requirement','history_start_status','transitions','status','implementer','verifier','identity_provenance','gaj_acceptance_required'],`requirement[${i}]`);if(!Array.isArray(r.transitions))fail(`CONTROL-TRANSITION-001 ${r.id} transitions must list`);for(const[j,t]of(r.transitions||[]).entries()){keys(t,['from','to','sha','actor','timestamp'],`${r.id}.transitions[${j}]`);required(t,['from','to','sha','actor','timestamp'],`${r.id}.transitions[${j}]`);sha(t.sha,`${r.id}.transitions[${j}].sha`);}if('candidate_sha'in r)sha(r.candidate_sha,`${r.id}.candidate_sha`,true);if('implementation_sha'in r)sha(r.implementation_sha,`${r.id}.implementation_sha`,true);}}
 if(state){keys(state,['schema_version','project','recorded_at','repository','branches','active_gate','active_gate_status','known_open_p0','source_of_truth','rules'],'CURRENT_STATE');required(state,['schema_version','project','recorded_at','repository','branches','active_gate','active_gate_status','source_of_truth'],'CURRENT_STATE');keys(state.branches,['production_main','development_recovery','staging_deployment'],'CURRENT_STATE.branches');for(const[n,b]of Object.entries(state.branches||{})){keys(b,['name','last_observed_sha','control_001_anchor_sha','current_head','role'],`CURRENT_STATE.branches.${n}`);if(b.last_observed_sha)sha(b.last_observed_sha,`${n}.last_observed_sha`);if(b.control_001_anchor_sha)sha(b.control_001_anchor_sha,`${n}.control_001_anchor_sha`);}keys(state.source_of_truth,['live_git_head','requirement_status','execution_scope','governance'],'CURRENT_STATE.source_of_truth');}
@@ -82,7 +93,7 @@ if(lock){keys(lock,['schema_version','gate','status','approval_ref','authorized_
 if(control){keys(control,['schema_version','precedence','rules','fail_closed'],'CONTROL_SCHEMA');required(control,['schema_version','precedence','rules','fail_closed'],'CONTROL_SCHEMA');const rn=['exactly_one_active_gate','active_gate_must_exist','approval_must_bind_exact_sha_when_sha_exists','verification_must_bind_exact_sha','deployed_verification_requires_deployed_sha','independent_verifier_must_differ_from_implementer','gaj_acceptance_requires_independent_verification','contradictory_evidence_reopens_requirement','branch_name_never_substitutes_for_sha','production_requires_explicit_GAJ_authorization','stale_verification_after_candidate_change','control_files_must_not_self_reference_containing_commit'];keys(control.rules,rn,'CONTROL_SCHEMA.rules');rn.forEach(n=>{if(control.rules?.[n]!==true)fail(`CONTROL-SCHEMA-006 rule ${n} must true`);});if(control.fail_closed!==true)fail('CONTROL-SCHEMA-007 fail_closed must true');}
 if(machine){keys(machine,['schema_version','states','transitions','constraints'],'STATE_MACHINE');required(machine,['schema_version','states','transitions','constraints'],'STATE_MACHINE');if(!sameSet(machine.states,CANONICAL_STATUSES))fail('CONTROL-STATUS-002 STATE_MACHINE.states must exactly equal closed canonical enum');keys(machine.transitions,CANONICAL_STATUSES,'STATE_MACHINE.transitions');}
 if(project){keys(project,['schema_version','project','repository','product_authority','production_branch','staging_development_branch','staging_deployment_branch','production_policy','canonical_sources','status_authority','human_readable_summaries_are_non_authoritative'],'PROJECT');required(project,['schema_version','project','repository','product_authority','production_branch','staging_development_branch','staging_deployment_branch','production_policy','canonical_sources','status_authority'],'PROJECT');keys(project.canonical_sources,['governance','control_schema','state_machine','current_state','requirements','execution_lock','approvals','verification','contradictions'],'PROJECT.canonical_sources');}
-if(legacyApprovalConfig){keys(legacyApprovalConfig,['schema_version','legacy_approval_ids','rules'],'APPROVAL_LEGACY');required(legacyApprovalConfig,['schema_version','legacy_approval_ids','rules'],'APPROVAL_LEGACY');}
+if(legacyApprovalConfig){keys(legacyApprovalConfig,['schema_version','legacy_baseline_sha','legacy_approval_ids','rules'],'APPROVAL_LEGACY');required(legacyApprovalConfig,['schema_version','legacy_baseline_sha','legacy_approval_ids','rules'],'APPROVAL_LEGACY');sha(legacyApprovalConfig.legacy_baseline_sha,'APPROVAL_LEGACY.legacy_baseline_sha');}
 
 const approvals=[],byApproval=new Map();
 for(const{name,record:a}of approvalFiles){
@@ -107,7 +118,7 @@ for(const{name,record:a}of approvalFiles){
   if((approvalProhibit.includes('application asset changes')||approvalProhibit.includes('product functionality changes'))&&approvalAllow.some(productScopeRule)){
     fail(`CONTROL-SCOPE-005 ${name} allow-list contradicts product/application prohibit categories`);
   }
-  validateApprovalAppendOnly(rel,isLegacy);
+  validateApprovalAppendOnly(rel,isLegacy,legacyApprovalBaseline);
   if(byApproval.has(a.id))fail(`CONTROL-APPROVAL-002 duplicate ${a.id}`);
   byApproval.set(a.id,a);
   approvals.push(a);
