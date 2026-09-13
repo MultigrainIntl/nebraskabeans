@@ -1,4 +1,4 @@
-schema_version: 3
+schema_version: 4
 project: NebraskaBeans
 recorded_at: 2026-09-13T12:23:00-06:00
 repository: MultigrainIntl/nebraskabeans
@@ -29,3 +29,4 @@ rules:
   - Recorded SHAs are observations or immutable anchors, never substitutes for live HEAD.
   - If live repository state conflicts with this file, stop product implementation, classify the discrepancy, and repair control state first.
   - A file inside a commit must not claim to contain the SHA of its own containing commit.
+  - Claims that main, gh-pages, production, or deployment were unchanged must be computed from live Git comparison and diff evidence; CURRENT_STATE must not assert its own innocence with boolean fields.
