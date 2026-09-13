@@ -51,14 +51,14 @@ requirements:
         timestamp: 2026-09-13T12:23:00-06:00
     status: ACTIVE
     candidate_sha: null
-    implementation_sha: 87065fe0b52aa59ade43385eacfcfff06cbbaedd
+    implementation_sha: e701eb704fb525ee8a08ff3deb6e95095675fe43
     implementer: ChatGPT
     verifier: null
     identity_provenance: pending_independent_verification
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
-    evidence: GAJ explicitly opened CONTROL-004 after CONTROL-003 failed exact SHA b5c3aa1b06f3175917b76f46a1935f9db2279b48; implementation body is bound to exact SHA 87065fe0b52aa59ade43385eacfcfff06cbbaedd while the gate remains ACTIVE pending the mandated fixture run and independent re-verification.
+    evidence: GAJ explicitly opened CONTROL-004 after CONTROL-003 failed exact SHA b5c3aa1b06f3175917b76f46a1935f9db2279b48; corrected implementation body is bound to exact SHA e701eb704fb525ee8a08ff3deb6e95095675fe43 while the gate remains ACTIVE pending the mandated fixture run and independent re-verification.
   - id: UX-001
     priority: P0
     requirement: Opening interface is immediately understandable and map-dominant rather than a long repetitive analytical page.
