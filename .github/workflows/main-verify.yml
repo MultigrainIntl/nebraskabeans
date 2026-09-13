@@ -1,0 +1,49 @@
+name: NebraskaBeans main policy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nebraskabeans-main-policy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Enforce main branch inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          unexpected="$(
+            git ls-files |
+              grep -Ev '^(README\.md|\.github/workflows/main-verify\.yml|\.github/CODEOWNERS)$' ||
+              true
+          )"
+
+          if [[ -n "$unexpected" ]]; then
+            echo "Files prohibited on main:"
+            echo "$unexpected"
+            exit 1
+          fi
+
+          test -f README.md
+          test ! -L README.md
+          test -f .github/workflows/main-verify.yml
+          test ! -L .github/workflows/main-verify.yml
+          test -f .github/CODEOWNERS
+          test ! -L .github/CODEOWNERS

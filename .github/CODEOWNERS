@@ -1,0 +1,6 @@
+# Human review required for control and automation surfaces.
+/.github/** @MultigrainIntl
+/scripts/** @MultigrainIntl
+/project-control/** @MultigrainIntl
+/joieos/** @MultigrainIntl
+/tests/control-plane/** @MultigrainIntl
