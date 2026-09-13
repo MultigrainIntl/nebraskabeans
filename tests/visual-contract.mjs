@@ -34,14 +34,20 @@ try{
  assert((await page.locator('#mapLegend').textContent()).trim().length>20,'map legend is empty');
 
  await page.waitForSelector('#nbSeasonSnapshot',{state:'visible',timeout:10000});
- for(const id of ['#nbSnapStage','#nbSnapCondition','#nbSnapWater','#nbSnapVeg','#nbSnapRisk']){
+ await page.waitForSelector('#nbYieldDirection',{state:'visible',timeout:10000});
+ for(const id of ['#nbSnapStage','#nbSnapCondition','#nbYieldDirection','#nbSnapWater','#nbSnapVeg','#nbWatchNext']){
    assert((await page.locator(id).textContent()).trim().length>0,`${id} is empty`);
  }
+ assert((await page.locator('#nbCurrentTakeaway').textContent()).includes('Nebraska Panhandle'),'current-state takeaway does not identify the initial region');
+ assert((await page.locator('#nbCurrentAsOf').textContent()).includes('2026-09-09'),'current-state panel is not anchored to latest governed date');
+ assert((await page.locator('.nbForecastPlaceholder').textContent()).includes('PLANNED'),'forecast placeholder missing');
 
  await page.waitForSelector('.nbTimeline',{state:'visible',timeout:10000});
  assert((await page.locator('.nbTimeline').count())>=2,'broad crop calendar and GDD timeline are not both rendered');
  const timeline=await box('.nbTimelines');
  assert(timeline&&timeline.y>=slider.y,'crop timeline is not below slider');
+ const speedRow=await box('#nbSpeedRow');
+ assert(speedRow&&speedRow.y>=slider.y+slider.height-2,'playback speed is not directly below the temporal slider');
 
  let blankLegend=false;
  await page.exposeFunction('__legendBlank',()=>{blankLegend=true});
@@ -53,7 +59,7 @@ try{
    await page.$eval('#timeSlider',(el,v)=>{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))},v);
    await page.waitForTimeout(120);
  }
- assert(!blankLegend,'legend became blank/hidden during temporal scrubbing');
+ assert(!blankLegend,'legend became blank/hidden during desktop temporal scrubbing');
 
  await page.click('#moistureBtn');
  await page.waitForSelector('img.temporal-raster',{state:'visible',timeout:45000});
@@ -65,8 +71,6 @@ try{
  const transition=await page.locator('img.temporal-raster').last().evaluate(el=>getComputedStyle(el).transitionDuration);
  assert.notEqual(transition,'0s','temporal raster has no CSS transition');
 
- // NDVI proof uses a date already present in the governed satellite evidence store.
- // This proves temporal rendering against a source-valid checkpoint rather than an arbitrary calendar day.
  await page.click('#satBtn');
  await page.waitForFunction(()=>document.querySelector('img.temporal-raster')?.src.includes('NDVI-DAILY_2026'),null,{timeout:45000});
  const ndviA=await page.locator('img.temporal-raster').last().getAttribute('src');
@@ -88,10 +92,17 @@ try{
  await page.setViewportSize({width:390,height:844});
  assert(await visible('#map'),'map hidden on mobile');
  assert(await visible('.timebar'),'slider hidden on mobile');
- assert(await visible('#nbSeasonSnapshot'),'season snapshot hidden on mobile');
+ assert(await visible('#nbSeasonSnapshot'),'current crop state hidden on mobile');
+ assert(await visible('#nbLegendToggle'),'mobile legend control missing');
+ assert(!(await visible('#mapLegend')),'mobile legend should default closed');
+ await page.click('#nbLegendToggle');
+ assert(await visible('#mapLegend'),'mobile legend cannot be opened');
+ assert.equal(await page.locator('#nbLegendToggle').getAttribute('aria-expanded'),'true','mobile legend open state not exposed');
+ await page.click('#nbLegendToggle');
+ assert(!(await visible('#mapLegend')),'mobile legend cannot be closed');
  await page.screenshot({path:`${OUT}/mobile.png`,fullPage:true});
 
  const fatal=errors.filter(x=>!x.includes('Failed to load resource'));
  assert.equal(fatal.length,0,`browser errors: ${fatal.join(' | ')}`);
- console.log(JSON.stringify({status:'PASS',base:BASE,sliderGapPx:slider.y-(map.y+map.height),moistureSourcesDiffer:srcA!==srcB,ndviSourcesDiffer:ndviA!==ndviB,ndviGovernedCheckpoint:ndviTargetDate,legendPersistent:!blankLegend,instantDecisionHierarchy:true,screenshots:['desktop-current.png','mobile.png']},null,2));
+ console.log(JSON.stringify({status:'PASS',base:BASE,sliderGapPx:slider.y-(map.y+map.height),moistureSourcesDiffer:srcA!==srcB,ndviSourcesDiffer:ndviA!==ndviB,ndviGovernedCheckpoint:ndviTargetDate,legendPersistent:!blankLegend,currentCropState:true,mobileLegendClosable:true,speedBelowSlider:true,screenshots:['desktop-current.png','mobile.png']},null,2));
 } finally { await browser.close(); }
