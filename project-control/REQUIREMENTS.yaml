@@ -1,4 +1,4 @@
-schema_version: 3
+schema_version: 4
 project: NebraskaBeans
 status_values: [OPEN, ACTIVE, IMPLEMENTED, IMPLEMENTATION_TESTED, DEPLOYED, INDEPENDENTLY_VERIFIED, GAJ_ACCEPTED, CLOSED, FAILED, BLOCKED]
 canonical_status_source: true
@@ -12,6 +12,8 @@ requirements:
     candidate_sha: 6102f9f5109adea9640d095b432504a764ce7b92
     implementation_sha: 6102f9f5109adea9640d095b432504a764ce7b92
     implementer: ChatGPT
+    verifier: null
+    identity_provenance: pending_independent_verification
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
@@ -30,6 +32,8 @@ requirements:
     candidate_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     implementation_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
     implementer: ChatGPT
+    verifier: Claude Opus 5
+    identity_provenance: user-reported separate model vendor account independent CONTROL-003 verifier
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
@@ -49,6 +53,8 @@ requirements:
     candidate_sha: null
     implementation_sha: null
     implementer: ChatGPT
+    verifier: null
+    identity_provenance: pending_independent_verification
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
@@ -59,6 +65,9 @@ requirements:
     history_start_status: FAILED
     transitions: []
     status: FAILED
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     evidence: GAJ screenshots and direct observation showed excessive complexity after prior claimed simplification.
     gaj_acceptance_required: true
     acceptance: [map near top, concise opening crop state, progressive disclosure, obvious primary view and temporal controls, advanced controls secondary, intentional desktop tablet phone hierarchy, no important agricultural intelligence lost]
@@ -68,6 +77,9 @@ requirements:
     history_start_status: FAILED
     transitions: []
     status: FAILED
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     evidence: GAJ screenshot showed visible coarse raster cells after prior implementation claims.
     gaj_acceptance_required: true
     acceptance: [diagnose source-to-browser pipeline, document smoothing or interpolation, disclose native measurement resolution, imply no false precision, visually inspect desktop tablet phone maps]
@@ -77,6 +89,9 @@ requirements:
     history_start_status: FAILED
     transitions: []
     status: FAILED
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     evidence: Approximate 2416 lb/acre output was challenged as commercially implausible and remains unvalidated.
     gaj_acceptance_required: true
     acceptance: [audit model inputs calibration validation and leakage, establish historical and out-of-sample skill, quantify uncertainty and regional bias, incorporate defensible crop-response evidence, justify displayed precision]
@@ -86,6 +101,9 @@ requirements:
     history_start_status: FAILED
     transitions: []
     status: FAILED
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     evidence: Prior proxy tests do not establish Pea-Trader-quality rendered behavior or GAJ acceptance.
     gaj_acceptance_required: true
     acceptance: [no legend blinking, no blank intermediate map, no unexplained stale frame, no date-map mismatch, visually smooth understandable transitions, synchronized crop-stage indicator]
@@ -95,6 +113,9 @@ requirements:
     history_start_status: OPEN
     transitions: []
     status: OPEN
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     gaj_acceptance_required: false
   - id: SCI-002
     priority: P1
@@ -102,6 +123,9 @@ requirements:
     history_start_status: OPEN
     transitions: []
     status: OPEN
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     gaj_acceptance_required: false
   - id: SCI-003
     priority: P1
@@ -109,6 +133,9 @@ requirements:
     history_start_status: OPEN
     transitions: []
     status: OPEN
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     gaj_acceptance_required: false
   - id: SCI-004
     priority: P1
@@ -116,6 +143,9 @@ requirements:
     history_start_status: OPEN
     transitions: []
     status: OPEN
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     gaj_acceptance_required: false
   - id: SCI-005
     priority: P1
@@ -123,4 +153,7 @@ requirements:
     history_start_status: OPEN
     transitions: []
     status: OPEN
+    implementer: null
+    verifier: null
+    identity_provenance: not_applicable_until_implementation
     gaj_acceptance_required: false
