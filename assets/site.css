@@ -242,3 +242,15 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 .mapwrap{position:relative;display:block}
 #map{height:66vh !important;min-height:600px !important;width:100% !important}
 .nbA-moist{font-size:14px;color:#33463a;margin:0 0 10px;max-width:72ch}
+
+/* Legend: readable, not 11px. It is the key to the whole map. */
+#mapLegend{font-size:13px !important;line-height:1.5}
+#mapLegend b{font-size:12px !important;letter-spacing:.06em;color:#33463a;display:block;margin-bottom:6px}
+#mapLegend .nbKey{gap:6px 18px;font-size:13px}
+#mapLegend .nbKey span{width:13px;height:13px;margin-right:6px}
+/* Map controls belong above the map, always visible — not floating over it. */
+.nbDecisionMapPanel{position:static !important;width:100% !important;max-width:none !important;
+  margin:0 0 10px !important;border-radius:6px}
+.nbPanelMore{color:#cfe0d3;font-size:12px}
+/* Playback speed sits with the play button it controls. */
+.timebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}

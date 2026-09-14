@@ -123,7 +123,15 @@
     window.__nbCropStatus = { crop: crop, byRegion: byRegion };
     if (typeof window.__nbRedrawYield === 'function') window.__nbRedrawYield();
     [250, 900, 2000].forEach(function (ms) {
-      setTimeout(function () { hideStationNoise(); labelRegions(); drawGrowingRegions(); shrinkMarkers(); pruneDeeper(); }, ms);
+      setTimeout(function () {
+        // one failing step must not kill the rest — that is what stopped the animation starting
+        [hideStationNoise, labelRegions, drawGrowingRegions, shrinkMarkers, pruneDeeper,
+         startAnimationWatch].forEach(function (fn) {
+          try { fn(); } catch (e) {
+            if (window.console) console.warn('nb step failed:', fn.name, e && e.message);
+          }
+        });
+      }, ms);
     });
 
     var sel = document.getElementById('nbCrop');
@@ -144,10 +152,29 @@
     if (!deeper) return;
     var move = function (node) { if (node) deeper.insertBefore(node, deeper.firstChild); };
 
-    ['nbSeasonSnapshot', 'nbDecisionPanel'].forEach(function (id) { move(document.getElementById(id)); });
-    ['.nbTimelines', '.nbRegionPanel', '.nbDecisionMapPanel'].forEach(function (sel) {
-      move(document.querySelector(sel));
-    });
+    move(document.getElementById('nbDecisionPanel'));
+    ['.nbTimelines', '.nbRegionPanel'].forEach(function (sel) { move(document.querySelector(sel)); });
+
+    // Map controls: above the map, always reachable, not floating over the picture.
+    var panel = document.querySelector('.nbDecisionMapPanel'),
+        wrap = document.querySelector('.mapwrap');
+    if (panel && wrap && wrap.parentNode) wrap.parentNode.insertBefore(panel, wrap);
+
+    // Playback speed belongs with the play button it controls.
+    var bar = document.querySelector('.timebar');
+    var speed = document.querySelector('#playSpeed') ||
+      [].slice.call(document.querySelectorAll('select')).filter(function (s) {
+        return /speed/i.test((s.parentNode.textContent || '')) ||
+               [].slice.call(s.options).some(function (o) { return /^\d+(\.\d+)?×?$/.test(o.textContent.trim()); });
+      })[0];
+    if (speed && bar) {
+      var holder = speed.closest('div') || speed;
+      bar.appendChild(holder);
+    }
+
+    // Season snapshot stays visible with the map rather than hiding in Dig deeper.
+    var snap = document.getElementById('nbSeasonSnapshot');
+    if (snap && wrap && wrap.parentNode) wrap.parentNode.insertBefore(snap, wrap.nextSibling);
 
     var sec = document.getElementById('mapSection');
     if (sec) {
@@ -375,6 +402,63 @@
     });
   }
 
+  /* ANIMATION. The polygons were coloured by end-of-season condition and never changed when
+     the timeline played — which is why playing it appeared to do nothing. Each region and
+     class now carries a per-day crop stage computed from station temperatures, so moving
+     through the season actually moves the crop through its stages. */
+  var STAGE = {
+    P: { label: 'Pre-planting',  color: '#cfd6d0' },
+    E: { label: 'Emergence',     color: '#9ec9a6' },
+    V: { label: 'Vegetative',    color: '#4ea56b' },
+    F: { label: 'Flowering / pod fill', color: '#e8c33a' },
+    M: { label: 'Maturing',      color: '#e08a2a' },
+    H: { label: 'Harvest ready', color: '#a8571f' }
+  };
+
+  function currentDateIndex() {
+    var tl = window.__nbTimeline;
+    if (!tl) return null;
+    var el = document.querySelector('#mapSection .timebar, .timebar');
+    var txt = el ? (el.textContent || '') : '';
+    var m = txt.match(/20\d\d-\d\d-\d\d/);
+    if (!m) return tl.dates.length - 1;
+    var i = tl.dates.indexOf(m[0]);
+    return i < 0 ? tl.dates.length - 1 : i;
+  }
+
+  function paintByDate() {
+    var tl = window.__nbTimeline, s = window.__nbCropStatus, map = window.__nbLeaflet;
+    if (!tl || !s || !map || !window.__nbGrow) return;
+    var i = currentDateIndex();
+    if (i === null) return;
+    var crop = s.crop, stageByRegion = {};
+    Object.keys(tl.regions).forEach(function (r) {
+      var rec = tl.regions[r][crop];
+      stageByRegion[r] = rec ? rec.stage.charAt(i) : null;
+    });
+    window.__nbGrow.eachLayer(function (l) {
+      var r = l.feature && l.feature.properties.region;
+      var st = stageByRegion[r];
+      if (!st || !STAGE[st]) return;
+      l.setStyle({ fillColor: STAGE[st].color, fillOpacity: 0.72 });
+    });
+    if (window.__nbOutline) {
+      window.__nbOutline.eachLayer(function (l) { l.setStyle({ opacity: 0.5 }); });
+    }
+    var host = document.getElementById('mapLegend');
+    if (host) {
+      host.innerHTML = '<b>' + crop + ' — crop stage on ' + tl.dates[i] + '</b><div class="nbKey">' +
+        ['P','E','V','F','M','H'].map(function (k) {
+          return '<span style="background:' + STAGE[k].color + '"></span>' + STAGE[k].label;
+        }).join('') + '</div>';
+    }
+  }
+
+  function startAnimationWatch() {
+    if (window.__nbAnimWatch) return;
+    window.__nbAnimWatch = setInterval(paintByDate, 350);
+  }
+
   function boot() {
     var host = document.getElementById('nbAnswer');
     if (!host) return;
@@ -383,6 +467,10 @@
       .then(function (d) {
         var saved = null;
         try { saved = localStorage.getItem('nbCrop'); } catch (e) { /* ignore */ }
+        fetch('assets/data/crop-timeline.json?v=' + Date.now())
+          .then(function (r) { return r.json(); })
+          .then(function (tl) { window.__nbTimeline = tl; })
+          .catch(function () { /* map still shows end-of-season condition */ });
         render(d, (saved && d.classes[saved]) ? saved : 'PINTO');
         setTimeout(function () { declutter(); simplifyMapPanel(); }, 400);  // after decision-workbench injects its panels
       })
