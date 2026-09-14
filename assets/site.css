@@ -212,3 +212,14 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
   text-shadow:0 0 3px #fff,0 0 6px #fff,0 0 9px #fff;letter-spacing:-.01em}
 .nbRegionTag i{display:block;font-style:normal;font-size:10px;font-weight:800;color:#5a3216;
   text-shadow:0 0 3px #fff,0 0 6px #fff}
+
+/* Legend: a compact key, not a white panel covering the map. */
+#mapLegend{max-width:210px !important;padding:8px 10px !important;font-size:11px;
+  background:rgba(255,255,255,.93);border:1px solid #cfd8d1;border-radius:4px;line-height:1.3}
+#mapLegend b{font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#4a564d}
+#mapLegend small{display:none}
+.nbKey{gap:2px 8px;margin-top:5px}
+.nbKey span{width:9px;height:9px}
+/* Region tags: readable over any basemap, never wider than they need to be. */
+.nbRegionTag b{font-size:11.5px;line-height:1.15}
+.nbRegionTag i{font-size:9.5px;letter-spacing:.03em}

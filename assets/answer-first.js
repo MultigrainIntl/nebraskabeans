@@ -111,6 +111,21 @@
     var sec = document.getElementById('mapSection');
     if (sec) {
       move(sec.querySelector('.sectionhead'));
+      // Everything beneath the map was build metadata: frame counts, CDL acreage, station
+      // tallies, data-build hashes, calibration seasons. None of it helps someone decide
+      // whether to cut. It is provenance and belongs with the evidence.
+      [].slice.call(sec.querySelectorAll('p, small, .note, .meta, div')).forEach(function (n) {
+        var s = (n.textContent || '').trim();
+        if (!s || n.querySelector('#map') || n.closest('.leaflet-container')) return;
+        if (/daily frames|CDL|mapped acres|stations with reports|county boundaries|Data build|calibration seasons|point outlooks released|temporal interpolation/i.test(s)) {
+          move(n);
+        }
+      });
+      var speed = sec.querySelector('#playSpeed');
+      if (speed && speed.closest('div')) move(speed.closest('div'));
+      [].slice.call(sec.querySelectorAll('button')).forEach(function (b) {
+        if (/zoom to crop detail/i.test(b.textContent || '')) move(b.parentNode.children.length === 1 ? b.parentNode : b);
+      });
       [].slice.call(sec.querySelectorAll('p')).forEach(function (p) {
         if (p.textContent.trim().length > 90 && !p.closest('.leaflet-container')) p.remove();
       });
@@ -132,6 +147,13 @@
     }
     setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 120);
     setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 600);
+    // frame the producing regions; the default view wasted half the map on Illinois
+    setTimeout(function () {
+      try {
+        var m = window.__nbLeaflet, A = window.__nbAreas;
+        if (m && A && window.L) m.fitBounds(window.L.latLngBounds(A.map(function (a) { return a.center; })).pad(0.35));
+      } catch (e) { /* leave the default view */ }
+    }, 1400);
   }
 
   function simplifyMapPanel() {
@@ -168,18 +190,32 @@
     (window.__nbAreas || []).forEach(function (a) {
       var st = s.byRegion[a.id];
       if (!st) return;
+      // fixed offsets stop the Wyoming/Panhandle and Colorado/Nebraska tags colliding
+      var OFF = {
+        'ne-panhandle':   [-20, -30], 'sw-nebraska':     [-20,  22],
+        'ne-colorado':    [ 96,  16], 'western-colorado':[-20,  22],
+        'big-horn':       [-20, -30], 'se-wyoming':      [ 92, -14],
+        'nw-kansas':      [-20,  22]
+      };
+      var o = OFF[a.id] || [-20, 10];
       var m = L.marker(a.center, {
         interactive: false,
         icon: L.divIcon({ className: 'nbRegionTag', html: '<b>' + a.name + '</b><i>' + st + '</i>',
-                          iconSize: [0, 0], iconAnchor: [-18, 8] })
+                          iconSize: [0, 0], iconAnchor: o })
       }).addTo(map);
       window.__nbLabels.push(m);
     });
   }
 
   function hideStationNoise(attempt) {
-    var box = [].slice.call(document.querySelectorAll('input[type=checkbox]'))
-      .filter(function (c) { return /station/i.test(c.parentNode.textContent || ''); })[0];
+    // Weather stations and the historical crop-footprint polygons are evidence, not answers.
+    // Thousands of purple specks and 200 blue dots bury the seven markers that matter.
+    var boxes = [].slice.call(document.querySelectorAll('input[type=checkbox]'))
+      .filter(function (c) { return /station|polygon|footprint/i.test(c.parentNode.textContent || ''); });
+    boxes.forEach(function (c) {
+      if (c.checked) { c.checked = false; c.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
+    var box = boxes[0];
     if (box) {
       if (box.checked) { box.checked = false; box.dispatchEvent(new Event('change', { bubbles: true })); }
       return;
