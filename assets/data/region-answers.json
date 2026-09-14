@@ -1,0 +1,2390 @@
+{
+ "generated": "2026-09-14T22:46:57.126455Z",
+ "classes": {
+  "PINTO": {
+   "commodity": "BEANS",
+   "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield"
+  },
+  "GREAT NORTHERN": {
+   "commodity": "BEANS",
+   "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised"
+  },
+  "NAVY": {
+   "commodity": "BEANS",
+   "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade"
+  },
+  "BLACK": {
+   "commodity": "BEANS",
+   "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less"
+  },
+  "LIGHT RED KIDNEY": {
+   "commodity": "BEANS",
+   "quality_driver": "large seed size is the grade; colour brightness second"
+  },
+  "DARK RED KIDNEY": {
+   "commodity": "BEANS",
+   "quality_driver": "large seed size and deep colour"
+  },
+  "PINK": {
+   "commodity": "BEANS",
+   "quality_driver": "even colour; sized similar to pinto"
+  },
+  "SMALL RED": {
+   "commodity": "BEANS",
+   "quality_driver": "colour depth and small uniform size"
+  },
+  "CRANBERRY": {
+   "commodity": "BEANS",
+   "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market"
+  },
+  "SMALL WHITE": {
+   "commodity": "BEANS",
+   "quality_driver": "whiteness and uniformity"
+  },
+  "BLACKEYE": {
+   "commodity": "BEANS",
+   "quality_driver": "clean white ground colour with sharp eye"
+  },
+  "GARBANZO (KABULI)": {
+   "commodity": "CHICKPEAS",
+   "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour"
+  },
+  "GARBANZO (DESI)": {
+   "commodity": "CHICKPEAS",
+   "quality_driver": "mostly split and milled, so appearance matters far less than kabuli"
+  },
+  "LENTIL LARGE GREEN": {
+   "commodity": "LENTILS",
+   "quality_driver": "size and green colour retention; sold whole, so appearance is the price"
+  },
+  "LENTIL SMALL GREEN": {
+   "commodity": "LENTILS",
+   "quality_driver": "colour retention and uniformity"
+  },
+  "LENTIL RED": {
+   "commodity": "LENTILS",
+   "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed"
+  },
+  "PEA YELLOW": {
+   "commodity": "PEAS",
+   "quality_driver": "soundness and low split; colour is stable"
+  },
+  "PEA GREEN": {
+   "commodity": "PEAS",
+   "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium"
+  }
+ },
+ "regions": {
+  "ne-panhandle": {
+   "name": "Nebraska Panhandle",
+   "state": "Nebraska",
+   "soil_awc": 0.21,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 2023,
+      "high": 2574,
+      "mid": 2299,
+      "baseline": 2420,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 148.2,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1943,
+      "high": 2473,
+      "mid": 2208,
+      "baseline": 2325,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 157.5,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "NAVY": {
+     "yield": {
+      "low": 1889,
+      "high": 2404,
+      "mid": 2147,
+      "baseline": 2260,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "downgrade_risk": "any harvest rain or field weathering shows immediately on a white seed coat",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "BLACK": {
+     "yield": {
+      "low": 2015,
+      "high": 2564,
+      "mid": 2290,
+      "baseline": 2290,
+      "years": 12,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 144.0,
+     "heat_days": 24.5,
+     "precip_mm": 268.2,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "downgrade_risk": "the most heat-tolerant class; sun bleaching of colour is the main quality loss",
+     "mould_risk": "lower",
+     "stations": 116
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": {
+      "low": 1818,
+      "high": 2314,
+      "mid": 2066,
+      "baseline": 2175,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "DARK RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "quality_driver": "large seed size and deep colour",
+     "downgrade_risk": "latest maturity, highest frost exposure; heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "PINK": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "quality_driver": "even colour; sized similar to pinto",
+     "downgrade_risk": "weathering dulls the coat",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "SMALL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "quality_driver": "colour depth and small uniform size",
+     "downgrade_risk": "weathering and stain",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "CRANBERRY": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 140.0,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "downgrade_risk": "any weathering blurs the mottle, which is the product",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "SMALL WHITE": {
+     "yield": {
+      "low": 1471,
+      "high": 1872,
+      "mid": 1672,
+      "baseline": 1760,
+      "years": 3,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "whiteness and uniformity",
+     "downgrade_risk": "staining is immediately visible",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 149.1,
+     "heat_days": 12.5,
+     "precip_mm": 331.6,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 120
+    },
+    "GARBANZO (KABULI)": {
+     "yield": {
+      "low": 554,
+      "high": 705,
+      "mid": 630,
+      "baseline": 700,
+      "years": 8,
+      "adjust_pct": -10.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 159.1,
+     "heat_days": 66.0,
+     "precip_mm": 379.0,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 122
+    },
+    "GARBANZO (DESI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 172.3,
+     "heat_days": 52.0,
+     "precip_mm": 379.0,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "downgrade_risk": "more tolerant of both heat and disease than kabuli",
+     "mould_risk": "Ascochyta moderate",
+     "stations": 122
+    },
+    "LENTIL LARGE GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 199.2,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "downgrade_risk": "heat at pod set collapses yield; sun and weathering bleach the green away",
+     "mould_risk": "moderate",
+     "stations": 122
+    },
+    "LENTIL SMALL GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 209.1,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "quality_driver": "colour retention and uniformity",
+     "downgrade_risk": "bleaching under sun and delayed harvest",
+     "mould_risk": "moderate",
+     "stations": 122
+    },
+    "LENTIL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 214.5,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "downgrade_risk": "far more forgiving of weathering than green lentils, because the coat comes off",
+     "mould_risk": "moderate",
+     "stations": 122
+    },
+    "PEA YELLOW": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 123
+    },
+    "PEA GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "downgrade_risk": "sun bleaching after maturity turns green peas yellow and destroys the premium. Same field, same weather as a yellow pea, opposite commercial outcome",
+     "mould_risk": "moderate",
+     "stations": 123
+    }
+   }
+  },
+  "sw-nebraska": {
+   "name": "Southwest Nebraska",
+   "state": "Nebraska",
+   "soil_awc": 0.21,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 2023,
+      "high": 2574,
+      "mid": 2299,
+      "baseline": 2420,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 148.2,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1943,
+      "high": 2473,
+      "mid": 2208,
+      "baseline": 2325,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 157.5,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "NAVY": {
+     "yield": {
+      "low": 1889,
+      "high": 2404,
+      "mid": 2147,
+      "baseline": 2260,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "downgrade_risk": "any harvest rain or field weathering shows immediately on a white seed coat",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "BLACK": {
+     "yield": {
+      "low": 2015,
+      "high": 2564,
+      "mid": 2290,
+      "baseline": 2290,
+      "years": 12,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 144.0,
+     "heat_days": 24.5,
+     "precip_mm": 268.2,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "downgrade_risk": "the most heat-tolerant class; sun bleaching of colour is the main quality loss",
+     "mould_risk": "lower",
+     "stations": 116
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": {
+      "low": 1818,
+      "high": 2314,
+      "mid": 2066,
+      "baseline": 2175,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "DARK RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "quality_driver": "large seed size and deep colour",
+     "downgrade_risk": "latest maturity, highest frost exposure; heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "PINK": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "quality_driver": "even colour; sized similar to pinto",
+     "downgrade_risk": "weathering dulls the coat",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "SMALL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "quality_driver": "colour depth and small uniform size",
+     "downgrade_risk": "weathering and stain",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "CRANBERRY": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 140.0,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "downgrade_risk": "any weathering blurs the mottle, which is the product",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "SMALL WHITE": {
+     "yield": {
+      "low": 1471,
+      "high": 1872,
+      "mid": 1672,
+      "baseline": 1760,
+      "years": 3,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "whiteness and uniformity",
+     "downgrade_risk": "staining is immediately visible",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 149.1,
+     "heat_days": 12.5,
+     "precip_mm": 331.6,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 120
+    },
+    "GARBANZO (KABULI)": {
+     "yield": {
+      "low": 554,
+      "high": 705,
+      "mid": 630,
+      "baseline": 700,
+      "years": 8,
+      "adjust_pct": -10.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 159.1,
+     "heat_days": 66.0,
+     "precip_mm": 379.0,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 122
+    },
+    "GARBANZO (DESI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 172.3,
+     "heat_days": 52.0,
+     "precip_mm": 379.0,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "downgrade_risk": "more tolerant of both heat and disease than kabuli",
+     "mould_risk": "Ascochyta moderate",
+     "stations": 122
+    },
+    "LENTIL LARGE GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 199.2,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "downgrade_risk": "heat at pod set collapses yield; sun and weathering bleach the green away",
+     "mould_risk": "moderate",
+     "stations": 122
+    },
+    "LENTIL SMALL GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 209.1,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "quality_driver": "colour retention and uniformity",
+     "downgrade_risk": "bleaching under sun and delayed harvest",
+     "mould_risk": "moderate",
+     "stations": 122
+    },
+    "LENTIL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 214.5,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "downgrade_risk": "far more forgiving of weathering than green lentils, because the coat comes off",
+     "mould_risk": "moderate",
+     "stations": 122
+    },
+    "PEA YELLOW": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 123
+    },
+    "PEA GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "downgrade_risk": "sun bleaching after maturity turns green peas yellow and destroys the premium. Same field, same weather as a yellow pea, opposite commercial outcome",
+     "mould_risk": "moderate",
+     "stations": 123
+    }
+   }
+  },
+  "ne-colorado": {
+   "name": "Northeast / East-Central Colorado",
+   "state": "Colorado",
+   "soil_awc": 0.15,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1619,
+      "high": 2060,
+      "mid": 1840,
+      "baseline": 1840,
+      "years": 12,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 104.7,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1425,
+      "high": 1814,
+      "mid": 1620,
+      "baseline": 1620,
+      "years": 9,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 111.2,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "NAVY": {
+     "yield": {
+      "low": 1452,
+      "high": 1848,
+      "mid": 1650,
+      "baseline": 1650,
+      "years": 8,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 107.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "downgrade_risk": "any harvest rain or field weathering shows immediately on a white seed coat",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "BLACK": {
+     "yield": {
+      "low": 1553,
+      "high": 1976,
+      "mid": 1765,
+      "baseline": 1765,
+      "years": 6,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 101.7,
+     "heat_days": 7.0,
+     "precip_mm": 78.7,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "downgrade_risk": "the most heat-tolerant class; sun bleaching of colour is the main quality loss",
+     "mould_risk": "lower",
+     "stations": 437
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": {
+      "low": 1918,
+      "high": 2441,
+      "mid": 2180,
+      "baseline": 2295,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "2026-09-18",
+      "gdd_still_needed": 120,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "DARK RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-18",
+      "gdd_still_needed": 120,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "quality_driver": "large seed size and deep colour",
+     "downgrade_risk": "latest maturity, highest frost exposure; heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "PINK": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 107.9,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "quality_driver": "even colour; sized similar to pinto",
+     "downgrade_risk": "weathering dulls the coat",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "SMALL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 107.9,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "quality_driver": "colour depth and small uniform size",
+     "downgrade_risk": "weathering and stain",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "CRANBERRY": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-14",
+      "gdd_still_needed": 20,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 98.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "downgrade_risk": "any weathering blurs the mottle, which is the product",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "SMALL WHITE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 107.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "whiteness and uniformity",
+     "downgrade_risk": "staining is immediately visible",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 100.7,
+     "heat_days": 0.0,
+     "precip_mm": 86.9,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 446
+    },
+    "GARBANZO (KABULI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 118.1,
+     "heat_days": 46.0,
+     "precip_mm": 132.1,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 448
+    },
+    "GARBANZO (DESI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 127.9,
+     "heat_days": 32.0,
+     "precip_mm": 132.1,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "downgrade_risk": "more tolerant of both heat and disease than kabuli",
+     "mould_risk": "Ascochyta moderate",
+     "stations": 448
+    },
+    "LENTIL LARGE GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 146.6,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "downgrade_risk": "heat at pod set collapses yield; sun and weathering bleach the green away",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "LENTIL SMALL GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 153.9,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "quality_driver": "colour retention and uniformity",
+     "downgrade_risk": "bleaching under sun and delayed harvest",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "LENTIL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 157.9,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "downgrade_risk": "far more forgiving of weathering than green lentils, because the coat comes off",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "PEA YELLOW": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "PEA GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "downgrade_risk": "sun bleaching after maturity turns green peas yellow and destroys the premium. Same field, same weather as a yellow pea, opposite commercial outcome",
+     "mould_risk": "moderate",
+     "stations": 448
+    }
+   }
+  },
+  "western-colorado": {
+   "name": "Western Colorado",
+   "state": "Colorado",
+   "soil_awc": 0.15,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1619,
+      "high": 2060,
+      "mid": 1840,
+      "baseline": 1840,
+      "years": 12,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 104.7,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1425,
+      "high": 1814,
+      "mid": 1620,
+      "baseline": 1620,
+      "years": 9,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 111.2,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "NAVY": {
+     "yield": {
+      "low": 1452,
+      "high": 1848,
+      "mid": 1650,
+      "baseline": 1650,
+      "years": 8,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 107.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "downgrade_risk": "any harvest rain or field weathering shows immediately on a white seed coat",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "BLACK": {
+     "yield": {
+      "low": 1553,
+      "high": 1976,
+      "mid": 1765,
+      "baseline": 1765,
+      "years": 6,
+      "adjust_pct": 0.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 101.7,
+     "heat_days": 7.0,
+     "precip_mm": 78.7,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "downgrade_risk": "the most heat-tolerant class; sun bleaching of colour is the main quality loss",
+     "mould_risk": "lower",
+     "stations": 437
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": {
+      "low": 1918,
+      "high": 2441,
+      "mid": 2180,
+      "baseline": 2295,
+      "years": 12,
+      "adjust_pct": -5.0
+     },
+     "harvest": {
+      "ready": "2026-09-24",
+      "gdd_still_needed": 120,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "DARK RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-24",
+      "gdd_still_needed": 120,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "quality_driver": "large seed size and deep colour",
+     "downgrade_risk": "latest maturity, highest frost exposure; heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "PINK": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 107.9,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "quality_driver": "even colour; sized similar to pinto",
+     "downgrade_risk": "weathering dulls the coat",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "SMALL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 107.9,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "quality_driver": "colour depth and small uniform size",
+     "downgrade_risk": "weathering and stain",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "CRANBERRY": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-15",
+      "gdd_still_needed": 20,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 98.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "downgrade_risk": "any weathering blurs the mottle, which is the product",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "SMALL WHITE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 107.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "whiteness and uniformity",
+     "downgrade_risk": "staining is immediately visible",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 100.7,
+     "heat_days": 0.0,
+     "precip_mm": 86.9,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 446
+    },
+    "GARBANZO (KABULI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 118.1,
+     "heat_days": 46.0,
+     "precip_mm": 132.1,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 448
+    },
+    "GARBANZO (DESI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 127.9,
+     "heat_days": 32.0,
+     "precip_mm": 132.1,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "downgrade_risk": "more tolerant of both heat and disease than kabuli",
+     "mould_risk": "Ascochyta moderate",
+     "stations": 448
+    },
+    "LENTIL LARGE GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 146.6,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "downgrade_risk": "heat at pod set collapses yield; sun and weathering bleach the green away",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "LENTIL SMALL GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 153.9,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "quality_driver": "colour retention and uniformity",
+     "downgrade_risk": "bleaching under sun and delayed harvest",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "LENTIL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 157.9,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "downgrade_risk": "far more forgiving of weathering than green lentils, because the coat comes off",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "PEA YELLOW": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "PEA GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "downgrade_risk": "sun bleaching after maturity turns green peas yellow and destroys the premium. Same field, same weather as a yellow pea, opposite commercial outcome",
+     "mould_risk": "moderate",
+     "stations": 448
+    }
+   }
+  },
+  "big-horn": {
+   "name": "Big Horn Basin",
+   "state": "Wyoming",
+   "soil_awc": 0.16,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1833,
+      "high": 2333,
+      "mid": 2083,
+      "baseline": 2265,
+      "years": 12,
+      "adjust_pct": -8.0
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 550,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 67.6,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1894,
+      "high": 2411,
+      "mid": 2152,
+      "baseline": 2340,
+      "years": 12,
+      "adjust_pct": -8.0
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 450,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 71.8,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "NAVY": {
+     "yield": {
+      "low": 1829,
+      "high": 2328,
+      "mid": 2079,
+      "baseline": 2260,
+      "years": 12,
+      "adjust_pct": -8.0
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 500,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 69.7,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "downgrade_risk": "any harvest rain or field weathering shows immediately on a white seed coat",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "BLACK": {
+     "yield": {
+      "low": 1951,
+      "high": 2483,
+      "mid": 2217,
+      "baseline": 2410,
+      "years": 6,
+      "adjust_pct": -8.0
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 600,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 65.7,
+     "heat_days": 3.0,
+     "precip_mm": 88.4,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "downgrade_risk": "the most heat-tolerant class; sun bleaching of colour is the main quality loss",
+     "mould_risk": "lower",
+     "stations": 197
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 750,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "DARK RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 750,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "quality_driver": "large seed size and deep colour",
+     "downgrade_risk": "latest maturity, highest frost exposure; heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "PINK": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 500,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 69.7,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "quality_driver": "even colour; sized similar to pinto",
+     "downgrade_risk": "weathering dulls the coat",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "SMALL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 500,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 69.7,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "quality_driver": "colour depth and small uniform size",
+     "downgrade_risk": "weathering and stain",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "CRANBERRY": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 650,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 63.9,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "downgrade_risk": "any weathering blurs the mottle, which is the product",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "SMALL WHITE": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 500,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 69.7,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "whiteness and uniformity",
+     "downgrade_risk": "staining is immediately visible",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 590,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 67.2,
+     "heat_days": 0.0,
+     "precip_mm": 107.8,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 202
+    },
+    "GARBANZO (KABULI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-27",
+      "gdd_still_needed": 338,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 87.0,
+     "heat_days": 22.0,
+     "precip_mm": 153.3,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 204
+    },
+    "GARBANZO (DESI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-19",
+      "gdd_still_needed": 138,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 94.2,
+     "heat_days": 15.0,
+     "precip_mm": 153.3,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "downgrade_risk": "more tolerant of both heat and disease than kabuli",
+     "mould_risk": "Ascochyta moderate",
+     "stations": 204
+    },
+    "LENTIL LARGE GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 107.7,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "downgrade_risk": "heat at pod set collapses yield; sun and weathering bleach the green away",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "LENTIL SMALL GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 113.1,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "quality_driver": "colour retention and uniformity",
+     "downgrade_risk": "bleaching under sun and delayed harvest",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "LENTIL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 116.0,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "downgrade_risk": "far more forgiving of weathering than green lentils, because the coat comes off",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "PEA YELLOW": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "PEA GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "downgrade_risk": "sun bleaching after maturity turns green peas yellow and destroys the premium. Same field, same weather as a yellow pea, opposite commercial outcome",
+     "mould_risk": "moderate",
+     "stations": 204
+    }
+   }
+  },
+  "se-wyoming": {
+   "name": "Southeast Wyoming",
+   "state": "Wyoming",
+   "soil_awc": 0.16,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1833,
+      "high": 2333,
+      "mid": 2083,
+      "baseline": 2265,
+      "years": 12,
+      "adjust_pct": -8.0
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 550,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 67.6,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1894,
+      "high": 2411,
+      "mid": 2152,
+      "baseline": 2340,
+      "years": 12,
+      "adjust_pct": -8.0
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 450,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 71.8,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "NAVY": {
+     "yield": {
+      "low": 1829,
+      "high": 2328,
+      "mid": 2079,
+      "baseline": 2260,
+      "years": 12,
+      "adjust_pct": -8.0
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 500,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 69.7,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "downgrade_risk": "any harvest rain or field weathering shows immediately on a white seed coat",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "BLACK": {
+     "yield": {
+      "low": 1951,
+      "high": 2483,
+      "mid": 2217,
+      "baseline": 2410,
+      "years": 6,
+      "adjust_pct": -8.0
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 600,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 65.7,
+     "heat_days": 3.0,
+     "precip_mm": 88.4,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "downgrade_risk": "the most heat-tolerant class; sun bleaching of colour is the main quality loss",
+     "mould_risk": "lower",
+     "stations": 197
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 750,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "DARK RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 750,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "quality_driver": "large seed size and deep colour",
+     "downgrade_risk": "latest maturity, highest frost exposure; heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "PINK": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 500,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 69.7,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "quality_driver": "even colour; sized similar to pinto",
+     "downgrade_risk": "weathering dulls the coat",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "SMALL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 500,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 69.7,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "quality_driver": "colour depth and small uniform size",
+     "downgrade_risk": "weathering and stain",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "CRANBERRY": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 650,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 63.9,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "downgrade_risk": "any weathering blurs the mottle, which is the product",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "SMALL WHITE": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 500,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 69.7,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "whiteness and uniformity",
+     "downgrade_risk": "staining is immediately visible",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 590,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 67.2,
+     "heat_days": 0.0,
+     "precip_mm": 107.8,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 202
+    },
+    "GARBANZO (KABULI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-26",
+      "gdd_still_needed": 338,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 87.0,
+     "heat_days": 22.0,
+     "precip_mm": 153.3,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 204
+    },
+    "GARBANZO (DESI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-18",
+      "gdd_still_needed": 138,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 94.2,
+     "heat_days": 15.0,
+     "precip_mm": 153.3,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "downgrade_risk": "more tolerant of both heat and disease than kabuli",
+     "mould_risk": "Ascochyta moderate",
+     "stations": 204
+    },
+    "LENTIL LARGE GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 107.7,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "downgrade_risk": "heat at pod set collapses yield; sun and weathering bleach the green away",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "LENTIL SMALL GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 113.1,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "quality_driver": "colour retention and uniformity",
+     "downgrade_risk": "bleaching under sun and delayed harvest",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "LENTIL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 116.0,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "downgrade_risk": "far more forgiving of weathering than green lentils, because the coat comes off",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "PEA YELLOW": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "PEA GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "downgrade_risk": "sun bleaching after maturity turns green peas yellow and destroys the premium. Same field, same weather as a yellow pea, opposite commercial outcome",
+     "mould_risk": "moderate",
+     "stations": 204
+    }
+   }
+  },
+  "nw-kansas": {
+   "name": "Northwest / West-Central Kansas",
+   "state": "Kansas",
+   "soil_awc": 0.17,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1663,
+      "high": 2116,
+      "mid": 1890,
+      "baseline": 2100,
+      "years": 12,
+      "adjust_pct": -10.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 177.1,
+     "heat_days": 64.0,
+     "precip_mm": 316.1,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 140
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1255,
+      "high": 1597,
+      "mid": 1426,
+      "baseline": 1585,
+      "years": 8,
+      "adjust_pct": -10.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 188.2,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 140
+    },
+    "NAVY": {
+     "yield": {
+      "low": 1314,
+      "high": 1673,
+      "mid": 1494,
+      "baseline": 1660,
+      "years": 10,
+      "adjust_pct": -10.0
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 182.5,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "downgrade_risk": "any harvest rain or field weathering shows immediately on a white seed coat",
+     "mould_risk": "moderate",
+     "stations": 140
+    },
+    "BLACK": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 172.0,
+     "heat_days": 49.5,
+     "precip_mm": 316.1,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "downgrade_risk": "the most heat-tolerant class; sun bleaching of colour is the main quality loss",
+     "mould_risk": "lower",
+     "stations": 140
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 158.4,
+     "heat_days": 82.0,
+     "precip_mm": 316.1,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 140
+    },
+    "DARK RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 158.4,
+     "heat_days": 82.0,
+     "precip_mm": 316.1,
+     "quality_driver": "large seed size and deep colour",
+     "downgrade_risk": "latest maturity, highest frost exposure; heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 140
+    },
+    "PINK": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 182.5,
+     "heat_days": 64.0,
+     "precip_mm": 316.1,
+     "quality_driver": "even colour; sized similar to pinto",
+     "downgrade_risk": "weathering dulls the coat",
+     "mould_risk": "moderate",
+     "stations": 140
+    },
+    "SMALL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 182.5,
+     "heat_days": 64.0,
+     "precip_mm": 316.1,
+     "quality_driver": "colour depth and small uniform size",
+     "downgrade_risk": "weathering and stain",
+     "mould_risk": "moderate",
+     "stations": 140
+    },
+    "CRANBERRY": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 167.2,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "downgrade_risk": "any weathering blurs the mottle, which is the product",
+     "mould_risk": "HIGH",
+     "stations": 140
+    },
+    "SMALL WHITE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 182.5,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "quality_driver": "whiteness and uniformity",
+     "downgrade_risk": "staining is immediately visible",
+     "mould_risk": "moderate",
+     "stations": 140
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 178.5,
+     "heat_days": 32.5,
+     "precip_mm": 355.6,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 144
+    },
+    "GARBANZO (KABULI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 187.3,
+     "heat_days": 91.0,
+     "precip_mm": 416.9,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 144
+    },
+    "GARBANZO (DESI)": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 202.9,
+     "heat_days": 79.0,
+     "precip_mm": 416.9,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "downgrade_risk": "more tolerant of both heat and disease than kabuli",
+     "mould_risk": "Ascochyta moderate",
+     "stations": 144
+    },
+    "LENTIL LARGE GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 236.5,
+     "heat_days": 110.0,
+     "precip_mm": 422.4,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "downgrade_risk": "heat at pod set collapses yield; sun and weathering bleach the green away",
+     "mould_risk": "moderate",
+     "stations": 144
+    },
+    "LENTIL SMALL GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 248.3,
+     "heat_days": 110.0,
+     "precip_mm": 422.4,
+     "quality_driver": "colour retention and uniformity",
+     "downgrade_risk": "bleaching under sun and delayed harvest",
+     "mould_risk": "moderate",
+     "stations": 144
+    },
+    "LENTIL RED": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 254.7,
+     "heat_days": 110.0,
+     "precip_mm": 422.4,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "downgrade_risk": "far more forgiving of weathering than green lentils, because the coat comes off",
+     "mould_risk": "moderate",
+     "stations": 144
+    },
+    "PEA YELLOW": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 258.1,
+     "heat_days": 112.0,
+     "precip_mm": 442.0,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 144
+    },
+    "PEA GREEN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 258.1,
+     "heat_days": 112.0,
+     "precip_mm": 442.0,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "downgrade_risk": "sun bleaching after maturity turns green peas yellow and destroys the premium. Same field, same weather as a yellow pea, opposite commercial outcome",
+     "mould_risk": "moderate",
+     "stations": 144
+    }
+   }
+  }
+ },
+ "resolution": "Weather and soil are state-level from NOAA stations and USDA SSURGO. Yield baselines are that class's own USDA history for that state. Harvest timing uses a 16-day forecast."
+}

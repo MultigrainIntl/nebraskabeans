@@ -24,29 +24,52 @@
       return c ? { id: id, name: r.name, state: r.state, c: c } : null;
     }).filter(Boolean);
     if (!rows.length) return null;
+
+    // status is derived here so the map and the words cannot disagree
+    rows.forEach(function (r) {
+      var c = r.c, h = c.harvest || {};
+      if (h.frost_forecast && (h.gdd_still_needed || 0) > 0) c.status = 'AT RISK';
+      else if (c.percent_of_maturity < 90) c.status = 'LATE';
+      else if (c.heat_days >= 50) c.status = 'STRESSED';
+      else if (c.heat_days >= 30) c.status = 'WATCH';
+      else c.status = 'ON TRACK';
+      c.call = h.frost_forecast && (h.gdd_still_needed || 0) > 0
+        ? 'frost forecast ' + h.frost_forecast + ' before it finishes'
+        : (c.percent_of_maturity < 90
+            ? 'still filling — ready about ' + (h.ready || 'beyond the forecast')
+            : (c.heat_days >= 50 ? Math.round(c.heat_days) + ' hot days in fill — small seed'
+              : (c.heat_days >= 30 ? Math.round(c.heat_days) + ' hot days — some size pressure' : 'no major flag')));
+    });
     rows.sort(function (a, b) { return RANK[a.c.status] - RANK[b.c.status]; });
 
-    var worst = rows[0];
-    // Headline the MEDIAN condition, not the most common one. A plurality can be a
-    // minority: with 5 of 7 regions ready to cut, two at-risk regions must not set the
-    // headline. The worst region still gets its own watch line below.
-    var byRank = rows.slice().sort(function (a, b) { return RANK[a.c.status] - RANK[b.c.status]; });
-    var majority = byRank[Math.floor(byRank.length / 2)].c.status;
+    var ys = rows.map(function (r) { return r.c.yield; }).filter(Boolean);
+    var yieldRange = null, yieldVs = null;
+    if (ys.length) {
+      var lo = Math.min.apply(null, ys.map(function (y) { return y.low; }));
+      var hi = Math.max.apply(null, ys.map(function (y) { return y.high; }));
+      var base = Math.round(ys.reduce(function (s, y) { return s + y.baseline; }, 0) / ys.length);
+      var mid = Math.round(ys.reduce(function (s, y) { return s + y.mid; }, 0) / ys.length);
+      var vs = mid === base ? 'in line with' : (mid > base ? 'above' : 'below');
+      yieldRange = lo.toLocaleString() + '–' + hi.toLocaleString() + ' lb/ac';
+      yieldVs = vs + ' the ' + base.toLocaleString() + ' lb/ac recent average.';
+    }
 
-    var ready = rows.filter(function (r) { return r.c.percent_of_maturity >= 100; }).length;
-    var when = ready === rows.length ? 'Ready to harvest across every region.'
-      : ready === 0 ? 'Still filling everywhere — no region is ready.'
-        : ready + ' of ' + rows.length + ' regions are ready to cut; the rest are still filling.';
+    var readyNow = rows.filter(function (r) { return (r.c.harvest || {}).ready === 'now'; }).length;
+    var when = readyNow === rows.length ? 'Ready to cut everywhere.'
+      : readyNow === 0 ? 'Nothing ready to cut yet.'
+        : readyNow + ' of ' + rows.length + ' regions ready to cut now.';
 
     var heat = Math.round(rows.reduce(function (s, r) { return s + r.c.heat_days; }, 0) / rows.length);
-    var size = heat >= 50 ? 'Expect smaller beans — heavy heat during fill.'
-      : heat >= 30 ? 'Expect some size pressure — ' + heat + ' hot days during fill.'
-        : 'Size should be normal — little heat during fill.';
+    var size = heat >= 50 ? 'Expect smaller seed.' : heat >= 30 ? 'Expect some size pressure.' : 'Size should be normal.';
 
+    var byRank = rows.slice();
+    var majority = byRank[Math.floor(byRank.length / 2)].c.status;
+    var worst = rows[0];
     var watch = (worst.c.status === 'AT RISK' || worst.c.status === 'STRESSED')
-      ? worst.name + ': ' + worst.c.call + '.' : null;
+      ? worst.name + ' — ' + worst.c.call + '.' : null;
 
-    return { rows: rows, majority: majority, when: when, size: size, watch: watch, worst: worst };
+    return { rows: rows, majority: majority, when: when, size: size, watch: watch,
+             yieldRange: yieldRange, yieldVs: yieldVs, worst: worst };
   }
 
   function render(data, crop) {
@@ -62,14 +85,18 @@
       return '<tr class="nbA-' + TONE[r.c.status] + '">' +
         '<td>' + r.name + '</td>' +
         '<td><b>' + r.c.status + '</b></td>' +
+        '<td>' + (r.c.yield ? r.c.yield.low.toLocaleString() + '–' + r.c.yield.high.toLocaleString() + ' lb/ac' : '—') + '</td>' +
+        '<td>' + ((r.c.harvest || {}).ready === 'now' ? 'cut now' : 'ready ' + ((r.c.harvest || {}).ready || '—')) + '</td>' +
         '<td>' + r.c.call + '</td></tr>';
     }).join('');
 
     el.innerHTML =
       '<div class="nbA-pick"><label for="nbCrop">Crop</label>' +
       '<select id="nbCrop">' + opts + '</select></div>' +
-      '<h2 class="nbA-head nbA-' + TONE[h.majority] + '">' + crop + ' — ' + h.majority + '</h2>' +
-      '<p class="nbA-line">' + h.when + ' ' + h.size + '</p>' +
+      '<h2 class="nbA-head nbA-' + TONE[h.majority] + '">' + crop +
+        (h.yieldRange ? ' — ' + h.yieldRange : ' — ' + h.majority) + '</h2>' +
+      '<p class="nbA-line"><b>' + h.when + '</b> ' + h.size +
+        (h.yieldVs ? ' Running ' + h.yieldVs : '') + '</p>' +
       (h.watch ? '<p class="nbA-watch">Watch — ' + h.watch + '</p>' : '') +
       '<p class="nbA-q"><b>What sets the price:</b> ' + (data.classes[crop].quality_driver || '') + '</p>' +
       '<details class="nbA-more"><summary>Region by region</summary>' +
@@ -227,7 +254,7 @@
   function boot() {
     var host = document.getElementById('nbAnswer');
     if (!host) return;
-    fetch('assets/data/region-classes.json')
+    fetch('assets/data/region-answers.json')
       .then(function (r) { return r.json(); })
       .then(function (d) {
         var saved = null;
