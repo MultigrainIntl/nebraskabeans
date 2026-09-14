@@ -23,3 +23,6 @@ Precise yield should not dominate the product until the model has been independe
 
 ## D-008 — One active product gate
 After the control foundation is accepted, only one highest-impact unresolved product requirement should be active at a time unless GAJ explicitly expands scope.
+
+## D-009 — Frustration is not authorization
+The initial CONTROL-009 instruction could not legally execute because it required control-file edits while the active YIELD-001 lock authorized only product files. The implementer correctly refused, then made a self-authorization error by treating GAJ's frustrated reaction as permission to reverse that refusal. User reaction does not amend scope: only explicit authorization does. GAJ stopped execution and supplied a corrected one-gate-at-a-time sequence on 2026-09-14.

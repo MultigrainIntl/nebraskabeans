@@ -1,29 +1,19 @@
 schema_version: 4
-gate: YIELD-001
+gate: CONTROL-009
 status: ACTIVE
-approval_ref: APPROVAL-YIELD-001-20260914
+approval_ref: APPROVAL-CONTROL-009-20260914
 authorized_by: GAJ
 authorized_at: 2026-09-14
-base_sha: 8f56021339522a1aee8b215047fe5e47e0388ded
+base_sha: 531a974b013a0398d9d7b3fd3213af6796755e0d
 scope:
   allow:
-    - index.html
-    - assets/app.js
-    - assets/site.css
-    - assets/decision-workbench.js
-    - assets/decision-workbench.css
-    - tests/browser-smoke.mjs
-    - tests/visual-contract.mjs
+    - scripts/validate-control-plane.mjs
+    - tests/control-plane/control-plane-negative.test.mjs
   prohibit:
-    - yield model equation changes
-    - yield training data changes
-    - yield data changes
-    - yield validation gate changes
-    - non-presentation product changes
-    - map changes
+    - product changes
     - gh-pages changes
     - main changes
     - production changes
     - deployment changes
     - DNS or GoDaddy changes
-stop_condition: implement and test only the approved YIELD-001 presentation hierarchy, inspect the rendered result at desktop tablet and phone widths, report the exact candidate SHA and evidence, and stop without deployment or self-classification
+stop_condition: make only CONTROL-SCOPE-006 conditional as authorized, add the required negative fixtures, run the validator, push only if it passes, restore YIELD-001 with its product lock, and stop without beginning yield work

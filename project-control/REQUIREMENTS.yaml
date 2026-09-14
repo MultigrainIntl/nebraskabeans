@@ -106,6 +106,27 @@ requirements:
     gaj_acceptance_record: null
     evidence: Independent re-verification failed dadcc0fcf8576168301ba63209374a67c5eee119. S-2 and S-1 were later corrected at 3db3fdb7195c638e19dac0c348a6c77ed5e07e3c and 8f56021339522a1aee8b215047fe5e47e0388ded, but neither correction was independently verified. GAJ capped control-plane work on 2026-09-14 and moved product priority to YIELD-001.
     note: Operationally closed with unresolved findings parked in project-control/findings/CONTROL-006-PARKED.yaml. FAILED is used instead of CLOSED because CLOSED would falsely imply the required independent verification and acceptance path.
+  - id: CONTROL-009
+    priority: P0
+    requirement: Permit an explicitly approved product gate to authorize exact product paths without weakening the prohibition on product paths for control gates or the prohibitions on deployment, DNS, main, gh-pages, and production surfaces.
+    history_start_status: OPEN
+    transitions:
+      - from: OPEN
+        to: ACTIVE
+        sha: 531a974b013a0398d9d7b3fd3213af6796755e0d
+        actor: gaj-product-authority
+        timestamp: 2026-09-14
+    status: ACTIVE
+    candidate_sha: null
+    implementation_sha: null
+    implementer: openai-chatgpt
+    verifier: null
+    identity_provenance: current_chat_explicit_authorization_from_GAJ
+    independent_verification_record: null
+    gaj_acceptance_required: true
+    gaj_acceptance_record: null
+    evidence: GAJ identified that the prior CONTROL-009 instruction was structurally illegal because the active YIELD-001 product lock did not authorize control-file edits. The implementer correctly refused, then made a self-authorization error by treating GAJ frustration as permission to reverse that refusal. GAJ stopped execution and authorized this corrected one-gate-at-a-time sequence.
+    acceptance: [CONTROL-SCOPE-006 bars product paths for an active control gate, an active product gate permits exact approved product paths only under a countersigned production_scope approval, the execution lock allow-list is a subset of that approval, deployment DNS main gh-pages and production surfaces remain barred under every approval, negative fixtures prove each required rejection, no other rule is weakened]
   - id: UX-001
     priority: P0
     requirement: Opening interface is immediately understandable and map-dominant rather than a long repetitive analytical page.
@@ -143,11 +164,16 @@ requirements:
         sha: fd1baefd31b52cf0630b9038726ee6afa45f393a
         actor: gaj-product-authority
         timestamp: 2026-09-14
-    status: ACTIVE
+      - from: ACTIVE
+        to: BLOCKED
+        sha: 531a974b013a0398d9d7b3fd3213af6796755e0d
+        actor: gaj-product-authority
+        timestamp: 2026-09-14
+    status: BLOCKED
     implementer: null
     verifier: null
     identity_provenance: not_applicable_until_implementation
-    evidence: GAJ confirmed the released-row model gate and empirical band are useful, but displaying a raw value such as 2416 lb/ac as the primary answer asserts precision unsupported by an approximately plus-or-minus 256 lb/ac band. This gate changes presentation only.
+    evidence: GAJ confirmed the released-row model gate and empirical band are useful, but displaying a raw value such as 2416 lb/ac as the primary answer asserts precision unsupported by an approximately plus-or-minus 256 lb/ac band. This gate changes presentation only. Temporarily blocked while the explicitly authorized CONTROL-009 prerequisite makes approved product scope mechanically reachable.
     gaj_acceptance_required: true
     acceptance: [potentialClass output is the primary answer, empirical band is immediately visible, seven-day direction is immediately visible, point estimate remains available as secondary detail, withheld rows remain withheld with their gate reason, model equation training data error band baseline comparison and release gate are unchanged, rendered hierarchy is inspected at desktop tablet and phone widths]
   - id: MAP-002
