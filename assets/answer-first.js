@@ -81,6 +81,7 @@
     h.rows.forEach(function (r) { byRegion[r.id] = r.c.status; });
     window.__nbCropStatus = { crop: crop, byRegion: byRegion };
     if (typeof window.__nbRedrawYield === 'function') window.__nbRedrawYield();
+    setTimeout(function () { hideStationNoise(); labelRegions(); }, 250);
 
     var sel = document.getElementById('nbCrop');
     if (sel) sel.addEventListener('change', function (e) {
@@ -145,6 +146,34 @@
     d.appendChild(s);
     rest.forEach(function (n) { d.appendChild(n); });
     panel.appendChild(d);
+  }
+
+
+  /* Decision support ON the map: label every region with its call, and hide the 200 weather
+     stations that mean nothing to someone deciding whether to cut. The stations remain
+     available under "Dig deeper" — they are evidence, not the answer. */
+  function labelRegions() {
+    var s = window.__nbCropStatus;
+    if (!s || !window.__nbLeaflet) return;
+    var map = window.__nbLeaflet, L = window.L;
+    if (window.__nbLabels) { window.__nbLabels.forEach(function (m) { map.removeLayer(m); }); }
+    window.__nbLabels = [];
+    (window.__nbAreas || []).forEach(function (a) {
+      var st = s.byRegion[a.id];
+      if (!st) return;
+      var m = L.marker(a.center, {
+        interactive: false,
+        icon: L.divIcon({ className: 'nbRegionTag', html: '<b>' + a.name + '</b><i>' + st + '</i>',
+                          iconSize: [0, 0], iconAnchor: [-18, 8] })
+      }).addTo(map);
+      window.__nbLabels.push(m);
+    });
+  }
+
+  function hideStationNoise() {
+    var box = [].slice.call(document.querySelectorAll('input[type=checkbox]'))
+      .filter(function (c) { return /station/i.test(c.parentNode.textContent || ''); })[0];
+    if (box && box.checked) { box.checked = false; box.dispatchEvent(new Event('change', { bubbles: true })); }
   }
 
   function boot() {

@@ -108,15 +108,16 @@
   }
   function yieldColor(value){if(!Number.isFinite(value))return '#b9c0bc';const t=clamp((value-1600)/1100,0,1),a=t<.5?[205,108,70]:[241,207,99],b=t<.5?[241,207,99]:[49,116,81],u=t<.5?t*2:(t-.5)*2;return `rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*u)).join(',')})`}
   window.__nbRedrawYield=function(){try{renderYield();}catch(e){}};
+  try{window.__nbLeaflet=map;window.__nbAreas=STUDY_AREAS;}catch(e){}
   function renderYield(){
     clearDataLayers();state.yieldLayer=L.layerGroup({pane:'yieldPane'});let released=0;
     for(const area of STUDY_AREAS){
       const row=modelRow(area),value=row?.yield_lb_ac,color=(nbCropColor(area.id)||yieldColor(value)),selected=area.id===state.selected;if(Number.isFinite(value))released++;
-      const circle=L.circleMarker(area.center,{pane:'yieldPane',radius:selected?10:7,color:selected?'#173f5a':'#fff',weight:selected?3:1.5,opacity:.98,fill:true,fillColor:color,fillOpacity:Number.isFinite(value)?.83:.55});
+      const circle=L.circleMarker(area.center,{pane:'yieldPane',radius:selected?17:14,color:selected?'#173f5a':'#fff',weight:selected?3:1.5,opacity:.98,fill:true,fillColor:color,fillOpacity:Number.isFinite(value)?.83:.55});
       const body=Number.isFinite(value)?`<b>${area.name}</b><br>GISit: ${value.toLocaleString()} lb/ac<br>80% empirical error band: ${row.yield_interval_lb_ac[0].toLocaleString()}–${row.yield_interval_lb_ac[1].toLocaleString()}<br>Stage: ${row.stage}<br>USDA current yield is not a predictor.`:`<b>${area.name}</b><br>${row?.eligibility||'No model state'}`;
       circle.bindTooltip(body,{sticky:true}).on('click',()=>selectArea(area.id)).addTo(state.yieldLayer);
     }
-    state.yieldLayer.addTo(map);setHTML('mapLegend','<b>Experimental pinto-basis yield at analytical points</b><div class="legendDate">SELECTED-DATE MODEL · NOT USDA YIELD</div><div class="yieldRamp"><span>1,600</span><span>2,150</span><span>2,700 lb/ac</span></div><div><span class="sw unknown"></span>Withheld by validation/data gate</div><small>Point estimates are not a field-scale yield surface. Purple polygons show historical crop identity only. Yield uses weather/GDD through the selected date plus historical-median completion.</small>');setText('layerBadge',`GISIT MODEL · ${iso(state.date)}`);setText('status',`${released} of 7 experimental point outlooks released for ${iso(state.date)}; spatially resolved yield remains under development.`);
+    state.yieldLayer.addTo(map);setHTML('mapLegend', window.__nbCropStatus ? '<b>'+window.__nbCropStatus.crop+' — condition by region</b><div class="nbKey"><span style="background:#2f7d4f"></span>On track<span style="background:#b8a23a"></span>Watch<span style="background:#c79a2b"></span>Late<span style="background:#c4622c"></span>Stressed<span style="background:#9c2b20"></span>At risk</div><small>Click a region for its call.</small>' : '<b>Select a crop above</b>');setText('layerBadge',`GISIT MODEL · ${iso(state.date)}`);setText('status',`${released} of 7 experimental point outlooks released for ${iso(state.date)}; spatially resolved yield remains under development.`);
   }
   function satelliteAt(area,date){const rows=state.satellite?.areas?.[area.id]?.dates||{},keys=Object.keys(rows).filter(key=>key<=iso(date)).sort();if(!keys.length)return null;const requested=keys.at(-1);return {requested,...rows[requested]}}
   function vegetationSignal(satellite,stage){
