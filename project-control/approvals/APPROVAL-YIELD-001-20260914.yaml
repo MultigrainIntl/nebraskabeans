@@ -1,0 +1,41 @@
+schema_version: 3
+id: APPROVAL-YIELD-001-20260914
+authority: GAJ
+authorization_type: production_scope
+gate: YIELD-001
+authorized_at: 2026-09-14
+base_sha: 8f56021339522a1aee8b215047fe5e47e0388ded
+candidate_sha: null
+countersigned_by: GAJ
+signature_provenance: current_chat_explicit_authorization_from_GAJ
+scope:
+  allow:
+    - index.html
+    - assets/app.js
+    - assets/site.css
+    - assets/decision-workbench.js
+    - assets/decision-workbench.css
+    - tests/browser-smoke.mjs
+    - tests/visual-contract.mjs
+  prohibit:
+    - yield model equation changes
+    - yield training data changes
+    - yield data changes
+    - yield validation gate changes
+    - non-presentation product changes
+    - map changes
+    - gh-pages changes
+    - main changes
+    - production changes
+    - deployment changes
+    - DNS or GoDaddy changes
+source:
+  type: current_chat_explicit_authorization
+  authority: GAJ
+  statement: GATE-MOVE-001, authorized by GAJ on 2026-09-14, caps control-plane work, closes CONTROL-006 operationally with unresolved findings parked, activates YIELD-001, and authorizes only the files needed to change yield-forecast presentation while keeping the model, training data, validation gates, deployment, main, and gh-pages prohibited.
+notes:
+  - This approval authorizes repository work only on staging/recover-5fa3f42.
+  - production_scope is the validator's product-path authorization class; it does not authorize production or deployment.
+  - This gate-move commit does not implement any yield or UI change.
+  - Testing by the implementer must be labeled implementer-authored and implementer-run.
+  - Independent verification and GAJ acceptance remain separate future steps.
