@@ -109,7 +109,7 @@
     window.__nbCropStatus = { crop: crop, byRegion: byRegion };
     if (typeof window.__nbRedrawYield === 'function') window.__nbRedrawYield();
     [250, 900, 2000].forEach(function (ms) {
-      setTimeout(function () { hideStationNoise(); labelRegions(); drawGrowingRegions(); }, ms);
+      setTimeout(function () { hideStationNoise(); labelRegions(); drawGrowingRegions(); shrinkMarkers(); }, ms);
     });
 
     var sel = document.getElementById('nbCrop');
@@ -177,8 +177,21 @@
     // frame the producing regions; the default view wasted half the map on Illinois
     setTimeout(function () {
       try {
-        var m = window.__nbLeaflet, A = window.__nbAreas;
-        if (m && A && window.L) m.fitBounds(window.L.latLngBounds(A.map(function (a) { return a.center; })).pad(0.35));
+        var m = window.__nbLeaflet;
+        if (m && window.__nbGrowGeo && window.L) {
+          // the outer 4% of cells are scattered strays; framing on them wastes half the map
+          var pts = window.__nbGrowGeo.features.map(function (f) {
+            var c = f.geometry.coordinates[0];
+            return [c[0][1], c[0][0]];
+          });
+          var lats = pts.map(function (p) { return p[0]; }).sort(function (a, b) { return a - b; });
+          var lons = pts.map(function (p) { return p[1]; }).sort(function (a, b) { return a - b; });
+          var q = function (arr, f) { return arr[Math.floor(arr.length * f)]; };
+          m.fitBounds(window.L.latLngBounds(
+            [q(lats, 0.02), q(lons, 0.02)], [q(lats, 0.98), q(lons, 0.98)]).pad(0.10));
+        } else if (m && window.__nbAreas && window.L) {
+          m.fitBounds(window.L.latLngBounds(window.__nbAreas.map(function (a) { return a.center; })).pad(0.2));
+        }
       } catch (e) { /* leave the default view */ }
     }, 1400);
   }
@@ -203,7 +216,7 @@
   /* Decision support ON the map: label every region with its call, and hide the 200 weather
      stations that mean nothing to someone deciding whether to cut. The stations remain
      available under "Dig deeper" — they are evidence, not the answer. */
-  var STATUS_COLOR = { 'AT RISK':'#9c2b20','STRESSED':'#c4622c','LATE':'#c79a2b','WATCH':'#b8a23a','ON TRACK':'#2f7d4f' };
+  var STATUS_COLOR = { 'AT RISK':'#9e1b0e','STRESSED':'#d4541c','LATE':'#eb9a00','WATCH':'#f0cb2a','ON TRACK':'#17794a' };
 
   /* Growing-region polygons. 344 cells aggregated from the USDA Cropland Data Layer — where
      dry beans actually grew in 2025 — shaded by the selected crop's condition in that region.
@@ -234,6 +247,23 @@
     fetch('assets/data/growing-regions.json').then(function (r) { return r.json(); })
       .then(function (geo) { window.__nbGrowGeo = geo; paint(geo); })
       .catch(function () { /* markers still carry the answer */ });
+  }
+
+  function shrinkMarkers() {
+    // the growing-region shading now carries the condition; the large circles repeated it.
+    // Reduced to a small anchor so the label has something to point at.
+    var m = window.__nbLeaflet;
+    if (!m || !m.eachLayer) return;
+    m.eachLayer(function (l) {
+      if (l.setRadius && l.options && l.options.pane === 'yieldPane') {
+        try { l.setRadius(5); l.setStyle({ weight: 1.5, color: '#fff', fillOpacity: 1 }); } catch (e) {}
+      }
+      if (l.eachLayer) l.eachLayer(function (x) {
+        if (x.setRadius && x.options && x.options.pane === 'yieldPane') {
+          try { x.setRadius(5); x.setStyle({ weight: 1.5, color: '#fff', fillOpacity: 1 }); } catch (e) {}
+        }
+      });
+    });
   }
 
   function labelRegions(attempt) {

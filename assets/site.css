@@ -223,3 +223,15 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 /* Region tags: readable over any basemap, never wider than they need to be. */
 .nbRegionTag b{font-size:11.5px;line-height:1.15}
 .nbRegionTag i{font-size:9.5px;letter-spacing:.03em}
+
+/* Legend: a caption under the map, not a panel covering three states. */
+#mapLegend{position:static !important;max-width:none !important;width:auto !important;
+  margin:8px 0 0 !important;padding:0 !important;background:none !important;border:0 !important;
+  box-shadow:none !important;font-size:11px;color:#4a564d}
+#mapLegend b{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#6c796f;margin-right:10px}
+#mapLegend .nbKey{display:inline-flex;margin:0;gap:3px 12px}
+/* A frame that suits the geography instead of a letterbox. */
+#map{min-height:620px !important;height:62vh !important}
+/* Labels sit tight to their anchor and stay legible on any basemap. */
+.nbRegionTag b{font-size:11px}
+.nbRegionTag i{font-size:9px;opacity:.95}
