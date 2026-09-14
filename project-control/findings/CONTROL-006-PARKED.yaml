@@ -1,0 +1,132 @@
+schema_version: 1
+gate: CONTROL-006
+lifecycle_status: FAILED
+operational_disposition: CLOSED_WITH_PARKED_FINDINGS
+recorded_at: 2026-09-14
+authorized_by: GAJ
+authorization_ref: GATE-MOVE-001
+source_candidate_sha: dadcc0fcf8576168301ba63209374a67c5eee119
+latest_implementation_sha: 8f56021339522a1aee8b215047fe5e47e0388ded
+assurance:
+  independently_verified: false
+  gaj_accepted: false
+  complete: false
+rules:
+  - PARKED means intentionally deferred, not resolved.
+  - Reproduction steps are retained for a future explicitly authorized control gate.
+  - No entry below may be treated as verified merely because it is recorded here.
+closed_or_corrected:
+  - id: CONTROL-005-R-1-R-11-R-13-R-15
+    disposition: CLOSED_BY_CONTROL_006_AT_DADCC0FC
+    evidence: The independent CONTROL-006 review confirmed the prior authorization, actor, non-impact, history, contradiction, implementer, status-authority, audit-window, dependency, head-mode, self-SHA, ledger, reviewability, and schema findings were corrected.
+  - id: S-1
+    disposition: IMPLEMENTER_CORRECTED_NOT_INDEPENDENTLY_VERIFIED
+    evidence: Commit 8f56021339522a1aee8b215047fe5e47e0388ded expands allow rules against tracked paths and tests the matched effects. The implementer-authored and implementer-run suite passed 64 of 64 fixtures; the branch workflow remained red for the separately recorded stale-main observation.
+  - id: S-2
+    disposition: IMPLEMENTER_CORRECTED_NOT_INDEPENDENTLY_VERIFIED
+    evidence: Commit 3db3fdb7195c638e19dac0c348a6c77ed5e07e3c restores exact twelve-rule, true-value, unknown-key, non-empty precedence, and GOVERNANCE precedence checks. The correction has not been independently verified.
+parked_findings:
+  - id: R-3
+    status: PARKED_OPEN
+    title: Verification fields may be present but empty
+    reproduction:
+      - Create an otherwise valid verification record for a requirement with an exact existing candidate SHA.
+      - Set identity_provenance, timestamp, evidence, and limitations to empty strings.
+      - Reference the record from the requirement and run node scripts/validate-control-plane.mjs.
+    observed_or_expected_result: The lost CONTROL-VERIFY-003 non-empty checks allow the empty evidence fields instead of rejecting them.
+  - id: R-4
+    status: PARKED_OPEN
+    title: Approval countersignature fields may be present but empty
+    reproduction:
+      - Introduce a new non-legacy approval in an approval-only commit.
+      - Include countersigned_by and signature_provenance keys with empty values.
+      - Run node scripts/validate-control-plane.mjs.
+    observed_or_expected_result: Key presence is checked, but the lost CONTROL-APPROVAL-010 non-empty check is not consistently enforced.
+  - id: R-5
+    status: PARKED_RETEST_REQUIRED
+    title: Protected-target allow and prohibit contradiction check was lost
+    reproduction:
+      - Add the same protected target to both scope.allow and scope.prohibit in the active approval and execution lock.
+      - Run node scripts/validate-control-plane.mjs and inspect whether CONTROL-SCOPE-002 is emitted.
+    observed_or_expected_result: The explicit CONTROL-SCOPE-002 check was removed. S-1 now rejects unmatched scope spellings, so this finding requires a fresh scoped reproduction before any future fix.
+  - id: R-6
+    status: PARKED_OPEN
+    title: Exact nested-schema validation was lost
+    reproduction:
+      - Add an unknown key to a transition, CURRENT_STATE branch/source mapping, lock scope, approval scope/source, state-machine mapping, project canonical source, or legacy-approval definition.
+      - Run node scripts/validate-control-plane.mjs.
+    observed_or_expected_result: Top-level schemas remain checked, but those nested mappings are not all checked for exact allowed and required keys.
+  - id: R-7
+    status: PARKED_OPEN
+    title: Requirements list lacks a controlled type check
+    reproduction:
+      - Replace REQUIREMENTS.yaml requirements list with a mapping or another malformed type.
+      - Run node scripts/validate-control-plane.mjs and inspect the failure path.
+    observed_or_expected_result: The explicit CONTROL-SCHEMA-005 diagnostic is absent; malformed input fails through later runtime behavior instead of a controlled schema result.
+  - id: R-8
+    status: PARKED_OPEN
+    title: Late-state requirement identity provenance may be empty
+    reproduction:
+      - Use a requirement in a late lifecycle state with an otherwise valid registered verifier.
+      - Set requirement.identity_provenance to an empty string.
+      - Run node scripts/validate-control-plane.mjs.
+    observed_or_expected_result: Actor-registry validation replaced only the verifier portion of CONTROL-IV-002, leaving requirement-level provenance emptiness unchecked.
+  - id: R-9
+    status: PARKED_OPEN
+    title: Contradiction resolution evidence may be empty
+    reproduction:
+      - Create an otherwise valid RESOLVED contradiction record with a registered resolver and existing superseding SHA.
+      - Set resolution.timestamp and resolution.evidence to empty strings.
+      - Run node scripts/validate-control-plane.mjs.
+    observed_or_expected_result: CONTROL-CONTRADICTION-011 was removed by the item-10 reformat, so empty resolution evidence is not explicitly rejected.
+  - id: R-10
+    status: PARKED_RECORDED_EFFECT_RESTORED
+    title: Original changed-path scope audit was removed
+    reproduction:
+      - At item-10 commit 9b9227603add201c8044a01fc0a34fa57ba0eea9, change a path outside the active allow list after the approval audit anchor.
+      - Run node scripts/validate-control-plane.mjs and observe that removed CONTROL-SCOPE-003 does not reject it.
+    observed_or_expected_result: The regression was real at item 10. Equivalent changed-path enforcement was later restored as CONTROL-SCOPE-102 in 96f1a187; retain this history, but do not claim the original check itself was restored.
+  - id: S-3
+    status: PARKED_OPEN
+    title: ACTORS.yaml is a writable root of trust
+    reproduction:
+      - Add a new actor whose vendor differs from the implementer vendor.
+      - Use that invented actor as verifier against implementer openai-chatgpt.
+      - Run node scripts/validate-control-plane.mjs.
+    observed_or_expected_result: The invented registry entry can satisfy the vendor-independence check because actor additions lack approval-style append-only and countersignature protection.
+  - id: S-4
+    status: PARKED_OPEN_MAIN_ONLY_MITIGATION
+    title: Control code and its tests remain writable on the recovery branch
+    reproduction:
+      - Replace scripts/validate-control-plane.mjs with a stub that prints CONTROL PLANE VALID.
+      - Replace project-control/checks/authority-hardening.mjs with a no-op and stub the negative/style suites if needed.
+      - Run the committed staging workflow against the altered tree.
+    observed_or_expected_result: In-repository checks cannot protect themselves. Main now rejects product/control inventory changes through a required PR and verify check, but the recovery branch does not have equivalent independent identity enforcement.
+  - id: S-5
+    status: PARKED_OPEN
+    title: legacy_baseline_sha is a writable trust anchor
+    reproduction:
+      - Repoint project-control/APPROVAL_LEGACY.yaml legacy_baseline_sha to an attacker-selected valid commit.
+      - Alter a legacy approval to match the selected baseline and run the validator.
+    observed_or_expected_result: The attacker-selected baseline can redefine what the immutability comparison trusts.
+  - id: S-6
+    status: PARKED_OPEN
+    title: Prose-ledger detection misses bare or single-line verification claims
+    reproduction:
+      - Add a non-README, non-proposal Markdown file under project-control containing one line such as YIELD-001 VERIFIED.
+      - Run node scripts/validate-control-plane.mjs.
+    observed_or_expected_result: CONTROL-LEDGER-102 omits bare VERIFIED and triggers only when at least two matching lines exist.
+  - id: S-7
+    status: PARKED_OPEN
+    title: Executable control code shares the control-data allow scope
+    reproduction:
+      - Modify project-control/checks/authority-hardening.mjs while project-control/** is allowed.
+      - Run the scope audit.
+    observed_or_expected_result: The blanket control-data path also authorizes executable control code, so code and data are not independently scoped.
+  - id: S-8
+    status: PARKED_OPEN
+    title: Exact recovery-head enforcement is opt-in
+    reproduction:
+      - Check out a historical or otherwise non-live recovery commit.
+      - Run node scripts/validate-control-plane.mjs without --require-head.
+    observed_or_expected_result: CONTROL-DRIFT-003 is skipped unless --require-head is explicitly supplied in both directions.

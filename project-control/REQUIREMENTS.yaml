@@ -90,16 +90,22 @@ requirements:
         sha: 5d853a693faef66691d8dcce1ee9f53c93926b37
         actor: GAJ
         timestamp: 2026-09-13T13:35:00-06:00
-    status: ACTIVE
-    candidate_sha: null
-    implementation_sha: null
+      - from: ACTIVE
+        to: FAILED
+        sha: 8f56021339522a1aee8b215047fe5e47e0388ded
+        actor: gaj-product-authority
+        timestamp: 2026-09-14
+    status: FAILED
+    candidate_sha: 8f56021339522a1aee8b215047fe5e47e0388ded
+    implementation_sha: 8f56021339522a1aee8b215047fe5e47e0388ded
     implementer: openai-chatgpt
-    verifier: null
-    identity_provenance: pending_independent_verification
+    verifier: anthropic-claude-opus-5
+    identity_provenance: independent failure at dadcc0fc followed by unverified implementer corrections
     independent_verification_record: null
     gaj_acceptance_required: true
     gaj_acceptance_record: null
-    evidence: GAJ explicitly opened CONTROL-006 after CONTROL-005 independently failed exact SHA 0cbfb3b86028d7ab8226283a8eccf07ec76ea134 and authorized items 1-15 on staging/recover-5fa3f42 only.
+    evidence: Independent re-verification failed dadcc0fcf8576168301ba63209374a67c5eee119. S-2 and S-1 were later corrected at 3db3fdb7195c638e19dac0c348a6c77ed5e07e3c and 8f56021339522a1aee8b215047fe5e47e0388ded, but neither correction was independently verified. GAJ capped control-plane work on 2026-09-14 and moved product priority to YIELD-001.
+    note: Operationally closed with unresolved findings parked in project-control/findings/CONTROL-006-PARKED.yaml. FAILED is used instead of CLOSED because CLOSED would falsely imply the required independent verification and acceptance path.
   - id: UX-001
     priority: P0
     requirement: Opening interface is immediately understandable and map-dominant rather than a long repetitive analytical page.
