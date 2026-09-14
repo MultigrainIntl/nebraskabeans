@@ -1,0 +1,1407 @@
+{
+ "generated": "2026-09-14T22:17:01.592535Z",
+ "window": [
+  "2026-04-01",
+  "2026-09-12"
+ ],
+ "resolution": "class metrics are STATE-level, applied to the regions within that state. Sub-state resolution requires per-region station selection and is not yet done.",
+ "sources": [
+  {
+   "name": "NOAA COOP/GHCN/airport stations via RCC-ACIS",
+   "url": "https://data.rcc-acis.org/",
+   "api_key_required": false,
+   "gives": "daily max/min temperature and precipitation per station"
+  },
+  {
+   "name": "USDA SSURGO Soil Data Access",
+   "url": "https://sdmdataaccess.sc.egov.usda.gov/",
+   "api_key_required": false,
+   "gives": "available water capacity, drainage class, slope"
+  }
+ ],
+ "classes": {
+  "PINTO": {
+   "commodity": "BEANS",
+   "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield"
+  },
+  "GREAT NORTHERN": {
+   "commodity": "BEANS",
+   "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised"
+  },
+  "NAVY": {
+   "commodity": "BEANS",
+   "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade"
+  },
+  "BLACK": {
+   "commodity": "BEANS",
+   "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less"
+  },
+  "LIGHT RED KIDNEY": {
+   "commodity": "BEANS",
+   "quality_driver": "large seed size is the grade; colour brightness second"
+  },
+  "DARK RED KIDNEY": {
+   "commodity": "BEANS",
+   "quality_driver": "large seed size and deep colour"
+  },
+  "PINK": {
+   "commodity": "BEANS",
+   "quality_driver": "even colour; sized similar to pinto"
+  },
+  "SMALL RED": {
+   "commodity": "BEANS",
+   "quality_driver": "colour depth and small uniform size"
+  },
+  "CRANBERRY": {
+   "commodity": "BEANS",
+   "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market"
+  },
+  "SMALL WHITE": {
+   "commodity": "BEANS",
+   "quality_driver": "whiteness and uniformity"
+  },
+  "BLACKEYE": {
+   "commodity": "BEANS",
+   "quality_driver": "clean white ground colour with sharp eye"
+  },
+  "GARBANZO (KABULI)": {
+   "commodity": "CHICKPEAS",
+   "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour"
+  },
+  "GARBANZO (DESI)": {
+   "commodity": "CHICKPEAS",
+   "quality_driver": "mostly split and milled, so appearance matters far less than kabuli"
+  },
+  "LENTIL LARGE GREEN": {
+   "commodity": "LENTILS",
+   "quality_driver": "size and green colour retention; sold whole, so appearance is the price"
+  },
+  "LENTIL SMALL GREEN": {
+   "commodity": "LENTILS",
+   "quality_driver": "colour retention and uniformity"
+  },
+  "LENTIL RED": {
+   "commodity": "LENTILS",
+   "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed"
+  },
+  "PEA YELLOW": {
+   "commodity": "PEAS",
+   "quality_driver": "soundness and low split; colour is stable"
+  },
+  "PEA GREEN": {
+   "commodity": "PEAS",
+   "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium"
+  }
+ },
+ "regions": {
+  "ne-panhandle": {
+   "name": "Nebraska Panhandle",
+   "state": "Nebraska",
+   "soil_awc": 0.21,
+   "classes": {
+    "PINTO": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 148.2,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "mould_risk": "moderate"
+    },
+    "GREAT NORTHERN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 157.5,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "mould_risk": "HIGH"
+    },
+    "NAVY": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "mould_risk": "moderate"
+    },
+    "BLACK": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 144.0,
+     "heat_days": 24.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "mould_risk": "lower"
+    },
+    "LIGHT RED KIDNEY": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "mould_risk": "HIGH"
+    },
+    "DARK RED KIDNEY": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "large seed size and deep colour",
+     "mould_risk": "HIGH"
+    },
+    "PINK": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "even colour; sized similar to pinto",
+     "mould_risk": "moderate"
+    },
+    "SMALL RED": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "colour depth and small uniform size",
+     "mould_risk": "moderate"
+    },
+    "CRANBERRY": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 140.0,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "mould_risk": "HIGH"
+    },
+    "SMALL WHITE": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "whiteness and uniformity",
+     "mould_risk": "moderate"
+    },
+    "BLACKEYE": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 149.1,
+     "heat_days": 12.5,
+     "precip_mm": 331.6,
+     "stations": 120,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "mould_risk": "lower"
+    },
+    "GARBANZO (KABULI)": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 159.1,
+     "heat_days": 66.0,
+     "precip_mm": 379.0,
+     "stations": 122,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "mould_risk": "Ascochyta HIGH"
+    },
+    "GARBANZO (DESI)": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 172.3,
+     "heat_days": 52.0,
+     "precip_mm": 379.0,
+     "stations": 122,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "mould_risk": "Ascochyta moderate"
+    },
+    "LENTIL LARGE GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 199.2,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "stations": 122,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "mould_risk": "moderate"
+    },
+    "LENTIL SMALL GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 209.1,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "stations": 122,
+     "quality_driver": "colour retention and uniformity",
+     "mould_risk": "moderate"
+    },
+    "LENTIL RED": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 214.5,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "stations": 122,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "mould_risk": "moderate"
+    },
+    "PEA YELLOW": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "stations": 123,
+     "quality_driver": "soundness and low split; colour is stable",
+     "mould_risk": "moderate"
+    },
+    "PEA GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "stations": 123,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "mould_risk": "moderate"
+    }
+   }
+  },
+  "sw-nebraska": {
+   "name": "Southwest Nebraska",
+   "state": "Nebraska",
+   "soil_awc": 0.21,
+   "classes": {
+    "PINTO": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 148.2,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "mould_risk": "moderate"
+    },
+    "GREAT NORTHERN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 157.5,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "mould_risk": "HIGH"
+    },
+    "NAVY": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "mould_risk": "moderate"
+    },
+    "BLACK": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 144.0,
+     "heat_days": 24.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "mould_risk": "lower"
+    },
+    "LIGHT RED KIDNEY": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "mould_risk": "HIGH"
+    },
+    "DARK RED KIDNEY": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "large seed size and deep colour",
+     "mould_risk": "HIGH"
+    },
+    "PINK": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "even colour; sized similar to pinto",
+     "mould_risk": "moderate"
+    },
+    "SMALL RED": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "colour depth and small uniform size",
+     "mould_risk": "moderate"
+    },
+    "CRANBERRY": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 140.0,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "mould_risk": "HIGH"
+    },
+    "SMALL WHITE": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 152.7,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "stations": 116,
+     "quality_driver": "whiteness and uniformity",
+     "mould_risk": "moderate"
+    },
+    "BLACKEYE": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 149.1,
+     "heat_days": 12.5,
+     "precip_mm": 331.6,
+     "stations": 120,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "mould_risk": "lower"
+    },
+    "GARBANZO (KABULI)": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 159.1,
+     "heat_days": 66.0,
+     "precip_mm": 379.0,
+     "stations": 122,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "mould_risk": "Ascochyta HIGH"
+    },
+    "GARBANZO (DESI)": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 172.3,
+     "heat_days": 52.0,
+     "precip_mm": 379.0,
+     "stations": 122,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "mould_risk": "Ascochyta moderate"
+    },
+    "LENTIL LARGE GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 199.2,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "stations": 122,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "mould_risk": "moderate"
+    },
+    "LENTIL SMALL GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 209.1,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "stations": 122,
+     "quality_driver": "colour retention and uniformity",
+     "mould_risk": "moderate"
+    },
+    "LENTIL RED": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 214.5,
+     "heat_days": 94.5,
+     "precip_mm": 380.1,
+     "stations": 122,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "mould_risk": "moderate"
+    },
+    "PEA YELLOW": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "stations": 123,
+     "quality_driver": "soundness and low split; colour is stable",
+     "mould_risk": "moderate"
+    },
+    "PEA GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "stations": 123,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "mould_risk": "moderate"
+    }
+   }
+  },
+  "ne-colorado": {
+   "name": "Northeast / East-Central Colorado",
+   "state": "Colorado",
+   "soil_awc": 0.15,
+   "classes": {
+    "PINTO": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 104.7,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "mould_risk": "moderate"
+    },
+    "GREAT NORTHERN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 111.2,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "mould_risk": "HIGH"
+    },
+    "NAVY": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 107.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "mould_risk": "moderate"
+    },
+    "BLACK": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 101.7,
+     "heat_days": 7.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "mould_risk": "lower"
+    },
+    "LIGHT RED KIDNEY": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "mould_risk": "HIGH"
+    },
+    "DARK RED KIDNEY": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "large seed size and deep colour",
+     "mould_risk": "HIGH"
+    },
+    "PINK": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 107.9,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "even colour; sized similar to pinto",
+     "mould_risk": "moderate"
+    },
+    "SMALL RED": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 107.9,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "colour depth and small uniform size",
+     "mould_risk": "moderate"
+    },
+    "CRANBERRY": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 98.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "mould_risk": "HIGH"
+    },
+    "SMALL WHITE": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 107.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "whiteness and uniformity",
+     "mould_risk": "moderate"
+    },
+    "BLACKEYE": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 100.7,
+     "heat_days": 0.0,
+     "precip_mm": 86.9,
+     "stations": 446,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "mould_risk": "lower"
+    },
+    "GARBANZO (KABULI)": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 118.1,
+     "heat_days": 46.0,
+     "precip_mm": 132.1,
+     "stations": 448,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "mould_risk": "Ascochyta HIGH"
+    },
+    "GARBANZO (DESI)": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 127.9,
+     "heat_days": 32.0,
+     "precip_mm": 132.1,
+     "stations": 448,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "mould_risk": "Ascochyta moderate"
+    },
+    "LENTIL LARGE GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 146.6,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "stations": 448,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "mould_risk": "moderate"
+    },
+    "LENTIL SMALL GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 153.9,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "stations": 448,
+     "quality_driver": "colour retention and uniformity",
+     "mould_risk": "moderate"
+    },
+    "LENTIL RED": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 157.9,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "stations": 448,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "mould_risk": "moderate"
+    },
+    "PEA YELLOW": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "stations": 448,
+     "quality_driver": "soundness and low split; colour is stable",
+     "mould_risk": "moderate"
+    },
+    "PEA GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "stations": 448,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "mould_risk": "moderate"
+    }
+   }
+  },
+  "western-colorado": {
+   "name": "Western Colorado",
+   "state": "Colorado",
+   "soil_awc": 0.15,
+   "classes": {
+    "PINTO": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 104.7,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "mould_risk": "moderate"
+    },
+    "GREAT NORTHERN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 111.2,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "mould_risk": "HIGH"
+    },
+    "NAVY": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 107.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "mould_risk": "moderate"
+    },
+    "BLACK": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 101.7,
+     "heat_days": 7.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "mould_risk": "lower"
+    },
+    "LIGHT RED KIDNEY": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "mould_risk": "HIGH"
+    },
+    "DARK RED KIDNEY": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "large seed size and deep colour",
+     "mould_risk": "HIGH"
+    },
+    "PINK": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 107.9,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "even colour; sized similar to pinto",
+     "mould_risk": "moderate"
+    },
+    "SMALL RED": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 107.9,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "colour depth and small uniform size",
+     "mould_risk": "moderate"
+    },
+    "CRANBERRY": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 98.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "mould_risk": "HIGH"
+    },
+    "SMALL WHITE": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 107.9,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "stations": 437,
+     "quality_driver": "whiteness and uniformity",
+     "mould_risk": "moderate"
+    },
+    "BLACKEYE": {
+     "status": "ON TRACK",
+     "call": "no major flag",
+     "percent_of_maturity": 100.7,
+     "heat_days": 0.0,
+     "precip_mm": 86.9,
+     "stations": 446,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "mould_risk": "lower"
+    },
+    "GARBANZO (KABULI)": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 118.1,
+     "heat_days": 46.0,
+     "precip_mm": 132.1,
+     "stations": 448,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "mould_risk": "Ascochyta HIGH"
+    },
+    "GARBANZO (DESI)": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 127.9,
+     "heat_days": 32.0,
+     "precip_mm": 132.1,
+     "stations": 448,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "mould_risk": "Ascochyta moderate"
+    },
+    "LENTIL LARGE GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 146.6,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "stations": 448,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "mould_risk": "moderate"
+    },
+    "LENTIL SMALL GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 153.9,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "stations": 448,
+     "quality_driver": "colour retention and uniformity",
+     "mould_risk": "moderate"
+    },
+    "LENTIL RED": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 157.9,
+     "heat_days": 70.0,
+     "precip_mm": 139.2,
+     "stations": 448,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "mould_risk": "moderate"
+    },
+    "PEA YELLOW": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "stations": 448,
+     "quality_driver": "soundness and low split; colour is stable",
+     "mould_risk": "moderate"
+    },
+    "PEA GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "stations": 448,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "mould_risk": "moderate"
+    }
+   }
+  },
+  "big-horn": {
+   "name": "Big Horn Basin",
+   "state": "Wyoming",
+   "soil_awc": 0.16,
+   "classes": {
+    "PINTO": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 67.6,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "mould_risk": "moderate"
+    },
+    "GREAT NORTHERN": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 71.8,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "mould_risk": "HIGH"
+    },
+    "NAVY": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 69.7,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "mould_risk": "moderate"
+    },
+    "BLACK": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 65.7,
+     "heat_days": 3.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "mould_risk": "lower"
+    },
+    "LIGHT RED KIDNEY": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "mould_risk": "HIGH"
+    },
+    "DARK RED KIDNEY": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "large seed size and deep colour",
+     "mould_risk": "HIGH"
+    },
+    "PINK": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 69.7,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "even colour; sized similar to pinto",
+     "mould_risk": "moderate"
+    },
+    "SMALL RED": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 69.7,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "colour depth and small uniform size",
+     "mould_risk": "moderate"
+    },
+    "CRANBERRY": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 63.9,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "mould_risk": "HIGH"
+    },
+    "SMALL WHITE": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 69.7,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "whiteness and uniformity",
+     "mould_risk": "moderate"
+    },
+    "BLACKEYE": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 67.2,
+     "heat_days": 0.0,
+     "precip_mm": 107.8,
+     "stations": 202,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "mould_risk": "lower"
+    },
+    "GARBANZO (KABULI)": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 87.0,
+     "heat_days": 22.0,
+     "precip_mm": 153.3,
+     "stations": 204,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "mould_risk": "Ascochyta HIGH"
+    },
+    "GARBANZO (DESI)": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 94.2,
+     "heat_days": 15.0,
+     "precip_mm": 153.3,
+     "stations": 204,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "mould_risk": "Ascochyta moderate"
+    },
+    "LENTIL LARGE GREEN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 107.7,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "stations": 204,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "mould_risk": "moderate"
+    },
+    "LENTIL SMALL GREEN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 113.1,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "stations": 204,
+     "quality_driver": "colour retention and uniformity",
+     "mould_risk": "moderate"
+    },
+    "LENTIL RED": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 116.0,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "stations": 204,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "mould_risk": "moderate"
+    },
+    "PEA YELLOW": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "stations": 204,
+     "quality_driver": "soundness and low split; colour is stable",
+     "mould_risk": "moderate"
+    },
+    "PEA GREEN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "stations": 204,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "mould_risk": "moderate"
+    }
+   }
+  },
+  "se-wyoming": {
+   "name": "Southeast Wyoming",
+   "state": "Wyoming",
+   "soil_awc": 0.16,
+   "classes": {
+    "PINTO": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 67.6,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "mould_risk": "moderate"
+    },
+    "GREAT NORTHERN": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 71.8,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "mould_risk": "HIGH"
+    },
+    "NAVY": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 69.7,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "mould_risk": "moderate"
+    },
+    "BLACK": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 65.7,
+     "heat_days": 3.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "mould_risk": "lower"
+    },
+    "LIGHT RED KIDNEY": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "mould_risk": "HIGH"
+    },
+    "DARK RED KIDNEY": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "large seed size and deep colour",
+     "mould_risk": "HIGH"
+    },
+    "PINK": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 69.7,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "even colour; sized similar to pinto",
+     "mould_risk": "moderate"
+    },
+    "SMALL RED": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 69.7,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "colour depth and small uniform size",
+     "mould_risk": "moderate"
+    },
+    "CRANBERRY": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 63.9,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "mould_risk": "HIGH"
+    },
+    "SMALL WHITE": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 69.7,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "stations": 197,
+     "quality_driver": "whiteness and uniformity",
+     "mould_risk": "moderate"
+    },
+    "BLACKEYE": {
+     "status": "AT RISK",
+     "call": "frost risk \u2014 crop immature",
+     "percent_of_maturity": 67.2,
+     "heat_days": 0.0,
+     "precip_mm": 107.8,
+     "stations": 202,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "mould_risk": "lower"
+    },
+    "GARBANZO (KABULI)": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 87.0,
+     "heat_days": 22.0,
+     "precip_mm": 153.3,
+     "stations": 204,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "mould_risk": "Ascochyta HIGH"
+    },
+    "GARBANZO (DESI)": {
+     "status": "LATE",
+     "call": "harvest window tight",
+     "percent_of_maturity": 94.2,
+     "heat_days": 15.0,
+     "precip_mm": 153.3,
+     "stations": 204,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "mould_risk": "Ascochyta moderate"
+    },
+    "LENTIL LARGE GREEN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 107.7,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "stations": 204,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "mould_risk": "moderate"
+    },
+    "LENTIL SMALL GREEN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 113.1,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "stations": 204,
+     "quality_driver": "colour retention and uniformity",
+     "mould_risk": "moderate"
+    },
+    "LENTIL RED": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 116.0,
+     "heat_days": 36.5,
+     "precip_mm": 157.7,
+     "stations": 204,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "mould_risk": "moderate"
+    },
+    "PEA YELLOW": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "stations": 204,
+     "quality_driver": "soundness and low split; colour is stable",
+     "mould_risk": "moderate"
+    },
+    "PEA GREEN": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "stations": 204,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "mould_risk": "moderate"
+    }
+   }
+  },
+  "nw-kansas": {
+   "name": "Northwest / West-Central Kansas",
+   "state": "Kansas",
+   "soil_awc": 0.17,
+   "classes": {
+    "PINTO": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 177.1,
+     "heat_days": 64.0,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "mould_risk": "moderate"
+    },
+    "GREAT NORTHERN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 188.2,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "mould_risk": "HIGH"
+    },
+    "NAVY": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 182.5,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "whiteness above all; small uniform seed. Staining is fatal to grade",
+     "mould_risk": "moderate"
+    },
+    "BLACK": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 172.0,
+     "heat_days": 49.5,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "deep colour retention and shine; dark coat conceals blemish, so pick matters less",
+     "mould_risk": "lower"
+    },
+    "LIGHT RED KIDNEY": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 158.4,
+     "heat_days": 82.0,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "mould_risk": "HIGH"
+    },
+    "DARK RED KIDNEY": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 158.4,
+     "heat_days": 82.0,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "large seed size and deep colour",
+     "mould_risk": "HIGH"
+    },
+    "PINK": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 182.5,
+     "heat_days": 64.0,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "even colour; sized similar to pinto",
+     "mould_risk": "moderate"
+    },
+    "SMALL RED": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 182.5,
+     "heat_days": 64.0,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "colour depth and small uniform size",
+     "mould_risk": "moderate"
+    },
+    "CRANBERRY": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 167.2,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "bold seed and sharp mottle contrast \u2014 appearance is the whole market",
+     "mould_risk": "HIGH"
+    },
+    "SMALL WHITE": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 182.5,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "stations": 140,
+     "quality_driver": "whiteness and uniformity",
+     "mould_risk": "moderate"
+    },
+    "BLACKEYE": {
+     "status": "WATCH",
+     "call": "some heat \u2014 size pressure",
+     "percent_of_maturity": 178.5,
+     "heat_days": 32.5,
+     "precip_mm": 355.6,
+     "stations": 144,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "mould_risk": "lower"
+    },
+    "GARBANZO (KABULI)": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 187.3,
+     "heat_days": 91.0,
+     "precip_mm": 416.9,
+     "stations": 144,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "mould_risk": "Ascochyta HIGH"
+    },
+    "GARBANZO (DESI)": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 202.9,
+     "heat_days": 79.0,
+     "precip_mm": 416.9,
+     "stations": 144,
+     "quality_driver": "mostly split and milled, so appearance matters far less than kabuli",
+     "mould_risk": "Ascochyta moderate"
+    },
+    "LENTIL LARGE GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 236.5,
+     "heat_days": 110.0,
+     "precip_mm": 422.4,
+     "stations": 144,
+     "quality_driver": "size and green colour retention; sold whole, so appearance is the price",
+     "mould_risk": "moderate"
+    },
+    "LENTIL SMALL GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 248.3,
+     "heat_days": 110.0,
+     "precip_mm": 422.4,
+     "stations": 144,
+     "quality_driver": "colour retention and uniformity",
+     "mould_risk": "moderate"
+    },
+    "LENTIL RED": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 254.7,
+     "heat_days": 110.0,
+     "precip_mm": 422.4,
+     "stations": 144,
+     "quality_driver": "milling yield, not appearance \u2014 the seed coat is removed",
+     "mould_risk": "moderate"
+    },
+    "PEA YELLOW": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 258.1,
+     "heat_days": 112.0,
+     "precip_mm": 442.0,
+     "stations": 144,
+     "quality_driver": "soundness and low split; colour is stable",
+     "mould_risk": "moderate"
+    },
+    "PEA GREEN": {
+     "status": "STRESSED",
+     "call": "heat in fill \u2014 small seed likely",
+     "percent_of_maturity": 258.1,
+     "heat_days": 112.0,
+     "precip_mm": 442.0,
+     "stations": 144,
+     "quality_driver": "GREEN COLOUR RETENTION is the grade and the premium",
+     "mould_risk": "moderate"
+    }
+   }
+  }
+ }
+}

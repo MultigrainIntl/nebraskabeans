@@ -97,11 +97,21 @@
     for(let offset=1;offset<=2;offset++){const next=new Date(date.getTime()+offset*DAY);if(next<=state.end)frames.load(wmsUrl(layer,next,'GetMap',view)).catch(()=>{})}
     return true;
   }
+  // When a crop is selected in the answer block, the map shows THAT crop's condition in
+  // every region rather than a pinto yield ramp. One crop, all regions — the broker's view.
+  var NB_STATUS_COLOR={'AT RISK':'#9c2b20','STRESSED':'#c4622c','LATE':'#c79a2b','WATCH':'#b8a23a','ON TRACK':'#2f7d4f'};
+  function nbCropColor(areaId){
+    var s=window.__nbCropStatus;
+    if(!s||!s.byRegion) return null;
+    var st=s.byRegion[areaId];
+    return st?(NB_STATUS_COLOR[st]||null):null;
+  }
   function yieldColor(value){if(!Number.isFinite(value))return '#b9c0bc';const t=clamp((value-1600)/1100,0,1),a=t<.5?[205,108,70]:[241,207,99],b=t<.5?[241,207,99]:[49,116,81],u=t<.5?t*2:(t-.5)*2;return `rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*u)).join(',')})`}
+  window.__nbRedrawYield=function(){try{renderYield();}catch(e){}};
   function renderYield(){
     clearDataLayers();state.yieldLayer=L.layerGroup({pane:'yieldPane'});let released=0;
     for(const area of STUDY_AREAS){
-      const row=modelRow(area),value=row?.yield_lb_ac,color=yieldColor(value),selected=area.id===state.selected;if(Number.isFinite(value))released++;
+      const row=modelRow(area),value=row?.yield_lb_ac,color=(nbCropColor(area.id)||yieldColor(value)),selected=area.id===state.selected;if(Number.isFinite(value))released++;
       const circle=L.circleMarker(area.center,{pane:'yieldPane',radius:selected?10:7,color:selected?'#173f5a':'#fff',weight:selected?3:1.5,opacity:.98,fill:true,fillColor:color,fillOpacity:Number.isFinite(value)?.83:.55});
       const body=Number.isFinite(value)?`<b>${area.name}</b><br>GISit: ${value.toLocaleString()} lb/ac<br>80% empirical error band: ${row.yield_interval_lb_ac[0].toLocaleString()}–${row.yield_interval_lb_ac[1].toLocaleString()}<br>Stage: ${row.stage}<br>USDA current yield is not a predictor.`:`<b>${area.name}</b><br>${row?.eligibility||'No model state'}`;
       circle.bindTooltip(body,{sticky:true}).on('click',()=>selectArea(area.id)).addTo(state.yieldLayer);

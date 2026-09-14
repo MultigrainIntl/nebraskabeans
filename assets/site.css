@@ -171,3 +171,39 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 .playbackControls input{width:110px}.playbackControls [role=status]{flex-basis:100%;font-size:12px;color:#4b5c50}
 .temporal-raster{transition:none}
 @media(prefers-reduced-motion:reduce){.temporal-raster{transition:none}}
+
+/* Answer-first opening block. Conclusion before evidence. */
+#nbAnswer{max-width:1180px;margin:0 auto;padding:22px 24px 26px}
+.nbA-pick{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.nbA-pick label{font-size:9px;letter-spacing:.1em;font-weight:850;color:#6c796f;text-transform:uppercase}
+.nbA-pick select{font:inherit;font-weight:700;padding:7px 10px;border:1px solid #aebdb2;background:#fff;border-radius:3px}
+.nbA-head{font-size:31px;line-height:1.12;margin:0 0 8px;letter-spacing:-.02em}
+.nbA-head.nbA-ok{color:#1d6b3a}.nbA-head.nbA-warn{color:#8a5a12}.nbA-head.nbA-risk{color:#9c2b20}
+.nbA-line{font-size:17px;line-height:1.45;margin:0 0 10px;max-width:70ch}
+.nbA-watch{font-size:15px;font-weight:700;color:#9c2b20;margin:0 0 10px;padding-left:12px;border-left:4px solid #9c2b20}
+.nbA-q{font-size:13px;color:#4a564d;margin:0 0 12px;max-width:74ch}
+.nbA-more summary{font-size:12px;font-weight:800;letter-spacing:.04em;cursor:pointer;color:#35543f}
+.nbA-table{border-collapse:collapse;margin-top:10px;font-size:13px;width:100%;max-width:760px}
+.nbA-table td{border-bottom:1px solid #e3e9e4;padding:6px 10px 6px 0}
+.nbA-table tr.nbA-ok td:nth-child(2){color:#1d6b3a}
+.nbA-table tr.nbA-warn td:nth-child(2){color:#8a5a12}
+.nbA-table tr.nbA-risk td:nth-child(2){color:#9c2b20}
+.nbA-note{font-size:11px;color:#77837a;margin-top:8px;max-width:74ch}
+@media(max-width:640px){.nbA-head{font-size:24px}.nbA-line{font-size:15px}}
+
+/* Everything past the answer and the map is opt-in. */
+.nbDeeper{max-width:1180px;margin:0 auto;padding:10px 24px 40px}
+.nbDeeperSum{font-size:12px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;
+  cursor:pointer;color:#35543f;padding:14px 0;border-top:1px solid #d9e2db}
+.nbDeeperBody{padding-top:8px}
+.nbPanelMore{font-size:11px;font-weight:800;letter-spacing:.05em;cursor:pointer;
+  color:#cfe0d3;padding:8px 0 4px;text-transform:uppercase}
+
+/* Sidebar moved to "Dig deeper" — the map takes the whole workspace. */
+.nbMapWorkspace{display:block !important}
+.nbMapMain{width:100% !important;flex:1 1 100% !important;max-width:none !important}
+.mapwrap{width:100% !important}
+#map{width:100% !important;min-height:560px}
+#mapLegend{max-width:270px}
+.nbKey{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:11px;margin-top:6px}
+.nbKey span{width:11px;height:11px;border-radius:50%;display:inline-block;margin-right:3px}
