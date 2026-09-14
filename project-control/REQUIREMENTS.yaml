@@ -134,17 +134,22 @@ requirements:
     acceptance: [diagnose source-to-browser pipeline, document smoothing or interpolation, disclose native measurement resolution, imply no false precision, visually inspect desktop tablet phone maps]
   - id: YIELD-001
     priority: P0
-    requirement: Precise current yield forecast is scientifically defensible before it is prominent in the primary interface.
+    requirement: Present the released yield outlook primarily as potential class, empirical uncertainty band, and direction of change, with the point estimate retained only as secondary detail and no model or validation change.
     history_start_status: FAILED
     history_anchor_sha: b5c3aa1b06f3175917b76f46a1935f9db2279b48
-    transitions: []
-    status: FAILED
+    transitions:
+      - from: FAILED
+        to: ACTIVE
+        sha: fd1baefd31b52cf0630b9038726ee6afa45f393a
+        actor: gaj-product-authority
+        timestamp: 2026-09-14
+    status: ACTIVE
     implementer: null
     verifier: null
     identity_provenance: not_applicable_until_implementation
-    evidence: Approximate 2416 lb/acre output was challenged as commercially implausible and remains unvalidated.
+    evidence: GAJ confirmed the released-row model gate and empirical band are useful, but displaying a raw value such as 2416 lb/ac as the primary answer asserts precision unsupported by an approximately plus-or-minus 256 lb/ac band. This gate changes presentation only.
     gaj_acceptance_required: true
-    acceptance: [audit model inputs calibration validation and leakage, establish historical and out-of-sample skill, quantify uncertainty and regional bias, incorporate defensible crop-response evidence, justify displayed precision]
+    acceptance: [potentialClass output is the primary answer, empirical band is immediately visible, seven-day direction is immediately visible, point estimate remains available as secondary detail, withheld rows remain withheld with their gate reason, model equation training data error band baseline comparison and release gate are unchanged, rendered hierarchy is inspected at desktop tablet and phone widths]
   - id: MAP-002
     priority: P0
     requirement: Temporal animation makes change understandable with synchronized date map crop stage and interpretation.
