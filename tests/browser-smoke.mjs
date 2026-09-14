@@ -32,7 +32,14 @@ try{
   assert(scripts.some(s=>s?.includes('assets/app.js')),'single recovery controller not loaded');
 
   assert.equal(await page.locator('#region option').count(),7,'all seven candidate analytical areas must be selectable');
-  assert.match(await page.locator('#yieldNow').textContent(),/2,416 lb\/ac/,'current Nebraska screen must expose the GISit estimate');
+  // YIELD-001. This previously asserted the headline slot showed the point estimate
+  // "2,416 lb/ac". That is the defect the requirement names: four significant figures
+  // asserting a precision the model does not have (p80 band is +/-265 lb/ac).
+  // The assertion is REPLACED, not removed — the slot must now carry the yield CLASS,
+  // which is the claim the model can defend. The band is still asserted on the next line,
+  // so numeric disclosure is not weakened.
+  assert.match(await page.locator('#yieldNow').textContent(),/ABOVE-TYPICAL|TYPICAL-RANGE|BELOW-TYPICAL|WITHHELD/,'yield headline must carry the defensible yield class, not a false-precision point estimate');
+  assert.doesNotMatch(await page.locator('#plainAnswer').textContent(),/\d,\d{3} lb\/ac/,'YIELD-001: the opening headline must not lead with a point estimate');
   assert.match(await page.locator('#yieldRange').textContent(),/2,151–2,681 lb\/ac/,'empirical GISit error band missing');
   assert.match(await page.locator('#narrative').textContent(),/no current USDA yield forecast enters the equation/i,'USDA yield separation is not explicit');
   assert.match(await page.locator('#condition').textContent(),/MIXED · TYPICAL-RANGE POTENTIAL/,'two-family crop-health outlook missing');
