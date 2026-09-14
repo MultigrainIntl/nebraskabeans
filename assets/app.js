@@ -108,8 +108,8 @@
   }
   function yieldColor(value){if(!Number.isFinite(value))return '#b9c0bc';const t=clamp((value-1600)/1100,0,1),a=t<.5?[205,108,70]:[241,207,99],b=t<.5?[241,207,99]:[49,116,81],u=t<.5?t*2:(t-.5)*2;return `rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*u)).join(',')})`}
   window.__nbRedrawYield=function(){try{renderYield();}catch(e){}};
-  try{window.__nbLeaflet=map;window.__nbAreas=STUDY_AREAS;}catch(e){}
   function renderYield(){
+    window.__nbLeaflet=map;window.__nbAreas=STUDY_AREAS;
     clearDataLayers();state.yieldLayer=L.layerGroup({pane:'yieldPane'});let released=0;
     for(const area of STUDY_AREAS){
       const row=modelRow(area),value=row?.yield_lb_ac,color=(nbCropColor(area.id)||yieldColor(value)),selected=area.id===state.selected;if(Number.isFinite(value))released++;

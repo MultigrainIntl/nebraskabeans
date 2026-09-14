@@ -81,7 +81,9 @@
     h.rows.forEach(function (r) { byRegion[r.id] = r.c.status; });
     window.__nbCropStatus = { crop: crop, byRegion: byRegion };
     if (typeof window.__nbRedrawYield === 'function') window.__nbRedrawYield();
-    setTimeout(function () { hideStationNoise(); labelRegions(); }, 250);
+    [250, 900, 2000].forEach(function (ms) {
+      setTimeout(function () { hideStationNoise(); labelRegions(); }, ms);
+    });
 
     var sel = document.getElementById('nbCrop');
     if (sel) sel.addEventListener('change', function (e) {
