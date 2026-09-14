@@ -235,3 +235,10 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 /* Labels sit tight to their anchor and stay legible on any basemap. */
 .nbRegionTag b{font-size:11px}
 .nbRegionTag i{font-size:9px;opacity:.95}
+
+/* The map was 620px tall inside a 580px container and was being clipped.
+   The container follows the map, not the other way round. */
+.nbMapWorkspace,.nbMapMain,.mapwrap{height:auto !important;min-height:0 !important}
+.mapwrap{position:relative;display:block}
+#map{height:66vh !important;min-height:600px !important;width:100% !important}
+.nbA-moist{font-size:14px;color:#33463a;margin:0 0 10px;max-width:72ch}

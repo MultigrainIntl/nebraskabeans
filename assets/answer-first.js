@@ -21,7 +21,8 @@
   function headlineFor(crop, regions) {
     var rows = Object.keys(regions).map(function (id) {
       var r = regions[id], c = r.classes[crop];
-      return c ? { id: id, name: r.name, state: r.state, c: c } : null;
+      return c ? { id: id, name: r.name, state: r.state, c: c,
+                   moisture: r.moisture, vegetation: r.vegetation } : null;
     }).filter(Boolean);
     if (!rows.length) return null;
 
@@ -68,8 +69,19 @@
     var watch = (worst.c.status === 'AT RISK' || worst.c.status === 'STRESSED')
       ? worst.name + ' — ' + worst.c.call + '.' : null;
 
+    // soil moisture and the direction of travel are requirements, not detail
+    var dry = rows.filter(function (r) { return r.moisture && /drier/.test(r.moisture.state); }).length;
+    var improving = rows.filter(function (r) { return r.moisture && r.moisture.trend === 'improving'; }).length;
+    var green = rows.filter(function (r) { return r.vegetation && r.vegetation.trend === 'greening'; }).length;
+    var moistLine = null;
+    if (rows.some(function (r) { return r.moisture; })) {
+      moistLine = 'Soil moisture ' + (dry > rows.length / 2 ? 'drier than normal' : 'about normal') +
+        ' in ' + (dry || rows.length - dry) + ' of ' + rows.length + ' regions, ' +
+        (improving > rows.length / 2 ? 'improving' : 'still drying') + '. Crop is ' +
+        (green > rows.length / 2 ? 'greening' : 'declining') + ' week on week.';
+    }
     return { rows: rows, majority: majority, when: when, size: size, watch: watch,
-             yieldRange: yieldRange, yieldVs: yieldVs, worst: worst };
+             yieldRange: yieldRange, yieldVs: yieldVs, worst: worst, moistLine: moistLine };
   }
 
   function render(data, crop) {
@@ -87,6 +99,7 @@
         '<td><b>' + r.c.status + '</b></td>' +
         '<td>' + (r.c.yield ? r.c.yield.low.toLocaleString() + '–' + r.c.yield.high.toLocaleString() + ' lb/ac' : '—') + '</td>' +
         '<td>' + ((r.c.harvest || {}).ready === 'now' ? 'cut now' : 'ready ' + ((r.c.harvest || {}).ready || '—')) + '</td>' +
+        '<td>' + (r.moisture ? r.moisture.state + ', ' + r.moisture.trend : '—') + '</td>' +
         '<td>' + r.c.call + '</td></tr>';
     }).join('');
 
@@ -97,6 +110,7 @@
         (h.yieldRange ? ' — ' + h.yieldRange : ' — ' + h.majority) + '</h2>' +
       '<p class="nbA-line"><b>' + h.when + '</b> ' + h.size +
         (h.yieldVs ? ' Running ' + h.yieldVs : '') + '</p>' +
+      (h.moistLine ? '<p class="nbA-moist">' + h.moistLine + '</p>' : '') +
       (h.watch ? '<p class="nbA-watch">Watch — ' + h.watch + '</p>' : '') +
       '<p class="nbA-q"><b>What sets the price:</b> ' + (data.classes[crop].quality_driver || '') + '</p>' +
       '<details class="nbA-more"><summary>Region by region</summary>' +
@@ -242,9 +256,10 @@
         }
       }).addTo(map);
       if (window.__nbGrow.bringToBack) window.__nbGrow.bringToBack();
+      drawRegionOutlines(geo, s);
     };
     if (window.__nbGrowGeo) return paint(window.__nbGrowGeo);
-    fetch('assets/data/growing-regions.json').then(function (r) { return r.json(); })
+    fetch('assets/data/growing-regions.json?v=' + (window.__nbBuild || Date.now())).then(function (r) { return r.json(); })
       .then(function (geo) { window.__nbGrowGeo = geo; paint(geo); })
       .catch(function () { /* markers still carry the answer */ });
   }
@@ -264,6 +279,38 @@
         }
       });
     });
+  }
+
+  /* Encircle each region by tracing the OUTER EDGES of its cells. A convex hull sprawled
+     across empty country and crossed its neighbours; this hugs the crop. An edge is drawn
+     only where a cell has no same-region neighbour on that side. */
+  function drawRegionOutlines(geo, s) {
+    var map = window.__nbLeaflet, L = window.L;
+    if (!map || !L) return;
+    if (window.__nbOutline) map.removeLayer(window.__nbOutline);
+    var CELL = geo.cell_deg || 0.12, h = CELL / 2;
+    var byRegion = {};
+    geo.features.forEach(function (f) {
+      var r = f.properties.region;
+      (byRegion[r] = byRegion[r] || {})[f.properties.iy + ',' + f.properties.ix] = f.properties;
+    });
+    var group = L.layerGroup();
+    Object.keys(byRegion).forEach(function (r) {
+      var set = byRegion[r], st = s.byRegion[r], segs = [];
+      Object.keys(set).forEach(function (k) {
+        var p = set[k], lat = p.iy * CELL, lon = p.ix * CELL;
+        var has = function (dy, dx) { return !!set[(p.iy + dy) + ',' + (p.ix + dx)]; };
+        if (!has(1, 0)) segs.push([[lat + h, lon - h], [lat + h, lon + h]]);   // north
+        if (!has(-1, 0)) segs.push([[lat - h, lon - h], [lat - h, lon + h]]);  // south
+        if (!has(0, 1)) segs.push([[lat - h, lon + h], [lat + h, lon + h]]);   // east
+        if (!has(0, -1)) segs.push([[lat - h, lon - h], [lat + h, lon - h]]);  // west
+      });
+      if (!segs.length) return;
+      L.polyline(segs, { color: STATUS_COLOR[st] || '#6b7770', weight: 2.4,
+                         opacity: 0.95, interactive: false, lineCap: 'square' }).addTo(group);
+    });
+    group.addTo(map);
+    window.__nbOutline = group;
   }
 
   function labelRegions(attempt) {
@@ -317,7 +364,7 @@
   function boot() {
     var host = document.getElementById('nbAnswer');
     if (!host) return;
-    fetch('assets/data/region-answers.json')
+    fetch('assets/data/region-answers.json?v=' + (window.__nbBuild || Date.now()))
       .then(function (r) { return r.json(); })
       .then(function (d) {
         var saved = null;
