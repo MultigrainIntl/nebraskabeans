@@ -152,9 +152,14 @@
   /* Decision support ON the map: label every region with its call, and hide the 200 weather
      stations that mean nothing to someone deciding whether to cut. The stations remain
      available under "Dig deeper" — they are evidence, not the answer. */
-  function labelRegions() {
+  function labelRegions(attempt) {
     var s = window.__nbCropStatus;
-    if (!s || !window.__nbLeaflet) return;
+    // the map is built by app.js asynchronously; wait for it rather than silently doing nothing
+    if (!s || !window.__nbLeaflet || !window.L) {
+      attempt = (attempt || 0) + 1;
+      if (attempt < 25) setTimeout(function () { labelRegions(attempt); }, 300);
+      return;
+    }
     var map = window.__nbLeaflet, L = window.L;
     if (window.__nbLabels) { window.__nbLabels.forEach(function (m) { map.removeLayer(m); }); }
     window.__nbLabels = [];
@@ -170,10 +175,15 @@
     });
   }
 
-  function hideStationNoise() {
+  function hideStationNoise(attempt) {
     var box = [].slice.call(document.querySelectorAll('input[type=checkbox]'))
       .filter(function (c) { return /station/i.test(c.parentNode.textContent || ''); })[0];
-    if (box && box.checked) { box.checked = false; box.dispatchEvent(new Event('change', { bubbles: true })); }
+    if (box) {
+      if (box.checked) { box.checked = false; box.dispatchEvent(new Event('change', { bubbles: true })); }
+      return;
+    }
+    attempt = (attempt || 0) + 1;
+    if (attempt < 25) setTimeout(function () { hideStationNoise(attempt); }, 300);
   }
 
   function boot() {
