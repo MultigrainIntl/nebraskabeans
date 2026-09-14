@@ -1,0 +1,5 @@
+name: JoieOS Compliance
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  compliance:
+    uses: MultigrainIntl/joieos-governance/.github/workflows/compliance.yml@main
