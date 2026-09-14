@@ -109,7 +109,7 @@
     window.__nbCropStatus = { crop: crop, byRegion: byRegion };
     if (typeof window.__nbRedrawYield === 'function') window.__nbRedrawYield();
     [250, 900, 2000].forEach(function (ms) {
-      setTimeout(function () { hideStationNoise(); labelRegions(); }, ms);
+      setTimeout(function () { hideStationNoise(); labelRegions(); drawGrowingRegions(); }, ms);
     });
 
     var sel = document.getElementById('nbCrop');
@@ -203,6 +203,39 @@
   /* Decision support ON the map: label every region with its call, and hide the 200 weather
      stations that mean nothing to someone deciding whether to cut. The stations remain
      available under "Dig deeper" — they are evidence, not the answer. */
+  var STATUS_COLOR = { 'AT RISK':'#9c2b20','STRESSED':'#c4622c','LATE':'#c79a2b','WATCH':'#b8a23a','ON TRACK':'#2f7d4f' };
+
+  /* Growing-region polygons. 344 cells aggregated from the USDA Cropland Data Layer — where
+     dry beans actually grew in 2025 — shaded by the selected crop's condition in that region.
+     This replaces both the point markers as the primary read and the 66,000 field specks. */
+  function drawGrowingRegions(attempt) {
+    var s = window.__nbCropStatus, map = window.__nbLeaflet, L = window.L;
+    if (!s || !map || !L) {
+      attempt = (attempt || 0) + 1;
+      if (attempt < 25) setTimeout(function () { drawGrowingRegions(attempt); }, 300);
+      return;
+    }
+    var paint = function (geo) {
+      if (window.__nbGrow) map.removeLayer(window.__nbGrow);
+      window.__nbGrow = L.geoJSON(geo, {
+        style: function (f) {
+          var st = s.byRegion[f.properties.region];
+          return { color: '#fff', weight: 0.3, opacity: 0.5,
+                   fillColor: STATUS_COLOR[st] || '#b9c0bc', fillOpacity: st ? 0.62 : 0.2 };
+        },
+        onEachFeature: function (f, layer) {
+          var st = s.byRegion[f.properties.region] || 'no data';
+          layer.bindTooltip(f.properties.acres.toLocaleString() + ' acres · ' + st, { sticky: true });
+        }
+      }).addTo(map);
+      if (window.__nbGrow.bringToBack) window.__nbGrow.bringToBack();
+    };
+    if (window.__nbGrowGeo) return paint(window.__nbGrowGeo);
+    fetch('assets/data/growing-regions.json').then(function (r) { return r.json(); })
+      .then(function (geo) { window.__nbGrowGeo = geo; paint(geo); })
+      .catch(function () { /* markers still carry the answer */ });
+  }
+
   function labelRegions(attempt) {
     var s = window.__nbCropStatus;
     // the map is built by app.js asynchronously; wait for it rather than silently doing nothing
