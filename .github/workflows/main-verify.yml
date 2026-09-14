@@ -31,7 +31,7 @@ jobs:
 
           unexpected="$(
             git ls-files |
-              grep -Ev '^(README\.md|\.github/workflows/main-verify\.yml|\.github/CODEOWNERS)$' ||
+              grep -Ev '^(README\.md|CLAUDE\.md|\.github/workflows/main-verify\.yml|\.github/workflows/joieos-compliance\.yml|\.github/CODEOWNERS)$' ||
               true
           )"
 
