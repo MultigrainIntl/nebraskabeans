@@ -123,7 +123,7 @@
     window.__nbCropStatus = { crop: crop, byRegion: byRegion };
     if (typeof window.__nbRedrawYield === 'function') window.__nbRedrawYield();
     [250, 900, 2000].forEach(function (ms) {
-      setTimeout(function () { hideStationNoise(); labelRegions(); drawGrowingRegions(); shrinkMarkers(); }, ms);
+      setTimeout(function () { hideStationNoise(); labelRegions(); drawGrowingRegions(); shrinkMarkers(); pruneDeeper(); }, ms);
     });
 
     var sel = document.getElementById('nbCrop');
@@ -359,6 +359,20 @@
     }
     attempt = (attempt || 0) + 1;
     if (attempt < 25) setTimeout(function () { hideStationNoise(attempt); }, 300);
+  }
+
+  /* "Dig deeper" had become a junk drawer of nineteen panels, most of them the old site
+     repeating what the answer above now states once. Keep the two that earn their place —
+     where the data comes from, and what the model does — and remove the duplicates. */
+  function pruneDeeper() {
+    var body = document.querySelector('.nbDeeperBody');
+    if (!body) return;
+    var KEEP = /evidence backbone|authoritative source|model transparency|what the experimental/i;
+    [].slice.call(body.children).forEach(function (n) {
+      var txt = (n.textContent || '').trim();
+      if (!txt) { n.remove(); return; }
+      if (!KEEP.test(txt.slice(0, 400))) n.remove();
+    });
   }
 
   function boot() {
