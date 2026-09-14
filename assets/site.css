@@ -254,3 +254,15 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 .nbPanelMore{color:#cfe0d3;font-size:12px}
 /* Playback speed sits with the play button it controls. */
 .timebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+
+/* Playback: directly under the map, one control, obvious. */
+#nbPlayback{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 12px;margin-top:8px;background:#f3f6f3;border:1px solid #d9e2db;border-radius:6px}
+#nbPlayBtn{font:inherit;font-weight:800;padding:7px 16px;border:1px solid #2f5d43;
+  background:#2f5d43;color:#fff;border-radius:4px;cursor:pointer;min-width:104px}
+#nbPlayBtn:hover{background:#26492f}
+#nbSlider{flex:1 1 260px;min-width:200px;accent-color:#2f5d43;cursor:pointer}
+#nbDateLabel{font-weight:800;font-variant-numeric:tabular-nums;min-width:96px}
+#nbPlayback label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6c796f;font-weight:850}
+#nbSpeedSel{font:inherit;padding:5px 8px;border:1px solid #aebdb2;border-radius:4px;background:#fff}
+@media(max-width:640px){#nbPlayBtn{min-width:88px}#nbDateLabel{min-width:0}}

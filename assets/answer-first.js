@@ -279,7 +279,8 @@
         },
         onEachFeature: function (f, layer) {
           var st = s.byRegion[f.properties.region] || 'no data';
-          layer.bindTooltip(f.properties.acres.toLocaleString() + ' acres · ' + st, { sticky: true });
+          var ac = f.properties.a != null ? f.properties.a : f.properties.acres;
+          layer.bindTooltip((ac != null ? ac.toLocaleString() + ' acres · ' : '') + st, { sticky: true });
         }
       }).addTo(map);
       if (window.__nbGrow.bringToBack) window.__nbGrow.bringToBack();
@@ -415,49 +416,93 @@
     H: { label: 'Harvest ready', color: '#a8571f' }
   };
 
-  function currentDateIndex() {
-    var tl = window.__nbTimeline;
-    if (!tl) return null;
-    var el = document.querySelector('#mapSection .timebar, .timebar');
-    var txt = el ? (el.textContent || '') : '';
-    var m = txt.match(/20\d\d-\d\d-\d\d/);
-    if (!m) return tl.dates.length - 1;
-    var i = tl.dates.indexOf(m[0]);
-    return i < 0 ? tl.dates.length - 1 : i;
-  }
-
+  /* Repaint every cell for the crop stage on the selected day. This is the animation:
+     without it the map held one colour all season and playing did nothing. */
   function paintByDate() {
-    var tl = window.__nbTimeline, s = window.__nbCropStatus, map = window.__nbLeaflet;
-    if (!tl || !s || !map || !window.__nbGrow) return;
-    var i = currentDateIndex();
-    if (i === null) return;
+    var tl = window.__nbTimeline, s = window.__nbCropStatus;
+    if (!tl || !s || !window.__nbGrow) return;
+    var i = (nbIdx === null) ? tl.dates.length - 1 : nbIdx;
     var crop = s.crop, stageByRegion = {};
     Object.keys(tl.regions).forEach(function (r) {
       var rec = tl.regions[r][crop];
       stageByRegion[r] = rec ? rec.stage.charAt(i) : null;
     });
     window.__nbGrow.eachLayer(function (l) {
-      var r = l.feature && l.feature.properties.region;
+      var r = l.feature && l.feature.properties && l.feature.properties.region;
       var st = stageByRegion[r];
       if (!st || !STAGE[st]) return;
-      l.setStyle({ fillColor: STAGE[st].color, fillOpacity: 0.72 });
+      l.setStyle({ fillColor: STAGE[st].color, fillOpacity: 0.75, weight: 0.2, color: '#fff' });
     });
-    if (window.__nbOutline) {
-      window.__nbOutline.eachLayer(function (l) { l.setStyle({ opacity: 0.5 }); });
-    }
     var host = document.getElementById('mapLegend');
     if (host) {
       host.innerHTML = '<b>' + crop + ' — crop stage on ' + tl.dates[i] + '</b><div class="nbKey">' +
-        ['P','E','V','F','M','H'].map(function (k) {
+        ['P', 'E', 'V', 'F', 'M', 'H'].map(function (k) {
           return '<span style="background:' + STAGE[k].color + '"></span>' + STAGE[k].label;
         }).join('') + '</div>';
     }
   }
 
-  function startAnimationWatch() {
-    if (window.__nbAnimWatch) return;
-    window.__nbAnimWatch = setInterval(paintByDate, 350);
+  var nbIdx = null, nbPlay = null, nbSpeed = 1;
+
+  function nbDates() { return window.__nbTimeline ? window.__nbTimeline.dates : null; }
+
+  function setDate(i, fromUser) {
+    var d = nbDates(); if (!d) return;
+    nbIdx = Math.max(0, Math.min(d.length - 1, i));
+    paintByDate();
+    var sl = document.getElementById('nbSlider'), lab = document.getElementById('nbDateLabel');
+    if (sl && !fromUser) sl.value = nbIdx;
+    if (lab) lab.textContent = d[nbIdx];
   }
+
+  function togglePlay() {
+    var d = nbDates(); if (!d) return;
+    var btn = document.getElementById('nbPlayBtn');
+    if (nbPlay) { clearInterval(nbPlay); nbPlay = null; if (btn) btn.textContent = '▶ Play'; return; }
+    if (nbIdx >= d.length - 1) nbIdx = 0;       // replay from the start
+    if (btn) btn.textContent = '❚❚ Pause';
+    nbPlay = setInterval(function () {
+      if (nbIdx >= d.length - 1) { clearInterval(nbPlay); nbPlay = null;
+        var b = document.getElementById('nbPlayBtn'); if (b) b.textContent = '▶ Play'; return; }
+      setDate(nbIdx + 1);
+    }, Math.round(120 / nbSpeed));
+  }
+
+  /* Playback lives directly under the map, where the eye already is. Sliding updates the
+     map immediately; the old control only moved a preview date and never touched the crop. */
+  function buildPlayback() {
+    var d = nbDates(); if (!d) return;
+    if (document.getElementById('nbPlayback')) return;
+    var wrap = document.querySelector('.mapwrap'); if (!wrap || !wrap.parentNode) return;
+    var bar = document.createElement('div');
+    bar.id = 'nbPlayback';
+    bar.innerHTML =
+      '<button id="nbPlayBtn" type="button">▶ Play</button>' +
+      '<input id="nbSlider" type="range" min="0" max="' + (d.length - 1) + '" value="' + (d.length - 1) + '">' +
+      '<span id="nbDateLabel">' + d[d.length - 1] + '</span>' +
+      '<label for="nbSpeedSel">Speed</label>' +
+      '<select id="nbSpeedSel">' +
+        '<option value="0.5">0.5x</option><option value="1" selected>1x</option>' +
+        '<option value="2">2x</option><option value="4">4x</option><option value="8">8x</option>' +
+      '</select>';
+    wrap.parentNode.insertBefore(bar, wrap.nextSibling);
+    document.getElementById('nbPlayBtn').addEventListener('click', togglePlay);
+    document.getElementById('nbSlider').addEventListener('input', function (e) {
+      if (nbPlay) { clearInterval(nbPlay); nbPlay = null;
+        document.getElementById('nbPlayBtn').textContent = '▶ Play'; }
+      setDate(parseInt(e.target.value, 10), true);
+    });
+    document.getElementById('nbSpeedSel').addEventListener('change', function (e) {
+      nbSpeed = parseFloat(e.target.value);
+      if (nbPlay) { clearInterval(nbPlay); nbPlay = null; togglePlay(); }
+    });
+    nbIdx = d.length - 1;
+    setDate(nbIdx);
+    var old = document.querySelector('.timebar');           // one control, not two
+    if (old) old.style.display = 'none';
+  }
+
+  function startAnimationWatch() { buildPlayback(); }
 
   function boot() {
     var host = document.getElementById('nbAnswer');
