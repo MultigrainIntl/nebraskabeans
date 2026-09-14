@@ -1,0 +1,31 @@
+schema_version: 3
+id: APPROVAL-CONTROL-009-20260914
+authority: GAJ
+authorization_type: control_scope
+gate: CONTROL-009
+authorized_at: 2026-09-14
+base_sha: 531a974b013a0398d9d7b3fd3213af6796755e0d
+candidate_sha: null
+countersigned_by: GAJ
+signature_provenance: current_chat_explicit_authorization_from_GAJ
+scope:
+  allow:
+    - scripts/validate-control-plane.mjs
+    - tests/control-plane/control-plane-negative.test.mjs
+  prohibit:
+    - product changes
+    - gh-pages changes
+    - main changes
+    - production changes
+    - deployment changes
+    - DNS or GoDaddy changes
+notes:
+  - This approval authorizes only the two named control-plane implementation paths on staging/recover-5fa3f42.
+  - It does not authorize any product, model, training-data, validation-gate, deployment, DNS, main, gh-pages, or production change.
+  - The prior refusal was correct; the proposed reversal was an implementer self-authorization error and granted no scope.
+  - Testing by the implementer must be labeled implementer-authored and implementer-run.
+  - Independent verification and GAJ acceptance remain separate future steps.
+source:
+  type: current_chat_explicit_authorization
+  authority: GAJ
+  statement: GAJ stopped the unauthorized reversal and directed the corrected CONTROL-009 sequence on 2026-09-14, beginning with a single active control gate and a countersigned approval limited to scripts/validate-control-plane.mjs and tests/control-plane/control-plane-negative.test.mjs.
