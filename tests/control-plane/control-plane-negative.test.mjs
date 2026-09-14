@@ -39,11 +39,32 @@ const req = () => load('project-control/REQUIREMENTS.yaml');
 const saveReq = object => save('project-control/REQUIREMENTS.yaml', object);
 const lock = () => load('project-control/EXECUTION_LOCK.yaml');
 const saveLock = object => save('project-control/EXECUTION_LOCK.yaml', object);
-const approvalPath = 'project-control/approvals/APPROVAL-CONTROL-006-20260913.yaml';
+const approvalPath = 'project-control/approvals/APPROVAL-CONTROL-009-20260914.yaml';
 const approval = () => load(approvalPath);
 const saveApproval = object => save(approvalPath, object);
-const active = requirements => requirements.requirements.find(item => item.id === 'CONTROL-006');
+const active = requirements => requirements.requirements.find(item => item.id === 'CONTROL-009');
 const other = requirements => requirements.requirements.find(item => item.id === 'SCI-001');
+const yieldApprovalPath = 'project-control/approvals/APPROVAL-YIELD-001-20260914.yaml';
+
+function activateYieldGate() {
+  const requirements = req();
+  setStatus(active(requirements), 'BLOCKED', '531a974b013a0398d9d7b3fd3213af6796755e0d');
+  const yieldGate = requirements.requirements.find(item => item.id === 'YIELD-001');
+  setStatus(yieldGate, 'ACTIVE', '531a974b013a0398d9d7b3fd3213af6796755e0d');
+  saveReq(requirements);
+
+  const state = load('project-control/CURRENT_STATE.yaml');
+  state.active_gate = 'YIELD-001';
+  save('project-control/CURRENT_STATE.yaml', state);
+
+  const yieldApproval = load(yieldApprovalPath);
+  const executionLock = lock();
+  executionLock.gate = 'YIELD-001';
+  executionLock.approval_ref = yieldApproval.id;
+  executionLock.base_sha = yieldApproval.base_sha;
+  executionLock.scope = structuredClone(yieldApproval.scope);
+  saveLock(executionLock);
+}
 
 function reset() {
   execFileSync('git', ['reset', '--hard', baseHead], { cwd: work, stdio: 'ignore' });
@@ -272,7 +293,7 @@ add('A28-quoted-active-scalar-valid', 0, () => {
 });
 add('A29-quoted-lock-gate-valid', 0, () => {
   let raw = fs.readFileSync(p('project-control/EXECUTION_LOCK.yaml'), 'utf8');
-  raw = raw.replace('gate: CONTROL-006', 'gate: "CONTROL-006"');
+  raw = raw.replace('gate: CONTROL-009', 'gate: "CONTROL-009"');
   fs.writeFileSync(p('project-control/EXECUTION_LOCK.yaml'), raw);
 });
 add('A30-valid-yaml-whitespace', 0, () => {
@@ -424,9 +445,11 @@ add('N7-free-text-non-impact-ref', 1, () => {
 add('N8-self-authored-assets-scope-expansion', 1, () => {
   const a = approval();
   a.scope.allow.push('assets/**', 'index.html');
+  a.scope.prohibit.push('application asset changes');
   saveApproval(a);
   const l = lock();
   l.scope.allow.push('assets/**', 'index.html');
+  l.scope.prohibit.push('application asset changes');
   saveLock(l);
   fs.appendFileSync(p('assets/site.css'), '\n/* unauthorized fixture */\n');
 }, [
@@ -435,6 +458,42 @@ add('N8-self-authored-assets-scope-expansion', 1, () => {
   'CONTROL-SCOPE-006',
   'CONTROL-SCOPE-007'
 ]);
+add('CONTROL009-product-paths-with-no-approval', 1, () => {
+  activateYieldGate();
+  const l = lock();
+  l.approval_ref = 'APPROVAL-DOES-NOT-EXIST';
+  saveLock(l);
+}, 'CONTROL-SCOPE-006');
+add('CONTROL009-product-path-beyond-approval', 1, () => {
+  activateYieldGate();
+  const l = lock();
+  l.scope.allow.push('bean.html');
+  saveLock(l);
+}, 'CONTROL-SCOPE-006');
+add('CONTROL009-control-gate-product-path', 1, () => {
+  const a = approval();
+  a.authorization_type = 'production_scope';
+  a.scope.allow.push('index.html');
+  saveApproval(a);
+  const l = lock();
+  l.scope.allow.push('index.html');
+  saveLock(l);
+}, 'CONTROL-SCOPE-006');
+add('CONTROL009-deployment-surface-under-approval', 1, () => {
+  activateYieldGate();
+  const a = load(yieldApprovalPath);
+  a.scope.allow.push('.github/workflows/staging-qa.yml');
+  save(yieldApprovalPath, a);
+  const l = lock();
+  l.scope.allow.push('.github/workflows/staging-qa.yml');
+  saveLock(l);
+}, 'CONTROL-SCOPE-006');
+add('CONTROL009-production-surface-not-barred', 1, () => {
+  activateYieldGate();
+  const a = load(yieldApprovalPath);
+  a.scope.prohibit = a.scope.prohibit.filter(item => item !== 'production changes');
+  save(yieldApprovalPath, a);
+}, 'CONTROL-SCOPE-006');
 for (const [id, rule] of [
   ['a-prefix', 'a/**'],
   ['i-prefix', 'i/**'],

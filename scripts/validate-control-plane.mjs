@@ -332,6 +332,24 @@ function productPath(file) {
   return false;
 }
 
+function productGate(id) {
+  return /^(UX|MAP|YIELD|SCI)-\d+$/.test(String(id || ''));
+}
+
+function protectedOperationalPath(file) {
+  const value = String(file || '').toLowerCase();
+  if (value.startsWith('.github/workflows/')) return true;
+  if (/^(deploy|deployment|dns|infra|infrastructure|production)\//.test(value)) return true;
+  return new Set([
+    '.firebaserc',
+    'cname',
+    'firebase.json',
+    'netlify.toml',
+    'vercel.json',
+    'wrangler.toml'
+  ]).has(value);
+}
+
 const trackedFiles = String(git(['ls-files', '-z'], { trim: false }) || '')
   .split('\0')
   .filter(Boolean);
@@ -998,6 +1016,7 @@ function validateGateAndScope(byApproval) {
   }
   const approval = byApproval.get(lock.approval_ref);
   const activeReq = reqs.requirements.find(item => item.id === state.active_gate);
+  let lockWithinApproval = false;
   if (!approval) {
     fail(`CONTROL-APPROVAL-003 unresolved ${lock.approval_ref}`);
   } else {
@@ -1007,8 +1026,10 @@ function validateGateAndScope(byApproval) {
     const approved = new Set(
       checkStringList(approval.scope.allow, `approval.${approval.id}.scope.allow`)
     );
+    lockWithinApproval = true;
     for (const rule of checkStringList(lock.scope.allow, 'EXECUTION_LOCK.scope.allow')) {
       if (!approved.has(rule)) {
+        lockWithinApproval = false;
         fail(`CONTROL-APPROVAL-005 lock exceeds approval ${rule}`);
       }
     }
@@ -1019,21 +1040,43 @@ function validateGateAndScope(byApproval) {
   const allow = checkStringList(lock.scope.allow, 'EXECUTION_LOCK.scope.allow');
   const prohibit = checkStringList(lock.scope.prohibit, 'EXECUTION_LOCK.scope.prohibit');
   const analyzedAllow = analyzeScopeRules(allow, 'EXECUTION_LOCK.scope.allow');
-  for (const required of [
+  const requiredProhibitions = [
     'main changes',
     'production changes',
     'gh-pages changes',
     'DNS or GoDaddy changes'
-  ]) {
+  ];
+  for (const required of requiredProhibitions) {
     if (!prohibit.includes(required)) {
       fail(`CONTROL-SCOPE-001 prohibit missing ${required}`);
     }
   }
-  for (const { rule, productMatches } of analyzedAllow) {
-    if (productMatches.length > 0) {
+  const protectedProhibitions = [...requiredProhibitions, 'deployment changes'];
+  const approvalProhibit = Array.isArray(approval?.scope?.prohibit)
+    ? approval.scope.prohibit
+    : [];
+  const productionClass =
+    approval?.authorization_type === 'production_scope' &&
+    nonEmpty(approval?.countersigned_by) &&
+    nonEmpty(approval?.signature_provenance);
+  const productScopeAuthorized =
+    productGate(activeReq?.id) &&
+    approval?.gate === activeReq?.id &&
+    lockWithinApproval &&
+    productionClass &&
+    protectedProhibitions.every(item => approvalProhibit.includes(item));
+  for (const { rule, matches, productMatches } of analyzedAllow) {
+    const protectedMatches = matches.filter(protectedOperationalPath);
+    if (protectedMatches.length > 0) {
       fail(
-        `CONTROL-SCOPE-006 execution lock may not allow product path: ` +
-        `${rule} -> ${productMatches.join(',')}`
+        `CONTROL-SCOPE-006 execution lock may not allow deployment or production ` +
+        `surface: ${rule} -> ${protectedMatches.join(',')}`
+      );
+    }
+    if (productMatches.length > 0 && !productScopeAuthorized) {
+      fail(
+        `CONTROL-SCOPE-006 product path requires an active product gate and exact ` +
+        `countersigned production_scope: ${rule} -> ${productMatches.join(',')}`
       );
     }
   }
