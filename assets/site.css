@@ -15,7 +15,7 @@ main{max-width:1500px;margin:auto}
 .hero p{font-size:14px;line-height:1.55;color:#526159;max-width:950px}
 .yieldBox{border:1px solid #aebdb2;border-top:5px solid var(--green);padding:17px;background:#f9fcf9}
 .yieldBox span,.answerStrip span,.detailGrid span{font-size:9px;letter-spacing:.1em;font-weight:850;color:#6c796f;display:block}
-.yieldBox strong{display:block;font-size:35px;margin:7px 0 2px}
+.yieldBox strong{display:block;font-size:26px;line-height:1.1;margin:7px 0 4px;letter-spacing:-.01em}
 .yieldBox small{font-size:10px;color:#657169}
 .delta{margin-top:10px;font-size:12px;font-weight:800}
 .answerStrip{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);margin-top:22px}
