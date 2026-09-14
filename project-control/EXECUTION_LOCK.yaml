@@ -1,26 +1,29 @@
 schema_version: 4
-gate: CONTROL-006
+gate: YIELD-001
 status: ACTIVE
-approval_ref: APPROVAL-CONTROL-006-20260913
+approval_ref: APPROVAL-YIELD-001-20260914
 authorized_by: GAJ
-authorized_at: 2026-09-13T13:35:00-06:00
-base_sha: 0cbfb3b86028d7ab8226283a8eccf07ec76ea134
+authorized_at: 2026-09-14
+base_sha: 8f56021339522a1aee8b215047fe5e47e0388ded
 scope:
   allow:
-    - joieos/**
-    - project-control/**
-    - scripts/validate-control-plane.mjs
-    - tests/control-plane/**
-    - .github/workflows/staging-qa.yml
-    - package.json
-    - package-lock.json
+    - index.html
+    - assets/app.js
+    - assets/site.css
+    - assets/decision-workbench.js
+    - assets/decision-workbench.css
+    - tests/browser-smoke.mjs
+    - tests/visual-contract.mjs
   prohibit:
-    - product functionality changes
-    - application asset changes
+    - yield model equation changes
+    - yield training data changes
+    - yield data changes
+    - yield validation gate changes
+    - non-presentation product changes
     - map changes
-    - yield model changes
     - gh-pages changes
     - main changes
     - production changes
+    - deployment changes
     - DNS or GoDaddy changes
-stop_condition: complete CONTROL-006 items 1-15, run the full implementer-authored and implementer-run fixture suite, report the exact final SHA and results, then stop for independent re-verification
+stop_condition: implement and test only the approved YIELD-001 presentation hierarchy, inspect the rendered result at desktop tablet and phone widths, report the exact candidate SHA and evidence, and stop without deployment or self-classification
