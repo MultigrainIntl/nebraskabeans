@@ -42,28 +42,32 @@
       ramp: [[0, '#d9e2d6'], [0.35, '#9ec9a6'], [0.6, '#4ea56b'], [0.8, '#e8c33a'], [1, '#a8571f']],
       question: 'How far along is the crop, and where is it behind?'
     },
+    /* NOT soil moisture, and it was labelled as such until an independent review caught it.
+     * This is rainfall minus grass-reference evaporation over thirty days — a climatic deficit.
+     * It carries no irrigation, no crop coefficient, no root-zone storage, no soil water
+     * capacity, no runoff and no drainage. In a region where much of the bean crop is under
+     * pivot, calling it soil moisture and saying the crop drew down stored water was wrong in
+     * a way that could have moved an irrigation decision. */
     moisture: {
-      label: 'Soil moisture',
-      unit: 'mm water balance, 30 days',
-      loLabel: 'Lower absolute water', hiLabel: 'Higher absolute water',
+      label: 'Rain minus evaporation',
+      unit: 'mm over 30 days · rainfall less grass-reference ET, no irrigation',
+      loLabel: 'Rain far behind evaporation', hiLabel: 'Rain ahead of evaporation',
       ramp: [[0, '#e07b1f'], [0.35, '#e8c33a'], [0.65, '#7cc08a'], [1, '#2a9d9a']],
-      question: 'Where is the crop short of water right now?'
+      question: 'Where has rainfall fallen furthest behind evaporation?'
     },
-    yield: {
-      label: 'Yield outlook',
-      unit: 'against the recent average for this class',
-      regional: true,
-      loLabel: 'Below average', hiLabel: 'Above average',
-      ramp: [[0, '#9e1b0e'], [0.35, '#e07b1f'], [0.5, '#e8c33a'], [0.75, '#7cc08a'], [1, '#17794a']],
-      question: 'What is this crop going to yield, and where is it off?'
-    },
+    /* THE YIELD VIEW IS GONE. It showed USDA's own historical baseline for the class
+     * multiplied by a season adjustment — every one of its 35 values was baseline x percentage
+     * to within a pound. That is not a prediction, and GAJ's standing rule is that USDA yield
+     * is the scorecard and never an input. It was doing the opposite while a heading asked
+     * "what is this crop going to yield". It stays out until there is a real prediction to
+     * grade against USDA rather than one derived from it. */
     health: {
-      label: 'Crop health',
-      unit: 'condition call, estimated per region',
+      label: 'Season flags',
+      unit: 'weather-derived flag from state-level inputs — not an observed crop condition',
       regional: true,
       loLabel: 'At risk', hiLabel: 'On track',
       ramp: [[0, '#9e1b0e'], [0.25, '#d4541c'], [0.5, '#eb9a00'], [0.75, '#f0cb2a'], [1, '#17794a']],
-      question: 'Which regions are in trouble, and why?'
+      question: 'Where do this season\'s weather flags fall?'
     },
     heat: {
       label: 'Heat stress',
@@ -94,7 +98,9 @@
   /* Hargreaves reference evapotranspiration. Rain alone does not tell you whether a crop is
    * short of water — the same 40mm in a cool June and a 100F August are different seasons. */
   function et0(hi, lo, lat, doy) {
-    if (hi == null || lo == null) return 3;
+    // A missing reading is missing. Substituting a plausible-looking 3 mm made gaps in the
+    // record indistinguishable from dry weather, and 8% of borrowed station-days were gaps.
+    if (hi == null || lo == null) return null;
     var tc = function (f) { return (f - 32) / 1.8; };
     var tmax = tc(hi), tmin = tc(lo), tmean = (tmax + tmin) / 2;
     var phi = lat * Math.PI / 180;
@@ -127,39 +133,71 @@
    * them away to protect a growing-degree-day sum they were never going to feed would be a
    * poor trade. A rain-only station borrows evaporation from the nearest thermometer, named in
    * the data file at build time — a median of fifteen kilometres away. */
+  /* Stations standing on the selected crop's counties, cached per crop.
+   * The statistics under the map used to be computed from every gauge in four states while the
+   * picture above them was clipped to one crop, so the sentence and the surface described
+   * different places. */
+  function cropRings() {
+    if (S.ringKey === S.crop) return S.ringCache;
+    var rings = [];
+    cropOutline().forEach(function (f) { rings = rings.concat(ringsOf(f)); });
+    S.ringKey = S.crop; S.ringCache = rings;
+    return rings;
+  }
+
+  /* One number per station for the chosen view on the chosen day. This is what the surface
+   * interpolates between — there is no modelled grid behind it, only observations.
+   *
+   * Temperature and rainfall come from different station sets. Most cooperative sites report
+   * rain and nothing else; they are the densest rainfall network in the country. A rain-only
+   * station borrows evaporation from the nearest thermometer named in the data file. That
+   * transfer is only sound over comparable ground, so a station whose thermometer is too far
+   * away, or whose record has too many gaps, is dropped rather than quietly filled in. */
+  var MAX_BORROW_KM = 40;      // beyond this the terrain and exposure stop being comparable
+  var MIN_WINDOW_COVER = 0.8;  // a station must have observed most of its accumulation window
+
   function stationValues(day) {
     var spec = CLASSES[S.crop] || CLASSES.PINTO;
     var p0 = plantIndex(spec);
     var all = S.field.stations;
+    var rings = cropRings();
     var out = [];
     for (var s = 0; s < all.length; s++) {
       var st = all[s], v = null;
-      if (S.view === 'stage') {
+      if (S.view === 'stage' || S.view === 'heat') {
         if (!st.has_temp) continue;
-        var gdd = 0;
+        var span = day - p0 + 1;
+        if (span <= 0) continue;
+        var seen = 0, gdd = 0, hot = 0;
         for (var i = p0; i <= day; i++) {
           var hi = st.hi[i], lo = st.lo[i];
           if (hi == null || lo == null) continue;
+          seen++;
           gdd += Math.max((hi + lo) / 2 - spec.base, 0);
+          if (hi >= spec.heat) hot++;
         }
-        v = 100 * gdd / spec.gdd;
-      } else if (S.view === 'heat') {
-        if (!st.has_temp) continue;
-        var n = 0;
-        for (var j = p0; j <= day; j++) if (st.hi[j] != null && st.hi[j] >= spec.heat) n++;
-        v = n;
+        // Skipping a missing day is not neutral: it accumulates nothing and biases the total
+        // low, which reads as a late crop rather than as a gappy record.
+        if (seen < span * MIN_WINDOW_COVER) continue;
+        v = S.view === 'stage' ? 100 * gdd / spec.gdd : hot;
       } else {
         if (!st.has_precip) continue;
         var ref = st.has_temp ? st : all[st.t_ref];
         if (!ref || !ref.has_temp) continue;
-        var bal = 0, from = Math.max(0, day - 29);
+        if (!st.has_temp && st.t_ref_km != null && st.t_ref_km > MAX_BORROW_KM) continue;
+        var bal = 0, from = Math.max(0, day - 29), days = day - from + 1, ok = 0;
         for (var k = from; k <= day; k++) {
-          if (st.pr[k] != null) bal += st.pr[k] / 10;      // stored as tenths of a millimetre
-          bal -= et0(ref.hi[k], ref.lo[k], st.lat, doyOf(S.dates[k]));
+          var e = et0(ref.hi[k], ref.lo[k], st.lat, doyOf(S.dates[k]));
+          if (e == null) continue;             // a gap is a gap, not a average day
+          ok++;
+          if (st.pr[k] != null) bal += st.pr[k] / 10;   // stored as tenths of a millimetre
+          bal -= e;
         }
+        if (ok < days * MIN_WINDOW_COVER) continue;
         v = bal;
       }
-      out.push({ x: st.lon, y: st.lat, v: v, name: st.name });
+      out.push({ x: st.lon, y: st.lat, v: v, name: st.name,
+                 inCrop: inRings(st.lon, st.lat, rings) });
     }
     return out;
   }
@@ -390,7 +428,8 @@
            (v.baseline ? '<br>' + Math.round(v.low).toLocaleString() + '–' +
              Math.round(v.high).toLocaleString() + ' lb/ac against a ' +
              Math.round(v.baseline).toLocaleString() + ' lb/ac average' : '') +
-           '<br><i>Estimated for ' + regionName(p.region) + ' as a whole, not for this county.</i>'
+           '<br><i>A flag computed from state-level weather and applied to ' +
+             regionName(p.region) + '. Nothing here was measured in this county.</i>'
          : '');
   }
 
@@ -615,10 +654,17 @@
     }
     var acres = outs.reduce(function (t, f) { return t + f.properties.acres; }, 0);
     var top = (outs[0].properties.top_counties || [])[0];
-    el.innerHTML = com.charAt(0) + com.slice(1).toLowerCase() + ' ground here is <b>' +
-      acres.toLocaleString() + ' acres across ' + counties.length + ' counties</b>' +
-      (top ? ', centred on ' + top : '') + ' · USDA Cropland Data Layer ' +
-      (S.cropOutlines.crop_year || '') + '.';
+    /* The outline is the union of whole counties that carry the crop, not the crop's fields.
+     * USDA counts the acres; the shape is much larger than they are, and saying "ground" made
+     * a county envelope look like a field boundary. */
+    el.innerHTML = 'USDA counts <b>' + acres.toLocaleString() + ' acres</b> of ' +
+      com.toLowerCase() + ' in the <b>' + counties.length + ' counties</b> outlined here' +
+      (top ? ', most of it around ' + top : '') + '. The outline is those whole counties, not ' +
+      'the fields — the crop is a small part of the area drawn. Cropland Data Layer ' +
+      (S.cropOutlines.crop_year || '') +
+      (com === 'DRY BEANS'
+        ? ', which carries one dry-bean class: pinto, navy, black and the kidneys share it.'
+        : '.');
     el.hidden = false;
   }
 
@@ -642,24 +688,33 @@
       calls.sort(function (a, b) { return a.v.t - b.v.t; });
       if (S.view === 'health') {
         var worst = calls[0], best = calls[calls.length - 1];
-        el.innerHTML = S.crop + ' is <b>' + worst.v.label.toLowerCase() + '</b> in ' +
-          worst.name + (calls.length > 1 ? ', and ' + best.v.label.toLowerCase() + ' in ' +
-          best.name : '') + '. ' + calls.length + ' regions carry this crop. ' +
-          '<span class="nbStationCount">condition is called per region, not per field</span>';
-      } else {
-        var lo = calls[0], hi = calls[calls.length - 1];
-        el.innerHTML = S.crop + ' is running <b>' + lo.v.label + '</b> in ' + lo.name +
-          (calls.length > 1 ? ' and <b>' + hi.v.label + '</b> in ' + hi.name : '') +
-          ', against a ' + Math.round(lo.v.baseline).toLocaleString() +
-          ' lb/ac recent average. ' +
-          '<span class="nbStationCount">estimated per region, not per county</span>';
+        el.innerHTML = 'This season\'s weather flags ' + S.crop + ' as <b>' +
+          worst.v.label.toLowerCase() + '</b> in ' + worst.name +
+          (calls.length > 1 ? ' and ' + best.v.label.toLowerCase() + ' in ' + best.name : '') +
+          '. <span class="nbStationCount">a flag from heat, maturity and frost on state-level ' +
+          'inputs — nobody has looked at the crop</span>';
       }
       return;
     }
-    var vals = stationValues(S.day).map(function (p) { return p.v; })
-      .filter(function (v) { return v != null && isFinite(v); })
-      .sort(function (a, b) { return a - b; });
-    if (!vals.length) { el.textContent = 'No station reported on this date.'; return; }
+    /* Before the crop is planted there is nothing to accumulate, and saying "no station
+     * reported" blames the weather network for the calendar. */
+    var spec0 = CLASSES[S.crop] || CLASSES.PINTO;
+    if ((S.view === 'stage' || S.view === 'heat') && S.day < plantIndex(spec0)) {
+      el.innerHTML = S.crop + ' is <b>not in the ground yet</b> on ' + niceDate(S.dates[S.day]) +
+        '. This class goes in around ' + niceDate(S.dates[plantIndex(spec0)]) +
+        ', and nothing accumulates before then.';
+      return;
+    }
+
+    var onCrop = stationValues(S.day).filter(function (p) {
+      return p.inCrop && p.v != null && isFinite(p.v);
+    });
+    var vals = onCrop.map(function (p) { return p.v; }).sort(function (a, b) { return a - b; });
+    if (!vals.length) {
+      el.innerHTML = 'No station on this crop\'s counties has a complete enough record for ' +
+        'this date. Nothing is shown rather than a number built from gaps.';
+      return;
+    }
     var q = function (f) { return vals[Math.floor((vals.length - 1) * f)]; };
     var med = q(0.5), low = q(0.1), high = q(0.9);
     var r = Math.round;
@@ -668,19 +723,22 @@
       // Past 110% the percentage stops being the useful number. A grower whose lentils finished
       // in July does not need to hear "168% of maturity"; they need to hear that it is standing.
       text = med >= 110
-        ? S.crop + ' is <b>past maturity</b> across the region on this date. The slowest tenth ' +
-          'reached ' + r(low) + '% of the heat it needs, so the field is finished and what ' +
-          'matters now is weathering in the swath.'
-        : S.crop + ' is at <b>' + r(med) + '% of maturity</b> across the region on this date, ' +
-          'from ' + r(low) + '% in the slowest tenth to ' + r(high) + '% in the fastest.';
+        ? 'The median ' + S.crop + ' gauge shows <b>' + r(med) + '% of the heat this class ' +
+          'needs</b> — past maturity. The slowest tenth is at ' + r(low) + '%, so the crop is ' +
+          'not uniformly finished' + (low < 100 ? ' and the back end is still filling' : '') + '.'
+        : S.crop + ' is at <b>' + r(med) + '% of the heat it needs</b> at the median gauge on ' +
+          'this crop, from ' + r(low) + '% in the slowest tenth to ' + r(high) + '% in the ' +
+          'fastest.';
     } else if (S.view === 'heat') {
       text = S.crop + ' has taken <b>' + r(med) + ' days above ' +
-        (CLASSES[S.crop] || CLASSES.PINTO).heat + '°F</b> at the median station, ' +
+        (CLASSES[S.crop] || CLASSES.PINTO).heat + '°F</b> at the median gauge on this crop, ' +
         'and up to ' + r(high) + ' in the hottest tenth. Heat in pod fill shows up as small seed.';
     } else {
-      text = 'Thirty-day water balance runs <b>' + r(med) + ' mm</b> at the median station, ' +
-        'from ' + r(low) + ' mm in the driest tenth to ' + r(high) + ' mm in the wettest. ' +
-        'Negative means the crop drew down stored soil water.';
+      text = 'Over the last thirty days rainfall ran <b>' + r(med) + ' mm</b> against ' +
+        'grass-reference evaporation at the median gauge on this crop, from ' + r(low) +
+        ' mm where it fell furthest behind to ' + r(high) + ' mm where it kept up. ' +
+        'This is weather, not soil: it carries no irrigation, no crop coefficient and no ' +
+        'stored soil water, so it says where demand outran rain, not whether a field is dry.';
     }
     /* Count the stations that actually answered this view. Most cooperative sites report rain
      * and not temperature, so claiming the full network behind a growing-degree-day figure
@@ -713,25 +771,6 @@
         }).join('') + '</div>' +
         tail + '<br>Called per region from that region\'s own season · through ' +
         S.dates[S.dates.length - 1] + '</div>';
-      return;
-    }
-
-    if (S.view === 'yield') {
-      var vals = [], seen = {};
-      cropCounties().forEach(function (f) {
-        var r = f.properties.region;
-        if (seen[r]) return;
-        seen[r] = 1;
-        var v = regionValue(r);
-        if (v) vals.push(v);
-      });
-      var base = vals.length ? Math.round(vals[0].baseline) : null;
-      el.innerHTML = bar +
-        '<div class="nbLegendEnds">' +
-        '<span><em>−20%</em>Below average</span>' +
-        '<span><em>+20%</em>Above average</span></div>' +
-        tail + (base ? '<br>Recent average ' + base.toLocaleString() + ' lb/ac' : '') +
-        ' · estimated per region, not per county</div>';
       return;
     }
 
@@ -867,8 +906,9 @@
                                       attributionControl: true });
     S.map = map;
     window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors · stations NOAA ASOS via Iowa ' +
-                   'Environmental Mesonet · crop footprint USDA Cropland Data Layer',
+      attribution: '&copy; OpenStreetMap contributors · weather NOAA cooperative and GHCN ' +
+                   'networks via RCC-ACIS · counties US Census · crop acreage USDA Cropland ' +
+                   'Data Layer',
       maxZoom: 12, opacity: 0.5
     }).addTo(map);
 

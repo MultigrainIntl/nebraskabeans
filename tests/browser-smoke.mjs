@@ -151,6 +151,7 @@ try {
 
   /* ---- class agronomy is real: a pulse cannot share a bean's calendar ---- */
   await setSelect('nbView', 'stage');
+  await setDay(maxDay);                 // late season: every class is in the ground by now
   await setSelect('nbCrop', 'PINTO');
   await page.waitForTimeout(300);
   const pinto = await text('#nbPhases');
@@ -189,7 +190,7 @@ try {
     'CROP-SYNC-001: the crop picker and the answer headline disagree');
   const COMMODITY = { 'GARBANZO': 'Chickpeas', 'LENTIL': 'Lentils', 'PEA ': 'Peas' };
   const expected = Object.keys(COMMODITY).find(k => named.picker.startsWith(k));
-  assert.match(named.footprint, new RegExp(expected ? COMMODITY[expected] : 'Dry beans'),
+  assert.match(named.footprint, new RegExp(expected ? COMMODITY[expected] : 'dry beans', 'i'),
     `CROP-SYNC-001: the map footprint does not match the selected crop (${named.picker})`);
 
   /* ---- FOOTPRINT-001: each crop is drawn on its own ground ---- */
@@ -205,11 +206,11 @@ try {
   const chick = await footprint('GARBANZO (KABULI)');
   const peas = await footprint('PEA GREEN');
 
-  assert.match(beans.text, /Dry beans ground here is [\d,]+ acres/,
+  assert.match(beans.text, /[\d,]+ acres of dry beans/i,
     'FOOTPRINT-001: dry beans must state their own acreage');
-  assert.match(chick.text, /Chickpeas ground here is [\d,]+ acres/,
+  assert.match(chick.text, /[\d,]+ acres of chickpeas/i,
     'FOOTPRINT-001: garbanzos must be drawn on chickpea ground, not on bean ground');
-  assert.match(peas.text, /Peas ground here is [\d,]+ acres/,
+  assert.match(peas.text, /[\d,]+ acres of peas/i,
     'FOOTPRINT-001: dry peas must be drawn on pea ground');
   assert.notEqual(beans.text, chick.text,
     'FOOTPRINT-001: a garbanzo and a pinto must not share one footprint — they did, and it was wrong');
@@ -225,11 +226,14 @@ try {
 
   /* ---- yield and crop health are on the map, not only in prose ---- */
   const views = await page.$$eval('#nbView option', o => o.map(x => x.value));
-  for (const need of ['yield', 'health', 'moisture', 'stage', 'heat']) {
+  for (const need of ['health', 'moisture', 'stage', 'heat']) {
     assert(views.includes(need), `map view missing: ${need}`);
   }
   await setSelect('nbCrop', 'PINTO');
-  for (const view of ['yield', 'health']) {
+  assert(!views.includes('yield'),
+    'the yield view was USDA baseline x an adjustment presented as a forecast; it must not ' +
+    'come back until a prediction exists that USDA can grade rather than produce');
+  for (const view of ['health']) {
     await setSelect('nbView', view);
     await page.waitForTimeout(400);
     const r = await text('#nbReadout');
@@ -241,6 +245,34 @@ try {
   await page.waitForTimeout(300);
   assert.equal(await page.locator('#nbPlay').isDisabled(), false,
     'playback must come back for the daily views');
+
+  /* ---- a crop that is not planted yet must say so, not blame the weather network ---- */
+  await setSelect('nbView', 'stage');
+  await setSelect('nbCrop', 'PINTO');
+  await setDay(5);
+  await page.waitForTimeout(350);
+  assert.match(await text('#nbReadout'), /not in the ground yet/i,
+    'before planting the map must say the crop is not planted, not "no station reported"');
+  await setDay(maxDay);
+
+  /* ---- TRUTH-001: the map must not claim more than it measures ---- */
+  await setSelect('nbView', 'moisture');
+  await page.waitForTimeout(400);
+  const moist = await text('#nbReadout');
+  assert.doesNotMatch(moist, /drew down stored soil water|soil moisture/i,
+    'TRUTH-001: rainfall minus reference evaporation is not soil moisture and must not be ' +
+    'described as stored soil water — it carries no irrigation and no root-zone storage');
+  assert.match(moist, /no irrigation|not soil/i,
+    'TRUTH-001: the moisture view must state what it leaves out');
+
+  const foot = await text('#nbFootprint');
+  assert.match(foot, /whole counties, not the fields|not the fields/i,
+    'TRUTH-001: the outline is a union of counties and must not be presented as crop ground');
+
+  await setSelect('nbView', 'health');
+  await page.waitForTimeout(400);
+  assert.match(await text('#nbReadout'), /state-level|nobody has looked/i,
+    'TRUTH-001: a weather-derived flag built on state-level inputs must say so');
 
   /* ---- the retired UI must not come back ---- */
   const legacyVisible = await page.evaluate(() => {
