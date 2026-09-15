@@ -275,9 +275,18 @@ try {
   await page.waitForTimeout(400);
   const late = await text('#nbReadout');
   assert.match(late, /\d,\d{3} lb\/ac/, 'YIELD-003: no yield published late in the season');
-  assert.match(late, /no USDA figure enters it/i,
-    'YIELD-003: the yield readout must state that USDA is the scorecard, not an input');
-  assert.match(late, /graded against USDA/i, 'YIELD-003: the grading must be stated');
+  /* An ablation showed the model's accuracy is reproduced exactly by a trend line with no
+     weather in it, and that adding weather makes it worse. It may be shown as a trend; it may
+     not be called a weather forecast. */
+  assert.match(late, /trend/i,
+    'YIELD-004: this series tracks the multi-year yield trend and must say so');
+  assert.match(late, /no measurable skill|not this season|not a weather/i,
+    'YIELD-004: the readout must state that the weather terms add no measurable skill');
+  assert.doesNotMatch(late, /the weather model puts|weather only/i,
+    'YIELD-004: it must not be presented as a weather-driven forecast');
+  const q = await text('#nbQuestion');
+  assert.doesNotMatch(q, /weather say the crop will yield/i,
+    'YIELD-004: the heading must not ask what the weather says the yield will be');
   assert.match(late, /±|errors fell inside/, 'YIELD-003: the error band must be shown');
 
   // A class the model was never fitted on gets nothing, not a borrowed number.

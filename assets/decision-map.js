@@ -67,14 +67,22 @@
      * critical stage. No current USDA figure enters it. It is graded against USDA afterwards by
      * leave-one-year-out hindcast, and it withholds its own number on every date where it fails
      * to beat the historical median, which is every date before 15 June. */
+    /* WHAT THIS IS, AFTER TESTING IT PROPERLY. The model was published on 15 September 2026 as
+     * a weather-driven forecast. An ablation against its own footprint — pinto, four states,
+     * 2000 to 2025 — showed that a model given only a year index and a state, and no weather at
+     * all, reproduces its accuracy exactly: 167 lb/ac against the 179 of guessing the median.
+     * Adding the weather features made it WORSE, by 4 to 8 per cent, with a bootstrap interval
+     * entirely below zero. Its apparent skill is a straight line through twenty-six years of
+     * rising yields. That is real information and worth showing; it is not a weather forecast,
+     * and it must not be labelled as one. */
     yield: {
-      label: 'Yield outlook',
-      unit: 'lb/ac, pinto basis · weather-only model, graded against USDA',
+      label: 'Yield trend',
+      unit: 'lb/ac, pinto basis · trend of USDA yields · NOT an in-season weather forecast',
       regional: true,
       model: true,
       loLabel: 'Below its history', hiLabel: 'Above its history',
       ramp: [[0, '#9e1b0e'], [0.35, '#e07b1f'], [0.5, '#e8c33a'], [0.75, '#7cc08a'], [1, '#17794a']],
-      question: 'What does this season\u2019s weather say the crop will yield?'
+      question: 'Where is yield running against its recent trend?'
     },
     health: {
       label: 'Season flags',
@@ -763,7 +771,7 @@
       }
       live.sort(function (a, b) { return a.v.yield - b.v.yield; });
       var loR = live[0], hiR = live[live.length - 1], any = loR.v;
-      el.innerHTML = 'On this date the weather model puts pinto at <b>' + hiR.v.label +
+      el.innerHTML = 'The trend puts pinto at <b>' + hiR.v.label +
         '</b> in ' + hiR.name + (live.length > 1 ? ' and <b>' + loR.v.label + '</b> in ' +
         loR.name : '') + ', against histories of ' +
         Math.round(hiR.v.median).toLocaleString() + ' and ' +
@@ -772,9 +780,10 @@
           Math.round((any.interval[1] - any.interval[0]) / 2).toLocaleString() + ' lb/ac. ' : '') +
         (held.length ? held.length + ' area' + (held.length > 1 ? 's are' : ' is') +
           ' withheld. ' : '') +
-        '<span class="nbStationCount">weather only — no USDA figure enters it; graded against ' +
-        'USDA at ' + any.mae + ' lb/ac error versus ' + any.baseline +
-        ' for guessing the median</span>';
+        '<span class="nbStationCount">This tracks the multi-year trend in USDA yields, not ' +
+        'this season\u2019s weather. Tested on 26 years, the weather terms add no measurable ' +
+        'skill for pinto — a trend line alone matches it. Error ' + any.mae + ' lb/ac against ' +
+        any.baseline + ' for guessing the median.</span>';
       return;
     }
 
@@ -878,7 +887,7 @@
         '<span><em>+12%</em>' + view.hiLabel + '</span></div>' +
         tail + '<br>' +
         (sample
-          ? 'Hindcast error ' + sample.mae + ' lb/ac against ' + sample.baseline +
+          ? 'Trend, not weather. Error ' + sample.mae + ' lb/ac against ' + sample.baseline +
             ' for guessing the median'
           : 'Withheld on this date \u2014 the model does not beat guessing the median') +
         ' \u00b7 state-level fit \u00b7 ' + niceDate(S.dates[S.day]) + '</div>';
