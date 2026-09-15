@@ -1,0 +1,79 @@
+name: Daily data refresh
+
+# Rebuilds every dataset the site shows, every morning, and FAILS LOUDLY if a source has
+# stopped answering — rather than letting the site serve last month's crop as today's.
+#
+# That is not hypothetical. The USGS groundwater API was frozen on 1 November 2025 and now
+# returns a redirect; anything still pointed at it receives a web page instead of data and
+# reports nothing wrong. This job exists so that cannot happen quietly here.
+#
+# Every source is keyless. No secrets to configure, and nothing that can expire.
+
+on:
+  schedule:
+    - cron: '20 11 * * *'      # 05:20 Mountain — after the overnight satellite passes land
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: pip install --quiet numpy pillow shapely
+
+      - name: Rebuild every dataset
+        run: python3 scripts/refresh/run.py
+
+      - name: Report freshness
+        if: always()
+        run: cat assets/data/refresh-status.json
+
+      # Nothing is published until the data passes the same contracts the site is held to.
+      # Without this the refresh could put malformed data live and the tests would only notice
+      # afterwards — the site broken, and the breakage already served.
+      - name: Verify the rebuilt data before anything is published
+        run: |
+          node scripts/verify_foundation.mjs
+          node --test tests/temporal-evidence.test.js tests/evidence-store.test.js
+
+      - name: Prove the site still renders with the new data
+        run: |
+          npm install --no-save --silent playwright@1.55.0 leaflet@1.9.4
+          npx playwright install --with-deps chromium
+          python3 -m http.server 4173 >/dev/null 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:4173/index.html >/dev/null && break; sleep 1; done
+          NB_OFFLINE_FIXTURES=1 NB_BASE_URL='http://127.0.0.1:4173/' node tests/browser-smoke.mjs
+          NB_BASE_URL='http://127.0.0.1:4173/' NB_VISUAL_OUT='artifacts/daily' node tests/visual-contract.mjs
+
+      - name: Publish the new data
+        if: success()
+        run: python3 scripts/refresh/publish.py
+
+      - name: Say plainly that the data is stale
+        if: failure()
+        run: |
+          echo "::error::A source stopped answering, or a dataset fell behind its tolerance."
+          echo "::error::The site was NOT updated and is now older than it claims."
+          echo "::error::The freshness report above names which dataset and which source."
+          echo "::error::If the freshness report is clean, the rebuilt data failed the site's"
+          echo "::error::own contracts and was correctly refused rather than published."
