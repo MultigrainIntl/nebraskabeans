@@ -620,3 +620,24 @@ canvas.nbSurface {
 }
 
 .nbEstLimit b, .nbEstNext b { color: #22303a; }
+
+.nbEstLead { margin: 0 0 12px; font-size: 13.5px; line-height: 1.55; color: #4d5c53; }
+
+.nbYieldTable { width: 100%; border-collapse: collapse; margin: 0 0 12px; font-size: 14px; }
+.nbYieldTable th {
+  text-align: left;
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #6c7d70;
+  padding: 0 8px 6px 0;
+  border-bottom: 1px solid #c8d2c9;
+}
+.nbYieldTable th.nbNum, .nbYieldTable td.nbNum { text-align: right; }
+.nbYieldTable td {
+  padding: 6px 8px 6px 0;
+  border-bottom: 1px solid #e4eae4;
+  color: #22303a;
+  font-variant-numeric: tabular-nums;
+}
+.nbYieldTable tr:first-child td { font-weight: 700; }

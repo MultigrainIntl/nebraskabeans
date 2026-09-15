@@ -128,7 +128,8 @@
   var S = {                                   // everything the map is currently showing
     crop: 'PINTO', view: 'moisture', interp: 'absolute', day: 0, playing: false, speed: 1, frame: 1,
     map: null, canvas: null, outlines: null, cropOutlines: null, counties: null,
-    answers: null, outlook: null, vsHistory: null, estimate: null, field: null, dates: [], layers: {}, timer: null
+    answers: null, outlook: null, vsHistory: null, estimate: null, yieldAll: null,
+    field: null, dates: [], layers: {}, timer: null
   };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -775,50 +776,47 @@
    * So the evidence leads and the figure follows, with its limits written next to it. A grower
    * can then judge the reasoning instead of trusting the output. */
   function updateEstimate() {
-    var el = $('nbEstimate'); if (!el || !S.estimate) return;
-    if (S.crop !== 'PINTO') { el.hidden = true; return; }
-    var seen = {}, rows = [];
+    var el = $('nbEstimate'); if (!el || !S.yieldAll) return;
+    var seen = {}, regions = [];
     cropCounties().forEach(function (f) {
       var rg = f.properties.region;
       if (seen[rg]) return;
       seen[rg] = 1;
-      var r = S.estimate.regions[rg];
-      if (r) rows.push(r);
+      var r = S.yieldAll.regions[rg];
+      if (r && r.classes[S.crop]) regions.push({ id: rg, r: r, c: r.classes[S.crop] });
     });
-    var withNum = rows.filter(function (r) { return r.estimate; });
-    if (!rows.length) { el.hidden = true; return; }
-    var lead = withNum[0] || rows[0];
+    if (!regions.length) { el.hidden = true; return; }
+    regions.sort(function (a, b) { return b.c.lb_ac - a.c.lb_ac; });
+    var best = regions[0], worst = regions[regions.length - 1];
 
-    var ev = lead.evidence.map(function (e) {
-      return '<li><b>' + e.value + '</b> — ' + e.what.toLowerCase() +
-        (e.detail ? ', ' + e.detail : '') + '<span>' + e.source + '</span></li>';
+    var rows = regions.map(function (x) {
+      return '<tr><td>' + x.r.name + '</td>' +
+        '<td class="nbNum">' + Number(x.c.lb_ac).toLocaleString() + '</td>' +
+        '<td class="nbNum">' + (x.r.canopy_above_air_c != null
+          ? (x.r.canopy_above_air_c > 0 ? '+' : '') + x.r.canopy_above_air_c + '\u00b0C' : '—') +
+        '</td>' +
+        '<td class="nbNum">' + (x.r.canopy_rank
+          ? x.r.canopy_rank.rank + ' of ' + x.r.canopy_rank.of : '—') + '</td>' +
+        '<td class="nbNum">' + x.c.pct_of_maturity + '%</td></tr>';
     }).join('');
 
-    var num = lead.estimate
-      ? '<p class="nbEstNum">On that evidence, <b>' +
-        Number(lead.estimate.lb_ac).toLocaleString() + ' lb/ac</b>' +
-        (lead.estimate.vs_normal_pct != null
-          ? ' — about ' + Math.abs(lead.estimate.vs_normal_pct) + '% ' +
-            (lead.estimate.vs_normal_pct < 0 ? 'below' : 'above') + ' the ' +
-            Number(lead.estimate.normal_lb_ac).toLocaleString() +
-            ' lb/ac this ground normally makes.' : '.') + '</p>'
-      : '<p class="nbEstNum">No yield estimate for ' + lead.name +
-        ' yet — the water-use measurement has not been retrieved for it.</p>';
-
     el.innerHTML =
-      '<h3>' + lead.name + ' — what this season actually did</h3>' +
-      '<ul class="nbEvidence">' + ev + '</ul>' + num +
-      '<p class="nbEstLimit"><b>What this is not.</b> It is not a validated forecast. The ' +
-      'physics lands on the right level — calibrating published bean parameters against USDA ' +
-      'moved them 5% — but tested over 2016 to 2023 it did not rank one season against another ' +
-      'correctly, and that error cannot be separated from the scorecard\u2019s: USDA revised ' +
-      'Nebraska\u2019s 2026 planted acres by 21% mid-season, reports yield per <i>harvested</i> ' +
-      'acre so abandoned fields vanish from it, and stopped publishing county yields in 2008.</p>' +
+      '<h3>' + S.crop + ' 2026 — what this season actually did</h3>' +
+      '<p class="nbEstLead">Planted ' + best.c.planted + ' — ' + best.c.planting_basis +
+      '. Every figure below is measured this season; nothing is forecast and nothing waits ' +
+      'on USDA.</p>' +
+      '<table class="nbYieldTable"><thead><tr><th>region</th><th>lb/ac</th>' +
+      '<th>canopy vs air</th><th>greenness rank</th><th>of maturity</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table>' +
+      '<p class="nbEstNum">Best <b>' + best.r.name + '</b> at ' +
+      Number(best.c.lb_ac).toLocaleString() + ' lb/ac; weakest <b>' + worst.r.name +
+      '</b> at ' + Number(worst.c.lb_ac).toLocaleString() + ' lb/ac. A watered crop sits ' +
+      'within a degree of air temperature — every region here ran hotter than that.</p>' +
+      '<p class="nbEstLimit"><b>What this is not.</b> ' + S.yieldAll.limits[0] + '</p>' +
       '<p class="nbEstNext"><b>What would sharpen it.</b> ' +
-      (S.estimate.what_would_sharpen_it || []).slice(0, 2).map(function (x) {
-        return x.need.toLowerCase();
-      }).join('; ') + '. Field reports from growers and agronomists are the largest single gap ' +
-      'and the one we can close.</p>';
+      S.yieldAll.what_would_sharpen_it.slice(0, 2).join('; ').toLowerCase() +
+      '. Field reports from growers and agronomists are the largest single gap and the one we ' +
+      'can close.</p>';
     el.hidden = false;
   }
 
@@ -1215,10 +1213,11 @@
       fetch('assets/data/region-answers.json?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/gisit-outlook-2026.json?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/crop-vs-history.json?v=' + build()).then(function (r) { return r.json(); }),
-      fetch('assets/data/estimate-2026.json?v=' + build()).then(function (r) { return r.json(); })
+      fetch('assets/data/estimate-2026.json?v=' + build()).then(function (r) { return r.json(); }),
+      fetch('assets/data/yield-all-2026.json?v=' + build()).then(function (r) { return r.json(); })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;

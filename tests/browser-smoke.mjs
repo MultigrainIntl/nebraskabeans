@@ -260,8 +260,44 @@ try {
   const est = await text('#nbEstimate');
   assert.match(est, /what this season actually did/i,
     'EVIDENCE-001: the estimate must be presented as observations, not as a bare number');
-  assert.match(est, /of \d+ years/i, 'EVIDENCE-001: canopy against its own history must be shown');
-  assert.match(est, /what it wanted/i, 'EVIDENCE-001: the water the crop actually got must be shown');
+  assert.match(est, /greenness rank/i,
+    'EVIDENCE-001: canopy against its own history must be shown beside every number');
+  assert.match(est, /\d+ of \d+/,
+    'EVIDENCE-001: the history comparison must be a rank against the years on record');
+  assert.match(est, /canopy vs air/i,
+    'EVIDENCE-001: the water-stress measurement must be shown beside every number');
+
+  /* ---- ALLCLASS-001: every class, every region, each on its own ground ---- */
+  const yieldAll = await page.evaluate(async () => {
+    const r = await fetch('assets/data/yield-all-2026.json');
+    const y = await r.json();
+    const regions = Object.keys(y.regions);
+    return { regions: regions.length,
+             classes: Math.min(...regions.map(r => Object.keys(y.regions[r].classes).length)),
+             hasThermal: regions.every(r => y.regions[r].canopy_above_air_c != null),
+             caveat: y.caveat, limits: y.limits.length,
+             sharpen: y.what_would_sharpen_it.length };
+  });
+  assert.equal(yieldAll.regions, 7, 'ALLCLASS-001: every growing region needs a yield');
+  assert.equal(yieldAll.classes, 18, 'ALLCLASS-001: every legume class needs a yield');
+  assert(yieldAll.hasThermal,
+    'ALLCLASS-001: every region must carry the water-stress measurement behind its number');
+  assert.match(yieldAll.caveat, /its own USDA ground/i,
+    'ALLCLASS-001: pulses must be read on pulse ground, not on the beans\u2019');
+  assert(yieldAll.limits >= 3 && yieldAll.sharpen >= 3,
+    'ALLCLASS-001: limits and the path to close them must both be stated');
+
+  /* each class must actually differ — a shared number means the agronomy is not being applied */
+  const differs = await page.evaluate(async () => {
+    const y = await (await fetch('assets/data/yield-all-2026.json')).json();
+    const c = y.regions['ne-panhandle'].classes;
+    return { pinto: c['PINTO'].lb_ac, lentil: c['LENTIL RED'].lb_ac,
+             beanPlant: c['PINTO'].planted, pulsePlant: c['PEA YELLOW'].planted };
+  });
+  assert.notEqual(differs.pinto, differs.lentil,
+    'ALLCLASS-001: a heat-sensitive lentil and a pinto cannot share a yield');
+  assert.notEqual(differs.beanPlant, differs.pulsePlant,
+    'ALLCLASS-001: a pulse plants in April and a bean in June — they cannot share a date');
   assert.match(est, /\d,\d{3} lb\/ac/, 'EVIDENCE-001: the implied yield must be stated');
   assert.match(est, /not a validated forecast/i,
     'EVIDENCE-001: it must say plainly that it is not a validated forecast');
