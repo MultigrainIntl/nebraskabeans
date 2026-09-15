@@ -361,7 +361,7 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 }
 
 #nbMap {
-  height: 620px;
+  height: 760px;
   width: 100%;
   background: #eef2ec;
 }
@@ -502,7 +502,7 @@ canvas.nbSurface {
 .nbPhaseHarvest span { color: #8a5416; }
 
 @media (max-width: 820px) {
-  #nbMap { height: 460px; }
+  #nbMap { height: 520px; }
   .nbMapHead h2 { font-size: 22px; }
   /* On a phone the legend goes under the map instead of covering a third of it. */
   .nbLegendCard {
@@ -541,3 +541,22 @@ canvas.nbSurface {
 
 .nbPhase.nbPhaseEnd span { left: auto; right: 0; transform: none; }
 .nbPhase.nbPhaseStart span { left: 0; transform: none; }
+
+.nbFootprint {
+  margin: -4px 0 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #4d5c53;
+  max-width: 82ch;
+}
+
+.nbFootprint b { color: #22303a; }
+
+/* Yield and crop health are a current read, not a daily series — the time control says so by
+   going quiet rather than by moving something that does not change. */
+.nbPlayback.nbPlaybackOff { opacity: .45; }
+.nbPlayback.nbPlaybackOff #nbPlay { background: #8a938c; cursor: not-allowed; }
+
+.nbLegendSteps { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.nbLegendSteps span { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; }
+.nbLegendSteps i { width: 14px; height: 14px; border-radius: 3px; flex: none; }

@@ -163,6 +163,69 @@ try {
   assert.match(await text('#nbReadout'), /GARBANZO \(KABULI\)/,
     'CLASS-001: the readout must describe the class actually selected');
 
+  /* ---- CROP-SYNC-001: the headline and the map must name the same crop ---- */
+  const named = await page.evaluate(() => ({
+    picker: document.getElementById('nbCrop').value,
+    headline: (document.querySelector('.nbA-head')?.textContent || '').split('\u2014')[0].trim(),
+    footprint: document.getElementById('nbFootprint')?.textContent || '',
+  }));
+  assert.equal(named.picker, named.headline,
+    'CROP-SYNC-001: the crop picker and the answer headline disagree');
+  const COMMODITY = { 'GARBANZO': 'Chickpeas', 'LENTIL': 'Lentils', 'PEA ': 'Peas' };
+  const expected = Object.keys(COMMODITY).find(k => named.picker.startsWith(k));
+  assert.match(named.footprint, new RegExp(expected ? COMMODITY[expected] : 'Dry beans'),
+    `CROP-SYNC-001: the map footprint does not match the selected crop (${named.picker})`);
+
+  /* ---- FOOTPRINT-001: each crop is drawn on its own ground ---- */
+  const footprint = async crop => {
+    await setSelect('nbCrop', crop);
+    await page.waitForTimeout(400);
+    return {
+      text: (await text('#nbFootprint')).trim(),
+      counties: await page.locator('#nbMap path').count(),
+    };
+  };
+  const beans = await footprint('PINTO');
+  const chick = await footprint('GARBANZO (KABULI)');
+  const peas = await footprint('PEA GREEN');
+
+  assert.match(beans.text, /Dry beans ground here is [\d,]+ acres/,
+    'FOOTPRINT-001: dry beans must state their own acreage');
+  assert.match(chick.text, /Chickpeas ground here is [\d,]+ acres/,
+    'FOOTPRINT-001: garbanzos must be drawn on chickpea ground, not on bean ground');
+  assert.match(peas.text, /Peas ground here is [\d,]+ acres/,
+    'FOOTPRINT-001: dry peas must be drawn on pea ground');
+  assert.notEqual(beans.text, chick.text,
+    'FOOTPRINT-001: a garbanzo and a pinto must not share one footprint — they did, and it was wrong');
+  assert.notEqual(beans.counties, chick.counties,
+    'FOOTPRINT-001: the map must redraw a different set of counties when the crop changes');
+
+  /* ---- county boundaries are present, because that is how the trade talks ---- */
+  const countyTip = await page.locator('#nbMap path').first().getAttribute('title');
+  const hasCounties = await page.evaluate(() =>
+    !!document.querySelector('#nbMap path') &&
+    /County/.test(document.querySelector('.leaflet-tooltip')?.textContent || 'County'));
+  assert(hasCounties, 'county boundaries are not drawn');
+
+  /* ---- yield and crop health are on the map, not only in prose ---- */
+  const views = await page.$$eval('#nbView option', o => o.map(x => x.value));
+  for (const need of ['yield', 'health', 'moisture', 'stage', 'heat']) {
+    assert(views.includes(need), `map view missing: ${need}`);
+  }
+  await setSelect('nbCrop', 'PINTO');
+  for (const view of ['yield', 'health']) {
+    await setSelect('nbView', view);
+    await page.waitForTimeout(400);
+    const r = await text('#nbReadout');
+    assert(r.trim().length > 40, `${view} view produced no answer`);
+    assert.equal(await page.locator('#nbPlay').isDisabled(), true,
+      `${view} is a current read, not a daily series — playback must not imply otherwise`);
+  }
+  await setSelect('nbView', 'moisture');
+  await page.waitForTimeout(300);
+  assert.equal(await page.locator('#nbPlay').isDisabled(), false,
+    'playback must come back for the daily views');
+
   /* ---- the retired UI must not come back ---- */
   const legacyVisible = await page.evaluate(() => {
     const s = document.getElementById('mapSection');

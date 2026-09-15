@@ -12,24 +12,24 @@
   'use strict';
 
   var CLASSES = {
-    'PINTO':              { base: 50, heat: 90, gdd: 1700, plant: '06-01' },
-    'GREAT NORTHERN':     { base: 50, heat: 88, gdd: 1600, plant: '06-01' },
-    'NAVY':               { base: 50, heat: 88, gdd: 1650, plant: '06-01' },
-    'BLACK':              { base: 50, heat: 92, gdd: 1750, plant: '06-01' },
-    'LIGHT RED KIDNEY':   { base: 50, heat: 86, gdd: 1900, plant: '06-01' },
-    'DARK RED KIDNEY':    { base: 50, heat: 86, gdd: 1900, plant: '06-01' },
-    'PINK':               { base: 50, heat: 90, gdd: 1650, plant: '06-01' },
-    'SMALL RED':          { base: 50, heat: 90, gdd: 1650, plant: '06-01' },
-    'CRANBERRY':          { base: 50, heat: 88, gdd: 1800, plant: '06-01' },
-    'SMALL WHITE':        { base: 50, heat: 88, gdd: 1650, plant: '06-01' },
-    'BLACKEYE':           { base: 50, heat: 95, gdd: 1800, plant: '05-20' },
-    'GARBANZO (KABULI)':  { base: 41, heat: 86, gdd: 2600, plant: '04-20' },
-    'GARBANZO (DESI)':    { base: 41, heat: 88, gdd: 2400, plant: '04-20' },
-    'LENTIL LARGE GREEN': { base: 41, heat: 82, gdd: 2100, plant: '04-15' },
-    'LENTIL SMALL GREEN': { base: 41, heat: 82, gdd: 2000, plant: '04-15' },
-    'LENTIL RED':         { base: 41, heat: 82, gdd: 1950, plant: '04-15' },
-    'PEA YELLOW':         { base: 41, heat: 82, gdd: 2000, plant: '04-05' },
-    'PEA GREEN':          { base: 41, heat: 82, gdd: 2000, plant: '04-05' }
+    'PINTO':              { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1700, plant: '06-01' },
+    'GREAT NORTHERN':     { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1600, plant: '06-01' },
+    'NAVY':               { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1650, plant: '06-01' },
+    'BLACK':              { commodity: 'DRY BEANS', base: 50, heat: 92, gdd: 1750, plant: '06-01' },
+    'LIGHT RED KIDNEY':   { commodity: 'DRY BEANS', base: 50, heat: 86, gdd: 1900, plant: '06-01' },
+    'DARK RED KIDNEY':    { commodity: 'DRY BEANS', base: 50, heat: 86, gdd: 1900, plant: '06-01' },
+    'PINK':               { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1650, plant: '06-01' },
+    'SMALL RED':          { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1650, plant: '06-01' },
+    'CRANBERRY':          { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1800, plant: '06-01' },
+    'SMALL WHITE':        { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1650, plant: '06-01' },
+    'BLACKEYE':           { commodity: 'DRY BEANS', base: 50, heat: 95, gdd: 1800, plant: '05-20' },
+    'GARBANZO (KABULI)':  { commodity: 'CHICKPEAS', base: 41, heat: 86, gdd: 2600, plant: '04-20' },
+    'GARBANZO (DESI)':    { commodity: 'CHICKPEAS', base: 41, heat: 88, gdd: 2400, plant: '04-20' },
+    'LENTIL LARGE GREEN': { commodity: 'LENTILS', base: 41, heat: 82, gdd: 2100, plant: '04-15' },
+    'LENTIL SMALL GREEN': { commodity: 'LENTILS', base: 41, heat: 82, gdd: 2000, plant: '04-15' },
+    'LENTIL RED':         { commodity: 'LENTILS', base: 41, heat: 82, gdd: 1950, plant: '04-15' },
+    'PEA YELLOW':         { commodity: 'PEAS', base: 41, heat: 82, gdd: 2000, plant: '04-05' },
+    'PEA GREEN':          { commodity: 'PEAS', base: 41, heat: 82, gdd: 2000, plant: '04-05' }
   };
 
   /* Each view is one question a professional actually asks, with the ends of the scale named
@@ -49,6 +49,22 @@
       ramp: [[0, '#e07b1f'], [0.35, '#e8c33a'], [0.65, '#7cc08a'], [1, '#2a9d9a']],
       question: 'Where is the crop short of water right now?'
     },
+    yield: {
+      label: 'Yield outlook',
+      unit: 'against the recent average for this class',
+      regional: true,
+      loLabel: 'Below average', hiLabel: 'Above average',
+      ramp: [[0, '#9e1b0e'], [0.35, '#e07b1f'], [0.5, '#e8c33a'], [0.75, '#7cc08a'], [1, '#17794a']],
+      question: 'What is this crop going to yield, and where is it off?'
+    },
+    health: {
+      label: 'Crop health',
+      unit: 'condition call, estimated per region',
+      regional: true,
+      loLabel: 'At risk', hiLabel: 'On track',
+      ramp: [[0, '#9e1b0e'], [0.25, '#d4541c'], [0.5, '#eb9a00'], [0.75, '#f0cb2a'], [1, '#17794a']],
+      question: 'Which regions are in trouble, and why?'
+    },
     heat: {
       label: 'Heat stress',
       unit: 'days above the class threshold',
@@ -60,7 +76,8 @@
 
   var S = {                                   // everything the map is currently showing
     crop: 'PINTO', view: 'moisture', interp: 'absolute', day: 0, playing: false, speed: 1, frame: 1,
-    map: null, canvas: null, outlines: null, field: null, dates: [], layers: {}, timer: null
+    map: null, canvas: null, outlines: null, cropOutlines: null, counties: null,
+    answers: null, field: null, dates: [], layers: {}, timer: null
   };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -194,6 +211,30 @@
 
   /* ---------------------------------------------------------------- surface */
 
+  function commodityOf() { return (CLASSES[S.crop] || CLASSES.PINTO).commodity; }
+
+  /* The ground this crop is actually grown on. Until now a single dry-bean outline was drawn
+   * under all eighteen classes, so choosing garbanzos mapped chickpea agronomy onto bean
+   * fields. Each commodity now carries its own footprint, from USDA county acreage. */
+  function cropOutline() {
+    var com = commodityOf();
+    return ((S.cropOutlines && S.cropOutlines.features) || []).filter(function (f) {
+      return f.properties.commodity === com;
+    });
+  }
+
+  /* The same floor the encircling outline was built with. A county carrying a few acres is a
+   * rounding artefact of a 10-metre raster, not a growing county, and drawing one set of
+   * counties inside a boundary built from a different set makes both untrustworthy. */
+  var MIN_COUNTY_ACRES = 40;
+
+  function cropCounties() {
+    var com = commodityOf();
+    return ((S.counties && S.counties.features) || []).filter(function (f) {
+      return ((f.properties.acres || {})[com] || 0) >= MIN_COUNTY_ACRES;
+    });
+  }
+
   function ringsOf(feature) {
     var g = feature.geometry;
     if (g.type === 'Polygon') return g.coordinates;
@@ -204,7 +245,7 @@
 
   function clipPath(ctx) {
     ctx.beginPath();
-    S.outlines.features.forEach(function (f) {
+    cropOutline().forEach(function (f) {
       ringsOf(f).forEach(function (ring) {
         ring.forEach(function (pt, i) {
           var p = S.map.latLngToContainerPoint([pt[1], pt[0]]);
@@ -220,7 +261,15 @@
    * surface is not drawn at all — painting a soil-moisture value across rangeland that grows no
    * beans is the kind of false precision that gets a tool distrusted. */
   function paintSurface() {
-    if (!S.map || !S.canvas || !S.field || !S.outlines) return;
+    if (!S.map || !S.canvas || !S.field || !S.cropOutlines) return;
+    if (VIEWS[S.view].regional) {
+      var g2 = S.canvas.getContext('2d');
+      g2.setTransform(1, 0, 0, 1, 0, 0);
+      g2.clearRect(0, 0, S.canvas.width, S.canvas.height);
+      paintRegions();
+      return;
+    }
+    clearRegionPaint();
     var size = S.map.getSize();
     var dpr = window.devicePixelRatio || 1;
     S.canvas.width = size.x * dpr; S.canvas.height = size.y * dpr;
@@ -270,19 +319,91 @@
 
   /* ---------------------------------------------------------------- map */
 
+  var HEALTH_RANK = { 'AT RISK': 0, 'STRESSED': 0.25, 'LATE': 0.5, 'WATCH': 0.75, 'ON TRACK': 1 };
+
+  /* Yield and crop health are estimated for a region as a whole, from that region's own class
+   * history and season. They are not a field-scale surface, so they are painted as flat
+   * counties with their boundaries showing, and the tooltip says which region the number
+   * actually belongs to. Smoothing them would invent precision the estimate does not have. */
+  function regionValue(region) {
+    var a = S.answers && S.answers.regions && S.answers.regions[region];
+    var c = a && a.classes && a.classes[S.crop];
+    if (!c) return null;
+    if (S.view === 'health') {
+      var st = window.__nbCropStatus || {};
+      if (st.crop !== S.crop) return null;     // never paint one crop with another's call
+      var call = (st.byRegion || {})[region];
+      return call && HEALTH_RANK[call] != null ? { t: HEALTH_RANK[call], label: call } : null;
+    }
+    var y = c.yield;
+    if (!y || !y.baseline) return null;
+    var pct = 100 * (y.mid - y.baseline) / y.baseline;
+    return { t: Math.max(0, Math.min(1, (pct + 20) / 40)),
+             label: Math.round(y.mid).toLocaleString() + ' lb/ac',
+             low: y.low, high: y.high, baseline: y.baseline };
+  }
+
+  function countyTip(p, com, v) {
+    return '<b>' + p.county + ' County, ' + p.state + '</b><br>' +
+      Math.round(p.acres[com]).toLocaleString() + ' acres of ' + com.toLowerCase() +
+      (v ? '<br>' + S.crop + ' — ' + v.label +
+           (v.baseline ? '<br>' + Math.round(v.low).toLocaleString() + '–' +
+             Math.round(v.high).toLocaleString() + ' lb/ac against a ' +
+             Math.round(v.baseline).toLocaleString() + ' lb/ac average' : '') +
+           '<br><i>Estimated for ' + regionName(p.region) + ' as a whole, not for this county.</i>'
+         : '');
+  }
+
+  function paintRegions() {
+    if (!S.layers.counties) return;
+    var view = VIEWS[S.view], com = commodityOf();
+    S.layers.counties.eachLayer(function (layer) {
+      var p = layer.feature.properties;
+      var v = regionValue(p.region);
+      layer.setStyle(v
+        ? { fillOpacity: 0.72, fillColor: 'rgb(' + rampColor(v.t, view.ramp).join(',') + ')',
+            weight: 0.7, color: '#42514a', opacity: 0.6 }
+        : { fillOpacity: 0.07, fillColor: '#8a938c', weight: 0.7, color: '#5c6b60', opacity: 0.45 });
+      layer.bindTooltip(countyTip(p, com, v), { sticky: true });
+    });
+  }
+
+  function clearRegionPaint() {
+    if (!S.layers.counties) return;
+    var com = commodityOf();
+    S.layers.counties.eachLayer(function (layer) {
+      layer.setStyle({ fillOpacity: 0.01, fillColor: '#ffffff',
+                       weight: 0.7, color: '#5c6b60', opacity: 0.45 });
+      layer.bindTooltip(countyTip(layer.feature.properties, com, null), { sticky: true });
+    });
+  }
+
   function drawOutlines() {
-    if (S.layers.outline) S.map.removeLayer(S.layers.outline);
-    S.layers.outline = window.L.geoJSON(S.outlines, {
-      style: function () {
-        return { color: '#14212b', weight: 1.8, opacity: 0.95, fill: true,
-                 fillColor: '#ffffff', fillOpacity: 0.01 };
-      },
-      onEachFeature: function (f, layer) {
-        var p = f.properties;
-        layer.bindTooltip(regionName(p.region) + ' · ' +
-          Number(p.acres).toLocaleString() + ' acres of legumes', { sticky: true });
-      }
-    }).addTo(S.map);
+    ['counties', 'outline'].forEach(function (k) {
+      if (S.layers[k]) { S.map.removeLayer(S.layers[k]); S.layers[k] = null; }
+    });
+    var com = commodityOf();
+
+    /* County lines, underneath. Growers, elevators and brokers all talk in counties; a boundary
+     * they already recognise is worth more than a smooth shape they cannot place. */
+    S.layers.counties = window.L.geoJSON(
+      { type: 'FeatureCollection', features: cropCounties() }, {
+        style: function () {
+          return { color: '#5c6b60', weight: 0.7, opacity: 0.45, fill: true,
+                   fillColor: '#ffffff', fillOpacity: 0.01 };
+        },
+        onEachFeature: function (f, layer) {
+          layer.bindTooltip(countyTip(f.properties, com, null), { sticky: true });
+        }
+      }).addTo(S.map);
+
+    S.layers.outline = window.L.geoJSON(
+      { type: 'FeatureCollection', features: cropOutline() }, {
+        style: function () {
+          return { color: '#14212b', weight: 2, opacity: 0.95, fill: false };
+        },
+        interactive: false
+      }).addTo(S.map);
   }
 
   function drawStations() {
@@ -300,24 +421,26 @@
    * Big Horn is 6% of the acreage and 500 miles from Kansas; letting it set the view zooms the
    * Panhandle — two thirds of the crop — down to a smudge. The smaller regions stay drawn, and
    * "Show every region" reaches them; they just do not get to decide the opening frame. */
+  /* Open on the counties that carry the crop, weighted by acreage.
+   * A commodity's outline can reach a long way — chickpeas turn up in a scatter of counties
+   * from the Wyoming line to western Colorado — and fitting the whole reach zooms the ground
+   * that actually grows it down to a smudge. The rest is a click away on "Show every region". */
   function coreBounds() {
-    var feats = S.outlines.features.slice().sort(function (a, b) {
-      return b.properties.acres - a.properties.acres;
+    var com = commodityOf();
+    var counties = cropCounties().slice().sort(function (x, y) {
+      return y.properties.acres[com] - x.properties.acres[com];
     });
-    var total = feats.reduce(function (t, f) { return t + f.properties.acres; }, 0);
-    var run = 0, core = [];
-    for (var i = 0; i < feats.length; i++) {
-      core.push(feats[i]);
-      run += feats[i].properties.acres;
-      if (run >= total * 0.65) break;
-    }
-    var b = window.L.latLngBounds([]);
-    core.forEach(function (f) {
-      ringsOf(f).forEach(function (ring) {
+    if (!counties.length) return null;
+    var total = counties.reduce(function (t, f) { return t + f.properties.acres[com]; }, 0);
+    var run = 0, b = window.L.latLngBounds([]);
+    for (var i = 0; i < counties.length; i++) {
+      ringsOf(counties[i]).forEach(function (ring) {
         ring.forEach(function (pt) { b.extend([pt[1], pt[0]]); });
       });
-    });
-    return b.pad(0.25);
+      run += counties[i].properties.acres[com];
+      if (run >= total * 0.8 && i >= 2) break;
+    }
+    return b.pad(0.12);
   }
 
   function regionName(id) {
@@ -405,9 +528,60 @@
 
   /* ---------------------------------------------------------------- readout */
 
+  function updateFootprint() {
+    var el = $('nbFootprint'); if (!el) return;
+    var com = commodityOf();
+    var outs = cropOutline(), counties = cropCounties();
+    if (!outs.length || !counties.length) {
+      el.innerHTML = '<b>' + S.crop + ' is not grown here in any measurable acreage.</b> ' +
+        'USDA records no ' + com.toLowerCase() + ' ground in these counties, so there is ' +
+        'nothing honest to draw. This class belongs on a northern-plains site.';
+      el.hidden = false;
+      return;
+    }
+    var acres = outs.reduce(function (t, f) { return t + f.properties.acres; }, 0);
+    var top = (outs[0].properties.top_counties || [])[0];
+    el.innerHTML = com.charAt(0) + com.slice(1).toLowerCase() + ' ground here is <b>' +
+      acres.toLocaleString() + ' acres across ' + counties.length + ' counties</b>' +
+      (top ? ', centred on ' + top : '') + ' · USDA Cropland Data Layer ' +
+      (S.cropOutlines.crop_year || '') + '.';
+    el.hidden = false;
+  }
+
   function updateReadout() {
     var el = $('nbReadout'); if (!el) return;
     var view = VIEWS[S.view];
+
+    if (view.regional) {
+      var rows = cropCounties().map(function (f) { return f.properties.region; });
+      var seen = {}, calls = [];
+      rows.forEach(function (r) {
+        if (seen[r]) return;
+        seen[r] = 1;
+        var v = regionValue(r);
+        if (v) calls.push({ name: regionName(r), v: v });
+      });
+      if (!calls.length) {
+        el.textContent = 'No ' + S.crop + ' estimate exists for the regions that grow it.';
+        return;
+      }
+      calls.sort(function (a, b) { return a.v.t - b.v.t; });
+      if (S.view === 'health') {
+        var worst = calls[0], best = calls[calls.length - 1];
+        el.innerHTML = S.crop + ' is <b>' + worst.v.label.toLowerCase() + '</b> in ' +
+          worst.name + (calls.length > 1 ? ', and ' + best.v.label.toLowerCase() + ' in ' +
+          best.name : '') + '. ' + calls.length + ' regions carry this crop. ' +
+          '<span class="nbStationCount">condition is called per region, not per field</span>';
+      } else {
+        var lo = calls[0], hi = calls[calls.length - 1];
+        el.innerHTML = S.crop + ' is running <b>' + lo.v.label + '</b> in ' + lo.name +
+          (calls.length > 1 ? ' and <b>' + hi.v.label + '</b> in ' + hi.name : '') +
+          ', against a ' + Math.round(lo.v.baseline).toLocaleString() +
+          ' lb/ac recent average. ' +
+          '<span class="nbStationCount">estimated per region, not per county</span>';
+      }
+      return;
+    }
     var vals = stationValues(S.day).map(function (p) { return p.v; })
       .filter(function (v) { return v != null && isFinite(v); })
       .sort(function (a, b) { return a - b; });
@@ -446,19 +620,60 @@
       var c = rampColor(i / 10, view.ramp);
       stops.push('rgb(' + c.join(',') + ') ' + (i * 10) + '%');
     }
+    var bar = '<div class="nbLegendBar" style="background:linear-gradient(90deg,' +
+      stops.join(',') + ')"></div>';
+    var tail = '<div class="nbLegendUnit">' + view.label + ' · ' + view.unit + ' · ' + S.crop;
+
+    /* Crop health is five named calls, not a continuum. A gradient with numbers under it would
+     * invite people to read a precision that is not in the word "STRESSED". */
+    if (S.view === 'health') {
+      var keys = ['AT RISK', 'STRESSED', 'LATE', 'WATCH', 'ON TRACK'];
+      el.innerHTML =
+        '<div class="nbLegendSteps">' + keys.map(function (k) {
+          var c = rampColor(HEALTH_RANK[k], view.ramp);
+          return '<span><i style="background:rgb(' + c.join(',') + ')"></i>' +
+            k.charAt(0) + k.slice(1).toLowerCase() + '</span>';
+        }).join('') + '</div>' +
+        tail + '<br>Called per region from that region\'s own season · through ' +
+        S.dates[S.dates.length - 1] + '</div>';
+      return;
+    }
+
+    if (S.view === 'yield') {
+      var vals = [], seen = {};
+      cropCounties().forEach(function (f) {
+        var r = f.properties.region;
+        if (seen[r]) return;
+        seen[r] = 1;
+        var v = regionValue(r);
+        if (v) vals.push(v);
+      });
+      var base = vals.length ? Math.round(vals[0].baseline) : null;
+      el.innerHTML = bar +
+        '<div class="nbLegendEnds">' +
+        '<span><em>−20%</em>Below average</span>' +
+        '<span><em>+20%</em>Above average</span></div>' +
+        tail + (base ? '<br>Recent average ' + base.toLocaleString() + ' lb/ac' : '') +
+        ' · estimated per region, not per county</div>';
+      return;
+    }
+
     var dom = domain();
     var fmt = function (v) { return Math.round(v).toLocaleString(); };
-    el.innerHTML =
-      '<div class="nbLegendBar" style="background:linear-gradient(90deg,' + stops.join(',') + ')"></div>' +
+    el.innerHTML = bar +
       '<div class="nbLegendEnds">' +
       '<span><em>' + fmt(dom.lo) + '</em>' + view.loLabel + '</span>' +
       '<span><em>' + fmt(dom.hi) + '</em>' + view.hiLabel + '</span></div>' +
-      '<div class="nbLegendUnit">' + view.label + ' · ' + view.unit + ' · ' + S.crop + '<br>' +
+      tail + '<br>' +
       (S.interp === 'relative'
         ? 'Scale stretched to this date — read where, not how much'
         : 'One scale all season — dates are comparable') +
       ' · through ' + S.dates[S.dates.length - 1] + '</div>';
-    var q = $('nbQuestion'); if (q) q.textContent = view.question;
+  }
+
+  function syncQuestion() {
+    var q = $('nbQuestion');
+    if (q) q.textContent = VIEWS[S.view].question;
   }
 
   /* ---------------------------------------------------------------- shell */
@@ -483,6 +698,7 @@
         '</div>' +
       '</div>' +
       '<p class="nbReadout" id="nbReadout">Reading stations…</p>' +
+      '<p class="nbFootprint" id="nbFootprint" hidden></p>' +
       '<div class="nbMapFrame"><div id="nbMap"></div>' +
         '<div class="nbLegendCard" id="nbLegend"></div>' +
         '<div class="nbGeoNote">Low-opacity geography avoids false field precision. ' +
@@ -515,19 +731,54 @@
     document.addEventListener('change', function (e) {
       var t = e.target;
       if (!t || t.id !== 'nbCrop' || !CLASSES[t.value] || t.value === S.crop) return;
-      S.crop = t.value; updateLegend(); setDay(S.day, true);
+      applyCrop(t.value, true);
     }, true);
     $('nbView').addEventListener('change', function (e) {
-      S.view = e.target.value; updateLegend(); setDay(S.day); });
+      S.view = e.target.value;
+      var regional = !!VIEWS[S.view].regional;
+      if (regional) stop();
+      var pb = document.querySelector('.nbPlayback');
+      if (pb) pb.classList.toggle('nbPlaybackOff', regional);
+      $('nbPlay').disabled = regional;
+      $('nbSlider').disabled = regional;
+      updateLegend(); syncQuestion(); setDay(S.day);
+    });
     $('nbInterp').addEventListener('change', function (e) {
       S.interp = e.target.value; updateLegend(); setDay(S.day); });
     $('nbFitAll').addEventListener('click', function () {
-      S.map.fitBounds(S.layers.outline.getBounds().pad(0.12));
+      if (S.layers.counties) S.map.fitBounds(S.layers.counties.getBounds().pad(0.08));
     });
     $('nbPlay').addEventListener('click', play);
     $('nbSlider').addEventListener('input', function (e) { stop(); setDay(Number(e.target.value)); });
     $('nbFrame').addEventListener('change', function (e) { S.frame = Number(e.target.value); });
     $('nbSpeed').addEventListener('change', function (e) { S.speed = Number(e.target.value); });
+  }
+
+  function applyCrop(next, refit) {
+    if (!next || !CLASSES[next] || next === S.crop) return false;
+    S.crop = next;
+    drawOutlines();
+    if (refit) { var cb = coreBounds(); if (cb) S.map.fitBounds(cb); }
+    updateFootprint();
+    updateLegend();
+    setDay(S.day, true);
+    return true;
+  }
+
+  /* Keep the map on the crop the answer block is showing. It restores the last crop from
+   * storage after its own fetch resolves and never fires a change event, so a map that only
+   * listened for changes sat on pinto while the headline said garbanzo. */
+  function watchCrop() {
+    var read = function () {
+      var el = document.getElementById('nbCrop');
+      if (el && CLASSES[el.value]) applyCrop(el.value, true);
+    };
+    read();
+    [300, 900, 2000].forEach(function (ms) { setTimeout(read, ms); });
+    var host = document.getElementById('nbAnswer');
+    if (host && window.MutationObserver) {
+      new window.MutationObserver(read).observe(host, { childList: true, subtree: true });
+    }
   }
 
   function start() {
@@ -549,16 +800,22 @@
 
     Promise.all([
       fetch('assets/data/region-outlines.json?v=' + build()).then(function (r) { return r.json(); }),
-      fetch('assets/data/station-field.json?v=' + build()).then(function (r) { return r.json(); })
+      fetch('assets/data/station-field.json?v=' + build()).then(function (r) { return r.json(); }),
+      fetch('assets/data/crop-outlines.geojson?v=' + build()).then(function (r) { return r.json(); }),
+      fetch('assets/data/county-crops.geojson?v=' + build()).then(function (r) { return r.json(); }),
+      fetch('assets/data/region-answers.json?v=' + build()).then(function (r) { return r.json(); })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
-      drawOutlines(); drawStations();
-      map.fitBounds(coreBounds());
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;
-      updateLegend(); wire();
+      drawOutlines(); drawStations();
+      var cb = coreBounds(); if (cb) map.fitBounds(cb);
+      updateFootprint();
+      updateLegend(); syncQuestion(); wire();
       setDay(S.dates.length - 1, true);
+      watchCrop();
       setTimeout(function () { map.invalidateSize(); paintSurface(); }, 200);
     }).catch(function (e) {
       var r = $('nbReadout');
