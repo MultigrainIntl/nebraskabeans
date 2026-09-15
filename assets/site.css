@@ -266,3 +266,278 @@ footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px
 #nbPlayback label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6c796f;font-weight:850}
 #nbSpeedSel{font:inherit;padding:5px 8px;border:1px solid #aebdb2;border-radius:4px;background:#fff}
 @media(max-width:640px){#nbPlayBtn{min-width:88px}#nbDateLabel{min-width:0}}
+
+/* ---------------------------------------------------------- decision map ---
+   One map, one question, playback directly under it. */
+
+#nbDecisionMap {
+  max-width: 1180px;
+  margin: 0 auto 34px;
+  padding: 0 18px;
+}
+
+.nbMapHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.nbMapHead .nbEyebrow {
+  font-size: 11px;
+  letter-spacing: .14em;
+  font-weight: 700;
+  color: #6c7d70;
+}
+
+.nbMapHead h2 {
+  margin: 4px 0 0;
+  font-size: 27px;
+  line-height: 1.2;
+  color: #14212b;
+}
+
+.nbMapPickers {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nbMapPickers label,
+.nbPlayback .nbSel {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  font-weight: 700;
+  color: #6c7d70;
+  text-transform: uppercase;
+}
+
+.nbMapPickers select,
+.nbPlayback select {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #14212b;
+  padding: 7px 10px;
+  border: 1px solid #c8d2c9;
+  border-radius: 7px;
+  background: #fff;
+  min-width: 132px;
+}
+
+.nbPlayback select { min-width: 92px; }
+
+.nbReadout {
+  margin: 0 0 12px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: #22303a;
+  max-width: 82ch;
+}
+
+.nbReadout b { color: #14212b; }
+
+.nbStationCount {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: #6c7d70;
+  text-transform: uppercase;
+}
+
+.nbMapFrame {
+  position: relative;
+  border: 1px solid #c8d2c9;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  background: #eef2ec;
+}
+
+#nbMap {
+  height: 620px;
+  width: 100%;
+  background: #eef2ec;
+}
+
+/* The interpolated surface sits above the tiles and below the outlines and station dots,
+   and never intercepts a click. */
+canvas.nbSurface {
+  position: absolute;
+  inset: 0;
+  z-index: 350;
+  pointer-events: none;
+}
+
+.nbLegendCard {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  z-index: 500;
+  width: 268px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(17, 30, 38, .93);
+  color: #eef3ef;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .28);
+}
+
+.nbLegendBar {
+  height: 12px;
+  border-radius: 6px;
+  margin-bottom: 7px;
+}
+
+.nbLegendEnds {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.nbLegendUnit {
+  margin-top: 7px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #a9bdb2;
+}
+
+.nbGeoNote {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 500;
+  max-width: 320px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .88);
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: #4d5c53;
+}
+
+/* ---- playback, directly under the map ---- */
+
+.nbPlayback {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 14px 16px 30px;
+  border: 1px solid #c8d2c9;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  background: #f6f8f5;
+}
+
+#nbPlay {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 108px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  background: #17794a;
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#nbPlay:hover { background: #12603a; }
+#nbPlay .nbIcon { font-size: 12px; }
+
+.nbDateBlock { display: flex; flex-direction: column; min-width: 148px; }
+
+.nbDateCap {
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  font-weight: 700;
+  color: #6c7d70;
+}
+
+.nbDateBlock strong {
+  font-size: 21px;
+  color: #14212b;
+  font-variant-numeric: tabular-nums;
+}
+
+.nbTrack { position: relative; flex: 1 1 340px; min-width: 260px; }
+
+#nbSlider { width: 100%; accent-color: #17794a; margin: 0; }
+
+/* Planting and harvest windows drawn on the timeline itself, so the date you are looking at
+   is read against the two dates that decide the season. */
+.nbPhases { position: relative; height: 34px; margin-top: 6px; }
+
+.nbPhase {
+  position: absolute;
+  top: 0;
+  height: 9px;
+  border-radius: 5px;
+}
+
+.nbPhase span {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #4d5c53;
+}
+
+.nbPhasePlant { background: #4ea56b; }
+.nbPhasePlant span { color: #2c6b45; }
+.nbPhaseHarvest { background: #e08a2a; }
+.nbPhaseHarvest span { color: #8a5416; }
+
+@media (max-width: 820px) {
+  #nbMap { height: 460px; }
+  .nbMapHead h2 { font-size: 22px; }
+  /* On a phone the legend goes under the map instead of covering a third of it. */
+  .nbLegendCard {
+    position: static;
+    width: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .nbGeoNote { display: none; }
+  .nbPlayback { gap: 12px; }
+}
+
+.nbLegendEnds span { display: flex; flex-direction: column; gap: 1px; max-width: 46%; }
+.nbLegendEnds span:last-child { text-align: right; }
+.nbLegendEnds em {
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+.nbLegendEnds span > :not(em) { font-weight: 600; }
+
+#nbFitAll {
+  display: block;
+  margin-top: 5px;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: #17794a;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.nbPhase.nbPhaseEnd span { left: auto; right: 0; transform: none; }
+.nbPhase.nbPhaseStart span { left: 0; transform: none; }

@@ -125,8 +125,9 @@
     [250, 900, 2000].forEach(function (ms) {
       setTimeout(function () {
         // one failing step must not kill the rest — that is what stopped the animation starting
-        [hideStationNoise, labelRegions, drawGrowingRegions, shrinkMarkers, pruneDeeper,
-         startAnimationWatch].forEach(function (fn) {
+        // The legacy map is retired; decision-map.js owns the map now. Only the tidy-up of
+        // the "Dig deeper" section still has anything to act on.
+        [pruneDeeper].forEach(function (fn) {
           try { fn(); } catch (e) {
             if (window.console) console.warn('nb step failed:', fn.name, e && e.message);
           }
@@ -155,7 +156,11 @@
     move(document.getElementById('nbDecisionPanel'));
     ['.nbTimelines', '.nbRegionPanel'].forEach(function (sel) { move(document.querySelector(sel)); });
 
-    // Map controls: above the map, always reachable, not floating over the picture.
+    // Everything below rearranged the retired map section. Leaving it running risks it
+    // reaching into the live map and moving a control it does not own.
+    var legacy = document.getElementById('mapSection');
+    if (!legacy || legacy.hasAttribute('hidden')) return;
+
     var panel = document.querySelector('.nbDecisionMapPanel'),
         wrap = document.querySelector('.mapwrap');
     if (panel && wrap && wrap.parentNode) wrap.parentNode.insertBefore(panel, wrap);
