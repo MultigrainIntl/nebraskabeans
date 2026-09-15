@@ -31,7 +31,7 @@ jobs:
 
           unexpected="$(
             git ls-files |
-              grep -Ev '^(README\.md|CLAUDE\.md|\.github/workflows/main-verify\.yml|\.github/workflows/joieos-compliance\.yml|\.github/CODEOWNERS)$' ||
+              grep -Ev '^(README\.md|CLAUDE\.md|\.github/workflows/main-verify\.yml|\.github/workflows/joieos-compliance\.yml|\.github/workflows/daily-refresh\.yml|\.github/CODEOWNERS)$' ||
               true
           )"
 
@@ -47,3 +47,9 @@ jobs:
           test ! -L .github/workflows/main-verify.yml
           test -f .github/CODEOWNERS
           test ! -L .github/CODEOWNERS
+          # Scheduled workflows only run from the default branch, so the daily data refresh
+          # has to live here even though everything it touches lives on gh-pages. If it goes
+          # missing, the site silently stops updating and nothing says so — which is the exact
+          # failure the job exists to prevent.
+          test -f .github/workflows/daily-refresh.yml
+          test ! -L .github/workflows/daily-refresh.yml
