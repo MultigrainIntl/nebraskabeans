@@ -105,6 +105,23 @@ try {
 
   await page.screenshot({ path: `${OUT}/desktop-current.png`, fullPage: true });
 
+  /* ---- LAYOUT-002: a thing you can open must look like a thing you can open ---- */
+  for (const sel of ['.nbA-more > summary', '.nbDeeperSum']) {
+    const b = await box(sel);
+    assert(b, `LAYOUT-002: ${sel} is missing`);
+    assert(b.height >= 38,
+      `LAYOUT-002: ${sel} is ${Math.round(b.height)}px tall — too small to read as a control ` +
+      `or to hit with a thumb`);
+    const look = await page.locator(sel).evaluate(el => {
+      const s = getComputedStyle(el);
+      return { bg: s.backgroundColor, border: s.borderTopWidth, cursor: s.cursor };
+    });
+    assert.equal(look.cursor, 'pointer', `LAYOUT-002: ${sel} must show it is clickable`);
+    assert(look.bg !== 'rgba(0, 0, 0, 0)' && look.bg !== 'transparent',
+      `LAYOUT-002: ${sel} needs a surface — plain text reads as a caption, not a control`);
+    assert(parseFloat(look.border) > 0, `LAYOUT-002: ${sel} needs a visible edge`);
+  }
+
   /* ---- LAYOUT-001: the controls belong on the map, at every width ---- */
   for (const [w, h, label] of [[1440, 1200, 'desktop'], [768, 1024, 'tablet'], [390, 844, 'phone']]) {
     await page.setViewportSize({ width: w, height: h });
