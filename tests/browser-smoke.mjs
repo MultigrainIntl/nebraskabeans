@@ -90,6 +90,13 @@ try {
   assert.doesNotMatch(headline, /^\s*[A-Z ()]+ — \d{1,2},\d{3} lb\/ac\s*$/,
     'YIELD-001: the headline must not lead with a single point estimate');
 
+  /* ---- YIELD-002: the headline number must name its source ---- */
+  const basis = await text('.nbA-basis');
+  assert.match(basis, /USDA state history/i,
+    'YIELD-002: the headline yield range is USDA history times an adjustment and must say so');
+  assert.match(basis, /not an independent forecast/i,
+    'YIELD-002: the headline must not let a USDA-derived range read as a forecast');
+
   /* ---- USDA is the scorecard, never an input ---- */
   const deeper = await page.locator('body').textContent();
   assert.match(deeper, /USDA|NASS/, 'the USDA relationship must remain stated on the page');

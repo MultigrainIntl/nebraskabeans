@@ -44,15 +44,24 @@
     rows.sort(function (a, b) { return RANK[a.c.status] - RANK[b.c.status]; });
 
     var ys = rows.map(function (r) { return r.c.yield; }).filter(Boolean);
-    var yieldRange = null, yieldVs = null;
+    var yieldRange = null, yieldVs = null, yieldBasis = null;
     if (ys.length) {
       var lo = Math.min.apply(null, ys.map(function (y) { return y.low; }));
       var hi = Math.max.apply(null, ys.map(function (y) { return y.high; }));
       var base = Math.round(ys.reduce(function (s, y) { return s + y.baseline; }, 0) / ys.length);
       var mid = Math.round(ys.reduce(function (s, y) { return s + y.mid; }, 0) / ys.length);
       var vs = mid === base ? 'in line with' : (mid > base ? 'above' : 'below');
+      var adj = Math.round(ys.reduce(function (s, y) {
+        return s + (y.adjust_pct || 0); }, 0) / ys.length);
+      /* This range is USDA's own state history for the class, moved by a season adjustment —
+       * it is not an independent forecast, and an independent review found the site presenting
+       * it as one. The headline now attributes it, because the number a broker reads first is
+       * the number they are most likely to act on. */
       yieldRange = lo.toLocaleString() + '–' + hi.toLocaleString() + ' lb/ac';
       yieldVs = vs + ' the ' + base.toLocaleString() + ' lb/ac recent average.';
+      yieldBasis = 'USDA state history for this class, adjusted ' +
+        (adj === 0 ? 'not at all' : (adj > 0 ? 'up ' : 'down ') + Math.abs(adj) + '%') +
+        ' for this season\u2019s heat and moisture. Not an independent forecast.';
     }
 
     var readyNow = rows.filter(function (r) { return (r.c.harvest || {}).ready === 'now'; }).length;
@@ -81,7 +90,8 @@
         (green > rows.length / 2 ? 'greening' : 'declining') + ' week on week.';
     }
     return { rows: rows, majority: majority, when: when, size: size, watch: watch,
-             yieldRange: yieldRange, yieldVs: yieldVs, worst: worst, moistLine: moistLine };
+             yieldRange: yieldRange, yieldVs: yieldVs, yieldBasis: yieldBasis,
+             worst: worst, moistLine: moistLine };
   }
 
   function render(data, crop) {
@@ -110,6 +120,7 @@
         (h.yieldRange ? ' — ' + h.yieldRange : ' — ' + h.majority) + '</h2>' +
       '<p class="nbA-line"><b>' + h.when + '</b> ' + h.size +
         (h.yieldVs ? ' Running ' + h.yieldVs : '') + '</p>' +
+      (h.yieldBasis ? '<p class="nbA-basis">' + h.yieldBasis + '</p>' : '') +
       (h.moistLine ? '<p class="nbA-moist">' + h.moistLine + '</p>' : '') +
       (h.watch ? '<p class="nbA-watch">Watch — ' + h.watch + '</p>' : '') +
       '<p class="nbA-q"><b>What sets the price:</b> ' + (data.classes[crop].quality_driver || '') + '</p>' +
