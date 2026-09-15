@@ -65,7 +65,7 @@ try {
   // The map is ready when it has drawn its regions and reported its stations.
   await page.waitForFunction(
     () => document.querySelectorAll('#nbMap path').length > 0 &&
-          /reporting stations/i.test(document.getElementById('nbReadout')?.textContent || ''),
+          /rain gauges|reporting thermometers/i.test(document.getElementById('nbReadout')?.textContent || ''),
     null, { timeout: 45000 });
 
   /* ---- the answer comes before the map ---- */
@@ -162,6 +162,22 @@ try {
     'warm-season pinto');
   assert.match(await text('#nbReadout'), /GARBANZO \(KABULI\)/,
     'CLASS-001: the readout must describe the class actually selected');
+
+  /* ---- STATION-001: the surface must stand on a real network, not a handful of airports ---- */
+  const net = await page.evaluate(async () => {
+    const r = await fetch('assets/data/station-field.json');
+    const f = await r.json();
+    return { counts: f.station_counts, days: f.dates.length, from: f.window[0] };
+  });
+  assert(net.counts.reporting_temperature >= 400,
+    `STATION-001: only ${net.counts.reporting_temperature} stations report temperature`);
+  assert(net.counts.reporting_precipitation >= 800,
+    `STATION-001: only ${net.counts.reporting_precipitation} stations report rainfall`);
+  assert(net.from <= '2026-04-01',
+    'the record must start before the earliest pulse planting date, or peas are modelled from ' +
+    'a season that had already begun');
+  assert.match(await text('#nbReadout'), /rain gauges|reporting thermometers/,
+    'the readout must say how many stations actually answered this view');
 
   /* ---- CROP-SYNC-001: the headline and the map must name the same crop ---- */
   const named = await page.evaluate(() => ({

@@ -119,13 +119,23 @@
 
   /* One number per station for the chosen view on the chosen day. This is what the surface
    * interpolates between — there is no modelled grid behind it, only observations. */
+  /* One number per station for the chosen view on the chosen day. This is what the surface
+   * interpolates between — there is no modelled grid behind it, only observations.
+   *
+   * Temperature and rainfall come from different station sets. Most cooperative sites report
+   * rain and nothing else; they are the densest rainfall network in the country and throwing
+   * them away to protect a growing-degree-day sum they were never going to feed would be a
+   * poor trade. A rain-only station borrows evaporation from the nearest thermometer, named in
+   * the data file at build time — a median of fifteen kilometres away. */
   function stationValues(day) {
     var spec = CLASSES[S.crop] || CLASSES.PINTO;
     var p0 = plantIndex(spec);
+    var all = S.field.stations;
     var out = [];
-    for (var s = 0; s < S.field.stations.length; s++) {
-      var st = S.field.stations[s], v = null;
+    for (var s = 0; s < all.length; s++) {
+      var st = all[s], v = null;
       if (S.view === 'stage') {
+        if (!st.has_temp) continue;
         var gdd = 0;
         for (var i = p0; i <= day; i++) {
           var hi = st.hi[i], lo = st.lo[i];
@@ -134,14 +144,18 @@
         }
         v = 100 * gdd / spec.gdd;
       } else if (S.view === 'heat') {
+        if (!st.has_temp) continue;
         var n = 0;
         for (var j = p0; j <= day; j++) if (st.hi[j] != null && st.hi[j] >= spec.heat) n++;
         v = n;
       } else {
+        if (!st.has_precip) continue;
+        var ref = st.has_temp ? st : all[st.t_ref];
+        if (!ref || !ref.has_temp) continue;
         var bal = 0, from = Math.max(0, day - 29);
         for (var k = from; k <= day; k++) {
-          if (st.pr[k] != null) bal += st.pr[k];
-          bal -= et0(st.hi[k], st.lo[k], st.lat, doyOf(S.dates[k]));
+          if (st.pr[k] != null) bal += st.pr[k] / 10;      // stored as tenths of a millimetre
+          bal -= et0(ref.hi[k], ref.lo[k], st.lat, doyOf(S.dates[k]));
         }
         v = bal;
       }
@@ -288,6 +302,31 @@
       return { x: c.x, y: c.y, v: p.v };
     });
 
+    /* Bucket the stations by screen position so each pixel only weighs its neighbours.
+     * Against fifteen hundred stations, weighing every one at every sample point is twenty
+     * million distance calculations a frame, and playback stops being playback. Nothing beyond
+     * a couple of buckets away carries meaningful weight under inverse-cube anyway. */
+    var BUCKET = 90;
+    var grid = {};
+    for (var b = 0; b < proj.length; b++) {
+      var key = (proj[b].x / BUCKET | 0) + ':' + (proj[b].y / BUCKET | 0);
+      (grid[key] || (grid[key] = [])).push(proj[b]);
+    }
+    var near = function (px, py) {
+      var bx = px / BUCKET | 0, by = py / BUCKET | 0;
+      for (var span = 1; span <= 4; span++) {
+        var found = [];
+        for (var ax = bx - span; ax <= bx + span; ax++) {
+          for (var ay = by - span; ay <= by + span; ay++) {
+            var cell = grid[ax + ':' + ay];
+            if (cell) found = found.concat(cell);
+          }
+        }
+        if (found.length >= 4 || span === 4) return found;
+      }
+      return proj;
+    };
+
     ctx.save();
     clipPath(ctx);
     var STEP = 6;                              // coarse grid, then blurred — smooth and quick
@@ -296,12 +335,13 @@
     for (var gy = 0; gy < H; gy++) {
       for (var gx = 0; gx < W; gx++) {
         var px = gx * STEP, py = gy * STEP, num = 0, den = 0;
-        for (var i = 0; i < proj.length; i++) {
-          var dx = proj[i].x - px, dy = proj[i].y - py;
+        var use = near(px, py);
+        for (var i = 0; i < use.length; i++) {
+          var dx = use[i].x - px, dy = use[i].y - py;
           var d2 = dx * dx + dy * dy;
-          if (d2 < 1) { num = proj[i].v; den = 1; break; }
-          var w = 1 / (d2 * d2 === 0 ? 1 : d2 * Math.sqrt(d2));  // inverse cube: local detail
-          num += proj[i].v * w; den += w;
+          if (d2 < 1) { num = use[i].v; den = 1; break; }
+          var w = 1 / (d2 * Math.sqrt(d2));    // inverse cube: keeps local detail
+          num += use[i].v * w; den += w;
         }
         var val = den ? num / den : 0;
         var c = rampColor((val - dom.lo) / (dom.hi - dom.lo), view.ramp);
@@ -406,21 +446,55 @@
       }).addTo(S.map);
   }
 
-  function drawStations() {
-    if (S.layers.stations) S.map.removeLayer(S.layers.stations);
-    var g = window.L.layerGroup();
-    S.field.stations.forEach(function (st) {
-      window.L.circleMarker([st.lat, st.lon], {
-        radius: 3.2, color: '#0f3b33', weight: 1.4, fillColor: '#2a9d9a', fillOpacity: 0.95
-      }).bindTooltip(st.name + ' — reporting station', { sticky: true }).addTo(g);
-    });
-    S.layers.stations = g.addTo(S.map);
+  function inRings(lon, lat, rings) {
+    var inside = false;
+    for (var r = 0; r < rings.length; r++) {
+      var ring = rings[r];
+      for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        var xi = ring[i][0], yi = ring[i][1], xj = ring[j][0], yj = ring[j][1];
+        if ((yi > lat) !== (yj > lat) &&
+            lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) inside = !inside;
+      }
+    }
+    return inside;
   }
 
-  /* Open where the crop is, not on the bounding box of every outlier.
-   * Big Horn is 6% of the acreage and 500 miles from Kansas; letting it set the view zooms the
-   * Panhandle — two thirds of the crop — down to a smudge. The smaller regions stay drawn, and
-   * "Show every region" reaches them; they just do not get to decide the opening frame. */
+  /* Only the stations standing on this crop's ground are drawn.
+   * The network behind the surface is fifteen hundred sites across four states; plotting all of
+   * them buries the map under dots and tells a grower nothing about the field in front of him.
+   * The ones shown are the ones whose readings are actually shaping what he is looking at, and
+   * the readout states the full count that stands behind the number. */
+  function drawStations() {
+    if (S.layers.stations) S.map.removeLayer(S.layers.stations);
+    var rings = [];
+    cropOutline().forEach(function (f) { rings = rings.concat(ringsOf(f)); });
+    var wanted = S.view === 'moisture' ? 'has_precip' : 'has_temp';
+    var on = S.field.stations.filter(function (st) {
+      return st[wanted] && inRings(st.lon, st.lat, rings);
+    });
+
+    /* Markers are thinned for legibility, one to a cell. Every station still feeds the surface
+     * — the readout states the full count — but a map buried under dots hides the very thing
+     * the dots are there to support. */
+    var CELL = 0.26, pick = {};
+    on.forEach(function (st) {
+      var k = Math.round(st.lon / CELL) + ':' + Math.round(st.lat / CELL);
+      if (!pick[k] || (st.has_temp && !pick[k].has_temp)) pick[k] = st;
+    });
+
+    var g = window.L.layerGroup();
+    Object.keys(pick).forEach(function (k) {
+      var st = pick[k];
+      window.L.circleMarker([st.lat, st.lon], {
+        radius: 2.4, color: '#12463d', weight: 0.8, opacity: 0.65,
+        fillColor: '#2a9d9a', fillOpacity: 0.62
+      }).bindTooltip(st.name + ' — ' +
+        (st.has_temp ? 'temperature and rainfall' : 'rainfall only'), { sticky: true }).addTo(g);
+    });
+    S.layers.stations = g.addTo(S.map);
+    S.stationsShown = on.length;
+  }
+
   /* Open on the counties that carry the crop, weighted by acreage.
    * A commodity's outline can reach a long way — chickpeas turn up in a scatter of counties
    * from the Wyoming line to western Colorado — and fitting the whole reach zooms the ground
@@ -608,8 +682,11 @@
         'from ' + r(low) + ' mm in the driest tenth to ' + r(high) + ' mm in the wettest. ' +
         'Negative means the crop drew down stored soil water.';
     }
-    el.innerHTML = text + ' <span class="nbStationCount">' + S.field.stations.length +
-      ' reporting stations</span>';
+    /* Count the stations that actually answered this view. Most cooperative sites report rain
+     * and not temperature, so claiming the full network behind a growing-degree-day figure
+     * would overstate what is holding it up. */
+    el.innerHTML = text + ' <span class="nbStationCount">' + vals.length +
+      (S.view === 'moisture' ? ' rain gauges' : ' reporting thermometers') + '</span>';
   }
 
   function updateLegend() {
@@ -702,7 +779,8 @@
       '<div class="nbMapFrame"><div id="nbMap"></div>' +
         '<div class="nbLegendCard" id="nbLegend"></div>' +
         '<div class="nbGeoNote">Low-opacity geography avoids false field precision. ' +
-        'The surface is drawn only inside the growing regions. ' +
+        'The surface is drawn only inside the growing regions, from every reporting ' +
+        'station; markers are thinned so they do not bury it. ' +
         '<button type="button" id="nbFitAll">Show every region</button></div>' +
       '</div>' +
       '<div class="nbPlayback">' +
@@ -741,6 +819,7 @@
       if (pb) pb.classList.toggle('nbPlaybackOff', regional);
       $('nbPlay').disabled = regional;
       $('nbSlider').disabled = regional;
+      drawStations();
       updateLegend(); syncQuestion(); setDay(S.day);
     });
     $('nbInterp').addEventListener('change', function (e) {
@@ -758,6 +837,7 @@
     if (!next || !CLASSES[next] || next === S.crop) return false;
     S.crop = next;
     drawOutlines();
+    drawStations();
     if (refit) { var cb = coreBounds(); if (cb) S.map.fitBounds(cb); }
     updateFootprint();
     updateLegend();

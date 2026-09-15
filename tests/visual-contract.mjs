@@ -51,7 +51,7 @@ try {
   assert(r?.ok(), `page response not OK: ${r?.status()}`);
   await page.waitForFunction(
     () => document.querySelectorAll('#nbMap path').length > 0 &&
-          /reporting stations/i.test(document.getElementById('nbReadout')?.textContent || ''),
+          /rain gauges|reporting thermometers/i.test(document.getElementById('nbReadout')?.textContent || ''),
     null, { timeout: 45000 });
   await page.waitForTimeout(700);
 
