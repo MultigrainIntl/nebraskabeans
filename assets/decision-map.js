@@ -61,6 +61,21 @@
      * is the scorecard and never an input. It was doing the opposite while a heading asked
      * "what is this crop going to yield". It stays out until there is a real prediction to
      * grade against USDA rather than one derived from it. */
+    /* A real prediction this time. gisit-drybean-weather-ridge-v1 is fitted on 92 state-years
+     * of USDA final pinto yield from 2000 to 2025, using weather only — thermal onset, growing
+     * degree days, rainfall, climatic deficit, and the same two measured across the crop's
+     * critical stage. No current USDA figure enters it. It is graded against USDA afterwards by
+     * leave-one-year-out hindcast, and it withholds its own number on every date where it fails
+     * to beat the historical median, which is every date before 15 June. */
+    yield: {
+      label: 'Yield outlook',
+      unit: 'lb/ac, pinto basis · weather-only model, graded against USDA',
+      regional: true,
+      model: true,
+      loLabel: 'Below its history', hiLabel: 'Above its history',
+      ramp: [[0, '#9e1b0e'], [0.35, '#e07b1f'], [0.5, '#e8c33a'], [0.75, '#7cc08a'], [1, '#17794a']],
+      question: 'What does this season\u2019s weather say the crop will yield?'
+    },
     health: {
       label: 'Season flags',
       unit: 'weather-derived flag from state-level inputs — not an observed crop condition',
@@ -81,7 +96,7 @@
   var S = {                                   // everything the map is currently showing
     crop: 'PINTO', view: 'moisture', interp: 'absolute', day: 0, playing: false, speed: 1, frame: 1,
     map: null, canvas: null, outlines: null, cropOutlines: null, counties: null,
-    answers: null, field: null, dates: [], layers: {}, timer: null
+    answers: null, outlook: null, field: null, dates: [], layers: {}, timer: null
   };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -403,7 +418,33 @@
    * history and season. They are not a field-scale surface, so they are painted as flat
    * counties with their boundaries showing, and the tooltip says which region the number
    * actually belongs to. Smoothing them would invent precision the estimate does not have. */
+  /* The model's own words for the selected date, or null where it refuses to publish.
+   * Refusing is not a failure state to be hidden — before 15 June this model is worse than
+   * guessing the historical median, and a number shown then would be worse than no number. */
+  function modelValue(region) {
+    if (S.crop !== 'PINTO') return null;      // fitted on pinto; no other class has a model yet
+    var r = S.outlook && S.outlook.regions && S.outlook.regions[region];
+    var row = r && r.dates && r.dates[S.dates[S.day]];
+    if (!row) return null;
+    if (row.eligibility !== 'PUBLISHED' || row.yield_lb_ac == null) {
+      return { withheld: true, why: row.eligibility || 'no model state for this date',
+               median: row.historical_median_lb_ac };
+    }
+    var change = row.change_vs_historical_median_lb_ac || 0;
+    var med = row.historical_median_lb_ac || row.yield_lb_ac;
+    var pct = med ? 100 * change / med : 0;
+    return {
+      t: Math.max(0, Math.min(1, (pct + 12) / 24)),
+      label: Math.round(row.yield_lb_ac).toLocaleString() + ' lb/ac',
+      yield: row.yield_lb_ac, interval: row.yield_interval_lb_ac,
+      median: med, change: change,
+      mae: row.hindcast_mae_lb_ac, baseline: row.baseline_mae_lb_ac,
+      stage: row.stage
+    };
+  }
+
   function regionValue(region) {
+    if (VIEWS[S.view].model) return modelValue(region);
     var a = S.answers && S.answers.regions && S.answers.regions[region];
     var c = a && a.classes && a.classes[S.crop];
     if (!c) return null;
@@ -422,8 +463,24 @@
   }
 
   function countyTip(p, com, v) {
-    return '<b>' + p.county + ' County, ' + p.state + '</b><br>' +
-      Math.round(p.acres[com]).toLocaleString() + ' acres of ' + com.toLowerCase() +
+    var head = '<b>' + p.county + ' County, ' + p.state + '</b><br>' +
+      Math.round(p.acres[com]).toLocaleString() + ' acres of ' + com.toLowerCase();
+    if (VIEWS[S.view].model) {
+      if (!v) return head + '<br><i>No model for ' + S.crop + '. The model is fitted on ' +
+        'pinto only.</i>';
+      if (v.withheld) return head + '<br><b>Withheld</b><br>' + v.why +
+        (v.median ? '<br>History for this area: ' + Math.round(v.median).toLocaleString() +
+          ' lb/ac' : '');
+      return head + '<br><b>' + v.label + '</b>' +
+        (v.interval ? ' · ' + Math.round(v.interval[0]).toLocaleString() + '–' +
+          Math.round(v.interval[1]).toLocaleString() + ' lb/ac' : '') +
+        '<br>' + (v.change >= 0 ? '+' : '') + Math.round(v.change).toLocaleString() +
+        ' lb/ac against a ' + Math.round(v.median).toLocaleString() + ' lb/ac history' +
+        '<br><i>Fitted and graded on ' + p.state + ' state yield. This region\'s weather runs ' +
+        'through it; the county is shown because it grows the crop, not because it was ' +
+        'modelled separately.</i>';
+    }
+    return head +
       (v ? '<br>' + S.crop + ' — ' + v.label +
            (v.baseline ? '<br>' + Math.round(v.low).toLocaleString() + '–' +
              Math.round(v.high).toLocaleString() + ' lb/ac against a ' +
@@ -439,10 +496,10 @@
     S.layers.counties.eachLayer(function (layer) {
       var p = layer.feature.properties;
       var v = regionValue(p.region);
-      layer.setStyle(v
+      layer.setStyle(v && !v.withheld
         ? { fillOpacity: 0.72, fillColor: 'rgb(' + rampColor(v.t, view.ramp).join(',') + ')',
             weight: 0.7, color: '#42514a', opacity: 0.6 }
-        : { fillOpacity: 0.07, fillColor: '#8a938c', weight: 0.7, color: '#5c6b60', opacity: 0.45 });
+        : { fillOpacity: 0.1, fillColor: '#8a938c', weight: 0.7, color: '#5c6b60', opacity: 0.45 });
       layer.bindTooltip(countyTip(p, com, v), { sticky: true });
     });
   }
@@ -615,7 +672,7 @@
     var lab = $('nbDate'); if (lab) lab.textContent = niceDate(S.dates[S.day]);
     paintSurface();
     updateReadout();
-    if (S.interp === 'relative') updateLegend();
+    if (S.interp === 'relative' || VIEWS[S.view].model) updateLegend();
     if (repaintBars) { var ph = $('nbPhases'); if (ph) ph.innerHTML = phaseBars(); }
   }
 
@@ -671,6 +728,55 @@
   function updateReadout() {
     var el = $('nbReadout'); if (!el) return;
     var view = VIEWS[S.view];
+
+    if (view.model) {
+      if (S.crop !== 'PINTO') {
+        el.innerHTML = '<b>No yield model for ' + S.crop + ' yet.</b> The model is fitted on ' +
+          'pinto, on 92 state-years of USDA final yield. Nothing is shown for a class it was ' +
+          'not trained on rather than a number borrowed from one that was.';
+        return;
+      }
+      var seenR = {}, live = [], held = [];
+      cropCounties().forEach(function (f) {
+        var rg = f.properties.region;
+        if (seenR[rg]) return;
+        seenR[rg] = 1;
+        var mv = modelValue(rg);
+        if (!mv) return;
+        (mv.withheld ? held : live).push({ name: regionName(rg), v: mv });
+      });
+      if (!live.length) {
+        /* Report the reason that covers the most areas. Kansas is withheld all season because
+         * its USDA pinto series ended, and letting that stand for every other area would
+         * explain the wrong thing on a date when the real reason is the calendar. */
+        var tally = {}, why = 'the model has no state for this date', best = 0;
+        held.forEach(function (h) {
+          var k = h.v.why || why;
+          tally[k] = (tally[k] || 0) + 1;
+          if (tally[k] > best) { best = tally[k]; why = k; }
+        });
+        el.innerHTML = '<b>No yield published for ' + niceDate(S.dates[S.day]) + '.</b> ' +
+          why + '. Before the middle of June this model is beaten by simply guessing each ' +
+          'area\u2019s historical median, so it publishes nothing rather than a number that ' +
+          'would mislead.';
+        return;
+      }
+      live.sort(function (a, b) { return a.v.yield - b.v.yield; });
+      var loR = live[0], hiR = live[live.length - 1], any = loR.v;
+      el.innerHTML = 'On this date the weather model puts pinto at <b>' + hiR.v.label +
+        '</b> in ' + hiR.name + (live.length > 1 ? ' and <b>' + loR.v.label + '</b> in ' +
+        loR.name : '') + ', against histories of ' +
+        Math.round(hiR.v.median).toLocaleString() + ' and ' +
+        Math.round(loR.v.median).toLocaleString() + ' lb/ac. ' +
+        (any.interval ? 'Eighty per cent of past errors fell inside \u00b1' +
+          Math.round((any.interval[1] - any.interval[0]) / 2).toLocaleString() + ' lb/ac. ' : '') +
+        (held.length ? held.length + ' area' + (held.length > 1 ? 's are' : ' is') +
+          ' withheld. ' : '') +
+        '<span class="nbStationCount">weather only — no USDA figure enters it; graded against ' +
+        'USDA at ' + any.mae + ' lb/ac error versus ' + any.baseline +
+        ' for guessing the median</span>';
+      return;
+    }
 
     if (view.regional) {
       var rows = cropCounties().map(function (f) { return f.properties.region; });
@@ -758,6 +864,26 @@
     var bar = '<div class="nbLegendBar" style="background:linear-gradient(90deg,' +
       stops.join(',') + ')"></div>';
     var tail = '<div class="nbLegendUnit">' + view.label + ' · ' + view.unit + ' · ' + S.crop;
+
+    if (S.view === 'yield') {
+      var sample = null;
+      cropCounties().some(function (f) {
+        var mv = modelValue(f.properties.region);
+        if (mv && !mv.withheld) { sample = mv; return true; }
+        return false;
+      });
+      el.innerHTML = bar +
+        '<div class="nbLegendEnds">' +
+        '<span><em>\u221212%</em>' + view.loLabel + '</span>' +
+        '<span><em>+12%</em>' + view.hiLabel + '</span></div>' +
+        tail + '<br>' +
+        (sample
+          ? 'Hindcast error ' + sample.mae + ' lb/ac against ' + sample.baseline +
+            ' for guessing the median'
+          : 'Withheld on this date \u2014 the model does not beat guessing the median') +
+        ' \u00b7 state-level fit \u00b7 ' + niceDate(S.dates[S.day]) + '</div>';
+      return;
+    }
 
     /* Crop health is five named calls, not a continuum. A gradient with numbers under it would
      * invite people to read a precision that is not in the word "STRESSED". */
@@ -852,7 +978,8 @@
     }, true);
     $('nbView').addEventListener('change', function (e) {
       S.view = e.target.value;
-      var regional = !!VIEWS[S.view].regional;
+      var frozen = !!VIEWS[S.view].regional && !VIEWS[S.view].model;
+      var regional = frozen;
       if (regional) stop();
       var pb = document.querySelector('.nbPlayback');
       if (pb) pb.classList.toggle('nbPlaybackOff', regional);
@@ -923,10 +1050,11 @@
       fetch('assets/data/station-field.json?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/crop-outlines.geojson?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/county-crops.geojson?v=' + build()).then(function (r) { return r.json(); }),
-      fetch('assets/data/region-answers.json?v=' + build()).then(function (r) { return r.json(); })
+      fetch('assets/data/region-answers.json?v=' + build()).then(function (r) { return r.json(); }),
+      fetch('assets/data/gisit-outlook-2026.json?v=' + build()).then(function (r) { return r.json(); })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;

@@ -237,9 +237,59 @@ try {
     assert(views.includes(need), `map view missing: ${need}`);
   }
   await setSelect('nbCrop', 'PINTO');
-  assert(!views.includes('yield'),
-    'the yield view was USDA baseline x an adjustment presented as a forecast; it must not ' +
-    'come back until a prediction exists that USDA can grade rather than produce');
+  /* ---- YIELD-003: the yield view must be the validated weather model, and must withhold ---- */
+  assert(views.includes('yield'), 'the yield view is missing');
+  await setSelect('nbView', 'yield');
+  await setSelect('nbCrop', 'PINTO');
+
+  const outlook = await page.evaluate(async () => {
+    const r = await fetch('assets/data/gisit-outlook-2026.json');
+    const o = await r.json();
+    return { id: o.model.id, target: o.model.target, features: o.model.feature_names,
+             checkpoints: o.validation.checkpoints };
+  });
+  assert(!outlook.features.some(f => /usda|nass|yield|baseline/i.test(f)),
+    `YIELD-003: no current USDA figure may be a model input — features were ${outlook.features}`);
+  assert(outlook.checkpoints.some(c => c.passes_baseline === false),
+    'YIELD-003: a model that never fails its own baseline test is not being tested');
+
+  const dayOf = iso => page.evaluate(d => {
+    const el = document.getElementById('nbSlider');
+    const i = window.__nbDates ? window.__nbDates.indexOf(d) : -1;
+    return i;
+  }, iso);
+
+  // Early season: the model loses to guessing the median, and must publish nothing.
+  await setDay(61);
+  await page.waitForTimeout(400);
+  const early = await text('#nbReadout');
+  assert.match(early, /No yield published/i,
+    'YIELD-003: the model must withhold on dates where it does not beat the historical median');
+  assert.match(early, /historical median/i,
+    'YIELD-003: withholding must say why');
+  assert.doesNotMatch(early, /\d,\d{3} lb\/ac (in|at) /,
+    'YIELD-003: no yield figure may appear on a withheld date');
+
+  // Late season: it beats the baseline and publishes, with its measured error band.
+  await setDay(maxDay);
+  await page.waitForTimeout(400);
+  const late = await text('#nbReadout');
+  assert.match(late, /\d,\d{3} lb\/ac/, 'YIELD-003: no yield published late in the season');
+  assert.match(late, /no USDA figure enters it/i,
+    'YIELD-003: the yield readout must state that USDA is the scorecard, not an input');
+  assert.match(late, /graded against USDA/i, 'YIELD-003: the grading must be stated');
+  assert.match(late, /±|errors fell inside/, 'YIELD-003: the error band must be shown');
+
+  // A class the model was never fitted on gets nothing, not a borrowed number.
+  await setSelect('nbCrop', 'GARBANZO (KABULI)');
+  await page.waitForTimeout(400);
+  assert.match(await text('#nbReadout'), /No yield model for GARBANZO/i,
+    'YIELD-003: a class with no model must get no number');
+  await setSelect('nbCrop', 'PINTO');
+
+  assert.equal(await page.locator('#nbPlay').isDisabled(), false,
+    'the model is a daily series and must remain playable');
+
   for (const view of ['health']) {
     await setSelect('nbView', view);
     await page.waitForTimeout(400);
