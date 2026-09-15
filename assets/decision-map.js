@@ -847,6 +847,13 @@
     el.hidden = false;
   }
 
+  /* A caveat that must be read is not the same as a caveat that must be read FIRST. */
+  function note(text) {
+    return '<span class="nbNote"><button type="button" class="nbNoteToggle" ' +
+      'aria-expanded="false">what this means</button><span class="nbNoteBody">' +
+      text + '</span></span>';
+  }
+
   function updateReadout() {
     var el = $('nbReadout'); if (!el) return;
     var view = VIEWS[S.view];
@@ -989,9 +996,10 @@
     } else {
       text = 'Over the last thirty days rainfall ran <b>' + r(med) + ' mm</b> against ' +
         'grass-reference evaporation at the median gauge on this crop, from ' + r(low) +
-        ' mm where it fell furthest behind to ' + r(high) + ' mm where it kept up. ' +
-        'This is weather, not soil: it carries no irrigation, no crop coefficient and no ' +
-        'stored soil water, so it says where demand outran rain, not whether a field is dry.';
+        ' mm where it fell furthest behind to ' + r(high) + ' mm where it kept up.' +
+        note('This is weather, not soil: it carries no irrigation, no crop coefficient and ' +
+             'no stored soil water, so it says where demand outran rain, not whether a ' +
+             'field is dry.');
     }
     /* Count the stations that actually answered this view. Most cooperative sites report rain
      * and not temperature, so claiming the full network behind a growing-degree-day figure
@@ -1073,6 +1081,8 @@
   function syncQuestion() {
     var q = $('nbQuestion');
     if (q) q.textContent = VIEWS[S.view].question;
+    var n = $('nbNowShowing');
+    if (n) n.textContent = S.crop;
   }
 
   /* ---------------------------------------------------------------- shell */
@@ -1088,17 +1098,19 @@
       '<div class="nbMapHead">' +
         '<div><div class="nbEyebrow">DECISION MAP</div>' +
         '<h2 id="nbQuestion">Where is the crop short of water right now?</h2></div>' +
-        '<div class="nbMapPickers">' +
-          '<label>Show<select id="nbView">' + viewOpts + '</select></label>' +
-          '<label>Scale<select id="nbInterp">' +
-            '<option value="absolute" selected>Across the season</option>' +
-            '<option value="relative">Within this date</option>' +
-          '</select></label>' +
-        '</div>' +
       '</div>' +
-      '<p class="nbReadout" id="nbReadout">Reading stations…</p>' +
-      '<p class="nbFootprint" id="nbFootprint" hidden></p>' +
-      '<div class="nbEstimate" id="nbEstimate" hidden></div>' +
+      '<p class="nbReadout" id="nbReadout">Reading stations\u2026</p>' +
+      /* The controls belong ON the map, not four hundred pixels above it. They used to sit in
+         the heading, which meant changing the view was: scroll up past the whole evidence
+         table, change it, scroll back down to see what happened. */
+      '<div class="nbMapControls">' +
+        '<span class="nbNowShowing" id="nbNowShowing"></span>' +
+        '<label>Show<select id="nbView">' + viewOpts + '</select></label>' +
+        '<label>Scale<select id="nbInterp">' +
+          '<option value="absolute" selected>Across the season</option>' +
+          '<option value="relative">Within this date</option>' +
+        '</select></label>' +
+      '</div>' +
       '<div class="nbMapFrame"><div id="nbMap"></div>' +
         '<div class="nbLegendCard" id="nbLegend"></div>' +
         '<div class="nbGeoNote">Low-opacity geography avoids false field precision. ' +
@@ -1107,19 +1119,23 @@
         '<button type="button" id="nbFitAll">Show every region</button></div>' +
       '</div>' +
       '<div class="nbPlayback">' +
-        '<button id="nbPlay" type="button"><span class="nbIcon">▶</span> Play</button>' +
+        '<button id="nbPlay" type="button"><span class="nbIcon">\u25b6</span> Play</button>' +
         '<div class="nbDateBlock"><span class="nbDateCap">DATE</span>' +
-        '<strong id="nbDate">—</strong></div>' +
+        '<strong id="nbDate">\u2014</strong></div>' +
         '<div class="nbTrack"><input id="nbSlider" type="range" min="0" max="1" value="0" ' +
         'aria-label="Season date"><div class="nbPhases" id="nbPhases"></div></div>' +
         '<label class="nbSel">Step<select id="nbFrame">' +
           '<option value="1" selected>1 day</option><option value="3">3 days</option>' +
           '<option value="7">7 days</option></select></label>' +
         '<label class="nbSel">Speed<select id="nbSpeed">' +
-          '<option value="0.5">0.5×</option><option value="1" selected>1×</option>' +
-          '<option value="2">2×</option><option value="4">4×</option>' +
-          '<option value="8">8×</option></select></label>' +
-      '</div>';
+          '<option value="0.5">0.5\u00d7</option><option value="1" selected>1\u00d7</option>' +
+          '<option value="2">2\u00d7</option><option value="4">4\u00d7</option>' +
+          '<option value="8">8\u00d7</option></select></label>' +
+      '</div>' +
+      /* The evidence table is the detail a professional digs into AFTER reading the map. It
+         used to sit between the controls and the map, which pushed the map off the screen. */
+      '<p class="nbFootprint" id="nbFootprint" hidden></p>' +
+      '<div class="nbEstimate" id="nbEstimate" hidden></div>';
     return host;
   }
 
@@ -1148,6 +1164,16 @@
     });
     $('nbInterp').addEventListener('change', function (e) {
       S.interp = e.target.value; updateLegend(); setDay(S.day); });
+    /* delegated: the readout is rewritten on every date change */
+    document.addEventListener('click', function (e) {
+      var b = e.target;
+      if (!b || !b.classList || !b.classList.contains('nbNoteToggle')) return;
+      var open = b.getAttribute('aria-expanded') === 'true';
+      b.setAttribute('aria-expanded', open ? 'false' : 'true');
+      b.parentNode.classList.toggle('nbNoteOpen', !open);
+      b.textContent = open ? 'what this means' : 'hide';
+    });
+
     $('nbFitAll').addEventListener('click', function () {
       if (S.layers.counties) S.map.fitBounds(S.layers.counties.getBounds().pad(0.08));
     });
@@ -1161,6 +1187,7 @@
     if (!next || !CLASSES[next] || next === S.crop) return false;
     S.crop = next;
     drawOutlines();
+    syncQuestion();
     drawStations();
     if (refit) { var cb = coreBounds(); if (cb) S.map.fitBounds(cb); }
     updateFootprint();
@@ -1185,8 +1212,17 @@
     }
   }
 
+  /* Measure the site header once so the controls pin just below it rather than under it. */
+  function setStickyOffset() {
+    var bar = document.querySelector('.topbar');
+    var h = bar ? Math.round(bar.getBoundingClientRect().height) : 62;
+    document.documentElement.style.setProperty('--nb-topbar', h + 'px');
+  }
+
   function start() {
     if (!shell() || !window.L) return;
+    setStickyOffset();
+    window.addEventListener('resize', setStickyOffset);
     var map = window.L.map('nbMap', { zoomControl: true, scrollWheelZoom: false,
                                       attributionControl: true });
     S.map = map;

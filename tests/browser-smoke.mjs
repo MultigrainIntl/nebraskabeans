@@ -359,6 +359,17 @@ try {
     'described as stored soil water — it carries no irrigation and no root-zone storage');
   assert.match(moist, /no irrigation|not soil/i,
     'TRUTH-001: the moisture view must state what it leaves out');
+  /* The caveat may be behind a toggle, but it must actually OPEN — text present in the DOM and
+     unreachable on screen is not a disclosure. */
+  const toggle = page.locator('#nbReadout .nbNoteToggle').first();
+  assert.equal(await toggle.count(), 1, 'TRUTH-001: the caveat must have a visible control');
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'false',
+    'TRUTH-001: the answer leads, the caveat opens on demand');
+  await toggle.click();
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'true',
+    'TRUTH-001: the caveat must open when asked for');
+  assert(await page.locator('#nbReadout .nbNoteBody').first().isVisible(),
+    'TRUTH-001: the caveat must be readable on screen, not merely present in the markup');
 
   const foot = await text('#nbFootprint');
   assert.match(foot, /whole counties, not the fields|not the fields/i,

@@ -105,6 +105,27 @@ try {
 
   await page.screenshot({ path: `${OUT}/desktop-current.png`, fullPage: true });
 
+  /* ---- LAYOUT-001: the controls belong on the map, at every width ---- */
+  for (const [w, h, label] of [[1440, 1200, 'desktop'], [768, 1024, 'tablet'], [390, 844, 'phone']]) {
+    await page.setViewportSize({ width: w, height: h });
+    await page.waitForTimeout(500);
+    const ctl = await box('.nbMapControls');
+    const map = await box('#nbMap');
+    const est = await box('#nbEstimate');
+    const bar = await box('.topbar');
+    assert(ctl && map, `${label}: controls or map missing`);
+    assert(map.y - (ctl.y + ctl.height) < 8,
+      `LAYOUT-001 ${label}: the view controls must sit on the map, not ${Math.round(map.y - ctl.y - ctl.height)}px above it`);
+    assert(!est || est.y > map.y + map.height - 8,
+      `LAYOUT-001 ${label}: the evidence table must follow the map, never push it off screen`);
+    const docW = await page.evaluate(() => document.documentElement.scrollWidth);
+    assert(docW <= w + 1, `LAYOUT-001 ${label}: page scrolls sideways (${docW} > ${w})`);
+    assert(ctl.y >= bar.height - 1,
+      `LAYOUT-001 ${label}: the controls are hidden under the site header`);
+  }
+  await page.setViewportSize({ width: 1440, height: 1200 });
+  await page.waitForTimeout(400);
+
   /* ---- a phone still gets a usable map and a usable playback ---- */
   await page.setViewportSize({ width: 390, height: 844 });
   await page.waitForTimeout(600);
