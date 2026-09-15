@@ -1,0 +1,150 @@
+{
+ "schema": "gisit.estimate-2026.v1",
+ "crop": "PINTO",
+ "principle": "Show the observations, then the number they imply. A bare figure is false precision; the evidence behind it is intelligence a professional can judge.",
+ "what_is_proven": [
+  "Every observation shown is measured, not modelled, and is final when it arrives.",
+  "The physics lands on the right absolute level: calibrating published dry-bean light-use efficiency and harvest index against USDA moved them by 5%.",
+  "The satellite independently identifies 2012 and 2013 as the worst years in 26 and 2023 as the best, without being told."
+ ],
+ "what_is_not_proven": [
+  "That the estimate ranks one season against another correctly. Tested against USDA over 2016-2023 it did not, and the model's error cannot be separated from the scorecard's: USDA revised Nebraska's 2026 planted acres 21% inside one season, reports yield per HARVESTED acre so abandoned fields vanish from it, and stops publishing county yields in 2008.",
+  "That it holds outside the four states measured here."
+ ],
+ "what_would_sharpen_it": [
+  {
+   "need": "Real harvest data \u2014 loads, test weights, screen size, tied to place and date",
+   "why": "The single largest gap. Six methods failed against public yield data because it is aggregated, revised and late, not because the methods are wrong. A few hundred real observations make every one of them testable again.",
+   "how": "A grower and agronomist web app reporting against the model, season by season"
+  },
+  {
+   "need": "Field-level irrigation status",
+   "why": "An irrigated and a dryland field under identical weather are different crops. USDA stopped publishing the split in 2008.",
+   "how": "USGS MIrAD-US irrigated-land mapping, plus what growers report directly"
+  },
+  {
+   "need": "Higher-resolution canopy",
+   "why": "250 m mixes bean ground with what surrounds it. Sentinel-2 at 10 m resolves individual fields.",
+   "how": "Harmonised Landsat-Sentinel, already public"
+  },
+  {
+   "need": "Current-year crop map",
+   "why": "The mask is 2024; USDA publishes 2026's in January 2027. Beans rotate.",
+   "how": "In-season classification from the same satellite series"
+  }
+ ],
+ "scope_today": "Four states, seven growing regions. The method is not specific to them \u2014 the same public sources cover the United States and Canada, and the crop physics is not regional.",
+ "regions": {
+  "ne-panhandle": {
+   "name": "Nebraska Panhandle",
+   "evidence": [
+    {
+     "what": "Canopy against its own history",
+     "value": "17 of 26 years",
+     "detail": "+5.2% against this area's average for 09-05",
+     "source": "satellite, on ground USDA maps as dry beans",
+     "observed": true
+    },
+    {
+     "what": "Water the crop actually got, through flowering and pod fill",
+     "value": "48% of what it wanted",
+     "detail": "short on 41 of 51 days",
+     "source": "OpenET \u2014 measures water used, so it sees irrigation",
+     "observed": true
+    }
+   ],
+   "estimate": {
+    "lb_ac": 1507,
+    "vs_normal_pct": -38,
+    "normal_lb_ac": 2420,
+    "days_observed": 125,
+    "basis": "sunlight and canopy from satellite, temperature from local stations, water use from OpenET, converted with published dry-bean light-use efficiency and harvest index"
+   },
+   "confidence": "LEVEL DEFENSIBLE, RANKING UNPROVEN"
+  },
+  "sw-nebraska": {
+   "name": "Southwest Nebraska",
+   "evidence": [
+    {
+     "what": "Canopy against its own history",
+     "value": "18 of 27 years",
+     "detail": "+8.8% against this area's average for 09-05",
+     "source": "satellite, on ground USDA maps as dry beans",
+     "observed": true
+    }
+   ],
+   "estimate": null,
+   "confidence": "NO ESTIMATE \u2014 water-use data not yet retrieved for this region"
+  },
+  "ne-colorado": {
+   "name": "Northeast Colorado",
+   "evidence": [
+    {
+     "what": "Canopy against its own history",
+     "value": "20 of 27 years",
+     "detail": "+9.4% against this area's average for 09-05",
+     "source": "satellite, on ground USDA maps as dry beans",
+     "observed": true
+    }
+   ],
+   "estimate": null,
+   "confidence": "NO ESTIMATE \u2014 water-use data not yet retrieved for this region"
+  },
+  "western-colorado": {
+   "name": "Western Colorado",
+   "evidence": [
+    {
+     "what": "Canopy against its own history",
+     "value": "11 of 27 years",
+     "detail": "+1.1% against this area's average for 09-05",
+     "source": "satellite, on ground USDA maps as dry beans",
+     "observed": true
+    }
+   ],
+   "estimate": null,
+   "confidence": "NO ESTIMATE \u2014 water-use data not yet retrieved for this region"
+  },
+  "se-wyoming": {
+   "name": "Southeast Wyoming",
+   "evidence": [
+    {
+     "what": "Canopy against its own history",
+     "value": "8 of 27 years",
+     "detail": "-3.4% against this area's average for 09-05",
+     "source": "satellite, on ground USDA maps as dry beans",
+     "observed": true
+    }
+   ],
+   "estimate": null,
+   "confidence": "NO ESTIMATE \u2014 water-use data not yet retrieved for this region"
+  },
+  "big-horn": {
+   "name": "Big Horn Basin",
+   "evidence": [
+    {
+     "what": "Canopy against its own history",
+     "value": "25 of 26 years",
+     "detail": "+8.5% against this area's average for 09-05",
+     "source": "satellite, on ground USDA maps as dry beans",
+     "observed": true
+    }
+   ],
+   "estimate": null,
+   "confidence": "NO ESTIMATE \u2014 water-use data not yet retrieved for this region"
+  },
+  "nw-kansas": {
+   "name": "Northwest Kansas",
+   "evidence": [
+    {
+     "what": "Canopy against its own history",
+     "value": "9 of 27 years",
+     "detail": "-1.7% against this area's average for 09-05",
+     "source": "satellite, on ground USDA maps as dry beans",
+     "observed": true
+    }
+   ],
+   "estimate": null,
+   "confidence": "NO ESTIMATE \u2014 water-use data not yet retrieved for this region"
+  }
+ }
+}

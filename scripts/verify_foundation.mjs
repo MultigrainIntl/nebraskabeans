@@ -27,6 +27,16 @@ assert.doesNotMatch(decisionMap,/label: 'Soil moisture'/,'rainfall minus referen
 assert.match(decisionMap,/no irrigation/,'the water view must state what it leaves out');
 assert.match(decisionMap,/whole counties, not '/,'the crop outline must not be presented as field boundaries');
 assert.match(decisionMap,/not an observed crop condition/,'season flags must not be presented as observed crop health');
+assert.match(decisionMap,/observed, not forecast/,'the present-tense view must declare itself an observation');
+const vsHistory=JSON.parse(read('assets/data/crop-vs-history.json'));
+assert.equal(vsHistory.source.api_key_required,false,'the real-time source must stay keyless');
+assert(vsHistory.latest_observation,'the present-tense view must carry a latest observation date');
+assert(Object.keys(vsHistory.regions).length>=7,'every growing region needs its own history');
+const est=JSON.parse(read('assets/data/estimate-2026.json'));
+assert(est.what_is_not_proven.length>0,'the estimate must carry its own unproven claims');
+assert(est.what_would_sharpen_it.length>=3,'a limitation without a path to close it is an excuse');
+assert(est.what_would_sharpen_it.some(x=>/harvest data|ground/i.test(x.need)),'ground truth from growers must be named as the largest gap');
+assert.match(est.principle,/observations, then the number/i,'the estimate must lead with evidence');
 assert.match(app,/USDA current yield is not a predictor/);
 assert.match(app,/BACKTEST GATE PASS/);
 assert.match(app,/Production requires validated crop-area weights/);

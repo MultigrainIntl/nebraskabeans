@@ -89,6 +89,25 @@
      * be the most decision-relevant number on this site and the least supported, so there isn't
      * one. Dry peas are the first class with demonstrated weather skill — +10.8%, interval +1.9
      * to +18.4 — and are the candidate for putting yield back. */
+    /* WHAT THE CROP LOOKS LIKE RIGHT NOW, against every season since 2000.
+     *
+     * Not a forecast, and it waits on nobody. Each value is a satellite pass at 250 m over the
+     * cells USDA's crop map calls dry beans, and a satellite pass is final when it lands.
+     *
+     * This is here instead of a yield number because USDA's own figures are neither timely nor
+     * stable: Nebraska's 2026 planted acres moved from 101,000 in March to 80,000 in August, a
+     * 21% revision inside one season, and no 2026 state yield has been published for any of
+     * these four states. A tool that predicts that number inherits its lateness and its
+     * revisions. A tool that reports what the satellite saw on Tuesday does not. */
+    vshistory: {
+      label: 'Crop vs its own history',
+      unit: 'greenness on bean ground, this season against 2000-2025',
+      regional: true,
+      realtime: true,
+      loLabel: 'Worst years on record', hiLabel: 'Best years on record',
+      ramp: [[0, '#9e1b0e'], [0.3, '#e07b1f'], [0.5, '#e8c33a'], [0.75, '#7cc08a'], [1, '#17794a']],
+      question: 'How does the crop compare with every year since 2000?'
+    },
     health: {
       label: 'Season flags',
       unit: 'weather-derived flag from state-level inputs — not an observed crop condition',
@@ -109,7 +128,7 @@
   var S = {                                   // everything the map is currently showing
     crop: 'PINTO', view: 'moisture', interp: 'absolute', day: 0, playing: false, speed: 1, frame: 1,
     map: null, canvas: null, outlines: null, cropOutlines: null, counties: null,
-    answers: null, outlook: null, field: null, dates: [], layers: {}, timer: null
+    answers: null, outlook: null, vsHistory: null, estimate: null, field: null, dates: [], layers: {}, timer: null
   };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -351,6 +370,12 @@
     }
     clearRegionPaint();
     var size = S.map.getSize();
+    // A pane that has not been laid out yet reports zero, and createImageData throws on it —
+    // which killed the entire load rather than one frame. Wait for a real size instead.
+    if (!size || size.x < 8 || size.y < 8) {
+      setTimeout(function () { try { S.map.invalidateSize(); paintSurface(); } catch (e) {} }, 250);
+      return;
+    }
     var dpr = window.devicePixelRatio || 1;
     S.canvas.width = size.x * dpr; S.canvas.height = size.y * dpr;
     S.canvas.style.width = size.x + 'px'; S.canvas.style.height = size.y + 'px';
@@ -456,7 +481,28 @@
     };
   }
 
+  /* Rank against the same calendar date in every prior season. A rank is honest in a way a
+   * percentage is not: it makes no claim about how much, only about where this year sits. */
+  function historyValue(region) {
+    var h = S.vsHistory && S.vsHistory.regions && S.vsHistory.regions[region];
+    if (!h) return null;
+    var md = S.dates[S.day].slice(5);
+    var row = h.dates[md];
+    if (!row) {                                   // nearest observed date at or before today
+        var keys = Object.keys(h.dates).filter(function (k) { return k <= md; }).sort();
+        row = keys.length ? h.dates[keys[keys.length - 1]] : null;
+    }
+    if (!row || row.now == null) return null;
+    return {
+      t: Math.max(0, Math.min(1, (row.rank - 1) / Math.max(row.of - 1, 1))),
+      label: 'rank ' + row.rank + ' of ' + row.of,
+      rank: row.rank, of: row.of, pct: row.vs_mean_pct,
+      band: [row.min, row.p20, row.mean, row.p80, row.max], now: row.now
+    };
+  }
+
   function regionValue(region) {
+    if (VIEWS[S.view].realtime) return historyValue(region);
     if (VIEWS[S.view].model) return modelValue(region);
     var a = S.answers && S.answers.regions && S.answers.regions[region];
     var c = a && a.classes && a.classes[S.crop];
@@ -478,6 +524,12 @@
   function countyTip(p, com, v) {
     var head = '<b>' + p.county + ' County, ' + p.state + '</b><br>' +
       Math.round(p.acres[com]).toLocaleString() + ' acres of ' + com.toLowerCase();
+    if (VIEWS[S.view].realtime) {
+      if (!v) return head + '<br><i>No satellite pass on this crop\'s ground yet.</i>';
+      return head + '<br><b>' + v.label + '</b> for this date, ' +
+        (v.pct >= 0 ? '+' : '') + v.pct + '% against its own 26-year average' +
+        '<br><i>Observed from space over bean ground. Not a forecast, and not a USDA figure.</i>';
+    }
     if (VIEWS[S.view].model) {
       if (!v) return head + '<br><i>No model for ' + S.crop + '. The model is fitted on ' +
         'pinto only.</i>';
@@ -685,6 +737,7 @@
     var lab = $('nbDate'); if (lab) lab.textContent = niceDate(S.dates[S.day]);
     paintSurface();
     updateReadout();
+    updateEstimate();
     if (S.interp === 'relative' || VIEWS[S.view].model) updateLegend();
     if (repaintBars) { var ph = $('nbPhases'); if (ph) ph.innerHTML = phaseBars(); }
   }
@@ -710,6 +763,64 @@
   }
 
   /* ---------------------------------------------------------------- readout */
+
+  /* The estimate, shown as the observations that produced it.
+   *
+   * A bare 1,507 lb/ac is false precision wearing a decimal point: tested against USDA over
+   * 2016-2023 the model did not rank seasons correctly, and its error cannot be separated from
+   * a scorecard that revised Nebraska's planted acres 21% inside one season. What IS defensible
+   * is every measurement behind it, and the physics that turns them into a number — calibrating
+   * published dry-bean light-use efficiency and harvest index moved them by 5%.
+   *
+   * So the evidence leads and the figure follows, with its limits written next to it. A grower
+   * can then judge the reasoning instead of trusting the output. */
+  function updateEstimate() {
+    var el = $('nbEstimate'); if (!el || !S.estimate) return;
+    if (S.crop !== 'PINTO') { el.hidden = true; return; }
+    var seen = {}, rows = [];
+    cropCounties().forEach(function (f) {
+      var rg = f.properties.region;
+      if (seen[rg]) return;
+      seen[rg] = 1;
+      var r = S.estimate.regions[rg];
+      if (r) rows.push(r);
+    });
+    var withNum = rows.filter(function (r) { return r.estimate; });
+    if (!rows.length) { el.hidden = true; return; }
+    var lead = withNum[0] || rows[0];
+
+    var ev = lead.evidence.map(function (e) {
+      return '<li><b>' + e.value + '</b> — ' + e.what.toLowerCase() +
+        (e.detail ? ', ' + e.detail : '') + '<span>' + e.source + '</span></li>';
+    }).join('');
+
+    var num = lead.estimate
+      ? '<p class="nbEstNum">On that evidence, <b>' +
+        Number(lead.estimate.lb_ac).toLocaleString() + ' lb/ac</b>' +
+        (lead.estimate.vs_normal_pct != null
+          ? ' — about ' + Math.abs(lead.estimate.vs_normal_pct) + '% ' +
+            (lead.estimate.vs_normal_pct < 0 ? 'below' : 'above') + ' the ' +
+            Number(lead.estimate.normal_lb_ac).toLocaleString() +
+            ' lb/ac this ground normally makes.' : '.') + '</p>'
+      : '<p class="nbEstNum">No yield estimate for ' + lead.name +
+        ' yet — the water-use measurement has not been retrieved for it.</p>';
+
+    el.innerHTML =
+      '<h3>' + lead.name + ' — what this season actually did</h3>' +
+      '<ul class="nbEvidence">' + ev + '</ul>' + num +
+      '<p class="nbEstLimit"><b>What this is not.</b> It is not a validated forecast. The ' +
+      'physics lands on the right level — calibrating published bean parameters against USDA ' +
+      'moved them 5% — but tested over 2016 to 2023 it did not rank one season against another ' +
+      'correctly, and that error cannot be separated from the scorecard\u2019s: USDA revised ' +
+      'Nebraska\u2019s 2026 planted acres by 21% mid-season, reports yield per <i>harvested</i> ' +
+      'acre so abandoned fields vanish from it, and stopped publishing county yields in 2008.</p>' +
+      '<p class="nbEstNext"><b>What would sharpen it.</b> ' +
+      (S.estimate.what_would_sharpen_it || []).slice(0, 2).map(function (x) {
+        return x.need.toLowerCase();
+      }).join('; ') + '. Field reports from growers and agronomists are the largest single gap ' +
+      'and the one we can close.</p>';
+    el.hidden = false;
+  }
 
   function updateFootprint() {
     var el = $('nbFootprint'); if (!el) return;
@@ -741,6 +852,30 @@
   function updateReadout() {
     var el = $('nbReadout'); if (!el) return;
     var view = VIEWS[S.view];
+
+    if (view.realtime) {
+      var seenV = {}, rows = [];
+      cropCounties().forEach(function (f) {
+        var rg = f.properties.region;
+        if (seenV[rg]) return;
+        seenV[rg] = 1;
+        var hv = historyValue(rg);
+        if (hv) rows.push({ name: regionName(rg), v: hv });
+      });
+      if (!rows.length) {
+        el.innerHTML = 'No satellite pass on bean ground for this date yet.';
+        return;
+      }
+      rows.sort(function (a, b) { return a.v.t - b.v.t; });
+      var worstR = rows[0], bestR = rows[rows.length - 1];
+      var above = rows.filter(function (r) { return r.v.pct > 0; }).length;
+      el.innerHTML = 'On this date the crop is <b>' + bestR.v.label + '</b> in ' + bestR.name +
+        (rows.length > 1 ? ' and <b>' + worstR.v.label + '</b> in ' + worstR.name : '') +
+        '. ' + above + ' of ' + rows.length + ' areas are greener than their own average for ' +
+        'this date. <span class="nbStationCount">observed, not forecast — a satellite pass ' +
+        'over bean ground, final when it lands, waiting on no agency</span>';
+      return;
+    }
 
     if (view.model) {
       if (S.crop !== 'PINTO') {
@@ -879,6 +1014,16 @@
       stops.join(',') + ')"></div>';
     var tail = '<div class="nbLegendUnit">' + view.label + ' · ' + view.unit + ' · ' + S.crop;
 
+    if (S.view === 'vshistory') {
+      el.innerHTML = bar +
+        '<div class="nbLegendEnds">' +
+        '<span><em>worst</em>' + view.loLabel + '</span>' +
+        '<span><em>best</em>' + view.hiLabel + '</span></div>' +
+        tail + '<br>Rank against the same date in every season since 2000 · ' +
+        (S.vsHistory ? 'latest pass ' + S.vsHistory.latest_observation : '') + '</div>';
+      return;
+    }
+
     if (S.view === 'yield') {
       var sample = null;
       cropCounties().some(function (f) {
@@ -955,6 +1100,7 @@
       '</div>' +
       '<p class="nbReadout" id="nbReadout">Reading stations…</p>' +
       '<p class="nbFootprint" id="nbFootprint" hidden></p>' +
+      '<div class="nbEstimate" id="nbEstimate" hidden></div>' +
       '<div class="nbMapFrame"><div id="nbMap"></div>' +
         '<div class="nbLegendCard" id="nbLegend"></div>' +
         '<div class="nbGeoNote">Low-opacity geography avoids false field precision. ' +
@@ -1057,7 +1203,9 @@
     cv.className = 'nbSurface';
     map.getContainer().appendChild(cv);
     S.canvas = cv;
-    map.on('move zoom resize viewreset', paintSurface);
+    map.on('move zoom resize viewreset', function () {
+      try { paintSurface(); } catch (e) { if (window.console) console.warn('surface:', e.message); }
+    });
 
     Promise.all([
       fetch('assets/data/region-outlines.json?v=' + build()).then(function (r) { return r.json(); }),
@@ -1065,16 +1213,18 @@
       fetch('assets/data/crop-outlines.geojson?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/county-crops.geojson?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/region-answers.json?v=' + build()).then(function (r) { return r.json(); }),
-      fetch('assets/data/gisit-outlook-2026.json?v=' + build()).then(function (r) { return r.json(); })
+      fetch('assets/data/gisit-outlook-2026.json?v=' + build()).then(function (r) { return r.json(); }),
+      fetch('assets/data/crop-vs-history.json?v=' + build()).then(function (r) { return r.json(); }),
+      fetch('assets/data/estimate-2026.json?v=' + build()).then(function (r) { return r.json(); })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;
       drawOutlines(); drawStations();
       var cb = coreBounds(); if (cb) map.fitBounds(cb);
-      updateFootprint();
+      updateFootprint(); updateEstimate();
       updateLegend(); syncQuestion(); wire();
       setDay(S.dates.length - 1, true);
       watchCrop();

@@ -237,6 +237,47 @@ try {
     assert(views.includes(need), `map view missing: ${need}`);
   }
   await setSelect('nbCrop', 'PINTO');
+  /* ---- NOW-001: the site must lead with what is observed, not what is forecast ---- */
+  assert(views.includes('vshistory'),
+    'NOW-001: the present-tense view is the product — where the crop stands today against its ' +
+    'own history, from a source that is final when it lands');
+  await setSelect('nbView', 'vshistory');
+  await setDay(maxDay);
+  await page.waitForTimeout(500);
+  const now = await text('#nbReadout');
+  assert.match(now, /rank \d+ of \d+/i, 'NOW-001: the reading must be a rank against history');
+  assert.match(now, /observed, not forecast/i,
+    'NOW-001: it must say plainly that it is an observation');
+  assert.match(now, /waiting on no agency|final when it lands/i,
+    'NOW-001: it must say it does not wait on USDA — whose 2026 Nebraska planted acres moved ' +
+    '21% inside one season and whose 2026 state yields are still unpublished');
+  assert.equal(await page.locator('#nbPlay').isDisabled(), true,
+    'the satellite record is observed per pass, not a daily series to animate');
+
+  /* ---- EVIDENCE-001: the estimate must lead with its evidence and state its limits ---- */
+  await setSelect('nbCrop', 'PINTO');
+  await page.waitForTimeout(500);
+  const est = await text('#nbEstimate');
+  assert.match(est, /what this season actually did/i,
+    'EVIDENCE-001: the estimate must be presented as observations, not as a bare number');
+  assert.match(est, /of \d+ years/i, 'EVIDENCE-001: canopy against its own history must be shown');
+  assert.match(est, /what it wanted/i, 'EVIDENCE-001: the water the crop actually got must be shown');
+  assert.match(est, /\d,\d{3} lb\/ac/, 'EVIDENCE-001: the implied yield must be stated');
+  assert.match(est, /not a validated forecast/i,
+    'EVIDENCE-001: it must say plainly that it is not a validated forecast');
+  assert.match(est, /did not rank one season against another correctly/i,
+    'EVIDENCE-001: the specific limitation must be named, not hinted at');
+  assert.match(est, /21%/,
+    'EVIDENCE-001: the scorecard\u2019s own instability must be stated alongside the model\u2019s');
+  assert.match(est, /would sharpen it/i,
+    'EVIDENCE-001: what would improve accuracy must be stated — a limitation without a path is an excuse');
+
+  /* the number must never appear without its limits */
+  const numIdx = est.search(/\d,\d{3} lb\/ac/);
+  const limIdx = est.search(/not a validated forecast/i);
+  assert(limIdx > numIdx,
+    'EVIDENCE-001: the limitation must sit with the number, not above it where it can be scrolled past');
+
   /* ---- YIELD-005: no yield layer until it can carry the weight ---- */
   assert(!views.includes('yield'),
     'YIELD-005: the yield layer is out until per-state skill, interval coverage and regional ' +
