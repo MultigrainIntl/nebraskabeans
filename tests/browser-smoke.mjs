@@ -237,67 +237,19 @@ try {
     assert(views.includes(need), `map view missing: ${need}`);
   }
   await setSelect('nbCrop', 'PINTO');
-  /* ---- YIELD-003: the yield view must be the validated weather model, and must withhold ---- */
-  assert(views.includes('yield'), 'the yield view is missing');
-  await setSelect('nbView', 'yield');
-  await setSelect('nbCrop', 'PINTO');
+  /* ---- YIELD-005: no yield layer until it can carry the weight ---- */
+  assert(!views.includes('yield'),
+    'YIELD-005: the yield layer is out until per-state skill, interval coverage and regional ' +
+    'resolution are established. Two reviews and one ablation found a calendar trend doing the ' +
+    'work, a pooled gate publishing states where the model loses, and an interval whose real ' +
+    'coverage runs 56% to 96% by state.');
 
-  const outlook = await page.evaluate(async () => {
-    const r = await fetch('assets/data/gisit-outlook-2026.json');
-    const o = await r.json();
-    return { id: o.model.id, target: o.model.target, features: o.model.feature_names,
-             checkpoints: o.validation.checkpoints };
-  });
-  assert(!outlook.features.some(f => /usda|nass|yield|baseline/i.test(f)),
-    `YIELD-003: no current USDA figure may be a model input — features were ${outlook.features}`);
-  assert(outlook.checkpoints.some(c => c.passes_baseline === false),
-    'YIELD-003: a model that never fails its own baseline test is not being tested');
-
-  const dayOf = iso => page.evaluate(d => {
-    const el = document.getElementById('nbSlider');
-    const i = window.__nbDates ? window.__nbDates.indexOf(d) : -1;
-    return i;
-  }, iso);
-
-  // Early season: the model loses to guessing the median, and must publish nothing.
-  await setDay(61);
-  await page.waitForTimeout(400);
-  const early = await text('#nbReadout');
-  assert.match(early, /No yield published/i,
-    'YIELD-003: the model must withhold on dates where it does not beat the historical median');
-  assert.match(early, /historical median/i,
-    'YIELD-003: withholding must say why');
-  assert.doesNotMatch(early, /\d,\d{3} lb\/ac (in|at) /,
-    'YIELD-003: no yield figure may appear on a withheld date');
-
-  // Late season: it beats the baseline and publishes, with its measured error band.
-  await setDay(maxDay);
-  await page.waitForTimeout(400);
-  const late = await text('#nbReadout');
-  assert.match(late, /\d,\d{3} lb\/ac/, 'YIELD-003: no yield published late in the season');
-  /* An ablation showed the model's accuracy is reproduced exactly by a trend line with no
-     weather in it, and that adding weather makes it worse. It may be shown as a trend; it may
-     not be called a weather forecast. */
-  assert.match(late, /trend/i,
-    'YIELD-004: this series tracks the multi-year yield trend and must say so');
-  assert.match(late, /no measurable skill|not this season|not a weather/i,
-    'YIELD-004: the readout must state that the weather terms add no measurable skill');
-  assert.doesNotMatch(late, /the weather model puts|weather only/i,
-    'YIELD-004: it must not be presented as a weather-driven forecast');
-  const q = await text('#nbQuestion');
-  assert.doesNotMatch(q, /weather say the crop will yield/i,
-    'YIELD-004: the heading must not ask what the weather says the yield will be');
-  assert.match(late, /±|errors fell inside/, 'YIELD-003: the error band must be shown');
-
-  // A class the model was never fitted on gets nothing, not a borrowed number.
-  await setSelect('nbCrop', 'GARBANZO (KABULI)');
-  await page.waitForTimeout(400);
-  assert.match(await text('#nbReadout'), /No yield model for GARBANZO/i,
-    'YIELD-003: a class with no model must get no number');
-  await setSelect('nbCrop', 'PINTO');
-
-  assert.equal(await page.locator('#nbPlay').isDisabled(), false,
-    'the model is a daily series and must remain playable');
+  /* The headline range above the map is USDA history and must say so — it is the only yield
+     figure left on the page and must not be mistaken for a forecast. */
+  assert.match(await text('.nbA-basis'), /USDA state history/i,
+    'YIELD-005: the only remaining yield figure must name its source');
+  assert.match(await text('.nbA-basis'), /not an independent forecast/i,
+    'YIELD-005: it must not read as a forecast');
 
   for (const view of ['health']) {
     await setSelect('nbView', view);

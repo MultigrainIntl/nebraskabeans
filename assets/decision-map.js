@@ -67,23 +67,28 @@
      * critical stage. No current USDA figure enters it. It is graded against USDA afterwards by
      * leave-one-year-out hindcast, and it withholds its own number on every date where it fails
      * to beat the historical median, which is every date before 15 June. */
-    /* WHAT THIS IS, AFTER TESTING IT PROPERLY. The model was published on 15 September 2026 as
-     * a weather-driven forecast. An ablation against its own footprint — pinto, four states,
-     * 2000 to 2025 — showed that a model given only a year index and a state, and no weather at
-     * all, reproduces its accuracy exactly: 167 lb/ac against the 179 of guessing the median.
-     * Adding the weather features made it WORSE, by 4 to 8 per cent, with a bootstrap interval
-     * entirely below zero. Its apparent skill is a straight line through twenty-six years of
-     * rising yields. That is real information and worth showing; it is not a weather forecast,
-     * and it must not be labelled as one. */
-    yield: {
-      label: 'Yield trend',
-      unit: 'lb/ac, pinto basis · trend of USDA yields · NOT an in-season weather forecast',
-      regional: true,
-      model: true,
-      loLabel: 'Below its history', hiLabel: 'Above its history',
-      ramp: [[0, '#9e1b0e'], [0.35, '#e07b1f'], [0.5, '#e8c33a'], [0.75, '#7cc08a'], [1, '#17794a']],
-      question: 'Where is yield running against its recent trend?'
-    },
+    /* THERE IS NO YIELD LAYER ON THIS MAP, AND THAT IS DELIBERATE.
+     *
+     * Two independent reviews and an ablation of my own took the previous one apart:
+     *
+     *   - It was never weather-only. State identity and a calendar year term were in the fit,
+     *     and the year term alone contributes roughly +156 lb/ac to a 2026 number.
+     *   - Its advantage over guessing the median is not statistically established. Clustered on
+     *     the 26 held-out years — the real experimental unit, because four states in one year
+     *     are not four independent tests — every confidence interval includes zero.
+     *   - The gate was pooled, not per state. Wyoming's own error, 96 lb/ac against a 93 lb/ac
+     *     baseline, means the model loses there. It published anyway, because Nebraska and
+     *     Colorado carried the pool.
+     *   - The +-265 lb/ac band was presented as 80% coverage. Actual coverage runs from 56% in
+     *     Kansas to 96% in Wyoming.
+     *   - The fit and the grading are state-level. Running each region's weather through a state
+     *     model produced a 123 lb/ac spread inside Colorado that has never been compared against
+     *     any regional yield observation. Painting it county by county made it look measured.
+     *
+     * Every one of those is fixable and none is fixed. A regional pounds-per-acre figure would
+     * be the most decision-relevant number on this site and the least supported, so there isn't
+     * one. Dry peas are the first class with demonstrated weather skill — +10.8%, interval +1.9
+     * to +18.4 — and are the candidate for putting yield back. */
     health: {
       label: 'Season flags',
       unit: 'weather-derived flag from state-level inputs — not an observed crop condition',

@@ -18,7 +18,15 @@ assert.match(read('robots.txt'),/Disallow: \/\s/);
 const app=read('assets/app.js');
 for(const forbidden of ['classifyWater','heatDays','frostDays',"new Date('2026-09-11"])assert(!app.includes(forbidden),`unsupported/fixed runtime construct remains: ${forbidden}`);
 assert.match(app,/L\.imageOverlay\(url,view.bounds/);
-assert.match(app,/Experimental pinto-basis yield at analytical points/);
+/* The legacy map this line used to guard is retired; decision-map.js owns the map now, and
+   this contract had been red since the string was removed — a failing gate nobody read.
+   These assert the claims the live map must keep making, and the ones it must never make. */
+const decisionMap=read('assets/decision-map.js');
+assert.doesNotMatch(decisionMap,/label: 'Yield/,'no yield layer may return until its per-state skill, its interval coverage and its regional resolution are established');
+assert.doesNotMatch(decisionMap,/label: 'Soil moisture'/,'rainfall minus reference evaporation must not be labelled soil moisture');
+assert.match(decisionMap,/no irrigation/,'the water view must state what it leaves out');
+assert.match(decisionMap,/whole counties, not '/,'the crop outline must not be presented as field boundaries');
+assert.match(decisionMap,/not an observed crop condition/,'season flags must not be presented as observed crop health');
 assert.match(app,/USDA current yield is not a predictor/);
 assert.match(app,/BACKTEST GATE PASS/);
 assert.match(app,/Production requires validated crop-area weights/);
