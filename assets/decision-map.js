@@ -930,6 +930,35 @@
     el.hidden = false;
   }
 
+  /* WHAT USDA SAYS WAS PLANTED OF THIS CLASS. The line above it is the crop MAP — the area
+     the satellite classifies as that commodity — and it is identical for every dry-bean class,
+     because USDA maps one dry-bean layer. That is a different number from acres planted, and
+     showing only the map left a reader no way to see that pinto is 51,000 acres in Nebraska
+     while light red kidney is 6,200. GAJ went looking for planted acres and found none, which
+     is how this gap surfaced. */
+  var USDA_NAME = { 'PINTO': 'Pinto', 'GREAT NORTHERN': 'Great northern',
+                    'LIGHT RED KIDNEY': 'Light red kidney', 'BLACKEYE': 'Blackeye' };
+
+  function usdaPlanted() {
+    var u = S.usdaAcres;
+    if (!u || !u.classes) return '';
+    var block = u.classes[USDA_NAME[S.crop]];
+    if (!block) return '';
+    var parts = [];
+    Object.keys(block).sort().forEach(function (st) {
+      var d = block[st];
+      if (d.verdict === 'grown') {
+        parts.push('<b>' + Math.round(parseFloat(d.mark) * 1000).toLocaleString() +
+                   '</b> in ' + st);
+      }
+    });
+    if (!parts.length) return '';
+    return '<span class="nbUsdaAcres">USDA planted acres of ' + S.crop.toLowerCase() + ', ' +
+      u.judged_on_crop_year + ': ' + parts.join(', ') + '. That is the crop itself, not the ' +
+      'mapped area above — USDA maps one dry-bean layer, so every bean class shares that ' +
+      'figure but not this one.</span>';
+  }
+
   function updateFootprint() {
     var el = $('nbFootprint'); if (!el) return;
     var com = commodityOf();
@@ -953,7 +982,7 @@
       (S.cropOutlines.crop_year || '') +
       (com === 'DRY BEANS'
         ? ', which carries one dry-bean class: pinto, navy, black and the kidneys share it.'
-        : '.');
+        : '.') + usdaPlanted();
     el.hidden = false;
   }
 
@@ -1390,10 +1419,12 @@
       fetch('assets/data/estimate-2026.json?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/yield-all-2026.json?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/yield-index-2026.json?v=' + build())
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch('assets/data/usda-class-acres.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;

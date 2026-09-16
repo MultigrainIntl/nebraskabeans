@@ -889,3 +889,7 @@ canvas.nbSurface {
    asked twice why four maps looked identical while the answer was already on the page. */
 .nbShared { display: block; margin-bottom: 6px; color: #8a5416; font-size: 13.5px;
   line-height: 1.5; }
+
+/* USDA planted acres for the selected class — the crop itself, not the mapped area. */
+.nbUsdaAcres { display: block; margin-top: 6px; font-size: 13px; line-height: 1.5;
+  color: #4d5c53; }
