@@ -131,7 +131,11 @@
     if(anomaly<0&&ndviChange<0)return `WATCH · ${potential}`;
     return `MIXED · ${potential}`;
   }
-  function updateSourcePanel(){const ids=['nass','openmeteo','smap','cropcasma','cdl','noaa','ssurgo','hls','usdm','irrigation'];setHTML('sourceList',ids.map(id=>{const item=source(id);return `<div class="sourceRow"><div><b>${item.name}</b><small>${item.role}</small></div><span>${item.classification}</span></div>`}).join(''))}
+  function updateSourcePanel(){/* Only sources this tool actually queries. It previously advertised SMAP, Landsat/
+     Sentinel-2, the Drought Monitor, IrrMapper and NOAA/NCEI ISD, none of which are
+     called anywhere, while omitting MODIS land surface temperature — which is where
+     every water-stress number comes from. */
+    const ids=['acis','iem','modis','cropcasma','cdl','nass','ssurgo','census','osm'];setHTML('sourceList',ids.map(id=>{const item=source(id);return `<div class="sourceRow"><div><b>${item.name}</b><small>${item.role}</small></div><span>${item.classification}</span></div>`}).join(''))}
   function updateCalendar(row){
     const phases=['Planting','Emergence','Vegetative','Flowering','Pod Set','Seed Fill','Maturity','Harvest'],stageIndex={'Pre-planting':0,'Establishment':1,'Vegetative':2,'Flowering / pod development':3,'Pod fill':5,'Maturity / seed maturation':6,'Harvest readiness':7}[row?.stage]??0;
     setHTML('calendar',phases.map((phase,index)=>`<div class="phase ${index<stageIndex?'past':index===stageIndex?'current':'future'}"><b>${phase}</b><span>${index===stageIndex?`${row?.observed_gdd_f||0} base-50°F GDD · selected-date model`:'Thermal stage boundary'}</span><em>${evidenceTag(index<=stageIndex?'DERIVED':'UNKNOWN')}</em></div>`).join(''));

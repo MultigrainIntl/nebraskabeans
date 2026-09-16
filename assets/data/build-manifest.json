@@ -1,7 +1,7 @@
 {
   "schema_version": "nebraskabeans.data_build.v1",
-  "data_build_id": "nbd-v1-5543f17db34965051277",
-  "input_set_sha256": "5543f17db34965051277ff4b8a1fbf5e6d3a752e0c3f108125ecdb56af365a4b",
+  "data_build_id": "nbd-v1-956995c79fd793156bf6",
+  "input_set_sha256": "956995c79fd793156bf6c1356c48d55eb7543af3b06753d3e7c79ac48275e547",
   "generated_at_utc": "2026-09-11T18:00:00Z",
   "evidence_cutoff_date": "2026-09-11",
   "material_inputs": [
@@ -104,8 +104,8 @@
     {
       "path": "assets/source-registry.js",
       "kind": "source-registry",
-      "bytes": 6322,
-      "sha256": "6868ed73512498eb374763eee44c5be03ea746441a0a27805a09c9dd4c07dfc3"
+      "bytes": 9009,
+      "sha256": "d4eda26ea9d74a9c3ec8f140a285592d33e9daebfd9191e90ba43c23e1955c16"
     },
     {
       "path": "NEBRASKABEANS-SCIENTIFIC-SPEC.md",
@@ -130,5 +130,5 @@
     "Original USDA PDF bytes and checksums are not yet stored; official URL/table transcription was independently checked.",
     "Open-Meteo historical-weather responses are governed modeled inputs with exact queries and response checksums in the model artifact."
   ],
-  "manifest_sha256": "2bf65b84a8087a76754b9a5b874272291913edf95f51931f33cf5fb1ff39e503"
+  "manifest_sha256": "ac7b3dbc0568c361cb87abd4e98ef3d237ff270950d4f8967fbe97a862273d56"
 }
