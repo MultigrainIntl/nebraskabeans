@@ -28,7 +28,7 @@ NB_OFFLINE_FIXTURES=1 NB_BASE_URL="$BASE" run "browser-smoke" node tests/browser
 NB_BASE_URL="$BASE" run "visual-contract" node tests/visual-contract.mjs
 
 echo "data integrity (every dataset against a source that did not produce it)"
-run "data-verification" python3 scripts/verify_data.py
+run "data-verification" python3 scripts/verify_data.py --strict
 
 echo "contract and truth gates"
 run "foundation" node scripts/verify_foundation.mjs

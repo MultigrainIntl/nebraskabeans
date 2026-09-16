@@ -233,7 +233,55 @@ for page in ("index.html", "about.html"):
           "%d local assets, all versioned" % len(refs) if not missing
           else "UNVERSIONED: " + ", ".join(missing[:4]))
 
-print("DATA VERIFICATION — every check against a source that did not produce the data\n")
+# ---------------------------------------------------------------- plan matches the code
+# PLAN.md states the formulas this tool runs on. A specification that has drifted from the code
+# is worse than none, because it is trusted. Each pair below is (what the plan claims, what the
+# code must contain). Change a formula and this fails until the plan is updated too.
+def _read(rel):
+    fp = os.path.join(HERE, "..", rel)
+    return open(fp, errors="replace").read() if os.path.exists(fp) else ""
+
+plan = _read("PLAN.md")
+if plan:
+    ya, yi, dm = _read("scripts/refresh/yield_all.py"), _read("scripts/refresh/yield_index.py"), \
+                 _read("assets/decision-map.js")
+    pairs = [
+        ("GDD",           "(Tmax_F + Tmin_F)/2 \u2212 T_base", "gdd += max((hi_f + lo_f) / 2 - base, 0)", yi),
+        ("NDVI scaling",  "(DN \u2212 125) / 125",             "(dn - 125.0) / 125.0", ya),
+        ("fAPAR",         "1.24 \u00d7 NDVI \u2212 0.168",     "1.24 * to_ndvi(dn) - 0.168", ya),
+        ("PAR fraction",  "0.48",                              "PAR_FRACTION = 0.48", ya),
+        ("tstress lower", "(T \u2212 10) / 14",                "(t - 10) / 14.0", ya),
+        ("tstress upper", "(40 \u2212 T) / 16",                "(40 - t) / 16.0", ya),
+        ("canopy stress", "(T_canopy \u2212 T_air \u2212 1) / 7", "1.0 - (diff_c - 1.0) / 7.0", ya),
+        ("night 68F",     "68 \u00b0F",                        "NIGHT_HOT_F = 68", yi),
+        ("shared index",  "One index per commodity",           "index_is_shared_across_classes", yi),
+    ]
+    drift = [n for n, inplan, incode, src in pairs
+             if (inplan not in plan) or (incode not in src)]
+    check("PLAN.md matches the code", not drift,
+          "%d formulas verified against the shipped code" % len(pairs) if not drift
+          else "DRIFTED: " + ", ".join(drift))
+
+# ---------------------------------------------------------------- unsourced constants
+# UNSOURCED.md lists numbers asserted from a model's own knowledge rather than read from a
+# publication, two of which are live on the site. This check fails while any row still says
+# "none", so the issue cannot be quietly forgotten between sessions.
+up = os.path.join(HERE, "..", "UNSOURCED.md")
+if os.path.exists(up):
+    rows = [l for l in open(up).read().split("\n")
+            if l.startswith("|") and "---" not in l and "| id |" not in l]
+    open_rows = [l.split("|")[1].strip() for l in rows if l.rstrip().endswith("none |")]
+    # Deliberately a WARNING in the daily run and a FAILURE before any publish. The daily
+    # refresh only moves measured data, which is verified by every check above; blocking it
+    # over a documentation debt would take a working site stale to make a point. A human or
+    # agent shipping CODE gets stopped, because that is when new claims enter.
+    check("constants are sourced", not open_rows,
+          "every constant carries a citation" if not open_rows
+          else "%d UNSOURCED: %s — see UNSOURCED.md" % (len(open_rows), ", ".join(open_rows)),
+          soft="--strict" not in sys.argv)
+
+print("DATA VERIFICATION — every check against a source that did not produce the data")
+print("mode: %s\n" % ("STRICT (pre-publish)" if "--strict" in sys.argv else "daily (data only)"))
 print("\n".join(lines))
 print("\n  %d passed, %d warnings, %d FAILED" % (ok, warn, fail))
 if fail:

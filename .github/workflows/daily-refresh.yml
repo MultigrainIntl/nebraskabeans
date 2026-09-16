@@ -44,9 +44,27 @@ jobs:
         if: always()
         run: cat assets/data/refresh-status.json
 
+      # VERIFY BEFORE PUBLISHING. Until 16 September 2026 this workflow pushed new data to the
+      # live site every morning without running a single check. Everything in scripts/
+      # verify_data.py only ran when someone ran it by hand. A source that changes format, or a
+      # parse that starts reading the wrong column, would have published silently — which is
+      # exactly how an all-crops row once became a dry bean yield.
+      - name: Verify the data before it goes anywhere
+        if: success()
+        run: python3 scripts/verify_data.py
+
       - name: Publish the new data
         if: success()
         run: python3 scripts/refresh/publish.py
+
+      - name: Say plainly that the data failed verification
+        if: failure()
+        run: |
+          echo "::error::A dataset failed verification and was NOT published."
+          echo "::error::The site is serving yesterday's data, which is correct behaviour."
+          echo "::error::The check that failed is named above; each compares against a source"
+          echo "::error::that did not produce the data."
+
 
       - name: Say plainly that the data is stale
         if: failure()
