@@ -183,6 +183,23 @@ def build_history(centres):
     return h
 
 
+def canopy_on(canopy, md):
+    """Canopy on this day, interpolated between the readings either side of it."""
+    before = [k for k in canopy if k <= md]
+    if not before:
+        return None
+    lo = max(before)
+    after = [k for k in canopy if k > md]
+    if not after:
+        return canopy[lo]
+    hi = min(after)
+    span = (date.fromisoformat("2001-" + hi) - date.fromisoformat("2001-" + lo)).days
+    if span <= 0:
+        return canopy[lo]
+    step = (date.fromisoformat("2001-" + md) - date.fromisoformat("2001-" + lo)).days
+    return canopy[lo] + (canopy[hi] - canopy[lo]) * (step / span)
+
+
 def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting,
                    stop_md=None):
     """The same arithmetic every year, over the same stretch of the calendar.
@@ -201,6 +218,7 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
     start, _how = derive_planting(st, days_iso, soil_threshold(cls, commodity),
                                   plant, grn_for_planting)
     bio, gdd, n = 0.0, 0.0, 0
+    matured_on = None
     for i, iso in enumerate(days_iso):
         d = date.fromisoformat(iso)
         if d < start:
@@ -212,16 +230,26 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
         if mj is None:
             continue
         gdd += max((hi_f + lo_f) / 2 - base, 0)
+        # Maturity stops the sum, because the crop genuinely stops filling. Removing it to
+        # equalise the comparison window was tested and reverted: it made every class inside
+        # a commodity identical — a kidney needing 1,900 growing degrees and a great northern
+        # needing 1,600 came out the same — and moved southwest Nebraska from agreeing with
+        # the canopy to 17 points away from it. An early-maturing hot year really does have
+        # less fill time. That is signal, not an artefact.
+        if matured_on is None and gdd > gdd_mat:
+            matured_on = iso
         if gdd > gdd_mat * 1.1:
             break
         repro = 0.40 <= (gdd / gdd_mat) <= 0.80
-        ks = [k for k in canopy if k <= iso[5:]]
-        if not ks:
+        # Readings land every ten days. Holding the last one flat between them undercounts a
+        # rising canopy for ten days at a time — the crop grows through that gap and the model
+        # pretended it stood still. Slope between the readings either side instead.
+        g = canopy_on(canopy, iso[5:])
+        if g is None:
             continue
-        g = canopy[max(ks)]
         bio += rue * mj * PAR_FRACTION * fpar(g) * tstress(hi_f, lo_f, heat, reproductive=repro)
         n += 1
-    return (bio, n) if n >= 60 else None
+    return (bio, n, matured_on) if n >= 60 else None
 
 
 def main():
@@ -308,6 +336,7 @@ def main():
                 "years_of_model_history": len(hist),
                 "model_year_to_year_spread_pct": round(100 * spread, 1),
                 "days_counted": got[1],
+                "matured_on": got[2],
                 "commodity": commodity,
             }
             if base:
