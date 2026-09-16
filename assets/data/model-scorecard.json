@@ -1,38 +1,11 @@
 {
  "schema": "gisit.scorecard.v1",
- "generated_utc": "2026-09-16T04:06:06.247450Z",
- "predictions_on_record": 100,
- "reported_outcomes": 2,
- "scored_pairs": 2,
+ "generated_utc": "2026-09-16T11:38:30.219327Z",
+ "predictions_on_record": 200,
+ "reported_outcomes": 0,
+ "scored_pairs": 0,
  "method": "each reported outcome is joined to every prediction made BEFORE it, so the error is always measured against a forecast that could not have seen the answer",
- "learned_correction": {
-  "PINTO": 2.362
- },
+ "learned_correction": {},
  "correction_note": "the ratio of what the field did to what remote sensing said, per crop, from reports on hand. Applied, it carries what the reporting fields taught to every region that will never report one. Two reports is not a calibration; it is the beginning of one, and the count is published so nobody mistakes it for more.",
- "pairs": [
-  {
-   "crop": "PINTO",
-   "region": "ne-panhandle",
-   "crop_year": 2026,
-   "made_on": "2026-09-15",
-   "lead_days": 5,
-   "predicted_lb_ac": 877,
-   "actual_lb_ac": 2180,
-   "error_lb_ac": -1303,
-   "error_pct": -59.8,
-   "reported_by": "TEST \u2014 not a real report"
-  },
-  {
-   "crop": "PINTO",
-   "region": "sw-nebraska",
-   "crop_year": 2026,
-   "made_on": "2026-09-15",
-   "lead_days": 7,
-   "predicted_lb_ac": 916,
-   "actual_lb_ac": 2050,
-   "error_lb_ac": -1134,
-   "error_pct": -55.3,
-   "reported_by": "TEST \u2014 not a real report"
-  }
- ]
+ "pairs": []
 }

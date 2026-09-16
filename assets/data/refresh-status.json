@@ -1,21 +1,27 @@
 {
- "ran_utc": "2026-09-16T02:14:00.686791Z",
+ "ran_utc": "2026-09-16T11:38:30.290553Z",
  "all_sources_keyless": true,
  "steps": [
   {
    "step": "../build_station_observations.py",
    "source": "IEM hourly ASOS air temperature at the satellite's overpass hour",
    "ok": true,
-   "took": "435s"
+   "took": "332s"
   },
   {
    "step": "station_field_acis.py",
    "source": "NOAA cooperative and GHCN stations via RCC-ACIS",
    "ok": true,
-   "took": "358s",
+   "took": "29s",
    "dataset": "station-field.json",
    "age_days": 1,
    "tolerance_days": 5
+  },
+  {
+   "step": "solar_power.py",
+   "source": "NASA POWER measured solar radiation, replacing a temperature-range estimate",
+   "ok": true,
+   "took": "1s"
   },
   {
    "step": "ndvi_cropmask.py",
@@ -27,13 +33,13 @@
    "step": "pulse_canopy.py",
    "source": "Crop-CASMA daily NDVI on chickpea, lentil and pea ground",
    "ok": true,
-   "took": "0s"
+   "took": "59s"
   },
   {
    "step": "thermal_stress.py",
    "source": "NASA MOD11A2 land surface temperature",
    "ok": true,
-   "took": "121s"
+   "took": "131s"
   },
   {
    "step": "vs_history.py",
@@ -52,6 +58,18 @@
    "dataset": "yield-all-2026.json",
    "age_days": 1,
    "tolerance_days": 12
+  },
+  {
+   "step": "yield_index.py",
+   "source": "this season against the model's own history, so the uncalibrated constants cancel",
+   "ok": true,
+   "took": "7s"
+  },
+  {
+   "step": "ledger.py",
+   "source": "freeze today's prediction and score it against any reported outcome",
+   "ok": true,
+   "took": "0s"
   },
   {
    "step": "build_manifest.mjs",
