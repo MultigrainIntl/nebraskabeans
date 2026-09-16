@@ -52,7 +52,7 @@
       unit: 'mm since planting, up to 30 days · rainfall less THIS crop’s water use',
       loLabel: 'Rain far behind evaporation', hiLabel: 'Rain ahead of evaporation',
       ramp: [[0, '#e07b1f'], [0.35, '#e8c33a'], [0.65, '#7cc08a'], [1, '#2a9d9a']],
-      question: 'Where has rainfall fallen furthest behind evaporation?'
+      question: 'Where is rain furthest behind what the crop is using?'
     },
     /* THE YIELD VIEW IS GONE. It showed USDA's own historical baseline for the class
      * multiplied by a season adjustment — every one of its 35 values was baseline x percentage
@@ -121,7 +121,7 @@
       regional: true,
       loLabel: 'At risk', hiLabel: 'On track',
       ramp: [[0, '#9e1b0e'], [0.25, '#d4541c'], [0.5, '#eb9a00'], [0.75, '#f0cb2a'], [1, '#17794a']],
-      question: 'Where do this season\'s weather flags fall?'
+      question: 'Where did the weather go wrong this season?'
     },
     heat: {
       label: 'Heat stress',
