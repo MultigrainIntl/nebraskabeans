@@ -216,6 +216,23 @@ if d:
     today = datetime.date.today().isoformat()
     check("refresh ran recently", today[:7] in s, "status file mentions %s" % today[:7], soft=True)
 
+# ---------------------------------------------------------------- cache busting
+# A script referenced without ?v= is served from cache forever. assets/i18n.js — the file
+# carrying EVERY sentence on this site — sat unversioned while its text was rewritten all day,
+# so a returning visitor could read old wording while every local test passed against a fresh
+# copy. A number can be right and still never reach anyone.
+import re as _re
+for page in ("index.html", "about.html"):
+    fp = os.path.join(HERE, "..", page)
+    if not os.path.exists(fp):
+        continue
+    html = open(fp).read()
+    refs = _re.findall(r'(?:src|href)="(assets/[A-Za-z0-9._-]+\.(?:js|css))(\?v=[^"]*)?"', html)
+    missing = [r[0] for r in refs if not r[1]]
+    check("%s assets cache-busted" % page, not missing,
+          "%d local assets, all versioned" % len(refs) if not missing
+          else "UNVERSIONED: " + ", ".join(missing[:4]))
+
 print("DATA VERIFICATION — every check against a source that did not produce the data\n")
 print("\n".join(lines))
 print("\n  %d passed, %d warnings, %d FAILED" % (ok, warn, fail))
