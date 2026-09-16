@@ -37,8 +37,13 @@
   var VIEWS = {
     stage: {
       label: 'Crop development',
-      unit: '% of maturity',
-      loLabel: 'Behind', hiLabel: 'Mature',
+      unit: '% of maturity \u2014 100% is ready to cut',
+      // A FIXED SCALE, because '% of maturity' already means something absolute.
+      // Stretching the ramp to each class's own range normalised the classes back
+      // together: a kidney at 95% and a great northern at 111% filled the same colours,
+      // so every bean class drew one picture even though the numbers differ by a fifth.
+      fixed: { lo: 0, hi: 150 },
+      loLabel: 'Just planted', hiLabel: '150% \u2014 well past ready',
       ramp: [[0, '#d9e2d6'], [0.35, '#9ec9a6'], [0.6, '#4ea56b'], [0.8, '#e8c33a'], [1, '#a8571f']],
       question: 'How far along is the crop, and where is it behind?'
     },
@@ -51,6 +56,9 @@
     moisture: {
       label: 'Rain minus evaporation',
       unit: 'mm over 30 days · rainfall less grass-reference ET, no irrigation',
+      sameAcrossClasses: 'This is a weather measure, not a crop one \u2014 rainfall against '
+        + 'reference evaporation. Every dry-bean class goes in on the same date and sees the '
+        + 'same balance, so they share this map. Pulses, planted in April, do not.',
       loLabel: 'Rain far behind evaporation', hiLabel: 'Rain ahead of evaporation',
       ramp: [[0, '#e07b1f'], [0.35, '#e8c33a'], [0.65, '#7cc08a'], [1, '#2a9d9a']],
       question: 'Where has rainfall fallen furthest behind evaporation?'
@@ -102,6 +110,14 @@
     vshistory: {
       label: 'Crop vs its own history',
       unit: 'greenness on this crop\u2019s own ground, against its own history',
+      // WHY EVERY BEAN CLASS DRAWS THE SAME MAP HERE, and why it is not a fault. USDA's
+      // Cropland Data Layer has ONE class for dry beans: pinto, navy, black, great northern,
+      // pink, small red, cranberry, small white and both kidneys are all class 42. A
+      // satellite reading that ground cannot separate them, and no work here will change it.
+      // Chickpeas, lentils and peas DO separate — their own classes, their own pixels.
+      sameAcrossClasses: 'Every dry-bean class shares this map. USDA\u2019s crop map has a '
+        + 'single class for dry beans, so the satellite cannot separate pinto from navy or '
+        + 'kidney. Chickpeas, lentils and peas are read on their own ground and do differ.',
       regional: true,
       realtime: true,
       loLabel: '15% below normal', hiLabel: '15% above normal',
@@ -268,6 +284,11 @@
       var l = qq(0.05), h = qq(0.95);
       return { lo: l, hi: (h - l < 1e-6 ? l + 1 : h) };
     }
+      // A view with an absolute meaning keeps an absolute scale, or the classes
+      // normalise back into one picture.
+      var fx = VIEWS[S.view] && VIEWS[S.view].fixed;
+      if (fx) return fx;
+
     var key = S.crop + '|' + S.view;
     if (S.domainKey === key) return S.domainVal;
     var all = [], save = S.day;
@@ -924,7 +945,19 @@
       text + '</span></span>';
   }
 
+  /* An identical map across every dry-bean class is correct for two of these views and a
+     fault in neither — but an unexplained identical picture reads as a broken tool, which is
+     exactly how GAJ read it. The reason is appended once here, after whichever branch of the
+     readout ran, rather than threaded through every return path. */
   function updateReadout() {
+    updateReadoutBody();
+    var el = $('nbReadout'), view = VIEWS[S.view];
+    if (!el || !view || !view.sameAcrossClasses) return;
+    if (commodityOf() !== 'DRY BEANS') return;
+    el.innerHTML += '<span class="nbStationCount">' + view.sameAcrossClasses + '</span>';
+  }
+
+  function updateReadoutBody() {
     var el = $('nbReadout'); if (!el) return;
     var view = VIEWS[S.view];
 
