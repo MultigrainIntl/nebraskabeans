@@ -376,15 +376,23 @@ def main():
                "no_current_usda_input": "USDA supplies only the fixed historical level. No "
                                         "current-year USDA estimate or forecast enters.",
                "limits": [
-                   "Assumes this season's departure from normal scales harvested yield "
-                   "proportionally.",
-                   "Water stress is excluded from the index: the thermal record exists only "
-                   "for 2026, and a term on one side of a ratio and not the other would bias "
-                   "rather than cancel. A dry crop still reaches the number through its canopy.",
-                   "The band is the model's own year-to-year spread, which measures how "
-                   "variable this signal is — not a statistical confidence interval.",
+                   "This is an estimate from remote sensing, not a validated forecast and not "
+                   "a measurement of your field. It is built by running the same biomass model "
+                   "over 2015-2025 and over this season and dividing one by the other, so the "
+                   "uncalibrated constants cancel, then applying that ratio to the harvested "
+                   "record for the class. Its level rests on that record; its movement rests "
+                   "on measured canopy, measured sunlight and station temperature.",
+                   "The band is the model's own year-to-year spread — how much this signal "
+                   "moves between seasons — not a statistical confidence interval.",
+                   "Heat during flowering and pod set is COUNTED and shown but not yet priced "
+                   "into the number. It aborts flowers while the canopy stays green, so in a "
+                   "hot flowering year the estimate is more likely to be generous than mean. "
+                   "Read the hot-days column beside it.",
+                   "Chickpeas, lentils and peas are sampled on their own crop pixels; a region "
+                   "with no reading for a crop gets no number rather than a borrowed one.",
                    "Irrigation scheduling, cultivar, disease, hail and management are not "
-                   "observed.",
+                   "observed. Where this disagrees with your own field records, your field is "
+                   "the better evidence, and telling us so is what sharpens it.",
                ],
                "regions": out}, open(OUT, "w"), indent=1)
 

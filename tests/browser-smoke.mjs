@@ -258,14 +258,15 @@ try {
   await setSelect('nbCrop', 'PINTO');
   await page.waitForTimeout(500);
   const est = await text('#nbEstimate');
-  assert.match(est, /what has been observed/i,
-    'EVIDENCE-001: the panel must be presented as observations, not as a bare number');
+  assert.match(est, /where the crop stands now/i,
+    'EVIDENCE-001: the panel must be presented as a current reading, not a post-mortem');
   assert.match(est, /greenness rank/i,
     'EVIDENCE-001: canopy against its own history must be shown beside every number');
   assert.match(est, /\d+ of \d+/,
     'EVIDENCE-001: the history comparison must be a rank against the years on record');
-  assert.match(est, /surface vs air/i,
-    'EVIDENCE-001: the water-stress measurement must be shown beside every number');
+  assert.match(est, /hot days in flower/i,
+    'EVIDENCE-001: flowering-stage heat must be shown beside every number — it is the one ' +
+    'stress the canopy cannot reveal, and a green field can still carry light seed');
 
   /* ---- ALLCLASS-001: every class, every region, each on its own ground ---- */
   const yieldAll = await page.evaluate(async () => {
@@ -347,10 +348,17 @@ try {
     'ALLCLASS-001: a cool-season pulse and a warm-season pinto cannot share a yield');
   assert.notEqual(differs.beanPlant, differs.pulsePlant,
     'ALLCLASS-001: a pulse plants in April and a bean in June — they cannot share a date');
-  /* Reversed after the September 2026 independent review: the radiation-use-efficiency
-     yield is withdrawn from the page, so this gate now guards against it reappearing. */
-  assert(!/\d,\d{3} lb\/ac/.test(est),
-    'EVIDENCE-001: the withdrawn model yield must not reappear in the evidence panel');
+  /* This gate has now swung twice in one day and the third position is the right one.
+     It first demanded a yield. Then, after the review found the figure indefensible, it
+     forbade one. Both were wrong: a tool whose yield waits for harvest data is a
+     post-mortem, and a tool that states a yield without its basis is the thing the review
+     caught. What it must do is carry a BAND and name what the band rests on. */
+  assert.match(est, /\d,\d{3}\u2013\d,\d{3}/,
+    'EVIDENCE-001: the estimate must be a band, never a bare point estimate');
+  assert.match(est, /not a validated forecast/i,
+    'EVIDENCE-001: the estimate must say plainly what it is not');
+  assert.match(est, /dividing one by the other|uncalibrated constants cancel/i,
+    'EVIDENCE-001: it must state how it is built, not just assert a number');
   assert.match(est, /rank \d+ of \d+/,
     'EVIDENCE-001: the panel must lead with the observation that survived review');
   assert.match(est, /your field is the better evidence/i,

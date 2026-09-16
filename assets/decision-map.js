@@ -804,6 +804,18 @@
     regions.sort(function (a, b) { return b.c.lb_ac - a.c.lb_ac; });
     var best = regions[0], worst = regions[regions.length - 1];
 
+    function idxFor(id) {
+      var r = S.yieldIndex && S.yieldIndex.regions && S.yieldIndex.regions[id];
+      return r && r.classes ? r.classes[S.crop] : null;
+    }
+    // only rows that actually carry a pounds figure — a class with no harvested baseline
+    // has an index but no level, and asking it for one threw and took the whole render down
+    var withIdx = regions.filter(function (x) {
+      var i = idxFor(x.id); return i && typeof i.lb_ac === 'number';
+    });
+    withIdx.sort(function (a, b) { return idxFor(b.id).lb_ac - idxFor(a.id).lb_ac; });
+    var bestY = withIdx[0], worstY = withIdx[withIdx.length - 1];
+
     var ranked = regions.filter(function (x) { return x.r.canopy_rank; });
     ranked.sort(function (a, b) {
       return (a.r.canopy_rank.rank / a.r.canopy_rank.of) - (b.r.canopy_rank.rank / b.r.canopy_rank.of);
@@ -812,44 +824,51 @@
     if (!bestRank) { el.hidden = true; return; }
 
     var rows = regions.map(function (x) {
+      var ix = idxFor(x.id);
       return '<tr><td>' + x.r.name + '</td>' +
+        '<td class="nbNum">' + (ix && typeof ix.lb_ac_low === 'number'
+          ? ix.lb_ac_low.toLocaleString() + '\u2013' + ix.lb_ac_high.toLocaleString() : '—') +
+        '</td>' +
+        '<td class="nbNum">' + (ix && ix.vs_normal_pct != null
+          ? (ix.vs_normal_pct > 0 ? '+' : '') + Math.round(ix.vs_normal_pct) + '%' : '—') + '</td>' +
         '<td class="nbNum">' + (x.c.flowering_window_days
           ? x.c.flowering_hot_days + ' of ' + x.c.flowering_window_days : '—') + '</td>' +
-        '<td class="nbNum">' + (x.r.canopy_above_air_c != null
-          ? (x.r.canopy_above_air_c > 0 ? '+' : '') + x.r.canopy_above_air_c + '\u00b0C' : '—') +
-        '</td>' +
         '<td class="nbNum">' + (x.r.canopy_rank
           ? x.r.canopy_rank.rank + ' of ' + x.r.canopy_rank.of : '—') + '</td>' +
         '<td class="nbNum">' + x.c.pct_of_maturity + '%</td></tr>';
     }).join('');
 
     el.innerHTML =
-      '<h3>' + S.crop + ' 2026 — what has been observed</h3>' +
-      '<p class="nbEstLead">Three measurements, each from a named source, none of them a ' +
-      'yield. An independent review in September 2026 found the yield figure this panel used ' +
-      'to carry could not be defended, and it was withdrawn rather than dressed with a ' +
-      'caveat.</p>' +
+      '<h3>' + S.crop + ' 2026 — where the crop stands now</h3>' +
+      '<p class="nbEstLead">A yield estimate built only from what has been measured this ' +
+      'season, and the measurements it rests on. Nothing here waits on USDA and nothing is ' +
+      'a post-mortem: it is what the crop has done so far, read from orbit and from ' +
+      'stations on the ground.</p>' +
       '<div class="nbTableWrap">' +
-      '<table class="nbYieldTable"><thead><tr><th>region</th>' +
-      '<th>hot days in flower</th><th>surface vs air</th><th>greenness rank</th>' +
+      '<table class="nbYieldTable"><thead><tr><th>region</th><th>est. lb/ac</th>' +
+      '<th>vs normal</th><th>hot days in flower</th><th>greenness rank</th>' +
       '<th>of GDD needed</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table></div>' +
+      (bestY ? '<p class="nbEstNum">Best <b>' + bestY.r.name + '</b> at ' +
+        idxFor(bestY.id).lb_ac.toLocaleString() + ' lb/ac; weakest <b>' + worstY.r.name +
+        '</b> at ' + idxFor(worstY.id).lb_ac.toLocaleString() + ' lb/ac.</p>' : '') +
       '<p class="nbEstNum">Greenest against its own history: <b>' + bestRank.r.name +
       '</b> at rank ' + bestRank.r.canopy_rank.rank + ' of ' + bestRank.r.canopy_rank.of +
       '; lowest <b>' + worstRank.r.name + '</b> at rank ' + worstRank.r.canopy_rank.rank +
       ' of ' + worstRank.r.canopy_rank.of + '.</p>' +
-      '<p class="nbEstLimit"><b>What this is not.</b> ' + S.yieldAll.limits[0] + '</p>' +
+      '<p class="nbEstLimit"><b>What this is and is not.</b> ' +
+      ((S.yieldIndex && S.yieldIndex.limits) ? S.yieldIndex.limits[0] : S.yieldAll.limits[0]) +
+      '</p>' +
+      ((S.yieldIndex && S.yieldIndex.limits && S.yieldIndex.limits[2])
+        ? '<p class="nbEstLimit">' + S.yieldIndex.limits[2] + '</p>' : '') +
+      ((S.yieldIndex && S.yieldIndex.limits && S.yieldIndex.limits[4])
+        ? '<p class="nbEstLimit"><b>When to trust your own field instead.</b> ' +
+          S.yieldIndex.limits[4] + '</p>' : '') +
       '<p class="nbEstNum">Days above ' + (best.c.heat_threshold_f || 90) + '\u00b0F ' +
       'during flowering and pod set, when ' + S.crop.toLowerCase() + ' sets seed. <b>Heat ' +
       'here does not show in the canopy</b> — it aborts flowers and blasts pods, so a field ' +
       'can stay green and still come up short. The greenness column and this one can ' +
       'disagree, and when they do, this one is the warning.</p>' +
-      '<p class="nbEstLimit"><b>Read the surface-vs-air column carefully.</b> It is an eight-day ' +
-      'average land-surface temperature over a 1 km pixel, minus one regional airport\u2019s ' +
-      'air temperature. A 1 km pixel mixes crop with soil, residue and everything around it, ' +
-      'so it is not a canopy thermometer and it is not a calibrated water-stress index. It ' +
-      'runs hot over thin canopy whether or not the crop is short of water. If it disagrees ' +
-      'with your pivot records or a soil probe, your field is the better evidence.</p>' +
       '<p class="nbEstNext"><b>What would sharpen it.</b> ' +
       S.yieldAll.what_would_sharpen_it.slice(0, 2).join('; ').toLowerCase() +
       '. Field reports from growers and agronomists are the largest single gap and the one we ' +
@@ -1289,10 +1308,12 @@
       fetch('assets/data/gisit-outlook-2026.json?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/crop-vs-history.json?v=' + build()).then(function (r) { return r.json(); }),
       fetch('assets/data/estimate-2026.json?v=' + build()).then(function (r) { return r.json(); }),
-      fetch('assets/data/yield-all-2026.json?v=' + build()).then(function (r) { return r.json(); })
+      fetch('assets/data/yield-all-2026.json?v=' + build()).then(function (r) { return r.json(); }),
+      fetch('assets/data/yield-index-2026.json?v=' + build())
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;

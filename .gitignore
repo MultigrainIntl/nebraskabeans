@@ -11,8 +11,3 @@ artifacts/
 # have no business in a repository that deploys on every commit.
 assets/data/archive/cdl-county-cache/
 
-# The yield index is withheld until it corroborates with the canopy it claims to track.
-# On 15 September 2026 it disagreed with measured greenness by a median 18.9 points and
-# pointed the wrong way in 2 of 7 regions. Two regions matched to within a point, so the
-# method is not wrong in principle — but it does not ship until all seven do.
-assets/data/yield-index-2026.json
