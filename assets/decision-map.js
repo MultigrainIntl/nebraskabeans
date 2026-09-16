@@ -101,12 +101,12 @@
      * revisions. A tool that reports what the satellite saw on Tuesday does not. */
     vshistory: {
       label: 'Crop vs its own history',
-      unit: 'greenness on bean ground, this season against 2000-2025',
+      unit: 'greenness on this crop\u2019s own ground, against its own history',
       regional: true,
       realtime: true,
-      loLabel: 'Worst years on record', hiLabel: 'Best years on record',
+      loLabel: '15% below normal', hiLabel: '15% above normal',
       ramp: [[0, '#9e1b0e'], [0.3, '#e07b1f'], [0.5, '#e8c33a'], [0.75, '#7cc08a'], [1, '#17794a']],
-      question: 'How does the crop compare with every year since 2000?'
+      question: 'How far is this crop from its own normal, on its own ground?'
     },
     health: {
       label: 'Season flags',
@@ -516,7 +516,12 @@
     if (!row || row.now == null) return null;
     return {
       asOf: used, stale: used !== md,
-      t: Math.max(0, Math.min(1, (row.rank - 1) / Math.max(row.of - 1, 1))),
+      // COLOUR BY HOW BIG THE DIFFERENCE IS, NOT WHERE IT RANKS. Ranking painted every
+      // positive season at the top of the ramp: a crop 2% above average and one 17% above
+      // average both came out solid green, because both ranked near the top of a tight
+      // field. The scale is now +/-15% around normal, wider than almost any season on
+      // record, so an ordinary year looks ordinary.
+      t: Math.max(0, Math.min(1, (row.vs_mean_pct + 15) / 30)),
       // The percentage leads. A rank alone made a 2% year read as a standout because the
       // seasons sit inside a 12% spread and every positive year climbs the ranking.
       label: (row.vs_mean_pct > 0 ? '+' : '') + row.vs_mean_pct + '% vs normal',
