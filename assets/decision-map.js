@@ -804,9 +804,15 @@
     regions.sort(function (a, b) { return b.c.lb_ac - a.c.lb_ac; });
     var best = regions[0], worst = regions[regions.length - 1];
 
+    var ranked = regions.filter(function (x) { return x.r.canopy_rank; });
+    ranked.sort(function (a, b) {
+      return (a.r.canopy_rank.rank / a.r.canopy_rank.of) - (b.r.canopy_rank.rank / b.r.canopy_rank.of);
+    });
+    var worstRank = ranked[0], bestRank = ranked[ranked.length - 1];
+    if (!bestRank) { el.hidden = true; return; }
+
     var rows = regions.map(function (x) {
       return '<tr><td>' + x.r.name + '</td>' +
-        '<td class="nbNum">' + Number(x.c.lb_ac).toLocaleString() + '</td>' +
         '<td class="nbNum">' + (x.r.canopy_above_air_c != null
           ? (x.r.canopy_above_air_c > 0 ? '+' : '') + x.r.canopy_above_air_c + '\u00b0C' : '—') +
         '</td>' +
@@ -816,19 +822,26 @@
     }).join('');
 
     el.innerHTML =
-      '<h3>' + S.crop + ' 2026 — what this season actually did</h3>' +
-      '<p class="nbEstLead">Planted ' + best.c.planted + ' — ' + best.c.planting_basis +
-      '. Every figure below is measured this season; nothing is forecast and nothing waits ' +
-      'on USDA.</p>' +
+      '<h3>' + S.crop + ' 2026 — what has been observed</h3>' +
+      '<p class="nbEstLead">Three measurements, each from a named source, none of them a ' +
+      'yield. An independent review in September 2026 found the yield figure this panel used ' +
+      'to carry could not be defended, and it was withdrawn rather than dressed with a ' +
+      'caveat.</p>' +
       '<div class="nbTableWrap">' +
-      '<table class="nbYieldTable"><thead><tr><th>region</th><th>lb/ac</th>' +
-      '<th>canopy vs air</th><th>greenness rank</th><th>of maturity</th></tr></thead>' +
+      '<table class="nbYieldTable"><thead><tr><th>region</th>' +
+      '<th>surface vs air</th><th>greenness rank</th><th>of GDD needed</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table></div>' +
-      '<p class="nbEstNum">Best <b>' + best.r.name + '</b> at ' +
-      Number(best.c.lb_ac).toLocaleString() + ' lb/ac; weakest <b>' + worst.r.name +
-      '</b> at ' + Number(worst.c.lb_ac).toLocaleString() + ' lb/ac. A watered crop sits ' +
-      'within a degree of air temperature — every region here ran hotter than that.</p>' +
+      '<p class="nbEstNum">Greenest against its own history: <b>' + bestRank.r.name +
+      '</b> at rank ' + bestRank.r.canopy_rank.rank + ' of ' + bestRank.r.canopy_rank.of +
+      '; lowest <b>' + worstRank.r.name + '</b> at rank ' + worstRank.r.canopy_rank.rank +
+      ' of ' + worstRank.r.canopy_rank.of + '.</p>' +
       '<p class="nbEstLimit"><b>What this is not.</b> ' + S.yieldAll.limits[0] + '</p>' +
+      '<p class="nbEstLimit"><b>Read the middle column carefully.</b> It is an eight-day ' +
+      'average land-surface temperature over a 1 km pixel, minus one regional airport\u2019s ' +
+      'air temperature. A 1 km pixel mixes crop with soil, residue and everything around it, ' +
+      'so it is not a canopy thermometer and it is not a calibrated water-stress index. It ' +
+      'runs hot over thin canopy whether or not the crop is short of water. If it disagrees ' +
+      'with your pivot records or a soil probe, your field is the better evidence.</p>' +
       '<p class="nbEstNext"><b>What would sharpen it.</b> ' +
       S.yieldAll.what_would_sharpen_it.slice(0, 2).join('; ').toLowerCase() +
       '. Field reports from growers and agronomists are the largest single gap and the one we ' +

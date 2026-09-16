@@ -27,11 +27,17 @@ STEPS = [
      "IEM hourly ASOS air temperature at the satellite's overpass hour"),
     ("station_field_acis.py", "station-field.json", 5,
      "NOAA cooperative and GHCN stations via RCC-ACIS"),
+    ("solar_power.py", None, None,
+     "NASA POWER measured solar radiation, replacing a temperature-range estimate"),
     ("ndvi_cropmask.py", None, None, "Crop-CASMA daily NDVI on dry-bean ground"),
     ("pulse_canopy.py", None, None, "Crop-CASMA daily NDVI on chickpea, lentil and pea ground"),
     ("thermal_stress.py", None, None, "NASA MOD11A2 land surface temperature"),
     ("vs_history.py", "crop-vs-history.json", 12, "this season against 2000-2025"),
     ("yield_all.py", "yield-all-2026.json", 12, "yield for every class in every region"),
+    ("yield_index.py", None, None,
+     "this season against the model's own history, so the uncalibrated constants cancel"),
+    ("ledger.py", None, None,
+     "freeze today's prediction and score it against any reported outcome"),
 ]
 
 

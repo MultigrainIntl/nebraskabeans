@@ -37,7 +37,10 @@ by = defaultdict(lambda: defaultdict(dict))          # region -> mm-dd -> year -
 for key, regions in obs.items():
     year, mm, dd = key.split("-")
     for r, s in regions.items():
-        if r in NAMES:
+        # Cloud and empty scenes read as a flat floor across every cell. Ranking this season
+        # against history while either side contains those is comparing a crop with a cloud —
+        # 6.4% of the record, and 14% of 2026.
+        if r in NAMES and s.get("q") != "suspect":
             by[r]["%s-%s" % (mm, dd)][int(year)] = s["mean"]
 
 out = {}

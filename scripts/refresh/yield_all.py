@@ -32,15 +32,9 @@ PROSE = {'evidence_note': 'Each number is built only from what was observed this
                   'local stations, and water stress from canopy temperature against air '
                   "temperature at the satellite's overpass hour — which sees irrigation "
                   'because it measures the cooling the water produced.',
- 'limits': ['This is not a validated forecast. The level is defensible; the ranking is not — '
-            'tested against USDA over 2016-2023 it did not rank one season against another '
-            "correctly, and that error cannot be separated from the scorecard's: USDA revised "
-            "Nebraska's 2026 planted acres by 21% mid-season, reports yield per harvested acre "
-            'so abandoned fields vanish from it, and stopped publishing county yields in 2008.',
-            'Water stress is read at 1 km, so a pixel mixes a crop field with the ground '
-            'around it. That biases every crop toward looking more stressed than it is.',
-            'Light-use efficiency and harvest index are published values per crop group, not '
-            'fitted to these fields.'],
+ 'limits': ['This is not a validated forecast. As of September 2026 the yield figure this model produced is withdrawn from the site. An independent review found the step converting satellite greenness to intercepted light is uncalibrated, the light-use efficiency and harvest-index constants are not sourced per market class, and the thermal term is an eight-day 1 km land-surface average against one airport rather than a calibrated water-stress index. What remains published is measurement: canopy against its own 26-year history, station weather, and growing degree days. USDA remains the scorecard here and never an input, and it is itself unstable: Nebraska planted acres for 2026 were revised 21% mid-season, yield is reported per harvested acre so abandoned fields vanish from it, and county yields stopped in 2008.',
+  'Chickpeas, lentils and peas are sampled at one point per county rather than on crop pixels, and where a region has no pulse reading the dry-bean canopy stands in for it.',
+  'Solar radiation is not measured. It is estimated from the daily temperature range, from one station per region.'],
  'what_would_sharpen_it': ['Real harvest data — loads, test weights, screen size, tied to '
                            'place and date',
                            'Field-level irrigation status',
@@ -86,13 +80,28 @@ def solar(tmax_f, tmin_f, lat, doy):
     return max(0.16 * math.sqrt(max(tmax - tmin, 0)) * ra, 0)
 
 
-def tstress(tmax_f, tmin_f, heat_f):
-    """Optimum near 24C, nothing below 10C, nothing above the class's own heat threshold."""
+def tstress(tmax_f, tmin_f, heat_f, reproductive=False):
+    """Growth response to temperature: a standard cardinal-temperature curve on the daily mean.
+
+    Nothing below 10C, optimum near 24C, falling away above it. That form is conventional and
+    defensible.
+
+    WHAT IS NOT HERE, AND WHY. A separate multiplicative heat penalty read off the daily
+    maximum was added on 15 September 2026 to answer a reviewer's correct observation that a
+    100F afternoon with a cool night slid under a 90F threshold untouched. The observation was
+    right; the fix was invented. Its shape and severity had no source, and tested against the
+    canopy it is supposed to track it accounted for roughly half of a 20-point disagreement —
+    turning regions that were within 1% of normal greenness into 20% yield deficits.
+
+    That is the same error as the greenness-to-light formula this project already withdrew: a
+    plausible curve with nobody's name on it, doing heavy lifting. Heat days above each class's
+    threshold are still counted and reported as an observation. They do not silently multiply
+    a yield until the penalty has a source and has been tested against outcomes.
+    """
     t = ((tmax_f + tmin_f) / 2 - 32) / 1.8
-    tmax_c = (heat_f - 32) / 1.8 + 3
-    if t <= 10 or t >= tmax_c:
+    if t <= 10:
         return 0.0
-    return (t - 10) / 14.0 if t <= 24 else (tmax_c - t) / (tmax_c - 24)
+    return min(1.0, (t - 10) / 14.0 if t <= 24 else max(0.0, (40 - t) / 16.0))
 
 
 def wstress(diff_c):
@@ -104,11 +113,50 @@ def wstress(diff_c):
     return max(0.0, min(1.0, 1.0 - (diff_c - 1.0) / 7.0))
 
 
+def to_ndvi(dn):
+    """Crop-CASMA's 8-bit number back to NDVI, by the service's documented scaling.
+
+    The archive note used to say this scaling was "undocumented by the service; monotonic in
+    greenness, which is all a model needs". Wrong twice: the scaling IS documented, and
+    monotonic is NOT all a model needs — the moment the number is multiplied by a light-use
+    efficiency to make kilograms, its absolute value carries the whole result."""
+    return (dn - 125.0) / 125.0
+
+
 def fpar(dn):
-    return max(0.0, min(0.95, (dn - 140.0) / 85.0 * 0.95))
+    """Fraction of photosynthetically active radiation intercepted by the canopy.
+
+    This used to be (dn - 140) / 85 * 0.95 — a straight line with no source, invented to land
+    in a plausible range. An independent review named it as the step that invalidated every
+    yield downstream, because it is where a satellite index becomes intercepted energy and
+    everything after it is arithmetic.
+
+    It is now the commonly used linear NDVI-fAPAR relation, fAPAR = 1.24 * NDVI - 0.168, after
+    Myneni and Williams (1994), applied to true NDVI rather than to raw counts.
+
+    STILL NOT CALIBRATED FOR THESE CROPS. The relation is for general vegetation, not dry beans
+    or pulses on the western High Plains, and NDVI saturates in dense canopy so a linear form
+    overstates interception late in the season. What changed is that the number now has a
+    published source and a stated failure mode instead of neither."""
+    return max(0.0, min(0.95, 1.24 * to_ndvi(dn) - 0.168))
 
 
-def derive_planting(st, dates, base_f, earliest_md, region_green):
+SOIL_F = {                      # minimum soil temperature the class will germinate in
+    "DRY BEANS": 58,            # dry beans will not germinate reliably in colder ground
+    "CHICKPEAS_KABULI": 50,     # ~10C. Kabuli is not a cold-tolerant pulse and was treated as one
+    "CHICKPEAS_DESI": 45,       # ~7C
+    "LENTILS": 41,              # ~5C
+    "PEAS": 41,                 # ~5C
+}
+
+
+def soil_threshold(cls, commodity):
+    if commodity == "CHICKPEAS":
+        return SOIL_F["CHICKPEAS_KABULI"] if "KABULI" in cls else SOIL_F["CHICKPEAS_DESI"]
+    return SOIL_F.get(commodity, 58)
+
+
+def derive_planting(st, dates, soil_f, earliest_md, region_green):
     """When the crop actually went in, from observed conditions — not from the calendar.
 
     Two signals, and the later one wins:
@@ -125,14 +173,17 @@ def derive_planting(st, dates, base_f, earliest_md, region_green):
     A fixed 1 June for beans overstates the season in a year the ground stayed cold, and
     understates it in a warm one. Both errors land straight in the yield.
     """
-    soil_f = 58 if base_f >= 50 else 42
     # WEATHER CAN ONLY DELAY PLANTING, NEVER PULL IT FORWARD.
     # A seven-day warm spell in mid-May clears the 58F threshold, but no grower puts dry beans
     # in then — frost risk has not passed and the ground is not settled. Allowing the threshold
     # to move planting earlier than the agronomic date handed beans a 15 May start and pulses
     # 22 March, which lengthened every season and inflated every yield. The published date is
     # the floor; cold ground pushes it later.
-    earliest = date.fromisoformat("2026-" + earliest_md)
+    # The season being examined, not a year typed in. yield_index.py runs this identical
+    # function over past seasons to build the baseline the current year is divided by;
+    # with 2026 hardcoded every historical season was rejected and the index was empty.
+    yr = dates[0][:4]
+    earliest = date.fromisoformat("%s-%s" % (yr, earliest_md))
     onset = None
     for i in range(7, len(dates)):
         d = date.fromisoformat(dates[i])
@@ -155,8 +206,18 @@ def derive_planting(st, dates, base_f, earliest_md, region_green):
     if base is not None:
         for k in md:
             if region_green[k] > base + 12:      # clear rise off bare soil
-                lift = date.fromisoformat("2026-" + k)
+                lift = date.fromisoformat("%s-%s" % (yr, k))
                 break
+    # The lift date is this field, this year, from orbit. Emergence trails planting by about
+    # three weeks. If that puts the crop in the ground before the soil rule allows, the soil
+    # rule was late and the satellite is the better witness — bounded to three weeks so a
+    # single noisy scene cannot rewrite the calendar.
+    if lift is not None:
+        implied = lift - timedelta(days=21)
+        if implied < onset and (onset - implied).days <= 21:
+            return implied, ("canopy lifted %s, which puts planting about three weeks earlier "
+                             "than the %dF soil rule allowed" % (lift.isoformat(), soil_f))
+
     delay = (onset - earliest).days
     if delay <= 0:
         return earliest, "normal date for this class; soil was warm enough on time"
@@ -169,6 +230,7 @@ def main():
     pulses = json.load(open(os.path.join(ARCHIVE, "canopy-pulses.json")))
     cells = json.load(open(os.path.join(HERE, "bean-cells-by-county.json")))
     vshist = json.load(open(os.path.join(DATA, "crop-vs-history.json")))["regions"]
+    rad = json.load(open(os.path.join(ARCHIVE, "solar-radiation.json")))["regions"]
     dates = field["dates"]
 
     out = {}
@@ -178,16 +240,22 @@ def main():
             continue
         thermal = json.load(open(tpath))["canopy_minus_air_c"]
         # Canopy on the BEAN ground, for the bean classes.
+        # Skip scenes flagged as cloud or empty. 6.4% of the record is a flat floor across
+        # every cell — not a bare field, nothing at all — and it was being scored as a week
+        # of no growth. In 2026 that is 14% of the season.
         grn = {k[5:]: v[region]["mean"] for k, v in ndvi.items()
-               if k.startswith("2026") and region in v}
+               if k.startswith("2026") and region in v
+               and v[region].get("q") != "suspect"}
         if not grn:
             continue
         # Canopy on each PULSE commodity's own ground. A chickpea grows in April on chickpea
         # ground; reading the bean field, which is bare then, scored every pulse as a failure.
         pulse_green = {}
         for com, blk in pulses.get("commodities", {}).items():
-            got = {k[5:]: v[region] for k, v in blk.get("observations", {}).items()
-                   if region in v}
+            got = {k[5:]: v[region]["mean"] if isinstance(v[region], dict) else v[region]
+                   for k, v in blk.get("observations", {}).items()
+                   if region in v and (not isinstance(v[region], dict)
+                                       or v[region].get("q") != "suspect")}
             if got:
                 pulse_green[com] = got
         pts = [c for c in cells if c["region"] == region]
@@ -198,7 +266,14 @@ def main():
                  key=lambda s: (s["lon"] - lon) ** 2 + (s["lat"] - lat) ** 2)
 
         def green_at(iso, commodity):
-            src = pulse_green.get(commodity) or grn
+            # NO FALLBACK. This used to be `pulse_green.get(commodity) or grn`, so a region
+            # with no lentil reading quietly computed its lentil yield from the dry-bean
+            # canopy. Lentils are mapped on 159 acres in one region; six regions were
+            # publishing a lentil number built on beans. A crop with no observation of its
+            # own gets no number.
+            src = pulse_green.get(commodity) if commodity != "DRY BEANS" else grn
+            if not src:
+                return None
             ks = sorted(k for k in src if k <= iso[5:])
             return src[ks[-1]] if ks else None
 
@@ -222,9 +297,13 @@ def main():
         ranked = [d for d, v in hist.items() if "rank" in v]
         asof = max(ranked) if ranked else None
 
+        region_rad = rad.get(region, {}).get("mj_m2_day", {})
+
         per = {}
         for cls, (base, heat, gdd_mat, plant, rue, hi, commodity) in CLASSES.items():
-            start, how = derive_planting(st, dates, base, plant, grn)
+            measured_days = estimated_days = 0
+            start, how = derive_planting(st, dates, soil_threshold(cls, commodity),
+                                         plant, grn)
             d, stop = start, date.fromisoformat(dates[-1])
             bio = 0.0
             days = short = 0
@@ -239,6 +318,8 @@ def main():
                 if hi_f is None or lo_f is None:
                     d += timedelta(days=1); continue
                 gdd += max((hi_f + lo_f) / 2 - base, 0)
+                # flowering through pod fill, on the class's own clock
+                repro = 0.40 <= (gdd / gdd_mat) <= 0.80
                 if gdd > gdd_mat * 1.1:          # past maturity, no more filling
                     break
                 # A THIN CANOPY CANNOT TELL YOU THE CROP IS THIRSTY.
@@ -251,13 +332,28 @@ def main():
                 ws_eff = 1.0 - (1.0 - ws) * (f / 0.95)
                 if ws_eff < 0.7:
                     short += 1
-                bio += rue * solar(hi_f, lo_f, lat, d.timetuple().tm_yday) * PAR_FRACTION * \
-                    f * tstress(hi_f, lo_f, heat) * ws_eff
+                # MEASURED sunlight. The Hargreaves estimate this replaces inferred
+                # radiation from the daily temperature range; checked against NASA POWER over
+                # the 2026 season it ran 8% high in every region and missed a typical day by
+                # 12-20%, which passed straight into biomass because biomass is linear in
+                # intercepted light. The estimate is kept only for days POWER has no value for.
+                mj = region_rad.get(iso)
+                if mj is None:
+                    mj = solar(hi_f, lo_f, lat, d.timetuple().tm_yday)
+                    estimated_days += 1
+                else:
+                    measured_days += 1
+                bio += rue * mj * PAR_FRACTION * \
+                    f * tstress(hi_f, lo_f, heat, reproductive=repro) * ws_eff
                 days += 1
                 d += timedelta(days=1)
             if days < 40:
                 continue
+            if days == 0 or bio <= 0:
+                continue                 # no observation of this crop here — publish nothing
             per[cls] = {"lb_ac": round(bio * hi * 8.9218), "days": days,
+                        "season_days_measured_light": measured_days,
+                        "season_days_estimated_light": estimated_days,
                         "planted": start.isoformat(), "planting_basis": how,
                         "stress_days": short, "gdd": round(gdd),
                         "pct_of_maturity": round(100 * gdd / gdd_mat),
@@ -278,8 +374,13 @@ def main():
                          "temperature and radiation from stations, water stress from canopy "
                          "minus air temperature at the satellite overpass hour",
                "sources_all_free": True,
-               "caveat": "each commodity is sampled on its own USDA ground — beans on bean "
-                         "cells, chickpeas, lentils and peas on theirs",
+               "caveat": "NOT every commodity is sampled on its own ground. Dry beans are read "
+                         "on Cropland Data Layer bean pixels. Chickpeas, lentils and peas are "
+                         "read at ONE point per county — the average of the county outline, "
+                         "which may be town, rangeland or another crop — and where a region "
+                         "has no pulse reading the dry-bean canopy stands in for it. Blackeye "
+                         "is cowpea, not common bean, and is drawn on dry-bean ground. These "
+                         "are defects, disclosed rather than smoothed over.",
                "not_validated": "the level is defensible; season-to-season ranking is not",
                "regions": out,
                "evidence_note": PROSE["evidence_note"],

@@ -188,6 +188,14 @@ def main():
         if got or not skipped:
             print("  %d: %d new box-dates (%d already held)" % (year, got, skipped),
                   file=sys.stderr)
+        # Flag cloud and empty scenes rather than letting them read as bare crop ground.
+        # 6.4% of the record is a flat floor across every cell, which is not a bare field —
+        # it is nothing at all, and the yield model was scoring it as a week of no growth.
+        for _d, _regions in out.items():
+            for _r, _v in _regions.items():
+                if _v.get("median", 999) <= 130 and (_v.get("p90", 0) - _v.get("median", 0)) < 10:
+                    _v["q"] = "suspect"
+
         json.dump({"schema": "gisit.ndvi-cropmask.v1",
                    "source": {"name": "USDA Crop-CASMA daily NDVI via WCS",
                               "projection": "EPSG:5070",

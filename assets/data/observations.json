@@ -1,0 +1,19 @@
+{
+ "schema": "gisit.reported-outcomes.v1",
+ "what_this_is": "Reported harvest outcomes. This is the ground truth side of the loop: remote sensing predicts everywhere, reported fields calibrate, and the correction learned from the fields that report is applied to the regions that never will.",
+ "why_it_matters": "There will never be harvest reports from every growing region on earth. There does not need to be. The residual between what remote sensing said and what a field actually did is one multiplier per crop, and a multiplier can be learned from a handful of honest reports. What it cannot be learned from is nothing.",
+ "how_a_report_is_used": "scripts/refresh/ledger.py joins each report to every prediction made BEFORE the harvest date, so the error is always measured against a forecast that could not have seen the answer. The result is published in model-scorecard.json, including the count of reports behind it, so a correction resting on two fields is never mistaken for a calibration.",
+ "what_a_report_needs": {
+  "crop": "the market class, exactly as the site names it \u2014 PINTO, GARBANZO (KABULI), PEA YELLOW",
+  "region": "one of ne-panhandle, sw-nebraska, ne-colorado, western-colorado, se-wyoming, big-horn, nw-kansas",
+  "crop_year": "the harvest year, as a number",
+  "lb_ac": "clean yield in pounds per acre, per harvested acre",
+  "harvested_on": "YYYY-MM-DD, the date it came off",
+  "reported_by": "who said so \u2014 a name or an operation. A report with no attribution is not evidence.",
+  "irrigated": "true, false, or null if unknown \u2014 this is the single most useful field after the yield itself, because the model cannot see irrigation and the error almost certainly differs between watered and dryland ground",
+  "acres": "optional, so a quarter section is not weighted the same as a whole farm",
+  "note": "optional \u2014 hail, disease, replant, anything that explains an outlier"
+ },
+ "standard_of_evidence": "A reported yield is OBSERVED evidence and outranks every model on this site. It is never adjusted to fit a prediction. If a report and the model disagree, the model is what is wrong.",
+ "observations": []
+}

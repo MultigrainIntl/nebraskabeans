@@ -258,13 +258,13 @@ try {
   await setSelect('nbCrop', 'PINTO');
   await page.waitForTimeout(500);
   const est = await text('#nbEstimate');
-  assert.match(est, /what this season actually did/i,
-    'EVIDENCE-001: the estimate must be presented as observations, not as a bare number');
+  assert.match(est, /what has been observed/i,
+    'EVIDENCE-001: the panel must be presented as observations, not as a bare number');
   assert.match(est, /greenness rank/i,
     'EVIDENCE-001: canopy against its own history must be shown beside every number');
   assert.match(est, /\d+ of \d+/,
     'EVIDENCE-001: the history comparison must be a rank against the years on record');
-  assert.match(est, /canopy vs air/i,
+  assert.match(est, /surface vs air/i,
     'EVIDENCE-001: the water-stress measurement must be shown beside every number');
 
   /* ---- ALLCLASS-001: every class, every region, each on its own ground ---- */
@@ -278,12 +278,58 @@ try {
              caveat: y.caveat, limits: y.limits.length,
              sharpen: y.what_would_sharpen_it.length };
   });
+  const coverage = await page.evaluate(async () => {
+    const y = await (await fetch('assets/data/yield-all-2026.json')).json();
+    const cells = await (await fetch('assets/data/pulse-regions.json')).json();
+    const COM = { 'GARBANZO (KABULI)': 'CHICKPEAS', 'GARBANZO (DESI)': 'CHICKPEAS',
+                  'LENTIL LARGE GREEN': 'LENTILS', 'LENTIL SMALL GREEN': 'LENTILS',
+                  'LENTIL RED': 'LENTILS', 'PEA YELLOW': 'PEAS', 'PEA GREEN': 'PEAS' };
+    const grown = {};
+    for (const [com, list] of Object.entries(cells.commodities))
+      for (const c of list) (grown[com] = grown[com] || new Set()).add(c.region);
+    const missingWhereGrown = [], yieldWhereNotGrown = [];
+    let beanClasses = Infinity;
+    for (const [region, r] of Object.entries(y.regions)) {
+      const has = r.classes;
+      let beans = 0;
+      for (const [cls, com] of Object.entries(COM)) {
+        const isGrown = grown[com] && grown[com].has(region);
+        if (isGrown && !has[cls]) missingWhereGrown.push(`${cls}@${region}`);
+        if (!isGrown && has[cls]) yieldWhereNotGrown.push(`${cls}@${region}`);
+      }
+      for (const cls of Object.keys(has)) if (!COM[cls]) beans++;
+      beanClasses = Math.min(beanClasses, beans);
+    }
+    return { missingWhereGrown, yieldWhereNotGrown, beanClasses };
+  });
+
+  const pulseGround = await page.evaluate(async () => {
+    const c = await (await fetch('assets/data/archive/canopy-history.json')).json();
+    return { beansOnBeanPixels: /class 42/i.test(JSON.stringify(c.mask || '')) };
+  });
   assert.equal(yieldAll.regions, 7, 'ALLCLASS-001: every growing region needs a yield');
-  assert.equal(yieldAll.classes, 18, 'ALLCLASS-001: every legume class needs a yield');
+  /* This used to demand 18 classes in all 7 regions. That forced a number for crops with no
+     crop ground and no observation in that region — six regions were publishing a lentil yield
+     computed from the dry-bean canopy because the gate insisted on one. The requirement is not
+     "a number everywhere"; it is "a number wherever the crop is, and nowhere it is not". */
+  assert.equal(coverage.missingWhereGrown.length, 0,
+    `ALLCLASS-001: crop mapped but no yield: ${coverage.missingWhereGrown.join(', ')}`);
+  assert.equal(coverage.yieldWhereNotGrown.length, 0,
+    `ALLCLASS-001: yield published where the crop is not mapped: ${coverage.yieldWhereNotGrown.join(', ')}`);
+  assert(coverage.beanClasses >= 11,
+    `ALLCLASS-001: every common-bean class runs on bean ground in every region; got ${coverage.beanClasses}`);
   assert(yieldAll.hasThermal,
     'ALLCLASS-001: every region must carry the water-stress measurement behind its number');
-  assert.match(yieldAll.caveat, /its own USDA ground/i,
-    'ALLCLASS-001: pulses must be read on pulse ground, not on the beans\u2019');
+  /* This gate used to assert the caveat CONTAINED the words "its own USDA ground". It
+     therefore passed while pulses were being sampled at county centroids and falling back to
+     the dry-bean canopy — it tested the sentence, not the sampling. It now checks the claim
+     against the builder's actual behaviour, and requires the weakness to be disclosed. */
+  assert(!/each commodity is sampled on its own/i.test(yieldAll.caveat),
+    'ALLCLASS-001: the file must not claim per-crop ground sampling that the builder does not do');
+  assert.match(yieldAll.caveat, /ONE point per county/,
+    'ALLCLASS-001: the pulse sampling weakness must be stated, not implied');
+  assert(pulseGround.beansOnBeanPixels,
+    'ALLCLASS-001: dry beans must still be read on Cropland Data Layer bean pixels');
   assert(yieldAll.limits >= 3 && yieldAll.sharpen >= 3,
     'ALLCLASS-001: limits and the path to close them must both be stated');
 
@@ -291,18 +337,30 @@ try {
   const differs = await page.evaluate(async () => {
     const y = await (await fetch('assets/data/yield-all-2026.json')).json();
     const c = y.regions['ne-panhandle'].classes;
-    return { pinto: c['PINTO'].lb_ac, lentil: c['LENTIL RED'].lb_ac,
+    /* A pulse that is actually grown here. Lentils are mapped on 159 acres in one region,
+       so asking the Panhandle for a lentil is asking for the fabrication this gate exists
+       to prevent. */
+    return { pinto: c['PINTO'].lb_ac, pulse: c['PEA YELLOW'].lb_ac,
              beanPlant: c['PINTO'].planted, pulsePlant: c['PEA YELLOW'].planted };
   });
-  assert.notEqual(differs.pinto, differs.lentil,
-    'ALLCLASS-001: a heat-sensitive lentil and a pinto cannot share a yield');
+  assert.notEqual(differs.pinto, differs.pulse,
+    'ALLCLASS-001: a cool-season pulse and a warm-season pinto cannot share a yield');
   assert.notEqual(differs.beanPlant, differs.pulsePlant,
     'ALLCLASS-001: a pulse plants in April and a bean in June — they cannot share a date');
-  assert.match(est, /\d,\d{3} lb\/ac/, 'EVIDENCE-001: the implied yield must be stated');
+  /* Reversed after the September 2026 independent review: the radiation-use-efficiency
+     yield is withdrawn from the page, so this gate now guards against it reappearing. */
+  assert(!/\d,\d{3} lb\/ac/.test(est),
+    'EVIDENCE-001: the withdrawn model yield must not reappear in the evidence panel');
+  assert.match(est, /rank \d+ of \d+/,
+    'EVIDENCE-001: the panel must lead with the observation that survived review');
+  assert.match(est, /your field is the better evidence/i,
+    'EVIDENCE-001: the thermal column must tell a grower when to trust their own field over it');
   assert.match(est, /not a validated forecast/i,
     'EVIDENCE-001: it must say plainly that it is not a validated forecast');
-  assert.match(est, /did not rank one season against another correctly/i,
-    'EVIDENCE-001: the specific limitation must be named, not hinted at');
+  assert.match(est, /uncalibrated|not sourced per market class/i,
+    'EVIDENCE-001: the specific limitation must be named, not hinted at — this gate tracked '
+    + 'the ranking failure until September 2026, when an independent review found a more '
+    + 'basic one: the greenness-to-light conversion is uncalibrated');
   assert.match(est, /21%/,
     'EVIDENCE-001: the scorecard\u2019s own instability must be stated alongside the model\u2019s');
   assert.match(est, /would sharpen it/i,

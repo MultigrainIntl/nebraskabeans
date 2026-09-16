@@ -1,0 +1,1 @@
+{"se-wyoming": {"n": 35, "mean": 130.39, "median": 127.0, "p90": 138.0}, "ne-colorado": {"n": 32, "mean": 131.11, "median": 128.0, "p90": 134.0, "q": "suspect"}, "ne-panhandle": {"n": 237, "mean": 143.06, "median": 128.0, "p90": 210.0}, "sw-nebraska": {"n": 26, "mean": 128.81, "median": 129.0, "p90": 129.0, "q": "suspect"}}
