@@ -813,6 +813,8 @@
 
     var rows = regions.map(function (x) {
       return '<tr><td>' + x.r.name + '</td>' +
+        '<td class="nbNum">' + (x.c.flowering_window_days
+          ? x.c.flowering_hot_days + ' of ' + x.c.flowering_window_days : '—') + '</td>' +
         '<td class="nbNum">' + (x.r.canopy_above_air_c != null
           ? (x.r.canopy_above_air_c > 0 ? '+' : '') + x.r.canopy_above_air_c + '\u00b0C' : '—') +
         '</td>' +
@@ -829,14 +831,20 @@
       'caveat.</p>' +
       '<div class="nbTableWrap">' +
       '<table class="nbYieldTable"><thead><tr><th>region</th>' +
-      '<th>surface vs air</th><th>greenness rank</th><th>of GDD needed</th></tr></thead>' +
+      '<th>hot days in flower</th><th>surface vs air</th><th>greenness rank</th>' +
+      '<th>of GDD needed</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table></div>' +
       '<p class="nbEstNum">Greenest against its own history: <b>' + bestRank.r.name +
       '</b> at rank ' + bestRank.r.canopy_rank.rank + ' of ' + bestRank.r.canopy_rank.of +
       '; lowest <b>' + worstRank.r.name + '</b> at rank ' + worstRank.r.canopy_rank.rank +
       ' of ' + worstRank.r.canopy_rank.of + '.</p>' +
       '<p class="nbEstLimit"><b>What this is not.</b> ' + S.yieldAll.limits[0] + '</p>' +
-      '<p class="nbEstLimit"><b>Read the middle column carefully.</b> It is an eight-day ' +
+      '<p class="nbEstNum">Days above ' + (best.c.heat_threshold_f || 90) + '\u00b0F ' +
+      'during flowering and pod set, when ' + S.crop.toLowerCase() + ' sets seed. <b>Heat ' +
+      'here does not show in the canopy</b> — it aborts flowers and blasts pods, so a field ' +
+      'can stay green and still come up short. The greenness column and this one can ' +
+      'disagree, and when they do, this one is the warning.</p>' +
+      '<p class="nbEstLimit"><b>Read the surface-vs-air column carefully.</b> It is an eight-day ' +
       'average land-surface temperature over a 1 km pixel, minus one regional airport\u2019s ' +
       'air temperature. A 1 km pixel mixes crop with soil, residue and everything around it, ' +
       'so it is not a canopy thermometer and it is not a calibrated water-stress index. It ' +

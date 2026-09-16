@@ -19,6 +19,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 1890,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 26,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -31,6 +34,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 1774,
+     "flowering_hot_days": 21,
+     "flowering_window_days": 23,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -43,6 +49,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 1838,
+     "flowering_hot_days": 21,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -55,6 +64,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 1945,
+     "flowering_hot_days": 17,
+     "flowering_window_days": 26,
+     "heat_threshold_f": 92,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -67,6 +79,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 2038,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 28,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 107,
      "commodity": "DRY BEANS"
     },
@@ -79,6 +94,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 2038,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 28,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 107,
      "commodity": "DRY BEANS"
     },
@@ -91,6 +109,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 1838,
+     "flowering_hot_days": 19,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -103,6 +124,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 1838,
+     "flowering_hot_days": 19,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -115,6 +139,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 1990,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -127,6 +154,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 23,
      "gdd": 1838,
+     "flowering_hot_days": 21,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -139,6 +169,9 @@
      "planting_basis": "delayed 8 days \u2014 soil did not hold 58F until then",
      "stress_days": 23,
      "gdd": 1980,
+     "flowering_hot_days": 12,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 95,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -151,6 +184,9 @@
      "planting_basis": "delayed 4 days \u2014 soil did not hold 50F until then",
      "stress_days": 37,
      "gdd": 2886,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 30,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "CHICKPEAS"
     },
@@ -163,6 +199,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 2660,
+     "flowering_hot_days": 18,
+     "flowering_window_days": 31,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "CHICKPEAS"
     },
@@ -175,6 +214,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 10,
      "gdd": 2214,
+     "flowering_hot_days": 15,
+     "flowering_window_days": 30,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     },
@@ -187,6 +229,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 10,
      "gdd": 2214,
+     "flowering_hot_days": 15,
+     "flowering_window_days": 30,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     }
@@ -212,6 +257,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 29,
      "gdd": 1886,
+     "flowering_hot_days": 18,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -224,6 +272,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 24,
      "gdd": 1764,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -236,6 +287,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 27,
      "gdd": 1836,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -248,6 +302,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 31,
      "gdd": 1939,
+     "flowering_hot_days": 14,
+     "flowering_window_days": 26,
+     "heat_threshold_f": 92,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -260,6 +317,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 35,
      "gdd": 2115,
+     "flowering_hot_days": 27,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -272,6 +332,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 35,
      "gdd": 2115,
+     "flowering_hot_days": 27,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -284,6 +347,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 27,
      "gdd": 1836,
+     "flowering_hot_days": 17,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -296,6 +362,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 27,
      "gdd": 1836,
+     "flowering_hot_days": 17,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -308,6 +377,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 33,
      "gdd": 1988,
+     "flowering_hot_days": 25,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -320,6 +392,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 27,
      "gdd": 1836,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -332,6 +407,9 @@
      "planting_basis": "canopy lifted 2026-05-25, which puts planting about three weeks earlier than the 58F soil rule allowed",
      "stress_days": 29,
      "gdd": 2001,
+     "flowering_hot_days": 4,
+     "flowering_window_days": 31,
+     "heat_threshold_f": 95,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -344,6 +422,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 34,
      "gdd": 2892,
+     "flowering_hot_days": 25,
+     "flowering_window_days": 34,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "CHICKPEAS"
     },
@@ -356,6 +437,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 31,
      "gdd": 2640,
+     "flowering_hot_days": 16,
+     "flowering_window_days": 32,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 110,
      "commodity": "CHICKPEAS"
     },
@@ -368,6 +452,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 16,
      "gdd": 2216,
+     "flowering_hot_days": 21,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     },
@@ -380,6 +467,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 16,
      "gdd": 2216,
+     "flowering_hot_days": 21,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     }
@@ -405,6 +495,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 1874,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -417,6 +510,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 1760,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -429,6 +525,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 1828,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -441,6 +540,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 1944,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 92,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -453,6 +555,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 2098,
+     "flowering_hot_days": 27,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -465,6 +570,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 2098,
+     "flowering_hot_days": 27,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -477,6 +585,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 1828,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -489,6 +600,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 1828,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -501,6 +615,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 2002,
+     "flowering_hot_days": 26,
+     "flowering_window_days": 26,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -513,6 +630,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 1,
      "gdd": 1828,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -525,6 +645,9 @@
      "planting_basis": "canopy lifted 2026-05-25, which puts planting about three weeks earlier than the 58F soil rule allowed",
      "stress_days": 8,
      "gdd": 1986,
+     "flowering_hot_days": 9,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 95,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -537,6 +660,9 @@
      "planting_basis": "delayed 6 days \u2014 soil did not hold 50F until then",
      "stress_days": 34,
      "gdd": 2870,
+     "flowering_hot_days": 30,
+     "flowering_window_days": 32,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 110,
      "commodity": "CHICKPEAS"
     },
@@ -549,6 +675,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 29,
      "gdd": 2640,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 31,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 110,
      "commodity": "CHICKPEAS"
     },
@@ -561,6 +690,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 11,
      "gdd": 2212,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     },
@@ -573,6 +705,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 11,
      "gdd": 2212,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     }
@@ -598,6 +733,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1874,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 26,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -610,6 +748,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1768,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -622,6 +763,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1831,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -634,6 +778,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1946,
+     "flowering_hot_days": 22,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 92,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -646,6 +793,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 2101,
+     "flowering_hot_days": 29,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -658,6 +808,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 2101,
+     "flowering_hot_days": 29,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -670,6 +823,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1831,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -682,6 +838,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1831,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -694,6 +853,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1990,
+     "flowering_hot_days": 26,
+     "flowering_window_days": 28,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -706,6 +868,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1831,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -718,6 +883,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 1990,
+     "flowering_hot_days": 15,
+     "flowering_window_days": 28,
+     "heat_threshold_f": 95,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -730,6 +898,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 42,
      "gdd": 2326,
+     "flowering_hot_days": 25,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "LENTILS"
     },
@@ -742,6 +913,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 38,
      "gdd": 2214,
+     "flowering_hot_days": 25,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "LENTILS"
     },
@@ -754,6 +928,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 37,
      "gdd": 2180,
+     "flowering_hot_days": 25,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 112,
      "commodity": "LENTILS"
     },
@@ -766,6 +943,9 @@
      "planting_basis": "canopy lifted 2026-04-05, which puts planting about three weeks earlier than the 41F soil rule allowed",
      "stress_days": 48,
      "gdd": 2214,
+     "flowering_hot_days": 25,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     },
@@ -778,6 +958,9 @@
      "planting_basis": "canopy lifted 2026-04-05, which puts planting about three weeks earlier than the 41F soil rule allowed",
      "stress_days": 48,
      "gdd": 2214,
+     "flowering_hot_days": 25,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     }
@@ -803,6 +986,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 1878,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 22,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -815,6 +1001,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 25,
      "gdd": 1767,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 22,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 110,
      "commodity": "DRY BEANS"
     },
@@ -827,6 +1016,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 1830,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 22,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -839,6 +1031,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 1948,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 23,
+     "heat_threshold_f": 92,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -851,6 +1046,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 2102,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -863,6 +1061,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 2102,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -875,6 +1076,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 1830,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 22,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -887,6 +1091,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 1830,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 22,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -899,6 +1106,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 1999,
+     "flowering_hot_days": 22,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -911,6 +1121,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 1830,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 22,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -923,6 +1136,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 28,
      "gdd": 2000,
+     "flowering_hot_days": 14,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 95,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -935,6 +1151,9 @@
      "planting_basis": "delayed 2 days \u2014 soil did not hold 50F until then",
      "stress_days": 28,
      "gdd": 2891,
+     "flowering_hot_days": 21,
+     "flowering_window_days": 32,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "CHICKPEAS"
     },
@@ -947,6 +1166,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 25,
      "gdd": 2668,
+     "flowering_hot_days": 17,
+     "flowering_window_days": 33,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "CHICKPEAS"
     },
@@ -959,6 +1181,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 37,
      "gdd": 2229,
+     "flowering_hot_days": 17,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     },
@@ -971,6 +1196,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 37,
      "gdd": 2229,
+     "flowering_hot_days": 17,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     }
@@ -996,6 +1224,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 16,
+     "flowering_window_days": 30,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 101,
      "commodity": "DRY BEANS"
     },
@@ -1008,6 +1239,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 107,
      "commodity": "DRY BEANS"
     },
@@ -1020,6 +1254,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 104,
      "commodity": "DRY BEANS"
     },
@@ -1032,6 +1269,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 12,
+     "flowering_window_days": 31,
+     "heat_threshold_f": 92,
      "pct_of_maturity": 98,
      "commodity": "DRY BEANS"
     },
@@ -1044,6 +1284,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 34,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 90,
      "commodity": "DRY BEANS"
     },
@@ -1056,6 +1299,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 34,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 90,
      "commodity": "DRY BEANS"
     },
@@ -1068,6 +1314,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 16,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 104,
      "commodity": "DRY BEANS"
     },
@@ -1080,6 +1329,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 16,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 104,
      "commodity": "DRY BEANS"
     },
@@ -1092,6 +1344,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 21,
+     "flowering_window_days": 33,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 96,
      "commodity": "DRY BEANS"
     },
@@ -1104,6 +1359,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 32,
      "gdd": 1720,
+     "flowering_hot_days": 20,
+     "flowering_window_days": 29,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 104,
      "commodity": "DRY BEANS"
     },
@@ -1116,6 +1374,9 @@
      "planting_basis": "delayed 10 days \u2014 soil did not hold 58F until then",
      "stress_days": 32,
      "gdd": 1743,
+     "flowering_hot_days": 6,
+     "flowering_window_days": 33,
+     "heat_threshold_f": 95,
      "pct_of_maturity": 97,
      "commodity": "DRY BEANS"
     }
@@ -1141,6 +1402,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 16,
      "gdd": 1897,
+     "flowering_hot_days": 22,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 112,
      "commodity": "DRY BEANS"
     },
@@ -1153,6 +1417,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 13,
      "gdd": 1774,
+     "flowering_hot_days": 23,
+     "flowering_window_days": 24,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -1165,6 +1432,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 15,
      "gdd": 1845,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 112,
      "commodity": "DRY BEANS"
     },
@@ -1177,6 +1447,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 16,
      "gdd": 1944,
+     "flowering_hot_days": 17,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 92,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -1189,6 +1462,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 16,
      "gdd": 2108,
+     "flowering_hot_days": 27,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -1201,6 +1477,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 16,
      "gdd": 2108,
+     "flowering_hot_days": 27,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 86,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -1213,6 +1492,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 15,
      "gdd": 1845,
+     "flowering_hot_days": 22,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 112,
      "commodity": "DRY BEANS"
     },
@@ -1225,6 +1507,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 15,
      "gdd": 1845,
+     "flowering_hot_days": 22,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 90,
      "pct_of_maturity": 112,
      "commodity": "DRY BEANS"
     },
@@ -1237,6 +1522,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 16,
      "gdd": 1997,
+     "flowering_hot_days": 25,
+     "flowering_window_days": 26,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -1249,6 +1537,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 15,
      "gdd": 1845,
+     "flowering_hot_days": 24,
+     "flowering_window_days": 25,
+     "heat_threshold_f": 88,
      "pct_of_maturity": 112,
      "commodity": "DRY BEANS"
     },
@@ -1261,6 +1552,9 @@
      "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 15,
      "gdd": 2010,
+     "flowering_hot_days": 9,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 95,
      "pct_of_maturity": 112,
      "commodity": "DRY BEANS"
     },
@@ -1273,6 +1567,9 @@
      "planting_basis": "canopy lifted 2026-04-05, which puts planting about three weeks earlier than the 41F soil rule allowed",
      "stress_days": 8,
      "gdd": 2220,
+     "flowering_hot_days": 22,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     },
@@ -1285,6 +1582,9 @@
      "planting_basis": "canopy lifted 2026-04-05, which puts planting about three weeks earlier than the 41F soil rule allowed",
      "stress_days": 8,
      "gdd": 2220,
+     "flowering_hot_days": 22,
+     "flowering_window_days": 27,
+     "heat_threshold_f": 82,
      "pct_of_maturity": 111,
      "commodity": "PEAS"
     }

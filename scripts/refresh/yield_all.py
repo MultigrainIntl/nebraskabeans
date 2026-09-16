@@ -308,6 +308,7 @@ def main():
             bio = 0.0
             days = short = 0
             gdd = 0.0
+            repro_hot = repro_days = 0
             while d <= stop:
                 iso = d.isoformat()
                 i = dates.index(iso) if iso in dates else None
@@ -320,6 +321,16 @@ def main():
                 gdd += max((hi_f + lo_f) / 2 - base, 0)
                 # flowering through pod fill, on the class's own clock
                 repro = 0.40 <= (gdd / gdd_mat) <= 0.80
+                # HEAT HERE DOES NOT SHOW IN THE CANOPY. It aborts flowers and blasts pods,
+                # so the field stays green and the seed is not there. GAJ's point, and the
+                # data carries it: every region ran hotter through flowering than normal in
+                # 2026. Counted and published as an observation, because a grower can act on
+                # "20 of 26 flowering days above 90F against a normal of 15" today, without
+                # waiting for anyone to calibrate what it costs in pounds.
+                if repro:
+                    repro_days += 1
+                    if hi_f >= heat:
+                        repro_hot += 1
                 if gdd > gdd_mat * 1.1:          # past maturity, no more filling
                     break
                 # A THIN CANOPY CANNOT TELL YOU THE CROP IS THIRSTY.
@@ -356,6 +367,9 @@ def main():
                         "season_days_estimated_light": estimated_days,
                         "planted": start.isoformat(), "planting_basis": how,
                         "stress_days": short, "gdd": round(gdd),
+                        "flowering_hot_days": repro_hot,
+                        "flowering_window_days": repro_days,
+                        "heat_threshold_f": heat,
                         "pct_of_maturity": round(100 * gdd / gdd_mat),
                         "commodity": commodity}
         out[region] = {"name": rname, "classes": per,

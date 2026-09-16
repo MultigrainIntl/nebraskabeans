@@ -219,6 +219,7 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
                                   plant, grn_for_planting)
     bio, gdd, n = 0.0, 0.0, 0
     matured_on = None
+    repro_hot = repro_days = 0
     for i, iso in enumerate(days_iso):
         d = date.fromisoformat(iso)
         if d < start:
@@ -238,6 +239,15 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
         # less fill time. That is signal, not an artefact.
         if matured_on is None and gdd > gdd_mat:
             matured_on = iso
+        # FLOWERING AND POD SET. Heat here does not stop the leaves growing — the field stays
+        # green — it aborts flowers and blasts pods, so the biomass is there and the seed is
+        # not. That is why a hot year can show a normal canopy and a short crop, and it is why
+        # a heat term applied to biomass was in the wrong place. Counted here as an
+        # observation; what it costs in yield is for harvest data to say, not for me to assume.
+        if 0.40 <= gdd / gdd_mat <= 0.80:
+            repro_days += 1
+            if hi_f >= heat:
+                repro_hot += 1
         if gdd > gdd_mat * 1.1:
             break
         repro = 0.40 <= (gdd / gdd_mat) <= 0.80
@@ -249,7 +259,7 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
             continue
         bio += rue * mj * PAR_FRACTION * fpar(g) * tstress(hi_f, lo_f, heat, reproductive=repro)
         n += 1
-    return (bio, n, matured_on) if n >= 60 else None
+    return (bio, n, matured_on, repro_hot, repro_days) if n >= 60 else None
 
 
 def main():
@@ -288,7 +298,7 @@ def main():
 
             # how far this season has actually come — every past year is cut to match
             reach = max(now_canopy)
-            hist = []
+            hist, hot_hist = [], []
             for y in YEARS:
                 t = {k: v for k, v in temp_all.items() if k.startswith(str(y))}
                 c = canopy_for(y, commodity)
@@ -298,6 +308,7 @@ def main():
                 got = season_biomass(cls, spec, region, y, c, r, t, c, stop_md=reach)
                 if got:
                     hist.append(got[0])
+                    hot_hist.append(got[3])
             if len(hist) < 7:
                 continue                      # too little history to divide by
 
@@ -337,6 +348,11 @@ def main():
                 "model_year_to_year_spread_pct": round(100 * spread, 1),
                 "days_counted": got[1],
                 "matured_on": got[2],
+                # measured, and the part an agronomist can act on today
+                "flowering_hot_days": got[3],
+                "flowering_window_days": got[4],
+                "flowering_hot_days_normal": (round(statistics.mean(hot_hist), 1)
+                                              if hot_hist else None),
                 "commodity": commodity,
             }
             if base:
