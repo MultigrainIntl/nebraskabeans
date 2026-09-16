@@ -77,10 +77,21 @@ try {
   const crops = await page.$$eval('#nbCrop option', o => o.map(x => x.value));
   assert.equal(await page.locator('#nbCrop').count(), 1,
     'exactly one crop picker may exist; two can disagree with each other');
+  /* ONLY WHAT USDA RECORDS AS PLANTED. This list once demanded eleven classes including dark
+     red kidney, two garbanzo types, a named lentil and two named peas. USDA carries no yield
+     history for dark red kidney, cranberry, pink or small red in any of these seven regions,
+     and its crop map has ONE class for peas, one for lentils and one for chickpeas — a
+     satellite cannot separate a yellow pea from a green one. The gate was requiring the site
+     to offer crops it could not evidence. */
   for (const required of ['PINTO', 'GREAT NORTHERN', 'NAVY', 'BLACK', 'LIGHT RED KIDNEY',
-                          'DARK RED KIDNEY', 'GARBANZO (KABULI)', 'GARBANZO (DESI)',
-                          'LENTIL RED', 'PEA GREEN', 'PEA YELLOW']) {
+                          'SMALL WHITE', 'PEAS', 'LENTILS', 'CHICKPEAS']) {
     assert(crops.includes(required), `class not selectable: ${required}`);
+  }
+  for (const gone of ['BLACKEYE', 'CRANBERRY', 'DARK RED KIDNEY', 'PINK', 'SMALL RED',
+                      'PEA YELLOW', 'PEA GREEN', 'GARBANZO (KABULI)', 'GARBANZO (DESI)',
+                      'LENTIL RED', 'LENTIL LARGE GREEN', 'LENTIL SMALL GREEN']) {
+    assert(!crops.includes(gone),
+      `${gone} has no USDA evidence in these counties and must not be offered`);
   }
 
   /* ---- YIELD-001: lead with a defensible band, never a bare point estimate ---- */
@@ -162,13 +173,13 @@ try {
   await setSelect('nbCrop', 'PINTO');
   await page.waitForTimeout(300);
   const pinto = await text('#nbPhases');
-  await setSelect('nbCrop', 'GARBANZO (KABULI)');
+  await setSelect('nbCrop', 'CHICKPEAS');
   await page.waitForTimeout(300);
   const garbanzo = await text('#nbPhases');
   assert.notEqual(pinto, garbanzo,
-    'CLASS-001: a cool-season garbanzo must not share the planting and harvest window of a ' +
+    'CLASS-001: a cool-season chickpea must not share the planting and harvest window of a ' +
     'warm-season pinto');
-  assert.match(await text('#nbReadout'), /GARBANZO \(KABULI\)/,
+  assert.match(await text('#nbReadout'), /CHICKPEAS/,
     'CLASS-001: the readout must describe the class actually selected');
 
   /* ---- STATION-001: the surface must stand on a real network, not a handful of airports ---- */
@@ -195,7 +206,8 @@ try {
   }));
   assert.equal(named.picker, named.headline,
     'CROP-SYNC-001: the crop picker and the answer headline disagree');
-  const COMMODITY = { 'GARBANZO': 'Chickpeas', 'LENTIL': 'Lentils', 'PEA ': 'Peas' };
+  // The pulses are named by commodity now, because that is the resolution USDA maps them at.
+  const COMMODITY = { 'CHICKPEAS': 'Chickpeas', 'LENTILS': 'Lentils', 'PEAS': 'Peas' };
   const expected = Object.keys(COMMODITY).find(k => named.picker.startsWith(k));
   assert.match(named.footprint, new RegExp(expected ? COMMODITY[expected] : 'dry beans', 'i'),
     `CROP-SYNC-001: the map footprint does not match the selected crop (${named.picker})`);
@@ -210,17 +222,17 @@ try {
     };
   };
   const beans = await footprint('PINTO');
-  const chick = await footprint('GARBANZO (KABULI)');
-  const peas = await footprint('PEA GREEN');
+  const chick = await footprint('CHICKPEAS');
+  const peas = await footprint('PEAS');
 
   assert.match(beans.text, /[\d,]+ acres of dry beans/i,
     'FOOTPRINT-001: dry beans must state their own acreage');
   assert.match(chick.text, /[\d,]+ acres of chickpeas/i,
-    'FOOTPRINT-001: garbanzos must be drawn on chickpea ground, not on bean ground');
+    'FOOTPRINT-001: chickpeas must be drawn on chickpea ground, not on bean ground');
   assert.match(peas.text, /[\d,]+ acres of peas/i,
     'FOOTPRINT-001: dry peas must be drawn on pea ground');
   assert.notEqual(beans.text, chick.text,
-    'FOOTPRINT-001: a garbanzo and a pinto must not share one footprint — they did, and it was wrong');
+    'FOOTPRINT-001: a chickpea and a pinto must not share one footprint — they did, and it was wrong');
   assert.notEqual(beans.counties, chick.counties,
     'FOOTPRINT-001: the map must redraw a different set of counties when the crop changes');
 
@@ -260,7 +272,7 @@ try {
      south-east Wyoming chickpeas read +16.6% when the season was -4.3% — wrong in size and in
      sign. Nothing failed; a plausible number was simply wrong, which is why it needed a
      person to look at the finished page. */
-  await setSelect('nbCrop', 'GARBANZO (KABULI)');
+  await setSelect('nbCrop', 'CHICKPEAS');
   await page.waitForTimeout(700);
   const seasonRead = await text('#nbReadout');
   assert.match(seasonRead, /Season so far \(\d+ satellite passes/i,
@@ -278,14 +290,14 @@ try {
      history". Nothing failed; every commodity simply read the same, which is how it survived
      until GAJ noticed the whole page looked like one crop. */
   const perCrop = {};
-  for (const crop of ['PINTO', 'GARBANZO (KABULI)', 'PEA YELLOW']) {
+  for (const crop of ['PINTO', 'CHICKPEAS', 'PEAS']) {
     await setSelect('nbCrop', crop);
     await page.waitForTimeout(600);
     perCrop[crop] = await text('#nbReadout');
   }
-  assert.notEqual(perCrop['PINTO'], perCrop['GARBANZO (KABULI)'],
+  assert.notEqual(perCrop['PINTO'], perCrop['CHICKPEAS'],
     'NOW-002: a chickpea and a pinto cannot share one history — they are different ground');
-  assert.notEqual(perCrop['PINTO'], perCrop['PEA YELLOW'],
+  assert.notEqual(perCrop['PINTO'], perCrop['PEAS'],
     'NOW-002: a pea and a pinto cannot share one history');
   const cropHist = await page.evaluate(async () => {
     const h = await (await fetch('assets/data/crop-vs-history.json')).json();
@@ -330,9 +342,7 @@ try {
   const coverage = await page.evaluate(async () => {
     const y = await (await fetch('assets/data/yield-all-2026.json')).json();
     const cells = await (await fetch('assets/data/pulse-regions.json')).json();
-    const COM = { 'GARBANZO (KABULI)': 'CHICKPEAS', 'GARBANZO (DESI)': 'CHICKPEAS',
-                  'LENTIL LARGE GREEN': 'LENTILS', 'LENTIL SMALL GREEN': 'LENTILS',
-                  'LENTIL RED': 'LENTILS', 'PEA YELLOW': 'PEAS', 'PEA GREEN': 'PEAS' };
+    const COM = { 'CHICKPEAS': 'CHICKPEAS', 'LENTILS': 'LENTILS', 'PEAS': 'PEAS' };
     const grown = {};
     for (const [com, list] of Object.entries(cells.commodities))
       for (const c of list) (grown[com] = grown[com] || new Set()).add(c.region);
@@ -368,7 +378,10 @@ try {
   /* Ten, not eleven: blackeye was removed. It is cowpea, a different genus from common bean,
      USDA maps no cowpea in these counties and carries no blackeye entry for these states, yet
      it was publishing a yield in all seven regions on borrowed bean ground. */
-  assert(coverage.beanClasses >= 10,
+  /* Six, not ten. Cranberry, dark red kidney, pink and small red were removed: USDA carries
+     no yield history for any of them in any of these seven regions. What remains is what USDA
+     records as planted. */
+  assert(coverage.beanClasses >= 6,
     `ALLCLASS-001: every common-bean class runs on bean ground in every region; got ${coverage.beanClasses}`);
   const picker = await page.$$eval('#nbCrop option', o => o.map(x => x.value));
   assert(!picker.includes('BLACKEYE'),
@@ -395,8 +408,8 @@ try {
     /* A pulse that is actually grown here. Lentils are mapped on 159 acres in one region,
        so asking the Panhandle for a lentil is asking for the fabrication this gate exists
        to prevent. */
-    return { pinto: c['PINTO'].lb_ac, pulse: c['PEA YELLOW'].lb_ac,
-             beanPlant: c['PINTO'].planted, pulsePlant: c['PEA YELLOW'].planted };
+    return { pinto: c['PINTO'].lb_ac, pulse: c['PEAS'].lb_ac,
+             beanPlant: c['PINTO'].planted, pulsePlant: c['PEAS'].planted };
   });
   assert.notEqual(differs.pinto, differs.pulse,
     'ALLCLASS-001: a cool-season pulse and a warm-season pinto cannot share a yield');

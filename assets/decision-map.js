@@ -17,18 +17,10 @@
     'NAVY':               { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1650, plant: '06-01' },
     'BLACK':              { commodity: 'DRY BEANS', base: 50, heat: 92, gdd: 1750, plant: '06-01' },
     'LIGHT RED KIDNEY':   { commodity: 'DRY BEANS', base: 50, heat: 86, gdd: 1900, plant: '06-01' },
-    'DARK RED KIDNEY':    { commodity: 'DRY BEANS', base: 50, heat: 86, gdd: 1900, plant: '06-01' },
-    'PINK':               { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1650, plant: '06-01' },
-    'SMALL RED':          { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1650, plant: '06-01' },
-    'CRANBERRY':          { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1800, plant: '06-01' },
     'SMALL WHITE':        { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1650, plant: '06-01' },
-    'GARBANZO (KABULI)':  { commodity: 'CHICKPEAS', base: 41, heat: 86, gdd: 2600, plant: '04-20' },
-    'GARBANZO (DESI)':    { commodity: 'CHICKPEAS', base: 41, heat: 88, gdd: 2400, plant: '04-20' },
-    'LENTIL LARGE GREEN': { commodity: 'LENTILS', base: 41, heat: 82, gdd: 2100, plant: '04-15' },
-    'LENTIL SMALL GREEN': { commodity: 'LENTILS', base: 41, heat: 82, gdd: 2000, plant: '04-15' },
-    'LENTIL RED':         { commodity: 'LENTILS', base: 41, heat: 82, gdd: 1950, plant: '04-15' },
-    'PEA YELLOW':         { commodity: 'PEAS', base: 41, heat: 82, gdd: 2000, plant: '04-05' },
-    'PEA GREEN':          { commodity: 'PEAS', base: 41, heat: 82, gdd: 2000, plant: '04-05' }
+    'PEAS':               { commodity: 'PEAS', base: 41, heat: 82, gdd: 2000, plant: '04-05' },
+    'LENTILS':            { commodity: 'LENTILS', base: 41, heat: 82, gdd: 2000, plant: '04-15' },
+    'CHICKPEAS':          { commodity: 'CHICKPEAS', base: 41, heat: 86, gdd: 2600, plant: '04-20' }
   };
 
   /* Each view is one question a professional actually asks, with the ends of the scale named

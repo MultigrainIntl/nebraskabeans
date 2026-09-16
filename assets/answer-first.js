@@ -10,10 +10,14 @@
 (function () {
   'use strict';
 
+  /* Only what USDA records as planted in these counties. Cranberry, dark red kidney, pink
+     and small red have no USDA yield history in any of the seven regions; blackeye is
+     cowpea and USDA maps no cowpea here at all. The pulses are listed at commodity level
+     because that is the resolution of the evidence — USDA's crop map has one class for
+     peas, one for lentils and one for chickpeas, and no satellite separates a yellow pea
+     from a green one. */
   var ORDER = ['PINTO', 'GREAT NORTHERN', 'NAVY', 'BLACK', 'LIGHT RED KIDNEY',
-    'DARK RED KIDNEY', 'PINK', 'SMALL RED', 'CRANBERRY', 'SMALL WHITE',
-    'GARBANZO (KABULI)', 'GARBANZO (DESI)', 'LENTIL LARGE GREEN', 'LENTIL SMALL GREEN',
-    'LENTIL RED', 'PEA YELLOW', 'PEA GREEN'];
+    'SMALL WHITE', 'PEAS', 'LENTILS', 'CHICKPEAS'];
 
   var RANK = { 'AT RISK': 0, 'STRESSED': 1, 'LATE': 2, 'WATCH': 3, 'ON TRACK': 4 };
   var TONE = { 'AT RISK': 'risk', 'STRESSED': 'risk', 'LATE': 'warn', 'WATCH': 'warn', 'ON TRACK': 'ok' };

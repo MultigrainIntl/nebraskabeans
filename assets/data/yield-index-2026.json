@@ -95,54 +95,6 @@
      "lb_ac_high": 2346,
      "baseline_lb_ac": 2175
     },
-    "DARK RED KIDNEY": {
-     "index": 0.94,
-     "vs_normal_pct": -6.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.7,
-     "days_counted": 94,
-     "matured_on": "2026-08-31",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 23.2,
-     "commodity": "DRY BEANS"
-    },
-    "PINK": {
-     "index": 0.854,
-     "vs_normal_pct": -14.6,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.3,
-     "days_counted": 84,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 19,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 15.2,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.854,
-     "vs_normal_pct": -14.6,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.3,
-     "days_counted": 84,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 19,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 15.2,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.915,
-     "vs_normal_pct": -8.5,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.0,
-     "days_counted": 91,
-     "matured_on": "2026-08-27",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 19.3,
-     "commodity": "DRY BEANS"
-    },
     "SMALL WHITE": {
      "index": 0.854,
      "vs_normal_pct": -14.6,
@@ -159,57 +111,29 @@
      "lb_ac_high": 1733,
      "baseline_lb_ac": 1760
     },
-    "GARBANZO (KABULI)": {
-     "index": 0.727,
-     "vs_normal_pct": -27.3,
+    "PEAS": {
+     "index": 0.777,
+     "vs_normal_pct": -22.3,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.9,
-     "days_counted": 116,
-     "matured_on": "2026-08-13",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 30,
-     "flowering_hot_days_normal": 22.6,
-     "commodity": "CHICKPEAS",
-     "lb_ac": 509,
-     "lb_ac_low": 403,
-     "lb_ac_high": 615,
-     "baseline_lb_ac": 700
-    },
-    "GARBANZO (DESI)": {
-     "index": 0.69,
-     "vs_normal_pct": -31.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.4,
-     "days_counted": 110,
-     "matured_on": "2026-08-05",
-     "flowering_hot_days": 18,
+     "model_year_to_year_spread_pct": 19.6,
+     "days_counted": 109,
+     "matured_on": "2026-07-22",
+     "flowering_hot_days": 16,
      "flowering_window_days": 31,
-     "flowering_hot_days_normal": 16.9,
+     "flowering_hot_days_normal": 18.6,
+     "commodity": "PEAS"
+    },
+    "CHICKPEAS": {
+     "index": 0.706,
+     "vs_normal_pct": -29.4,
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 21.1,
+     "days_counted": 118,
+     "matured_on": "2026-08-11",
+     "flowering_hot_days": 22,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 22.1,
      "commodity": "CHICKPEAS"
-    },
-    "PEA YELLOW": {
-     "index": 0.777,
-     "vs_normal_pct": -22.3,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.6,
-     "days_counted": 109,
-     "matured_on": "2026-07-22",
-     "flowering_hot_days": 16,
-     "flowering_window_days": 31,
-     "flowering_hot_days_normal": 18.6,
-     "commodity": "PEAS"
-    },
-    "PEA GREEN": {
-     "index": 0.777,
-     "vs_normal_pct": -22.3,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.6,
-     "days_counted": 109,
-     "matured_on": "2026-07-22",
-     "flowering_hot_days": 16,
-     "flowering_window_days": 31,
-     "flowering_hot_days_normal": 18.6,
-     "commodity": "PEAS"
     }
    }
   },
@@ -296,54 +220,6 @@
      "lb_ac_high": 2632,
      "baseline_lb_ac": 2175
     },
-    "DARK RED KIDNEY": {
-     "index": 1.079,
-     "vs_normal_pct": 7.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 12.1,
-     "days_counted": 88,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 23,
-     "commodity": "DRY BEANS"
-    },
-    "PINK": {
-     "index": 1.08,
-     "vs_normal_pct": 8.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.4,
-     "days_counted": 77,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 17,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 15.1,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 1.08,
-     "vs_normal_pct": 8.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.4,
-     "days_counted": 77,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 17,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 15.1,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 1.077,
-     "vs_normal_pct": 7.7,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 12.5,
-     "days_counted": 83,
-     "matured_on": "2026-08-16",
-     "flowering_hot_days": 25,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 19.9,
-     "commodity": "DRY BEANS"
-    },
     "SMALL WHITE": {
      "index": 1.08,
      "vs_normal_pct": 8.0,
@@ -360,57 +236,29 @@
      "lb_ac_high": 2156,
      "baseline_lb_ac": 1760
     },
-    "GARBANZO (KABULI)": {
-     "index": 0.91,
-     "vs_normal_pct": -9.0,
+    "PEAS": {
+     "index": 1.154,
+     "vs_normal_pct": 15.4,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.1,
+     "model_year_to_year_spread_pct": 23.2,
+     "days_counted": 102,
+     "matured_on": "2026-07-09",
+     "flowering_hot_days": 21,
+     "flowering_window_days": 28,
+     "flowering_hot_days_normal": 19.3,
+     "commodity": "PEAS"
+    },
+    "CHICKPEAS": {
+     "index": 0.917,
+     "vs_normal_pct": -8.3,
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 19.0,
      "days_counted": 110,
      "matured_on": "2026-07-30",
      "flowering_hot_days": 25,
      "flowering_window_days": 34,
-     "flowering_hot_days_normal": 21.9,
-     "commodity": "CHICKPEAS",
-     "lb_ac": 637,
-     "lb_ac_low": 516,
-     "lb_ac_high": 759,
-     "baseline_lb_ac": 700
-    },
-    "GARBANZO (DESI)": {
-     "index": 0.946,
-     "vs_normal_pct": -5.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.0,
-     "days_counted": 102,
-     "matured_on": "2026-07-26",
-     "flowering_hot_days": 16,
-     "flowering_window_days": 32,
-     "flowering_hot_days_normal": 17.4,
+     "flowering_hot_days_normal": 21.6,
      "commodity": "CHICKPEAS"
-    },
-    "PEA YELLOW": {
-     "index": 1.154,
-     "vs_normal_pct": 15.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 23.2,
-     "days_counted": 102,
-     "matured_on": "2026-07-09",
-     "flowering_hot_days": 21,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 19.3,
-     "commodity": "PEAS"
-    },
-    "PEA GREEN": {
-     "index": 1.154,
-     "vs_normal_pct": 15.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 23.2,
-     "days_counted": 102,
-     "matured_on": "2026-07-09",
-     "flowering_hot_days": 21,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 19.3,
-     "commodity": "PEAS"
     }
    }
   },
@@ -497,54 +345,6 @@
      "lb_ac_high": 1947,
      "baseline_lb_ac": 2295
     },
-    "DARK RED KIDNEY": {
-     "index": 0.725,
-     "vs_normal_pct": -27.5,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.0,
-     "days_counted": 87,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 26.2,
-     "commodity": "DRY BEANS"
-    },
-    "PINK": {
-     "index": 0.726,
-     "vs_normal_pct": -27.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 76,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 19.6,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.726,
-     "vs_normal_pct": -27.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 76,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 19.6,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.737,
-     "vs_normal_pct": -26.3,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.3,
-     "days_counted": 83,
-     "matured_on": "2026-08-15",
-     "flowering_hot_days": 26,
-     "flowering_window_days": 26,
-     "flowering_hot_days_normal": 22.3,
-     "commodity": "DRY BEANS"
-    },
     "SMALL WHITE": {
      "index": 0.726,
      "vs_normal_pct": -27.4,
@@ -557,31 +357,7 @@
      "flowering_hot_days_normal": 20.9,
      "commodity": "DRY BEANS"
     },
-    "GARBANZO (KABULI)": {
-     "index": 0.808,
-     "vs_normal_pct": -19.2,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.4,
-     "days_counted": 109,
-     "matured_on": "2026-08-03",
-     "flowering_hot_days": 29,
-     "flowering_window_days": 31,
-     "flowering_hot_days_normal": 24.6,
-     "commodity": "CHICKPEAS"
-    },
-    "GARBANZO (DESI)": {
-     "index": 0.906,
-     "vs_normal_pct": -9.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.3,
-     "days_counted": 104,
-     "matured_on": "2026-07-27",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 31,
-     "flowering_hot_days_normal": 20.1,
-     "commodity": "CHICKPEAS"
-    },
-    "PEA YELLOW": {
+    "PEAS": {
      "index": 0.99,
      "vs_normal_pct": -1.0,
      "years_of_model_history": 11,
@@ -593,17 +369,17 @@
      "flowering_hot_days_normal": 21.1,
      "commodity": "PEAS"
     },
-    "PEA GREEN": {
-     "index": 0.99,
-     "vs_normal_pct": -1.0,
+    "CHICKPEAS": {
+     "index": 0.828,
+     "vs_normal_pct": -17.2,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 27.1,
-     "days_counted": 105,
-     "matured_on": "2026-07-13",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 21.1,
-     "commodity": "PEAS"
+     "model_year_to_year_spread_pct": 17.0,
+     "days_counted": 111,
+     "matured_on": "2026-08-01",
+     "flowering_hot_days": 30,
+     "flowering_window_days": 32,
+     "flowering_hot_days_normal": 24.2,
+     "commodity": "CHICKPEAS"
     }
    }
   },
@@ -690,54 +466,6 @@
      "lb_ac_high": 2562,
      "baseline_lb_ac": 2295
     },
-    "DARK RED KIDNEY": {
-     "index": 0.922,
-     "vs_normal_pct": -7.8,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.0,
-     "days_counted": 96,
-     "matured_on": "2026-08-27",
-     "flowering_hot_days": 29,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 24.9,
-     "commodity": "DRY BEANS"
-    },
-    "PINK": {
-     "index": 0.895,
-     "vs_normal_pct": -10.5,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.3,
-     "days_counted": 82,
-     "matured_on": "2026-08-16",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 18.4,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.895,
-     "vs_normal_pct": -10.5,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.3,
-     "days_counted": 82,
-     "matured_on": "2026-08-16",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 18.4,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.908,
-     "vs_normal_pct": -9.2,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.9,
-     "days_counted": 90,
-     "matured_on": "2026-08-23",
-     "flowering_hot_days": 26,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 22.1,
-     "commodity": "DRY BEANS"
-    },
     "SMALL WHITE": {
      "index": 0.895,
      "vs_normal_pct": -10.5,
@@ -750,19 +478,19 @@
      "flowering_hot_days_normal": 20.3,
      "commodity": "DRY BEANS"
     },
-    "LENTIL LARGE GREEN": {
-     "index": 0.891,
-     "vs_normal_pct": -10.9,
+    "PEAS": {
+     "index": 0.917,
+     "vs_normal_pct": -8.3,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.4,
-     "days_counted": 103,
-     "matured_on": "2026-07-22",
-     "flowering_hot_days": 29,
-     "flowering_window_days": 30,
-     "flowering_hot_days_normal": 22.2,
-     "commodity": "LENTILS"
+     "model_year_to_year_spread_pct": 16.2,
+     "days_counted": 107,
+     "matured_on": "2026-07-16",
+     "flowering_hot_days": 28,
+     "flowering_window_days": 29,
+     "flowering_hot_days_normal": 20.7,
+     "commodity": "PEAS"
     },
-    "LENTIL SMALL GREEN": {
+    "LENTILS": {
      "index": 0.891,
      "vs_normal_pct": -10.9,
      "years_of_model_history": 11,
@@ -773,42 +501,6 @@
      "flowering_window_days": 29,
      "flowering_hot_days_normal": 21.3,
      "commodity": "LENTILS"
-    },
-    "LENTIL RED": {
-     "index": 0.904,
-     "vs_normal_pct": -9.6,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.1,
-     "days_counted": 99,
-     "matured_on": "2026-07-18",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 20.6,
-     "commodity": "LENTILS"
-    },
-    "PEA YELLOW": {
-     "index": 0.917,
-     "vs_normal_pct": -8.3,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.2,
-     "days_counted": 107,
-     "matured_on": "2026-07-16",
-     "flowering_hot_days": 28,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 20.7,
-     "commodity": "PEAS"
-    },
-    "PEA GREEN": {
-     "index": 0.917,
-     "vs_normal_pct": -8.3,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.2,
-     "days_counted": 107,
-     "matured_on": "2026-07-16",
-     "flowering_hot_days": 28,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 20.7,
-     "commodity": "PEAS"
     }
    }
   },
@@ -891,54 +583,6 @@
      "flowering_hot_days_normal": 24.1,
      "commodity": "DRY BEANS"
     },
-    "DARK RED KIDNEY": {
-     "index": 0.788,
-     "vs_normal_pct": -21.2,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.8,
-     "days_counted": 86,
-     "matured_on": "2026-08-18",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 24.1,
-     "commodity": "DRY BEANS"
-    },
-    "PINK": {
-     "index": 0.78,
-     "vs_normal_pct": -22.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.7,
-     "days_counted": 75,
-     "matured_on": "2026-08-09",
-     "flowering_hot_days": 20,
-     "flowering_window_days": 22,
-     "flowering_hot_days_normal": 17.5,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.78,
-     "vs_normal_pct": -22.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.7,
-     "days_counted": 75,
-     "matured_on": "2026-08-09",
-     "flowering_hot_days": 20,
-     "flowering_window_days": 22,
-     "flowering_hot_days_normal": 17.5,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.764,
-     "vs_normal_pct": -23.6,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.3,
-     "days_counted": 82,
-     "matured_on": "2026-08-14",
-     "flowering_hot_days": 22,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 20.8,
-     "commodity": "DRY BEANS"
-    },
     "SMALL WHITE": {
      "index": 0.78,
      "vs_normal_pct": -22.0,
@@ -951,53 +595,29 @@
      "flowering_hot_days_normal": 19,
      "commodity": "DRY BEANS"
     },
-    "GARBANZO (KABULI)": {
-     "index": 0.708,
-     "vs_normal_pct": -29.2,
+    "PEAS": {
+     "index": 0.681,
+     "vs_normal_pct": -31.9,
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 22.0,
+     "days_counted": 102,
+     "matured_on": "2026-07-11",
+     "flowering_hot_days": 17,
+     "flowering_window_days": 29,
+     "flowering_hot_days_normal": 19.7,
+     "commodity": "PEAS"
+    },
+    "CHICKPEAS": {
+     "index": 0.72,
+     "vs_normal_pct": -28.0,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 25.5,
-     "days_counted": 108,
-     "matured_on": "2026-07-31",
-     "flowering_hot_days": 21,
-     "flowering_window_days": 32,
-     "flowering_hot_days_normal": 22.6,
-     "commodity": "CHICKPEAS"
-    },
-    "GARBANZO (DESI)": {
-     "index": 0.726,
-     "vs_normal_pct": -27.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 26.6,
-     "days_counted": 102,
-     "matured_on": "2026-07-25",
-     "flowering_hot_days": 17,
+     "days_counted": 109,
+     "matured_on": "2026-07-30",
+     "flowering_hot_days": 20,
      "flowering_window_days": 33,
-     "flowering_hot_days_normal": 17.6,
+     "flowering_hot_days_normal": 22.4,
      "commodity": "CHICKPEAS"
-    },
-    "PEA YELLOW": {
-     "index": 0.681,
-     "vs_normal_pct": -31.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 22.0,
-     "days_counted": 102,
-     "matured_on": "2026-07-11",
-     "flowering_hot_days": 17,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 19.7,
-     "commodity": "PEAS"
-    },
-    "PEA GREEN": {
-     "index": 0.681,
-     "vs_normal_pct": -31.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 22.0,
-     "days_counted": 102,
-     "matured_on": "2026-07-11",
-     "flowering_hot_days": 17,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 19.7,
-     "commodity": "PEAS"
     }
    }
   },
@@ -1078,54 +698,6 @@
      "flowering_hot_days": 23,
      "flowering_window_days": 34,
      "flowering_hot_days_normal": 24.3,
-     "commodity": "DRY BEANS"
-    },
-    "DARK RED KIDNEY": {
-     "index": 0.784,
-     "vs_normal_pct": -21.6,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 99,
-     "matured_on": null,
-     "flowering_hot_days": 23,
-     "flowering_window_days": 34,
-     "flowering_hot_days_normal": 24.3,
-     "commodity": "DRY BEANS"
-    },
-    "PINK": {
-     "index": 0.795,
-     "vs_normal_pct": -20.5,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.1,
-     "days_counted": 99,
-     "matured_on": "2026-09-04",
-     "flowering_hot_days": 16,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 13.3,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.795,
-     "vs_normal_pct": -20.5,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.1,
-     "days_counted": 99,
-     "matured_on": "2026-09-04",
-     "flowering_hot_days": 16,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 13.3,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.784,
-     "vs_normal_pct": -21.6,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 99,
-     "matured_on": null,
-     "flowering_hot_days": 21,
-     "flowering_window_days": 33,
-     "flowering_hot_days_normal": 19.8,
      "commodity": "DRY BEANS"
     },
     "SMALL WHITE": {
@@ -1217,54 +789,6 @@
      "flowering_hot_days_normal": 22.5,
      "commodity": "DRY BEANS"
     },
-    "DARK RED KIDNEY": {
-     "index": 0.801,
-     "vs_normal_pct": -19.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 82,
-     "matured_on": "2026-08-15",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 22.5,
-     "commodity": "DRY BEANS"
-    },
-    "PINK": {
-     "index": 0.941,
-     "vs_normal_pct": -5.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.4,
-     "days_counted": 72,
-     "matured_on": "2026-08-07",
-     "flowering_hot_days": 22,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 15.5,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.941,
-     "vs_normal_pct": -5.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.4,
-     "days_counted": 72,
-     "matured_on": "2026-08-07",
-     "flowering_hot_days": 22,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 15.5,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.846,
-     "vs_normal_pct": -15.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 18.0,
-     "days_counted": 78,
-     "matured_on": "2026-08-11",
-     "flowering_hot_days": 25,
-     "flowering_window_days": 26,
-     "flowering_hot_days_normal": 19.7,
-     "commodity": "DRY BEANS"
-    },
     "SMALL WHITE": {
      "index": 0.941,
      "vs_normal_pct": -5.9,
@@ -1277,19 +801,7 @@
      "flowering_hot_days_normal": 18.2,
      "commodity": "DRY BEANS"
     },
-    "PEA YELLOW": {
-     "index": 1.131,
-     "vs_normal_pct": 13.1,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 29.6,
-     "days_counted": 98,
-     "matured_on": "2026-07-06",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 18.9,
-     "commodity": "PEAS"
-    },
-    "PEA GREEN": {
+    "PEAS": {
      "index": 1.131,
      "vs_normal_pct": 13.1,
      "years_of_model_history": 11,

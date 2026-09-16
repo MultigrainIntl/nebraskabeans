@@ -50,23 +50,27 @@ PAR_FRACTION = 0.48
 # publishing a yield in all seven regions, computed on common-bean ground, at 1,315-1,373
 # lb/ac. That is a fabricated crop, and disclosing it was not enough — it is removed.
 CLASSES = {
+    # DRY BEANS — only the classes USDA carries a yield history for in these states.
+    # Cranberry, dark red kidney, pink and small red were dropped in September 2026: USDA has
+    # no history for any of them in any of these seven regions, and the model was publishing a
+    # number for all four anyway. Blackeye went with them — it is cowpea, a different genus,
+    # and USDA maps no cowpea here at all.
     "PINTO":              (50, 90, 1700, "06-01", 1.45, 0.45, "DRY BEANS"),
     "GREAT NORTHERN":     (50, 88, 1600, "06-01", 1.45, 0.45, "DRY BEANS"),
     "NAVY":               (50, 88, 1650, "06-01", 1.45, 0.46, "DRY BEANS"),
     "BLACK":              (50, 92, 1750, "06-01", 1.50, 0.45, "DRY BEANS"),
     "LIGHT RED KIDNEY":   (50, 86, 1900, "06-01", 1.40, 0.42, "DRY BEANS"),
-    "DARK RED KIDNEY":    (50, 86, 1900, "06-01", 1.40, 0.42, "DRY BEANS"),
-    "PINK":               (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
-    "SMALL RED":          (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
-    "CRANBERRY":          (50, 88, 1800, "06-01", 1.40, 0.43, "DRY BEANS"),
     "SMALL WHITE":        (50, 88, 1650, "06-01", 1.45, 0.46, "DRY BEANS"),
-    "GARBANZO (KABULI)":  (41, 86, 2600, "04-20", 1.30, 0.38, "CHICKPEAS"),
-    "GARBANZO (DESI)":    (41, 88, 2400, "04-20", 1.35, 0.40, "CHICKPEAS"),
-    "LENTIL LARGE GREEN": (41, 82, 2100, "04-15", 1.15, 0.38, "LENTILS"),
-    "LENTIL SMALL GREEN": (41, 82, 2000, "04-15", 1.15, 0.39, "LENTILS"),
-    "LENTIL RED":         (41, 82, 1950, "04-15", 1.20, 0.40, "LENTILS"),
-    "PEA YELLOW":         (41, 82, 2000, "04-05", 1.60, 0.48, "PEAS"),
-    "PEA GREEN":          (41, 82, 2000, "04-05", 1.60, 0.47, "PEAS"),
+
+    # PULSES — ONE ENTRY PER COMMODITY, because that is all anyone can see. USDA's crop map
+    # has a single class for peas, one for lentils and one for chickpeas. The satellite reads
+    # those pixels and cannot tell a yellow pea from a green one. The site used to show two
+    # peas, three lentils and two chickpeas; yellow and green pea differed by a single invented
+    # constant — harvest index 0.48 against 0.47 — on identical ground, identical weather and
+    # an identical planting date. Splitting them was class-level precision nobody can observe.
+    "PEAS":               (41, 82, 2000, "04-05", 1.60, 0.48, "PEAS"),
+    "LENTILS":            (41, 82, 2000, "04-15", 1.15, 0.39, "LENTILS"),
+    "CHICKPEAS":          (41, 86, 2600, "04-20", 1.30, 0.38, "CHICKPEAS"),
 }
 NAMES = {"ne-panhandle": "Nebraska Panhandle", "sw-nebraska": "Southwest Nebraska",
          "ne-colorado": "Northeast Colorado", "western-colorado": "Western Colorado",
