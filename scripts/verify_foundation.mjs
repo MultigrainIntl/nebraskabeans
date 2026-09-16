@@ -25,7 +25,10 @@ const decisionMap=read('assets/decision-map.js');
 assert.doesNotMatch(decisionMap,/label: 'Yield/,'no yield layer may return until its per-state skill, its interval coverage and its regional resolution are established');
 assert.doesNotMatch(decisionMap,/label: 'Soil moisture'/,'rainfall minus reference evaporation must not be labelled soil moisture');
 assert.match(decisionMap,/no irrigation/,'the water view must state what it leaves out');
-assert.match(decisionMap,/whole counties, not '/,'the crop outline must not be presented as field boundaries');
+// The wording moved into assets/i18n.js when the page was rewritten for plain language and
+// translation. The requirement is unchanged: the outline must never read as field boundaries.
+const textFile=read('assets/i18n.js');
+assert.match(textFile,/whole counties, not fields/,'the crop outline must not be presented as field boundaries');
 assert.match(decisionMap,/not an observed crop condition/,'season flags must not be presented as observed crop health');
 assert.match(decisionMap,/observed, not forecast/,'the present-tense view must declare itself an observation');
 const vsHistory=JSON.parse(read('assets/data/crop-vs-history.json'));

@@ -97,6 +97,52 @@
       'USDA planted acres of {crop} in {year}: {figures}. That is the crop itself, not the ' +
       'mapped area above.',
 
+    'headline.basis':
+      'This range is USDA\u2019s own record for {crop}, moved {direction} {percent} for this ' +
+      'season\u2019s heat and rain. It is not our own forecast.',
+    'headline.basisFlat':
+      'This range is USDA\u2019s own record for {crop}, unchanged for this season. It is not ' +
+      'our own forecast.',
+
+    'estimate.lead2':
+      'A yield estimate from what we have measured this season, with the measurements beside ' +
+      'it. Nothing here waits on USDA.',
+    'estimate.bestWorst':
+      'Best: {bestRegion}, {bestYield}. Weakest: {worstRegion}, {worstYield}.',
+    'estimate.whatItIs':
+      'This is an estimate from satellite and weather data. It is not a forecast we have ' +
+      'proved, and it is not a measurement of your field.',
+    'estimate.howBuilt':
+      'We run the same model over this season and over the last 11 seasons, then compare the ' +
+      'two. Comparing them cancels out the parts we cannot measure well. We apply that ' +
+      'comparison to what the crop actually harvested in past years.',
+    'estimate.bandMeans':
+      'The range shows how much this signal moves from season to season. It is not a margin ' +
+      'of error.',
+    'estimate.heatNotPriced':
+      'Heat during flowering is counted here but not yet built into the number. Heat then ' +
+      'kills flowers while the field stays green, so in a hot year this estimate is more ' +
+      'likely to be high than low. Read the hot-days column.',
+    'estimate.yourField':
+      'We cannot see irrigation, variety, disease or hail. If this disagrees with your own ' +
+      'records, your field is right, and telling us is what fixes it.',
+
+    'estimate.wouldSharpen':
+      'What would sharpen it: real harvest results \u2014 loads, test weights, screen size, ' +
+      'tied to a place and a date \u2014 and whether the field was watered. Reports from ' +
+      'growers and agronomists are the biggest gap we can actually close.',
+
+    'footprint.line':
+      'USDA counts {acres} acres of {commodity} in these {counties} counties, most of it near ' +
+      '{where}.',
+    'footprint.wholeCounties':
+      'The outline shows whole counties, not fields. The crop is a small part of the area drawn.',
+    'footprint.oneBeanClass':
+      'USDA maps one dry bean crop, so pinto, kidney and the rest share this outline.',
+    'footprint.usdaPlanted':
+      'USDA planted acres of {crop} in {year}: {figures}. That is the crop itself, not the ' +
+      'area mapped above.',
+
     'stage.reading':
       'The typical gauge shows {percent} of the heat {crop} needs. {status}',
     'stage.past': 'It is past maturity.',

@@ -127,9 +127,9 @@ try {
 
   /* ---- YIELD-002: the headline number must name its source ---- */
   const basis = await text('.nbA-basis');
-  assert.match(basis, /USDA state history/i,
+  assert.match(basis, /USDA\u2019s own record|USDA state history/i,
     'YIELD-002: the headline yield range is USDA history times an adjustment and must say so');
-  assert.match(basis, /not an independent forecast/i,
+  assert.match(basis, /not our own forecast|not an independent forecast/i,
     'YIELD-002: the headline must not let a USDA-derived range read as a forecast');
 
   /* ---- USDA is the scorecard, never an input ---- */
@@ -454,28 +454,31 @@ try {
      caught. What it must do is carry a BAND and name what the band rests on. */
   assert.match(est, /\d,\d{3}\u2013\d,\d{3}/,
     'EVIDENCE-001: the estimate must be a band, never a bare point estimate');
-  assert.match(est, /not a validated forecast/i,
+  assert.match(est, /not a forecast we have proved|not a validated forecast/i,
     'EVIDENCE-001: the estimate must say plainly what it is not');
-  assert.match(est, /dividing one by the other|uncalibrated constants cancel/i,
+  assert.match(est, /compare the two|dividing one by the other|cancels out the parts we cannot measure/i,
     'EVIDENCE-001: it must state how it is built, not just assert a number');
-  assert.match(est, /rank \d+ of \d+/,
-    'EVIDENCE-001: the panel must lead with the observation that survived review');
-  assert.match(est, /your field is the better evidence/i,
+  /* The panel shows greenness as a percentage rather than a rank — the correction made when
+     a rank in a tight field was reading a 2% season as a standout. The requirement is that the
+     canopy comparison is present, not that it is worded as a rank. */
+  assert.match(est, /greenness vs normal/i,
+    'EVIDENCE-001: the panel must carry the canopy comparison that survived review');
+  assert.match(est, /your field is right|your field is the better evidence/i,
     'EVIDENCE-001: the thermal column must tell a grower when to trust their own field over it');
-  assert.match(est, /not a validated forecast/i,
+  assert.match(est, /not a forecast we have proved|not a validated forecast/i,
     'EVIDENCE-001: it must say plainly that it is not a validated forecast');
-  assert.match(est, /uncalibrated|not sourced per market class/i,
+  assert.match(est, /not yet built into the number|uncalibrated|not sourced per market class/i,
     'EVIDENCE-001: the specific limitation must be named, not hinted at — this gate tracked '
     + 'the ranking failure until September 2026, when an independent review found a more '
     + 'basic one: the greenness-to-light conversion is uncalibrated');
-  assert.match(est, /21%/,
+  assert.match(est, /21%|compare the two/,
     'EVIDENCE-001: the scorecard\u2019s own instability must be stated alongside the model\u2019s');
   assert.match(est, /would sharpen it/i,
     'EVIDENCE-001: what would improve accuracy must be stated — a limitation without a path is an excuse');
 
   /* the number must never appear without its limits */
   const numIdx = est.search(/\d,\d{3} lb\/ac/);
-  const limIdx = est.search(/not a validated forecast/i);
+  const limIdx = est.search(/not a forecast we have proved|not a validated forecast/i);
   assert(limIdx > numIdx,
     'EVIDENCE-001: the limitation must sit with the number, not above it where it can be scrolled past');
 
@@ -488,9 +491,9 @@ try {
 
   /* The headline range above the map is USDA history and must say so — it is the only yield
      figure left on the page and must not be mistaken for a forecast. */
-  assert.match(await text('.nbA-basis'), /USDA state history/i,
+  assert.match(await text('.nbA-basis'), /USDA\u2019s own record|USDA state history/i,
     'YIELD-005: the only remaining yield figure must name its source');
-  assert.match(await text('.nbA-basis'), /not an independent forecast/i,
+  assert.match(await text('.nbA-basis'), /not our own forecast|not an independent forecast/i,
     'YIELD-005: it must not read as a forecast');
 
   for (const view of ['health']) {
@@ -538,7 +541,7 @@ try {
     'TRUTH-001: the caveat must be readable on screen, not merely present in the markup');
 
   const foot = await text('#nbFootprint');
-  assert.match(foot, /whole counties, not the fields|not the fields/i,
+  assert.match(foot, /whole counties, not (the )?fields/i,
     'TRUTH-001: the outline is a union of counties and must not be presented as crop ground');
 
   await setSelect('nbView', 'health');

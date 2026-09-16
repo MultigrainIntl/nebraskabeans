@@ -919,41 +919,34 @@
         '<td class="nbNum">' + x.c.pct_of_maturity + '%</td></tr>';
     }).join('');
 
+    /* Whole sentences from the text file, in plain words. This block was thirty-four lines of
+       glued fragments — untranslatable, and reading grade 17 at its worst. The table headings
+       stay short because a heading has no room for a sentence. */
+    var T = window.NB_TEXT;
+    var heatF = best.c.heat_threshold_f || 90;
     el.innerHTML =
-      '<h3>' + S.crop + ' 2026 — where the crop stands now</h3>' +
-      '<p class="nbEstLead">A yield estimate built only from what has been measured this ' +
-      'season, and the measurements it rests on. Nothing here waits on USDA and nothing is ' +
-      'a post-mortem: it is what the crop has done so far, read from orbit and from ' +
-      'stations on the ground.</p>' +
+      '<h3>' + S.crop + ' 2026 \u2014 where the crop stands now</h3>' +
+      '<p class="nbEstLead">' + T.t('estimate.lead2') + '</p>' +
       '<div class="nbTableWrap">' +
       '<table class="nbYieldTable"><thead><tr><th>region</th><th>est. lb/ac</th>' +
       '<th>vs normal</th><th>hot days in flower</th><th>greenness vs normal</th>' +
-      '<th>of GDD needed</th></tr></thead>' +
+      '<th>of heat needed</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table></div>' +
-      (bestY ? '<p class="nbEstNum">Best <b>' + bestY.r.name + '</b> at ' +
-        idxFor(bestY.id).lb_ac.toLocaleString() + ' lb/ac; weakest <b>' + worstY.r.name +
-        '</b> at ' + idxFor(worstY.id).lb_ac.toLocaleString() + ' lb/ac.</p>' : '') +
-      '<p class="nbEstNum">Greenest against its own history: <b>' + bestRank.r.name +
-      '</b> at rank ' + bestRank.r.canopy_rank.rank + ' of ' + bestRank.r.canopy_rank.of +
-      '; lowest <b>' + worstRank.r.name + '</b> at rank ' + worstRank.r.canopy_rank.rank +
-      ' of ' + worstRank.r.canopy_rank.of + '.</p>' +
-      '<p class="nbEstLimit"><b>What this is and is not.</b> ' +
-      ((S.yieldIndex && S.yieldIndex.limits) ? S.yieldIndex.limits[0] : S.yieldAll.limits[0]) +
-      '</p>' +
-      ((S.yieldIndex && S.yieldIndex.limits && S.yieldIndex.limits[2])
-        ? '<p class="nbEstLimit">' + S.yieldIndex.limits[2] + '</p>' : '') +
-      ((S.yieldIndex && S.yieldIndex.limits && S.yieldIndex.limits[4])
-        ? '<p class="nbEstLimit"><b>When to trust your own field instead.</b> ' +
-          S.yieldIndex.limits[4] + '</p>' : '') +
-      '<p class="nbEstNum">Days above ' + (best.c.heat_threshold_f || 90) + '\u00b0F ' +
-      'during flowering and pod set, when ' + S.crop.toLowerCase() + ' sets seed. <b>Heat ' +
-      'here does not show in the canopy</b> — it aborts flowers and blasts pods, so a field ' +
-      'can stay green and still come up short. The greenness column and this one can ' +
-      'disagree, and when they do, this one is the warning.</p>' +
-      '<p class="nbEstNext"><b>What would sharpen it.</b> ' +
-      S.yieldAll.what_would_sharpen_it.slice(0, 2).join('; ').toLowerCase() +
-      '. Field reports from growers and agronomists are the largest single gap and the one we ' +
-      'can close.</p>';
+      (bestY ? '<p class="nbEstNum">' + T.t('estimate.bestWorst', {
+          bestRegion: '<b>' + bestY.r.name + '</b>',
+          bestYield: idxFor(bestY.id).lb_ac.toLocaleString() + ' lb/ac',
+          worstRegion: '<b>' + worstY.r.name + '</b>',
+          worstYield: idxFor(worstY.id).lb_ac.toLocaleString() + ' lb/ac' }) + '</p>' : '') +
+      '<p class="nbEstNum">' + T.t('flower.heat', {
+          threshold: T.temp((heatF - 32) * 5 / 9), crop: S.crop.toLowerCase() }) + ' ' +
+        T.t('flower.disagree') + '</p>' +
+      '<p class="nbEstLimit"><b>What this is.</b> ' + T.t('estimate.whatItIs') + ' ' +
+        T.t('estimate.howBuilt') + '</p>' +
+      '<p class="nbEstLimit">' + T.t('estimate.bandMeans') + ' ' +
+        T.t('estimate.heatNotPriced') + '</p>' +
+      '<p class="nbEstLimit"><b>When to trust your own field instead.</b> ' +
+        T.t('estimate.yourField') + '</p>' +
+      '<p class="nbEstNext">' + T.t('estimate.wouldSharpen') + '</p>';
     el.hidden = false;
   }
 
@@ -980,10 +973,9 @@
       }
     });
     if (!parts.length) return '';
-    return '<span class="nbUsdaAcres">USDA planted acres of ' + S.crop.toLowerCase() + ', ' +
-      u.judged_on_crop_year + ': ' + parts.join(', ') + '. That is the crop itself, not the ' +
-      'mapped area above — USDA maps one dry-bean layer, so every bean class shares that ' +
-      'figure but not this one.</span>';
+    return '<span class="nbUsdaAcres">' + window.NB_TEXT.t('footprint.usdaPlanted', {
+      crop: S.crop.toLowerCase(), year: u.judged_on_crop_year,
+      figures: parts.join(', ') }) + '</span>';
   }
 
   function updateFootprint() {
@@ -1002,14 +994,15 @@
     /* The outline is the union of whole counties that carry the crop, not the crop's fields.
      * USDA counts the acres; the shape is much larger than they are, and saying "ground" made
      * a county envelope look like a field boundary. */
-    el.innerHTML = 'USDA counts <b>' + acres.toLocaleString() + ' acres</b> of ' +
-      com.toLowerCase() + ' in the <b>' + counties.length + ' counties</b> outlined here' +
-      (top ? ', most of it around ' + top : '') + '. The outline is those whole counties, not ' +
-      'the fields — the crop is a small part of the area drawn. Cropland Data Layer ' +
-      (S.cropOutlines.crop_year || '') +
-      (com === 'DRY BEANS'
-        ? ', which carries one dry-bean class: pinto, navy, black and the kidneys share it.'
-        : '.') + usdaPlanted();
+    var T = window.NB_TEXT;
+    el.innerHTML =
+      T.t('footprint.line', { acres: '<b>' + acres.toLocaleString() + '</b>',
+                              commodity: com.toLowerCase(),
+                              counties: '<b>' + counties.length + '</b>',
+                              where: top || 'the areas shown' }) + ' ' +
+      T.t('footprint.wholeCounties') +
+      (com === 'DRY BEANS' ? ' ' + T.t('footprint.oneBeanClass') : '') +
+      usdaPlanted();
     el.hidden = false;
   }
 

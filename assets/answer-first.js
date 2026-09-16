@@ -62,9 +62,14 @@
        * the number they are most likely to act on. */
       yieldRange = lo.toLocaleString() + '–' + hi.toLocaleString() + ' lb/ac';
       yieldVs = vs + ' the ' + base.toLocaleString() + ' lb/ac recent average.';
-      yieldBasis = 'USDA state history for this class, adjusted ' +
-        (adj === 0 ? 'not at all' : (adj > 0 ? 'up ' : 'down ') + Math.abs(adj) + '%') +
-        ' for this season\u2019s heat and moisture. Not an independent forecast.';
+      /* One whole sentence, in plain words, with slots a translator can move. This was three
+         fragments with a percentage glued into the middle of a clause. */
+      yieldBasis = adj === 0
+        ? window.NB_TEXT.t('headline.basisFlat', { crop: crop.toLowerCase() })
+        : window.NB_TEXT.t('headline.basis', {
+            crop: crop.toLowerCase(),
+            direction: adj > 0 ? 'up' : 'down',
+            percent: Math.abs(adj) + '%' });
     }
 
     var readyNow = rows.filter(function (r) { return (r.c.harvest || {}).ready === 'now'; }).length;
