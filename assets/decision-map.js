@@ -1184,16 +1184,23 @@
           'this crop, from ' + r(low) + '% in the slowest tenth to ' + r(high) + '% in the ' +
           'fastest.';
     } else if (S.view === 'heat') {
-      text = S.crop + ' has taken <b>' + r(med) + ' days above ' +
-        (CLASSES[S.crop] || CLASSES.PINTO).heat + '°F</b> at the median gauge on this crop, ' +
-        'and up to ' + r(high) + ' in the hottest tenth. Heat in pod fill shows up as small seed.';
+      text = window.NB_TEXT.t('heat.reading', {
+        crop: S.crop, days: '<b>' + r(med) + '</b>',
+        threshold: window.NB_TEXT.temp(((CLASSES[S.crop] || CLASSES.PINTO).heat - 32) * 5 / 9),
+        hottest: r(high) });
     } else {
-      text = 'Over the last thirty days rainfall ran <b>' + r(med) + ' mm</b> against ' +
-        possessive(S.crop.toLowerCase()) + ' own water use at the median gauge on this crop, from ' + r(low) +
-        ' mm where it fell furthest behind to ' + r(high) + ' mm where it kept up.' +
-        note('This is weather, not soil: it carries no irrigation, no crop coefficient and ' +
-             'no stored soil water, so it says where demand outran rain, not whether a ' +
-             'field is dry.');
+      /* One whole sentence with named slots, in the reader's own units. This was six glued
+         fragments reporting millimetres to growers in Nebraska — wrong units, and
+         untranslatable, because Spanish and Turkish cannot move a word across a join. It also
+         said it carried "no crop coefficient", which stopped being true the moment the water
+         map started using one. */
+      var T = window.NB_TEXT;
+      text = (med < 0
+        ? T.t('water.reading', { balance: '<b>' + T.depth(med) + '</b>',
+                                 crop: S.crop.toLowerCase(),
+                                 low: T.depth(low), high: T.depth(high) })
+        : T.t('water.surplus', { crop: S.crop.toLowerCase(), high: T.depth(high) })) +
+        note(T.t('water.what'));
     }
     /* Count the stations that actually answered this view. Most cooperative sites report rain
      * and not temperature, so claiming the full network behind a growing-degree-day figure
