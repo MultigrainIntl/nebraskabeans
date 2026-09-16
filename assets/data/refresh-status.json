@@ -1,20 +1,20 @@
 {
- "ran_utc": "2026-09-16T01:53:24.224654Z",
+ "ran_utc": "2026-09-16T02:14:00.686791Z",
  "all_sources_keyless": true,
  "steps": [
   {
    "step": "../build_station_observations.py",
    "source": "IEM hourly ASOS air temperature at the satellite's overpass hour",
    "ok": true,
-   "took": "336s"
+   "took": "435s"
   },
   {
    "step": "station_field_acis.py",
    "source": "NOAA cooperative and GHCN stations via RCC-ACIS",
    "ok": true,
-   "took": "139s",
+   "took": "358s",
    "dataset": "station-field.json",
-   "age_days": 0,
+   "age_days": 1,
    "tolerance_days": 5
   },
   {
@@ -33,7 +33,7 @@
    "step": "thermal_stress.py",
    "source": "NASA MOD11A2 land surface temperature",
    "ok": true,
-   "took": "128s"
+   "took": "121s"
   },
   {
    "step": "vs_history.py",
@@ -41,7 +41,7 @@
    "ok": true,
    "took": "0s",
    "dataset": "crop-vs-history.json",
-   "age_days": 10,
+   "age_days": 11,
    "tolerance_days": 12
   },
   {
@@ -50,7 +50,7 @@
    "ok": true,
    "took": "0s",
    "dataset": "yield-all-2026.json",
-   "age_days": 0,
+   "age_days": 1,
    "tolerance_days": 12
   },
   {
