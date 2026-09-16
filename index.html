@@ -11,62 +11,25 @@
 <div class="playbackControls"><label>Playback speed <select id="playSpeed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><button id="cropDetail">Zoom to crop detail</button><label>Raster opacity <input id="rasterOpacity" type="range" min="15" max="85" value="45" aria-label="Raster opacity"><output id="opacityValue">45%</output></label><span id="playbackStatus" role="status">Preparing daily frames…</span></div><div class="spatialControls"><label><input type="checkbox" id="cropToggle" checked> Historical dry-bean polygons <span class="cropKey">■</span></label><label><input type="checkbox" id="stationToggle" checked> Weather stations <span class="stationKey">●</span></label><div id="cropStatus" role="status">Loading crop footprint…</div><div id="stationStatus" role="status">Loading station observations…</div></div>
 <div class="maptools"><select id="region" aria-label="Analytical area"></select><span id="status">Loading evidence architecture…</span></div><div class="runtime"><span id="countyStatus">County boundaries loading…</span><span id="runtimeStatus">Runtime initializing…</span><span id="buildStatus">Data build manifest loading…</span></div></section>
 <section class="nbDeeper"><section class="method" id="report"><div class="sectionhead"><div>
-<div class="eyebrow">CLOSE THE LOOP</div>
-<h2>Tell us what your field actually made</h2>
-<p>This is the one thing that sharpens every number on this page. The model predicts from orbit for every growing region; the fields that report back teach it where it is wrong, and that correction carries to regions that will never report one. Your figure is never adjusted to fit a prediction &mdash; a reported yield outranks every model here.</p>
+<div class="eyebrow">CONTACT</div>
+<h2>Tell us where this is wrong</h2>
+<p>If a number here disagrees with what you are seeing in the field, your field is the better evidence and we want to hear it. A correction, a question, a region we should cover &mdash; anything.</p>
 </div></div>
 <form id="nbReport" class="nbForm" action="https://formspree.io/f/xpqeadrq" method="POST">
  <div class="nbFormGrid">
-  <label>Crop
-   <select name="crop" required>
-    <option value="">select a class</option>
-    <option>PINTO</option><option>GREAT NORTHERN</option><option>NAVY</option><option>BLACK</option>
-    <option>LIGHT RED KIDNEY</option><option>DARK RED KIDNEY</option><option>PINK</option>
-    <option>SMALL RED</option><option>CRANBERRY</option><option>SMALL WHITE</option><option>BLACKEYE</option>
-    <option>GARBANZO (KABULI)</option><option>GARBANZO (DESI)</option>
-    <option>LENTIL LARGE GREEN</option><option>LENTIL SMALL GREEN</option><option>LENTIL RED</option>
-    <option>PEA YELLOW</option><option>PEA GREEN</option>
-   </select></label>
-  <label>Growing region
-   <select name="region" required>
-    <option value="">select a region</option>
-    <option value="ne-panhandle">Nebraska Panhandle</option>
-    <option value="sw-nebraska">Southwest Nebraska</option>
-    <option value="ne-colorado">Northeast Colorado</option>
-    <option value="western-colorado">Western Colorado</option>
-    <option value="se-wyoming">Southeast Wyoming</option>
-    <option value="big-horn">Big Horn Basin</option>
-    <option value="nw-kansas">Northwest Kansas</option>
-    <option value="other">somewhere else &mdash; say where in the notes</option>
-   </select></label>
-  <label>Clean yield, lb per acre
-   <input type="number" name="lb_ac" min="1" max="6000" step="1" required placeholder="2150"></label>
-  <label>Date it came off
-   <input type="date" name="harvested_on" required></label>
-  <label>Irrigated?
-   <select name="irrigated" required>
-    <option value="">select</option>
-    <option value="true">Irrigated</option>
-    <option value="false">Dryland</option>
-    <option value="">Not sure</option>
-   </select></label>
-  <label>Acres <span class="nbOpt">optional</span>
-   <input type="number" name="acres" min="1" step="1" placeholder="160"></label>
-  <label>Your name or operation
-   <input type="text" name="reported_by" required placeholder="so the report can be attributed"></label>
-  <label>Email <span class="nbOpt">so we can come back with questions</span>
-   <input type="email" name="email" placeholder="you@example.com"></label>
+  <label>Your name <span class="nbOpt">optional</span>
+   <input type="text" name="name" placeholder=""></label>
+  <label>Email <span class="nbOpt">only if you want a reply</span>
+   <input type="email" name="email" placeholder=""></label>
  </div>
- <label class="nbFull">Anything that explains the number &mdash; hail, replant, disease, a short water year, a variety worth naming
-  <textarea name="note" rows="3" placeholder="optional, and often the most useful part"></textarea></label>
- <input type="hidden" name="crop_year" value="2026">
- <input type="hidden" name="_subject" value="NebraskaBeans harvest report">
+ <label class="nbFull">Message
+  <textarea name="message" rows="4" required placeholder=""></textarea></label>
+ <input type="hidden" name="_subject" value="NebraskaBeans message">
  <div class="nbFormFoot">
-  <button type="submit">Send the report</button>
-  <span class="nbOpt">Goes to Multigrain. Not published with your name unless you say we may.</span>
+  <button type="submit">Send</button>
+  <span class="nbOpt">Goes to Multigrain. Nothing is published.</span>
  </div>
 </form>
-<p class="nbOpt" style="margin-top:14px">Not reporting a harvest? Anything else &mdash; a correction, a question, a region we should cover &mdash; use the same form and put it in the notes.</p>
 </section>
 <details><summary class="nbDeeperSum">Dig deeper — model detail, evidence and method</summary><div class="nbDeeperBody"><section class="hero" style="padding-top:0"><div class="answerStrip"><div><span>CROP-HEALTH OUTLOOK</span><strong id="condition">LOADING</strong><small id="conditionWhy">Requires a released model plus independent SMAP and NDVI evidence.</small></div><div><span>ROOT-ZONE MOISTURE</span><strong id="soilState">LOADING</strong><small id="soilValue">NASA SMAP L4 0–100 cm anomaly.</small></div><div><span>VEGETATION SIGNAL</span><strong id="healthState">LOADING</strong><small id="healthWhy">Weekly Crop-CASMA NDVI direction.</small></div><div><span>VS HISTORICAL MEDIAN</span><strong id="yieldVsBase">—</strong><small>USDA final pinto outcomes define the calibration history.</small></div><div><span>VALIDATION STATE</span><strong id="confidence">LOADING</strong><small id="confidenceWhy">Leave-one-year-out testing; no invented confidence percentage.</small></div></div><div class="plain"><b>In plain English:</b> <span id="plainEnglish">GISit yield is calculated independently; USDA acreage is a dated production input and USDA final yield is reserved for comparison.</span></div></section>
 

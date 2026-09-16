@@ -26,17 +26,10 @@
       headers: { Accept: 'application/json' }
     }).then(function (r) {
       if (!r.ok) throw new Error('rejected');
-      var crop = form.querySelector('[name=crop]').value;
-      var lb = form.querySelector('[name=lb_ac]').value;
       var note = document.createElement('div');
       note.className = 'nbFormSent';
-      note.innerHTML = '<b>Thank you — that is the most useful thing on this page.</b><br>' +
-        (crop && lb
-          ? 'Recorded: ' + crop + ' at ' + Number(lb).toLocaleString() + ' lb/ac. '
-          : '') +
-        'It will be scored against what this model predicted before your harvest date, and ' +
-        'the difference becomes a correction that carries to regions which will never report ' +
-        'a yield of their own.';
+      note.innerHTML = '<b>Thank you \u2014 that reached us.</b><br>' +
+        'If a number on this page is wrong, knowing it is the fastest way we fix it.';
       form.parentNode.replaceChild(note, form);
       note.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }).catch(function () {
