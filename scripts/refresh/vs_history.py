@@ -82,7 +82,51 @@ def series_for(obs):
     return by
 
 
-def build(by):
+# When each crop is actually in the field. Comparing a pass taken after harvest is comparing
+# stubble to stubble: kabuli chickpea goes in on 20 April and comes off in late August, so a
+# 5 September reading says nothing about the crop, and that reading was what the page led with.
+SEASON = {"DRY BEANS": ("06-01", "09-25"),
+          "CHICKPEAS": ("05-01", "08-25"),
+          "LENTILS":   ("05-01", "08-15"),
+          "PEAS":      ("04-25", "08-15")}
+
+
+def season_to_date(dates, window, latest):
+    """The whole season so far, not one pass.
+
+    A single satellite pass swings twenty points between adjacent dates — chickpeas in the
+    Nebraska Panhandle ran -19.7% on 5 August and +11.3% on 5 September. Leading with the last
+    one turned noise into a headline. Averaging every in-season pass to date, against the same
+    stretch of every past season, gives +0.5%: an ordinary year, which is what it is.
+    """
+    lo, hi = window
+    md_in = [md for md in dates if lo <= md <= min(hi, latest)]
+    if len(md_in) < 3:
+        return None
+    years = defaultdict(list)
+    for md in md_in:
+        for y, v in dates[md].items():
+            years[y].append(v)
+    # a year only counts if it covered most of the same window
+    need = len(md_in) * 0.6
+    means = {y: sum(v) / len(v) for y, v in years.items() if len(v) >= need}
+    cur = means.pop(THIS_YEAR, None)
+    if cur is None or len(means) < MIN_YEARS:
+        return None
+    hist = sorted(means.values())
+    mean = sum(hist) / len(hist)
+    p20, p80 = hist[int(len(hist) * 0.2)], hist[int(len(hist) * 0.8)]
+    return {"passes": len(md_in), "window": [lo, min(hi, latest)],
+            "now": round(cur, 1), "mean": round(mean, 1),
+            "n_years": len(hist),
+            "vs_mean_pct": round(100 * (cur - mean) / mean, 1),
+            "rank": sum(1 for v in hist if v < cur) + 1, "of": len(hist) + 1,
+            "typical": bool(p20 <= cur <= p80),
+            "band": ("above the usual range" if cur > p80 else
+                     "below the usual range" if cur < p20 else "inside the usual range")}
+
+
+def build(by, commodity=None, latest_hint="12-31"):
     out = {}
     for r, dates in by.items():
         series = {}
@@ -113,19 +157,28 @@ def build(by):
                 row["spread_pct"] = round(100 * (hist[-1] - hist[0]) / mean, 1)
             series[md] = row
         if series:
-            out[r] = {"name": NAMES[r], "dates": series}
+            block = {"name": NAMES[r], "dates": series}
+            win = SEASON.get(commodity or "DRY BEANS")
+            if win:
+                std = season_to_date(dates, win, latest_hint)
+                if std:
+                    block["season_to_date"] = std
+            out[r] = block
     return out
 
 
 def main():
-    crops = {"DRY BEANS": build(series_for(bean_observations()))}
-    for com, obs in pulse_observations().items():
-        got = build(series_for(obs))
+    bean_by = series_for(bean_observations())
+    pulse_by = {com: series_for(obs) for com, obs in pulse_observations().items()}
+    latest = max((md for by in [bean_by] + list(pulse_by.values())
+                  for dates in by.values() for md, yrs in dates.items()
+                  if THIS_YEAR in yrs), default="12-31")
+
+    crops = {"DRY BEANS": build(bean_by, "DRY BEANS", latest)}
+    for com, by in pulse_by.items():
+        got = build(by, com, latest)
         if got:
             crops[com] = got
-
-    latest = max((md for c in crops.values() for v in c.values()
-                  for md, r in v["dates"].items() if "now" in r), default=None)
 
     json.dump({
         "schema": "gisit.crop-vs-history.v2",

@@ -229,7 +229,9 @@ def main():
     ndvi = json.load(open(os.path.join(ARCHIVE, "canopy-history.json")))["observations"]
     pulses = json.load(open(os.path.join(ARCHIVE, "canopy-pulses.json")))
     cells = json.load(open(os.path.join(HERE, "bean-cells-by-county.json")))
-    vshist = json.load(open(os.path.join(DATA, "crop-vs-history.json")))["regions"]
+    _vs = json.load(open(os.path.join(DATA, "crop-vs-history.json")))
+    vshist = _vs["regions"]
+    vshist_crops = _vs.get("crops", {})
     rad = json.load(open(os.path.join(ARCHIVE, "solar-radiation.json")))["regions"]
     dates = field["dates"]
 
@@ -379,8 +381,11 @@ def main():
                                                  "canopy cover so bare-soil passes do not "
                                                  "count as crop stress",
                        "thermal_readings": len(thermal),
+                       # NOTE: this is a single date and the PAGE NO LONGER USES IT. The
+                       # evidence table reads crop-vs-history directly, so the map and the
+                       # table cannot disagree. Kept only because the file has other readers.
                        "canopy_rank": ({"rank": hist[asof]["rank"], "of": hist[asof]["of"],
-                                        "as_of": asof} if asof else None)}
+                                        "as_of": asof, "single_date": True} if asof else None)}
 
     json.dump({"schema": "gisit.yield-all-2026.v1", "year": 2026,
                "latest_observation": dates[-1],

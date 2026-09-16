@@ -242,7 +242,8 @@
    "canopy_rank": {
     "rank": 17,
     "of": 26,
-    "as_of": "09-05"
+    "as_of": "09-05",
+    "single_date": true
    }
   },
   "sw-nebraska": {
@@ -480,7 +481,8 @@
    "canopy_rank": {
     "rank": 18,
     "of": 27,
-    "as_of": "09-05"
+    "as_of": "09-05",
+    "single_date": true
    }
   },
   "ne-colorado": {
@@ -718,7 +720,8 @@
    "canopy_rank": {
     "rank": 18,
     "of": 25,
-    "as_of": "09-05"
+    "as_of": "09-05",
+    "single_date": true
    }
   },
   "western-colorado": {
@@ -971,7 +974,8 @@
    "canopy_rank": {
     "rank": 11,
     "of": 27,
-    "as_of": "09-05"
+    "as_of": "09-05",
+    "single_date": true
    }
   },
   "se-wyoming": {
@@ -1209,7 +1213,8 @@
    "canopy_rank": {
     "rank": 7,
     "of": 26,
-    "as_of": "09-05"
+    "as_of": "09-05",
+    "single_date": true
    }
   },
   "big-horn": {
@@ -1387,7 +1392,8 @@
    "canopy_rank": {
     "rank": 25,
     "of": 26,
-    "as_of": "09-05"
+    "as_of": "09-05",
+    "single_date": true
    }
   },
   "nw-kansas": {
@@ -1595,7 +1601,8 @@
    "canopy_rank": {
     "rank": 8,
     "of": 26,
-    "as_of": "09-05"
+    "as_of": "09-05",
+    "single_date": true
    }
   }
  },

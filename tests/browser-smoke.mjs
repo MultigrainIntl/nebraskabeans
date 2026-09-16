@@ -254,6 +254,17 @@ try {
     'NOW-001: the reading must state how big the difference is, not only where it ranks');
   assert.match(now, /usual range/i,
     'NOW-001: it must say whether this season is inside the ordinary range — most are');
+
+  /* NOW-003: the season, not one pass. The readout led with a single satellite date. Adjacent
+     passes swing twenty points, and the date it picked was after harvest for the pulses, so
+     south-east Wyoming chickpeas read +16.6% when the season was -4.3% — wrong in size and in
+     sign. Nothing failed; a plausible number was simply wrong, which is why it needed a
+     person to look at the finished page. */
+  await setSelect('nbCrop', 'GARBANZO (KABULI)');
+  await page.waitForTimeout(700);
+  const seasonRead = await text('#nbReadout');
+  assert.match(seasonRead, /Season so far \(\d+ satellite passes/i,
+    'NOW-003: the reading must be the season to date, and must say how many passes it rests on');
   assert.match(now, /observed, not forecast/i,
     'NOW-001: it must say plainly that it is an observation');
   assert.match(now, /waiting on no agency|final when it lands/i,
@@ -291,8 +302,14 @@ try {
   const est = await text('#nbEstimate');
   assert.match(est, /where the crop stands now/i,
     'EVIDENCE-001: the panel must be presented as a current reading, not a post-mortem');
-  assert.match(est, /greenness rank/i,
+  /* Renamed when the column stopped being a rank taken from one satellite pass. A single
+     date swung twenty points between adjacent passes and, for a chickpea, fell after harvest —
+     stubble compared with stubble. It now shows the season to date, from the same function the
+     map is painted from, so the table and the map cannot disagree. */
+  assert.match(est, /greenness vs normal/i,
     'EVIDENCE-001: canopy against its own history must be shown beside every number');
+  assert(!/greenness rank/i.test(est),
+    'EVIDENCE-001: the single-pass rank must not come back into the table');
   assert.match(est, /\d+ of \d+/,
     'EVIDENCE-001: the history comparison must be a rank against the years on record');
   assert.match(est, /hot days in flower/i,

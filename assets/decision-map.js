@@ -521,6 +521,26 @@
     var h = (byCrop && byCrop[region]) ||
             (S.vsHistory && S.vsHistory.regions && S.vsHistory.regions[region]);
     if (!h) return null;
+
+    /* THE SEASON, NOT ONE PASS. This read a single satellite date and led with it. Adjacent
+       passes swing twenty points — chickpeas in the Panhandle ran -19.7% on 5 August and
+       +11.3% on 5 September — and the date it happened to pick was after chickpea harvest,
+       so it compared this year's stubble with past years' stubble. Every headline on this
+       view was wrong in size and several were wrong in SIGN: south-east Wyoming chickpeas
+       showed +16.6% when the season is -4.3%. Averaging every in-season pass to date against
+       the same stretch of every past season is the honest comparison. */
+    var std = h.season_to_date;
+    if (std) {
+      return {
+        t: Math.max(0, Math.min(1, (std.vs_mean_pct + 15) / 30)),
+        label: (std.vs_mean_pct > 0 ? '+' : '') + std.vs_mean_pct + '% vs normal',
+        rank: std.rank, of: std.of, pct: std.vs_mean_pct,
+        band: std.band, typical: std.typical, years: std.n_years,
+        passes: std.passes, window: std.window, seasonToDate: true,
+        band_lo: null, now: std.now
+      };
+    }
+    if (!h) return null;
     var md = S.dates[S.day].slice(5);
     // Dates late in the season carry the 26-year history but no reading yet — the satellite
     // passes every eight to ten days while the station record advances daily. A bucket that
@@ -868,8 +888,13 @@
           ? (ix.vs_normal_pct > 0 ? '+' : '') + Math.round(ix.vs_normal_pct) + '%' : '—') + '</td>' +
         '<td class="nbNum">' + (x.c.flowering_window_days
           ? x.c.flowering_hot_days + ' of ' + x.c.flowering_window_days : '—') + '</td>' +
-        '<td class="nbNum">' + (x.r.canopy_rank
-          ? x.r.canopy_rank.rank + ' of ' + x.r.canopy_rank.of : '—') + '</td>' +
+        // SAME SOURCE AS THE MAP. This column read a single satellite date out of
+        // yield-all-2026.json while the map above it read the season, so the two could — and
+        // did — disagree. It now calls the identical function the surface is painted from.
+        '<td class="nbNum">' + (function () {
+          var hv = historyValue(x.id);
+          return hv ? (hv.pct > 0 ? '+' : '') + hv.pct + '%' : '—';
+        })() + '</td>' +
         '<td class="nbNum">' + x.c.pct_of_maturity + '%</td></tr>';
     }).join('');
 
@@ -881,7 +906,7 @@
       'stations on the ground.</p>' +
       '<div class="nbTableWrap">' +
       '<table class="nbYieldTable"><thead><tr><th>region</th><th>est. lb/ac</th>' +
-      '<th>vs normal</th><th>hot days in flower</th><th>greenness rank</th>' +
+      '<th>vs normal</th><th>hot days in flower</th><th>greenness vs normal</th>' +
       '<th>of GDD needed</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table></div>' +
       (bestY ? '<p class="nbEstNum">Best <b>' + bestY.r.name + '</b> at ' +
@@ -954,7 +979,11 @@
     var el = $('nbReadout'), view = VIEWS[S.view];
     if (!el || !view || !view.sameAcrossClasses) return;
     if (commodityOf() !== 'DRY BEANS') return;
-    el.innerHTML += '<span class="nbStationCount">' + view.sameAcrossClasses + '</span>';
+    // LEADING, not trailing. This was appended after a 460-character paragraph, where it was
+    // read by nobody — GAJ asked the same question twice with the explanation already on the
+    // page, which is the clearest possible evidence that placing it last was the same as
+    // leaving it out.
+    el.innerHTML = '<b class="nbShared">' + view.sameAcrossClasses + '</b> ' + el.innerHTML;
   }
 
   function updateReadoutBody() {
@@ -977,15 +1006,21 @@
       rows.sort(function (a, b) { return a.v.t - b.v.t; });
       var worstR = rows[0], bestR = rows[rows.length - 1];
       var above = rows.filter(function (r) { return r.v.pct > 0; }).length;
-      var asOf = bestR.v.stale ? bestR.v.asOf : null;
+      var std0 = rows[0] && rows[0].v.seasonToDate;
+      var asOf = (!std0 && bestR.v.stale) ? bestR.v.asOf : null;
       var usual = rows.filter(function (r) { return r.v.typical; }).length;
-      el.innerHTML = (asOf ? 'Latest pass, ' + monthDay(asOf) + ': ' : 'On this date, ') +
+      el.innerHTML = (std0
+          ? 'Season so far (' + bestR.v.passes + ' satellite passes, ' +
+            monthDay(bestR.v.window[0]) + ' to ' + monthDay(bestR.v.window[1]) + '): '
+          : asOf ? 'Latest pass, ' + monthDay(asOf) + ': ' : 'On this date, ') +
         S.crop.toLowerCase() + ' greenness runs <b>' + bestR.v.label + '</b> in ' +
         bestR.name +
         (rows.length > 1 ? ' and <b>' + worstR.v.label + '</b> in ' + worstR.name : '') +
         '. ' + usual + ' of ' + rows.length + ' areas sit inside their usual range for this ' +
         'date — most seasons do. <span class="nbStationCount">observed, not forecast — a ' +
-        'satellite pass over this crop\u2019s own ground, final when it lands, waiting on no ' +
+        (commodityOf() === 'DRY BEANS'
+          ? 'satellite pass over dry-bean ground, final when it lands, waiting on no '
+          : 'satellite pass over this crop\u2019s own ground, final when it lands, waiting on no ') +
         'agency. A rank is published beside it, but the seasons sit inside about a 12% spread, ' +
         'so treat the percentage as the measure and the rank as context.</span>';
       return;

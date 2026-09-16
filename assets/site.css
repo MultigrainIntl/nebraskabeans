@@ -884,3 +884,8 @@ canvas.nbSurface {
 .nbFormSent { padding: 14px 16px; border-radius: 8px; background: #eef5ee;
   border: 1px solid #b9d3bd; color: #22303a; font-size: 15px; }
 @media (max-width: 560px) { .nbFormGrid { grid-template-columns: 1fr; } }
+
+/* The shared-map caveat. It sat at the end of a long readout and was invisible; a reader
+   asked twice why four maps looked identical while the answer was already on the page. */
+.nbShared { display: block; margin-bottom: 6px; color: #8a5416; font-size: 13.5px;
+  line-height: 1.5; }
