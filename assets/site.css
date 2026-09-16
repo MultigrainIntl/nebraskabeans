@@ -842,3 +842,21 @@ canvas.nbSurface {
   .nbDeeperSum { padding: 14px 14px; font-size: 14.5px; }
   .nbDeeperSum { font-size: 12.5px; }
 }
+
+/* On a phone the two season labels are centred under bars that are only a few dozen pixels
+   apart, and they overprint each other — it reads "Planting May-Harvest August". Anchor each
+   one to the outside edge of its own bar so they open away from one another, and let the
+   results table scroll sideways rather than putting its last columns out of reach. */
+@media (max-width: 560px) {
+  .nbPhases { height: 52px; }
+  .nbPhase span { font-size: 10.5px; }
+  /* Anchoring alone is not enough — the two labels together are wider than a phone. Put
+     them on their own lines so they cannot collide at any width. */
+  .nbPhasePlant span { left: 0; right: auto; transform: none; top: 12px; }
+  .nbPhaseHarvest span { left: auto; right: 0; transform: none; top: 26px; }
+  .nbYieldTable { font-size: 12.5px; }
+  .nbYieldTable th, .nbYieldTable td { padding-left: 6px; padding-right: 6px; }
+}
+
+.nbTableWrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 12px; }
+.nbTableWrap .nbYieldTable { margin-bottom: 0; }

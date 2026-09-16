@@ -23,6 +23,8 @@ DATA = os.path.join(HERE, "..", "..", "assets", "data")
 
 # builder, what it produces, how stale it may be before the run fails
 STEPS = [
+    ("../build_station_observations.py", None, None,
+     "IEM hourly ASOS air temperature at the satellite's overpass hour"),
     ("station_field_acis.py", "station-field.json", 5,
      "NOAA cooperative and GHCN stations via RCC-ACIS"),
     ("ndvi_cropmask.py", None, None, "Crop-CASMA daily NDVI on dry-bean ground"),
@@ -86,6 +88,23 @@ def main():
                                 "likely stopped publishing" % (produces, a, tol))
         report.append(line)
         print("  %-26s %-4s %s" % (script, "ok" if ok else "FAIL", took), file=sys.stderr)
+
+    # The build id is derived from the bytes of every material input, and the daily station
+    # download changes one of them by design. Left alone it is stale the moment the data is
+    # rebuilt, the foundation gate refuses it, and nothing is ever published. Re-derive it here
+    # so the id that ships always describes the data that ships.
+    if not failures:
+        t = time.time()
+        m = subprocess.run(["node", os.path.join(HERE, "..", "build_manifest.mjs")],
+                           capture_output=True, text=True, cwd=os.path.join(HERE, "..", ".."))
+        ok = m.returncode == 0
+        if not ok:
+            failures.append("build manifest could not be re-derived: %s"
+                            % (m.stderr or m.stdout or "").strip().split("\n")[-1])
+        report.append({"step": "build_manifest.mjs", "source": "content-derived build id",
+                       "ok": ok, "took": "%.0fs" % (time.time() - t)})
+        print("  %-26s %-4s %s" % ("build_manifest.mjs", "ok" if ok else "FAIL",
+                                   (m.stdout or "").strip()), file=sys.stderr)
 
     json.dump({"ran_utc": datetime.utcnow().isoformat() + "Z",
                "all_sources_keyless": True,

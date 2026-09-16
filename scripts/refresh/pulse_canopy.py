@@ -20,8 +20,8 @@ from PIL import Image
 import ndvi_cropmask as M
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CACHE = os.path.join(HERE, "casma-pulse-cache")
-OUT = os.path.join(HERE, "ndvi-pulses-2026.json")
+CACHE = os.path.join(HERE, "..", "..", "assets", "data", "archive", "casma-pulse-cache")
+OUT = os.path.join(HERE, "..", "..", "assets", "data", "archive", "canopy-pulses.json")
 COMMODITIES = ["CHICKPEAS", "LENTILS", "PEAS"]
 DATES = ["%02d.%02d" % (m, d) for m in range(3, 10) for d in (5, 15, 25)]
 MIN_ACRES = 40
@@ -104,11 +104,20 @@ def main():
                "y": (int(min(y for _, y in xy)) - pad, int(max(y for _, y in xy)) + pad),
                "cells": [{"x": x, "y": y, "acres": c["acres"], "region": c["region"]}
                          for c, (x, y) in zip(cs, xy)]}
+        # Only fetch dates not already on record.
         got = {}
+        if os.path.exists(OUT):
+            try:
+                got = json.load(open(OUT))["commodities"].get(com, {}).get("observations", {})
+            except Exception:
+                got = {}
         for mmdd in DATES:
+            key = "%d-%s" % (year, mmdd.replace(".", "-"))
+            if key in got:
+                continue
             s = fetch(box, com, year, mmdd)
             if s:
-                got["%d-%s" % (year, mmdd.replace(".", "-"))] = s
+                got[key] = s
         out[com] = {"counties": len(cs),
                     "acres": round(sum(c["acres"] for c in cs)),
                     "observations": got}

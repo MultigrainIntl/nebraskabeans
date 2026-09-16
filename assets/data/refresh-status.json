@@ -1,0 +1,64 @@
+{
+ "ran_utc": "2026-09-16T01:53:24.224654Z",
+ "all_sources_keyless": true,
+ "steps": [
+  {
+   "step": "../build_station_observations.py",
+   "source": "IEM hourly ASOS air temperature at the satellite's overpass hour",
+   "ok": true,
+   "took": "336s"
+  },
+  {
+   "step": "station_field_acis.py",
+   "source": "NOAA cooperative and GHCN stations via RCC-ACIS",
+   "ok": true,
+   "took": "139s",
+   "dataset": "station-field.json",
+   "age_days": 0,
+   "tolerance_days": 5
+  },
+  {
+   "step": "ndvi_cropmask.py",
+   "source": "Crop-CASMA daily NDVI on dry-bean ground",
+   "ok": true,
+   "took": "1s"
+  },
+  {
+   "step": "pulse_canopy.py",
+   "source": "Crop-CASMA daily NDVI on chickpea, lentil and pea ground",
+   "ok": true,
+   "took": "0s"
+  },
+  {
+   "step": "thermal_stress.py",
+   "source": "NASA MOD11A2 land surface temperature",
+   "ok": true,
+   "took": "128s"
+  },
+  {
+   "step": "vs_history.py",
+   "source": "this season against 2000-2025",
+   "ok": true,
+   "took": "0s",
+   "dataset": "crop-vs-history.json",
+   "age_days": 10,
+   "tolerance_days": 12
+  },
+  {
+   "step": "yield_all.py",
+   "source": "yield for every class in every region",
+   "ok": true,
+   "took": "0s",
+   "dataset": "yield-all-2026.json",
+   "age_days": 0,
+   "tolerance_days": 12
+  },
+  {
+   "step": "build_manifest.mjs",
+   "source": "content-derived build id",
+   "ok": true,
+   "took": "0s"
+  }
+ ],
+ "failures": []
+}

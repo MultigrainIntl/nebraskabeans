@@ -21,7 +21,8 @@ from collections import defaultdict
 HERE = os.path.dirname(os.path.abspath(__file__))
 API = "https://modis.ornl.gov/rst/api/v1/MOD11A2"
 UA = {"User-Agent": "JoieOS-GISit/1.0 (+MultigrainIntl)", "Accept": "application/json"}
-CACHE = os.path.join(HERE, "lst-cache")
+CACHE = os.path.join(HERE, "..", "..", "assets", "data", "archive", "lst-cache")
+ARCHIVE = os.path.join(HERE, "..", "..", "assets", "data", "archive")
 RAW = os.path.join(HERE, "..", "..", "assets", "data", "stations", "raw")
 PAUSE, CHUNK, KM = 1.4, 10, 2
 N_CELLS = 6
@@ -145,7 +146,16 @@ def main():
                 out[d] = round(acc[d] / wt[d] - a[d], 2)
         if not out:
             print("  %-18s no matching days" % region, file=sys.stderr); continue
-        path = os.path.join(HERE, "thermal-%s-%d.json" % (region, year))
+        # Merge with what is already on record rather than re-reading the whole season.
+        path = os.path.join(ARCHIVE, "thermal-%s-%d.json" % (region, year))
+        if os.path.exists(path):
+            try:
+                prior = json.load(open(path)).get("canopy_minus_air_c", {})
+                merged = dict(prior)
+                merged.update(out)
+                out = merged
+            except Exception:
+                pass
         json.dump({"region": region, "year": year, "station": st["name"],
                    "source": {"name": "NASA MOD11A2 land surface temperature, 1 km, 8-day",
                               "url": API, "api_key_required": False, "coverage": "global"},

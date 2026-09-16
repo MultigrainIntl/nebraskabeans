@@ -27,8 +27,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WCS = ("https://cloud.csiss.gmu.edu/smap_server/cgi-bin/mapserv?SERVICE=WCS&VERSION=2.0.1"
        "&REQUEST=GetCoverage&MAP=/WMS/NDVI-DAILY_%d.map&COVERAGEID=NDVI-DAILY_%s"
        "&FORMAT=image/tiff&SUBSET=x(%d,%d)&SUBSET=y(%d,%d)")
-CACHE = os.path.join(HERE, "casma-region-cache")
-OUT = os.path.join(HERE, "ndvi-cropmask.json")
+CACHE = os.path.join(HERE, "..", "..", "assets", "data", "archive", "casma-region-cache")
+ARCHIVE = os.path.join(HERE, "..", "..", "assets", "data", "archive", "canopy-history.json")
+OUT = ARCHIVE
 PAUSE = 1.2
 STATE_OF = {"ne-panhandle": "Nebraska", "sw-nebraska": "Nebraska", "ne-colorado": "Colorado",
             "western-colorado": "Colorado", "se-wyoming": "Wyoming", "big-horn": "Wyoming",
@@ -153,17 +154,40 @@ def main():
         print("  %-18s %4d bean cells  x %d..%d  y %d..%d"
               % (k, len(b["cells"]), b["x"][0], b["x"][1], b["y"][0], b["y"][1]), file=sys.stderr)
     dates = ["%02d.%02d" % (m, d) for m in range(4, 10) for d in (5, 15, 25)]
-    years = range(2000, 2026)
+    years = range(2000, 2027)
+
+    # START FROM WHAT IS ALREADY ON RECORD.
+    # Satellite history does not change. Re-fetching 2000-2025 every morning to learn one new
+    # day is what made the first scheduled run hit its ninety-minute ceiling and get killed
+    # before it published anything. The accumulated record is committed to the repository, and
+    # only dates missing from it are fetched — a few each morning instead of two thousand.
     out = defaultdict(dict)
+    already = set()
+    if os.path.exists(ARCHIVE):
+        try:
+            prior = json.load(open(ARCHIVE))["observations"]
+            for k, v in prior.items():
+                out[k].update(v)
+            already = set(prior)
+            print("  %d dates already on record" % len(already), file=sys.stderr)
+        except Exception as e:
+            print("  archive unreadable (%s) — rebuilding in full" % str(e)[:40], file=sys.stderr)
+
     for year in years:
-        got = 0
+        got = skipped = 0
         for mmdd in dates:
+            key = "%d-%s" % (year, mmdd.replace(".", "-"))
+            if key in already:
+                skipped += 1
+                continue                       # the past does not change
             for name, b in bx.items():
                 s = fetch_sample(b, name, year, mmdd)
                 if s:
-                    out["%d-%s" % (year, mmdd.replace(".", "-"))].update(s)
+                    out[key].update(s)
                     got += 1
-        print("  %d: %d box-dates" % (year, got), file=sys.stderr)
+        if got or not skipped:
+            print("  %d: %d new box-dates (%d already held)" % (year, got, skipped),
+                  file=sys.stderr)
         json.dump({"schema": "gisit.ndvi-cropmask.v1",
                    "source": {"name": "USDA Crop-CASMA daily NDVI via WCS",
                               "projection": "EPSG:5070",

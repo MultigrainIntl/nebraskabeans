@@ -71,5 +71,12 @@ def build(args):
     (root/'station-observations.json.gz').write_bytes(gzip.compress(output,mtime=0))
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('--start',required=True);ap.add_argument('--end',required=True);ap.add_argument('--out',required=True)
+    ap=argparse.ArgumentParser()
+    # Defaults so the daily refresh can call this with no arguments. Without it the hourly
+    # air temperature freezes at whatever day the snapshot was last taken by hand, and the
+    # canopy-minus-air stress silently stops advancing while still reporting a number.
+    here=Path(__file__).resolve().parent
+    ap.add_argument('--start',default='%d-04-15'%date.today().year)
+    ap.add_argument('--end',default=date.today().isoformat())
+    ap.add_argument('--out',default=str(here.parent/'assets'/'data'/'stations'))
     build(ap.parse_args())

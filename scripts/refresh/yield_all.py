@@ -22,6 +22,30 @@ from datetime import date, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "..", "assets", "data")
+ARCHIVE = os.path.join(HERE, "..", "..", "assets", "data", "archive")
+
+# What the page prints beside the figure. Carried verbatim from the file the site was
+# written against — this is the honesty statement, not decoration, and it is not mine
+# to paraphrase on a rebuild.
+PROSE = {'evidence_note': 'Each number is built only from what was observed this season: canopy from '
+                  "satellite on that crop's own USDA ground, sunlight and temperature from "
+                  'local stations, and water stress from canopy temperature against air '
+                  "temperature at the satellite's overpass hour — which sees irrigation "
+                  'because it measures the cooling the water produced.',
+ 'limits': ['This is not a validated forecast. The level is defensible; the ranking is not — '
+            'tested against USDA over 2016-2023 it did not rank one season against another '
+            "correctly, and that error cannot be separated from the scorecard's: USDA revised "
+            "Nebraska's 2026 planted acres by 21% mid-season, reports yield per harvested acre "
+            'so abandoned fields vanish from it, and stopped publishing county yields in 2008.',
+            'Water stress is read at 1 km, so a pixel mixes a crop field with the ground '
+            'around it. That biases every crop toward looking more stressed than it is.',
+            'Light-use efficiency and harvest index are published values per crop group, not '
+            'fitted to these fields.'],
+ 'what_would_sharpen_it': ['Real harvest data — loads, test weights, screen size, tied to '
+                           'place and date',
+                           'Field-level irrigation status',
+                           '10 m canopy from Sentinel-2 instead of 250 m',
+                           "A current-year crop map instead of 2024's"]}
 PAR_FRACTION = 0.48
 
 # base F, heat F, GDD to maturity, planting, light-use efficiency g/MJ, harvest index
@@ -141,14 +165,15 @@ def derive_planting(st, dates, base_f, earliest_md, region_green):
 
 def main():
     field = json.load(open(os.path.join(DATA, "station-field.json")))
-    ndvi = json.load(open(os.path.join(HERE, "ndvi-with-2026.json")))["observations"]
-    pulses = json.load(open(os.path.join(HERE, "ndvi-pulses-2026.json")))
+    ndvi = json.load(open(os.path.join(ARCHIVE, "canopy-history.json")))["observations"]
+    pulses = json.load(open(os.path.join(ARCHIVE, "canopy-pulses.json")))
     cells = json.load(open(os.path.join(HERE, "bean-cells-by-county.json")))
+    vshist = json.load(open(os.path.join(DATA, "crop-vs-history.json")))["regions"]
     dates = field["dates"]
 
     out = {}
     for region, rname in NAMES.items():
-        tpath = os.path.join(HERE, "thermal-%s-2026.json" % region)
+        tpath = os.path.join(ARCHIVE, "thermal-%s-2026.json" % region)
         if not os.path.exists(tpath):
             continue
         thermal = json.load(open(tpath))["canopy_minus_air_c"]
@@ -181,10 +206,26 @@ def main():
             ks = sorted(k for k in thermal if k <= iso)
             return wstress(thermal[ks[-1]]) if ks else None
 
+        # The evidence table beside the figure. Weighted by canopy cover: a thermal reading
+        # taken over bare soil is a reading of dirt, not of a thirsty crop.
+        tnum = tden = 0.0
+        for d, v in thermal.items():
+            g = green_at(d, "DRY BEANS")
+            if g is None:
+                continue
+            f = fpar(g)
+            tnum += v * f
+            tden += f
+        hist = vshist.get(region, {}).get("dates", {})
+        # Dates later in the season carry the 26-year history but no reading yet — the
+        # season has not reached them. Rank against the last date that has one.
+        ranked = [d for d, v in hist.items() if "rank" in v]
+        asof = max(ranked) if ranked else None
+
         per = {}
         for cls, (base, heat, gdd_mat, plant, rue, hi, commodity) in CLASSES.items():
             start, how = derive_planting(st, dates, base, plant, grn)
-            d, stop = start, date.fromisoformat("2026-09-09")
+            d, stop = start, date.fromisoformat(dates[-1])
             bio = 0.0
             days = short = 0
             gdd = 0.0
@@ -221,9 +262,18 @@ def main():
                         "stress_days": short, "gdd": round(gdd),
                         "pct_of_maturity": round(100 * gdd / gdd_mat),
                         "commodity": commodity}
-        out[region] = {"name": rname, "classes": per}
+        out[region] = {"name": rname, "classes": per,
+                       "canopy_above_air_c": round(tnum / tden, 1) if tden else None,
+                       "canopy_above_air_basis": "mean of canopy minus air temperature across "
+                                                 "the season's satellite passes, weighted by "
+                                                 "canopy cover so bare-soil passes do not "
+                                                 "count as crop stress",
+                       "thermal_readings": len(thermal),
+                       "canopy_rank": ({"rank": hist[asof]["rank"], "of": hist[asof]["of"],
+                                        "as_of": asof} if asof else None)}
 
     json.dump({"schema": "gisit.yield-all-2026.v1", "year": 2026,
+               "latest_observation": dates[-1],
                "method": "radiation-use-efficiency biomass model; canopy from satellite, "
                          "temperature and radiation from stations, water stress from canopy "
                          "minus air temperature at the satellite overpass hour",
@@ -231,7 +281,10 @@ def main():
                "caveat": "each commodity is sampled on its own USDA ground — beans on bean "
                          "cells, chickpeas, lentils and peas on theirs",
                "not_validated": "the level is defensible; season-to-season ranking is not",
-               "regions": out}, open(os.path.join(HERE, "yield-all-2026.json"), "w"), indent=1)
+               "regions": out,
+               "evidence_note": PROSE["evidence_note"],
+               "limits": PROSE["limits"],
+               "what_would_sharpen_it": PROSE["what_would_sharpen_it"]}, open(os.path.join(DATA, "yield-all-2026.json"), "w"), indent=1)
 
     cls_order = list(CLASSES)
     print("2026 YIELD, lb/ac — all classes, all regions, remote data only\n")

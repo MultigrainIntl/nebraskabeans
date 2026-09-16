@@ -21,11 +21,11 @@ NAMES = {"ne-panhandle": "Nebraska Panhandle", "sw-nebraska": "Southwest Nebrask
          "se-wyoming": "Southeast Wyoming", "big-horn": "Big Horn Basin",
          "nw-kansas": "Northwest Kansas"}
 
-src = os.path.join(HERE, "ndvi-cropmask.json")
+src = os.path.join(HERE, "..", "..", "assets", "data", "archive", "canopy-history.json")
 if not os.path.exists(src):
-    raise SystemExit("ndvi-cropmask.json missing — run ndvi_cropmask.py first")
+    raise SystemExit("canopy-history.json missing — run ndvi_cropmask.py first")
 obs = json.load(open(src))["observations"]
-for f in glob.glob(os.path.join(HERE, "casma-region-cache", "*_2026*.json")):
+for f in glob.glob(os.path.join(os.path.join(HERE, "..", "..", "assets", "data", "archive", "casma-region-cache"), "*_2026*.json")):
     d = json.load(open(f))
     if not d:
         continue

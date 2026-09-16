@@ -484,17 +484,32 @@
 
   /* Rank against the same calendar date in every prior season. A rank is honest in a way a
    * percentage is not: it makes no claim about how much, only about where this year sits. */
+  function monthDay(md) {
+    var M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+             'September', 'October', 'November', 'December'];
+    var p = md.split('-');
+    return M[parseInt(p[0], 10) - 1] + ' ' + parseInt(p[1], 10);
+  }
+
   function historyValue(region) {
     var h = S.vsHistory && S.vsHistory.regions && S.vsHistory.regions[region];
     if (!h) return null;
     var md = S.dates[S.day].slice(5);
-    var row = h.dates[md];
-    if (!row) {                                   // nearest observed date at or before today
-        var keys = Object.keys(h.dates).filter(function (k) { return k <= md; }).sort();
-        row = keys.length ? h.dates[keys[keys.length - 1]] : null;
+    // Dates late in the season carry the 26-year history but no reading yet — the satellite
+    // passes every eight to ten days while the station record advances daily. A bucket that
+    // exists but holds no pass is as empty as a missing one; fall back to the last real pass
+    // rather than telling a grower there is nothing to see.
+    var row = h.dates[md], used = md;
+    if (!row || row.now == null) {
+        var keys = Object.keys(h.dates).filter(function (k) {
+          return k <= md && h.dates[k] && h.dates[k].now != null;
+        }).sort();
+        used = keys.length ? keys[keys.length - 1] : null;
+        row = used ? h.dates[used] : null;
     }
     if (!row || row.now == null) return null;
     return {
+      asOf: used, stale: used !== md,
       t: Math.max(0, Math.min(1, (row.rank - 1) / Math.max(row.of - 1, 1))),
       label: 'rank ' + row.rank + ' of ' + row.of,
       rank: row.rank, of: row.of, pct: row.vs_mean_pct,
@@ -805,9 +820,10 @@
       '<p class="nbEstLead">Planted ' + best.c.planted + ' — ' + best.c.planting_basis +
       '. Every figure below is measured this season; nothing is forecast and nothing waits ' +
       'on USDA.</p>' +
+      '<div class="nbTableWrap">' +
       '<table class="nbYieldTable"><thead><tr><th>region</th><th>lb/ac</th>' +
       '<th>canopy vs air</th><th>greenness rank</th><th>of maturity</th></tr></thead>' +
-      '<tbody>' + rows + '</tbody></table>' +
+      '<tbody>' + rows + '</tbody></table></div>' +
       '<p class="nbEstNum">Best <b>' + best.r.name + '</b> at ' +
       Number(best.c.lb_ac).toLocaleString() + ' lb/ac; weakest <b>' + worst.r.name +
       '</b> at ' + Number(worst.c.lb_ac).toLocaleString() + ' lb/ac. A watered crop sits ' +
@@ -874,7 +890,9 @@
       rows.sort(function (a, b) { return a.v.t - b.v.t; });
       var worstR = rows[0], bestR = rows[rows.length - 1];
       var above = rows.filter(function (r) { return r.v.pct > 0; }).length;
-      el.innerHTML = 'On this date the crop is <b>' + bestR.v.label + '</b> in ' + bestR.name +
+      var asOf = bestR.v.stale ? bestR.v.asOf : null;
+      el.innerHTML = (asOf ? 'Latest pass, ' + monthDay(asOf) + ': the crop is <b>'
+                           : 'On this date the crop is <b>') + bestR.v.label + '</b> in ' + bestR.name +
         (rows.length > 1 ? ' and <b>' + worstR.v.label + '</b> in ' + worstR.name : '') +
         '. ' + above + ' of ' + rows.length + ' areas are greener than their own average for ' +
         'this date. <span class="nbStationCount">observed, not forecast — a satellite pass ' +

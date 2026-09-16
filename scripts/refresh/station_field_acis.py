@@ -24,7 +24,10 @@ DATA = os.path.join(HERE, "..", "..", "assets", "data")
 OUTL = os.path.join(DATA, "crop-outlines.geojson")
 OUT = os.path.join(DATA, "station-field.json")
 STATES = ["NE", "CO", "WY", "KS"]
-SDATE, EDATE = "2026-03-15", "2026-09-09"
+# The season, not a date typed in by hand. Nailed to a constant, every "daily refresh"
+# rebuilt the identical frozen window and the site aged while reporting itself current.
+SDATE = "%d-03-15" % date.today().year
+EDATE = date.today().isoformat()
 NEAR_DEG = 0.6
 MIN_COVER = 0.6          # a station must observe most of the season to join the surface
 
@@ -168,6 +171,32 @@ for st in kept:
             best, bd = i, d2
     st["t_ref"] = best
     st["t_ref_km"] = round(bd ** 0.5 * 87, 1)
+
+# RCC-ACIS runs a day or two behind. Asking for the window through today and then reporting
+# it as covered would overstate the data by exactly the amount nobody would notice. Trim the
+# window back to the last day a station actually observed something, and say that instead.
+last = -1
+for st in kept:
+    for arr in (st["hi"], st["pr"]):
+        if not arr:
+            continue
+        for i in range(len(arr) - 1, last, -1):
+            if arr[i] is not None:
+                last = max(last, i)
+                break
+if last < 0:
+    raise SystemExit("no station reported a single observation — refusing to write an empty field")
+if last + 1 < len(dates):
+    dropped = len(dates) - (last + 1)
+    dates = dates[:last + 1]
+    for st in kept:
+        for k in ("hi", "lo", "pr"):
+            if st[k]:
+                st[k] = st[k][:last + 1]
+    print("%d trailing day(s) not yet published by ACIS — window trimmed to %s"
+          % (dropped, dates[-1]), file=sys.stderr)
+EDATE = dates[-1]
+ndays = len(dates)
 
 temp = sum(1 for s in kept if s["has_temp"])
 rain = sum(1 for s in kept if s["has_precip"])
