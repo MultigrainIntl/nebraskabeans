@@ -73,8 +73,12 @@ if d:
 d = load("irrigation.json")
 if d:
     acres = d.get("conus_irrigated_acres", 0)
-    check("irrigation vs USDA Census", 45e6 < acres < 70e6,
-          "raster totals %.1fM acres; USDA Census of Agriculture reports 55-58M" % (acres / 1e6))
+    # MIrAD-US v4 is a 2017 raster, so the right comparison is the 2017 Census, not a vague
+    # range across census years. SOURCE: USDA Census of Agriculture — 58.0M irrigated acres in
+    # 2017 (a record high), 54.9M in 2022 (USDA ERS Charts of Note 110247 / 115050).
+    check("irrigation vs USDA Census 2017", 52e6 < acres < 64e6,
+          "raster totals %.1fM acres against the 2017 Census figure of 58.0M (%.1f%% apart)"
+          % (acres / 1e6, abs(acres - 58.0e6) / 58.0e6 * 100))
     shares = [b["irrigated_share_of_ground"]
               for c in d.get("crops", {}).values() for b in c.values()]
     check("irrigation shares are shares", all(0 <= s <= 100 for s in shares),
@@ -105,10 +109,12 @@ if d:
     dig(d)
     if vals:
         mx = max(vals)
-        # Physical bound: clear-sky surface shortwave at 41N peaks near 30-32 MJ/m2/day.
-        # Anything above that is not sunlight, it is a unit error.
+        # Physical bound, DERIVED not asserted. FAO-56 (Allen et al. 1998) eq. 21 and 37:
+        # peak extraterrestrial radiation at 41 N is 41.90 MJ/m2/day on 21 June; clear-sky
+        # Rso = 0.75 Ra = 31.4 at sea level, and 32.4 at Scotts Bluff's ~1,180 m elevation.
+        # The pass limit of 34 leaves headroom above that. Anything higher is a unit error.
         check("solar within physical limit", mx <= 34,
-              "peak %.1f MJ/m2/day; clear-sky maximum at this latitude is about 31" % mx)
+              "peak %.1f MJ/m2/day; FAO-56 clear-sky limit is 32.4 at 41N, 1,180 m" % mx)
         summer = [v for v in vals if v > 0]
         check("solar has plausible mean", 8 <= (sum(summer)/len(summer)) <= 30,
               "mean %.1f MJ/m2/day over %d station-days" % (sum(summer)/len(summer), len(summer)))

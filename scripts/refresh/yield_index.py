@@ -56,9 +56,12 @@ ACIS = "https://data.rcc-acis.org/MultiStnData"
 # GAJ's call, and the right one: going back to 2000 tripled the fetching to move the mean by
 # very little. Eleven covers the recent run of wet and dry years these regions have had.
 YEARS = list(range(2015, 2026))
-# Night minimum above which common bean pollen is reported to fail. Counted as an
-# observation and tested against real harvests; nothing is subtracted from any yield on
-# the strength of it.
+# Night minimum above which common bean pollen fails. 68 F = 20.0 C.
+# SOURCE: Porch & Jahn 2001, Plant, Cell & Environment 24:723-731; restated in Cruz et al.
+# 2023, Front. Plant Sci. 14:1145858 ("overnight temperatures above 20 C").
+# CAVEAT, and it is a real one: both sources are for Phaseolus vulgaris. This count is also
+# applied to PEAS, CHICKPEAS and BLACKEYE (a cowpea, Vigna unguiculata), where no source
+# covers it. Counted as an observation only; nothing is subtracted from any yield on it.
 NIGHT_HOT_F = 68
 THIS_YEAR = 2026
 SEASON = ("03-01", "10-31")
@@ -83,13 +86,17 @@ FULL_STATE = {"NE": "Nebraska", "CO": "Colorado", "WY": "Wyoming", "KS": "Kansas
 # state stands in — but only where that transfer can be CHECKED, not assumed.
 #
 # Chickpeas: USDA does not estimate them in Nebraska, Colorado or Wyoming. Montana is the
-# largest dryland chickpea state, semi-arid, same pulse rotation, similar latitude band.
+# largest chickpea state (260,000 of 541,000 US planted acres, USDA Acreage June 2025),
+# semi-arid, same pulse rotation, similar latitude band. The word "dryland" was dropped:
+# MSU Extension treats Montana chickpea as dryland but publishes no irrigated share, and
+# the word does no work in the proxy argument.
 # The check: dry peas are published in BOTH Montana and Nebraska, and come out at 1,528 and
 # 1,579 lb/ac — within 3%. So Montana's pulse yields do transfer to this ground, and that is
 # demonstrated rather than claimed. The page says all of this in plain words.
 PROXY = {"CHICKPEAS": ("Montana",
                        "USDA does not estimate chickpea yield in these states. This uses "
-                       "Montana, the largest dryland chickpea state. Dry peas are published "
+                       "Montana, the largest chickpea state — 260,000 of 541,000 US "
+                       "planted acres, USDA Acreage, June 2025. Dry peas are published "
                        "in both Montana and Nebraska and differ by 3%, which is the evidence "
                        "that Montana transfers here.")}
 
