@@ -25,6 +25,8 @@ DATA = os.path.join(HERE, "..", "..", "assets", "data")
 STEPS = [
     ("../build_station_observations.py", None, None,
      "IEM hourly ASOS air temperature at the satellite's overpass hour"),
+    ("usda_classes.py", None, None,
+     "USDA commercial-class table — which crops are actually planted in these states"),
     ("station_field_acis.py", "station-field.json", 5,
      "NOAA cooperative and GHCN stations via RCC-ACIS"),
     ("solar_power.py", None, None,

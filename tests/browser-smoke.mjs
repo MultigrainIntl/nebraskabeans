@@ -83,12 +83,31 @@ try {
      and its crop map has ONE class for peas, one for lentils and one for chickpeas — a
      satellite cannot separate a yellow pea from a green one. The gate was requiring the site
      to offer crops it could not evidence. */
-  for (const required of ['PINTO', 'GREAT NORTHERN', 'NAVY', 'BLACK', 'LIGHT RED KIDNEY',
-                          'SMALL WHITE', 'PEAS', 'LENTILS', 'CHICKPEAS']) {
+  /* DECIDED BY USDA, NOT BY US. scripts/refresh/usda_classes.py reads USDA's commercial-class
+     table and the class list is filtered against it. Two hand-made lists got this wrong in one
+     day: the first invented blackeye in seven regions, the second deleted dark red kidney,
+     small red, cranberry AND blackeye — all of which USDA records as grown here — while
+     keeping navy and small white, which it does not. USDA publishes 10,200 blackeye acres in
+     Colorado and 5,700 in Nebraska for 2025. */
+  for (const required of ['PINTO', 'GREAT NORTHERN', 'BLACK', 'LIGHT RED KIDNEY',
+                          'DARK RED KIDNEY', 'SMALL RED', 'CRANBERRY', 'BLACKEYE',
+                          'PEAS', 'LENTILS', 'CHICKPEAS']) {
     assert(crops.includes(required), `class not selectable: ${required}`);
   }
-  for (const gone of ['BLACKEYE', 'CRANBERRY', 'DARK RED KIDNEY', 'PINK', 'SMALL RED',
-                      'PEA YELLOW', 'PEA GREEN', 'GARBANZO (KABULI)', 'GARBANZO (DESI)',
+  for (const absent of ['NAVY', 'PINK', 'SMALL WHITE']) {
+    assert(!crops.includes(absent),
+      `${absent}: USDA's 2025 record shows none grown or no estimate in these states`);
+  }
+  const usda = await page.evaluate(async () => {
+    const r = await fetch('assets/data/usda-class-acres.json');
+    return r.ok ? await r.json() : null;
+  });
+  assert(usda && usda.classes && usda.classes['Blackeye'],
+    'the class list must be backed by USDA\u2019s own commercial-class table');
+  assert.match(JSON.stringify(usda.how_to_read), /presence, not absence/,
+    'the file must record that a withheld figure means the crop IS grown — reading (D) as ' +
+    'absence is what deleted four real crops');
+  for (const gone of ['PEA YELLOW', 'PEA GREEN', 'GARBANZO (KABULI)', 'GARBANZO (DESI)',
                       'LENTIL RED', 'LENTIL LARGE GREEN', 'LENTIL SMALL GREEN']) {
     assert(!crops.includes(gone),
       `${gone} has no USDA evidence in these counties and must not be offered`);
@@ -381,11 +400,16 @@ try {
   /* Six, not ten. Cranberry, dark red kidney, pink and small red were removed: USDA carries
      no yield history for any of them in any of these seven regions. What remains is what USDA
      records as planted. */
-  assert(coverage.beanClasses >= 6,
+  assert(coverage.beanClasses >= 8,
     `ALLCLASS-001: every common-bean class runs on bean ground in every region; got ${coverage.beanClasses}`);
+  /* This gate asserted blackeye "is not grown here". That was false, and I wrote it. USDA's
+     own commercial-class table publishes 10,200 blackeye acres in Colorado and 5,700 in
+     Nebraska for 2025. Blackeye IS cowpea, botanically a different genus, and USDA maps no
+     cowpea layer — so it is drawn on dry-bean ground and the page says so. But it is grown,
+     and a gate that enforced its absence was enforcing my error. */
   const picker = await page.$$eval('#nbCrop option', o => o.map(x => x.value));
-  assert(!picker.includes('BLACKEYE'),
-    'ALLCLASS-001: blackeye is cowpea and is not grown here — it must not return to the picker');
+  assert(picker.includes('BLACKEYE'),
+    'ALLCLASS-001: USDA records blackeye acreage in Colorado and Nebraska — it belongs here');
   assert(yieldAll.hasThermal,
     'ALLCLASS-001: every region must carry the water-stress measurement behind its number');
   /* This gate used to assert the caveat CONTAINED the words "its own USDA ground". It

@@ -49,29 +49,70 @@ PAR_FRACTION = 0.48
 # blackeye entry, and it is not commercially grown on the High Plains. It was nevertheless
 # publishing a yield in all seven regions, computed on common-bean ground, at 1,315-1,373
 # lb/ac. That is a fabricated crop, and disclosing it was not enough — it is removed.
-CLASSES = {
-    # DRY BEANS — only the classes USDA carries a yield history for in these states.
-    # Cranberry, dark red kidney, pink and small red were dropped in September 2026: USDA has
-    # no history for any of them in any of these seven regions, and the model was publishing a
-    # number for all four anyway. Blackeye went with them — it is cowpea, a different genus,
-    # and USDA maps no cowpea here at all.
+# Every dry-bean commercial class USDA names, with its agronomy. WHICH ONES ARE PUBLISHED IS
+# NOT DECIDED HERE — usda_classes.py reads USDA's own commercial-class table and this list is
+# filtered against it at build time. That indirection exists because deciding it by hand went
+# wrong twice in one day: first a blackeye yield in seven regions, then a hand-trim that
+# deleted dark red kidney, small red, cranberry and blackeye — all of which USDA records as
+# grown here — while keeping navy and small white, which it does not.
+ALL_CLASSES = {
     "PINTO":              (50, 90, 1700, "06-01", 1.45, 0.45, "DRY BEANS"),
     "GREAT NORTHERN":     (50, 88, 1600, "06-01", 1.45, 0.45, "DRY BEANS"),
     "NAVY":               (50, 88, 1650, "06-01", 1.45, 0.46, "DRY BEANS"),
     "BLACK":              (50, 92, 1750, "06-01", 1.50, 0.45, "DRY BEANS"),
     "LIGHT RED KIDNEY":   (50, 86, 1900, "06-01", 1.40, 0.42, "DRY BEANS"),
+    "DARK RED KIDNEY":    (50, 86, 1900, "06-01", 1.40, 0.42, "DRY BEANS"),
+    "SMALL RED":          (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
+    "PINK":               (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
+    "CRANBERRY":          (50, 88, 1800, "06-01", 1.40, 0.43, "DRY BEANS"),
     "SMALL WHITE":        (50, 88, 1650, "06-01", 1.45, 0.46, "DRY BEANS"),
+    # Blackeye is cowpea, Vigna unguiculata — botanically not a common bean, but USDA counts
+    # it as a dry edible bean commercial class and publishes 10,200 acres in Colorado and
+    # 5,700 in Nebraska for 2025. It is more heat-tolerant than Phaseolus, hence the higher
+    # threshold. It is drawn on Cropland Data Layer dry-bean ground because USDA maps no
+    # cowpea layer, and that limitation is stated on the page.
+    "BLACKEYE":           (50, 95, 1800, "05-20", 1.50, 0.44, "DRY BEANS"),
 
-    # PULSES — ONE ENTRY PER COMMODITY, because that is all anyone can see. USDA's crop map
-    # has a single class for peas, one for lentils and one for chickpeas. The satellite reads
-    # those pixels and cannot tell a yellow pea from a green one. The site used to show two
-    # peas, three lentils and two chickpeas; yellow and green pea differed by a single invented
-    # constant — harvest index 0.48 against 0.47 — on identical ground, identical weather and
-    # an identical planting date. Splitting them was class-level precision nobody can observe.
+    # PULSES — one entry per commodity, because USDA's crop map has one class for each and no
+    # satellite separates a yellow pea from a green one.
     "PEAS":               (41, 82, 2000, "04-05", 1.60, 0.48, "PEAS"),
     "LENTILS":            (41, 82, 2000, "04-15", 1.15, 0.39, "LENTILS"),
     "CHICKPEAS":          (41, 86, 2600, "04-20", 1.30, 0.38, "CHICKPEAS"),
 }
+
+# USDA's own spelling of each commercial class, so the filter joins on evidence not on guesses.
+USDA_NAME = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern", "NAVY": "Navy",
+             "BLACK": "Black", "LIGHT RED KIDNEY": "Light red kidney",
+             "DARK RED KIDNEY": "Dark red kidney", "SMALL RED": "Small red",
+             "PINK": "Pink", "CRANBERRY": "Cranberry", "SMALL WHITE": "Small white",
+             "BLACKEYE": "Blackeye"}
+
+
+def usda_grown():
+    """Classes USDA records as GROWN in at least one of these states.
+
+    A withheld figure — USDA's (D) — means the crop is grown and the acreage is suppressed
+    because too few operations report it. Reading that as absence is what deleted four real
+    crops from this site. (NA) means USDA stopped estimating; a bare dash is the only mark
+    that means the crop is not there.
+    """
+    path = os.path.join(DATA, "usda-class-acres.json")
+    if not os.path.exists(path):
+        return None
+    try:
+        got = json.load(open(path))["classes"]
+    except Exception:
+        return None
+    return {c for c, block in got.items()
+            if any(b.get("verdict", "").startswith("grown") for b in block.values())}
+
+
+_grown = usda_grown()
+if _grown is None:
+    CLASSES = dict(ALL_CLASSES)          # no USDA file yet: publish everything, loudly
+else:
+    CLASSES = {c: v for c, v in ALL_CLASSES.items()
+               if v[6] != "DRY BEANS" or USDA_NAME.get(c) in _grown}
 NAMES = {"ne-panhandle": "Nebraska Panhandle", "sw-nebraska": "Southwest Nebraska",
          "ne-colorado": "Northeast Colorado", "western-colorado": "Western Colorado",
          "se-wyoming": "Southeast Wyoming", "big-horn": "Big Horn Basin",
