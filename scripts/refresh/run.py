@@ -34,6 +34,10 @@ STEPS = [
     ("ndvi_cropmask.py", None, None, "Crop-CASMA daily NDVI on dry-bean ground"),
     ("pulse_canopy.py", None, None, "Crop-CASMA daily NDVI on chickpea, lentil and pea ground"),
     ("thermal_stress.py", None, None, "NASA MOD11A2 land surface temperature"),
+    # Runs from a cached raster after the first day, so it costs nothing to keep here and
+    # re-checks that the source is still reachable.
+    ("irrigation.py", "irrigation.json", 5,
+     "USGS MIrAD-US — how much of each crop's ground is irrigated"),
     ("vs_history.py", "crop-vs-history.json", 12, "this season against 2000-2025"),
     ("yield_all.py", "yield-all-2026.json", 12, "yield for every class in every region"),
     ("yield_index.py", None, None,

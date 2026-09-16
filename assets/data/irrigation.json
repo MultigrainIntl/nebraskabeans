@@ -1,0 +1,156 @@
+{
+ "schema": "gisit.irrigation.v1",
+ "what": "share of the ground each crop grows on that is irrigated agriculture",
+ "crop_year_of_layer": 2017,
+ "vintage_note": "MIrAD-US is published about every five years; 2017 is the newest release. Centre pivots are capital and move slowly, so the layer is still useful, but it is not this season's irrigation.",
+ "read_this_carefully": "This is the share of the GROUND that is irrigated agriculture, not the share of this crop that is watered. A cell can be 60% irrigated while every bean field in it is dryland. The two are related and they are not the same, and this file will not pretend otherwise.",
+ "conus_irrigated_acres": 58700284,
+ "reconciled_against": "USDA Census of Agriculture, which puts US irrigated land at roughly 55-58 million acres",
+ "source": {
+  "name": "USGS MIrAD-US, MODIS Irrigated Agriculture, 250 m",
+  "item": "https://www.sciencebase.gov/catalog/item/5db08e84e4b0b0c58b56e04f",
+  "papers": [
+   "doi:10.3390/land10040394",
+   "doi:10.1016/j.agsy.2014.01.004",
+   "doi:10.3390/rs2102388"
+  ],
+  "projection": "US National Atlas Equal Area (Lambert azimuthal equal area, 100W 45N, sphere r=6370997 m), per the dataset metadata",
+  "api_key_required": false
+ },
+ "crops": {
+  "CHICKPEAS": {
+   "se-wyoming": {
+    "name": "Southeast Wyoming",
+    "irrigated_share_of_ground": 13.8,
+    "cells": 52,
+    "raster_pixels_read": 9069,
+    "crop_acres_weighting": 2033.4
+   },
+   "ne-colorado": {
+    "name": "Northeast Colorado",
+    "irrigated_share_of_ground": 26.1,
+    "cells": 34,
+    "raster_pixels_read": 5803,
+    "crop_acres_weighting": 571.6
+   },
+   "ne-panhandle": {
+    "name": "Nebraska Panhandle",
+    "irrigated_share_of_ground": 11.3,
+    "cells": 269,
+    "raster_pixels_read": 45320,
+    "crop_acres_weighting": 16908.9
+   },
+   "sw-nebraska": {
+    "name": "Southwest Nebraska",
+    "irrigated_share_of_ground": 13.1,
+    "cells": 28,
+    "raster_pixels_read": 4647,
+    "crop_acres_weighting": 557.7
+   }
+  },
+  "DRY BEANS": {
+   "se-wyoming": {
+    "name": "Southeast Wyoming",
+    "irrigated_share_of_ground": 37.6,
+    "cells": 210,
+    "raster_pixels_read": 36358,
+    "crop_acres_weighting": 8230.0
+   },
+   "ne-colorado": {
+    "name": "Northeast Colorado",
+    "irrigated_share_of_ground": 43.0,
+    "cells": 234,
+    "raster_pixels_read": 40935,
+    "crop_acres_weighting": 7919.0
+   },
+   "sw-nebraska": {
+    "name": "Southwest Nebraska",
+    "irrigated_share_of_ground": 30.7,
+    "cells": 389,
+    "raster_pixels_read": 64905,
+    "crop_acres_weighting": 22100.0
+   },
+   "nw-kansas": {
+    "name": "Northwest Kansas",
+    "irrigated_share_of_ground": 20.7,
+    "cells": 126,
+    "raster_pixels_read": 21337,
+    "crop_acres_weighting": 3368.0
+   },
+   "western-colorado": {
+    "name": "Western Colorado",
+    "irrigated_share_of_ground": 34.5,
+    "cells": 191,
+    "raster_pixels_read": 37245,
+    "crop_acres_weighting": 12966.0
+   },
+   "ne-panhandle": {
+    "name": "Nebraska Panhandle",
+    "irrigated_share_of_ground": 42.2,
+    "cells": 708,
+    "raster_pixels_read": 118822,
+    "crop_acres_weighting": 69595.0
+   },
+   "big-horn": {
+    "name": "Big Horn Basin",
+    "irrigated_share_of_ground": 50.9,
+    "cells": 169,
+    "raster_pixels_read": 30726,
+    "crop_acres_weighting": 8933.0
+   }
+  },
+  "LENTILS": {
+   "western-colorado": {
+    "name": "Western Colorado",
+    "irrigated_share_of_ground": 50.6,
+    "cells": 20,
+    "raster_pixels_read": 3816,
+    "crop_acres_weighting": 158.9
+   }
+  },
+  "PEAS": {
+   "western-colorado": {
+    "name": "Western Colorado",
+    "irrigated_share_of_ground": 68.0,
+    "cells": 67,
+    "raster_pixels_read": 12488,
+    "crop_acres_weighting": 1764.3
+   },
+   "ne-colorado": {
+    "name": "Northeast Colorado",
+    "irrigated_share_of_ground": 9.4,
+    "cells": 138,
+    "raster_pixels_read": 24022,
+    "crop_acres_weighting": 3583.3
+   },
+   "se-wyoming": {
+    "name": "Southeast Wyoming",
+    "irrigated_share_of_ground": 20.8,
+    "cells": 29,
+    "raster_pixels_read": 5070,
+    "crop_acres_weighting": 564.3
+   },
+   "ne-panhandle": {
+    "name": "Nebraska Panhandle",
+    "irrigated_share_of_ground": 14.3,
+    "cells": 487,
+    "raster_pixels_read": 81352,
+    "crop_acres_weighting": 15285.9
+   },
+   "nw-kansas": {
+    "name": "Northwest Kansas",
+    "irrigated_share_of_ground": 12.4,
+    "cells": 141,
+    "raster_pixels_read": 23974,
+    "crop_acres_weighting": 3879.9
+   },
+   "sw-nebraska": {
+    "name": "Southwest Nebraska",
+    "irrigated_share_of_ground": 21.4,
+    "cells": 353,
+    "raster_pixels_read": 58304,
+    "crop_acres_weighting": 13729.5
+   }
+  }
+ }
+}

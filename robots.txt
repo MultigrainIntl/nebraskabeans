@@ -1,4 +1,14 @@
-User-agent: *
-Disallow: /
+# NebraskaBeans — nebraskabeans.com
+#
+# Production indexing approved by GAJ (Product Authority), 16 September 2026.
+#
+# Crawling is deliberately allowed for EVERY page, including the unfinished ones. That looks
+# backwards, so here is why: a page blocked here is never fetched, so a search engine never
+# reads its "noindex" instruction and can still list the bare URL if it finds a link anywhere.
+# Letting the crawler in is what lets it read "noindex" and honour it. The unfinished pages
+# carry that tag and are kept out of the sitemap; that is what holds them back, not this file.
 
-# Public staging prototype. Product Authority must approve production indexing.
+User-agent: *
+Allow: /
+
+Sitemap: https://nebraskabeans.com/sitemap.xml

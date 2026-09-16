@@ -10,10 +10,30 @@ const required=['MASTER-EXECUTION-CONTRACT.md','NEBRASKABEANS-SCIENTIFIC-SPEC.md
 for(const path of required)assert(existsSync(resolve(root,path)),`missing governed artifact ${path}`);
 
 const pages=['index.html','bean.html','commercial.html','methodology.html','privacy.html','reports.html','resources.html'];
-for(const path of pages)assert.match(read(path),/<meta name="robots" content="noindex,nofollow,noarchive">/,`${path} is indexable`);
+// Indexing posture, per PRODUCT-AUTHORITY-DECISIONS.md D-004 (GAJ, 16 September 2026).
+// Two finished pages are public to search; every draft stays hidden. The drafts are the point
+// of this check: methodology.html still describes the withdrawn yield model and contradicts the
+// live site, and commercial.html says on its face that its own form is not configured. Either
+// one surfacing in a search result costs more than being findable gains.
+const PUBLIC=['index.html','about.html'];
+const DRAFT=pages.filter(p=>!PUBLIC.includes(p));
+for(const path of PUBLIC)assert.doesNotMatch(read(path),/content="noindex/,`${path} must be indexable — D-004 approved it`);
+for(const path of DRAFT)assert.match(read(path),/<meta name="robots" content="noindex,nofollow,noarchive">/,`${path} is a draft and must stay out of search`);
+// A draft must also never be advertised in the sitemap, which is read even when noindex is honoured.
+// Read the <loc> entries, not the raw file: a first pass matched the explanatory comment
+// inside the sitemap and failed on a page the sitemap does not actually list.
+const locs=[...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
+assert(locs.length,'sitemap.xml lists no URLs');
+for(const path of DRAFT)assert(!locs.some(u=>u.endsWith('/'+path)),`sitemap.xml advertises the draft ${path}`);
+assert(locs.some(u=>/nebraskabeans\.com\/$/.test(u)),'sitemap.xml omits the homepage');
+assert(locs.some(u=>u.endsWith('/about.html')),'sitemap.xml omits about.html');
+for(const u of locs)assert(u.startsWith('https://nebraskabeans.com/'),`sitemap.xml points off-domain: ${u}`);
 for(const path of pages.slice(1)){assert.match(read(path),/assets\/shell\.js/,`${path} lacks shared shell`);assert.doesNotMatch(read(path),/assets\/site\.js/,`${path} loads deleted site.js`)}
 const index=read('index.html');assert.match(index,/assets\/app\.js/);assert.doesNotMatch(index,/assets\/(site|bean-regions|map-refine|visual-evidence)\.js/);
-assert.match(read('robots.txt'),/Disallow: \/\s/);
+// Crawling must stay OPEN. Blocking a page here stops the crawler fetching it, so its noindex
+// is never read and a bare URL can still be listed — the opposite of what blocking looks like.
+assert.doesNotMatch(read('robots.txt'),/^\s*Disallow:\s*\/\s*$/m,'robots.txt blocks the site; noindex cannot be read by a crawler that is turned away');
+assert.match(read('robots.txt'),/Sitemap:\s*https:\/\/nebraskabeans\.com\/sitemap\.xml/,'robots.txt must point at the sitemap');
 
 const app=read('assets/app.js');
 for(const forbidden of ['classifyWater','heatDays','frostDays',"new Date('2026-09-11"])assert(!app.includes(forbidden),`unsupported/fixed runtime construct remains: ${forbidden}`);

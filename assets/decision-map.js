@@ -866,6 +866,25 @@
    *
    * So the evidence leads and the figure follows, with its limits written next to it. A grower
    * can then judge the reasoning instead of trusting the output. */
+  /* How much of this crop's ground is irrigated, by region.
+     This is deliberately NOT fed into the yield number yet -- it is measured and shown first,
+     so the figure can be checked against what growers know before anything depends on it. */
+  function irrigationLine() {
+    var ir = S.irrigation && S.irrigation.crops && S.irrigation.crops[commodityOf()];
+    if (!ir) return '';
+    var rows = Object.keys(ir).map(function (k) { return ir[k]; })
+      .sort(function (a, b) { return b.irrigated_share_of_ground - a.irrigated_share_of_ground; });
+    if (!rows.length) return '';
+    var figures = rows.map(function (r) {
+      return r.name + ' ' + Math.round(r.irrigated_share_of_ground) + '%';
+    }).join(', ');
+    return '<p class="nbEstLimit">' + window.NB_TEXT.t('estimate.irrigated', {
+      crop: (S.crop || '').toLowerCase(),
+      figures: figures,
+      year: S.irrigation.crop_year_of_layer
+    }) + '</p>';
+  }
+
   function updateEstimate() {
     var el = $('nbEstimate'); if (!el || !S.yieldAll) return;
     var seen = {}, regions = [];
@@ -946,6 +965,7 @@
         T.t('estimate.heatNotPriced') + '</p>' +
       '<p class="nbEstLimit"><b>When to trust your own field instead.</b> ' +
         T.t('estimate.yourField') + '</p>' +
+      irrigationLine() +
       '<p class="nbEstNext">' + T.t('estimate.wouldSharpen') + '</p>';
     el.hidden = false;
   }
@@ -1448,10 +1468,12 @@
       fetch('assets/data/yield-index-2026.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
       fetch('assets/data/usda-class-acres.json?v=' + build())
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch('assets/data/irrigation.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;

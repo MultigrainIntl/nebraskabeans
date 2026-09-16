@@ -26,7 +26,7 @@ WHAT IS AND IS NOT ALLOWED, because the distinction is easy to get wrong:
 The test is a read-path test, not a word search: it asks whether a script that computes yield
 can reach a file that only exists post-harvest.
 """
-import os, re, sys
+import json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REFRESH = os.path.join(HERE, "..", "scripts", "refresh")
@@ -54,8 +54,42 @@ def offending_lines(path):
     return bad
 
 
+def irrigation_honesty():
+    """Irrigation is measured now, so the old blanket denial must not come back.
+
+    The site said "we cannot see irrigation" in four places for months after it became possible
+    to measure it. The opposite error is now the live risk: claiming we know which FIELDS are
+    watered. MIrAD tells us the share of the ground that is irrigated agriculture. It cannot
+    tell us that any particular bean field is watered, and the vintage is 2017, not this season.
+    """
+    import glob
+    bad = []
+    here = os.path.dirname(os.path.abspath(__file__))
+    root = os.path.join(here, "..")
+    for f in ["index.html", "about.html", os.path.join("assets", "i18n.js")]:
+        p = os.path.join(root, f)
+        if not os.path.exists(p):
+            continue
+        t = open(p, errors="replace").read()
+        if re.search(r"(cannot|can't|do not|don't) see irrigation", t, re.I):
+            bad.append("%s still says irrigation cannot be seen; it is measured now" % f)
+        if re.search(r"(your|each|every|which) fields? (is|are) irrigated", t, re.I):
+            bad.append("%s claims field-level irrigation, which the layer cannot support" % f)
+    d = os.path.join(root, "assets", "data", "irrigation.json")
+    if os.path.exists(d):
+        j = json.load(open(d))
+        if not j.get("crop_year_of_layer"):
+            bad.append("irrigation.json does not state the vintage of the layer")
+        for f in ["index.html", os.path.join("assets", "i18n.js")]:
+            t = open(os.path.join(root, f), errors="replace").read()
+            if "estimate.irrigated" in t and "{year}" not in t and str(j["crop_year_of_layer"]) not in t:
+                bad.append("%s shows irrigation without stating the year it was measured" % f)
+    return bad
+
+
 def main():
     failures = []
+    failures += irrigation_honesty()
     for s in YIELD_SCRIPTS:
         p = os.path.join(REFRESH, s)
         if not os.path.exists(p):

@@ -52,8 +52,8 @@
       '{high} to spare.',
     'water.what':
       'This is rain against what the crop itself draws, which changes as the crop grows. ' +
-      'It does not include irrigation or water already stored in the soil. Use it to see ' +
-      'where rain fell behind, not to judge a watered field.',
+      'This counts rain only. It leaves out irrigation and water already in the soil. Use ' +
+      'it to see where rain fell behind, not to judge a watered field.',
 
     'heat.reading':
       '{crop} has had {days} days above {threshold} at the typical gauge, and up to {hottest} ' +
@@ -124,8 +124,12 @@
       'kills flowers while the field stays green, so in a hot year this estimate is more ' +
       'likely to be high than low. Read the hot-days column.',
     'estimate.yourField':
-      'We cannot see irrigation, variety, disease or hail. If this disagrees with your own ' +
+      'We know how much of the ground here is irrigated, but not whether your field is. ' +
+      'We cannot see variety, disease or hail at all. If this disagrees with your own ' +
       'records, your field is right, and telling us is what fixes it.',
+    'estimate.irrigated':
+      'Irrigated ground under {crop}: {figures}. Measured by USGS in {year}, so this is ' +
+      'the ground itself, not this season, and not your own field.',
 
     'estimate.wouldSharpen':
       'What would sharpen it: real harvest results \u2014 loads, test weights, screen size, ' +

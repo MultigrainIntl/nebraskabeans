@@ -525,7 +525,7 @@ try {
   assert.doesNotMatch(moist, /drew down stored soil water|soil moisture/i,
     'TRUTH-001: rainfall minus reference evaporation is not soil moisture and must not be ' +
     'described as stored soil water — it carries no irrigation and no root-zone storage');
-  assert.match(moist, /does not include irrigation|no irrigation|not soil/i,
+  assert.match(moist, /leaves out irrigation|does not include irrigation|no irrigation|not soil/i,
     'TRUTH-001: the water view must state what it leaves out. The wording changed when the '
     + 'page was rewritten for plain language and translation; the requirement did not.');
   /* The caveat may be behind a toggle, but it must actually OPEN — text present in the DOM and
