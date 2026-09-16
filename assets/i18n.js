@@ -125,8 +125,13 @@
       'less. Two reasons: nights cool off here, and much of this ground is watered.',
     'estimate.weakestPart':
       'The weakest part of this estimate: the step that turns greenness into growth is not ' +
-      'calibrated for these crops, and the numbers that separate one bean type from ' +
-      'another are not taken from published work. They are our own choices.',
+      'calibrated for these crops. The whole range can be off. What moves it up or down ' +
+      'through the season is measured.',
+    'estimate.classLevels':
+      'The difference between bean types comes from what each type actually harvested in ' +
+      'this state, over ten USDA years. We used to work it out ourselves and it was wrong ' +
+      'by about 10%, and backwards in Wyoming. The season signal is now one figure per ' +
+      'area, because the satellite cannot tell one bean type from another.',
     'estimate.heatSeedSize':
       'Heat can still cost you seed size, which is a price problem rather than a weight ' +
       'problem. We cannot measure seed size from a satellite. Only weighing and ' +

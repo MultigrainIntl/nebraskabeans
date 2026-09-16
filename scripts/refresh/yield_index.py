@@ -67,6 +67,31 @@ sys.path.insert(0, HERE)
 from yield_all import (CLASSES, NAMES, PAR_FRACTION, fpar, tstress, soil_threshold,
                        derive_planting)
 
+USDA_CLASS = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern",
+              "LIGHT RED KIDNEY": "Light red kidney", "DARK RED KIDNEY": "Dark red kidney",
+              "NAVY": "Navy", "BLACK": "Black", "BLACKEYE": "Blackeye"}
+FULL_STATE = {"NE": "Nebraska", "CO": "Colorado", "WY": "Wyoming", "KS": "Kansas"}
+
+
+def usda_level(cls, region):
+    """What this class ACTUALLY yielded in this state, averaged over the published years.
+
+    Replaces a baseline that had drifted from the record -- Nebraska light red kidney sat at
+    2,175 against a measured 2,031 -- and, more importantly, it makes the DIFFERENCE between
+    classes a measurement instead of an artefact of constants nobody sourced.
+    """
+    try:
+        d = json.load(open(os.path.join(DATA, "usda-class-yields.json")))
+    except Exception:
+        return None
+    name = USDA_CLASS.get(cls)
+    st = FULL_STATE.get(STATE_OF.get(region))
+    if not name or not st:
+        return None
+    b = d.get("classes", {}).get(name, {}).get(st)
+    return b["mean_lb_ac"] if b else None
+
+
 STATE_OF = {"ne-panhandle": "NE", "sw-nebraska": "NE", "ne-colorado": "CO",
             "western-colorado": "CO", "se-wyoming": "WY", "big-horn": "WY",
             "nw-kansas": "KS"}
@@ -355,8 +380,12 @@ def main():
             index = got[0] / mean_hist
             spread = statistics.pstdev(hist) / mean_hist if len(hist) > 2 else 0.0
 
-            base = ((answers.get(region, {}).get("classes", {}).get(cls, {}) or {})
-                    .get("yield", {}) or {}).get("baseline")
+            # Prefer USDA's measured level for this class in this state. The old baseline
+            # was close for pinto and adrift for the smaller classes.
+            base = usda_level(cls, region)
+            if base is None:
+                base = ((answers.get(region, {}).get("classes", {}).get(cls, {}) or {})
+                        .get("yield", {}) or {}).get("baseline")
             per[cls] = {
                 "index": round(index, 3),
                 "vs_normal_pct": round(100 * (index - 1), 1),
@@ -378,6 +407,41 @@ def main():
                 per[cls]["lb_ac_low"] = round(base * index * (1 - spread))
                 per[cls]["lb_ac_high"] = round(base * index * (1 + spread))
                 per[cls]["baseline_lb_ac"] = base
+        # ONE SEASONAL SIGNAL PER COMMODITY, not one per class.
+        #
+        # USDA maps a single dry bean crop, so every class here is read off the SAME satellite
+        # pixels and the same weather. Any class-to-class difference in this index therefore
+        # came from the constants -- growing-degree requirement, heat threshold, light-use
+        # efficiency, harvest index -- and none of those are sourced. Tested against USDA's own
+        # per-class harvest record for 2016-2025, publishing that variation made the class
+        # ratios wrong by about 10 percentage points and, in Wyoming, backwards.
+        #
+        # Averaging the index across a commodity's classes marginalises over those arbitrary
+        # constants instead of pretending they measure something. Class differences now come
+        # from the measured level, which is what actually differs between classes.
+        #
+        # What is knowingly given up: a kidney needing 1,900 growing degrees really does
+        # experience a different season from a great northern needing 1,600, and in a short
+        # season that matters. That is real, we cannot yet quantify it, and our version of it
+        # made the answer worse. It stays out until there is evidence for it.
+        by_com = {}
+        for cls, row in per.items():
+            by_com.setdefault(row["commodity"], []).append(row)
+        for commodity, rows in by_com.items():
+            if len(rows) < 2:
+                continue
+            shared = statistics.mean(r["index"] for r in rows)
+            shared_spread = statistics.mean(r["model_year_to_year_spread_pct"] for r in rows) / 100
+            for r in rows:
+                r["index_own_class"] = r["index"]
+                r["index"] = round(shared, 3)
+                r["vs_normal_pct"] = round(100 * (shared - 1), 1)
+                r["index_is_shared_across_classes"] = True
+                if r.get("baseline_lb_ac"):
+                    b = r["baseline_lb_ac"]
+                    r["lb_ac"] = round(b * shared)
+                    r["lb_ac_low"] = round(b * shared * (1 - shared_spread))
+                    r["lb_ac_high"] = round(b * shared * (1 + shared_spread))
         if per:
             out[region] = {"name": NAMES[region], "classes": per}
 

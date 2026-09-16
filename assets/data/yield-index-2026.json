@@ -16,8 +16,8 @@
    "name": "Nebraska Panhandle",
    "classes": {
     "PINTO": {
-     "index": 0.872,
-     "vs_normal_pct": -12.8,
+     "index": 0.876,
+     "vs_normal_pct": -12.4,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 15.2,
      "days_counted": 86,
@@ -84,14 +84,16 @@
      },
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
-     "lb_ac": 2110,
-     "lb_ac_low": 1789,
-     "lb_ac_high": 2432,
-     "baseline_lb_ac": 2420
+     "lb_ac": 2100,
+     "lb_ac_low": 1787,
+     "lb_ac_high": 2413,
+     "baseline_lb_ac": 2396,
+     "index_own_class": 0.872,
+     "index_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.818,
-     "vs_normal_pct": -18.2,
+     "index": 0.876,
+     "vs_normal_pct": -12.4,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 15.8,
      "days_counted": 81,
@@ -158,14 +160,16 @@
      },
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
-     "lb_ac": 1902,
-     "lb_ac_low": 1602,
-     "lb_ac_high": 2203,
-     "baseline_lb_ac": 2325
+     "lb_ac": 2048,
+     "lb_ac_low": 1742,
+     "lb_ac_high": 2353,
+     "baseline_lb_ac": 2336,
+     "index_own_class": 0.818,
+     "index_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.94,
-     "vs_normal_pct": -6.0,
+     "index": 0.876,
+     "vs_normal_pct": -12.4,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 14.7,
      "days_counted": 94,
@@ -232,10 +236,12 @@
      },
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
-     "lb_ac": 2045,
-     "lb_ac_low": 1744,
-     "lb_ac_high": 2346,
-     "baseline_lb_ac": 2175
+     "lb_ac": 1780,
+     "lb_ac_low": 1515,
+     "lb_ac_high": 2045,
+     "baseline_lb_ac": 2031,
+     "index_own_class": 0.94,
+     "index_is_shared_across_classes": true
     },
     "BLACKEYE": {
      "index": 0.876,
@@ -305,7 +311,9 @@
       }
      },
      "flowering_warm_nights": 3,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.876,
+     "index_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 0.777,
@@ -457,8 +465,8 @@
    "name": "Southwest Nebraska",
    "classes": {
     "PINTO": {
-     "index": 1.076,
-     "vs_normal_pct": 7.6,
+     "index": 1.075,
+     "vs_normal_pct": 7.5,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 13.0,
      "days_counted": 79,
@@ -525,14 +533,16 @@
      },
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
-     "lb_ac": 2605,
-     "lb_ac_low": 2267,
-     "lb_ac_high": 2943,
-     "baseline_lb_ac": 2420
+     "lb_ac": 2576,
+     "lb_ac_low": 2242,
+     "lb_ac_high": 2909,
+     "baseline_lb_ac": 2396,
+     "index_own_class": 1.076,
+     "index_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 1.065,
-     "vs_normal_pct": 6.5,
+     "index": 1.075,
+     "vs_normal_pct": 7.5,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 14.0,
      "days_counted": 74,
@@ -599,14 +609,16 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
-     "lb_ac": 2475,
-     "lb_ac_low": 2128,
-     "lb_ac_high": 2823,
-     "baseline_lb_ac": 2325
+     "lb_ac": 2511,
+     "lb_ac_low": 2186,
+     "lb_ac_high": 2836,
+     "baseline_lb_ac": 2336,
+     "index_own_class": 1.065,
+     "index_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 1.079,
-     "vs_normal_pct": 7.9,
+     "index": 1.075,
+     "vs_normal_pct": 7.5,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 12.1,
      "days_counted": 88,
@@ -673,14 +685,16 @@
      },
      "flowering_warm_nights": 2,
      "commodity": "DRY BEANS",
-     "lb_ac": 2348,
-     "lb_ac_low": 2063,
-     "lb_ac_high": 2632,
-     "baseline_lb_ac": 2175
+     "lb_ac": 2183,
+     "lb_ac_low": 1901,
+     "lb_ac_high": 2466,
+     "baseline_lb_ac": 2031,
+     "index_own_class": 1.079,
+     "index_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 1.08,
-     "vs_normal_pct": 8.0,
+     "index": 1.075,
+     "vs_normal_pct": 7.5,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 12.7,
      "days_counted": 89,
@@ -746,7 +760,9 @@
       }
      },
      "flowering_warm_nights": 0,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 1.08,
+     "index_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 1.154,
@@ -898,8 +914,8 @@
    "name": "Northeast Colorado",
    "classes": {
     "PINTO": {
-     "index": 0.73,
-     "vs_normal_pct": -27.0,
+     "index": 0.728,
+     "vs_normal_pct": -27.2,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 17.6,
      "days_counted": 78,
@@ -966,14 +982,16 @@
      },
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
-     "lb_ac": 1343,
-     "lb_ac_low": 1107,
-     "lb_ac_high": 1580,
-     "baseline_lb_ac": 1840
+     "lb_ac": 1440,
+     "lb_ac_low": 1190,
+     "lb_ac_high": 1691,
+     "baseline_lb_ac": 1977,
+     "index_own_class": 0.73,
+     "index_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.71,
-     "vs_normal_pct": -29.0,
+     "index": 0.728,
+     "vs_normal_pct": -27.2,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 18.2,
      "days_counted": 73,
@@ -1040,14 +1058,16 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
-     "lb_ac": 1151,
-     "lb_ac_low": 941,
-     "lb_ac_high": 1360,
-     "baseline_lb_ac": 1620
+     "lb_ac": 1180,
+     "lb_ac_low": 975,
+     "lb_ac_high": 1386,
+     "baseline_lb_ac": 1620,
+     "index_own_class": 0.71,
+     "index_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.725,
-     "vs_normal_pct": -27.5,
+     "index": 0.728,
+     "vs_normal_pct": -27.2,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 17.0,
      "days_counted": 87,
@@ -1114,14 +1134,16 @@
      },
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
-     "lb_ac": 1664,
-     "lb_ac_low": 1381,
-     "lb_ac_high": 1947,
-     "baseline_lb_ac": 2295
+     "lb_ac": 1880,
+     "lb_ac_low": 1553,
+     "lb_ac_high": 2207,
+     "baseline_lb_ac": 2581,
+     "index_own_class": 0.725,
+     "index_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.749,
-     "vs_normal_pct": -25.1,
+     "index": 0.728,
+     "vs_normal_pct": -27.2,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 16.8,
      "days_counted": 90,
@@ -1187,7 +1209,9 @@
       }
      },
      "flowering_warm_nights": 1,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.749,
+     "index_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 0.99,
@@ -1335,8 +1359,8 @@
    "name": "Western Colorado",
    "classes": {
     "PINTO": {
-     "index": 0.899,
-     "vs_normal_pct": -10.1,
+     "index": 0.897,
+     "vs_normal_pct": -10.3,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 21.3,
      "days_counted": 85,
@@ -1403,14 +1427,16 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
-     "lb_ac": 1655,
-     "lb_ac_low": 1303,
-     "lb_ac_high": 2007,
-     "baseline_lb_ac": 1840
+     "lb_ac": 1773,
+     "lb_ac_low": 1402,
+     "lb_ac_high": 2145,
+     "baseline_lb_ac": 1977,
+     "index_own_class": 0.899,
+     "index_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.906,
-     "vs_normal_pct": -9.4,
+     "index": 0.897,
+     "vs_normal_pct": -10.3,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 21.0,
      "days_counted": 80,
@@ -1477,14 +1503,16 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
-     "lb_ac": 1468,
-     "lb_ac_low": 1160,
-     "lb_ac_high": 1776,
-     "baseline_lb_ac": 1620
+     "lb_ac": 1453,
+     "lb_ac_low": 1149,
+     "lb_ac_high": 1758,
+     "baseline_lb_ac": 1620,
+     "index_own_class": 0.906,
+     "index_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.922,
-     "vs_normal_pct": -7.8,
+     "index": 0.897,
+     "vs_normal_pct": -10.3,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 21.0,
      "days_counted": 96,
@@ -1551,14 +1579,16 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
-     "lb_ac": 2116,
-     "lb_ac_low": 1671,
-     "lb_ac_high": 2562,
-     "baseline_lb_ac": 2295
+     "lb_ac": 2315,
+     "lb_ac_low": 1830,
+     "lb_ac_high": 2800,
+     "baseline_lb_ac": 2581,
+     "index_own_class": 0.922,
+     "index_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.861,
-     "vs_normal_pct": -13.9,
+     "index": 0.897,
+     "vs_normal_pct": -10.3,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 20.5,
      "days_counted": 97,
@@ -1624,7 +1654,9 @@
       }
      },
      "flowering_warm_nights": 0,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.861,
+     "index_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 0.917,
@@ -1702,8 +1734,8 @@
    "name": "Southeast Wyoming",
    "classes": {
     "PINTO": {
-     "index": 0.761,
-     "vs_normal_pct": -23.9,
+     "index": 0.783,
+     "vs_normal_pct": -21.7,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 16.3,
      "days_counted": 77,
@@ -1770,14 +1802,16 @@
      },
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
-     "lb_ac": 1724,
-     "lb_ac_low": 1443,
-     "lb_ac_high": 2005,
-     "baseline_lb_ac": 2265
+     "lb_ac": 1794,
+     "lb_ac_low": 1508,
+     "lb_ac_high": 2081,
+     "baseline_lb_ac": 2291,
+     "index_own_class": 0.761,
+     "index_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.796,
-     "vs_normal_pct": -20.4,
+     "index": 0.783,
+     "vs_normal_pct": -21.7,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 17.3,
      "days_counted": 72,
@@ -1844,14 +1878,16 @@
      },
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
-     "lb_ac": 1863,
-     "lb_ac_low": 1541,
-     "lb_ac_high": 2186,
-     "baseline_lb_ac": 2340
+     "lb_ac": 1698,
+     "lb_ac_low": 1427,
+     "lb_ac_high": 1969,
+     "baseline_lb_ac": 2168,
+     "index_own_class": 0.796,
+     "index_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.788,
-     "vs_normal_pct": -21.2,
+     "index": 0.783,
+     "vs_normal_pct": -21.7,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 13.8,
      "days_counted": 86,
@@ -1917,11 +1953,13 @@
       }
      },
      "flowering_warm_nights": 3,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.788,
+     "index_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.788,
-     "vs_normal_pct": -21.2,
+     "index": 0.783,
+     "vs_normal_pct": -21.7,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 16.4,
      "days_counted": 87,
@@ -1987,7 +2025,9 @@
       }
      },
      "flowering_warm_nights": 1,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.788,
+     "index_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 0.681,
@@ -2135,8 +2175,8 @@
    "name": "Big Horn Basin",
    "classes": {
     "PINTO": {
-     "index": 0.788,
-     "vs_normal_pct": -21.2,
+     "index": 0.786,
+     "vs_normal_pct": -21.4,
      "years_of_model_history": 10,
      "model_year_to_year_spread_pct": 18.4,
      "days_counted": 99,
@@ -2198,14 +2238,16 @@
      },
      "flowering_warm_nights": 2,
      "commodity": "DRY BEANS",
-     "lb_ac": 1785,
-     "lb_ac_low": 1456,
-     "lb_ac_high": 2113,
-     "baseline_lb_ac": 2265
+     "lb_ac": 1802,
+     "lb_ac_low": 1476,
+     "lb_ac_high": 2128,
+     "baseline_lb_ac": 2291,
+     "index_own_class": 0.788,
+     "index_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.8,
-     "vs_normal_pct": -20.0,
+     "index": 0.786,
+     "vs_normal_pct": -21.4,
      "years_of_model_history": 10,
      "model_year_to_year_spread_pct": 18.0,
      "days_counted": 99,
@@ -2267,14 +2309,16 @@
      },
      "flowering_warm_nights": 2,
      "commodity": "DRY BEANS",
-     "lb_ac": 1871,
-     "lb_ac_low": 1535,
-     "lb_ac_high": 2208,
-     "baseline_lb_ac": 2340
+     "lb_ac": 1705,
+     "lb_ac_low": 1397,
+     "lb_ac_high": 2014,
+     "baseline_lb_ac": 2168,
+     "index_own_class": 0.8,
+     "index_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.784,
-     "vs_normal_pct": -21.6,
+     "index": 0.786,
+     "vs_normal_pct": -21.4,
      "years_of_model_history": 10,
      "model_year_to_year_spread_pct": 17.8,
      "days_counted": 99,
@@ -2335,11 +2379,13 @@
       }
      },
      "flowering_warm_nights": 2,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.784,
+     "index_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.774,
-     "vs_normal_pct": -22.6,
+     "index": 0.786,
+     "vs_normal_pct": -21.4,
      "years_of_model_history": 10,
      "model_year_to_year_spread_pct": 18.2,
      "days_counted": 101,
@@ -2400,7 +2446,9 @@
       }
      },
      "flowering_warm_nights": 2,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.774,
+     "index_is_shared_across_classes": true
     }
    }
   },
@@ -2408,8 +2456,8 @@
    "name": "Northwest Kansas",
    "classes": {
     "PINTO": {
-     "index": 0.907,
-     "vs_normal_pct": -9.3,
+     "index": 0.904,
+     "vs_normal_pct": -9.6,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 19.1,
      "days_counted": 74,
@@ -2476,14 +2524,16 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
-     "lb_ac": 1905,
-     "lb_ac_low": 1541,
-     "lb_ac_high": 2268,
-     "baseline_lb_ac": 2100
+     "lb_ac": 1899,
+     "lb_ac_low": 1537,
+     "lb_ac_high": 2261,
+     "baseline_lb_ac": 2100,
+     "index_own_class": 0.907,
+     "index_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.977,
-     "vs_normal_pct": -2.3,
+     "index": 0.904,
+     "vs_normal_pct": -9.6,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 19.9,
      "days_counted": 70,
@@ -2550,14 +2600,16 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
-     "lb_ac": 1549,
-     "lb_ac_low": 1240,
-     "lb_ac_high": 1857,
-     "baseline_lb_ac": 1585
+     "lb_ac": 1433,
+     "lb_ac_low": 1160,
+     "lb_ac_high": 1706,
+     "baseline_lb_ac": 1585,
+     "index_own_class": 0.977,
+     "index_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.801,
-     "vs_normal_pct": -19.9,
+     "index": 0.904,
+     "vs_normal_pct": -9.6,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 17.8,
      "days_counted": 82,
@@ -2623,11 +2675,13 @@
       }
      },
      "flowering_warm_nights": 1,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.801,
+     "index_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.932,
-     "vs_normal_pct": -6.8,
+     "index": 0.904,
+     "vs_normal_pct": -9.6,
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 19.4,
      "days_counted": 84,
@@ -2693,7 +2747,9 @@
       }
      },
      "flowering_warm_nights": 0,
-     "commodity": "DRY BEANS"
+     "commodity": "DRY BEANS",
+     "index_own_class": 0.932,
+     "index_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 1.131,

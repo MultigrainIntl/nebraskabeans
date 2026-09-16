@@ -27,6 +27,8 @@ STEPS = [
      "IEM hourly ASOS air temperature at the satellite's overpass hour"),
     ("usda_classes.py", None, None,
      "USDA commercial-class table — which crops are actually planted in these states"),
+    ("usda_class_yields.py", "usda-class-yields.json", 5,
+     "USDA yield by commercial class — the measured level each class actually harvests"),
     ("station_field_acis.py", "station-field.json", 5,
      "NOAA cooperative and GHCN stations via RCC-ACIS"),
     ("solar_power.py", None, None,

@@ -964,6 +964,7 @@
       '<p class="nbEstLimit">' + T.t('estimate.bandMeans') + ' ' +
         T.t('estimate.heatNotPriced') + ' ' + T.t('estimate.heatSeedSize') + '</p>' +
       '<p class="nbEstLimit">' + T.t('estimate.weakestPart') + '</p>' +
+      '<p class="nbEstLimit">' + T.t('estimate.classLevels') + '</p>' +
       '<p class="nbEstLimit"><b>When to trust your own field instead.</b> ' +
         T.t('estimate.yourField') + '</p>' +
       irrigationLine() +
