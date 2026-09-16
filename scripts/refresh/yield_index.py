@@ -69,7 +69,13 @@ from yield_all import (CLASSES, NAMES, PAR_FRACTION, fpar, tstress, soil_thresho
 
 USDA_CLASS = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern",
               "LIGHT RED KIDNEY": "Light red kidney", "DARK RED KIDNEY": "Dark red kidney",
-              "NAVY": "Navy", "BLACK": "Black", "BLACKEYE": "Blackeye"}
+              "NAVY": "Navy", "BLACK": "Black", "BLACKEYE": "Blackeye",
+              # USDA publishes dry pea yield for Nebraska. It publishes NO chickpea yield for
+              # Nebraska, Colorado or Wyoming — that programme covers Idaho, Montana, North
+              # Dakota and Washington only. So chickpeas get no level here, and therefore no
+              # pounds per acre. The site was showing 494 lb/ac from a 700 lb/ac level that
+              # came from nowhere, against 940-2,100 in every state USDA actually estimates.
+              "PEAS": "DRY PEAS", "CHICKPEAS": "CHICKPEAS"}
 FULL_STATE = {"NE": "Nebraska", "CO": "Colorado", "WY": "Wyoming", "KS": "Kansas"}
 
 
@@ -304,7 +310,12 @@ def main():
     h = build_history(centres)
 
     obs = json.load(open(os.path.join(ARCHIVE, "canopy-history.json")))["observations"]
-    answers = json.load(open(os.path.join(DATA, "region-answers.json")))["regions"]
+    # region-answers.json feeds the HEADLINE — the first number a broker reads. It was a
+    # static file that nothing rebuilt, carrying a hand-set chickpea level of 700 lb/ac for a
+    # crop USDA does not estimate in these states. The daily model now writes these blocks, so
+    # the headline and the model cannot drift apart and no unsourced level can survive in it.
+    answers_doc = json.load(open(os.path.join(DATA, "region-answers.json")))
+    answers = answers_doc["regions"]
     pulses = json.load(open(os.path.join(ARCHIVE, "canopy-pulses.json")))["commodities"]
 
     out = {}
@@ -382,10 +393,13 @@ def main():
 
             # Prefer USDA's measured level for this class in this state. The old baseline
             # was close for pinto and adrift for the smaller classes.
+            # ONE RULE: no USDA-published level for this class in this state, no pounds per
+            # acre on the page. The old fallback invented a level where USDA declines to
+            # estimate one, which is precisely the kind of number that cannot be defended to
+            # an agronomist. Condition and the seasonal index are still published — those are
+            # measured — but the weight is not.
             base = usda_level(cls, region)
-            if base is None:
-                base = ((answers.get(region, {}).get("classes", {}).get(cls, {}) or {})
-                        .get("yield", {}) or {}).get("baseline")
+            unsourced = base is None
             per[cls] = {
                 "index": round(index, 3),
                 "vs_normal_pct": round(100 * (index - 1), 1),
@@ -401,6 +415,7 @@ def main():
                 "flowering_hot_days_by_year": hot_by_year,
                 "flowering_warm_nights": got[5],
                 "commodity": commodity,
+                "level_is_usda_published": not unsourced,
             }
             if base:
                 per[cls]["lb_ac"] = round(base * index)
@@ -444,6 +459,30 @@ def main():
                     r["lb_ac_high"] = round(b * shared * (1 + shared_spread))
         if per:
             out[region] = {"name": NAMES[region], "classes": per}
+
+    # Push today's USDA-sourced figures into the file the headline reads, and DELETE any
+    # yield block whose level USDA does not publish. A missing number is honest; an invented
+    # one is not.
+    stripped = written = 0
+    for rname, rblock in answers.items():
+        for cname, cblock in (rblock.get("classes") or {}).items():
+            got = out.get(rname, {}).get("classes", {}).get(cname)
+            if got and got.get("lb_ac") and got.get("level_is_usda_published"):
+                cblock["yield"] = {
+                    "low": got["lb_ac_low"], "high": got["lb_ac_high"], "mid": got["lb_ac"],
+                    "baseline": got["baseline_lb_ac"],
+                    "years": got["years_of_model_history"],
+                    "adjust_pct": got["vs_normal_pct"],
+                    "level_source": "USDA published yield for this class in this state"}
+                written += 1
+            elif cblock.get("yield") is not None:
+                cblock["yield"] = None
+                stripped += 1
+    answers_doc["yield_blocks"] = ("written by yield_index.py; a class with no USDA-published "
+                                   "level carries no yield, by design")
+    json.dump(answers_doc, open(os.path.join(DATA, "region-answers.json"), "w"), indent=1)
+    print("\nheadline file: %d yields written, %d unsourced yields removed"
+          % (written, stripped), file=sys.stderr)
 
     json.dump({"schema": "gisit.yield-index.v1",
                "year": THIS_YEAR,

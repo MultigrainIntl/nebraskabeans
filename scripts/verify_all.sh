@@ -27,6 +27,9 @@ echo "functional gates (a live page is rendered and inspected)"
 NB_OFFLINE_FIXTURES=1 NB_BASE_URL="$BASE" run "browser-smoke" node tests/browser-smoke.mjs
 NB_BASE_URL="$BASE" run "visual-contract" node tests/visual-contract.mjs
 
+echo "data integrity (every dataset against a source that did not produce it)"
+run "data-verification" python3 scripts/verify_data.py
+
 echo "contract and truth gates"
 run "foundation" node scripts/verify_foundation.mjs
 run "truth-firewall" python3 tests/verify_truth_firewall.py

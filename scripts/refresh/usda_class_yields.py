@@ -104,6 +104,40 @@ def parse(txt, out):
                     out.setdefault(cur, {}).setdefault(st, {})[str(yr)] = int(n)
 
 
+def pulses(txt, out):
+    """Dry pea and chickpea yields, which live in their own tables.
+
+    USDA publishes dry pea yield for Nebraska. It does NOT publish chickpea yield for Nebraska,
+    Colorado or Wyoming at all -- the chickpea programme covers California, Idaho, Montana,
+    North Dakota and Washington. That absence is the finding: this site was publishing a
+    chickpea yield of 494 lb/ac built on a 700 lb/ac level that came from nowhere, while every
+    state USDA does publish runs 940-2,100. A number with no source is worse than no number.
+    """
+    for title, key in (("Dry Edible Pea Area Planted", "DRY PEAS"),
+                       ("Chickpea Area Planted", "CHICKPEAS")):
+        for m in re.finditer(re.escape(title), txt):
+            seg = txt[m.start(): m.start() + 3000]
+            if "pounds" not in seg:
+                continue
+            yrs = re.search(r":\s*(\d{4})\s*:\s*(\d{4})\s*:\s*(\d{4})\s*:", seg)
+            if not yrs:
+                continue
+            Y = [int(g) for g in yrs.groups()]
+            body = seg[seg.find("pounds"):]
+            for st in STATES:
+                row = re.search(r"^%s[^:\n]*:(.*)$" % st, body, re.M)
+                if not row:
+                    continue
+                vals = re.findall(r"\(D\)|\(NA\)|\(X\)|[\d][\d,]*", row.group(1))
+                for yr, v in zip(Y, vals[:3]):
+                    if v.startswith("("):
+                        continue
+                    n = v.replace(",", "")
+                    if n.isdigit() and LO <= int(n) <= HI:
+                        out.setdefault(key, {}).setdefault(st, {})[str(yr)] = int(n)
+            break
+
+
 def main():
     rel = releases()
     if not rel:
@@ -113,6 +147,7 @@ def main():
         t = text(path, name)
         if t:
             parse(t, table)
+            pulses(t, table)
     if not table:
         print("no class yields parsed -- refusing to write", file=sys.stderr)
         return 1

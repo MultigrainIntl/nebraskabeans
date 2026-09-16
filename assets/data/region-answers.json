@@ -1,1 +1,910 @@
-{"generated":"2026-09-14T22:46:57.126455Z","classes":{"PINTO":{"commodity":"BEANS","quality_driver":"seed-coat brightness and uniform mottling; dullness and stain cost more than yield"},"GREAT NORTHERN":{"commodity":"BEANS","quality_driver":"clean white seed coat and uniform size; any staining is visible and penalised"},"LIGHT RED KIDNEY":{"commodity":"BEANS","quality_driver":"large seed size is the grade; colour brightness second"},"BLACKEYE":{"commodity":"BEANS","quality_driver":"clean white ground colour with sharp eye"},"PEAS":{"commodity":"PEAS","quality_driver":"soundness and low split; colour is stable"},"CHICKPEAS":{"commodity":"CHICKPEAS","quality_driver":"seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour"}},"regions":{"ne-panhandle":{"name":"Nebraska Panhandle","state":"Nebraska","soil_awc":0.21,"classes":{"PINTO":{"yield":{"low":2023,"high":2574,"mid":2299,"baseline":2420,"years":12,"adjust_pct":-5.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":148.2,"heat_days":36.5,"precip_mm":268.2,"quality_driver":"seed-coat brightness and uniform mottling; dullness and stain cost more than yield","downgrade_risk":"rain near harvest dulls and stains; heat in fill shrinks screen size","mould_risk":"moderate","stations":116},"GREAT NORTHERN":{"yield":{"low":1943,"high":2473,"mid":2208,"baseline":2325,"years":12,"adjust_pct":-5.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":157.5,"heat_days":47.5,"precip_mm":268.2,"quality_driver":"clean white seed coat and uniform size; any staining is visible and penalised","downgrade_risk":"white mould staining under wet canopy; earliest to mature, so harvest rain is the risk","mould_risk":"HIGH","stations":116},"LIGHT RED KIDNEY":{"yield":{"low":1818,"high":2314,"mid":2066,"baseline":2175,"years":12,"adjust_pct":-5.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":132.6,"heat_days":59.5,"precip_mm":268.2,"quality_driver":"large seed size is the grade; colour brightness second","downgrade_risk":"latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering","mould_risk":"HIGH","stations":116},"BLACKEYE":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"normal","percent_of_maturity":149.1,"heat_days":12.5,"precip_mm":331.6,"quality_driver":"clean white ground colour with sharp eye","downgrade_risk":"tolerates heat that would ruin a kidney; harvest weathering is the risk","mould_risk":"lower","stations":120},"PEAS":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":214.1,"heat_days":96.0,"precip_mm":381.8,"quality_driver":"soundness and low split; colour is stable","downgrade_risk":"heat during fill; bleaching is NOT a concern for yellow","mould_risk":"moderate","stations":123},"CHICKPEAS":{"yield":{"low":554,"high":705,"mid":630,"baseline":700,"years":8,"adjust_pct":-10.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":159.1,"heat_days":66.0,"precip_mm":379.0,"quality_driver":"seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour","downgrade_risk":"Ascochyta blight under prolonged wet canopy destroys both yield and appearance","mould_risk":"Ascochyta HIGH","stations":122}},"moisture":{"anomaly":-0.0607,"as_of":"2026-09-09","state":"drier than normal","trend":"improving","since":"2026-09-02"},"vegetation":{"value":177.0,"prior":128.0,"trend":"greening","as_of":"2026-09-09"}},"sw-nebraska":{"name":"Southwest Nebraska","state":"Nebraska","soil_awc":0.21,"classes":{"PINTO":{"yield":{"low":2023,"high":2574,"mid":2299,"baseline":2420,"years":12,"adjust_pct":-5.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":148.2,"heat_days":36.5,"precip_mm":268.2,"quality_driver":"seed-coat brightness and uniform mottling; dullness and stain cost more than yield","downgrade_risk":"rain near harvest dulls and stains; heat in fill shrinks screen size","mould_risk":"moderate","stations":116},"GREAT NORTHERN":{"yield":{"low":1943,"high":2473,"mid":2208,"baseline":2325,"years":12,"adjust_pct":-5.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":157.5,"heat_days":47.5,"precip_mm":268.2,"quality_driver":"clean white seed coat and uniform size; any staining is visible and penalised","downgrade_risk":"white mould staining under wet canopy; earliest to mature, so harvest rain is the risk","mould_risk":"HIGH","stations":116},"LIGHT RED KIDNEY":{"yield":{"low":1818,"high":2314,"mid":2066,"baseline":2175,"years":12,"adjust_pct":-5.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":132.6,"heat_days":59.5,"precip_mm":268.2,"quality_driver":"large seed size is the grade; colour brightness second","downgrade_risk":"latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering","mould_risk":"HIGH","stations":116},"BLACKEYE":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"normal","percent_of_maturity":149.1,"heat_days":12.5,"precip_mm":331.6,"quality_driver":"clean white ground colour with sharp eye","downgrade_risk":"tolerates heat that would ruin a kidney; harvest weathering is the risk","mould_risk":"lower","stations":120},"PEAS":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":214.1,"heat_days":96.0,"precip_mm":381.8,"quality_driver":"soundness and low split; colour is stable","downgrade_risk":"heat during fill; bleaching is NOT a concern for yellow","mould_risk":"moderate","stations":123},"CHICKPEAS":{"yield":{"low":554,"high":705,"mid":630,"baseline":700,"years":8,"adjust_pct":-10.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":159.1,"heat_days":66.0,"precip_mm":379.0,"quality_driver":"seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour","downgrade_risk":"Ascochyta blight under prolonged wet canopy destroys both yield and appearance","mould_risk":"Ascochyta HIGH","stations":122}},"moisture":{"anomaly":-0.0612,"as_of":"2026-09-09","state":"drier than normal","trend":"drying further","since":"2026-09-02"},"vegetation":{"value":178.0,"prior":179.0,"trend":"declining","as_of":"2026-09-09"}},"ne-colorado":{"name":"Northeast / East-Central Colorado","state":"Colorado","soil_awc":0.15,"classes":{"PINTO":{"yield":{"low":1619,"high":2060,"mid":1840,"baseline":1840,"years":12,"adjust_pct":0.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"normal","percent_of_maturity":104.7,"heat_days":18.0,"precip_mm":78.7,"quality_driver":"seed-coat brightness and uniform mottling; dullness and stain cost more than yield","downgrade_risk":"rain near harvest dulls and stains; heat in fill shrinks screen size","mould_risk":"moderate","stations":437},"GREAT NORTHERN":{"yield":{"low":1425,"high":1814,"mid":1620,"baseline":1620,"years":9,"adjust_pct":0.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":111.2,"heat_days":32.0,"precip_mm":78.7,"quality_driver":"clean white seed coat and uniform size; any staining is visible and penalised","downgrade_risk":"white mould staining under wet canopy; earliest to mature, so harvest rain is the risk","mould_risk":"HIGH","stations":437},"LIGHT RED KIDNEY":{"yield":{"low":1918,"high":2441,"mid":2180,"baseline":2295,"years":12,"adjust_pct":-5.0},"harvest":{"ready":"2026-09-18","gdd_still_needed":120,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":93.7,"heat_days":46.0,"precip_mm":78.7,"quality_driver":"large seed size is the grade; colour brightness second","downgrade_risk":"latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering","mould_risk":"HIGH","stations":437},"BLACKEYE":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"normal","percent_of_maturity":100.7,"heat_days":0.0,"precip_mm":86.9,"quality_driver":"clean white ground colour with sharp eye","downgrade_risk":"tolerates heat that would ruin a kidney; harvest weathering is the risk","mould_risk":"lower","stations":446},"PEAS":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":156.9,"heat_days":70.0,"precip_mm":140.7,"quality_driver":"soundness and low split; colour is stable","downgrade_risk":"heat during fill; bleaching is NOT a concern for yellow","mould_risk":"moderate","stations":448},"CHICKPEAS":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":118.1,"heat_days":46.0,"precip_mm":132.1,"quality_driver":"seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour","downgrade_risk":"Ascochyta blight under prolonged wet canopy destroys both yield and appearance","mould_risk":"Ascochyta HIGH","stations":448}},"moisture":{"anomaly":-0.0011,"as_of":"2026-09-09","state":"about normal","trend":"drying further","since":"2026-09-02"},"vegetation":{"value":179.0,"prior":133.0,"trend":"greening","as_of":"2026-09-09"}},"western-colorado":{"name":"Western Colorado","state":"Colorado","soil_awc":0.15,"classes":{"PINTO":{"yield":{"low":1619,"high":2060,"mid":1840,"baseline":1840,"years":12,"adjust_pct":0.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"normal","percent_of_maturity":104.7,"heat_days":18.0,"precip_mm":78.7,"quality_driver":"seed-coat brightness and uniform mottling; dullness and stain cost more than yield","downgrade_risk":"rain near harvest dulls and stains; heat in fill shrinks screen size","mould_risk":"moderate","stations":437},"GREAT NORTHERN":{"yield":{"low":1425,"high":1814,"mid":1620,"baseline":1620,"years":9,"adjust_pct":0.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":111.2,"heat_days":32.0,"precip_mm":78.7,"quality_driver":"clean white seed coat and uniform size; any staining is visible and penalised","downgrade_risk":"white mould staining under wet canopy; earliest to mature, so harvest rain is the risk","mould_risk":"HIGH","stations":437},"LIGHT RED KIDNEY":{"yield":{"low":1918,"high":2441,"mid":2180,"baseline":2295,"years":12,"adjust_pct":-5.0},"harvest":{"ready":"2026-09-24","gdd_still_needed":120,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":93.7,"heat_days":46.0,"precip_mm":78.7,"quality_driver":"large seed size is the grade; colour brightness second","downgrade_risk":"latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering","mould_risk":"HIGH","stations":437},"BLACKEYE":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"normal","percent_of_maturity":100.7,"heat_days":0.0,"precip_mm":86.9,"quality_driver":"clean white ground colour with sharp eye","downgrade_risk":"tolerates heat that would ruin a kidney; harvest weathering is the risk","mould_risk":"lower","stations":446},"PEAS":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":156.9,"heat_days":70.0,"precip_mm":140.7,"quality_driver":"soundness and low split; colour is stable","downgrade_risk":"heat during fill; bleaching is NOT a concern for yellow","mould_risk":"moderate","stations":448}},"moisture":{"anomaly":-0.0658,"as_of":"2026-09-09","state":"drier than normal","trend":"drying further","since":"2026-09-02"},"vegetation":{"value":183.0,"prior":164.0,"trend":"greening","as_of":"2026-09-09"}},"big-horn":{"name":"Big Horn Basin","state":"Wyoming","soil_awc":0.16,"classes":{"PINTO":{"yield":{"low":1833,"high":2333,"mid":2083,"baseline":2265,"years":12,"adjust_pct":-8.0},"harvest":{"ready":"beyond the 16-day forecast","gdd_still_needed":550,"frost_forecast":null},"size":"normal","percent_of_maturity":67.6,"heat_days":6.0,"precip_mm":88.4,"quality_driver":"seed-coat brightness and uniform mottling; dullness and stain cost more than yield","downgrade_risk":"rain near harvest dulls and stains; heat in fill shrinks screen size","mould_risk":"moderate","stations":197},"GREAT NORTHERN":{"yield":{"low":1894,"high":2411,"mid":2152,"baseline":2340,"years":12,"adjust_pct":-8.0},"harvest":{"ready":"beyond the 16-day forecast","gdd_still_needed":450,"frost_forecast":null},"size":"normal","percent_of_maturity":71.8,"heat_days":13.0,"precip_mm":88.4,"quality_driver":"clean white seed coat and uniform size; any staining is visible and penalised","downgrade_risk":"white mould staining under wet canopy; earliest to mature, so harvest rain is the risk","mould_risk":"HIGH","stations":197},"LIGHT RED KIDNEY":{"yield":null,"harvest":{"ready":"beyond the 16-day forecast","gdd_still_needed":750,"frost_forecast":null},"size":"normal","percent_of_maturity":60.5,"heat_days":21.0,"precip_mm":88.4,"quality_driver":"large seed size is the grade; colour brightness second","downgrade_risk":"latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering","mould_risk":"HIGH","stations":197},"BLACKEYE":{"yield":null,"harvest":{"ready":"beyond the 16-day forecast","gdd_still_needed":590,"frost_forecast":null},"size":"normal","percent_of_maturity":67.2,"heat_days":0.0,"precip_mm":107.8,"quality_driver":"clean white ground colour with sharp eye","downgrade_risk":"tolerates heat that would ruin a kidney; harvest weathering is the risk","mould_risk":"lower","stations":202}},"moisture":{"anomaly":-0.2761,"as_of":"2026-09-09","state":"much drier than normal","trend":"drying further","since":"2026-09-02"},"vegetation":{"value":140.0,"prior":141.0,"trend":"declining","as_of":"2026-09-09"}},"se-wyoming":{"name":"Southeast Wyoming","state":"Wyoming","soil_awc":0.16,"classes":{"PINTO":{"yield":{"low":1833,"high":2333,"mid":2083,"baseline":2265,"years":12,"adjust_pct":-8.0},"harvest":{"ready":"beyond the 16-day forecast","gdd_still_needed":550,"frost_forecast":null},"size":"normal","percent_of_maturity":67.6,"heat_days":6.0,"precip_mm":88.4,"quality_driver":"seed-coat brightness and uniform mottling; dullness and stain cost more than yield","downgrade_risk":"rain near harvest dulls and stains; heat in fill shrinks screen size","mould_risk":"moderate","stations":197},"GREAT NORTHERN":{"yield":{"low":1894,"high":2411,"mid":2152,"baseline":2340,"years":12,"adjust_pct":-8.0},"harvest":{"ready":"beyond the 16-day forecast","gdd_still_needed":450,"frost_forecast":null},"size":"normal","percent_of_maturity":71.8,"heat_days":13.0,"precip_mm":88.4,"quality_driver":"clean white seed coat and uniform size; any staining is visible and penalised","downgrade_risk":"white mould staining under wet canopy; earliest to mature, so harvest rain is the risk","mould_risk":"HIGH","stations":197},"LIGHT RED KIDNEY":{"yield":null,"harvest":{"ready":"beyond the 16-day forecast","gdd_still_needed":750,"frost_forecast":null},"size":"normal","percent_of_maturity":60.5,"heat_days":21.0,"precip_mm":88.4,"quality_driver":"large seed size is the grade; colour brightness second","downgrade_risk":"latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering","mould_risk":"HIGH","stations":197},"BLACKEYE":{"yield":null,"harvest":{"ready":"beyond the 16-day forecast","gdd_still_needed":590,"frost_forecast":null},"size":"normal","percent_of_maturity":67.2,"heat_days":0.0,"precip_mm":107.8,"quality_driver":"clean white ground colour with sharp eye","downgrade_risk":"tolerates heat that would ruin a kidney; harvest weathering is the risk","mould_risk":"lower","stations":202},"PEAS":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":114.2,"heat_days":36.5,"precip_mm":162.6,"quality_driver":"soundness and low split; colour is stable","downgrade_risk":"heat during fill; bleaching is NOT a concern for yellow","mould_risk":"moderate","stations":204},"CHICKPEAS":{"yield":null,"harvest":{"ready":"2026-09-26","gdd_still_needed":338,"frost_forecast":null},"size":"normal","percent_of_maturity":87.0,"heat_days":22.0,"precip_mm":153.3,"quality_driver":"seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour","downgrade_risk":"Ascochyta blight under prolonged wet canopy destroys both yield and appearance","mould_risk":"Ascochyta HIGH","stations":204}},"moisture":{"anomaly":-0.0141,"as_of":"2026-09-09","state":"about normal","trend":"improving","since":"2026-09-02"},"vegetation":{"value":156.0,"prior":131.0,"trend":"greening","as_of":"2026-09-09"}},"nw-kansas":{"name":"Northwest / West-Central Kansas","state":"Kansas","soil_awc":0.17,"classes":{"PINTO":{"yield":{"low":1663,"high":2116,"mid":1890,"baseline":2100,"years":12,"adjust_pct":-10.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":177.1,"heat_days":64.0,"precip_mm":316.1,"quality_driver":"seed-coat brightness and uniform mottling; dullness and stain cost more than yield","downgrade_risk":"rain near harvest dulls and stains; heat in fill shrinks screen size","mould_risk":"moderate","stations":140},"GREAT NORTHERN":{"yield":{"low":1255,"high":1597,"mid":1426,"baseline":1585,"years":8,"adjust_pct":-10.0},"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":188.2,"heat_days":74.5,"precip_mm":316.1,"quality_driver":"clean white seed coat and uniform size; any staining is visible and penalised","downgrade_risk":"white mould staining under wet canopy; earliest to mature, so harvest rain is the risk","mould_risk":"HIGH","stations":140},"LIGHT RED KIDNEY":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":158.4,"heat_days":82.0,"precip_mm":316.1,"quality_driver":"large seed size is the grade; colour brightness second","downgrade_risk":"latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering","mould_risk":"HIGH","stations":140},"BLACKEYE":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"some size pressure","percent_of_maturity":178.5,"heat_days":32.5,"precip_mm":355.6,"quality_driver":"clean white ground colour with sharp eye","downgrade_risk":"tolerates heat that would ruin a kidney; harvest weathering is the risk","mould_risk":"lower","stations":144},"PEAS":{"yield":null,"harvest":{"ready":"now","gdd_still_needed":0,"frost_forecast":null},"size":"smaller than normal","percent_of_maturity":258.1,"heat_days":112.0,"precip_mm":442.0,"quality_driver":"soundness and low split; colour is stable","downgrade_risk":"heat during fill; bleaching is NOT a concern for yellow","mould_risk":"moderate","stations":144}},"moisture":{"anomaly":-0.0948,"as_of":"2026-09-09","state":"drier than normal","trend":"drying further","since":"2026-09-02"},"vegetation":{"value":181.0,"prior":173.5,"trend":"greening","as_of":"2026-09-09"}}},"resolution":"Weather and soil are state-level from NOAA stations and USDA SSURGO. Yield baselines are that class's own USDA history for that state. Harvest timing uses a 16-day forecast.","class_note":"Only classes USDA prints an acreage for. Where USDA withholds the figure because too few operations report it \u2014 black, dark red kidney, small red, cranberry \u2014 the crop is grown but the market is too thin to quote a yield for. Navy, pink and small white show none grown or no estimate. Lentils are omitted on the same commercial test: 215 mapped acres across four states. Peas and chickpeas are listed at commodity level because USDA's crop map has one class for each."}
+{
+ "generated": "2026-09-14T22:46:57.126455Z",
+ "classes": {
+  "PINTO": {
+   "commodity": "BEANS",
+   "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield"
+  },
+  "GREAT NORTHERN": {
+   "commodity": "BEANS",
+   "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised"
+  },
+  "LIGHT RED KIDNEY": {
+   "commodity": "BEANS",
+   "quality_driver": "large seed size is the grade; colour brightness second"
+  },
+  "BLACKEYE": {
+   "commodity": "BEANS",
+   "quality_driver": "clean white ground colour with sharp eye"
+  },
+  "PEAS": {
+   "commodity": "PEAS",
+   "quality_driver": "soundness and low split; colour is stable"
+  },
+  "CHICKPEAS": {
+   "commodity": "CHICKPEAS",
+   "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour"
+  }
+ },
+ "regions": {
+  "ne-panhandle": {
+   "name": "Nebraska Panhandle",
+   "state": "Nebraska",
+   "soil_awc": 0.21,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1787,
+      "high": 2413,
+      "mid": 2100,
+      "baseline": 2396,
+      "years": 11,
+      "adjust_pct": -12.4,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 148.2,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1742,
+      "high": 2353,
+      "mid": 2048,
+      "baseline": 2336,
+      "years": 11,
+      "adjust_pct": -12.4,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 157.5,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": {
+      "low": 1515,
+      "high": 2045,
+      "mid": 1780,
+      "baseline": 2031,
+      "years": 11,
+      "adjust_pct": -12.4,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 149.1,
+     "heat_days": 12.5,
+     "precip_mm": 331.6,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 120
+    },
+    "PEAS": {
+     "yield": {
+      "low": 986,
+      "high": 1468,
+      "mid": 1227,
+      "baseline": 1579,
+      "years": 11,
+      "adjust_pct": -22.3,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 123
+    },
+    "CHICKPEAS": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 159.1,
+     "heat_days": 66.0,
+     "precip_mm": 379.0,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 122
+    }
+   },
+   "moisture": {
+    "anomaly": -0.0607,
+    "as_of": "2026-09-09",
+    "state": "drier than normal",
+    "trend": "improving",
+    "since": "2026-09-02"
+   },
+   "vegetation": {
+    "value": 177.0,
+    "prior": 128.0,
+    "trend": "greening",
+    "as_of": "2026-09-09"
+   }
+  },
+  "sw-nebraska": {
+   "name": "Southwest Nebraska",
+   "state": "Nebraska",
+   "soil_awc": 0.21,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 2242,
+      "high": 2909,
+      "mid": 2576,
+      "baseline": 2396,
+      "years": 11,
+      "adjust_pct": 7.5,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 148.2,
+     "heat_days": 36.5,
+     "precip_mm": 268.2,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 116
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 2186,
+      "high": 2836,
+      "mid": 2511,
+      "baseline": 2336,
+      "years": 11,
+      "adjust_pct": 7.5,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 157.5,
+     "heat_days": 47.5,
+     "precip_mm": 268.2,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": {
+      "low": 1901,
+      "high": 2466,
+      "mid": 2183,
+      "baseline": 2031,
+      "years": 11,
+      "adjust_pct": 7.5,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 132.6,
+     "heat_days": 59.5,
+     "precip_mm": 268.2,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 116
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 149.1,
+     "heat_days": 12.5,
+     "precip_mm": 331.6,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 120
+    },
+    "PEAS": {
+     "yield": {
+      "low": 1399,
+      "high": 2244,
+      "mid": 1821,
+      "baseline": 1579,
+      "years": 11,
+      "adjust_pct": 15.4,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 214.1,
+     "heat_days": 96.0,
+     "precip_mm": 381.8,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 123
+    },
+    "CHICKPEAS": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 159.1,
+     "heat_days": 66.0,
+     "precip_mm": 379.0,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 122
+    }
+   },
+   "moisture": {
+    "anomaly": -0.0612,
+    "as_of": "2026-09-09",
+    "state": "drier than normal",
+    "trend": "drying further",
+    "since": "2026-09-02"
+   },
+   "vegetation": {
+    "value": 178.0,
+    "prior": 179.0,
+    "trend": "declining",
+    "as_of": "2026-09-09"
+   }
+  },
+  "ne-colorado": {
+   "name": "Northeast / East-Central Colorado",
+   "state": "Colorado",
+   "soil_awc": 0.15,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1190,
+      "high": 1691,
+      "mid": 1440,
+      "baseline": 1977,
+      "years": 11,
+      "adjust_pct": -27.2,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 104.7,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "GREAT NORTHERN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 111.2,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": {
+      "low": 1553,
+      "high": 2207,
+      "mid": 1880,
+      "baseline": 2581,
+      "years": 11,
+      "adjust_pct": -27.2,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "2026-09-18",
+      "gdd_still_needed": 120,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 100.7,
+     "heat_days": 0.0,
+     "precip_mm": 86.9,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 446
+    },
+    "PEAS": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 448
+    },
+    "CHICKPEAS": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 118.1,
+     "heat_days": 46.0,
+     "precip_mm": 132.1,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 448
+    }
+   },
+   "moisture": {
+    "anomaly": -0.0011,
+    "as_of": "2026-09-09",
+    "state": "about normal",
+    "trend": "drying further",
+    "since": "2026-09-02"
+   },
+   "vegetation": {
+    "value": 179.0,
+    "prior": 133.0,
+    "trend": "greening",
+    "as_of": "2026-09-09"
+   }
+  },
+  "western-colorado": {
+   "name": "Western Colorado",
+   "state": "Colorado",
+   "soil_awc": 0.15,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1402,
+      "high": 2145,
+      "mid": 1773,
+      "baseline": 1977,
+      "years": 11,
+      "adjust_pct": -10.3,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 104.7,
+     "heat_days": 18.0,
+     "precip_mm": 78.7,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 437
+    },
+    "GREAT NORTHERN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 111.2,
+     "heat_days": 32.0,
+     "precip_mm": 78.7,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": {
+      "low": 1830,
+      "high": 2800,
+      "mid": 2315,
+      "baseline": 2581,
+      "years": 11,
+      "adjust_pct": -10.3,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "2026-09-24",
+      "gdd_still_needed": 120,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 93.7,
+     "heat_days": 46.0,
+     "precip_mm": 78.7,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 437
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 100.7,
+     "heat_days": 0.0,
+     "precip_mm": 86.9,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 446
+    },
+    "PEAS": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 156.9,
+     "heat_days": 70.0,
+     "precip_mm": 140.7,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 448
+    }
+   },
+   "moisture": {
+    "anomaly": -0.0658,
+    "as_of": "2026-09-09",
+    "state": "drier than normal",
+    "trend": "drying further",
+    "since": "2026-09-02"
+   },
+   "vegetation": {
+    "value": 183.0,
+    "prior": 164.0,
+    "trend": "greening",
+    "as_of": "2026-09-09"
+   }
+  },
+  "big-horn": {
+   "name": "Big Horn Basin",
+   "state": "Wyoming",
+   "soil_awc": 0.16,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1476,
+      "high": 2128,
+      "mid": 1802,
+      "baseline": 2291,
+      "years": 10,
+      "adjust_pct": -21.4,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 550,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 67.6,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1397,
+      "high": 2014,
+      "mid": 1705,
+      "baseline": 2168,
+      "years": 10,
+      "adjust_pct": -21.4,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 450,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 71.8,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 750,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 590,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 67.2,
+     "heat_days": 0.0,
+     "precip_mm": 107.8,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 202
+    }
+   },
+   "moisture": {
+    "anomaly": -0.2761,
+    "as_of": "2026-09-09",
+    "state": "much drier than normal",
+    "trend": "drying further",
+    "since": "2026-09-02"
+   },
+   "vegetation": {
+    "value": 140.0,
+    "prior": 141.0,
+    "trend": "declining",
+    "as_of": "2026-09-09"
+   }
+  },
+  "se-wyoming": {
+   "name": "Southeast Wyoming",
+   "state": "Wyoming",
+   "soil_awc": 0.16,
+   "classes": {
+    "PINTO": {
+     "yield": {
+      "low": 1508,
+      "high": 2081,
+      "mid": 1794,
+      "baseline": 2291,
+      "years": 11,
+      "adjust_pct": -21.7,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 550,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 67.6,
+     "heat_days": 6.0,
+     "precip_mm": 88.4,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 197
+    },
+    "GREAT NORTHERN": {
+     "yield": {
+      "low": 1427,
+      "high": 1969,
+      "mid": 1698,
+      "baseline": 2168,
+      "years": 11,
+      "adjust_pct": -21.7,
+      "level_source": "USDA published yield for this class in this state"
+     },
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 450,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 71.8,
+     "heat_days": 13.0,
+     "precip_mm": 88.4,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 750,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 60.5,
+     "heat_days": 21.0,
+     "precip_mm": 88.4,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 197
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "beyond the 16-day forecast",
+      "gdd_still_needed": 590,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 67.2,
+     "heat_days": 0.0,
+     "precip_mm": 107.8,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 202
+    },
+    "PEAS": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 114.2,
+     "heat_days": 36.5,
+     "precip_mm": 162.6,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 204
+    },
+    "CHICKPEAS": {
+     "yield": null,
+     "harvest": {
+      "ready": "2026-09-26",
+      "gdd_still_needed": 338,
+      "frost_forecast": null
+     },
+     "size": "normal",
+     "percent_of_maturity": 87.0,
+     "heat_days": 22.0,
+     "precip_mm": 153.3,
+     "quality_driver": "seed SIZE is the grade \u2014 9mm+ garbanzo commands the premium \u2014 plus pale even colour",
+     "downgrade_risk": "Ascochyta blight under prolonged wet canopy destroys both yield and appearance",
+     "mould_risk": "Ascochyta HIGH",
+     "stations": 204
+    }
+   },
+   "moisture": {
+    "anomaly": -0.0141,
+    "as_of": "2026-09-09",
+    "state": "about normal",
+    "trend": "improving",
+    "since": "2026-09-02"
+   },
+   "vegetation": {
+    "value": 156.0,
+    "prior": 131.0,
+    "trend": "greening",
+    "as_of": "2026-09-09"
+   }
+  },
+  "nw-kansas": {
+   "name": "Northwest / West-Central Kansas",
+   "state": "Kansas",
+   "soil_awc": 0.17,
+   "classes": {
+    "PINTO": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 177.1,
+     "heat_days": 64.0,
+     "precip_mm": 316.1,
+     "quality_driver": "seed-coat brightness and uniform mottling; dullness and stain cost more than yield",
+     "downgrade_risk": "rain near harvest dulls and stains; heat in fill shrinks screen size",
+     "mould_risk": "moderate",
+     "stations": 140
+    },
+    "GREAT NORTHERN": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 188.2,
+     "heat_days": 74.5,
+     "precip_mm": 316.1,
+     "quality_driver": "clean white seed coat and uniform size; any staining is visible and penalised",
+     "downgrade_risk": "white mould staining under wet canopy; earliest to mature, so harvest rain is the risk",
+     "mould_risk": "HIGH",
+     "stations": 140
+    },
+    "LIGHT RED KIDNEY": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 158.4,
+     "heat_days": 82.0,
+     "precip_mm": 316.1,
+     "quality_driver": "large seed size is the grade; colour brightness second",
+     "downgrade_risk": "latest to mature \u2014 highest frost exposure. Most heat sensitive at flowering",
+     "mould_risk": "HIGH",
+     "stations": 140
+    },
+    "BLACKEYE": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "some size pressure",
+     "percent_of_maturity": 178.5,
+     "heat_days": 32.5,
+     "precip_mm": 355.6,
+     "quality_driver": "clean white ground colour with sharp eye",
+     "downgrade_risk": "tolerates heat that would ruin a kidney; harvest weathering is the risk",
+     "mould_risk": "lower",
+     "stations": 144
+    },
+    "PEAS": {
+     "yield": null,
+     "harvest": {
+      "ready": "now",
+      "gdd_still_needed": 0,
+      "frost_forecast": null
+     },
+     "size": "smaller than normal",
+     "percent_of_maturity": 258.1,
+     "heat_days": 112.0,
+     "precip_mm": 442.0,
+     "quality_driver": "soundness and low split; colour is stable",
+     "downgrade_risk": "heat during fill; bleaching is NOT a concern for yellow",
+     "mould_risk": "moderate",
+     "stations": 144
+    }
+   },
+   "moisture": {
+    "anomaly": -0.0948,
+    "as_of": "2026-09-09",
+    "state": "drier than normal",
+    "trend": "drying further",
+    "since": "2026-09-02"
+   },
+   "vegetation": {
+    "value": 181.0,
+    "prior": 173.5,
+    "trend": "greening",
+    "as_of": "2026-09-09"
+   }
+  }
+ },
+ "resolution": "Weather and soil are state-level from NOAA stations and USDA SSURGO. Yield baselines are that class's own USDA history for that state. Harvest timing uses a 16-day forecast.",
+ "class_note": "Only classes USDA prints an acreage for. Where USDA withholds the figure because too few operations report it \u2014 black, dark red kidney, small red, cranberry \u2014 the crop is grown but the market is too thin to quote a yield for. Navy, pink and small white show none grown or no estimate. Lentils are omitted on the same commercial test: 215 mapped acres across four states. Peas and chickpeas are listed at commodity level because USDA's crop map has one class for each.",
+ "yield_blocks": "written by yield_index.py; a class with no USDA-published level carries no yield, by design"
+}
