@@ -85,6 +85,8 @@
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 2100,
      "lb_ac_low": 1787,
      "lb_ac_high": 2413,
@@ -162,6 +164,8 @@
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 2048,
      "lb_ac_low": 1742,
      "lb_ac_high": 2353,
@@ -239,6 +243,8 @@
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1780,
      "lb_ac_low": 1515,
      "lb_ac_high": 2045,
@@ -316,6 +322,8 @@
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.876,
      "index_is_shared_across_classes": true
     },
@@ -389,6 +397,8 @@
      "flowering_warm_nights": 0,
      "commodity": "PEAS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1227,
      "lb_ac_low": 986,
      "lb_ac_high": 1468,
@@ -463,7 +473,13 @@
      },
      "flowering_warm_nights": 2,
      "commodity": "CHICKPEAS",
-     "level_is_usda_published": false
+     "level_is_usda_published": false,
+     "level_kind": "proxy",
+     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+     "lb_ac": 822,
+     "lb_ac_low": 649,
+     "lb_ac_high": 995,
+     "baseline_lb_ac": 1164
     }
    }
   },
@@ -540,6 +556,8 @@
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 2576,
      "lb_ac_low": 2242,
      "lb_ac_high": 2909,
@@ -617,6 +635,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 2511,
      "lb_ac_low": 2186,
      "lb_ac_high": 2836,
@@ -694,6 +714,8 @@
      "flowering_warm_nights": 2,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 2183,
      "lb_ac_low": 1901,
      "lb_ac_high": 2466,
@@ -771,6 +793,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 1.08,
      "index_is_shared_across_classes": true
     },
@@ -844,6 +868,8 @@
      "flowering_warm_nights": 0,
      "commodity": "PEAS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1821,
      "lb_ac_low": 1399,
      "lb_ac_high": 2244,
@@ -918,7 +944,13 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "CHICKPEAS",
-     "level_is_usda_published": false
+     "level_is_usda_published": false,
+     "level_kind": "proxy",
+     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+     "lb_ac": 1067,
+     "lb_ac_low": 864,
+     "lb_ac_high": 1270,
+     "baseline_lb_ac": 1164
     }
    }
   },
@@ -995,6 +1027,8 @@
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1440,
      "lb_ac_low": 1190,
      "lb_ac_high": 1691,
@@ -1072,6 +1106,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.71,
      "index_is_shared_across_classes": true
     },
@@ -1145,6 +1181,8 @@
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1880,
      "lb_ac_low": 1553,
      "lb_ac_high": 2207,
@@ -1222,6 +1260,8 @@
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.749,
      "index_is_shared_across_classes": true
     },
@@ -1294,7 +1334,9 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "PEAS",
-     "level_is_usda_published": false
+     "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null
     },
     "CHICKPEAS": {
      "index": 0.828,
@@ -1365,7 +1407,13 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "CHICKPEAS",
-     "level_is_usda_published": false
+     "level_is_usda_published": false,
+     "level_kind": "proxy",
+     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+     "lb_ac": 964,
+     "lb_ac_low": 799,
+     "lb_ac_high": 1128,
+     "baseline_lb_ac": 1164
     }
    }
   },
@@ -1442,6 +1490,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1773,
      "lb_ac_low": 1402,
      "lb_ac_high": 2145,
@@ -1519,6 +1569,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.906,
      "index_is_shared_across_classes": true
     },
@@ -1592,6 +1644,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 2315,
      "lb_ac_low": 1830,
      "lb_ac_high": 2800,
@@ -1669,6 +1723,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.861,
      "index_is_shared_across_classes": true
     },
@@ -1741,7 +1797,9 @@
      },
      "flowering_warm_nights": 1,
      "commodity": "PEAS",
-     "level_is_usda_published": false
+     "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null
     }
    }
   },
@@ -1818,6 +1876,8 @@
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1794,
      "lb_ac_low": 1508,
      "lb_ac_high": 2081,
@@ -1895,6 +1955,8 @@
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1698,
      "lb_ac_low": 1427,
      "lb_ac_high": 1969,
@@ -1972,6 +2034,8 @@
      "flowering_warm_nights": 3,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.788,
      "index_is_shared_across_classes": true
     },
@@ -2045,6 +2109,8 @@
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.788,
      "index_is_shared_across_classes": true
     },
@@ -2117,7 +2183,9 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "PEAS",
-     "level_is_usda_published": false
+     "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null
     },
     "CHICKPEAS": {
      "index": 0.72,
@@ -2188,7 +2256,13 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "CHICKPEAS",
-     "level_is_usda_published": false
+     "level_is_usda_published": false,
+     "level_kind": "proxy",
+     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+     "lb_ac": 838,
+     "lb_ac_low": 625,
+     "lb_ac_high": 1052,
+     "baseline_lb_ac": 1164
     }
    }
   },
@@ -2260,6 +2334,8 @@
      "flowering_warm_nights": 2,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1802,
      "lb_ac_low": 1476,
      "lb_ac_high": 2128,
@@ -2332,6 +2408,8 @@
      "flowering_warm_nights": 2,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
      "lb_ac": 1705,
      "lb_ac_low": 1397,
      "lb_ac_high": 2014,
@@ -2404,6 +2482,8 @@
      "flowering_warm_nights": 2,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.784,
      "index_is_shared_across_classes": true
     },
@@ -2472,6 +2552,8 @@
      "flowering_warm_nights": 2,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.774,
      "index_is_shared_across_classes": true
     }
@@ -2550,6 +2632,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.907,
      "index_is_shared_across_classes": true
     },
@@ -2623,6 +2707,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.977,
      "index_is_shared_across_classes": true
     },
@@ -2696,6 +2782,8 @@
      "flowering_warm_nights": 1,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.801,
      "index_is_shared_across_classes": true
     },
@@ -2769,6 +2857,8 @@
      "flowering_warm_nights": 0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
      "index_own_class": 0.932,
      "index_is_shared_across_classes": true
     },
@@ -2841,7 +2931,9 @@
      },
      "flowering_warm_nights": 0,
      "commodity": "PEAS",
-     "level_is_usda_published": false
+     "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null
     }
    }
   }

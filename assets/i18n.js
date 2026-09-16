@@ -127,6 +127,13 @@
       'The weakest part of this estimate: the step that turns greenness into growth is not ' +
       'calibrated for these crops. The whole range can be off. What moves it up or down ' +
       'through the season is measured.',
+    'estimate.proxyLevel':
+      'Read this one more carefully. USDA does not measure the yield of this crop in ' +
+      'these states at all, so the pounds here are borrowed from Montana, the largest ' +
+      'dryland pulse state. We can show that borrowing works: dry peas are measured in ' +
+      'both Montana and Nebraska, and the two come out within 3% of each other. What is ' +
+      'measured on this ground is how the season is going. What is borrowed is the ' +
+      'weight that is applied to.',
     'estimate.classLevels':
       'The difference between bean types comes from what each type actually harvested in ' +
       'this state, over ten USDA years. We used to work it out ourselves and it was wrong ' +

@@ -42,7 +42,7 @@ CLASS_LINES = ["Pinto", "Light red kidney", "Dark red kidney", "Navy", "Great no
                "Small white", "Black", "Pink", "Small red", "Cranberry", "Garbanzo",
                "Baby lima", "Large lima", "Blackeye"]
 STATES = ["Colorado", "Nebraska", "Wyoming", "Kansas", "North Dakota", "Minnesota", "Idaho",
-          "Michigan", "Washington"]
+          "Michigan", "Washington", "Montana"]
 # A dry bean yield outside this band is not a dry bean yield; it is a column from another
 # table. Bounding it is what stopped an all-crops acreage row being read as a bean yield.
 LO, HI = 400, 4500

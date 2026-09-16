@@ -40,6 +40,8 @@
       "baseline": 2396,
       "years": 11,
       "adjust_pct": -12.4,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -64,6 +66,8 @@
       "baseline": 2336,
       "years": 11,
       "adjust_pct": -12.4,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -88,6 +92,8 @@
       "baseline": 2031,
       "years": 11,
       "adjust_pct": -12.4,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -128,6 +134,8 @@
       "baseline": 1579,
       "years": 11,
       "adjust_pct": -22.3,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -145,7 +153,17 @@
      "stations": 123
     },
     "CHICKPEAS": {
-     "yield": null,
+     "yield": {
+      "low": 649,
+      "high": 995,
+      "mid": 822,
+      "baseline": 1164,
+      "years": 11,
+      "adjust_pct": -29.4,
+      "level_kind": "proxy",
+      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+      "level_source": "nearest comparable published state, see level_note"
+     },
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -188,6 +206,8 @@
       "baseline": 2396,
       "years": 11,
       "adjust_pct": 7.5,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -212,6 +232,8 @@
       "baseline": 2336,
       "years": 11,
       "adjust_pct": 7.5,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -236,6 +258,8 @@
       "baseline": 2031,
       "years": 11,
       "adjust_pct": 7.5,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -276,6 +300,8 @@
       "baseline": 1579,
       "years": 11,
       "adjust_pct": 15.4,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -293,7 +319,17 @@
      "stations": 123
     },
     "CHICKPEAS": {
-     "yield": null,
+     "yield": {
+      "low": 864,
+      "high": 1270,
+      "mid": 1067,
+      "baseline": 1164,
+      "years": 11,
+      "adjust_pct": -8.3,
+      "level_kind": "proxy",
+      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+      "level_source": "nearest comparable published state, see level_note"
+     },
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -336,6 +372,8 @@
       "baseline": 1977,
       "years": 11,
       "adjust_pct": -27.2,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -376,6 +414,8 @@
       "baseline": 2581,
       "years": 11,
       "adjust_pct": -27.2,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -425,7 +465,17 @@
      "stations": 448
     },
     "CHICKPEAS": {
-     "yield": null,
+     "yield": {
+      "low": 799,
+      "high": 1128,
+      "mid": 964,
+      "baseline": 1164,
+      "years": 11,
+      "adjust_pct": -17.2,
+      "level_kind": "proxy",
+      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+      "level_source": "nearest comparable published state, see level_note"
+     },
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -468,6 +518,8 @@
       "baseline": 1977,
       "years": 11,
       "adjust_pct": -10.3,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -508,6 +560,8 @@
       "baseline": 2581,
       "years": 11,
       "adjust_pct": -10.3,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -584,6 +638,8 @@
       "baseline": 2291,
       "years": 10,
       "adjust_pct": -21.4,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -608,6 +664,8 @@
       "baseline": 2168,
       "years": 10,
       "adjust_pct": -21.4,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -684,6 +742,8 @@
       "baseline": 2291,
       "years": 11,
       "adjust_pct": -21.7,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -708,6 +768,8 @@
       "baseline": 2168,
       "years": 11,
       "adjust_pct": -21.7,
+      "level_kind": "published",
+      "level_note": null,
       "level_source": "USDA published yield for this class in this state"
      },
      "harvest": {
@@ -773,7 +835,17 @@
      "stations": 204
     },
     "CHICKPEAS": {
-     "yield": null,
+     "yield": {
+      "low": 625,
+      "high": 1052,
+      "mid": 838,
+      "baseline": 1164,
+      "years": 11,
+      "adjust_pct": -28.0,
+      "level_kind": "proxy",
+      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+      "level_source": "nearest comparable published state, see level_note"
+     },
      "harvest": {
       "ready": "2026-09-26",
       "gdd_still_needed": 338,

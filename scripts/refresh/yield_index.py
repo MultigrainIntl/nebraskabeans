@@ -79,6 +79,21 @@ USDA_CLASS = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern",
 FULL_STATE = {"NE": "Nebraska", "CO": "Colorado", "WY": "Wyoming", "KS": "Kansas"}
 
 
+# Where USDA publishes no level for a crop in these states, the nearest comparable published
+# state stands in — but only where that transfer can be CHECKED, not assumed.
+#
+# Chickpeas: USDA does not estimate them in Nebraska, Colorado or Wyoming. Montana is the
+# largest dryland chickpea state, semi-arid, same pulse rotation, similar latitude band.
+# The check: dry peas are published in BOTH Montana and Nebraska, and come out at 1,528 and
+# 1,579 lb/ac — within 3%. So Montana's pulse yields do transfer to this ground, and that is
+# demonstrated rather than claimed. The page says all of this in plain words.
+PROXY = {"CHICKPEAS": ("Montana",
+                       "USDA does not estimate chickpea yield in these states. This uses "
+                       "Montana, the largest dryland chickpea state. Dry peas are published "
+                       "in both Montana and Nebraska and differ by 3%, which is the evidence "
+                       "that Montana transfers here.")}
+
+
 def usda_level(cls, region):
     """What this class ACTUALLY yielded in this state, averaged over the published years.
 
@@ -95,7 +110,14 @@ def usda_level(cls, region):
     if not name or not st:
         return None
     b = d.get("classes", {}).get(name, {}).get(st)
-    return b["mean_lb_ac"] if b else None
+    if b:
+        return b["mean_lb_ac"], "published", None
+    if cls in PROXY:
+        pst, why = PROXY[cls]
+        pb = d.get("classes", {}).get(name, {}).get(pst)
+        if pb:
+            return pb["mean_lb_ac"], "proxy", why
+    return None, None, None
 
 
 STATE_OF = {"ne-panhandle": "NE", "sw-nebraska": "NE", "ne-colorado": "CO",
@@ -398,7 +420,7 @@ def main():
             # estimate one, which is precisely the kind of number that cannot be defended to
             # an agronomist. Condition and the seasonal index are still published — those are
             # measured — but the weight is not.
-            base = usda_level(cls, region)
+            base, level_kind, proxy_note = usda_level(cls, region)
             unsourced = base is None
             per[cls] = {
                 "index": round(index, 3),
@@ -415,7 +437,9 @@ def main():
                 "flowering_hot_days_by_year": hot_by_year,
                 "flowering_warm_nights": got[5],
                 "commodity": commodity,
-                "level_is_usda_published": not unsourced,
+                "level_is_usda_published": level_kind == "published",
+                "level_kind": level_kind,
+                "level_proxy_note": proxy_note,
             }
             if base:
                 per[cls]["lb_ac"] = round(base * index)
@@ -467,13 +491,17 @@ def main():
     for rname, rblock in answers.items():
         for cname, cblock in (rblock.get("classes") or {}).items():
             got = out.get(rname, {}).get("classes", {}).get(cname)
-            if got and got.get("lb_ac") and got.get("level_is_usda_published"):
+            if got and got.get("lb_ac") and got.get("level_kind") in ("published", "proxy"):
                 cblock["yield"] = {
                     "low": got["lb_ac_low"], "high": got["lb_ac_high"], "mid": got["lb_ac"],
                     "baseline": got["baseline_lb_ac"],
                     "years": got["years_of_model_history"],
                     "adjust_pct": got["vs_normal_pct"],
-                    "level_source": "USDA published yield for this class in this state"}
+                    "level_kind": got["level_kind"],
+                    "level_note": got.get("level_proxy_note"),
+                    "level_source": ("USDA published yield for this class in this state"
+                                     if got["level_kind"] == "published"
+                                     else "nearest comparable published state, see level_note")}
                 written += 1
             elif cblock.get("yield") is not None:
                 cblock["yield"] = None

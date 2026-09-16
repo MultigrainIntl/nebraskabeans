@@ -168,16 +168,38 @@ if d and a:
 # ---------------------------------------------------------------- yield output
 d = load("yield-index-2026.json")
 if d:
-    lb = [c["lb_ac"] for r in d.get("regions", {}).values()
-          for c in r.get("classes", {}).values() if c.get("lb_ac")]
-    check("published yields plausible", lb and all(900 <= v <= 4000 for v in lb),
-          "%d class-region figures, %d-%d lb/ac" % (len(lb), min(lb), max(lb)) if lb else "none")
-    unsourced = [(rn, cn) for rn, r in d.get("regions", {}).items()
-                 for cn, c in r.get("classes", {}).items()
-                 if c.get("lb_ac") and not c.get("level_is_usda_published")]
-    check("every published pound is USDA-sourced", not unsourced,
-          "no invented yield levels" if not unsourced
-          else "UNSOURCED: " + ", ".join("%s/%s" % x for x in unsourced[:3]))
+    # Plausible ranges differ by crop and a single floor was wrong: chickpeas legitimately
+    # yield far less than dry beans -- Montana's own published record runs down to 940, so a
+    # season 29% below normal lands near 820 and is not an error.
+    BOUNDS = {"DRY BEANS": (900, 4000), "CHICKPEAS": (500, 2600), "PEAS": (500, 3200)}
+    bad, seen = [], []
+    for r in d.get("regions", {}).values():
+        for cn, c in r.get("classes", {}).items():
+            v = c.get("lb_ac")
+            if not v:
+                continue
+            seen.append(v)
+            lo, hi = BOUNDS.get(c.get("commodity"), (900, 4000))
+            if not (lo <= v <= hi):
+                bad.append("%s %d" % (cn, v))
+    check("published yields plausible", seen and not bad,
+          "%d figures, %d-%d lb/ac, each inside its own crop's range" % (len(seen), min(seen), max(seen))
+          if not bad else "OUT OF RANGE: " + ", ".join(bad[:4]))
+    # A level may be USDA-published for this state, or borrowed from a named comparable state.
+    # It may never be invented. Anything with no level_kind at all is the failure case.
+    bad = [(rn, cn) for rn, r in d.get("regions", {}).items()
+           for cn, c in r.get("classes", {}).items()
+           if c.get("lb_ac") and c.get("level_kind") not in ("published", "proxy")]
+    check("every published pound is traceable", not bad,
+          "no invented yield levels" if not bad
+          else "UNTRACEABLE: " + ", ".join("%s/%s" % x for x in bad[:3]))
+    # A borrowed level must carry the reason it was borrowed, or the page cannot disclose it.
+    mute = [(rn, cn) for rn, r in d.get("regions", {}).items()
+            for cn, c in r.get("classes", {}).items()
+            if c.get("level_kind") == "proxy" and not c.get("level_proxy_note")]
+    check("borrowed levels explain themselves", not mute,
+          "every proxy carries its justification" if not mute
+          else "SILENT PROXY: " + ", ".join("%s/%s" % x for x in mute[:3]))
     # every dry bean class in a region must now share one seasonal index
     bad = []
     for rn, r in d.get("regions", {}).items():

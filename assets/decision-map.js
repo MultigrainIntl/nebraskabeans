@@ -869,6 +869,22 @@
   /* How much of this crop's ground is irrigated, by region.
      This is deliberately NOT fed into the yield number yet -- it is measured and shown first,
      so the figure can be checked against what growers know before anything depends on it. */
+  /* Says so, loudly, when the weight is borrowed from another state rather than measured
+     here. A number without this line would be indistinguishable from a USDA-backed one, which
+     is the difference between a proxy and a fabrication. */
+  function proxyLine() {
+    var com = commodityOf();
+    var kinds = [];
+    var regions = (S.yieldIndex && S.yieldIndex.regions) || {};
+    Object.keys(regions).forEach(function (rk) {
+      var c = (regions[rk].classes || {})[S.crop];
+      if (c && c.level_kind === 'proxy') kinds.push(rk);
+    });
+    if (!kinds.length) return '';
+    return '<p class="nbEstLimit nbProxy">' +
+      window.NB_TEXT.t('estimate.proxyLevel') + '</p>';
+  }
+
   function irrigationLine() {
     var ir = S.irrigation && S.irrigation.crops && S.irrigation.crops[commodityOf()];
     if (!ir) return '';
@@ -967,6 +983,7 @@
       '<p class="nbEstLimit">' + T.t('estimate.classLevels') + '</p>' +
       '<p class="nbEstLimit"><b>When to trust your own field instead.</b> ' +
         T.t('estimate.yourField') + '</p>' +
+      proxyLine() +
       irrigationLine() +
       '<p class="nbEstNext">' + T.t('estimate.wouldSharpen') + '</p>';
     el.hidden = false;
