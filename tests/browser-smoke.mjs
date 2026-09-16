@@ -245,7 +245,15 @@ try {
   await setDay(maxDay);
   await page.waitForTimeout(500);
   const now = await text('#nbReadout');
-  assert.match(now, /rank \d+ of \d+/i, 'NOW-001: the reading must be a rank against history');
+  /* This demanded a bare rank. A rank alone made a 2% season read as a standout, because the
+     years sit inside about a 12% spread and every positive year climbs the ranking — GAJ read
+     the finished page and said every commodity looked near-best, which is exactly what a bare
+     rank produces. The reading must now carry the SIZE of the difference and say whether the
+     year is ordinary at all. */
+  assert.match(now, /[+-]?\d+(\.\d+)? ?% vs normal/i,
+    'NOW-001: the reading must state how big the difference is, not only where it ranks');
+  assert.match(now, /usual range/i,
+    'NOW-001: it must say whether this season is inside the ordinary range — most are');
   assert.match(now, /observed, not forecast/i,
     'NOW-001: it must say plainly that it is an observation');
   assert.match(now, /waiting on no agency|final when it lands/i,
@@ -253,6 +261,29 @@ try {
     '21% inside one season and whose 2026 state yields are still unpublished');
   assert.equal(await page.locator('#nbPlay').isDisabled(), true,
     'the satellite record is observed per pass, not a daily series to animate');
+
+  /* NOW-002: each crop against ITS OWN ground. The history file carried no crop dimension at
+     all, so a chickpea was shown the dry beans' history under the heading "Crop vs its own
+     history". Nothing failed; every commodity simply read the same, which is how it survived
+     until GAJ noticed the whole page looked like one crop. */
+  const perCrop = {};
+  for (const crop of ['PINTO', 'GARBANZO (KABULI)', 'PEA YELLOW']) {
+    await setSelect('nbCrop', crop);
+    await page.waitForTimeout(600);
+    perCrop[crop] = await text('#nbReadout');
+  }
+  assert.notEqual(perCrop['PINTO'], perCrop['GARBANZO (KABULI)'],
+    'NOW-002: a chickpea and a pinto cannot share one history — they are different ground');
+  assert.notEqual(perCrop['PINTO'], perCrop['PEA YELLOW'],
+    'NOW-002: a pea and a pinto cannot share one history');
+  const cropHist = await page.evaluate(async () => {
+    const h = await (await fetch('assets/data/crop-vs-history.json')).json();
+    return Object.keys(h.crops || {});
+  });
+  for (const need of ['DRY BEANS', 'CHICKPEAS', 'PEAS']) {
+    assert(cropHist.includes(need),
+      `NOW-002: the history file must carry ${need} on its own ground`);
+  }
 
   /* ---- EVIDENCE-001: the estimate must lead with its evidence and state its limits ---- */
   await setSelect('nbCrop', 'PINTO');

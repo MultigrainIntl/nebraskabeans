@@ -492,7 +492,13 @@
   }
 
   function historyValue(region) {
-    var h = S.vsHistory && S.vsHistory.regions && S.vsHistory.regions[region];
+    // EACH CROP'S OWN GROUND. This read S.vsHistory.regions, which is dry-bean ground and
+    // nothing else, so a chickpea or a lentil was shown the beans' history under the heading
+    // "Crop vs its own history". GAJ caught it on the finished page.
+    var crops = S.vsHistory && S.vsHistory.crops;
+    var byCrop = crops && crops[commodityOf()];
+    var h = (byCrop && byCrop[region]) ||
+            (S.vsHistory && S.vsHistory.regions && S.vsHistory.regions[region]);
     if (!h) return null;
     var md = S.dates[S.day].slice(5);
     // Dates late in the season carry the 26-year history but no reading yet — the satellite
@@ -511,8 +517,11 @@
     return {
       asOf: used, stale: used !== md,
       t: Math.max(0, Math.min(1, (row.rank - 1) / Math.max(row.of - 1, 1))),
-      label: 'rank ' + row.rank + ' of ' + row.of,
+      // The percentage leads. A rank alone made a 2% year read as a standout because the
+      // seasons sit inside a 12% spread and every positive year climbs the ranking.
+      label: (row.vs_mean_pct > 0 ? '+' : '') + row.vs_mean_pct + '% vs normal',
       rank: row.rank, of: row.of, pct: row.vs_mean_pct,
+      band: row.band, typical: row.typical, years: row.n_years,
       band: [row.min, row.p20, row.mean, row.p80, row.max], now: row.now
     };
   }
@@ -931,12 +940,16 @@
       var worstR = rows[0], bestR = rows[rows.length - 1];
       var above = rows.filter(function (r) { return r.v.pct > 0; }).length;
       var asOf = bestR.v.stale ? bestR.v.asOf : null;
-      el.innerHTML = (asOf ? 'Latest pass, ' + monthDay(asOf) + ': the crop is <b>'
-                           : 'On this date the crop is <b>') + bestR.v.label + '</b> in ' + bestR.name +
+      var usual = rows.filter(function (r) { return r.v.typical; }).length;
+      el.innerHTML = (asOf ? 'Latest pass, ' + monthDay(asOf) + ': ' : 'On this date, ') +
+        S.crop.toLowerCase() + ' greenness runs <b>' + bestR.v.label + '</b> in ' +
+        bestR.name +
         (rows.length > 1 ? ' and <b>' + worstR.v.label + '</b> in ' + worstR.name : '') +
-        '. ' + above + ' of ' + rows.length + ' areas are greener than their own average for ' +
-        'this date. <span class="nbStationCount">observed, not forecast — a satellite pass ' +
-        'over bean ground, final when it lands, waiting on no agency</span>';
+        '. ' + usual + ' of ' + rows.length + ' areas sit inside their usual range for this ' +
+        'date — most seasons do. <span class="nbStationCount">observed, not forecast — a ' +
+        'satellite pass over this crop\u2019s own ground, final when it lands, waiting on no ' +
+        'agency. A rank is published beside it, but the seasons sit inside about a 12% spread, ' +
+        'so treat the percentage as the measure and the rank as context.</span>';
       return;
     }
 
