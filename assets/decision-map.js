@@ -49,10 +49,7 @@
      * a way that could have moved an irrigation decision. */
     moisture: {
       label: 'Rain minus evaporation',
-      unit: 'mm over 30 days · rainfall less grass-reference ET, no irrigation',
-      sameAcrossClasses: 'This is a weather measure, not a crop one \u2014 rainfall against '
-        + 'reference evaporation. Every dry-bean class goes in on the same date and sees the '
-        + 'same balance, so they share this map. Pulses, planted in April, do not.',
+      unit: 'mm since planting, up to 30 days · rainfall less THIS crop’s water use',
       loLabel: 'Rain far behind evaporation', hiLabel: 'Rain ahead of evaporation',
       ramp: [[0, '#e07b1f'], [0.35, '#e8c33a'], [0.65, '#7cc08a'], [1, '#2a9d9a']],
       question: 'Where has rainfall fallen furthest behind evaporation?'
@@ -146,6 +143,22 @@
   var build = function () { return window.__nbBuild || Date.now(); };
 
   /* ---------------------------------------------------------------- agronomy */
+
+  /* Crop coefficient by growth stage, FAO-56 in shape. A crop barely out of the ground uses a
+     fraction of what a closed canopy does, and a senescing one gives some back. A flat grass
+     reference for every class made every crop's water map identical. */
+  // "peas's" is not a word. A plural already ending in s takes the bare apostrophe.
+  function possessive(word) {
+    return word + (word.slice(-1) === 's' ? '\u2019' : '\u2019s');
+  }
+
+  function kc(progress) {
+    if (progress <= 0) return 0.15;
+    if (progress < 0.25) return 0.30 + (progress / 0.25) * 0.35;
+    if (progress < 0.55) return 0.65 + ((progress - 0.25) / 0.30) * 0.50;
+    if (progress < 0.85) return 1.15;
+    return Math.max(0.45, 1.15 - (progress - 0.85) * 2.0);
+  }
 
   function plantIndex(spec) {
     var want = S.dates[0].slice(0, 4) + '-' + spec.plant;
@@ -243,13 +256,27 @@
         var ref = st.has_temp ? st : all[st.t_ref];
         if (!ref || !ref.has_temp) continue;
         if (!st.has_temp && st.t_ref_km != null && st.t_ref_km > MAX_BORROW_KM) continue;
-        var bal = 0, from = Math.max(0, day - 29), days = day - from + 1, ok = 0;
+        /* THE CROP'S OWN THIRST, not a lawn's. This subtracted grass-reference evaporation
+           for every class, so one map served pinto, chickpea and pea alike, and a pea in
+           April was charged the water demand of a July bean canopy. Reference ET is now
+           scaled by a crop coefficient read from the crop's own growth stage, which we
+           already know from its own growing-degree clock. Days before this class went in are
+           not counted. FAO-56 in shape: ETc = Kc x ET0. */
+        var pI = plantIndex(spec);
+        var from = Math.max(Math.max(0, day - 29), pI);
+        var days = Math.max(day - from + 1, 1), bal = 0, ok = 0, gddRun = 0;
+        for (var g = pI; g < from; g++) {
+          if (ref.hi[g] != null && ref.lo[g] != null)
+            gddRun += Math.max((ref.hi[g] + ref.lo[g]) / 2 - spec.base, 0);
+        }
         for (var k = from; k <= day; k++) {
           var e = et0(ref.hi[k], ref.lo[k], st.lat, doyOf(S.dates[k]));
-          if (e == null) continue;             // a gap is a gap, not a average day
+          if (e == null) continue;             // a gap is a gap, not an average day
           ok++;
+          if (ref.hi[k] != null && ref.lo[k] != null)
+            gddRun += Math.max((ref.hi[k] + ref.lo[k]) / 2 - spec.base, 0);
           if (st.pr[k] != null) bal += st.pr[k] / 10;   // stored as tenths of a millimetre
-          bal -= e;
+          bal -= e * kc(gddRun / spec.gdd);
         }
         if (ok < days * MIN_WINDOW_COVER) continue;
         v = bal;
@@ -1162,7 +1189,7 @@
         'and up to ' + r(high) + ' in the hottest tenth. Heat in pod fill shows up as small seed.';
     } else {
       text = 'Over the last thirty days rainfall ran <b>' + r(med) + ' mm</b> against ' +
-        'grass-reference evaporation at the median gauge on this crop, from ' + r(low) +
+        possessive(S.crop.toLowerCase()) + ' own water use at the median gauge on this crop, from ' + r(low) +
         ' mm where it fell furthest behind to ' + r(high) + ' mm where it kept up.' +
         note('This is weather, not soil: it carries no irrigation, no crop coefficient and ' +
              'no stored soil water, so it says where demand outran rain, not whether a ' +
