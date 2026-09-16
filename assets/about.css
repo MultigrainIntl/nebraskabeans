@@ -1,0 +1,41 @@
+/* About page only. The shared stylesheet already carries the header, footer, .method panel and
+   the form grid; this adds the few blocks that exist nowhere else. Kept in its own file so the
+   map page does not pay for styles it never uses. */
+
+.aboutCols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.aboutCard{border:1px solid var(--line);padding:15px 16px;background:#fafcf9}
+.aboutCard span{font-size:9px;letter-spacing:.11em;font-weight:850;color:#6c796f;display:block;margin-bottom:9px}
+.aboutCard ul{margin:0;padding-left:18px}
+.aboutCard li{font-size:13px;line-height:1.55;margin-bottom:7px;color:#31423a}
+.aboutYes{border-top:4px solid var(--green)}
+.aboutNo{border-top:4px solid var(--amber)}
+.aboutNote{margin:12px 0 0;padding:10px 12px;background:#fff5df;border-left:3px solid var(--amber);font-size:12.5px;line-height:1.5}
+
+.aboutLead{font-size:14.5px;line-height:1.55;color:#3a4c42;margin:10px 0 4px;max-width:900px}
+.aboutBody{font-size:14px;line-height:1.62;color:#41544a;max-width:900px;margin:11px 0}
+.aboutQuiet{color:#697a70;font-size:13px}
+
+/* The defect table is the most important thing on the page, so it is the most readable thing
+   on the page rather than small print at the bottom. */
+.aboutDefects{width:100%;border-collapse:collapse;margin-top:15px;font-size:13px}
+.aboutDefects th{text-align:left;font-size:9px;letter-spacing:.1em;color:#6c796f;border-bottom:1px solid var(--line);padding:0 12px 8px 0;font-weight:850}
+.aboutDefects td{vertical-align:top;padding:13px 12px 13px 0;border-bottom:1px solid #e7ece8;line-height:1.55;color:#41544a}
+.aboutDefects td:first-child{font-weight:750;color:#2b3d34;width:21%}
+.aboutDefects td:last-child{width:34%}
+
+.nbFormWide{display:block;margin-top:12px;font-size:12px;font-weight:750;color:#41564c}
+.nbFormWide textarea{display:block;width:100%;margin-top:6px;padding:9px;border:1px solid #c6d0c8;font:inherit;font-size:14px;border-radius:4px}
+
+/* Phone. Two columns of anything is unreadable at 375px, and the defect table has to stop
+   being a table — a horizontal scrollbar on the page's most important content is a failure. */
+@media(max-width:760px){
+  .aboutCols{grid-template-columns:1fr}
+  .aboutDefects,.aboutDefects tbody,.aboutDefects tr,.aboutDefects td{display:block;width:auto!important}
+  .aboutDefects thead,.aboutDefects th{display:none}
+  .aboutDefects tr{border:1px solid var(--line);margin-bottom:12px;padding:12px;background:#fafcf9}
+  .aboutDefects td{border:0;padding:0 0 9px}
+  .aboutDefects td:first-child{font-size:14px;margin-bottom:4px}
+  .aboutDefects td:nth-child(2):before{content:'WHAT IT DID';display:block;font-size:8.5px;letter-spacing:.1em;font-weight:850;color:#8a958e;margin-bottom:3px}
+  .aboutDefects td:last-child:before{content:'WHAT WE CHANGED';display:block;font-size:8.5px;letter-spacing:.1em;font-weight:850;color:#8a958e;margin-bottom:3px}
+  .hero h1{font-size:26px}
+}

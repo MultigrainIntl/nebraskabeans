@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>About | NebraskaBeans</title><meta name="description" content="Who builds NebraskaBeans, what it measures, what it cannot see, and what it has gotten wrong."><link rel="stylesheet" href="assets/site.css?v=20260916-111504"><link rel="stylesheet" href="assets/about.css?v=20260916-111823"></head><body>
+<header class="topbar"><div><div class="logo">NEBRASKA<span>BEANS</span></div><div class="sub">Multigrain Market Intelligence · GISit</div></div><div class="toplinks"><a href="index.html">The map</a></div></header>
+<main>
+
+<section class="hero">
+  <div class="eyebrow">About</div>
+  <h1>We show growers what the crop is doing now, while there is still time to act.</h1>
+  <p>Most crop numbers arrive after harvest. By then the decisions are made. This site reads
+  satellites and weather stations through the season, so the picture lands in July and August
+  while irrigation, harvest order and marketing are still open questions.</p>
+  <p>It is built by <b>Multigrain International</b> with <b>GISit</b>, and it covers the dry
+  beans, chickpeas and field peas of the High Plains &mdash; western Nebraska, eastern Colorado,
+  southeast Wyoming and northwest Kansas.</p>
+</section>
+
+<section class="method">
+  <div class="sectionhead"><h2>What we measure, and what we cannot see</h2></div>
+  <div class="aboutCols">
+    <div class="aboutCard aboutYes">
+      <span>WE MEASURE</span>
+      <ul>
+        <li><b>Greenness</b>, from USDA satellite imagery, on each crop's own ground.</li>
+        <li><b>Rain and temperature</b>, from one fixed weather station per region, so a season
+        is never compared against a different station's record.</li>
+        <li><b>Heat during flowering</b>, when hot days kill flowers and pods.</li>
+        <li><b>Planted acres</b>, from USDA's own published count by crop type.</li>
+      </ul>
+    </div>
+    <div class="aboutCard aboutNo">
+      <span>WE CANNOT SEE</span>
+      <ul>
+        <li><b>Irrigation.</b> A watered field and a rained-on field look the same from orbit.</li>
+        <li><b>Variety.</b> Two fields of the same crop can differ by a third.</li>
+        <li><b>Disease and hail</b>, until they are large enough to change the colour of a field.</li>
+        <li><b>Your field.</b> We work in counties. You work in acres.</li>
+      </ul>
+      <p class="aboutNote">Where this site disagrees with your own records, <b>your records are
+      right</b>. Telling us is what fixes it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="method">
+  <div class="sectionhead"><h2>Harvest results grade us. They never build the number.</h2></div>
+  <p class="aboutLead">This is the rule the whole site is built around, so it is worth stating
+  plainly.</p>
+  <p class="aboutBody">Harvest data arrives after the season is over. If we fed it back into the
+  in-season estimate, two things would happen. The estimate would quietly become a report on a
+  season that had already finished &mdash; no use to anyone still making decisions. And we would
+  lose the only honest way to check ourselves, because we would be marking our own exam with the
+  answer key in front of us.</p>
+  <p class="aboutBody">So every estimate is written down <b>before</b> the truth arrives, and the
+  truth is only ever used to score it. A number we published in August cannot be quietly
+  improved in November. The software refuses to build if anyone wires harvest results into the
+  estimate, including us.</p>
+  <p class="aboutBody aboutQuiet">Past finished seasons are different. Those were known before
+  this season opened, and they set the baseline the estimate moves up or down from.</p>
+</section>
+
+<section class="method">
+  <div class="sectionhead"><h2>What we have gotten wrong</h2></div>
+  <p class="aboutLead">Any tool can show you its best day. This is the other list, because it is
+  the one that tells you whether to trust the first.</p>
+  <table class="aboutDefects">
+    <tr><th>What went wrong</th><th>What it did</th><th>What we changed</th></tr>
+    <tr><td>We dropped blackeye peas</td>
+        <td>We said the crop was not grown near here. USDA records about 10,200 acres in
+        Colorado and 5,700 in Nebraska. It was being grown; the acreage was simply withheld
+        because too few farms report it.</td>
+        <td>The crop list is no longer our opinion. It is built straight from USDA's published
+        table every day.</td></tr>
+    <tr><td>Our first yield model was not sound</td>
+        <td>An outside review found several steps resting on constants we could not source. We
+        withdrew the figure rather than defend it.</td>
+        <td>Rebuilt to compare this season against eleven past seasons of the same measurements,
+        which cancels out the parts we cannot pin down. It is published as a range, and we say
+        plainly it is not a proven forecast.</td></tr>
+    <tr><td>One satellite pass stood in for a whole season</td>
+        <td>Chickpeas read 16% above normal on a single day when the season to that point was
+        4% below. The sign was wrong, not just the size.</td>
+        <td>Every comparison now averages the whole season so far against the same stretch of
+        past seasons.</td></tr>
+    <tr><td>A temperature conversion was wrong</td>
+        <td>A 90&deg;F heat threshold printed on the page as 58&deg;F.</td>
+        <td>Fixed, and the page is now checked against the numbers behind it automatically.</td></tr>
+    <tr><td>Five regions shared one cache file</td>
+        <td>Four regions displayed a fifth region's satellite data while the logs reported
+        success.</td>
+        <td>Fixed, and a failed download is never again stored as though it were an answer.</td></tr>
+  </table>
+  <p class="aboutBody aboutQuiet">We would rather publish this than be asked for it.</p>
+</section>
+
+<section class="method" id="contact">
+  <div class="sectionhead"><h2>Talk to us</h2></div>
+  <p class="aboutLead">If a number here is wrong, if you want this run on your own ground, or if
+  you want to know how something works &mdash; this reaches us directly.</p>
+  <form id="nbContact" class="nbForm" action="https://formspree.io/f/xpqeadrq" method="POST">
+    <input type="hidden" name="_subject" value="NebraskaBeans - about page enquiry">
+    <input type="hidden" name="form" value="about-contact">
+    <div class="nbFormGrid">
+      <label>Your name<input name="name" required autocomplete="name"></label>
+      <label>Email or phone<input name="contact" required autocomplete="email"></label>
+      <label>Where you farm or work<input name="where" placeholder="County and state, or company"></label>
+      <label>Crop, if relevant<input name="crop" placeholder="Pinto, chickpeas, peas&hellip;"></label>
+    </div>
+    <label class="nbFormWide">What would you like to tell us or ask?
+      <textarea name="message" rows="5" required></textarea></label>
+    <div class="nbFormFoot">
+      <button type="submit">Send</button>
+      <p class="nbOpt">We reply to people, not addresses. We do not sell or share what you send.</p>
+    </div>
+  </form>
+</section>
+
+<section class="method">
+  <div class="sectionhead"><h2>Why we build this</h2></div>
+  <p class="aboutBody">A grower deciding when to cut and a buyer deciding what to commit to are
+  asking the same question: what is the crop doing <i>now</i>? That question has good answers
+  sitting in satellite and weather records every week of the season. They are just not usually
+  pointed at the people who need them in time to act.</p>
+  <p class="aboutBody aboutQuiet">That is the whole job. Everything else on this page &mdash;
+  what we cannot see, what we have gotten wrong &mdash; is there so you can judge how well we
+  are doing it.</p>
+</section>
+
+</main>
+<footer>Multigrain / GISit &middot; <a href="index.html">The map</a> &middot; <a href="about.html">About</a> &middot; Observe &rarr; Prove &rarr; Classify &rarr; Act</footer>
+<script src="assets/contact-form.js?v=20260916-111424"></script>
+</body></html>

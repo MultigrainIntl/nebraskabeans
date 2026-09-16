@@ -93,6 +93,8 @@ main{max-width:1500px;margin:auto}
 .evidence.assumed,.evidence.unknown{border-color:#d3c7ad;background:#faf7f0;color:#705f3c}
 .workstatus{display:inline-block;padding:1px 5px;margin-right:5px;border:1px solid #d3c7ad;background:#faf7f0;color:#705f3c;font-size:8px;font-weight:850;letter-spacing:.04em}
 footer{text-align:center;padding:11px;font-size:9px;color:#718078;border-top:1px solid var(--line)}
+footer a{color:#4b6a57;text-decoration:none;font-weight:700}
+footer a:hover{text-decoration:underline}
 .leaflet-popup-content{font-size:11px}
 
 /* Shared secondary-page shell; intentionally separate from the crop model runtime. */
