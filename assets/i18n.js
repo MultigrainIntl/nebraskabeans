@@ -73,11 +73,11 @@
       'cannot tell pinto from kidney. Peas and chickpeas have their own ground and do differ.',
 
     'flower.heat':
-      'Days above {threshold} while {crop} was flowering and setting pods. Heat then does ' +
-      'not show up in the canopy. It kills flowers and pods, so a green field can still ' +
-      'come up short.',
+      'Days above {threshold} while {crop} was flowering and setting pods. Beans are hurt ' +
+      'most by nights that stay warm, and nights cool off here, so this rarely costs ' +
+      'weight. It can still cost seed size.',
     'flower.disagree':
-      'When this column and the greenness column disagree, this one is the warning.',
+      'A high count here is worth watching for small seed, not for a light crop.',
 
     'estimate.lead':
       'A yield estimate built only from what has been measured this season, and the ' +
@@ -120,9 +120,17 @@
       'The range shows how much this signal moves from season to season. It is not a margin ' +
       'of error.',
     'estimate.heatNotPriced':
-      'Heat during flowering is counted here but not yet built into the number. Heat then ' +
-      'kills flowers while the field stays green, so in a hot year this estimate is more ' +
-      'likely to be high than low. Read the hot-days column.',
+      'Hot days are not subtracted from this number, and we checked whether they should ' +
+      'be. Across ten years of real harvests in these states, hot years did not yield ' +
+      'less. Two reasons: nights cool off here, and much of this ground is watered.',
+    'estimate.weakestPart':
+      'The weakest part of this estimate: the step that turns greenness into growth is not ' +
+      'calibrated for these crops, and the numbers that separate one bean type from ' +
+      'another are not taken from published work. They are our own choices.',
+    'estimate.heatSeedSize':
+      'Heat can still cost you seed size, which is a price problem rather than a weight ' +
+      'problem. We cannot measure seed size from a satellite. Only weighing and ' +
+      'screening real beans shows that.',
     'estimate.yourField':
       'We know how much of the ground here is irrigated, but not whether your field is. ' +
       'We cannot see variety, disease or hail at all. If this disagrees with your own ' +

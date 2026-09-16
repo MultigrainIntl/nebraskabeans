@@ -56,6 +56,10 @@ ACIS = "https://data.rcc-acis.org/MultiStnData"
 # GAJ's call, and the right one: going back to 2000 tripled the fetching to move the mean by
 # very little. Eleven covers the recent run of wet and dry years these regions have had.
 YEARS = list(range(2015, 2026))
+# Night minimum above which common bean pollen is reported to fail. Counted as an
+# observation and tested against real harvests; nothing is subtracted from any yield on
+# the strength of it.
+NIGHT_HOT_F = 68
 THIS_YEAR = 2026
 SEASON = ("03-01", "10-31")
 
@@ -219,7 +223,7 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
                                   plant, grn_for_planting)
     bio, gdd, n = 0.0, 0.0, 0
     matured_on = None
-    repro_hot = repro_days = 0
+    repro_hot = repro_days = repro_warm_nights = 0
     for i, iso in enumerate(days_iso):
         d = date.fromisoformat(iso)
         if d < start:
@@ -248,6 +252,13 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
             repro_days += 1
             if hi_f >= heat:
                 repro_hot += 1
+            # WARM NIGHTS, counted separately. Day heat was the only thing counted here, and
+            # tested against ten years of real harvests it predicted nothing. For common bean
+            # the sharper reproductive signal is the NIGHT minimum: pollen fails when the crop
+            # gets no relief after dark. Counting it is the only way to find out whether that
+            # holds on this ground rather than assuming either way.
+            if lo_f >= NIGHT_HOT_F:
+                repro_warm_nights += 1
         if gdd > gdd_mat * 1.1:
             break
         repro = 0.40 <= (gdd / gdd_mat) <= 0.80
@@ -259,7 +270,7 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
             continue
         bio += rue * mj * PAR_FRACTION * fpar(g) * tstress(hi_f, lo_f, heat, reproductive=repro)
         n += 1
-    return (bio, n, matured_on, repro_hot, repro_days) if n >= 60 else None
+    return (bio, n, matured_on, repro_hot, repro_days, repro_warm_nights) if n >= 60 else None
 
 
 def main():
@@ -299,6 +310,7 @@ def main():
             # how far this season has actually come — every past year is cut to match
             reach = max(now_canopy)
             hist, hot_hist = [], []
+            hot_by_year = {}
             for y in YEARS:
                 t = {k: v for k, v in temp_all.items() if k.startswith(str(y))}
                 c = canopy_for(y, commodity)
@@ -309,6 +321,10 @@ def main():
                 if got:
                     hist.append(got[0])
                     hot_hist.append(got[3])
+                    # Kept per year, not just averaged. Pairing these against USDA's actual
+                    # harvested yields is the only way to find what a hot flowering day costs
+                    # without inventing the figure.
+                    hot_by_year[str(y)] = {"hot": got[3], "window": got[4], "warm_nights": got[5]}
             if len(hist) < 7:
                 continue                      # too little history to divide by
 
@@ -353,6 +369,8 @@ def main():
                 "flowering_window_days": got[4],
                 "flowering_hot_days_normal": (round(statistics.mean(hot_hist), 1)
                                               if hot_hist else None),
+                "flowering_hot_days_by_year": hot_by_year,
+                "flowering_warm_nights": got[5],
                 "commodity": commodity,
             }
             if base:

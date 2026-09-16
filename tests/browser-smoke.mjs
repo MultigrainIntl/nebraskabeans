@@ -467,7 +467,7 @@ try {
     'EVIDENCE-001: the thermal column must tell a grower when to trust their own field over it');
   assert.match(est, /not a forecast we have proved|not a validated forecast/i,
     'EVIDENCE-001: it must say plainly that it is not a validated forecast');
-  assert.match(est, /not yet built into the number|uncalibrated|not sourced per market class/i,
+  assert.match(est, /not calibrated for these crops|not yet built into the number|uncalibrated|not sourced per market class/i,
     'EVIDENCE-001: the specific limitation must be named, not hinted at — this gate tracked '
     + 'the ranking failure until September 2026, when an independent review found a more '
     + 'basic one: the greenness-to-light conversion is uncalibrated');
