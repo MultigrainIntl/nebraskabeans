@@ -74,9 +74,10 @@ ALL_CLASSES = {
     "BLACKEYE":           (50, 95, 1800, "05-20", 1.50, 0.44, "DRY BEANS"),
 
     # PULSES — one entry per commodity, because USDA's crop map has one class for each and no
-    # satellite separates a yellow pea from a green one.
+    # satellite separates a yellow pea from a green one. Lentils were dropped: 215 mapped acres
+    # across four states is one field, not a market. Same commercial test GAJ applied to the
+    # classes USDA withholds — if it is too thin to trade, it is too thin to quote.
     "PEAS":               (41, 82, 2000, "04-05", 1.60, 0.48, "PEAS"),
-    "LENTILS":            (41, 82, 2000, "04-15", 1.15, 0.39, "LENTILS"),
     "CHICKPEAS":          (41, 86, 2600, "04-20", 1.30, 0.38, "CHICKPEAS"),
 }
 
@@ -89,12 +90,18 @@ USDA_NAME = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern", "NAVY": "Navy
 
 
 def usda_grown():
-    """Classes USDA records as GROWN in at least one of these states.
+    """Classes with a PUBLISHED acreage in at least one of these states.
 
-    A withheld figure — USDA's (D) — means the crop is grown and the acreage is suppressed
-    because too few operations report it. Reading that as absence is what deleted four real
-    crops from this site. (NA) means USDA stopped estimating; a bare dash is the only mark
-    that means the crop is not there.
+    USDA's (D) means the crop is grown but the acreage is withheld, because so few operations
+    report it that publishing would identify them. GAJ's call, and it is a commercial one
+    rather than an agronomic one: a class thin enough that USDA cannot print its acreage
+    without naming the growers is not a marketable product, and a market-intelligence site
+    has no business quoting a yield for it. So a withheld class is recorded in
+    usda-class-acres.json — the evidence stays visible — and is not published as a crop.
+
+    That is a narrower rule than "is it grown". Black, dark red kidney, small red and
+    cranberry ARE grown here; none of them has a printable acreage. (NA) still means USDA
+    stopped estimating, and a bare dash still means none grown.
     """
     path = os.path.join(DATA, "usda-class-acres.json")
     if not os.path.exists(path):
@@ -104,15 +111,41 @@ def usda_grown():
     except Exception:
         return None
     return {c for c, block in got.items()
-            if any(b.get("verdict", "").startswith("grown") for b in block.values())}
+            if any(b.get("verdict") == "grown" for b in block.values())}
+
+
+MIN_MAPPED_ACRES = 5000     # below this a commodity is a field, not a market
+
+
+def pulse_big_enough():
+    """Commodities with enough mapped ground to be worth quoting.
+
+    Lentils were being published on 215 mapped acres across four states, split — until today —
+    into three market classes. The same commercial test that removes a class USDA will not
+    print an acreage for removes a commodity nobody could trade.
+    """
+    path = os.path.join(DATA, "county-crops.geojson")
+    if not os.path.exists(path):
+        return None
+    try:
+        feats = json.load(open(path))["features"]
+    except Exception:
+        return None
+    total = {}
+    for f in feats:
+        for k, v in (f["properties"].get("acres") or {}).items():
+            total[k] = total.get(k, 0) + v
+    return {k for k, v in total.items() if v >= MIN_MAPPED_ACRES}
 
 
 _grown = usda_grown()
+_big = pulse_big_enough()
 if _grown is None:
     CLASSES = dict(ALL_CLASSES)          # no USDA file yet: publish everything, loudly
 else:
     CLASSES = {c: v for c, v in ALL_CLASSES.items()
-               if v[6] != "DRY BEANS" or USDA_NAME.get(c) in _grown}
+               if ((USDA_NAME.get(c) in _grown) if v[6] == "DRY BEANS"
+                   else (_big is None or v[6] in _big))}
 NAMES = {"ne-panhandle": "Nebraska Panhandle", "sw-nebraska": "Southwest Nebraska",
          "ne-colorado": "Northeast Colorado", "western-colorado": "Western Colorado",
          "se-wyoming": "Southeast Wyoming", "big-horn": "Big Horn Basin",

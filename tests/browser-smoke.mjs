@@ -89,14 +89,19 @@ try {
      small red, cranberry AND blackeye — all of which USDA records as grown here — while
      keeping navy and small white, which it does not. USDA publishes 10,200 blackeye acres in
      Colorado and 5,700 in Nebraska for 2025. */
-  for (const required of ['PINTO', 'GREAT NORTHERN', 'BLACK', 'LIGHT RED KIDNEY',
-                          'DARK RED KIDNEY', 'SMALL RED', 'CRANBERRY', 'BLACKEYE',
-                          'PEAS', 'LENTILS', 'CHICKPEAS']) {
+  for (const required of ['PINTO', 'GREAT NORTHERN', 'LIGHT RED KIDNEY', 'BLACKEYE',
+                          'PEAS', 'CHICKPEAS']) {
     assert(crops.includes(required), `class not selectable: ${required}`);
   }
-  for (const absent of ['NAVY', 'PINK', 'SMALL WHITE']) {
+  /* A class needs a PRINTABLE acreage. Black, dark red kidney, small red and cranberry are
+     grown here — USDA says so — but it withholds their acreage because too few operations
+     report it. GAJ's rule, and a commercial one: a market too thin for USDA to print without
+     naming the growers is too thin to quote a yield for. Navy, pink and small white are out
+     for the different reason that USDA shows none grown or no estimate at all. */
+  for (const absent of ['NAVY', 'PINK', 'SMALL WHITE', 'BLACK', 'DARK RED KIDNEY',
+                        'SMALL RED', 'CRANBERRY', 'LENTILS']) {
     assert(!crops.includes(absent),
-      `${absent}: USDA's 2025 record shows none grown or no estimate in these states`);
+      `${absent}: no printable USDA acreage in these states — it must not be offered`);
   }
   const usda = await page.evaluate(async () => {
     const r = await fetch('assets/data/usda-class-acres.json');
@@ -361,7 +366,10 @@ try {
   const coverage = await page.evaluate(async () => {
     const y = await (await fetch('assets/data/yield-all-2026.json')).json();
     const cells = await (await fetch('assets/data/pulse-regions.json')).json();
-    const COM = { 'CHICKPEAS': 'CHICKPEAS', 'LENTILS': 'LENTILS', 'PEAS': 'PEAS' };
+    /* Lentils are deliberately absent: 215 mapped acres across four states is a field, not
+       a market, so the site does not quote one. The gate must not demand a yield for a crop
+       the site has decided not to offer. */
+    const COM = { 'CHICKPEAS': 'CHICKPEAS', 'PEAS': 'PEAS' };
     const grown = {};
     for (const [com, list] of Object.entries(cells.commodities))
       for (const c of list) (grown[com] = grown[com] || new Set()).add(c.region);
@@ -400,7 +408,7 @@ try {
   /* Six, not ten. Cranberry, dark red kidney, pink and small red were removed: USDA carries
      no yield history for any of them in any of these seven regions. What remains is what USDA
      records as planted. */
-  assert(coverage.beanClasses >= 8,
+  assert(coverage.beanClasses >= 4,
     `ALLCLASS-001: every common-bean class runs on bean ground in every region; got ${coverage.beanClasses}`);
   /* This gate asserted blackeye "is not grown here". That was false, and I wrote it. USDA's
      own commercial-class table publishes 10,200 blackeye acres in Colorado and 5,700 in

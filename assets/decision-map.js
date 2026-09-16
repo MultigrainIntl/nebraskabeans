@@ -11,22 +11,19 @@
 (function () {
   'use strict';
 
-    /* Which classes appear here is decided by USDA's commercial-class table, not by anyone's
-     judgement — see scripts/refresh/usda_classes.py. Navy, pink and small white are absent
-     because USDA's 2025 record shows none grown or no estimate in these states. Blackeye IS
-     here: USDA publishes 10,200 acres in Colorado and 5,700 in Nebraska. */
+    /* Which classes appear here is decided by USDA's commercial-class table, not by judgement
+     — see scripts/refresh/usda_classes.py. A class needs a PRINTABLE acreage: where USDA
+     withholds the figure because too few operations report it, the crop is grown but the
+     market is too thin to quote a yield for. Black, dark red kidney, small red and cranberry
+     are all grown here and all withheld, so none of them is offered. Lentils go for the same
+     commercial reason: 215 mapped acres across four states is one field, not a market. */
   var CLASSES = {
-    'PINTO':                { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1700, plant: '06-01' },
-    'GREAT NORTHERN':       { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1600, plant: '06-01' },
-    'BLACK':                { commodity: 'DRY BEANS', base: 50, heat: 92, gdd: 1750, plant: '06-01' },
-    'LIGHT RED KIDNEY':     { commodity: 'DRY BEANS', base: 50, heat: 86, gdd: 1900, plant: '06-01' },
-    'DARK RED KIDNEY':      { commodity: 'DRY BEANS', base: 50, heat: 86, gdd: 1900, plant: '06-01' },
-    'SMALL RED':            { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1650, plant: '06-01' },
-    'CRANBERRY':            { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1800, plant: '06-01' },
-    'BLACKEYE':             { commodity: 'DRY BEANS', base: 50, heat: 95, gdd: 1800, plant: '05-20' },
-    'PEAS':                 { commodity: 'PEAS', base: 41, heat: 82, gdd: 2000, plant: '04-05' },
-    'LENTILS':              { commodity: 'LENTILS', base: 41, heat: 82, gdd: 2000, plant: '04-15' },
-    'CHICKPEAS':            { commodity: 'CHICKPEAS', base: 41, heat: 86, gdd: 2600, plant: '04-20' }
+    'PINTO':              { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1700, plant: '06-01' },
+    'GREAT NORTHERN':     { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1600, plant: '06-01' },
+    'LIGHT RED KIDNEY':   { commodity: 'DRY BEANS', base: 50, heat: 86, gdd: 1900, plant: '06-01' },
+    'BLACKEYE':           { commodity: 'DRY BEANS', base: 50, heat: 95, gdd: 1800, plant: '05-20' },
+    'PEAS':               { commodity: 'PEAS', base: 41, heat: 82, gdd: 2000, plant: '04-05' },
+    'CHICKPEAS':          { commodity: 'CHICKPEAS', base: 41, heat: 86, gdd: 2600, plant: '04-20' }
   };
 
   /* Each view is one question a professional actually asks, with the ends of the scale named

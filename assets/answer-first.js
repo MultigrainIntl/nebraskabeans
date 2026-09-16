@@ -16,7 +16,7 @@
      because that is the resolution of the evidence — USDA's crop map has one class for
      peas, one for lentils and one for chickpeas, and no satellite separates a yellow pea
      from a green one. */
-  var ORDER = ['PINTO', 'GREAT NORTHERN', 'BLACK', 'LIGHT RED KIDNEY', 'DARK RED KIDNEY', 'SMALL RED', 'CRANBERRY', 'BLACKEYE', 'PEAS', 'LENTILS', 'CHICKPEAS'];
+  var ORDER = ['PINTO', 'GREAT NORTHERN', 'LIGHT RED KIDNEY', 'BLACKEYE', 'PEAS', 'CHICKPEAS'];
 
   var RANK = { 'AT RISK': 0, 'STRESSED': 1, 'LATE': 2, 'WATCH': 3, 'ON TRACK': 4 };
   var TONE = { 'AT RISK': 'risk', 'STRESSED': 'risk', 'LATE': 'warn', 'WATCH': 'warn', 'ON TRACK': 'ok' };

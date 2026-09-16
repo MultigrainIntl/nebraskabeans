@@ -47,22 +47,6 @@
      "lb_ac_high": 2203,
      "baseline_lb_ac": 2325
     },
-    "BLACK": {
-     "index": 0.896,
-     "vs_normal_pct": -10.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.1,
-     "days_counted": 89,
-     "matured_on": "2026-08-24",
-     "flowering_hot_days": 17,
-     "flowering_window_days": 26,
-     "flowering_hot_days_normal": 12.7,
-     "commodity": "DRY BEANS",
-     "lb_ac": 2051,
-     "lb_ac_low": 1742,
-     "lb_ac_high": 2360,
-     "baseline_lb_ac": 2290
-    },
     "LIGHT RED KIDNEY": {
      "index": 0.94,
      "vs_normal_pct": -6.0,
@@ -78,42 +62,6 @@
      "lb_ac_low": 1744,
      "lb_ac_high": 2346,
      "baseline_lb_ac": 2175
-    },
-    "DARK RED KIDNEY": {
-     "index": 0.94,
-     "vs_normal_pct": -6.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.7,
-     "days_counted": 94,
-     "matured_on": "2026-08-31",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 23.2,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.854,
-     "vs_normal_pct": -14.6,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.3,
-     "days_counted": 84,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 19,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 15.2,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.915,
-     "vs_normal_pct": -8.5,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.0,
-     "days_counted": 91,
-     "matured_on": "2026-08-27",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 19.3,
-     "commodity": "DRY BEANS"
     },
     "BLACKEYE": {
      "index": 0.876,
@@ -192,22 +140,6 @@
      "lb_ac_high": 2823,
      "baseline_lb_ac": 2325
     },
-    "BLACK": {
-     "index": 1.077,
-     "vs_normal_pct": 7.7,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 12.7,
-     "days_counted": 81,
-     "matured_on": "2026-08-14",
-     "flowering_hot_days": 14,
-     "flowering_window_days": 26,
-     "flowering_hot_days_normal": 13.9,
-     "commodity": "DRY BEANS",
-     "lb_ac": 2467,
-     "lb_ac_low": 2155,
-     "lb_ac_high": 2780,
-     "baseline_lb_ac": 2290
-    },
     "LIGHT RED KIDNEY": {
      "index": 1.079,
      "vs_normal_pct": 7.9,
@@ -223,42 +155,6 @@
      "lb_ac_low": 2063,
      "lb_ac_high": 2632,
      "baseline_lb_ac": 2175
-    },
-    "DARK RED KIDNEY": {
-     "index": 1.079,
-     "vs_normal_pct": 7.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 12.1,
-     "days_counted": 88,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 23,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 1.08,
-     "vs_normal_pct": 8.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.4,
-     "days_counted": 77,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 17,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 15.1,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 1.077,
-     "vs_normal_pct": 7.7,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 12.5,
-     "days_counted": 83,
-     "matured_on": "2026-08-16",
-     "flowering_hot_days": 25,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 19.9,
-     "commodity": "DRY BEANS"
     },
     "BLACKEYE": {
      "index": 1.08,
@@ -337,22 +233,6 @@
      "lb_ac_high": 1360,
      "baseline_lb_ac": 1620
     },
-    "BLACK": {
-     "index": 0.741,
-     "vs_normal_pct": -25.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.4,
-     "days_counted": 81,
-     "matured_on": "2026-08-13",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 17,
-     "commodity": "DRY BEANS",
-     "lb_ac": 1308,
-     "lb_ac_low": 1080,
-     "lb_ac_high": 1536,
-     "baseline_lb_ac": 1765
-    },
     "LIGHT RED KIDNEY": {
      "index": 0.725,
      "vs_normal_pct": -27.5,
@@ -368,42 +248,6 @@
      "lb_ac_low": 1381,
      "lb_ac_high": 1947,
      "baseline_lb_ac": 2295
-    },
-    "DARK RED KIDNEY": {
-     "index": 0.725,
-     "vs_normal_pct": -27.5,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.0,
-     "days_counted": 87,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 26.2,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.726,
-     "vs_normal_pct": -27.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 76,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 19.6,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.737,
-     "vs_normal_pct": -26.3,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.3,
-     "days_counted": 83,
-     "matured_on": "2026-08-15",
-     "flowering_hot_days": 26,
-     "flowering_window_days": 26,
-     "flowering_hot_days_normal": 22.3,
-     "commodity": "DRY BEANS"
     },
     "BLACKEYE": {
      "index": 0.749,
@@ -478,22 +322,6 @@
      "lb_ac_high": 1776,
      "baseline_lb_ac": 1620
     },
-    "BLACK": {
-     "index": 0.901,
-     "vs_normal_pct": -9.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.0,
-     "days_counted": 87,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 22,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 17.1,
-     "commodity": "DRY BEANS",
-     "lb_ac": 1590,
-     "lb_ac_low": 1256,
-     "lb_ac_high": 1924,
-     "baseline_lb_ac": 1765
-    },
     "LIGHT RED KIDNEY": {
      "index": 0.922,
      "vs_normal_pct": -7.8,
@@ -509,42 +337,6 @@
      "lb_ac_low": 1671,
      "lb_ac_high": 2562,
      "baseline_lb_ac": 2295
-    },
-    "DARK RED KIDNEY": {
-     "index": 0.922,
-     "vs_normal_pct": -7.8,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.0,
-     "days_counted": 96,
-     "matured_on": "2026-08-27",
-     "flowering_hot_days": 29,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 24.9,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.895,
-     "vs_normal_pct": -10.5,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.3,
-     "days_counted": 82,
-     "matured_on": "2026-08-16",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 18.4,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.908,
-     "vs_normal_pct": -9.2,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.9,
-     "days_counted": 90,
-     "matured_on": "2026-08-23",
-     "flowering_hot_days": 26,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 22.1,
-     "commodity": "DRY BEANS"
     },
     "BLACKEYE": {
      "index": 0.861,
@@ -569,18 +361,6 @@
      "flowering_window_days": 29,
      "flowering_hot_days_normal": 20.7,
      "commodity": "PEAS"
-    },
-    "LENTILS": {
-     "index": 0.891,
-     "vs_normal_pct": -10.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.0,
-     "days_counted": 100,
-     "matured_on": "2026-07-19",
-     "flowering_hot_days": 28,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 21.3,
-     "commodity": "LENTILS"
     }
    }
   },
@@ -619,22 +399,6 @@
      "lb_ac_high": 2186,
      "baseline_lb_ac": 2340
     },
-    "BLACK": {
-     "index": 0.76,
-     "vs_normal_pct": -24.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.9,
-     "days_counted": 80,
-     "matured_on": "2026-08-12",
-     "flowering_hot_days": 20,
-     "flowering_window_days": 23,
-     "flowering_hot_days_normal": 14.9,
-     "commodity": "DRY BEANS",
-     "lb_ac": 1831,
-     "lb_ac_low": 1539,
-     "lb_ac_high": 2122,
-     "baseline_lb_ac": 2410
-    },
     "LIGHT RED KIDNEY": {
      "index": 0.788,
      "vs_normal_pct": -21.2,
@@ -645,42 +409,6 @@
      "flowering_hot_days": 24,
      "flowering_window_days": 25,
      "flowering_hot_days_normal": 24.1,
-     "commodity": "DRY BEANS"
-    },
-    "DARK RED KIDNEY": {
-     "index": 0.788,
-     "vs_normal_pct": -21.2,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.8,
-     "days_counted": 86,
-     "matured_on": "2026-08-18",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 24.1,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.78,
-     "vs_normal_pct": -22.0,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.7,
-     "days_counted": 75,
-     "matured_on": "2026-08-09",
-     "flowering_hot_days": 20,
-     "flowering_window_days": 22,
-     "flowering_hot_days_normal": 17.5,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.764,
-     "vs_normal_pct": -23.6,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.3,
-     "days_counted": 82,
-     "matured_on": "2026-08-14",
-     "flowering_hot_days": 22,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 20.8,
      "commodity": "DRY BEANS"
     },
     "BLACKEYE": {
@@ -756,22 +484,6 @@
      "lb_ac_high": 2208,
      "baseline_lb_ac": 2340
     },
-    "BLACK": {
-     "index": 0.786,
-     "vs_normal_pct": -21.4,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.1,
-     "days_counted": 99,
-     "matured_on": null,
-     "flowering_hot_days": 12,
-     "flowering_window_days": 31,
-     "flowering_hot_days_normal": 9.1,
-     "commodity": "DRY BEANS",
-     "lb_ac": 1894,
-     "lb_ac_low": 1551,
-     "lb_ac_high": 2238,
-     "baseline_lb_ac": 2410
-    },
     "LIGHT RED KIDNEY": {
      "index": 0.784,
      "vs_normal_pct": -21.6,
@@ -782,42 +494,6 @@
      "flowering_hot_days": 23,
      "flowering_window_days": 34,
      "flowering_hot_days_normal": 24.3,
-     "commodity": "DRY BEANS"
-    },
-    "DARK RED KIDNEY": {
-     "index": 0.784,
-     "vs_normal_pct": -21.6,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 99,
-     "matured_on": null,
-     "flowering_hot_days": 23,
-     "flowering_window_days": 34,
-     "flowering_hot_days_normal": 24.3,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.795,
-     "vs_normal_pct": -20.5,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.1,
-     "days_counted": 99,
-     "matured_on": "2026-09-04",
-     "flowering_hot_days": 16,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 13.3,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.784,
-     "vs_normal_pct": -21.6,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 99,
-     "matured_on": null,
-     "flowering_hot_days": 21,
-     "flowering_window_days": 33,
-     "flowering_hot_days_normal": 19.8,
      "commodity": "DRY BEANS"
     },
     "BLACKEYE": {
@@ -869,18 +545,6 @@
      "lb_ac_high": 1857,
      "baseline_lb_ac": 1585
     },
-    "BLACK": {
-     "index": 0.876,
-     "vs_normal_pct": -12.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 18.3,
-     "days_counted": 76,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 17,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 13.7,
-     "commodity": "DRY BEANS"
-    },
     "LIGHT RED KIDNEY": {
      "index": 0.801,
      "vs_normal_pct": -19.9,
@@ -891,42 +555,6 @@
      "flowering_hot_days": 27,
      "flowering_window_days": 27,
      "flowering_hot_days_normal": 22.5,
-     "commodity": "DRY BEANS"
-    },
-    "DARK RED KIDNEY": {
-     "index": 0.801,
-     "vs_normal_pct": -19.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.8,
-     "days_counted": 82,
-     "matured_on": "2026-08-15",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 22.5,
-     "commodity": "DRY BEANS"
-    },
-    "SMALL RED": {
-     "index": 0.941,
-     "vs_normal_pct": -5.9,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.4,
-     "days_counted": 72,
-     "matured_on": "2026-08-07",
-     "flowering_hot_days": 22,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 15.5,
-     "commodity": "DRY BEANS"
-    },
-    "CRANBERRY": {
-     "index": 0.846,
-     "vs_normal_pct": -15.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 18.0,
-     "days_counted": 78,
-     "matured_on": "2026-08-11",
-     "flowering_hot_days": 25,
-     "flowering_window_days": 26,
-     "flowering_hot_days_normal": 19.7,
      "commodity": "DRY BEANS"
     },
     "BLACKEYE": {
