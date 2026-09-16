@@ -43,6 +43,12 @@ PROSE = {'evidence_note': 'Each number is built only from what was observed this
 PAR_FRACTION = 0.48
 
 # base F, heat F, GDD to maturity, planting, light-use efficiency g/MJ, harvest index
+# BLACKEYE IS NOT HERE, DELIBERATELY. Blackeye is cowpea, Vigna unguiculata — a different
+# genus from common bean, Phaseolus vulgaris. USDA's Cropland Data Layer maps no cowpea in
+# these counties, USDA's own state records for Nebraska, Colorado, Wyoming and Kansas carry no
+# blackeye entry, and it is not commercially grown on the High Plains. It was nevertheless
+# publishing a yield in all seven regions, computed on common-bean ground, at 1,315-1,373
+# lb/ac. That is a fabricated crop, and disclosing it was not enough — it is removed.
 CLASSES = {
     "PINTO":              (50, 90, 1700, "06-01", 1.45, 0.45, "DRY BEANS"),
     "GREAT NORTHERN":     (50, 88, 1600, "06-01", 1.45, 0.45, "DRY BEANS"),
@@ -54,7 +60,6 @@ CLASSES = {
     "SMALL RED":          (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
     "CRANBERRY":          (50, 88, 1800, "06-01", 1.40, 0.43, "DRY BEANS"),
     "SMALL WHITE":        (50, 88, 1650, "06-01", 1.45, 0.46, "DRY BEANS"),
-    "BLACKEYE":           (50, 95, 1800, "05-20", 1.50, 0.44, "DRY BEANS"),
     "GARBANZO (KABULI)":  (41, 86, 2600, "04-20", 1.30, 0.38, "CHICKPEAS"),
     "GARBANZO (DESI)":    (41, 88, 2400, "04-20", 1.35, 0.40, "CHICKPEAS"),
     "LENTIL LARGE GREEN": (41, 82, 2100, "04-15", 1.15, 0.38, "LENTILS"),
@@ -212,9 +217,17 @@ def derive_planting(st, dates, soil_f, earliest_md, region_green):
     # three weeks. If that puts the crop in the ground before the soil rule allows, the soil
     # rule was late and the satellite is the better witness — bounded to three weeks so a
     # single noisy scene cannot rewrite the calendar.
+    # THE PUBLISHED DATE IS AN ABSOLUTE FLOOR. This bypassed it and planted peas on 15 March
+    # in Western Colorado, on ground that is frozen, because the "lift" it detected was the
+    # FIRST observation of the pulse series — there is nothing before 5 April to lift from, so
+    # the baseline was the crop itself. Blackeye came out on 4 May by the same route. A
+    # satellite can tell you a crop went in LATER than normal; it cannot licence a date no
+    # grower would plant on.
     if lift is not None:
         implied = lift - timedelta(days=21)
-        if implied < onset and (onset - implied).days <= 21:
+        md = sorted(region_green)
+        lift_is_first = bool(md) and lift.isoformat()[5:] <= md[min(1, len(md) - 1)]
+        if implied < onset and implied >= earliest and not lift_is_first:
             return implied, ("canopy lifted %s, which puts planting about three weeks earlier "
                              "than the %dF soil rule allowed" % (lift.isoformat(), soil_f))
 
@@ -403,7 +416,19 @@ def main():
                "not_validated": "the level is defensible; season-to-season ranking is not",
                "regions": out,
                "evidence_note": PROSE["evidence_note"],
-               "limits": PROSE["limits"],
+               # Seventeen names, fourteen models. Navy and small white, the two kidneys,
+               # and pink and small red are agronomically identical at this resolution —
+               # and no satellite separates any of them anyway, because USDA maps one
+               # dry-bean class. Better said than left for a reader to notice.
+               "limits": PROSE["limits"] + [
+                   "Three pairs carry identical agronomy because they are identical at this "
+                   "resolution: navy and small white, light red and dark red kidney, pink and "
+                   "small red. Seventeen classes are listed; fourteen distinct models sit "
+                   "behind them.",
+                   "Blackeye was removed in September 2026. It is cowpea, a different genus "
+                   "from common bean; USDA maps no cowpea in these counties and carries no "
+                   "blackeye entry for these states, yet a yield was being published for it "
+                   "in all seven regions on borrowed dry-bean ground."],
                "what_would_sharpen_it": PROSE["what_would_sharpen_it"]}, open(os.path.join(DATA, "yield-all-2026.json"), "w"), indent=1)
 
     cls_order = list(CLASSES)

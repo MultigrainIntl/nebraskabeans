@@ -365,8 +365,14 @@ try {
     `ALLCLASS-001: crop mapped but no yield: ${coverage.missingWhereGrown.join(', ')}`);
   assert.equal(coverage.yieldWhereNotGrown.length, 0,
     `ALLCLASS-001: yield published where the crop is not mapped: ${coverage.yieldWhereNotGrown.join(', ')}`);
-  assert(coverage.beanClasses >= 11,
+  /* Ten, not eleven: blackeye was removed. It is cowpea, a different genus from common bean,
+     USDA maps no cowpea in these counties and carries no blackeye entry for these states, yet
+     it was publishing a yield in all seven regions on borrowed bean ground. */
+  assert(coverage.beanClasses >= 10,
     `ALLCLASS-001: every common-bean class runs on bean ground in every region; got ${coverage.beanClasses}`);
+  const picker = await page.$$eval('#nbCrop option', o => o.map(x => x.value));
+  assert(!picker.includes('BLACKEYE'),
+    'ALLCLASS-001: blackeye is cowpea and is not grown here — it must not return to the picker');
   assert(yieldAll.hasThermal,
     'ALLCLASS-001: every region must carry the water-stress measurement behind its number');
   /* This gate used to assert the caveat CONTAINED the words "its own USDA ground". It

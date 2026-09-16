@@ -160,21 +160,6 @@
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
-    "BLACKEYE": {
-     "lb_ac": 1315,
-     "days": 92,
-     "season_days_measured_light": 92,
-     "season_days_estimated_light": 0,
-     "planted": "2026-05-28",
-     "planting_basis": "delayed 8 days \u2014 soil did not hold 58F until then",
-     "stress_days": 23,
-     "gdd": 1980,
-     "flowering_hot_days": 12,
-     "flowering_window_days": 27,
-     "heat_threshold_f": 95,
-     "pct_of_maturity": 110,
-     "commodity": "DRY BEANS"
-    },
     "GARBANZO (KABULI)": {
      "lb_ac": 552,
      "days": 116,
@@ -396,21 +381,6 @@
      "flowering_hot_days": 23,
      "flowering_window_days": 25,
      "heat_threshold_f": 88,
-     "pct_of_maturity": 111,
-     "commodity": "DRY BEANS"
-    },
-    "BLACKEYE": {
-     "lb_ac": 1364,
-     "days": 99,
-     "season_days_measured_light": 99,
-     "season_days_estimated_light": 0,
-     "planted": "2026-05-04",
-     "planting_basis": "canopy lifted 2026-05-25, which puts planting about three weeks earlier than the 58F soil rule allowed",
-     "stress_days": 29,
-     "gdd": 2001,
-     "flowering_hot_days": 4,
-     "flowering_window_days": 31,
-     "heat_threshold_f": 95,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -638,21 +608,6 @@
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
-    "BLACKEYE": {
-     "lb_ac": 1326,
-     "days": 100,
-     "season_days_measured_light": 100,
-     "season_days_estimated_light": 0,
-     "planted": "2026-05-04",
-     "planting_basis": "canopy lifted 2026-05-25, which puts planting about three weeks earlier than the 58F soil rule allowed",
-     "stress_days": 8,
-     "gdd": 1986,
-     "flowering_hot_days": 9,
-     "flowering_window_days": 29,
-     "heat_threshold_f": 95,
-     "pct_of_maturity": 110,
-     "commodity": "DRY BEANS"
-    },
     "GARBANZO (KABULI)": {
      "lb_ac": 1051,
      "days": 107,
@@ -877,21 +832,6 @@
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
-    "BLACKEYE": {
-     "lb_ac": 1022,
-     "days": 90,
-     "season_days_measured_light": 90,
-     "season_days_estimated_light": 0,
-     "planted": "2026-05-20",
-     "planting_basis": "normal date for this class; soil was warm enough on time",
-     "stress_days": 8,
-     "gdd": 1990,
-     "flowering_hot_days": 15,
-     "flowering_window_days": 28,
-     "heat_threshold_f": 95,
-     "pct_of_maturity": 111,
-     "commodity": "DRY BEANS"
-    },
     "LENTIL LARGE GREEN": {
      "lb_ac": 872,
      "days": 74,
@@ -942,8 +882,8 @@
      "days": 70,
      "season_days_measured_light": 70,
      "season_days_estimated_light": 0,
-     "planted": "2026-03-15",
-     "planting_basis": "canopy lifted 2026-04-05, which puts planting about three weeks earlier than the 41F soil rule allowed",
+     "planted": "2026-04-05",
+     "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 48,
      "gdd": 2214,
      "flowering_hot_days": 25,
@@ -957,8 +897,8 @@
      "days": 70,
      "season_days_measured_light": 70,
      "season_days_estimated_light": 0,
-     "planted": "2026-03-15",
-     "planting_basis": "canopy lifted 2026-04-05, which puts planting about three weeks earlier than the 41F soil rule allowed",
+     "planted": "2026-04-05",
+     "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 48,
      "gdd": 2214,
      "flowering_hot_days": 25,
@@ -1128,21 +1068,6 @@
      "flowering_hot_days": 20,
      "flowering_window_days": 22,
      "heat_threshold_f": 88,
-     "pct_of_maturity": 111,
-     "commodity": "DRY BEANS"
-    },
-    "BLACKEYE": {
-     "lb_ac": 1035,
-     "days": 87,
-     "season_days_measured_light": 87,
-     "season_days_estimated_light": 0,
-     "planted": "2026-05-20",
-     "planting_basis": "normal date for this class; soil was warm enough on time",
-     "stress_days": 28,
-     "gdd": 2000,
-     "flowering_hot_days": 14,
-     "flowering_window_days": 25,
-     "heat_threshold_f": 95,
      "pct_of_maturity": 111,
      "commodity": "DRY BEANS"
     },
@@ -1369,21 +1294,6 @@
      "heat_threshold_f": 88,
      "pct_of_maturity": 104,
      "commodity": "DRY BEANS"
-    },
-    "BLACKEYE": {
-     "lb_ac": 1102,
-     "days": 102,
-     "season_days_measured_light": 101,
-     "season_days_estimated_light": 1,
-     "planted": "2026-05-30",
-     "planting_basis": "delayed 10 days \u2014 soil did not hold 58F until then",
-     "stress_days": 32,
-     "gdd": 1743,
-     "flowering_hot_days": 6,
-     "flowering_window_days": 33,
-     "heat_threshold_f": 95,
-     "pct_of_maturity": 97,
-     "commodity": "DRY BEANS"
     }
    },
    "canopy_above_air_c": 7.1,
@@ -1549,28 +1459,13 @@
      "pct_of_maturity": 112,
      "commodity": "DRY BEANS"
     },
-    "BLACKEYE": {
-     "lb_ac": 1033,
-     "days": 84,
-     "season_days_measured_light": 84,
-     "season_days_estimated_light": 0,
-     "planted": "2026-05-20",
-     "planting_basis": "normal date for this class; soil was warm enough on time",
-     "stress_days": 15,
-     "gdd": 2010,
-     "flowering_hot_days": 9,
-     "flowering_window_days": 27,
-     "heat_threshold_f": 95,
-     "pct_of_maturity": 112,
-     "commodity": "DRY BEANS"
-    },
     "PEA YELLOW": {
      "lb_ac": 740,
      "days": 92,
      "season_days_measured_light": 92,
      "season_days_estimated_light": 0,
-     "planted": "2026-03-15",
-     "planting_basis": "canopy lifted 2026-04-05, which puts planting about three weeks earlier than the 41F soil rule allowed",
+     "planted": "2026-04-05",
+     "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 2220,
      "flowering_hot_days": 22,
@@ -1584,8 +1479,8 @@
      "days": 92,
      "season_days_measured_light": 92,
      "season_days_estimated_light": 0,
-     "planted": "2026-03-15",
-     "planting_basis": "canopy lifted 2026-04-05, which puts planting about three weeks earlier than the 41F soil rule allowed",
+     "planted": "2026-04-05",
+     "planting_basis": "normal date for this class; soil was warm enough on time",
      "stress_days": 8,
      "gdd": 2220,
      "flowering_hot_days": 22,
@@ -1610,7 +1505,9 @@
  "limits": [
   "This is not a validated forecast. As of September 2026 the yield figure this model produced is withdrawn from the site. An independent review found the step converting satellite greenness to intercepted light is uncalibrated, the light-use efficiency and harvest-index constants are not sourced per market class, and the thermal term is an eight-day 1 km land-surface average against one airport rather than a calibrated water-stress index. What remains published is measurement: canopy against its own 26-year history, station weather, and growing degree days. USDA remains the scorecard here and never an input, and it is itself unstable: Nebraska planted acres for 2026 were revised 21% mid-season, yield is reported per harvested acre so abandoned fields vanish from it, and county yields stopped in 2008.",
   "Chickpeas, lentils and peas are sampled at one point per county rather than on crop pixels, and where a region has no pulse reading the dry-bean canopy stands in for it.",
-  "Solar radiation is not measured. It is estimated from the daily temperature range, from one station per region."
+  "Solar radiation is not measured. It is estimated from the daily temperature range, from one station per region.",
+  "Three pairs carry identical agronomy because they are identical at this resolution: navy and small white, light red and dark red kidney, pink and small red. Seventeen classes are listed; fourteen distinct models sit behind them.",
+  "Blackeye was removed in September 2026. It is cowpea, a different genus from common bean; USDA maps no cowpea in these counties and carries no blackeye entry for these states, yet a yield was being published for it in all seven regions on borrowed dry-bean ground."
  ],
  "what_would_sharpen_it": [
   "Real harvest data \u2014 loads, test weights, screen size, tied to place and date",

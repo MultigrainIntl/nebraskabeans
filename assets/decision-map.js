@@ -22,7 +22,6 @@
     'SMALL RED':          { commodity: 'DRY BEANS', base: 50, heat: 90, gdd: 1650, plant: '06-01' },
     'CRANBERRY':          { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1800, plant: '06-01' },
     'SMALL WHITE':        { commodity: 'DRY BEANS', base: 50, heat: 88, gdd: 1650, plant: '06-01' },
-    'BLACKEYE':           { commodity: 'DRY BEANS', base: 50, heat: 95, gdd: 1800, plant: '05-20' },
     'GARBANZO (KABULI)':  { commodity: 'CHICKPEAS', base: 41, heat: 86, gdd: 2600, plant: '04-20' },
     'GARBANZO (DESI)':    { commodity: 'CHICKPEAS', base: 41, heat: 88, gdd: 2400, plant: '04-20' },
     'LENTIL LARGE GREEN': { commodity: 'LENTILS', base: 41, heat: 82, gdd: 2100, plant: '04-15' },

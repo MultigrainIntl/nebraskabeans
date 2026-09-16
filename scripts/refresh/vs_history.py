@@ -85,10 +85,14 @@ def series_for(obs):
 # When each crop is actually in the field. Comparing a pass taken after harvest is comparing
 # stubble to stubble: kabuli chickpea goes in on 20 April and comes off in late August, so a
 # 5 September reading says nothing about the crop, and that reading was what the page led with.
+# Each window opens on the class's own normal planting date and closes at harvest. They used
+# to open days or weeks LATE — peas were compared from 25 April when they go in on the 5th,
+# lentils from 1 May against a 15 April planting — so establishment, the part of the season a
+# grower can still do something about, was excluded from every comparison.
 SEASON = {"DRY BEANS": ("06-01", "09-25"),
-          "CHICKPEAS": ("05-01", "08-25"),
-          "LENTILS":   ("05-01", "08-15"),
-          "PEAS":      ("04-25", "08-15")}
+          "CHICKPEAS": ("04-20", "08-25"),
+          "LENTILS":   ("04-15", "08-15"),
+          "PEAS":      ("04-05", "08-15")}
 
 
 def season_to_date(dates, window, latest):
