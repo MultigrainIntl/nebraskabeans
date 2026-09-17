@@ -150,6 +150,39 @@ if d:
         check("solar has plausible mean", 8 <= (sum(summer)/len(summer)) <= 30,
               "mean %.1f MJ/m2/day over %d station-days" % (sum(summer)/len(summer), len(summer)))
 
+# ---------------------------------------------------------------- groundwater
+d = load("groundwater.json")
+if d:
+    regs = d.get("regions", {})
+    # Independent check: depth to water under High Plains bean ground runs from a few feet in
+    # the North Platte valley to a couple of hundred over the Ogallala. A median outside
+    # 5-400 ft is a units error or a dry hole read as a water table, not a shallower aquifer.
+    bad = ["%s=%s" % (rk, r.get("median_depth_to_water_ft"))
+           for rk, r in regs.items()
+           if not (5 <= (r.get("median_depth_to_water_ft") or 0) <= 400)]
+    check("water table depths are plausible", regs and not bad,
+          "%d regions, medians 19-162 ft" % len(regs) if not bad
+          else "IMPLAUSIBLE: " + ", ".join(bad[:3]))
+
+    # A median of one well is an anecdote. It may publish, but it must be FLAGGED — the same
+    # failure that let the cutworm model report a Big Horn date computed from a handful of
+    # mountain stations.
+    unflagged = [rk for rk, r in regs.items()
+                 if r.get("wells", 0) < 8 and r.get("enough_wells") is not False]
+    check("thin well counts are flagged", not unflagged,
+          "every region below 8 wells says so" if not unflagged
+          else "UNFLAGGED: " + ", ".join(unflagged))
+
+    # R1 territory: this failed the skill test and must not become a forecast input.
+    src = ""
+    for f in ("scripts/refresh/yield_index.py", "scripts/refresh/yield_all.py",
+              "scripts/refresh/pest_wbc.py"):
+        fp = os.path.join(HERE, "..", f)
+        if os.path.exists(fp):
+            src += open(fp, encoding="utf-8").read()
+    check("groundwater feeds no forecast", "groundwater.json" not in src,
+          "no yield or pest script reads it")
+
 # ---------------------------------------------------------------- pest timing
 d = load("pest-wbc-2026.json")
 if d:

@@ -1,0 +1,163 @@
+{
+ "schema": "nebraskabeans.groundwater.v1",
+ "what": "Depth to water below land surface under each growing region, from the most recent reading at every monitored well within 120 km of mapped bean ground.",
+ "direction": "LARGER IS WORSE \u2014 the water is further down.",
+ "not_a_predictor": "This is an observation and nothing on this site may use it to forecast a yield. Tested 17 Sep 2026 over 469 county-years, forward-only: +0.7% against a trend baseline, confidence interval [-1.4, +8.9], which includes zero. The decline is smooth and a trend term absorbs it.",
+ "source": {
+  "name": "USGS National Ground-Water Monitoring Network",
+  "url": "https://www.usgs.gov/apps/ngwmn/geoserver/ngwmn/ows",
+  "layer": "ngwmn:Latest_WL_Percentile",
+  "api_key_required": false,
+  "federates": "state networks \u2014 Kansas Geological Survey, UNL Conservation and Survey Division, Colorado Division of Water Resources, Wyoming DEQ \u2014 alongside USGS's own wells",
+  "evidence_class": "OBSERVED"
+ },
+ "limits": [
+  "Wyoming contributes only three wells to this network. Any Wyoming region is flagged and must not be read as a regional picture.",
+  "This is the LATEST reading at each well, not a matched date. Wells are measured on their own schedules, mostly in winter.",
+  "Depth below land surface says nothing on its own about how much water remains \u2014 that needs saturated thickness, which this layer does not carry."
+ ],
+ "as_of": "2026-09-17",
+ "wells_total": 8648,
+ "regions": {
+  "big-horn": {
+   "wells": 1,
+   "wells_read_this_year": 1,
+   "median_depth_to_water_ft": 19,
+   "shallowest_tenth_ft": 19,
+   "deepest_tenth_ft": 19,
+   "newest_reading": "2026-09-15",
+   "oldest_reading_used": "2026-09-15",
+   "providers": {
+    "U.S. Geological Survey": 1
+   },
+   "wells_by_state": {
+    "Wyoming": 1
+   },
+   "mostly_from_another_state": null,
+   "enough_wells": false,
+   "note": "A median of 1 wells is an anecdote, not a regional figure."
+  },
+  "ne-colorado": {
+   "wells": 531,
+   "wells_read_this_year": 275,
+   "median_depth_to_water_ft": 120,
+   "shallowest_tenth_ft": 14,
+   "deepest_tenth_ft": 233,
+   "newest_reading": "2026-09-15",
+   "oldest_reading_used": "2016-03-06",
+   "providers": {
+    "Colorado Division of Water Resources": 409,
+    "University of Nebraska-Lincoln, Conservation and Survey Division": 113,
+    "U.S. Geological Survey": 9
+   },
+   "wells_by_state": {
+    "Colorado": 410,
+    "Nebraska": 121
+   },
+   "mostly_from_another_state": null,
+   "enough_wells": true,
+   "note": null
+  },
+  "ne-panhandle": {
+   "wells": 1111,
+   "wells_read_this_year": 146,
+   "median_depth_to_water_ft": 33,
+   "shallowest_tenth_ft": 7,
+   "deepest_tenth_ft": 156,
+   "newest_reading": "2026-09-16",
+   "oldest_reading_used": "2008-04-15",
+   "providers": {
+    "University of Nebraska-Lincoln, Conservation and Survey Division": 1089,
+    "U.S. Geological Survey": 22
+   },
+   "wells_by_state": {
+    "Nebraska": 1111
+   },
+   "mostly_from_another_state": null,
+   "enough_wells": true,
+   "note": null
+  },
+  "nw-kansas": {
+   "wells": 827,
+   "wells_read_this_year": 695,
+   "median_depth_to_water_ft": 162,
+   "shallowest_tenth_ft": 49,
+   "deepest_tenth_ft": 232,
+   "newest_reading": "2026-09-16",
+   "oldest_reading_used": "2014-02-18",
+   "providers": {
+    "Colorado Division of Water Resources": 426,
+    "Kansas Geological Survey": 367,
+    "University of Nebraska-Lincoln, Conservation and Survey Division": 32
+   },
+   "wells_by_state": {
+    "Colorado": 427,
+    "Kansas": 367,
+    "Nebraska": 33
+   },
+   "mostly_from_another_state": "Colorado",
+   "enough_wells": true,
+   "note": null
+  },
+  "se-wyoming": {
+   "wells": 766,
+   "wells_read_this_year": 73,
+   "median_depth_to_water_ft": 30,
+   "shallowest_tenth_ft": 7,
+   "deepest_tenth_ft": 156,
+   "newest_reading": "2026-09-16",
+   "oldest_reading_used": "2008-04-15",
+   "providers": {
+    "University of Nebraska-Lincoln, Conservation and Survey Division": 753,
+    "U.S. Geological Survey": 13
+   },
+   "wells_by_state": {
+    "Nebraska": 765,
+    "Wyoming": 1
+   },
+   "mostly_from_another_state": "Nebraska",
+   "enough_wells": true,
+   "note": null
+  },
+  "sw-nebraska": {
+   "wells": 1269,
+   "wells_read_this_year": 609,
+   "median_depth_to_water_ft": 139,
+   "shallowest_tenth_ft": 16,
+   "deepest_tenth_ft": 232,
+   "newest_reading": "2026-09-14",
+   "oldest_reading_used": "2016-03-06",
+   "providers": {
+    "University of Nebraska-Lincoln, Conservation and Survey Division": 633,
+    "Colorado Division of Water Resources": 491,
+    "Kansas Geological Survey": 126
+   },
+   "wells_by_state": {
+    "Nebraska": 652,
+    "Colorado": 491,
+    "Kansas": 126
+   },
+   "mostly_from_another_state": null,
+   "enough_wells": true,
+   "note": null
+  },
+  "western-colorado": {
+   "wells": 7,
+   "wells_read_this_year": 5,
+   "median_depth_to_water_ft": 102,
+   "shallowest_tenth_ft": 14,
+   "deepest_tenth_ft": 336,
+   "newest_reading": "2026-09-10",
+   "oldest_reading_used": "2023-08-02",
+   "providers": {
+    "Colorado Division of Water Resources": 7
+   },
+   "wells_by_state": {
+    "Colorado": 7
+   },
+   "mostly_from_another_state": null,
+   "enough_wells": false,
+   "note": "A median of 7 wells is an anecdote, not a regional figure."
+  }
+ }
+}

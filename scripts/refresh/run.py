@@ -49,6 +49,11 @@ STEPS = [
     # field trap counts and published the thresholds — and it is the only forward prediction on
     # this site that has been shown to work: standing on 1 June 2026 it named the 25% flight
     # date within a day in three regions of four.
+    # OBSERVATION ONLY. Groundwater failed the yield-skill test on 17 Sep 2026 and must never
+    # feed a forecast. It ships because a grower deciding whether to drill deeper is owed the
+    # number — 8,648 wells, four states, read as recently as today.
+    ("groundwater.py", "groundwater.json", 25,
+     "USGS National Ground-Water Monitoring Network — depth to water under each region"),
     ("pest_wbc.py", "pest-wbc-2026.json", 20,
      "western bean cutworm flight timing, UNL degree-day model, every station"),
     ("ledger.py", None, None,
