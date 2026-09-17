@@ -16,10 +16,10 @@
    "name": "Nebraska Panhandle",
    "classes": {
     "PINTO": {
-     "index": 0.876,
+     "index": 0.8765,
      "vs_normal_pct": -12.4,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.2,
+     "model_year_to_year_spread_pct": 14.9,
      "days_counted": 86,
      "matured_on": "2026-08-22",
      "flowering_hot_days": 20,
@@ -92,13 +92,15 @@
      "lb_ac_high": 2413,
      "baseline_lb_ac": 2396,
      "index_own_class": 0.872,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 15.2,
+     "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.876,
+     "index": 0.8765,
      "vs_normal_pct": -12.4,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 15.8,
+     "model_year_to_year_spread_pct": 14.9,
      "days_counted": 81,
      "matured_on": "2026-08-18",
      "flowering_hot_days": 21,
@@ -171,13 +173,15 @@
      "lb_ac_high": 2353,
      "baseline_lb_ac": 2336,
      "index_own_class": 0.818,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 15.8,
+     "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.876,
+     "index": 0.8765,
      "vs_normal_pct": -12.4,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.7,
+     "model_year_to_year_spread_pct": 14.9,
      "days_counted": 94,
      "matured_on": "2026-08-31",
      "flowering_hot_days": 24,
@@ -250,13 +254,15 @@
      "lb_ac_high": 2045,
      "baseline_lb_ac": 2031,
      "index_own_class": 0.94,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 14.7,
+     "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.876,
+     "index": 0.8765,
      "vs_normal_pct": -12.4,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.9,
+     "model_year_to_year_spread_pct": 14.9,
      "days_counted": 92,
      "matured_on": "2026-08-24",
      "flowering_hot_days": 12,
@@ -325,7 +331,9 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.876,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 13.9,
+     "spread_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 0.777,
@@ -475,7 +483,7 @@
      "commodity": "CHICKPEAS",
      "level_is_usda_published": false,
      "level_kind": "proxy",
-     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state — 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
      "lb_ac": 822,
      "lb_ac_low": 649,
      "lb_ac_high": 995,
@@ -563,13 +571,15 @@
      "lb_ac_high": 2909,
      "baseline_lb_ac": 2396,
      "index_own_class": 1.076,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 13.0,
+     "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
      "index": 1.075,
      "vs_normal_pct": 7.5,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.0,
+     "model_year_to_year_spread_pct": 13.0,
      "days_counted": 74,
      "matured_on": "2026-08-09",
      "flowering_hot_days": 23,
@@ -642,13 +652,15 @@
      "lb_ac_high": 2836,
      "baseline_lb_ac": 2336,
      "index_own_class": 1.065,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 14.0,
+     "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
      "index": 1.075,
      "vs_normal_pct": 7.5,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 12.1,
+     "model_year_to_year_spread_pct": 13.0,
      "days_counted": 88,
      "matured_on": "2026-08-20",
      "flowering_hot_days": 27,
@@ -721,13 +733,15 @@
      "lb_ac_high": 2466,
      "baseline_lb_ac": 2031,
      "index_own_class": 1.079,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 12.1,
+     "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
      "index": 1.075,
      "vs_normal_pct": 7.5,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 12.7,
+     "model_year_to_year_spread_pct": 13.0,
      "days_counted": 89,
      "matured_on": "2026-08-10",
      "flowering_hot_days": 6,
@@ -796,7 +810,9 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 1.08,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 12.7,
+     "spread_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 1.154,
@@ -946,7 +962,7 @@
      "commodity": "CHICKPEAS",
      "level_is_usda_published": false,
      "level_kind": "proxy",
-     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state — 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
      "lb_ac": 1067,
      "lb_ac_low": 864,
      "lb_ac_high": 1270,
@@ -958,10 +974,10 @@
    "name": "Northeast Colorado",
    "classes": {
     "PINTO": {
-     "index": 0.728,
+     "index": 0.7284,
      "vs_normal_pct": -27.2,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.6,
+     "model_year_to_year_spread_pct": 17.4,
      "days_counted": 78,
      "matured_on": "2026-08-11",
      "flowering_hot_days": 23,
@@ -1034,13 +1050,15 @@
      "lb_ac_high": 1691,
      "baseline_lb_ac": 1977,
      "index_own_class": 0.73,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 17.6,
+     "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.728,
+     "index": 0.7284,
      "vs_normal_pct": -27.2,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 18.2,
+     "model_year_to_year_spread_pct": 17.4,
      "days_counted": 73,
      "matured_on": "2026-08-08",
      "flowering_hot_days": 24,
@@ -1109,13 +1127,15 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.71,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 18.2,
+     "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.728,
+     "index": 0.7284,
      "vs_normal_pct": -27.2,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.0,
+     "model_year_to_year_spread_pct": 17.4,
      "days_counted": 87,
      "matured_on": "2026-08-20",
      "flowering_hot_days": 27,
@@ -1188,13 +1208,15 @@
      "lb_ac_high": 2207,
      "baseline_lb_ac": 2581,
      "index_own_class": 0.725,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 17.0,
+     "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.728,
+     "index": 0.7284,
      "vs_normal_pct": -27.2,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.8,
+     "model_year_to_year_spread_pct": 17.4,
      "days_counted": 90,
      "matured_on": "2026-08-11",
      "flowering_hot_days": 12,
@@ -1263,7 +1285,9 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.749,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 16.8,
+     "spread_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 0.99,
@@ -1409,7 +1433,7 @@
      "commodity": "CHICKPEAS",
      "level_is_usda_published": false,
      "level_kind": "proxy",
-     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state — 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
      "lb_ac": 964,
      "lb_ac_low": 799,
      "lb_ac_high": 1128,
@@ -1421,10 +1445,10 @@
    "name": "Western Colorado",
    "classes": {
     "PINTO": {
-     "index": 0.897,
+     "index": 0.8969,
      "vs_normal_pct": -10.3,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.3,
+     "model_year_to_year_spread_pct": 20.9,
      "days_counted": 85,
      "matured_on": "2026-08-18",
      "flowering_hot_days": 24,
@@ -1497,13 +1521,15 @@
      "lb_ac_high": 2145,
      "baseline_lb_ac": 1977,
      "index_own_class": 0.899,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 21.3,
+     "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.897,
+     "index": 0.8969,
      "vs_normal_pct": -10.3,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.0,
+     "model_year_to_year_spread_pct": 20.9,
      "days_counted": 80,
      "matured_on": "2026-08-13",
      "flowering_hot_days": 23,
@@ -1572,13 +1598,15 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.906,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 21.0,
+     "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.897,
+     "index": 0.8969,
      "vs_normal_pct": -10.3,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 21.0,
+     "model_year_to_year_spread_pct": 20.9,
      "days_counted": 96,
      "matured_on": "2026-08-27",
      "flowering_hot_days": 29,
@@ -1651,13 +1679,15 @@
      "lb_ac_high": 2800,
      "baseline_lb_ac": 2581,
      "index_own_class": 0.922,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 21.0,
+     "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.897,
+     "index": 0.8969,
      "vs_normal_pct": -10.3,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.5,
+     "model_year_to_year_spread_pct": 20.9,
      "days_counted": 97,
      "matured_on": "2026-08-18",
      "flowering_hot_days": 11,
@@ -1726,7 +1756,9 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.861,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 20.5,
+     "spread_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 0.917,
@@ -1807,10 +1839,10 @@
    "name": "Southeast Wyoming",
    "classes": {
     "PINTO": {
-     "index": 0.783,
+     "index": 0.7831,
      "vs_normal_pct": -21.7,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.3,
+     "model_year_to_year_spread_pct": 16.0,
      "days_counted": 77,
      "matured_on": "2026-08-10",
      "flowering_hot_days": 20,
@@ -1883,13 +1915,15 @@
      "lb_ac_high": 2081,
      "baseline_lb_ac": 2291,
      "index_own_class": 0.761,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 16.3,
+     "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.783,
+     "index": 0.7831,
      "vs_normal_pct": -21.7,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.3,
+     "model_year_to_year_spread_pct": 16.0,
      "days_counted": 72,
      "matured_on": "2026-08-07",
      "flowering_hot_days": 20,
@@ -1962,13 +1996,15 @@
      "lb_ac_high": 1969,
      "baseline_lb_ac": 2168,
      "index_own_class": 0.796,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 17.3,
+     "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.783,
+     "index": 0.7831,
      "vs_normal_pct": -21.7,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.8,
+     "model_year_to_year_spread_pct": 16.0,
      "days_counted": 86,
      "matured_on": "2026-08-18",
      "flowering_hot_days": 24,
@@ -2037,13 +2073,15 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.788,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 13.8,
+     "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.783,
+     "index": 0.7831,
      "vs_normal_pct": -21.7,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.4,
+     "model_year_to_year_spread_pct": 16.0,
      "days_counted": 87,
      "matured_on": "2026-08-08",
      "flowering_hot_days": 14,
@@ -2112,7 +2150,9 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.788,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 16.4,
+     "spread_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 0.681,
@@ -2258,7 +2298,7 @@
      "commodity": "CHICKPEAS",
      "level_is_usda_published": false,
      "level_kind": "proxy",
-     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state — 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+     "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
      "lb_ac": 838,
      "lb_ac_low": 625,
      "lb_ac_high": 1052,
@@ -2270,10 +2310,10 @@
    "name": "Big Horn Basin",
    "classes": {
     "PINTO": {
-     "index": 0.786,
+     "index": 0.7865,
      "vs_normal_pct": -21.4,
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.4,
+     "model_year_to_year_spread_pct": 18.1,
      "days_counted": 99,
      "matured_on": "2026-09-10",
      "flowering_hot_days": 16,
@@ -2341,13 +2381,15 @@
      "lb_ac_high": 2128,
      "baseline_lb_ac": 2291,
      "index_own_class": 0.788,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 18.4,
+     "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.786,
+     "index": 0.7865,
      "vs_normal_pct": -21.4,
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.0,
+     "model_year_to_year_spread_pct": 18.1,
      "days_counted": 99,
      "matured_on": "2026-09-01",
      "flowering_hot_days": 20,
@@ -2415,13 +2457,15 @@
      "lb_ac_high": 2014,
      "baseline_lb_ac": 2168,
      "index_own_class": 0.8,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 18.0,
+     "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 0.786,
+     "index": 0.7865,
      "vs_normal_pct": -21.4,
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 17.8,
+     "model_year_to_year_spread_pct": 18.1,
      "days_counted": 99,
      "matured_on": null,
      "flowering_hot_days": 23,
@@ -2485,13 +2529,15 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.784,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 17.8,
+     "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.786,
+     "index": 0.7865,
      "vs_normal_pct": -21.4,
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.2,
+     "model_year_to_year_spread_pct": 18.1,
      "days_counted": 101,
      "matured_on": null,
      "flowering_hot_days": 6,
@@ -2555,7 +2601,9 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.774,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 18.2,
+     "spread_is_shared_across_classes": true
     }
    }
   },
@@ -2635,13 +2683,15 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.907,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 19.1,
+     "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
      "index": 0.904,
      "vs_normal_pct": -9.6,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.9,
+     "model_year_to_year_spread_pct": 19.1,
      "days_counted": 70,
      "matured_on": "2026-08-04",
      "flowering_hot_days": 23,
@@ -2710,13 +2760,15 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.977,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 19.9,
+     "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
      "index": 0.904,
      "vs_normal_pct": -9.6,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.8,
+     "model_year_to_year_spread_pct": 19.1,
      "days_counted": 82,
      "matured_on": "2026-08-15",
      "flowering_hot_days": 27,
@@ -2785,13 +2837,15 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.801,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 17.8,
+     "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
      "index": 0.904,
      "vs_normal_pct": -9.6,
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.4,
+     "model_year_to_year_spread_pct": 19.1,
      "days_counted": 84,
      "matured_on": "2026-08-06",
      "flowering_hot_days": 9,
@@ -2860,7 +2914,9 @@
      "level_kind": null,
      "level_proxy_note": null,
      "index_own_class": 0.932,
-     "index_is_shared_across_classes": true
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 19.4,
+     "spread_is_shared_across_classes": true
     },
     "PEAS": {
      "index": 1.131,

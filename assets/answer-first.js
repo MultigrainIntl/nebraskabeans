@@ -416,14 +416,27 @@
   /* "Dig deeper" had become a junk drawer of nineteen panels, most of them the old site
      repeating what the answer above now states once. Keep the two that earn their place —
      where the data comes from, and what the model does — and remove the duplicates. */
+  /* THE WHITELIST IS GONE, AND WITH IT A LIVE DEFECT. It read
+       /evidence backbone|authoritative source|model transparency|what the experimental/i
+     and deleted every panel that did not match. Those four phrases no longer appear anywhere
+     in index.html -- the plain-language rewrite renamed all of them and nobody updated this
+     filter. A whitelist matching nothing deletes everything, so "More detail" opened EMPTY on
+     the live site. GAJ found it by opening the box; no automated check could, because the HTML
+     is valid and the content is destroyed by script after load.
+
+     Counted before rewriting rather than assumed: the panel now holds SIX substantive sections
+     -- the answer strip, the heat timeline, the picked-area detail, the area summary, "where
+     every number comes from" and "how this works". The nineteen-panel junk drawer this filter
+     was written to thin out no longer exists; the rewrite already removed it. So there is
+     nothing left to whitelist against, and only genuinely empty nodes are dropped.
+
+     If this ever needs to prune by content again, match on element id (#sources, #method),
+     not on prose. Prose gets rewritten; ids do not. */
   function pruneDeeper() {
     var body = document.querySelector('.nbDeeperBody');
     if (!body) return;
-    var KEEP = /evidence backbone|authoritative source|model transparency|what the experimental/i;
     [].slice.call(body.children).forEach(function (n) {
-      var txt = (n.textContent || '').trim();
-      if (!txt) { n.remove(); return; }
-      if (!KEEP.test(txt.slice(0, 400))) n.remove();
+      if (!(n.textContent || '').trim()) n.remove();
     });
   }
 

@@ -510,9 +510,22 @@ def main():
             shared_spread = statistics.mean(r["model_year_to_year_spread_pct"] for r in rows) / 100
             for r in rows:
                 r["index_own_class"] = r["index"]
-                r["index"] = round(shared, 3)
+                # 4 dp, not 3. The index is never shown to a reader — it exists so the
+                # arithmetic can be checked — and at 3 dp great northern published 2,048
+                # against a baseline x index of 2,046.3, which does not reproduce.
+                r["index"] = round(shared, 4)
                 r["vs_normal_pct"] = round(100 * (shared - 1), 1)
                 r["index_is_shared_across_classes"] = True
+                # PUBLISH THE SPREAD THAT ACTUALLY BUILDS THE BAND. It used to publish each
+                # class's OWN spread beside a band built from the commodity mean, so a reader
+                # doing the obvious arithmetic -- middle number plus or minus the spread
+                # printed next to it -- got a different range from the one on the page. Eleven
+                # of thirteen bands failed that check. The numbers were right; the input
+                # needed to verify them was missing, which for this site is the same as wrong.
+                # The per-class figure is kept alongside, exactly as index_own_class is.
+                r["model_year_to_year_spread_own_class_pct"] = r["model_year_to_year_spread_pct"]
+                r["model_year_to_year_spread_pct"] = round(100 * shared_spread, 1)
+                r["spread_is_shared_across_classes"] = True
                 if r.get("baseline_lb_ac"):
                     b = r["baseline_lb_ac"]
                     r["lb_ac"] = round(b * shared)
