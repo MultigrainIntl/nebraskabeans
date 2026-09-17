@@ -38,8 +38,8 @@ on the day the prediction was made.*
 justification — so a borrowed number can never lose its disclaimer.*
 
 **R3 — No constant may be asserted without a citation.**
-*Enforced: `UNSOURCED.md` plus its gate. Four constants are currently open and block all code
-publishing.*
+*Enforced: `UNSOURCED.md` plus its gate. All four constants were cited on 16 Sep 2026; the
+gate fails the build if any row ever returns to `none`.*
 
 **R4 — A difference the sensor cannot see must not be invented.**
 *Learned: bean class differences were modelled from unsourced constants and came out 9.9
@@ -56,13 +56,20 @@ Any plan that ignores this repeats it.
 | Published "8.5% better than guessing" | — | A straight line through 26 years of rising yields. Trend, not skill |
 | Hot days vs yield, 28 state-years | 16 Sep 2026 | r²=0.025, t=+0.81 — nothing, sign positive |
 | Hot days vs abandoned acres, 19 state-years | 16 Sep 2026 | r²=0.031, t=−0.74 — nothing |
+| **County weather**, pinto, 369 held-out county-years, per state, bootstrapped by year | **17 Sep 2026** | **No skill.** Nebraska 224.1→234.6 lb/ac (worse); Wyoming 194.4→191.7, CI [−12.3,+18.8] |
+| **County satellite**, peak NDVI on CDL bean cells, 3 states | **17 Sep 2026** | **No skill.** CO 221.0→224.9, NE 207.3→213.2, WY 203.8→213.6 — worse in all three |
+| **County groundwater**, Colorado DWR wells, 469 county-years | **17 Sep 2026** | **No skill.** 474.1→470.7, CI [−1.4,+8.9] |
+| Abandoned acres vs water table, clean SURVEY series | 17 Sep 2026 | r²=0.002 irrigated. Irrigated share ROSE 89%→99% through the decline |
 
 **Prime suspect for the failures: irrigation.** You cannot predict an irrigated yield from
 rainfall. Irrigation became measurable on 16 September 2026 and has never been tested as a
 feature.
 
 **Current honest position: this tool measures well and has never demonstrated predictive
-skill.**
+skill.** That is no longer an open question. The county test — the one this plan called
+decisive — was run on 17 September 2026 with 20x the sample of the state test, and weather,
+satellite and groundwater all failed it. Five of seven state-by-state tests came out WORSE
+than a plain trend line. The site now says so on the page.
 
 ---
 
@@ -224,7 +231,7 @@ If neither exists: publish no pounds.
 | BLACKEYE (cowpea) | 50 | 95 | 1800 | 05-20 | 1.50 | 0.44 |
 | PEAS | 41 | 82 | 2000 | 04-05 | 1.60 | 0.48 |
 | CHICKPEAS | 41 | 86 | 2600 | 04-20 | 1.30 | 0.38 |
-| *Night stress threshold* | | **68 °F** | | | | |
+| *Night stress threshold* | | **68 °F** *(sourced — Porch & Jahn 2001; Phaseolus only)* | | | | |
 
 **Every number in this table was chosen, not read from a publication.** They no longer create
 class differences in the index (3.7), but they still set maturity, planting and stage. The
@@ -333,8 +340,8 @@ no local statistics agency, and nobody else provides it.
 
 | # | Step | Kill criterion |
 |---|---|---|
-| 0 | Source the four constants in `UNSOURCED.md` | Blocks all code publishing until clear |
-| 1 | **County skill test, irrigation included** | **No skill → stop modelling. Ship condition only** |
+| 0 | ~~Source the four constants~~ **DONE 16 Sep 2026.** All four cited in `UNSOURCED.md`; the irrigation bound and the live Montana sentence were corrected, not merely cited. One caveat remains open: the 68 °F night threshold is sourced for *Phaseolus vulgaris* only and is also applied to peas, chickpeas and blackeye | — |
+| 1 | ~~County skill test~~ **RUN AND FAILED 17 Sep 2026.** See 1.3 | **Kill criterion met. Stop modelling. Ship condition only** |
 | 2 | Replace rainfall−ET with measured ETa/ETp | No improvement → keep the simpler input |
 | 3 | Move to 30 m HLS imagery | No improvement → stay at 250 m |
 | 4 | Ensemble and per-region intervals | Coverage fails → publish no interval |
@@ -342,11 +349,92 @@ no local statistics agency, and nobody else provides it.
 | 6 | Regional sites (NebraskaBeans, MindakBeans) as views | Never before agronomist review |
 | 7 | Tier 2 and 3 regions | Only with the tier stated on every page |
 
-**Step 1 decides whether 2–4 happen at all.** It is cheap, uses public data, and can say no.
+**Step 1 decided, and it said no.** Steps 2-4 were conditional on it and are therefore CLOSED. Do not reopen them without new evidence — not a new feature, new *evidence*.
+
+What remains worth doing, in order:
+1. **Get one harvest report.** 200 predictions are frozen in the ledger and not one has ever been graded. Nothing that cannot be graded can improve. This is a phone call, not a model.
+2. **Publish the estimate's own track record** through the season, so a reader can see whether it held steady or wandered. Same data, already collected.
+3. **Source the remaining ten constants** in 3.9. Four of fourteen are cited.
+4. **Agronomist review**, which has still never happened.
 
 ---
 
-# PART VIII — HOW THIS PLAN STAYS HONEST
+# PART VIII — THE SITE AS IT ACTUALLY STANDS
+
+Facts a new session needs and cannot infer from the code.
+
+## 8.1 Hosting, domains, deployment
+
+- **Repository:** `MultigrainIntl/nebraskabeans`. **The live branch is `gh-pages`, not `main`.**
+  `main` carries only governance files and is 8 commits behind on unrelated work.
+- **Live at** nebraskabeans.com over HTTPS. DNS is GoDaddy, owned by GAJ: four A records
+  (185.199.108–111.153) plus `www` CNAME to `multigrainintl.github.io`. A `CNAME` file in the
+  repo root holds the domain. Let's Encrypt certificate. **Email was never touched.**
+- **Publishing = `git push origin HEAD:gh-pages`.** GitHub Pages builds in about 45 seconds.
+- **GAJ also owns** MindakBeans.com (North Dakota / Minnesota), DryBeans.org and BeanYield.com.
+  The intended architecture is ONE engine at BeanYield.com, DryBeans.org as the public method
+  and credibility layer, and the `.com` sites as regional front doors. **Do not duplicate the
+  codebase per site** — there are 2,064 hardcoded region names; copying is not an option.
+
+## 8.2 Search indexing — approved, and deliberately partial
+
+Approved by GAJ as decision D-004, recorded in `PRODUCT-AUTHORITY-DECISIONS.md`.
+
+- `index.html` and `about.html` are indexable. The six draft pages — `bean.html`,
+  `commercial.html`, `methodology.html`, `privacy.html`, `reports.html`, `resources.html` —
+  keep `noindex` and stay out of `sitemap.xml`. `methodology.html` still describes the WITHDRAWN
+  yield model and `commercial.html` says its own form is unconfigured; either in a search result
+  costs more than being found gains.
+- `robots.txt` allows crawling EVERYWHERE on purpose: a page blocked there is never fetched, so
+  its `noindex` is never read, and a bare URL can still be listed. `verify_foundation.mjs`
+  enforces this posture and was proved against three planted leaks.
+- Google had not yet indexed the site as of 16 Sep 2026. Submitting the sitemap in Google Search
+  Console needs GAJ's own Google account.
+
+## 8.3 Page text lives in one file
+
+- **All user-facing sentences are in `assets/i18n.js`** as whole sentences with `{named}` slots,
+  so another language is a data file and not a rewrite. Units follow `document.documentElement.lang`.
+- **Never put a crop name in a slot needing a singular noun.** "where peas grows" and "dryland
+  chickpeas state" both shipped. Plural crop names break English and break worse elsewhere.
+- **Every asset reference must carry a `?v=` cache-buster.** Without one the browser serves a cached copy forever. `assets/i18n.js` — the file holding every sentence
+  on the site — sat unversioned while its text was rewritten all day, so returning visitors
+  could read stale wording while every local test passed. `verify_data.py` now fails the build
+  if any script or stylesheet is referenced without a version.
+
+## 8.4 What the site currently offers
+
+- **Six crops**, chosen by USDA's published record, not by opinion: PINTO, GREAT NORTHERN,
+  LIGHT RED KIDNEY, BLACKEYE, PEAS, CHICKPEAS. Lentils were dropped — 215 mapped acres is one
+  field, not a market.
+- **Seven regions:** Nebraska Panhandle, Southwest Nebraska, Northeast Colorado, Western
+  Colorado, Southeast Wyoming, Big Horn Basin, Northwest Kansas.
+- **An About page** carrying a published defect log — five real errors with what each did and
+  what changed. GAJ agreed this is the strongest credibility item on the site. Keep it current.
+- **A contact form** posting to Formspree `https://formspree.io/f/xpqeadrq`, submit intercepted
+  so nobody lands on a third-party page. No email address is published as text.
+- **Chickpea yields are a labelled proxy** from Montana. The evidence is that dry peas are
+  published in BOTH Montana (1,528 lb/ac) and Nebraska (1,579) — within 3%.
+
+## 8.5 The prediction ledger — built, and empty
+
+- `ledger.py` writes an append-only `prediction-ledger.jsonl` BEFORE any truth exists, and
+  scores it only against reports that arrive later. It runs LAST in the daily sequence.
+- **200 predictions are on record. ZERO harvest reports have ever come back.** The feedback loop
+  works and has never run on real data. Until a grower says what a field actually made, nobody
+  knows how good the estimate is.
+- The predictions are not shown to visitors. Publishing them would turn a claim into something
+  an agronomist can check, and is the cheapest credibility win left.
+
+## 8.6 Publishing requires GAJ
+
+GAJ pastes `printf ok > ~/.claude/joieos-unlock` before a publish and
+`rm ~/.claude/joieos-unlock` after. **Never write that file yourself.** Recursive and forced
+deletes are blocked by policy; on a block, report plainly and stop — do not work around it.
+
+---
+
+# PART IX — HOW THIS PLAN STAYS HONEST
 
 - Every claim traces to a source or is marked borrowed.
 - Every stage has a test that can fail, run by `scripts/verify_all.sh`.
