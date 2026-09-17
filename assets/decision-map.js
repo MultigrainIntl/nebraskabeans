@@ -443,6 +443,31 @@
   /* The ground this crop is actually grown on. Until now a single dry-bean outline was drawn
    * under all eighteen classes, so choosing garbanzos mapped chickpea agronomy onto bean
    * fields. Each commodity now carries its own footprint, from USDA county acreage. */
+
+  /* PER REGION, NEVER POOLED. The cutworm sentence used to take the median across every
+   * station on the crop's counties — a thousand miles of them. On 12 July 2026 that pooled
+   * median was 24% and the site therefore said flight "has not reached the 25% scouting
+   * mark". At that moment northwest Kansas was at 97%, southwest Nebraska at 60% and
+   * northeast Colorado at 32%. Three of seven regions were past the mark and a Kansas grower
+   * reading that sentence would not have gone out to scout.
+   *
+   * This project has already been burned by pooling once: the yield publish gate was pooled
+   * rather than per state, and Wyoming shipped a failure hidden inside Nebraska's numbers.
+   * PLAN.md records it and says any future gate must be per state. A sentence is a gate too.
+   */
+  function regionOf(lon, lat) {
+    var fs = (S.outlines && S.outlines.features) || [];
+    for (var i = 0; i < fs.length; i++) {
+      if (inRings(lon, lat, ringsOf(fs[i]))) return fs[i].properties.region;
+    }
+    return null;
+  }
+
+  function selectedRegion() {
+    var el = document.getElementById('region');
+    return el && el.value ? el.value : null;
+  }
+
   function cropOutline() {
     var com = commodityOf();
     return ((S.cropOutlines && S.cropOutlines.features) || []).filter(function (f) {
@@ -1294,9 +1319,10 @@
       return;
     }
 
-    var onCrop = stationValues(S.day).filter(function (p) {
-      return p.inCrop && p.v != null && isFinite(p.v);
+    var pointsToday = stationValues(S.day).filter(function (p) {
+      return p.v != null && isFinite(p.v) && p.onGround;
     });
+    var onCrop = pointsToday.filter(function (p) { return p.inCrop; });
     var vals = onCrop.map(function (p) { return p.v; }).sort(function (a, b) { return a - b; });
     if (!vals.length) {
       el.innerHTML = 'No station on this crop\'s counties has a complete enough record for ' +
@@ -1308,22 +1334,44 @@
     var r = Math.round;
     var text;
     if (S.view === 'cutworm') {
+      /* PER REGION, NEVER POOLED. This took the median across every station on the crop's
+       * counties — a thousand miles of them. On 12 July 2026 that pooled median was 24%, so
+       * the site said flight "has not reached the 25% scouting mark", while northwest Kansas
+       * stood at 97%, southwest Nebraska at 60% and northeast Colorado at 32%. Three regions
+       * of seven were past the mark and a Kansas grower reading it would not have gone out.
+       * This project has been burned by pooling before: the yield publish gate was pooled
+       * rather than per state and Wyoming shipped a failure hidden inside Nebraska's numbers.
+       * A sentence is a gate too. */
+      var rgn = selectedRegion();
+      if (rgn) {
+        var mine = pointsToday.filter(function (p) { return regionOf(p.x, p.y) === rgn; })
+                              .map(function (p) { return p.v; })
+                              .sort(function (a, b) { return a - b; });
+        if (mine.length >= 3) {
+          vals = mine;
+          med = vals[Math.floor((vals.length - 1) * 0.5)];
+          low = vals[Math.floor((vals.length - 1) * 0.1)];
+          high = vals[Math.floor((vals.length - 1) * 0.9)];
+        } else { rgn = null; }
+      }
       /* WITHOUT THIS THE HEADING AND THE SENTENCE DESCRIBED DIFFERENT THINGS — the question
        * above read "Where is the cutworm flight?" and the answer below reported rainfall,
        * because every view that is not stage or heat fell through to the water sentence.
        * That is the same fault this file already records fixing once, where the surface was
        * clipped to one crop and the summary was not. */
+      var where = rgn ? regionName(rgn) : 'this crop\u2019s ground';
       text = med >= 75
-        ? 'Flight is <b>past three quarters</b> at the median thermometer on this ground — ' +
+        ? 'In <b>' + where + '</b>, flight is <b>past three quarters</b> — ' +
           r(med) + '% — so egg laying is largely finished. Scouting now finds what is already ' +
           'there, not what is coming.'
         : med >= 25
-          ? 'Flight is at <b>' + r(med) + '%</b> at the median thermometer, past the 25% mark ' +
+          ? 'In <b>' + where + '</b>, flight is at <b>' + r(med) + '%</b>, past the 25% mark ' +
             'where UNL says start scouting. The earliest tenth of this ground is at ' +
             r(high) + '% and the latest at ' + r(low) + '%, so the whole area is not on the ' +
             'same schedule.'
-          : 'Flight has <b>not reached the 25% scouting mark</b> — the median thermometer is ' +
-            'at ' + r(med) + '%. The warmest tenth of this ground is at ' + r(high) + '%.';
+          : 'In <b>' + where + '</b>, flight has <b>not reached the 25% scouting mark</b> — ' +
+            'the median thermometer is at ' + r(med) + '%, the warmest tenth at ' + r(high) + '%. ' +
+            'Other regions are on their own schedule; switch region above to see them.';
       text += ' <i>This is timing from accumulated heat, on UNL\u2019s published model. It ' +
         'does not say whether moths are in your field, and it does not say how bad it is. ' +
         'That needs a trap count or a walk through the rows.</i>';
@@ -1510,6 +1558,14 @@
       var t = e.target;
       if (!t || t.id !== 'nbCrop' || !CLASSES[t.value] || t.value === S.crop) return;
       applyCrop(t.value, true);
+    }, true);
+
+    /* The region picker belongs to app.js, but the cutworm sentence is now written per region
+     * and had no way to hear it change — so it reported the Panhandle whichever region you
+     * chose, which is a worse lie than the pooled number it replaced. It is bound here rather
+     * than in app.js because this file is the one that has to redraw. */
+    document.addEventListener('change', function (e) {
+      if (e.target && e.target.id === 'region' && S.view === 'cutworm') setDay(S.day);
     }, true);
     $('nbView').addEventListener('change', function (e) {
       S.view = e.target.value;

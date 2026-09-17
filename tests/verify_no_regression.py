@@ -170,6 +170,20 @@ for f in ("scripts/refresh/yield_all.py", "scripts/refresh/yield_index.py"):
     check("%s picks no station on distance alone" % f.split("/")[-1], raw not in txt,
           "absent" if raw not in txt else "RAW NEAREST-STATION PICK IS BACK")
 
+# ---------------------------------------------------------------------------
+# 10. A REGIONAL SENTENCE POOLED ACROSS A THOUSAND MILES (found 17 Sep 2026).
+# The cutworm summary took the median of every station on the crop's counties. On 12 July 2026
+# that came to 24% and the page said flight "has not reached the 25% scouting mark" — while
+# northwest Kansas stood at 97%, southwest Nebraska 60% and northeast Colorado 32%. Three of
+# seven regions were past the mark and a Kansas grower reading it would not have gone out to
+# scout. PLAN.md already records the yield publish gate failing for exactly this reason:
+# pooled instead of per state, so Wyoming shipped a failure hidden inside Nebraska's numbers.
+dm2 = read("assets", "decision-map.js")
+check("cutworm sentence is per region", "selectedRegion()" in dm2 and "regionOf(" in dm2,
+      "scoped to the region the reader picked")
+check("the map hears the region picker", "e.target.id === 'region'" in dm2,
+      "bound — without it the sentence named one region whatever you chose")
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))
