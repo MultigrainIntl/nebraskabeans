@@ -1018,6 +1018,46 @@
     }) + '</p>';
   }
 
+  /* HOW DEEP THE WATER IS. Sits beside the irrigation share because they answer the same
+   * grower question from opposite ends — how much of this ground is watered, and how far down
+   * the water is now.
+   *
+   * IT IS AN OBSERVATION AND THE TEXT SAYS SO. Groundwater was tested as a yield predictor on
+   * 17 September 2026 across 469 county-years, forward-only, and returned +0.7% against a
+   * trend baseline with a confidence interval of [-1.4, +8.9]. It failed. Nothing on this
+   * page may imply it forecasts anything, and a check in verify_data.py asserts that no yield
+   * or pest script even reads the file.
+   *
+   * Two things are shown that a single number would hide: a region resting on fewer than
+   * eight wells is called an anecdote, and where the radius pulls most of a region's wells
+   * across a state line the sentence names that state. Se-wyoming's reading is 765 Nebraska
+   * wells and one Wyoming well; calling that "southeast Wyoming" without saying so would be
+   * the label doing work the data does not support. */
+  function groundwaterLine() {
+    var gw = S.groundwater && S.groundwater.regions;
+    var rgn = selectedRegion();
+    var r = gw && rgn && gw[rgn];
+    if (!r || r.median_depth_to_water_ft == null) return '';
+    var txt = '<b>Water table under ' + regionName(rgn) + ': ' +
+      r.median_depth_to_water_ft + ' ft down</b> at the median monitored well';
+    if (r.enough_wells) {
+      txt += ' of ' + r.wells.toLocaleString() + ', from ' + r.shallowest_tenth_ft +
+        ' ft in the shallowest tenth to ' + r.deepest_tenth_ft + ' ft in the deepest. ' +
+        'Latest reading ' + niceDate(r.newest_reading) + '.';
+    } else {
+      txt += '. <b>This rests on ' + r.wells + (r.wells === 1 ? ' well' : ' wells') +
+        '</b> — an anecdote, not a regional figure. Read it as one measurement.';
+    }
+    if (r.mostly_from_another_state) {
+      txt += ' Most of these wells are in ' + r.mostly_from_another_state +
+        '; the aquifer crosses the state line even where the name does not.';
+    }
+    txt += ' <i>This is what is measured, not a forecast. We tested whether a falling water ' +
+      'table predicts yield and it does not \u2014 the decline is steady enough that a trend ' +
+      'line already accounts for it. It is here because it is worth knowing on its own.</i>';
+    return '<p class="nbEstLimit">' + txt + '</p>';
+  }
+
   function updateEstimate() {
     var el = $('nbEstimate'); if (!el || !S.yieldAll) return;
     var seen = {}, regions = [];
@@ -1111,6 +1151,7 @@
         T.t('estimate.yourField') + '</p>' +
       proxyLine() +
       irrigationLine() +
+      groundwaterLine() +
       '<p class="nbEstNext">' + T.t('estimate.wouldSharpen') + '</p>' +
       '<p class="nbEstNext">' + T.t('estimate.whatWouldFixIt') + '</p>';
     el.hidden = false;
@@ -1583,7 +1624,11 @@
      * chose, which is a worse lie than the pooled number it replaced. It is bound here rather
      * than in app.js because this file is the one that has to redraw. */
     document.addEventListener('change', function (e) {
-      if (e.target && e.target.id === 'region' && S.view === 'cutworm') setDay(S.day);
+      if (!e.target || e.target.id !== 'region') return;
+      /* Both the cutworm sentence and the water-table line are written for the region the
+       * reader picked, and neither hears the picker on its own — it belongs to app.js. */
+      if (S.view === 'cutworm') setDay(S.day);
+      try { updateEstimate(); } catch (err) { /* estimate panel not built yet */ }
     }, true);
     $('nbView').addEventListener('change', function (e) {
       S.view = e.target.value;
@@ -1693,10 +1738,12 @@
       fetch('assets/data/irrigation.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
       fetch('assets/data/pest-wbc-2026.json?v=' + build())
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch('assets/data/groundwater.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11]; S.pest = res[12];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11]; S.pest = res[12]; S.groundwater = res[13];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;

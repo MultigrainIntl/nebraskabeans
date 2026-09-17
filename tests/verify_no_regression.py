@@ -181,8 +181,27 @@ for f in ("scripts/refresh/yield_all.py", "scripts/refresh/yield_index.py"):
 dm2 = read("assets", "decision-map.js")
 check("cutworm sentence is per region", "selectedRegion()" in dm2 and "regionOf(" in dm2,
       "scoped to the region the reader picked")
-check("the map hears the region picker", "e.target.id === 'region'" in dm2,
-      "bound — without it the sentence named one region whatever you chose")
+# Matches either form of the guard clause. The listener was rewritten when the water-table
+# line was added — it now early-returns on `!== 'region'` rather than testing `=== 'region'` —
+# and this assertion failed on the rewrite, which is the guard working. What must hold is that
+# something in this file still reacts to that element.
+check("the map hears the region picker",
+      ("e.target.id === 'region'" in dm2) or ("e.target.id !== 'region'" in dm2),
+      "bound — without it the per-region lines named one region whatever you chose")
+
+# ---------------------------------------------------------------------------
+# 11. THE WATER TABLE IS AN OBSERVATION AND MUST NOT DRIFT INTO BEING A FORECAST.
+# It failed the yield-skill test on 17 Sep 2026 (469 county-years, +0.7%, CI [-1.4, +8.9]).
+# It publishes because a grower deciding whether to drill deeper is owed the number. Both
+# honesty flags must survive: a region resting on fewer than eight wells is called an
+# anecdote, and a region whose wells are mostly across a state line names that state.
+dm3 = read("assets", "decision-map.js")
+check("water table says it is not a forecast", "not a forecast" in dm3,
+      "the line disclaims prediction")
+check("thin well counts are called anecdotes", "an anecdote, not a regional figure" in dm3,
+      "Big Horn's single well cannot read like a regional figure")
+check("borrowed wells name their state", "mostly_from_another_state" in dm3,
+      "se-wyoming's 765 Nebraska wells are disclosed")
 
 print()
 if fails:
