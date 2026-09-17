@@ -118,6 +118,25 @@ for needle, why in (("region", "the region picker defect"),
     check("defect log records %s" % why, needle.lower() in about.lower(),
           "present in about.html" if needle.lower() in about.lower() else "NOT PUBLISHED")
 
+# ---------------------------------------------------------------------------
+# 8. The two halves of the yield ratio read DIFFERENT WEATHER STATIONS (found 17 Sep 2026).
+# The eleven-year history used a fixed named station; the current season took whichever pin was
+# nearest the bean centroid. Five of seven regions therefore divided one place by another. The
+# Panhandle read PLAINSVIEW RANCH, 230 m above ALLIANCE and 304 growing degrees cooler over the
+# season, and that moved published Panhandle pinto by about 88 lb/ac — UPWARD, because less
+# heat delays maturity and holds the accumulation window open longer. Northwest Kansas and
+# southwest Nebraska were both reading stations in Colorado. The whole method rests on running
+# the same arithmetic on the same ground; a silent station swap does not fail, it drifts.
+yi = read("scripts", "refresh", "yield_index.py")
+for needle, why in (('s["name"].strip().upper() == hist_name.strip().upper()',
+                     "the history station is preferred"),
+                    ("_km(s[\"lat\"], s[\"lon\"], lat, lon) <= 110",
+                     "the elevation ceiling uses a real radius, not a lat/lon box"),
+                    ("elevs[max(0, int(0.20 * len(elevs)) - 1)] + 250",
+                     "the fallback is screened on elevation")):
+    check("yield station: %s" % why, needle in yi,
+          "present" if needle in yi else "GONE — the station swap can return")
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))

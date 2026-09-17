@@ -1,0 +1,1868 @@
+{
+ "schema": "nebraskabeans.pest-wbc.v1",
+ "pest": "Western bean cutworm (Striacosta albicosta)",
+ "what_this_is": "When moths should be flying, from accumulated heat. It does NOT say whether they are in your field, and it does not say how bad it is. That needs a trap count or someone walking the rows.",
+ "model": {
+  "base_f": 38.0,
+  "upper_cutoff_f": 75.0,
+  "accumulate_from": "03-01",
+  "cutoff_method": "horizontal \u2014 the daily MEAN is capped at 75 F",
+  "method_evidence": "Recomputing UNL's published 2025 dates: horizontal lands 1-2 days from their Alliance figures, double cutoff 10-14 days out."
+ },
+ "source": {
+  "name": "University of Nebraska-Lincoln Extension, CropWatch",
+  "url": "https://cropwatch.unl.edu/western-bean-cutworm-degree-day-modeling/",
+  "evidence_class": "PUBLISHED \u2014 fitted by UNL against field trap counts, not by us",
+  "api_key_required": false
+ },
+ "forecast_method": "Observed heat to date, then this region's own 2015-2025 daily normals for the rest of the season. Backtested on 2026: standing on 1 June the 25% date came out within 1 day in the Panhandle, 0 in southwest Nebraska, 1 in northeast Colorado and 4 in southeast Wyoming.",
+ "limits": [
+  "Timing only. Presence and severity are not modelled and must not be inferred.",
+  "1-14 March is estimated from normals because the station file opens on 15 March. That is 36-79 DD, about 1% of the scouting threshold.",
+  "Stations more than 160 km from mapped bean ground are excluded.",
+  "A station whose date sits more than 21 days from its region's median is treated as an outlier and left out of the headline figure."
+ ],
+ "as_of": "2026-09-15",
+ "generated_for_year": 2026,
+ "stations_rejected": {
+  "too far from any bean ground": 408,
+  "fewer than 150 days of temperature": 7,
+  "more than 250 m above the crop": 170
+ },
+ "regions": {
+  "big-horn": {
+   "stations_used": 20,
+   "stations_flagged_as_outliers": 1,
+   "mean_dd_to_date": 4224,
+   "marks": {
+    "scouting_25pct": {
+     "median_date": "2026-07-25",
+     "earliest_date": "2026-07-13",
+     "latest_date": "2026-08-07",
+     "stations_reached": 20,
+     "stations_total": 20,
+     "status": "observed",
+     "threshold_dd": 2577,
+     "threshold_dd_low": 2416,
+     "threshold_dd_high": 2749
+    },
+    "peak_50pct": {
+     "median_date": "2026-07-28",
+     "earliest_date": "2026-07-16",
+     "latest_date": "2026-08-11",
+     "stations_reached": 20,
+     "stations_total": 20,
+     "status": "observed",
+     "threshold_dd": 2704,
+     "threshold_dd_low": 2577,
+     "threshold_dd_high": 2838
+    },
+    "late_75pct": {
+     "median_date": "2026-08-01",
+     "earliest_date": "2026-07-20",
+     "latest_date": "2026-08-15",
+     "stations_reached": 20,
+     "stations_total": 20,
+     "status": "observed",
+     "threshold_dd": 2838,
+     "threshold_dd_low": 2660,
+     "threshold_dd_high": 3027
+    }
+   },
+   "stations": [
+    {
+     "station": "Cody 12Se",
+     "lat": 44.4138,
+     "lon": -108.9005,
+     "km_from_beans": 28.8,
+     "dd_to_date": 3747,
+     "days": 178,
+     "observed": {
+      "scouting_25pct": "2026-08-01",
+      "peak_50pct": "2026-08-05",
+      "late_75pct": "2026-08-09"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Greybull South Big Horn County Ap",
+     "lat": 44.5173,
+     "lon": -108.0752,
+     "km_from_beans": 42.2,
+     "dd_to_date": 4523,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-07-19",
+      "peak_50pct": "2026-07-23",
+      "late_75pct": "2026-07-26"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Lovell",
+     "lat": 44.8377,
+     "lon": -108.404,
+     "km_from_beans": 55.7,
+     "dd_to_date": 3812,
+     "days": 161,
+     "observed": {
+      "scouting_25pct": "2026-07-26",
+      "peak_50pct": "2026-07-29",
+      "late_75pct": "2026-08-02"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Deaver",
+     "lat": 44.8924,
+     "lon": -108.593,
+     "km_from_beans": 60.7,
+     "dd_to_date": 4156,
+     "days": 181,
+     "observed": {
+      "scouting_25pct": "2026-07-25",
+      "peak_50pct": "2026-07-28",
+      "late_75pct": "2026-08-01"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Worland Municipal Ap",
+     "lat": 43.9654,
+     "lon": -107.9502,
+     "km_from_beans": 64.0,
+     "dd_to_date": 4463,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-20",
+      "peak_50pct": "2026-07-23",
+      "late_75pct": "2026-07-27"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Shell",
+     "lat": 44.5351,
+     "lon": -107.7774,
+     "km_from_beans": 64.8,
+     "dd_to_date": 4018,
+     "days": 178,
+     "observed": {
+      "scouting_25pct": "2026-07-24",
+      "peak_50pct": "2026-07-28",
+      "late_75pct": "2026-07-31"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Thermopolis 9Ne",
+     "lat": 43.7533,
+     "lon": -108.143,
+     "km_from_beans": 73.7,
+     "dd_to_date": 4024,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-28",
+      "peak_50pct": "2026-07-31",
+      "late_75pct": "2026-08-04"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Clark 3Ne",
+     "lat": 44.9365,
+     "lon": -109.1374,
+     "km_from_beans": 80.3,
+     "dd_to_date": 4071,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-26",
+      "peak_50pct": "2026-07-30",
+      "late_75pct": "2026-08-03"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Thermopolis",
+     "lat": 43.6483,
+     "lon": -108.2037,
+     "km_from_beans": 82.6,
+     "dd_to_date": 4776,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-07-13",
+      "peak_50pct": "2026-07-16",
+      "late_75pct": "2026-07-20"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Tensleep 4Ne",
+     "lat": 44.0648,
+     "lon": -107.382,
+     "km_from_beans": 98.3,
+     "dd_to_date": 4403,
+     "days": 176,
+     "observed": {
+      "scouting_25pct": "2026-07-16",
+      "peak_50pct": "2026-07-19",
+      "late_75pct": "2026-07-23"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Boysen Dam",
+     "lat": 43.4054,
+     "lon": -108.1634,
+     "km_from_beans": 109.3,
+     "dd_to_date": 4810,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-14",
+      "peak_50pct": "2026-07-17",
+      "late_75pct": "2026-07-21"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Tensleep 16Sse",
+     "lat": 43.8089,
+     "lon": -107.3617,
+     "km_from_beans": 112.3,
+     "dd_to_date": 3877,
+     "days": 167,
+     "observed": {
+      "scouting_25pct": "2026-07-30",
+      "peak_50pct": "2026-08-02",
+      "late_75pct": "2026-08-08"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Pavillion",
+     "lat": 43.246,
+     "lon": -108.6942,
+     "km_from_beans": 123.0,
+     "dd_to_date": 4396,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-20",
+      "peak_50pct": "2026-07-23",
+      "late_75pct": "2026-07-27"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Big Horn",
+     "lat": 44.6828,
+     "lon": -107.0089,
+     "km_from_beans": 127.8,
+     "dd_to_date": 4020,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-29",
+      "peak_50pct": "2026-08-02",
+      "late_75pct": "2026-08-07"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Shoshoni",
+     "lat": 43.2372,
+     "lon": -108.1096,
+     "km_from_beans": 128.4,
+     "dd_to_date": 4705,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-07-15",
+      "peak_50pct": "2026-07-18",
+      "late_75pct": "2026-07-22"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Story",
+     "lat": 44.5767,
+     "lon": -106.9062,
+     "km_from_beans": 133.0,
+     "dd_to_date": 3714,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-08-07",
+      "peak_50pct": "2026-08-11",
+      "late_75pct": "2026-08-15"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Sheridan Airport",
+     "lat": 44.7603,
+     "lon": -106.9741,
+     "km_from_beans": 133.1,
+     "dd_to_date": 4015,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-30",
+      "peak_50pct": "2026-08-02",
+      "late_75pct": "2026-08-07"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Riverton Regional Ap",
+     "lat": 43.0622,
+     "lon": -108.4471,
+     "km_from_beans": 143.2,
+     "dd_to_date": 4450,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-20",
+      "peak_50pct": "2026-07-24",
+      "late_75pct": "2026-07-27"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Buffalo Johnson County Ap",
+     "lat": 44.3812,
+     "lon": -106.7195,
+     "km_from_beans": 145.6,
+     "dd_to_date": 4080,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-07-29",
+      "peak_50pct": "2026-08-01",
+      "late_75pct": "2026-08-06"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Riverton",
+     "lat": 43.0307,
+     "lon": -108.3743,
+     "km_from_beans": 147.1,
+     "dd_to_date": 4421,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-20",
+      "peak_50pct": "2026-07-24",
+      "late_75pct": "2026-07-27"
+     },
+     "forecast": {}
+    }
+   ]
+  },
+  "ne-colorado": {
+   "stations_used": 15,
+   "stations_flagged_as_outliers": 0,
+   "mean_dd_to_date": 4893,
+   "marks": {
+    "scouting_25pct": {
+     "median_date": "2026-07-10",
+     "earliest_date": "2026-07-06",
+     "latest_date": "2026-07-20",
+     "stations_reached": 15,
+     "stations_total": 15,
+     "status": "observed",
+     "threshold_dd": 2577,
+     "threshold_dd_low": 2416,
+     "threshold_dd_high": 2749
+    },
+    "peak_50pct": {
+     "median_date": "2026-07-13",
+     "earliest_date": "2026-07-09",
+     "latest_date": "2026-07-23",
+     "stations_reached": 15,
+     "stations_total": 15,
+     "status": "observed",
+     "threshold_dd": 2704,
+     "threshold_dd_low": 2577,
+     "threshold_dd_high": 2838
+    },
+    "late_75pct": {
+     "median_date": "2026-07-17",
+     "earliest_date": "2026-07-13",
+     "latest_date": "2026-07-27",
+     "stations_reached": 15,
+     "stations_total": 15,
+     "status": "observed",
+     "threshold_dd": 2838,
+     "threshold_dd_low": 2660,
+     "threshold_dd_high": 3027
+    }
+   },
+   "stations": [
+    {
+     "station": "Woodrow 6Nne",
+     "lat": 40.075,
+     "lon": -103.5677,
+     "km_from_beans": 22.9,
+     "dd_to_date": 4886,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-13",
+      "peak_50pct": "2026-07-16",
+      "late_75pct": "2026-07-20"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Akron Washington County Ap",
+     "lat": 40.1743,
+     "lon": -103.2146,
+     "km_from_beans": 40.4,
+     "dd_to_date": 4397,
+     "days": 166,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-13",
+      "late_75pct": "2026-07-16"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Akron",
+     "lat": 40.1548,
+     "lon": -103.142,
+     "km_from_beans": 47.0,
+     "dd_to_date": 5001,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-13",
+      "late_75pct": "2026-07-16"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Eastern Adams County",
+     "lat": 39.7692,
+     "lon": -103.7972,
+     "km_from_beans": 55.9,
+     "dd_to_date": 5142,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-06",
+      "peak_50pct": "2026-07-09",
+      "late_75pct": "2026-07-13"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Lindon 5 Wnw",
+     "lat": 39.7554,
+     "lon": -103.4986,
+     "km_from_beans": 58.5,
+     "dd_to_date": 4771,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-14",
+      "peak_50pct": "2026-07-18",
+      "late_75pct": "2026-07-21"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Sterling",
+     "lat": 40.4621,
+     "lon": -103.029,
+     "km_from_beans": 59.1,
+     "dd_to_date": 4994,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-10",
+      "peak_50pct": "2026-07-13",
+      "late_75pct": "2026-07-17"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Leroy 5 Wsw",
+     "lat": 40.5149,
+     "lon": -102.9908,
+     "km_from_beans": 64.4,
+     "dd_to_date": 4933,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-10",
+      "peak_50pct": "2026-07-14",
+      "late_75pct": "2026-07-17"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Briggsdale",
+     "lat": 40.5947,
+     "lon": -104.319,
+     "km_from_beans": 65.7,
+     "dd_to_date": 4815,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-13",
+      "peak_50pct": "2026-07-17",
+      "late_75pct": "2026-07-20"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Kersey 2",
+     "lat": 40.3629,
+     "lon": -104.478,
+     "km_from_beans": 68.9,
+     "dd_to_date": 4986,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-13",
+      "late_75pct": "2026-07-17"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Kersey 1",
+     "lat": 40.3703,
+     "lon": -104.5358,
+     "km_from_beans": 73.8,
+     "dd_to_date": 4571,
+     "days": 176,
+     "observed": {
+      "scouting_25pct": "2026-07-20",
+      "peak_50pct": "2026-07-23",
+      "late_75pct": "2026-07-27"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Iliff",
+     "lat": 40.7678,
+     "lon": -103.045,
+     "km_from_beans": 77.4,
+     "dd_to_date": 5082,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-07",
+      "peak_50pct": "2026-07-11",
+      "late_75pct": "2026-07-14"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "La Salle",
+     "lat": 40.3349,
+     "lon": -104.63,
+     "km_from_beans": 81.3,
+     "dd_to_date": 4879,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-12",
+      "peak_50pct": "2026-07-15",
+      "late_75pct": "2026-07-19"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Greeley 4",
+     "lat": 40.4487,
+     "lon": -104.638,
+     "km_from_beans": 84.0,
+     "dd_to_date": 4972,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-13",
+      "late_75pct": "2026-07-16"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Ault",
+     "lat": 40.569,
+     "lon": -104.7195,
+     "km_from_beans": 94.6,
+     "dd_to_date": 4897,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-11",
+      "peak_50pct": "2026-07-14",
+      "late_75pct": "2026-07-18"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Longmont 2 Ese",
+     "lat": 40.1696,
+     "lon": -105.0774,
+     "km_from_beans": 119.4,
+     "dd_to_date": 5075,
+     "days": 182,
+     "observed": {
+      "scouting_25pct": "2026-07-06",
+      "peak_50pct": "2026-07-10",
+      "late_75pct": "2026-07-13"
+     },
+     "forecast": {}
+    }
+   ]
+  },
+  "ne-panhandle": {
+   "stations_used": 11,
+   "stations_flagged_as_outliers": 0,
+   "mean_dd_to_date": 4592,
+   "marks": {
+    "scouting_25pct": {
+     "median_date": "2026-07-15",
+     "earliest_date": "2026-07-09",
+     "latest_date": "2026-07-23",
+     "stations_reached": 11,
+     "stations_total": 11,
+     "status": "observed",
+     "threshold_dd": 2577,
+     "threshold_dd_low": 2416,
+     "threshold_dd_high": 2749
+    },
+    "peak_50pct": {
+     "median_date": "2026-07-18",
+     "earliest_date": "2026-07-13",
+     "latest_date": "2026-07-27",
+     "stations_reached": 11,
+     "stations_total": 11,
+     "status": "observed",
+     "threshold_dd": 2704,
+     "threshold_dd_low": 2577,
+     "threshold_dd_high": 2838
+    },
+    "late_75pct": {
+     "median_date": "2026-07-22",
+     "earliest_date": "2026-07-17",
+     "latest_date": "2026-07-31",
+     "stations_reached": 11,
+     "stations_total": 11,
+     "status": "observed",
+     "threshold_dd": 2838,
+     "threshold_dd_low": 2660,
+     "threshold_dd_high": 3027
+    }
+   },
+   "stations": [
+    {
+     "station": "Alliance Municipal Airport Asos",
+     "lat": 42.0573,
+     "lon": -102.8017,
+     "km_from_beans": 33.9,
+     "dd_to_date": 4581,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-07-19",
+      "peak_50pct": "2026-07-22",
+      "late_75pct": "2026-07-26"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Scottsbluff W B Heilig Field Ap",
+     "lat": 41.8747,
+     "lon": -103.6011,
+     "km_from_beans": 36.1,
+     "dd_to_date": 4955,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-10",
+      "peak_50pct": "2026-07-14",
+      "late_75pct": "2026-07-17"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Harrison 20 Sse",
+     "lat": 42.4247,
+     "lon": -103.7363,
+     "km_from_beans": 62.9,
+     "dd_to_date": 4247,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-23",
+      "peak_50pct": "2026-07-27",
+      "late_75pct": "2026-07-31"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Crescent Lake Nebraska",
+     "lat": 41.7611,
+     "lon": -102.4378,
+     "km_from_beans": 69.8,
+     "dd_to_date": 4734,
+     "days": 177,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-13",
+      "late_75pct": "2026-07-17"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Kings Canyon Nebraska",
+     "lat": 42.7239,
+     "lon": -102.9714,
+     "km_from_beans": 81.1,
+     "dd_to_date": 4466,
+     "days": 171,
+     "observed": {
+      "scouting_25pct": "2026-07-16",
+      "peak_50pct": "2026-07-20",
+      "late_75pct": "2026-07-24"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Chadron 3Sw",
+     "lat": 42.8083,
+     "lon": -103.0533,
+     "km_from_beans": 89.0,
+     "dd_to_date": 4779,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-14",
+      "peak_50pct": "2026-07-17",
+      "late_75pct": "2026-07-21"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Chadron Municipal Ap",
+     "lat": 42.8374,
+     "lon": -103.0981,
+     "km_from_beans": 91.8,
+     "dd_to_date": 4296,
+     "days": 171,
+     "observed": {
+      "scouting_25pct": "2026-07-15",
+      "peak_50pct": "2026-07-18",
+      "late_75pct": "2026-07-22"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Lodgepole 8N",
+     "lat": 41.2662,
+     "lon": -102.6585,
+     "km_from_beans": 95.1,
+     "dd_to_date": 4624,
+     "days": 180,
+     "observed": {
+      "scouting_25pct": "2026-07-15",
+      "peak_50pct": "2026-07-19",
+      "late_75pct": "2026-07-23"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Harrison 9Ne",
+     "lat": 42.8002,
+     "lon": -103.7866,
+     "km_from_beans": 99.3,
+     "dd_to_date": 4288,
+     "days": 162,
+     "observed": {
+      "scouting_25pct": "2026-07-20",
+      "peak_50pct": "2026-07-24",
+      "late_75pct": "2026-07-27"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Sidney Municipal Ap",
+     "lat": 41.0993,
+     "lon": -102.9864,
+     "km_from_beans": 103.6,
+     "dd_to_date": 4877,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-12",
+      "peak_50pct": "2026-07-16",
+      "late_75pct": "2026-07-19"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Whitman 5 Ene",
+     "lat": 42.068,
+     "lon": -101.445,
+     "km_from_beans": 145.7,
+     "dd_to_date": 4663,
+     "days": 181,
+     "observed": {
+      "scouting_25pct": "2026-07-13",
+      "peak_50pct": "2026-07-16",
+      "late_75pct": "2026-07-20"
+     },
+     "forecast": {}
+    }
+   ]
+  },
+  "nw-kansas": {
+   "stations_used": 19,
+   "stations_flagged_as_outliers": 0,
+   "mean_dd_to_date": 5350,
+   "marks": {
+    "scouting_25pct": {
+     "median_date": "2026-06-27",
+     "earliest_date": "2026-06-21",
+     "latest_date": "2026-07-12",
+     "stations_reached": 19,
+     "stations_total": 19,
+     "status": "observed",
+     "threshold_dd": 2577,
+     "threshold_dd_low": 2416,
+     "threshold_dd_high": 2749
+    },
+    "peak_50pct": {
+     "median_date": "2026-07-01",
+     "earliest_date": "2026-06-24",
+     "latest_date": "2026-07-15",
+     "stations_reached": 19,
+     "stations_total": 19,
+     "status": "observed",
+     "threshold_dd": 2704,
+     "threshold_dd_low": 2577,
+     "threshold_dd_high": 2838
+    },
+    "late_75pct": {
+     "median_date": "2026-07-04",
+     "earliest_date": "2026-06-28",
+     "latest_date": "2026-07-19",
+     "stations_reached": 19,
+     "stations_total": 19,
+     "status": "observed",
+     "threshold_dd": 2838,
+     "threshold_dd_low": 2660,
+     "threshold_dd_high": 3027
+    }
+   },
+   "stations": [
+    {
+     "station": "Wallace",
+     "lat": 38.9111,
+     "lon": -101.5854,
+     "km_from_beans": 33.8,
+     "dd_to_date": 5197,
+     "days": 176,
+     "observed": {
+      "scouting_25pct": "2026-06-27",
+      "peak_50pct": "2026-07-01",
+      "late_75pct": "2026-07-04"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Goodland Renner Field",
+     "lat": 39.3673,
+     "lon": -101.6932,
+     "km_from_beans": 34.8,
+     "dd_to_date": 5270,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-07-03",
+      "peak_50pct": "2026-07-06",
+      "late_75pct": "2026-07-10"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Russell Springs 3N",
+     "lat": 38.9618,
+     "lon": -101.1665,
+     "km_from_beans": 64.7,
+     "dd_to_date": 5480,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-28",
+      "peak_50pct": "2026-07-02",
+      "late_75pct": "2026-07-06"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Tribune 1W",
+     "lat": 38.4661,
+     "lon": -101.773,
+     "km_from_beans": 70.9,
+     "dd_to_date": 5362,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-07-01",
+      "peak_50pct": "2026-07-05",
+      "late_75pct": "2026-07-09"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Colby 1Sw",
+     "lat": 39.3925,
+     "lon": -101.0689,
+     "km_from_beans": 78.4,
+     "dd_to_date": 5337,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-02",
+      "peak_50pct": "2026-07-05",
+      "late_75pct": "2026-07-09"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Oakley 4W",
+     "lat": 39.113,
+     "lon": -100.9447,
+     "km_from_beans": 82.0,
+     "dd_to_date": 4983,
+     "days": 171,
+     "observed": {
+      "scouting_25pct": "2026-07-12",
+      "peak_50pct": "2026-07-15",
+      "late_75pct": "2026-07-19"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Oakley 19 Ssw",
+     "lat": 38.8701,
+     "lon": -100.9627,
+     "km_from_beans": 84.4,
+     "dd_to_date": 5514,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-06-26",
+      "peak_50pct": "2026-06-29",
+      "late_75pct": "2026-07-03"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Scott City",
+     "lat": 38.4746,
+     "lon": -100.9176,
+     "km_from_beans": 109.3,
+     "dd_to_date": 4996,
+     "days": 170,
+     "observed": {
+      "scouting_25pct": "2026-06-27",
+      "peak_50pct": "2026-06-30",
+      "late_75pct": "2026-07-04"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Holly 2",
+     "lat": 38.1361,
+     "lon": -102.2405,
+     "km_from_beans": 110.9,
+     "dd_to_date": 5468,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-29",
+      "peak_50pct": "2026-07-02",
+      "late_75pct": "2026-07-06"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Holly",
+     "lat": 38.1198,
+     "lon": -102.1605,
+     "km_from_beans": 111.0,
+     "dd_to_date": 5566,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-26",
+      "peak_50pct": "2026-06-29",
+      "late_75pct": "2026-07-03"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Holly",
+     "lat": 38.0517,
+     "lon": -102.1316,
+     "km_from_beans": 117.9,
+     "dd_to_date": 5496,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-28",
+      "peak_50pct": "2026-07-01",
+      "late_75pct": "2026-07-05"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Syracuse 1Ne",
+     "lat": 37.9929,
+     "lon": -101.7417,
+     "km_from_beans": 123.4,
+     "dd_to_date": 5585,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-26",
+      "peak_50pct": "2026-06-29",
+      "late_75pct": "2026-07-03"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Healy",
+     "lat": 38.6002,
+     "lon": -100.6196,
+     "km_from_beans": 123.5,
+     "dd_to_date": 5647,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-24",
+      "peak_50pct": "2026-06-27",
+      "late_75pct": "2026-07-01"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Lamar Municipal Ap",
+     "lat": 38.0718,
+     "lon": -102.6875,
+     "km_from_beans": 133.1,
+     "dd_to_date": 5457,
+     "days": 180,
+     "observed": {
+      "scouting_25pct": "2026-06-29",
+      "peak_50pct": "2026-07-02",
+      "late_75pct": "2026-07-06"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Lamar 1",
+     "lat": 37.9808,
+     "lon": -102.5962,
+     "km_from_beans": 138.2,
+     "dd_to_date": 5583,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-25",
+      "peak_50pct": "2026-06-29",
+      "late_75pct": "2026-07-03"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Lakin",
+     "lat": 37.9412,
+     "lon": -101.2492,
+     "km_from_beans": 140.2,
+     "dd_to_date": 5735,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-06-21",
+      "peak_50pct": "2026-06-24",
+      "late_75pct": "2026-06-28"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Quinter",
+     "lat": 39.0667,
+     "lon": -100.239,
+     "km_from_beans": 143.0,
+     "dd_to_date": 4910,
+     "days": 169,
+     "observed": {
+      "scouting_25pct": "2026-06-29",
+      "peak_50pct": "2026-07-02",
+      "late_75pct": "2026-07-06"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "John Martin Dam",
+     "lat": 38.0633,
+     "lon": -102.9299,
+     "km_from_beans": 145.9,
+     "dd_to_date": 5462,
+     "days": 181,
+     "observed": {
+      "scouting_25pct": "2026-06-25",
+      "peak_50pct": "2026-06-29",
+      "late_75pct": "2026-07-02"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Garden City Exp Sta",
+     "lat": 37.993,
+     "lon": -100.8121,
+     "km_from_beans": 154.7,
+     "dd_to_date": 4602,
+     "days": 157,
+     "observed": {
+      "scouting_25pct": "2026-06-24",
+      "peak_50pct": "2026-06-28",
+      "late_75pct": "2026-07-02"
+     },
+     "forecast": {}
+    }
+   ]
+  },
+  "se-wyoming": {
+   "stations_used": 4,
+   "stations_flagged_as_outliers": 0,
+   "mean_dd_to_date": 4576,
+   "marks": {
+    "scouting_25pct": {
+     "median_date": "2026-07-14",
+     "earliest_date": "2026-07-07",
+     "latest_date": "2026-07-16",
+     "stations_reached": 4,
+     "stations_total": 4,
+     "status": "observed",
+     "threshold_dd": 2577,
+     "threshold_dd_low": 2416,
+     "threshold_dd_high": 2749
+    },
+    "peak_50pct": {
+     "median_date": "2026-07-17",
+     "earliest_date": "2026-07-10",
+     "latest_date": "2026-07-19",
+     "stations_reached": 4,
+     "stations_total": 4,
+     "status": "observed",
+     "threshold_dd": 2704,
+     "threshold_dd_low": 2577,
+     "threshold_dd_high": 2838
+    },
+    "late_75pct": {
+     "median_date": "2026-07-21",
+     "earliest_date": "2026-07-14",
+     "latest_date": "2026-07-23",
+     "stations_reached": 4,
+     "stations_total": 4,
+     "status": "observed",
+     "threshold_dd": 2838,
+     "threshold_dd_low": 2660,
+     "threshold_dd_high": 3027
+    }
+   },
+   "stations": [
+    {
+     "station": "Torrington Municipal Ap",
+     "lat": 42.0613,
+     "lon": -104.1585,
+     "km_from_beans": 26.6,
+     "dd_to_date": 4940,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-10",
+      "peak_50pct": "2026-07-14",
+      "late_75pct": "2026-07-17"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Harrisburg 12Wnw",
+     "lat": 41.633,
+     "lon": -103.9541,
+     "km_from_beans": 39.1,
+     "dd_to_date": 4208,
+     "days": 169,
+     "observed": {
+      "scouting_25pct": "2026-07-16",
+      "peak_50pct": "2026-07-19",
+      "late_75pct": "2026-07-23"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Whalen Dam (Usbr)",
+     "lat": 42.2494,
+     "lon": -104.628,
+     "km_from_beans": 50.8,
+     "dd_to_date": 4328,
+     "days": 168,
+     "observed": {
+      "scouting_25pct": "2026-07-14",
+      "peak_50pct": "2026-07-17",
+      "late_75pct": "2026-07-21"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Redbird",
+     "lat": 43.2427,
+     "lon": -104.2864,
+     "km_from_beans": 154.4,
+     "dd_to_date": 4829,
+     "days": 177,
+     "observed": {
+      "scouting_25pct": "2026-07-07",
+      "peak_50pct": "2026-07-10",
+      "late_75pct": "2026-07-14"
+     },
+     "forecast": {}
+    }
+   ]
+  },
+  "sw-nebraska": {
+   "stations_used": 15,
+   "stations_flagged_as_outliers": 0,
+   "mean_dd_to_date": 5112,
+   "marks": {
+    "scouting_25pct": {
+     "median_date": "2026-07-06",
+     "earliest_date": "2026-06-30",
+     "latest_date": "2026-07-17",
+     "stations_reached": 15,
+     "stations_total": 15,
+     "status": "observed",
+     "threshold_dd": 2577,
+     "threshold_dd_low": 2416,
+     "threshold_dd_high": 2749
+    },
+    "peak_50pct": {
+     "median_date": "2026-07-09",
+     "earliest_date": "2026-07-03",
+     "latest_date": "2026-07-21",
+     "stations_reached": 15,
+     "stations_total": 15,
+     "status": "observed",
+     "threshold_dd": 2704,
+     "threshold_dd_low": 2577,
+     "threshold_dd_high": 2838
+    },
+    "late_75pct": {
+     "median_date": "2026-07-13",
+     "earliest_date": "2026-07-07",
+     "latest_date": "2026-07-24",
+     "stations_reached": 15,
+     "stations_total": 15,
+     "status": "observed",
+     "threshold_dd": 2838,
+     "threshold_dd_low": 2660,
+     "threshold_dd_high": 3027
+    }
+   },
+   "stations": [
+    {
+     "station": "Imperial Municipal Ap",
+     "lat": 40.5106,
+     "lon": -101.6243,
+     "km_from_beans": 30.0,
+     "dd_to_date": 5238,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-03",
+      "peak_50pct": "2026-07-07",
+      "late_75pct": "2026-07-11"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Trenton Dam 1N",
+     "lat": 40.1903,
+     "lon": -101.0668,
+     "km_from_beans": 77.9,
+     "dd_to_date": 5283,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-03",
+      "peak_50pct": "2026-07-06",
+      "late_75pct": "2026-07-10"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Hayes Center 1Nw",
+     "lat": 40.5232,
+     "lon": -101.0346,
+     "km_from_beans": 78.3,
+     "dd_to_date": 5138,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-06",
+      "peak_50pct": "2026-07-09",
+      "late_75pct": "2026-07-13"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Wallace 2W",
+     "lat": 40.8433,
+     "lon": -101.2094,
+     "km_from_beans": 79.6,
+     "dd_to_date": 5047,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-07",
+      "peak_50pct": "2026-07-11",
+      "late_75pct": "2026-07-14"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Ogallala",
+     "lat": 41.1275,
+     "lon": -101.7205,
+     "km_from_beans": 83.6,
+     "dd_to_date": 5120,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-07",
+      "peak_50pct": "2026-07-10",
+      "late_75pct": "2026-07-14"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Kingsley Dam",
+     "lat": 41.2097,
+     "lon": -101.6705,
+     "km_from_beans": 93.5,
+     "dd_to_date": 5000,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-12",
+      "late_75pct": "2026-07-16"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Culbertson",
+     "lat": 40.2315,
+     "lon": -100.8303,
+     "km_from_beans": 96.3,
+     "dd_to_date": 5264,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-03",
+      "peak_50pct": "2026-07-07",
+      "late_75pct": "2026-07-10"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Atwood",
+     "lat": 39.7996,
+     "lon": -101.0421,
+     "km_from_beans": 101.4,
+     "dd_to_date": 5413,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-30",
+      "peak_50pct": "2026-07-03",
+      "late_75pct": "2026-07-07"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Hershey 5 Sse",
+     "lat": 41.1056,
+     "lon": -100.9775,
+     "km_from_beans": 113.5,
+     "dd_to_date": 5012,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-12",
+      "late_75pct": "2026-07-16"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Mccook Municipal Ap",
+     "lat": 40.204,
+     "lon": -100.5904,
+     "km_from_beans": 116.8,
+     "dd_to_date": 4755,
+     "days": 161,
+     "observed": {
+      "scouting_25pct": "2026-07-17",
+      "peak_50pct": "2026-07-21",
+      "late_75pct": "2026-07-24"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Curtis",
+     "lat": 40.6344,
+     "lon": -100.5219,
+     "km_from_beans": 123.2,
+     "dd_to_date": 4918,
+     "days": 175,
+     "observed": {
+      "scouting_25pct": "2026-07-04",
+      "peak_50pct": "2026-07-08",
+      "late_75pct": "2026-07-12"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Arthur",
+     "lat": 41.5697,
+     "lon": -101.6917,
+     "km_from_beans": 132.3,
+     "dd_to_date": 4935,
+     "days": 183,
+     "observed": {
+      "scouting_25pct": "2026-07-10",
+      "peak_50pct": "2026-07-14",
+      "late_75pct": "2026-07-17"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "North Platte Regional Ap",
+     "lat": 41.122,
+     "lon": -100.6689,
+     "km_from_beans": 134.5,
+     "dd_to_date": 4998,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-12",
+      "late_75pct": "2026-07-16"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Brady",
+     "lat": 41.0232,
+     "lon": -100.367,
+     "km_from_beans": 150.2,
+     "dd_to_date": 5336,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-01",
+      "peak_50pct": "2026-07-04",
+      "late_75pct": "2026-07-08"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Cambridge",
+     "lat": 40.2845,
+     "lon": -100.1419,
+     "km_from_beans": 153.3,
+     "dd_to_date": 5223,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-03",
+      "peak_50pct": "2026-07-07",
+      "late_75pct": "2026-07-10"
+     },
+     "forecast": {}
+    }
+   ]
+  },
+  "western-colorado": {
+   "stations_used": 26,
+   "stations_flagged_as_outliers": 1,
+   "mean_dd_to_date": 4997,
+   "marks": {
+    "scouting_25pct": {
+     "median_date": "2026-07-06",
+     "earliest_date": "2026-06-19",
+     "latest_date": "2026-07-27",
+     "stations_reached": 26,
+     "stations_total": 26,
+     "status": "observed",
+     "threshold_dd": 2577,
+     "threshold_dd_low": 2416,
+     "threshold_dd_high": 2749
+    },
+    "peak_50pct": {
+     "median_date": "2026-07-10",
+     "earliest_date": "2026-06-23",
+     "latest_date": "2026-07-31",
+     "stations_reached": 26,
+     "stations_total": 26,
+     "status": "observed",
+     "threshold_dd": 2704,
+     "threshold_dd_low": 2577,
+     "threshold_dd_high": 2838
+    },
+    "late_75pct": {
+     "median_date": "2026-07-14",
+     "earliest_date": "2026-06-26",
+     "latest_date": "2026-08-03",
+     "stations_reached": 26,
+     "stations_total": 26,
+     "status": "observed",
+     "threshold_dd": 2838,
+     "threshold_dd_low": 2660,
+     "threshold_dd_high": 3027
+    }
+   },
+   "stations": [
+    {
+     "station": "Nucla",
+     "lat": 38.2658,
+     "lon": -108.5456,
+     "km_from_beans": 19.6,
+     "dd_to_date": 4751,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-13",
+      "peak_50pct": "2026-07-17",
+      "late_75pct": "2026-07-20"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Northdale",
+     "lat": 37.8123,
+     "lon": -109.0132,
+     "km_from_beans": 55.8,
+     "dd_to_date": 3942,
+     "days": 178,
+     "observed": {
+      "scouting_25pct": "2026-07-27",
+      "peak_50pct": "2026-07-31",
+      "late_75pct": "2026-08-03"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Dove Creek",
+     "lat": 37.7271,
+     "lon": -108.9563,
+     "km_from_beans": 58.0,
+     "dd_to_date": 4655,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-16",
+      "peak_50pct": "2026-07-19",
+      "late_75pct": "2026-07-23"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Montrose Regional Ap",
+     "lat": 38.5054,
+     "lon": -107.8981,
+     "km_from_beans": 68.8,
+     "dd_to_date": 5277,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-02",
+      "peak_50pct": "2026-07-05",
+      "late_75pct": "2026-07-09"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Montrose",
+     "lat": 38.547,
+     "lon": -107.9143,
+     "km_from_beans": 70.9,
+     "dd_to_date": 5029,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-07",
+      "peak_50pct": "2026-07-10",
+      "late_75pct": "2026-07-14"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Canyon Of The Ancients",
+     "lat": 37.5009,
+     "lon": -108.8155,
+     "km_from_beans": 72.1,
+     "dd_to_date": 5224,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-03",
+      "peak_50pct": "2026-07-06",
+      "late_75pct": "2026-07-10"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Lebanon",
+     "lat": 37.4464,
+     "lon": -108.553,
+     "km_from_beans": 72.4,
+     "dd_to_date": 4934,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-09",
+      "peak_50pct": "2026-07-12",
+      "late_75pct": "2026-07-16"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Olathe",
+     "lat": 38.635,
+     "lon": -107.9636,
+     "km_from_beans": 75.4,
+     "dd_to_date": 5094,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-06",
+      "peak_50pct": "2026-07-09",
+      "late_75pct": "2026-07-13"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Gateway 1Ene",
+     "lat": 38.6878,
+     "lon": -108.9609,
+     "km_from_beans": 77.7,
+     "dd_to_date": 5282,
+     "days": 171,
+     "observed": {
+      "scouting_25pct": "2026-06-19",
+      "peak_50pct": "2026-06-23",
+      "late_75pct": "2026-06-26"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Cortez Montezuma County Ap",
+     "lat": 37.307,
+     "lon": -108.6265,
+     "km_from_beans": 88.5,
+     "dd_to_date": 4804,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-12",
+      "peak_50pct": "2026-07-16",
+      "late_75pct": "2026-07-20"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Eckert",
+     "lat": 38.8397,
+     "lon": -107.9734,
+     "km_from_beans": 94.1,
+     "dd_to_date": 5179,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-05",
+      "peak_50pct": "2026-07-08",
+      "late_75pct": "2026-07-12"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Yucca House",
+     "lat": 37.2478,
+     "lon": -108.687,
+     "km_from_beans": 95.9,
+     "dd_to_date": 5152,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-07-04",
+      "peak_50pct": "2026-07-08",
+      "late_75pct": "2026-07-11"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Csu Rogers Mesa Research Sta",
+     "lat": 38.7985,
+     "lon": -107.7882,
+     "km_from_beans": 99.1,
+     "dd_to_date": 5211,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-04",
+      "peak_50pct": "2026-07-07",
+      "late_75pct": "2026-07-11"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Cedaredge 1E",
+     "lat": 38.901,
+     "lon": -107.9021,
+     "km_from_beans": 103.1,
+     "dd_to_date": 5109,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-06",
+      "peak_50pct": "2026-07-09",
+      "late_75pct": "2026-07-13"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Little Delores Colorado",
+     "lat": 38.9692,
+     "lon": -108.9444,
+     "km_from_beans": 105.0,
+     "dd_to_date": 4987,
+     "days": 182,
+     "observed": {
+      "scouting_25pct": "2026-07-06",
+      "peak_50pct": "2026-07-10",
+      "late_75pct": "2026-07-13"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Grand Junction 6Ese",
+     "lat": 39.0422,
+     "lon": -108.4663,
+     "km_from_beans": 105.3,
+     "dd_to_date": 5678,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-22",
+      "peak_50pct": "2026-06-26",
+      "late_75pct": "2026-06-29"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Glade Park 17W",
+     "lat": 38.9542,
+     "lon": -109.0531,
+     "km_from_beans": 107.4,
+     "dd_to_date": 4857,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-11",
+      "peak_50pct": "2026-07-15",
+      "late_75pct": "2026-07-18"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Towaoc",
+     "lat": 37.1892,
+     "lon": -108.9353,
+     "km_from_beans": 108.2,
+     "dd_to_date": 5149,
+     "days": 177,
+     "observed": {
+      "scouting_25pct": "2026-07-07",
+      "peak_50pct": "2026-07-10",
+      "late_75pct": "2026-07-14"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Kline",
+     "lat": 37.1261,
+     "lon": -108.146,
+     "km_from_beans": 111.9,
+     "dd_to_date": 4665,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-16",
+      "peak_50pct": "2026-07-20",
+      "late_75pct": "2026-07-24"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Colorado National Monument",
+     "lat": 39.1013,
+     "lon": -108.7338,
+     "km_from_beans": 113.9,
+     "dd_to_date": 5022,
+     "days": 164,
+     "observed": {
+      "scouting_25pct": "2026-07-06",
+      "peak_50pct": "2026-07-10",
+      "late_75pct": "2026-07-14"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Grand Junction Wfo",
+     "lat": 39.1198,
+     "lon": -108.5247,
+     "km_from_beans": 114.0,
+     "dd_to_date": 5719,
+     "days": 184,
+     "observed": {
+      "scouting_25pct": "2026-06-21",
+      "peak_50pct": "2026-06-24",
+      "late_75pct": "2026-06-28"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Grand Junction Walker Field",
+     "lat": 39.1344,
+     "lon": -108.5408,
+     "km_from_beans": 115.6,
+     "dd_to_date": 5652,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-06-23",
+      "peak_50pct": "2026-06-26",
+      "late_75pct": "2026-06-30"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Csu Fruita Exp Station",
+     "lat": 39.183,
+     "lon": -108.697,
+     "km_from_beans": 122.3,
+     "dd_to_date": 5129,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-05",
+      "peak_50pct": "2026-07-09",
+      "late_75pct": "2026-07-13"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Durango La Plata County Ap",
+     "lat": 37.1431,
+     "lon": -107.7602,
+     "km_from_beans": 123.8,
+     "dd_to_date": 4568,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-18",
+      "peak_50pct": "2026-07-22",
+      "late_75pct": "2026-07-26"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Southern Ute Tribe",
+     "lat": 37.1684,
+     "lon": -107.6764,
+     "km_from_beans": 125.4,
+     "dd_to_date": 4320,
+     "days": 185,
+     "observed": {
+      "scouting_25pct": "2026-07-23",
+      "peak_50pct": "2026-07-27",
+      "late_75pct": "2026-07-30"
+     },
+     "forecast": {}
+    },
+    {
+     "station": "Collbran",
+     "lat": 39.2402,
+     "lon": -107.9575,
+     "km_from_beans": 135.4,
+     "dd_to_date": 4539,
+     "days": 178,
+     "observed": {
+      "scouting_25pct": "2026-07-14",
+      "peak_50pct": "2026-07-18",
+      "late_75pct": "2026-07-21"
+     },
+     "forecast": {}
+    }
+   ]
+  }
+ }
+}

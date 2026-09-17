@@ -44,6 +44,13 @@ STEPS = [
     ("yield_all.py", "yield-all-2026.json", 12, "yield for every class in every region"),
     ("yield_index.py", None, None,
      "this season against the model's own history, so the uncalibrated constants cancel"),
+    # PEST TIMING. Runs on station-field.json, which step 4 has already written. Unlike the
+    # yield estimate this one carries a model we did not fit — UNL Extension fitted it against
+    # field trap counts and published the thresholds — and it is the only forward prediction on
+    # this site that has been shown to work: standing on 1 June 2026 it named the 25% flight
+    # date within a day in three regions of four.
+    ("pest_wbc.py", "pest-wbc-2026.json", 20,
+     "western bean cutworm flight timing, UNL degree-day model, every station"),
     ("ledger.py", None, None,
      "freeze today's prediction and score it against any reported outcome"),
 ]

@@ -150,6 +150,47 @@ if d:
         check("solar has plausible mean", 8 <= (sum(summer)/len(summer)) <= 30,
               "mean %.1f MJ/m2/day over %d station-days" % (sum(summer)/len(summer), len(summer)))
 
+# ---------------------------------------------------------------- pest timing
+d = load("pest-wbc-2026.json")
+if d:
+    regs = d.get("regions", {})
+    # Independent check 1: UNL publishes 12 July for Scottsbluff and 25 July for Alliance in
+    # 2025. Western bean cutworm flies in this country in JULY. A median outside 10 June to
+    # 20 August is not a late season, it is a broken station set — the first run of this model
+    # put Big Horn on 4 SEPTEMBER because two thirds of its "nearby" stations sat up to 1,800 m
+    # above the beans, on mountains the crop does not grow on.
+    bad = []
+    for rk, r in regs.items():
+        md = (r.get("marks", {}).get("scouting_25pct") or {}).get("median_date")
+        if not md or not ("06-10" <= md[5:] <= "08-20"):
+            bad.append("%s=%s" % (rk, md))
+    check("cutworm flight lands in flight season", regs and not bad,
+          "%d regions, all between 10 Jun and 20 Aug" % len(regs)
+          if not bad else "OUT OF SEASON: " + ", ".join(bad))
+
+    # Independent check 2: a median computed after throwing away most of its own input is not a
+    # median. This is the symptom that exposed the elevation problem, so it is now a gate.
+    thin = ["%s (%d kept, %d flagged)" % (rk, r["stations_used"], r["stations_flagged_as_outliers"])
+            for rk, r in regs.items()
+            if r["stations_flagged_as_outliers"] > r["stations_used"]]
+    check("cutworm medians rest on real stations", not thin,
+          "no region discards more stations than it keeps"
+          if not thin else "DISCARDING MORE THAN IT KEEPS: " + ", ".join(thin))
+
+    # Independent check 3: agronomic expectation, not a restatement of our own file. Heat
+    # arrives from the south and from lower ground. Northwest Kansas must reach flight before
+    # the Big Horn Basin, which is five degrees of latitude north and a basin floor higher up.
+    ks = (regs.get("nw-kansas", {}).get("marks", {}).get("scouting_25pct") or {}).get("median_date")
+    bh = (regs.get("big-horn", {}).get("marks", {}).get("scouting_25pct") or {}).get("median_date")
+    check("cutworm timing runs south to north", bool(ks and bh) and ks < bh,
+          "northwest Kansas %s before Big Horn %s" % (ks, bh) if ks and bh else "missing a region")
+
+    # The thresholds are UNL's. If they are ever edited they must be edited against the source.
+    t = {m["threshold_dd"] for r in regs.values() for m in r.get("marks", {}).values()}
+    check("UNL thresholds unchanged", t == {2577, 2704, 2838},
+          "25/50/75%% flight at 2,577 / 2,704 / 2,838 DD" if t == {2577, 2704, 2838}
+          else "ALTERED: %s" % sorted(t))
+
 # ---------------------------------------------------------------- weather stations
 d = load("station-field.json")
 if d:
