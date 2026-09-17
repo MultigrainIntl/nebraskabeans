@@ -41,6 +41,33 @@
       ramp: [[0, '#d9e2d6'], [0.35, '#9ec9a6'], [0.6, '#4ea56b'], [0.8, '#e8c33a'], [1, '#a8571f']],
       question: 'How far along is the crop, and where is it behind?'
     },
+    /* WESTERN BEAN CUTWORM FLIGHT. The only layer on this site running a model we did not
+     * fit. UNL Extension fitted it against field trap counts and published the thresholds
+     * with confidence intervals; we accumulate heat and read their numbers.
+     *
+     *   DD = max( min( (Tmax+Tmin)/2 , 75F ) - 38F , 0 ), from 1 March
+     *   2,577 DD = 25% of flight, the date UNL says start scouting
+     *   2,704 DD = 50%      2,838 DD = 75%
+     *
+     * SOURCE: cropwatch.unl.edu/western-bean-cutworm-degree-day-modeling/
+     *
+     * Scaled 0-100% of flight rather than raw degree-days, because a grower needs to know
+     * where in the flight they are, not a heat sum. Fixed scale — the thresholds are
+     * absolute, and stretching the ramp per region would make a Kansas field in full flight
+     * and a Big Horn field weeks away fill the same colours.
+     *
+     * WHAT IT DOES NOT SAY: whether moths are in YOUR field, or how bad it is. No instrument
+     * here resolves a moth or an egg mass. Onset is modelled; presence and severity need a
+     * trap count or someone walking the rows. */
+    cutworm: {
+      label: 'Cutworm flight (UNL model)',
+      unit: '% of western bean cutworm flight \u2014 25% is when UNL says start scouting',
+      fixed: { lo: 0, hi: 100 },
+      loLabel: 'Flight not started', hiLabel: 'Flight over',
+      ramp: [[0, '#dfe3ea'], [0.25, '#f0d27a'], [0.5, '#e09a3e'], [0.75, '#c0562a'], [1, '#7d2f1c']],
+      cropIndependent: true,
+      question: 'Where is the cutworm flight, and where should scouting start?'
+    },
     /* NOT soil moisture, and it was labelled as such until an independent review caught it.
      * This is rainfall minus grass-reference evaporation over thirty days — a climatic deficit.
      * It carries no irrigation, no crop coefficient, no root-zone storage, no soil water
@@ -227,6 +254,44 @@
   var MAX_BORROW_KM = 40;      // beyond this the terrain and exposure stop being comparable
   var MIN_WINDOW_COVER = 0.8;  // a station must have observed most of its accumulation window
 
+  /* ELEVATION. A station can stand inside a bean county and still be measuring weather the
+   * beans never see. Counted on 17 September 2026: 92 station-region pairs sit more than 250 m
+   * above the crop they would colour — Blackwater at 2,981 m over Big Horn beans at 1,279 m,
+   * Beartown at 3,536 m over western Colorado, Dodge Creek at 2,164 m over southeast Wyoming.
+   * Western Colorado had 37 such stations against 18 on the crop's own ground, so the surface
+   * there was painted mostly by mountains.
+   *
+   * The same blindness put the cutworm model's Big Horn flight date in SEPTEMBER before an
+   * elevation screen fixed it, and had the yield model dividing Alliance's eleven-year history
+   * by a station 230 m higher. This is the third place it had to be closed.
+   *
+   * The crop's ground is the 20th percentile of nearby station elevations — dry beans here are
+   * irrigated valley-bottom ground, so the low end of the local spread is where the crop is.
+   * In flat country almost every station survives; in mountains the valley does.
+   *
+   * GAJ: "I NEED TO BE ABLE TO TRUST YOU THAT YOU ARE BUILDING STABLE MODELS FOR ALL THESE
+   * FIXES, INCLUDING BUT NOT LIMITED TO LOCKING IN THE WEATHER STATIONS TO ELEVATION." */
+  var ELEV_TOLERANCE_M = 250;
+
+  function cropElevationCeiling() {
+    if (S.elevKey === S.crop) return S.elevCeiling;
+    var rings = cropRings(), els = [];
+    S.field.stations.forEach(function (st) {
+      if (st.elev_m != null && inRings(st.lon, st.lat, rings)) els.push(st.elev_m);
+    });
+    els.sort(function (a, b) { return a - b; });
+    S.elevKey = S.crop;
+    S.elevCeiling = els.length
+      ? els[Math.max(0, Math.floor(0.20 * els.length) - 1)] + ELEV_TOLERANCE_M : null;
+    return S.elevCeiling;
+  }
+
+  /* True when this station stands on ground the crop could actually be grown on. */
+  function onCropGround(st) {
+    var ceil = cropElevationCeiling();
+    return ceil == null || st.elev_m == null || st.elev_m <= ceil;
+  }
+
   function stationValues(day) {
     var spec = CLASSES[S.crop] || CLASSES.PINTO;
     var p0 = plantIndex(spec);
@@ -235,7 +300,27 @@
     var out = [];
     for (var s = 0; s < all.length; s++) {
       var st = all[s], v = null;
-      if (S.view === 'stage' || S.view === 'heat') {
+      if (S.view === 'cutworm') {
+        /* Accumulates from 1 MARCH, not from planting — the moths do not wait for the crop.
+         * The station file opens on 15 March, so the first fortnight is missing; it is worth
+         * 36-79 DD here, about 1% of the scouting threshold, and is not filled in because
+         * inventing it would be exactly the habit this project has been removing. The effect
+         * is that flight reads a day late, which is the safe direction for a scouting call. */
+        if (!st.has_temp) continue;
+        var wseen = 0, wdd = 0;
+        for (var w = 0; w <= day; w++) {
+          var whi = st.hi[w], wlo = st.lo[w];
+          if (whi == null || wlo == null) continue;
+          wseen++;
+          wdd += Math.max(Math.min((whi + wlo) / 2, 75) - 38, 0);
+        }
+        if (wseen < (day + 1) * MIN_WINDOW_COVER) continue;
+        // 0% below 2,577; 25/50/75% at UNL's thresholds; linear between and beyond.
+        v = wdd <= 2577 ? 25 * (wdd / 2577)
+          : wdd <= 2704 ? 25 + 25 * (wdd - 2577) / (2704 - 2577)
+          : wdd <= 2838 ? 50 + 25 * (wdd - 2704) / (2838 - 2704)
+          : Math.min(100, 75 + 25 * (wdd - 2838) / 200);
+      } else if (S.view === 'stage' || S.view === 'heat') {
         if (!st.has_temp) continue;
         var span = day - p0 + 1;
         if (span <= 0) continue;
@@ -282,7 +367,7 @@
         v = bal;
       }
       out.push({ x: st.lon, y: st.lat, v: v, name: st.name,
-                 inCrop: inRings(st.lon, st.lat, rings) });
+                 inCrop: inRings(st.lon, st.lat, rings), onGround: onCropGround(st) });
     }
     return out;
   }
@@ -427,7 +512,14 @@
     ctx.clearRect(0, 0, size.x, size.y);
 
     var view = VIEWS[S.view], dom = domain();
-    var pts = stationValues(S.day).filter(function (p) { return p.v != null && isFinite(p.v); });
+    /* Only stations on the crop's own ground may colour it. Without this the canvas
+     * interpolated across every station in four states, mountains included, while the
+     * sentence underneath was computed from in-county stations only — the surface and the
+     * summary describing different places, which is the exact fault this file records
+     * having fixed once already. */
+    var pts = stationValues(S.day).filter(function (p) {
+      return p.v != null && isFinite(p.v) && p.onGround;
+    });
     if (!pts.length) return;
 
     // Project stations once, not per pixel.
@@ -1215,7 +1307,27 @@
     var med = q(0.5), low = q(0.1), high = q(0.9);
     var r = Math.round;
     var text;
-    if (S.view === 'stage') {
+    if (S.view === 'cutworm') {
+      /* WITHOUT THIS THE HEADING AND THE SENTENCE DESCRIBED DIFFERENT THINGS — the question
+       * above read "Where is the cutworm flight?" and the answer below reported rainfall,
+       * because every view that is not stage or heat fell through to the water sentence.
+       * That is the same fault this file already records fixing once, where the surface was
+       * clipped to one crop and the summary was not. */
+      text = med >= 75
+        ? 'Flight is <b>past three quarters</b> at the median thermometer on this ground — ' +
+          r(med) + '% — so egg laying is largely finished. Scouting now finds what is already ' +
+          'there, not what is coming.'
+        : med >= 25
+          ? 'Flight is at <b>' + r(med) + '%</b> at the median thermometer, past the 25% mark ' +
+            'where UNL says start scouting. The earliest tenth of this ground is at ' +
+            r(high) + '% and the latest at ' + r(low) + '%, so the whole area is not on the ' +
+            'same schedule.'
+          : 'Flight has <b>not reached the 25% scouting mark</b> — the median thermometer is ' +
+            'at ' + r(med) + '%. The warmest tenth of this ground is at ' + r(high) + '%.';
+      text += ' <i>This is timing from accumulated heat, on UNL\u2019s published model. It ' +
+        'does not say whether moths are in your field, and it does not say how bad it is. ' +
+        'That needs a trap count or a walk through the rows.</i>';
+    } else if (S.view === 'stage') {
       // Past 110% the percentage stops being the useful number. A grower whose lentils finished
       // in July does not need to hear "168% of maturity"; they need to hear that it is standing.
       text = med >= 110
@@ -1261,7 +1373,13 @@
     }
     var bar = '<div class="nbLegendBar" style="background:linear-gradient(90deg,' +
       stops.join(',') + ')"></div>';
-    var tail = '<div class="nbLegendUnit">' + view.label + ' · ' + view.unit + ' · ' + S.crop;
+    /* Most layers describe the SELECTED crop, so the legend names it. Cutworm flight does
+     * not: it accumulates from 1 March on air temperature and does not know what is planted.
+     * Tagging it "· CHICKPEAS" claimed a chickpea-specific cutworm reading, and western bean
+     * cutworm is not a chickpea pest at all — it is a pest of dry beans and corn. A label
+     * that borrows the crop selector is a claim about the crop. */
+    var tail = '<div class="nbLegendUnit">' + view.label + ' · ' + view.unit +
+      (view.cropIndependent ? ' · dry beans and corn — not crop-specific' : ' · ' + S.crop);
 
     if (S.view === 'vshistory') {
       el.innerHTML = bar +

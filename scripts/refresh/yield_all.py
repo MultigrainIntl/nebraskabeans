@@ -127,6 +127,59 @@ USDA_NAME = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern", "NAVY": "Navy
              "BLACKEYE": "Blackeye"}
 
 
+
+def station_on_crop_ground(field, lat, lon, hist_name=None, radius_km=110, tolerance_m=250):
+    """The weather station that stands on the ground this crop is grown on.
+
+    ONE RULE, ONE PLACE. This had to be fixed three separate times before it was written
+    down: the cutworm model put Big Horn's flight in SEPTEMBER because two thirds of its
+    "nearby" stations sat up to 1,800 m above the beans; the yield index divided Alliance's
+    eleven-year history by a station 230 m higher and 304 growing degrees cooler, worth about
+    88 lb/ac on published Panhandle pinto; and the map surface interpolated across 92
+    station-region pairs more than 250 m above the crop, Beartown at 3,536 m among them.
+    Nearest-on-a-map is not nearest-in-weather once there are mountains in the frame.
+
+    GAJ: "I SHOULD NOT HAVE TO REMEMBER TO TELL YOU EVERYTHING. YOU SHOULD BE SMART ENOUGH TO
+    APPLY THESE FIXES ACROSS ALL THE MODELS, AND ALL THE REGIONS."
+
+    Order of preference:
+      1. the station the history already uses, by exact name — the ratio only cancels its
+         uncalibrated constants if both halves read the same ground
+      2. the same station renamed (IMPERIAL -> IMPERIAL MUNICIPAL AP), matched on the leading
+         word but ONLY within 60 km, because a bare first-word match is what once grabbed
+         TORRINGTON 29N, a different station 29 miles north and 200 m up
+      3. the nearest station that is not more than `tolerance_m` above the crop's ground,
+         where that ground is the 20th percentile of elevations within `radius_km` — beans
+         here are irrigated valley bottom, so the low end of the local spread is the crop
+    """
+    import math
+
+    def _km(la1, lo1, la2, lo2):
+        r = math.pi / 180
+        h = (0.5 - math.cos((la2 - la1) * r) / 2 + math.cos(la1 * r) * math.cos(la2 * r)
+             * (1 - math.cos((lo2 - lo1) * r)) / 2)
+        return 12742 * math.asin(math.sqrt(h))
+
+    warm = [s for s in field["stations"] if s.get("has_temp")]
+    if hist_name:
+        want = hist_name.strip().upper()
+        exact = [s for s in warm if s["name"].strip().upper() == want]
+        if exact:
+            return exact[0], "history station"
+        head = want.split()[0]
+        renamed = [s for s in warm if s["name"].strip().upper().split()[0] == head
+                   and _km(s["lat"], s["lon"], lat, lon) <= 60]
+        if renamed:
+            return renamed[0], "history station, renamed"
+    local = [s for s in warm if s.get("elev_m") is not None
+             and _km(s["lat"], s["lon"], lat, lon) <= radius_km]
+    els = sorted(s["elev_m"] for s in local)
+    ceiling = els[max(0, int(0.20 * len(els)) - 1)] + tolerance_m if els else None
+    ok = [s for s in (local or warm)
+          if ceiling is None or s.get("elev_m") is None or s["elev_m"] <= ceiling]
+    chosen = min(ok or warm, key=lambda s: (s["lon"] - lon) ** 2 + (s["lat"] - lat) ** 2)
+    return chosen, "nearest on the crop's ground (ceiling %s m)" % ceiling
+
 def usda_grown():
     """Classes with a PUBLISHED acreage in at least one of these states.
 
@@ -393,8 +446,15 @@ def main():
         w = sum(max(c["acres"], 0.01) for c in pts) or 1
         lat = sum(c["lat"] * max(c["acres"], 0.01) for c in pts) / w
         lon = sum(c["lon"] * max(c["acres"], 0.01) for c in pts) / w
-        st = min((s for s in field["stations"] if s["has_temp"]),
-                 key=lambda s: (s["lon"] - lon) ** 2 + (s["lat"] - lat) ** 2)
+        # Same rule as yield_index.py and the map surface — see station_on_crop_ground above.
+        _hist = {}
+        try:
+            _hist = json.load(open(os.path.join(HERE, "..", "..", "assets", "data", "archive",
+                                                "season-history.json")))["temperature"]
+        except Exception:
+            pass
+        st, _how = station_on_crop_ground(
+            field, lat, lon, (_hist.get(region, {}) or {}).get("station"))
 
         def green_at(iso, commodity):
             # NO FALLBACK. This used to be `pulse_green.get(commodity) or grn`, so a region

@@ -81,7 +81,7 @@ SEASON = ("03-01", "10-31")
 
 sys.path.insert(0, HERE)
 from yield_all import (CLASSES, NAMES, PAR_FRACTION, fpar, tstress, soil_threshold,
-                       derive_planting)
+                       derive_planting, station_on_crop_ground)
 
 USDA_CLASS = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern",
               "LIGHT RED KIDNEY": "Light red kidney", "DARK RED KIDNEY": "Dark red kidney",
@@ -432,66 +432,16 @@ def main():
             w = sum(max(c["acres"], 0.01) for c in pts) or 1
             lat = sum(c["lat"] * max(c["acres"], 0.01) for c in pts) / w
             lon = sum(c["lon"] * max(c["acres"], 0.01) for c in pts) / w
-            # THE SAME GROUND ON BOTH SIDES OF THE DIVISION, OR THE CONSTANTS DO NOT CANCEL.
-            # This used to take whichever station sat nearest the bean centroid, while the
-            # eleven-year history used a fixed named station. Five of seven regions therefore
-            # divided one place by another: the Panhandle read PLAINSVIEW RANCH against a
-            # history built on ALLIANCE MUNICIPAL AIRPORT ASOS, 230 m lower and 304 growing
-            # degrees warmer over the season. Northwest Kansas read a station in Colorado.
-            # So did southwest Nebraska.
-            #
-            # Measured on Panhandle pinto: the mismatch moved the published figure by about
-            # 88 lb/ac, 4.3%, and UPWARD — not downward as the cooler station suggests. Less
-            # heat delays maturity, the accumulation window stays open longer, and that
-            # outweighs the cooler days. The direction is not guessable from temperature
-            # alone, which is the point: a silent station swap does not fail, it drifts.
-            #
-            # The history station is now used whenever this season carries it. The fallback is
-            # still the nearest station, but it is screened on elevation — a station more than
-            # 250 m above the crop is measuring different weather, which is what put the
-            # cutworm model's Big Horn flight date in September before the same screen fixed it.
+            # ONE RULE, ONE PLACE — station_on_crop_ground() in yield_all.py. The history
+            # station wins when this season carries it, because the ratio only cancels its
+            # uncalibrated constants when both halves read the same ground; otherwise the
+            # nearest station that is not more than 250 m above the crop. Measured cost of
+            # getting this wrong on Panhandle pinto: about 88 lb/ac.
             hist_name = (hist_temp.get(region, {}) or {}).get("station", "")
-            named = [s for s in field["stations"]
-                     if s["has_temp"] and s["name"].strip().upper() == hist_name.strip().upper()]
-            if not named and hist_name:
-                # Same station, renamed. The history says IMPERIAL and this season carries
-                # IMPERIAL MUNICIPAL AP; NUCLA COLORADO became NUCLA. Without this the region
-                # silently falls back to the nearest pin, and southwest Nebraska ends up
-                # reading Holyoke, COLORADO. Matched on the leading word, but only within
-                # 60 km — the bare first word is what made an earlier audit of this same
-                # problem grab TORRINGTON 29N, a different station 29 miles north and 200 m
-                # up, and report a defect that was not there.
-                head = hist_name.strip().upper().split()[0]
-                named = [s for s in field["stations"]
-                         if s["has_temp"] and s["name"].strip().upper().split()[0] == head
-                         and (abs(s["lat"] - lat) < 0.6 and abs(s["lon"] - lon) < 0.8)]
-            if named:
-                stn = named[0]
-            else:
-                # The ceiling is taken from stations within 110 km, measured properly, not
-                # from a lat/lon box. A box of +-1.6 degrees around the Big Horn Basin sweeps
-                # in the Bighorn Mountains, lifts the 20th percentile to 1,486 m and sets a
-                # ceiling of 1,736 m — which then admits Cody 12Se at 1,600 m, 400 m above the
-                # beans, purely because it is the closest pin on the map. Inside a real radius
-                # the same rule puts the floor at 1,190 m and picks Greybull, on the basin
-                # floor where the crop is, with a longer record.
-                def _km(la1, lo1, la2, lo2):
-                    r = math.pi / 180
-                    h = (0.5 - math.cos((la2 - la1) * r) / 2 + math.cos(la1 * r)
-                         * math.cos(la2 * r) * (1 - math.cos((lo2 - lo1) * r)) / 2)
-                    return 12742 * math.asin(math.sqrt(h))
-                local = [s for s in field["stations"]
-                         if s["has_temp"] and s.get("elev_m") is not None
-                         and _km(s["lat"], s["lon"], lat, lon) <= 110]
-                elevs = sorted(s["elev_m"] for s in local)
-                ceiling = (elevs[max(0, int(0.20 * len(elevs)) - 1)] + 250) if elevs else None
-                ok = [s for s in (local or field["stations"])
-                      if s["has_temp"] and (ceiling is None or s.get("elev_m") is None
-                                            or s["elev_m"] <= ceiling)]
-                stn = min(ok or [s for s in field["stations"] if s["has_temp"]],
-                          key=lambda s: (s["lon"] - lon) ** 2 + (s["lat"] - lat) ** 2)
-                print("  %s: history station %r absent this season, using %r (%s m)"
-                      % (region, hist_name, stn["name"], stn.get("elev_m")), file=sys.stderr)
+            stn, how = station_on_crop_ground(field, lat, lon, hist_name)
+            if how != "history station":
+                print("  %s: %s -> %s (%s)" % (region, hist_name or "no history station",
+                                               stn["name"], how), file=sys.stderr)
             for i, iso in enumerate(field["dates"]):
                 a, b = stn["hi"][i], stn["lo"][i]
                 if a is not None and b is not None:

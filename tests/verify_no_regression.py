@@ -127,15 +127,48 @@ for needle, why in (("region", "the region picker defect"),
 # heat delays maturity and holds the accumulation window open longer. Northwest Kansas and
 # southwest Nebraska were both reading stations in Colorado. The whole method rests on running
 # the same arithmetic on the same ground; a silent station swap does not fail, it drifts.
+# These three used to read yield_index.py, where the logic was written inline. It now lives in
+# one shared function and they read that instead — and the guard caught the move itself, which
+# is the behaviour wanted: it notices when the thing it protects changes shape.
 yi = read("scripts", "refresh", "yield_index.py")
-for needle, why in (('s["name"].strip().upper() == hist_name.strip().upper()',
+rule = read("scripts", "refresh", "yield_all.py")
+rule = rule[rule.index("def station_on_crop_ground("):] if "def station_on_crop_ground(" in rule else ""
+for needle, why in (('s["name"].strip().upper() == want',
                      "the history station is preferred"),
-                    ("_km(s[\"lat\"], s[\"lon\"], lat, lon) <= 110",
+                    ("<= radius_km",
                      "the elevation ceiling uses a real radius, not a lat/lon box"),
-                    ("elevs[max(0, int(0.20 * len(elevs)) - 1)] + 250",
+                    ("+ tolerance_m",
                      "the fallback is screened on elevation")):
-    check("yield station: %s" % why, needle in yi,
-          "present" if needle in yi else "GONE — the station swap can return")
+    check("yield station: %s" % why, needle in rule,
+          "present in the shared rule" if needle in rule else "GONE — the station swap can return")
+
+# ---------------------------------------------------------------------------
+# 9. THE ELEVATION RULE MUST HOLD EVERYWHERE, NOT WHEREVER IT WAS LAST PATCHED.
+# GAJ, 17 Sep 2026: "I SHOULD NOT HAVE TO REMEMBER TO TELL YOU EVERYTHING. YOU SHOULD BE SMART
+# ENOUGH TO APPLY THESE FIXES ACROSS ALL THE MODELS, AND ALL THE REGIONS." It was fixed three
+# times in three places before it was written down once: the cutworm model (Big Horn flight in
+# September), the yield index (88 lb/ac on Panhandle pinto) and the map surface (92 station-
+# region pairs above the crop, Beartown at 3,536 m). These assert it is still in all of them.
+ya = read("scripts", "refresh", "yield_all.py")
+check("one shared station rule exists", "def station_on_crop_ground(" in ya,
+      "station_on_crop_ground() in yield_all.py")
+check("yield_all uses it", "station_on_crop_ground(" in ya.split("def station_on_crop_ground")[-1],
+      "called, not just defined")
+check("yield_index uses the shared rule", "station_on_crop_ground(" in yi,
+      "imported from yield_all rather than copied")
+dm = read("assets", "decision-map.js")
+check("the map surface screens elevation", "onCropGround(" in dm and "p.onGround" in dm,
+      "stations above the crop cannot colour it")
+pw = read("scripts", "refresh", "pest_wbc.py")
+check("the pest model screens elevation", "ELEV_TOLERANCE_M" in pw,
+      "cutworm stations are screened")
+
+# No script may go back to picking a station on map distance alone.
+for f in ("scripts/refresh/yield_all.py", "scripts/refresh/yield_index.py"):
+    txt = read(*f.split("/"))
+    raw = 'min((s for s in field["stations"] if s["has_temp"]),'
+    check("%s picks no station on distance alone" % f.split("/")[-1], raw not in txt,
+          "absent" if raw not in txt else "RAW NEAREST-STATION PICK IS BACK")
 
 print()
 if fails:
