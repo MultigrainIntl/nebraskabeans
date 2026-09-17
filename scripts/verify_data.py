@@ -73,8 +73,22 @@ if d:
 d = load("irrigation.json")
 if d:
     acres = d.get("conus_irrigated_acres", 0)
-    check("irrigation vs USDA Census", 45e6 < acres < 70e6,
-          "raster totals %.1fM acres; USDA Census of Agriculture reports 55-58M" % (acres / 1e6))
+    # SOURCE, and a correction. This used to read "USDA Census reports 55-58M", which was
+    # asserted from memory and is wrong at both ends. USDA's published figures are 58.0M
+    # irrigated acres in the 2017 Census — a record high — and 54.9M in the 2022 Census
+    # (USDA Economic Research Service, Charts of Note 110247 and 115050).
+    #
+    # More to the point, a range spanning two censuses was the wrong comparison to make.
+    # MIrAD-US v4 is a 2017 raster, so it should be held against the 2017 census year and
+    # nothing else. That turns a vague band into a real check: 58.7M mapped against 58.0M
+    # counted is agreement to 1.2%, and a 10% tolerance is generous for a 250 m raster
+    # scored against a farm-by-farm census.
+    CENSUS_2017_IRRIGATED = 58.0e6     # USDA Census of Agriculture 2017, via USDA ERS
+    lo, hi = CENSUS_2017_IRRIGATED * 0.90, CENSUS_2017_IRRIGATED * 1.10
+    check("irrigation vs USDA Census", lo < acres < hi,
+          "raster totals %.1fM acres, %+.1f%% against the 58.0M the 2017 USDA Census counted "
+          "(MIrAD-US v4 is a 2017 raster; tolerance 10%%)"
+          % (acres / 1e6, 100 * (acres - CENSUS_2017_IRRIGATED) / CENSUS_2017_IRRIGATED))
     shares = [b["irrigated_share_of_ground"]
               for c in d.get("crops", {}).values() for b in c.values()]
     check("irrigation shares are shares", all(0 <= s <= 100 for s in shares),
@@ -105,10 +119,33 @@ if d:
     dig(d)
     if vals:
         mx = max(vals)
-        # Physical bound: clear-sky surface shortwave at 41N peaks near 30-32 MJ/m2/day.
-        # Anything above that is not sunlight, it is a unit error.
+        # Physical bound on clear-sky surface shortwave at 41N. This is DERIVED, not
+        # asserted — it comes out of the standard reference method and can be recomputed by
+        # anyone: Allen, Pereira, Raes & Smith (1998), "Crop evapotranspiration", FAO
+        # Irrigation and Drainage Paper 56.
+        #
+        #   Ra  = (24*60/pi) * Gsc * dr * (ws*sin(lat)*sin(dec) + cos(lat)*cos(dec)*sin(ws))
+        #                                                              FAO-56 eq. 21
+        #   Rso = (0.75 + 2e-5 * elevation_m) * Ra                     FAO-56 eq. 37
+        #
+        # At 41N, Ra peaks at 41.90 MJ/m2/day on 21 June (day 171), giving Rso = 31.4 at sea
+        # level. But these regions are not at sea level and not all at 41N: they run from
+        # nw-kansas at 39.1N to big-horn at 44.35N, on ground from roughly 1,200 m in the
+        # Bighorn Basin to 1,800 m in western Colorado. Thinner air passes more light, so the
+        # bound RISES with elevation, and across that span Rso works out at 32.4-32.9.
+        #
+        # The old comment's "about 31" was the SEA-LEVEL figure quoted for regions a mile up,
+        # which understated the true ceiling by about 1.5 MJ. Checked region by region, every
+        # observed peak sits under its own bound — the highest, western-colorado at 32.5, is
+        # below the 32.9 its elevation allows and would have looked like an exceedance against
+        # the old number.
+        #
+        # 34 stays as the pass limit. It clears the real ceiling everywhere in the region set
+        # and still catches the only thing this check is for: a unit error. Anything above
+        # that is not sunlight.
         check("solar within physical limit", mx <= 34,
-              "peak %.1f MJ/m2/day; clear-sky maximum at this latitude is about 31" % mx)
+              "peak %.1f MJ/m2/day; FAO-56 clear-sky ceiling is 32.4-32.9 across this region "
+              "set (39-44N, 1,200-1,800 m)" % mx)
         summer = [v for v in vals if v > 0]
         check("solar has plausible mean", 8 <= (sum(summer)/len(summer)) <= 30,
               "mean %.1f MJ/m2/day over %d station-days" % (sum(summer)/len(summer), len(summer)))

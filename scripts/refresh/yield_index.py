@@ -59,6 +59,22 @@ YEARS = list(range(2015, 2026))
 # Night minimum above which common bean pollen is reported to fail. Counted as an
 # observation and tested against real harvests; nothing is subtracted from any yield on
 # the strength of it.
+#
+# SOURCE: 68 F is 20.0 C, which is the published threshold, not a round number chosen to
+# look like one. Porch, T.G. & Jahn, M. (2001), "Effects of high-temperature stress on
+# microsporogenesis in heat-sensitive and heat-tolerant genotypes of Phaseolus vulgaris",
+# Plant, Cell & Environment 24:723-731 — day above 30 C and NIGHT ABOVE 20 C give
+# significant yield reduction in common bean. Restated in Cruz et al. (2023), Frontiers in
+# Plant Science 14:1145858, doi:10.3389/fpls.2023.1145858: "Common bean reproductive
+# development is strongly affected by heat stress, particularly overnight temperatures
+# above 20 C." Corroborated across later reviews of reproductive-stage heat stress.
+#
+# LIMIT OF THAT SOURCE: it covers Phaseolus vulgaris — pinto, great northern, navy, black,
+# kidney, small red, cranberry, small white. It does NOT cover peas, chickpeas or blackeye
+# (cowpea), which season_biomass() below currently counts on this same threshold. That
+# count is an observation, published as a count and not subtracted from any yield, but for
+# those three crops the 20 C line is borrowed and nothing sources it. Do not build a claim
+# about pea or chickpea nights on it without finding a threshold for those species.
 NIGHT_HOT_F = 68
 THIS_YEAR = 2026
 SEASON = ("03-01", "10-31")
@@ -83,13 +99,34 @@ FULL_STATE = {"NE": "Nebraska", "CO": "Colorado", "WY": "Wyoming", "KS": "Kansas
 # state stands in — but only where that transfer can be CHECKED, not assumed.
 #
 # Chickpeas: USDA does not estimate them in Nebraska, Colorado or Wyoming. Montana is the
-# largest dryland chickpea state, semi-arid, same pulse rotation, similar latitude band.
+# largest chickpea state, semi-arid, same pulse rotation, similar latitude band.
+#
+# SOURCE for "largest": USDA NASS State Agriculture Overview, 2025, read per state — chickpea
+# acres PLANTED: Montana 260,000; Washington 141,000; Idaho 98,000; North Dakota 37,000.
+# NASS estimates chickpeas in those four states only (California has no chickpea row), so the
+# US figure is 536,000 and Montana is 48.5% of it, first by a factor of 1.8 over second place.
+#
+# DO NOT quote 541,000. That was the June 2025 Acreage report's PLANTING INTENTIONS
+# (ISSN 1949-1522), and it was used here first and was wrong: the state overviews have since
+# revised Washington from 144,000 to 141,000, Idaho 99,000 to 98,000, North Dakota 38,000 to
+# 37,000. The reader-facing sentence deliberately quotes Montana against WASHINGTON rather
+# than against a national total, so it rests on two figures read straight off USDA's own
+# pages and needs no arithmetic of ours to stand up.
+#
+# The word "dryland" USED TO STAND HERE AND HAS BEEN REMOVED. Montana chickpea really is
+# grown almost entirely without irrigation — MSU Extension MontGuide MT201703AG bases the
+# state's whole yield expectation on dryland variety trials — but NO agency publishes the
+# irrigated-vs-dryland split for chickpeas, so no number backs the word. It also did no work
+# here: the transfer rests on the pea check below, not on how the ground is watered.
+#
 # The check: dry peas are published in BOTH Montana and Nebraska, and come out at 1,528 and
 # 1,579 lb/ac — within 3%. So Montana's pulse yields do transfer to this ground, and that is
 # demonstrated rather than claimed. The page says all of this in plain words.
 PROXY = {"CHICKPEAS": ("Montana",
                        "USDA does not estimate chickpea yield in these states. This uses "
-                       "Montana, the largest dryland chickpea state. Dry peas are published "
+                       "Montana, which plants more chickpeas than any other state — 260,000 "
+                       "acres in 2025 against 141,000 in Washington, the next biggest "
+                       "(USDA NASS State Agriculture Overview, 2025). Dry peas are published "
                        "in both Montana and Nebraska and differ by 3%, which is the evidence "
                        "that Montana transfers here.")}
 

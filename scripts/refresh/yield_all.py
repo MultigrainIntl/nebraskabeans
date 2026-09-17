@@ -55,13 +55,51 @@ PAR_FRACTION = 0.48
 # wrong twice in one day: first a blackeye yield in seven regions, then a hand-trim that
 # deleted dark red kidney, small red, cranberry and blackeye — all of which USDA records as
 # grown here — while keeping navy and small white, which it does not.
+# GDD-TO-MATURITY IS NOW MEASURED, NOT CHOSEN — for the two classes the evidence covers.
+#
+# SOURCE: UNL Panhandle REEC, "2022 Nebraska Dry Edible Bean Variety Trials" (EC3064,
+# Urrea), Scottsbluff Ag Lab (planted 8 June) and Mitchell Ag Lab (planted 3 June), both
+# irrigated. DTM is UNL's own definition: days from planting until 80% of plants are ready
+# to harvest. Median DTM per market class was converted to growing degrees, base 50 F, over
+# this project's own ALLIANCE MUNICIPAL AIRPORT ASOS daily record in season-history.json.
+#
+#                    measured ratio to pinto        this table said
+#   GREAT NORTHERN   -1.0% (SB)  +0.7% (MI)         -5.9%
+#   LIGHT RED KIDNEY +3.5% (SB)  +3.0% (MI)        +11.8%
+#
+# Both classes agree across two sites with different planting dates and different irrigation
+# methods, which is two independent measurements rather than one. Kidney IS slower than
+# pinto — that part of the old table was right in direction — but by about 3%, not 12%. The
+# 1,900 exaggerated it roughly fourfold and was producing a ~200 lb/ac swing in northwest
+# Kansas on no evidence at all. Great Northern was wrong in the other direction: the table
+# had it maturing 6% faster than pinto; the trials have it level.
+#
+# Pinto's 1,700 is kept as the anchor and the others are scaled by the measured ratio, NOT
+# set to the measured absolute. The absolute GDD came out 12-23% higher than this table at
+# both sites, but that figure moves with which weather station you use, and Alliance is
+# about 50 miles from the trial ground. The RATIO between classes is what creates class
+# differences in the model, and a ratio is not sensitive to the station choice. Changing the
+# absolutes would move every maturity date on the site and is not supported by one year.
+#
+# NAVY AND BLACK ARE DELIBERATELY UNCHANGED. The two sites disagreed for them — navy +4.7%
+# at Scottsbluff against +1.6% at Mitchell, black +4.7% against +0.7% — so there is no
+# reproducible number to put in. Leaving a known-unsourced value is honest; replacing it
+# with an average of two readings that contradict each other is not.
+#
+# STILL UNSOURCED IN THIS TABLE: every heat threshold, every light-use efficiency, every
+# harvest index, and the GDD for navy, black, small red, pink, cranberry and small white.
+# Those remain chosen, not read. Do not cite this comment as covering them.
 ALL_CLASSES = {
     "PINTO":              (50, 90, 1700, "06-01", 1.45, 0.45, "DRY BEANS"),
-    "GREAT NORTHERN":     (50, 88, 1600, "06-01", 1.45, 0.45, "DRY BEANS"),
+    "GREAT NORTHERN":     (50, 88, 1700, "06-01", 1.45, 0.45, "DRY BEANS"),
     "NAVY":               (50, 88, 1650, "06-01", 1.45, 0.46, "DRY BEANS"),
     "BLACK":              (50, 92, 1750, "06-01", 1.50, 0.45, "DRY BEANS"),
-    "LIGHT RED KIDNEY":   (50, 86, 1900, "06-01", 1.40, 0.42, "DRY BEANS"),
-    "DARK RED KIDNEY":    (50, 86, 1900, "06-01", 1.40, 0.42, "DRY BEANS"),
+    "LIGHT RED KIDNEY":   (50, 86, 1755, "06-01", 1.40, 0.42, "DRY BEANS"),
+    # Dark red kidney carries light red kidney's figure. UNL's 2022 trial had no dark red
+    # kidney entries, so this is not measured here — but WSU variety trials put dark red
+    # kidney at 101-111 days against light red kidney's 106-112, i.e. if anything faster,
+    # so 1,755 is the generous end rather than an invention in the wrong direction.
+    "DARK RED KIDNEY":    (50, 86, 1755, "06-01", 1.40, 0.42, "DRY BEANS"),
     "SMALL RED":          (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
     "PINK":               (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
     "CRANBERRY":          (50, 88, 1800, "06-01", 1.40, 0.43, "DRY BEANS"),

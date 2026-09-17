@@ -161,7 +161,7 @@
       "years": 11,
       "adjust_pct": -29.4,
       "level_kind": "proxy",
-      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state — 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
       "level_source": "nearest comparable published state, see level_note"
      },
      "harvest": {
@@ -327,7 +327,7 @@
       "years": 11,
       "adjust_pct": -8.3,
       "level_kind": "proxy",
-      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state — 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
       "level_source": "nearest comparable published state, see level_note"
      },
      "harvest": {
@@ -473,7 +473,7 @@
       "years": 11,
       "adjust_pct": -17.2,
       "level_kind": "proxy",
-      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state — 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
       "level_source": "nearest comparable published state, see level_note"
      },
      "harvest": {
@@ -843,7 +843,7 @@
       "years": 11,
       "adjust_pct": -28.0,
       "level_kind": "proxy",
-      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, the largest dryland chickpea state. Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
+      "level_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state — 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
       "level_source": "nearest comparable published state, see level_note"
      },
      "harvest": {
