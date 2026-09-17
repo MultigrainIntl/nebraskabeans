@@ -203,6 +203,18 @@ check("thin well counts are called anecdotes", "an anecdote, not a regional figu
 check("borrowed wells name their state", "mostly_from_another_state" in dm3,
       "se-wyoming's 765 Nebraska wells are disclosed")
 
+# ---------------------------------------------------------------------------
+# 12. BUILT AND BURIED IS THE SAME AS NOT BUILT (found 17 Sep 2026).
+# The water-table line was first written into the estimate panel — 19,574 pixels down a
+# 25,717-pixel page, inside a collapsed box, 76% of the way to the bottom. GAJ: "I CANNOT SEE
+# ANYTHING CLEAR ON THE WEBSITE!" It now sits in the top answer block beside the crop
+# headline, and must stay there.
+af = read("assets", "answer-first.js")
+check("the water line is in the top answer block", "waterLine()" in af and "nbA-water" in af,
+      "rendered with the crop headline, not buried in a panel")
+check("the answer block hears the region picker", "e.target.id === 'region'" in af,
+      "without it the water line names one region whichever you pick")
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))

@@ -907,3 +907,18 @@ canvas.nbSurface {
 @media (prefers-color-scheme: dark) {
   .nbEstCaveat { background: #2a2418; border-left-color: #c9954a; }
 }
+
+/* The water line in the top answer block. Given its own weight because it answers a question
+   growers are actually asking — and because for the Panhandle the answer is reassuring, which
+   is the opposite of what national coverage of the Ogallala would lead them to expect. */
+.nbA-water {
+  margin: 10px 0 0;
+  padding: 8px 12px;
+  border-left: 3px solid #2f7d9e;
+  background: #eef5f8;
+  font-size: 15px;
+  line-height: 1.5;
+}
+@media (prefers-color-scheme: dark) {
+  .nbA-water { background: #16262c; border-left-color: #4a9dc0; }
+}

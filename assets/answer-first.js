@@ -102,7 +102,56 @@
              worst: worst, moistLine: moistLine };
   }
 
+
+  /* THE WATER, WHERE SOMEBODY WILL ACTUALLY SEE IT. This was first written into the estimate
+   * panel, which sits 19,574 pixels down a 25,717-pixel page — 76% of the way to the bottom,
+   * inside a collapsed box. GAJ: "I CANNOT SEE ANYTHING CLEAR ON THE WEBSITE!" He was right.
+   * Building a thing and burying it is the same as not building it.
+   *
+   * One sentence, in the answer block at the top, next to the crop headline. It says the depth,
+   * the rate, and — because this is the part a grower cannot get anywhere else — whether that
+   * rate is steady or falling. For the Panhandle it is reassuring: about four feet in a
+   * century, from 1,393 wells and 95 years. A grower reading national coverage of the Ogallala
+   * assumes the worst about ground that is holding, and correcting that is worth the line.
+   *
+   * Not a forecast, and it never becomes one: groundwater failed the yield-skill test on
+   * 17 Sep 2026 and a check in verify_data.py stops any forecasting script reading the file. */
+  var GW = null;
+  fetch('assets/data/groundwater.json').then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { GW = j; }).catch(function () { GW = null; });
+
+  function waterLine() {
+    var sel = document.getElementById('region');
+    var rk = sel && sel.value;
+    var r = GW && GW.regions && rk && GW.regions[rk];
+    if (!r || r.median_depth_to_water_ft == null) return '';
+    var t = r.trend;
+    var txt = 'Water is <b>' + r.median_depth_to_water_ft + ' ft down</b>';
+    if (t) {
+      var per20 = Math.abs(t.feet_over_20_years);
+      txt += per20 < 3
+        ? ' and <b>holding</b> — it has moved about ' + per20.toFixed(0) +
+          ' ft in twenty years, measured over ' + t.years + '.'
+        : ' and <b>falling ' + per20.toFixed(0) + ' ft every twenty years</b> at the pace of ' +
+          t.years + '.';
+      txt += ' From ' + t.wells_fitted.toLocaleString() + ' wells.';
+    } else {
+      txt += '. No long record here, so we publish no rate rather than borrowing one.';
+    }
+    return '<p class="nbA-water">' + txt + '</p>';
+  }
+
+  /* The region picker belongs to app.js and the answer block never listened for it. Without
+   * this the water line would name one region's depth whichever region was chosen — the exact
+   * defect fixed twice already today, in the cutworm sentence and then in the estimate panel. */
+  document.addEventListener('change', function (e) {
+    if (e.target && e.target.id === 'region' && window.__nbAnswerLast) {
+      try { render(window.__nbAnswerLast.data, window.__nbAnswerLast.crop); } catch (err) { }
+    }
+  }, true);
+
   function render(data, crop) {
+    window.__nbAnswerLast = { data: data, crop: crop };
     var h = headlineFor(crop, data.regions);
     var el = document.getElementById('nbAnswer');
     if (!h || !el) return;
@@ -131,6 +180,7 @@
       (h.yieldBasis ? '<p class="nbA-basis">' + h.yieldBasis + '</p>' : '') +
       (h.moistLine ? '<p class="nbA-moist">' + h.moistLine + '</p>' : '') +
       (h.watch ? '<p class="nbA-watch">Watch — ' + h.watch + '</p>' : '') +
+      waterLine() +
       '<p class="nbA-q"><b>What sets the price:</b> ' + (data.classes[crop].quality_driver || '') + '</p>' +
       '<details class="nbA-more"><summary>Region by region</summary>' +
       '<table class="nbA-table"><tbody>' + table + '</tbody></table>' +
