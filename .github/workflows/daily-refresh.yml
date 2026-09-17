@@ -53,6 +53,22 @@ jobs:
         if: success()
         run: python3 scripts/verify_data.py
 
+      # A READER MUST BE ABLE TO REDO THE ARITHMETIC. The check above asks whether each number
+      # is believable; this asks whether it follows from the numbers printed beside it. Eleven
+      # of thirteen published yield ranges once failed that and no gate noticed, because a
+      # wrong-looking range is still a perfectly plausible bean yield.
+      - name: Every published number must reproduce
+        if: success()
+        run: python3 scripts/verify_replication.py
+
+      # DEFECTS THAT WERE LIVE ONCE. This run regenerates the data files every morning, so a
+      # fix that lives only in a data file is undone by tomorrow's run. These assert the fixes
+      # are still in the CODE. Every defect it guards was found by GAJ opening the page, not by
+      # a test — each left valid HTML that rendered without error.
+      - name: No defect has come back
+        if: success()
+        run: python3 tests/verify_no_regression.py
+
       - name: Publish the new data
         if: success()
         run: python3 scripts/refresh/publish.py

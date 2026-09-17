@@ -29,12 +29,20 @@ NB_BASE_URL="$BASE" run "visual-contract" node tests/visual-contract.mjs
 
 echo "data integrity (every dataset against a source that did not produce it)"
 run "data-verification" python3 scripts/verify_data.py --strict
+# Not "is this number believable" — every check above asks that. This asks whether a
+# READER can recompute each published figure from the figures printed beside it. Eleven
+# of thirteen yield ranges once failed that and nothing noticed, because a wrong-looking
+# range is still a plausible bean yield.
+run "replication" python3 scripts/verify_replication.py
 
 echo "contract and truth gates"
 run "foundation" node scripts/verify_foundation.mjs
 run "truth-firewall" python3 tests/verify_truth_firewall.py
 run "evidence-store" node --test tests/evidence-store.test.js
 run "temporal-evidence" node --test tests/temporal-evidence.test.js
+# Defects that were live once and must not return. Every one was found by GAJ opening
+# the page, not by a test, and every one left valid HTML that rendered without error.
+run "no-regression" python3 tests/verify_no_regression.py
 
 echo "syntax (necessary, never sufficient)"
 for f in assets/decision-map.js assets/i18n.js assets/answer-first.js; do

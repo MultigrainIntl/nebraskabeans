@@ -61,7 +61,14 @@ assert(est.what_would_sharpen_it.length>=3,'a limitation without a path to close
 assert(est.what_would_sharpen_it.some(x=>/harvest data|ground/i.test(x.need)),'ground truth from growers must be named as the largest gap');
 assert.match(est.principle,/observations, then the number/i,'the estimate must lead with evidence');
 assert.match(app,/USDA current yield is not a predictor/);
-assert.match(app,/BACKTEST GATE PASS/);
+// WAS: assert.match(app,/BACKTEST GATE PASS/)
+// That assertion REQUIRED the page to claim a passed backtest, and so defended a claim the
+// county skill test disproved on 17 Sep 2026. A gate that enforces a false statement is worse
+// than no gate: it would have reverted the honest wording and reported PASS while doing it.
+// The tile must now state the opposite, and must never quietly go back.
+assert.match(app,/NOT PROVEN/,'the confidence tile must say NOT PROVEN — the county test found no skill');
+assert.doesNotMatch(app.replace(/\/\*[\s\S]*?\*\//g,' '),/BACKTEST GATE PASS/,
+  'the disproved backtest claim must not return to the page');
 assert.match(app,/Production requires validated crop-area weights/);
 assert.doesNotMatch(app,/const stateYield=rows.reduce/,'unweighted regional averages must not generate state production');
 
