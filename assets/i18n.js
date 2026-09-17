@@ -110,8 +110,26 @@
     'estimate.bestWorst':
       'Best: {bestRegion}, {bestYield}. Weakest: {worstRegion}, {worstYield}.',
     'estimate.whatItIs':
-      'This is an estimate from satellite and weather data. It is not a forecast we have ' +
-      'proved, and it is not a measurement of your field.',
+      'This is an educated estimate from satellite and weather data. It is not a forecast we ' +
+      'have proved, and it is not a measurement of your field.',
+    'estimate.neverBeatenTrend':
+      'Read this before you use the number. We tested whether this estimate beats simply ' +
+      'drawing a line through past yields. It does not. We checked county by county, using ' +
+      'weather, using satellite greenness, and using how far the water table has fallen. ' +
+      'Seven tests across four states. Five made the answer worse. Two helped by an amount ' +
+      'too small to tell apart from luck. We are publishing this because it is the best ' +
+      'reading available while the crop is still in the ground, and because you should know ' +
+      'exactly what it is worth.',
+    'estimate.whyItMisses':
+      'Here is the honest reason it misses. The satellite sees leaves. What you sell is ' +
+      'seed. Heat during flowering kills pods while the canopy stays green, so a field can ' +
+      'look healthy from orbit and come up short in the bin. Nothing we can see from space ' +
+      'looks inside a pod.',
+    'estimate.whatWouldFixIt':
+      'One thing would fix this, and it is not a better model. We have frozen 200 estimates ' +
+      'and not one grower has told us what actually came off the field. Until real harvest ' +
+      'results come back, nothing here can be graded, and nothing that cannot be graded can ' +
+      'improve. If you cut this year, tell us what you got.',
     'estimate.howBuilt':
       'We run the same model over this season and over the last 11 seasons, then compare the ' +
       'two. Comparing them cancels out the parts we cannot measure well. We apply that ' +

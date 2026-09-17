@@ -895,3 +895,15 @@ canvas.nbSurface {
 /* USDA planted acres for the selected class — the crop itself, not the mapped area. */
 .nbUsdaAcres { display: block; margin-top: 6px; font-size: 13px; line-height: 1.5;
   color: #4d5c53; }
+
+/* The estimate's own hesitation. It sits with the other limits rather than in a footnote,
+   because the county skill test (17 Sep 2026) found this number does not beat a trend line,
+   and a reader who misses that sentence is reading a validated forecast that does not exist. */
+.nbEstCaveat {
+  border-left: 3px solid #b4813a;
+  padding-left: 12px;
+  background: #fdf8f0;
+}
+@media (prefers-color-scheme: dark) {
+  .nbEstCaveat { background: #2a2418; border-left-color: #c9954a; }
+}

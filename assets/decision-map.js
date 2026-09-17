@@ -977,6 +977,15 @@
         T.t('flower.disagree') + '</p>' +
       '<p class="nbEstLimit"><b>What this is.</b> ' + T.t('estimate.whatItIs') + ' ' +
         T.t('estimate.howBuilt') + '</p>' +
+      /* THE HESITATION GOES FIRST, NOT IN A FOOTNOTE. The county skill test finished on
+         17 September 2026 and this estimate lost to a straight line through past yields in
+         five of seven state-by-state tests, and tied in the other two. GAJ's call is to keep
+         publishing the number — it is the best reading available before harvest — and to say
+         plainly what it is worth. A number without this paragraph reads like a forecast that
+         has been validated. It has not. */
+      '<p class="nbEstLimit nbEstCaveat"><b>What we cannot claim.</b> ' +
+        T.t('estimate.neverBeatenTrend') + '</p>' +
+      '<p class="nbEstLimit">' + T.t('estimate.whyItMisses') + '</p>' +
       '<p class="nbEstLimit">' + T.t('estimate.bandMeans') + ' ' +
         T.t('estimate.heatNotPriced') + ' ' + T.t('estimate.heatSeedSize') + '</p>' +
       '<p class="nbEstLimit">' + T.t('estimate.weakestPart') + '</p>' +
@@ -985,7 +994,8 @@
         T.t('estimate.yourField') + '</p>' +
       proxyLine() +
       irrigationLine() +
-      '<p class="nbEstNext">' + T.t('estimate.wouldSharpen') + '</p>';
+      '<p class="nbEstNext">' + T.t('estimate.wouldSharpen') + '</p>' +
+      '<p class="nbEstNext">' + T.t('estimate.whatWouldFixIt') + '</p>';
     el.hidden = false;
   }
 
