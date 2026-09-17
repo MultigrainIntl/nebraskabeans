@@ -125,15 +125,28 @@
     var rk = sel && sel.value;
     var r = GW && GW.regions && rk && GW.regions[rk];
     if (!r || r.median_depth_to_water_ft == null) return '';
-    var t = r.trend;
+    var t = r.trend, a = r.this_year;
     var txt = 'Water is <b>' + r.median_depth_to_water_ft + ' ft down</b>';
+    /* THIS YEAR FIRST. The long-run slope is the durable fact, but a grower is standing in
+     * one season and wants to know whether the water is where it usually is. In 2026
+     * southwest Nebraska sits 4.67 ft below its own 2015-2025 normal — about thirty years of
+     * its own decline in a single season, which is this winter's dryness and not depletion.
+     * Saying only the century rate would have hidden that completely. */
+    if (a) {
+      var ft = Math.abs(a.feet_vs_own_normal);
+      txt += ft < 0.5
+        ? ' — about where it normally sits this year'
+        : ' — <b>' + ft.toFixed(1) + ' ft ' + a.direction + ' than normal this year</b>' +
+          (a.direction === 'lower' && ft >= 3 ? ', a dry season showing up in the aquifer' : '');
+      txt += ' (' + a.wells + ' wells against their own ' + '2015\u201325 average).';
+    }
     if (t) {
       var per20 = Math.abs(t.feet_over_20_years);
       txt += per20 < 3
-        ? ' and <b>holding</b> — it has moved about ' + per20.toFixed(0) +
+        ? ' Over the long run it is <b>holding</b> — about ' + per20.toFixed(0) +
           ' ft in twenty years, measured over ' + t.years + '.'
-        : ' and <b>falling ' + per20.toFixed(0) + ' ft every twenty years</b> at the pace of ' +
-          t.years + '.';
+        : ' Over the long run it is <b>falling ' + per20.toFixed(0) +
+          ' ft every twenty years</b>, measured over ' + t.years + '.';
       txt += ' From ' + t.wells_fitted.toLocaleString() + ' wells.';
     } else {
       txt += '. No long record here, so we publish no rate rather than borrowing one.';

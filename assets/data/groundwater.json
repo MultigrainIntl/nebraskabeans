@@ -20,6 +20,7 @@
  "wells_total": 8648,
  "regions": {
   "big-horn": {
+   "this_year": null,
    "trend": null,
    "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 1,
@@ -40,6 +41,7 @@
    "note": "A median of 1 wells is an anecdote, not a regional figure."
   },
   "ne-colorado": {
+   "this_year": null,
    "trend": {
     "feet_per_year": 0.24,
     "direction": "falling",
@@ -74,6 +76,13 @@
    "note": null
   },
   "ne-panhandle": {
+   "this_year": {
+    "feet_vs_own_normal": 1.07,
+    "direction": "lower",
+    "wells": 111,
+    "year": 2026,
+    "baseline": "each well's own 2015-2025 average"
+   },
    "trend": {
     "feet_per_year": 0.04,
     "direction": "falling",
@@ -106,6 +115,7 @@
    "note": null
   },
   "nw-kansas": {
+   "this_year": null,
    "trend": null,
    "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 827,
@@ -130,6 +140,13 @@
    "note": null
   },
   "se-wyoming": {
+   "this_year": {
+    "feet_vs_own_normal": 0.87,
+    "direction": "lower",
+    "wells": 57,
+    "year": 2026,
+    "baseline": "each well's own 2015-2025 average"
+   },
    "trend": null,
    "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 766,
@@ -152,6 +169,13 @@
    "note": null
   },
   "sw-nebraska": {
+   "this_year": {
+    "feet_vs_own_normal": 4.67,
+    "direction": "lower",
+    "wells": 37,
+    "year": 2026,
+    "baseline": "each well's own 2015-2025 average"
+   },
    "trend": {
     "feet_per_year": 0.16,
     "direction": "falling",
@@ -187,6 +211,7 @@
    "note": null
   },
   "western-colorado": {
+   "this_year": null,
    "trend": {
     "feet_per_year": -0.09,
     "direction": "rising",

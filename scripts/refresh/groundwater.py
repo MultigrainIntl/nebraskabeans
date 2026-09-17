@@ -61,6 +61,23 @@ TREND_CACHE = os.path.join(DATA, "archive", "groundwater-trend-cache.json")
 # 63-year decline.
 MIN_TREND_YEARS = 12       # a slope from fewer years than this is weather, not depletion
 MIN_TREND_WELLS = 5
+MIN_ANOM_WELLS = 8         # below this, this year's anomaly is a handful of wells, not a season
+
+# THIS YEAR, NOT JUST THIS CENTURY. GAJ: "It also does not say anything about 2026!" He was
+# right — the line reported a 95-year slope and nothing about the season a grower is standing
+# in. The long trend and the current year are different facts and both are needed:
+#
+#     Southwest Nebraska  4.65 ft BELOW its own 2015-2025 normal in 2026, from 38 wells
+#     Nebraska Panhandle  1.02 ft below, from 113 wells
+#     Southeast Wyoming   0.87 ft below, from 58 wells
+#
+# Southwest Nebraska is about THIRTY YEARS of its own long-run decline in a single season.
+# That is not depletion, it is this winter's dryness showing up in the aquifer, and calling it
+# depletion would be as wrong as calling the Panhandle's steady century a crisis.
+#
+# Built by joining two sources on the well: UNL carries history to 2025, the national portal
+# carries the 2026 reading. 5,885 of UNL's 6,177 wells in the portal share their CSD_ID
+# directly, and 833 of those have been read in 2026.
 
 # WHAT THE TREND ACTUALLY SAYS, AND A CORRECTION WORTH KEEPING.
 # This was built expecting to publish a countdown. Yuma County, Colorado is roughly 51 ft
@@ -265,15 +282,49 @@ def unl_nebraska_series():
     print("  UNL: %d wells with 6+ years of record" % len(out), file=sys.stderr)
     return out
 
+
+def this_year_anomaly(unl, portal_rows, la, lo, year=2026):
+    """How far this year's water sits from each well's OWN recent normal.
+
+    A raw median across wells moves with which wells were measured; comparing every well to
+    itself removes that. Same normalisation the trend uses, and the reason a noisy county
+    series becomes a clean signal.
+    """
+    anoms = []
+    for r in portal_rows:
+        sid = r.get("SITE_NO")
+        rec = unl.get(sid)
+        if not rec or (r.get("LATEST_DATE") or "") < "%d-01-01" % year:
+            continue
+        ser, (wla, wlo) = rec
+        recent = {y: v for y, v in ser.items() if 2015 <= y <= 2025}
+        if len(recent) < 5 or km(wla, wlo, la, lo) > MAX_KM:
+            continue
+        try:
+            v = float(r["LATEST_VALUE"])
+        except (TypeError, ValueError):
+            continue
+        if 0 < v < 1500:
+            anoms.append(v - statistics.mean(recent.values()))
+    if len(anoms) < MIN_ANOM_WELLS:
+        return None
+    m = statistics.median(anoms)
+    return {"feet_vs_own_normal": round(m, 2),
+            "direction": "lower" if m > 0 else "higher",
+            "wells": len(anoms), "year": year,
+            "baseline": "each well's own 2015-2025 average"}
+
 def main():
     import csv, io
     wells = []
+    portal_rows = []
     for st in STATES:
         q = urllib.parse.urlencode({
             "service": "WFS", "version": "1.0.0", "request": "GetFeature",
             "typeName": LAYER, "outputFormat": "csv", "maxFeatures": 30000,
             "CQL_FILTER": "STATE_NM='%s'" % st})
         rows = list(csv.DictReader(io.StringIO(get(WFS + "?" + q))))
+        portal_rows.extend(rows)
         got = 0
         for r in rows:
             try:
@@ -348,6 +399,7 @@ def main():
             hist = [w["series"] for w in ne if len(w.get("series") or {}) >= 4]
             trend_src = ("UNL Conservation and Survey Division groundwater database, "
                          "1930-2025")
+        anomaly = this_year_anomaly(unl, portal_rows, la, lo) if unl else None
         b, npts, span = slope_ft_per_year(hist)
         trend = None
         # MIN_TREND_WELLS was declared and then not enforced on the FIT, only on the candidate
@@ -371,6 +423,7 @@ def main():
                      "feet_over_20_years": round(b * 20, 1)}
 
         regions[rk] = {
+            "this_year": anomaly,
             "trend": trend,
             "trend_unavailable_because": None if trend else (
                 "No trend is published for this region. A slope may only be fitted from wells "

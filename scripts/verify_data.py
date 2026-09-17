@@ -187,6 +187,25 @@ if d:
               if t else "NO TREND — is mdbtools installed? UNL's database is the only source "
                         "rich enough to fit one here.")
 
+    # THIS YEAR MUST NOT QUIETLY VANISH EITHER. The anomaly joins UNL's history to the
+    # national portal's 2026 reading on the well's own id — 5,885 of 6,177 match. If either
+    # side moves, the current-season number disappears and the page silently reverts to
+    # quoting a 95-year slope at a grower standing in one season.
+    a = (regs.get("ne-panhandle") or {}).get("this_year")
+    check("this year's water level is published", bool(a),
+          "%+.2f ft vs normal from %d wells" % (a["feet_vs_own_normal"], a["wells"]) if a
+          else "NO CURRENT-YEAR FIGURE — did the UNL/portal well-id join break?")
+
+    # A season anomaly and a century trend are different facts. If the anomaly ever came out
+    # smaller than the annual trend it would not be a season at all, it would be the trend
+    # leaking into the field that is supposed to hold weather.
+    t = (regs.get("ne-panhandle") or {}).get("trend")
+    if a and t:
+        check("season and trend are distinguishable",
+              abs(a["feet_vs_own_normal"]) > abs(t["feet_per_year"]),
+              "season %+.2f ft against a trend of %+.2f ft/yr"
+              % (a["feet_vs_own_normal"], t["feet_per_year"]))
+
     # R1 territory: this failed the skill test and must not become a forecast input.
     src = ""
     for f in ("scripts/refresh/yield_index.py", "scripts/refresh/yield_all.py",
