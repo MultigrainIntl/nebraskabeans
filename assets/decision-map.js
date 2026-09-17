@@ -1372,9 +1372,27 @@
           : 'In <b>' + where + '</b>, flight has <b>not reached the 25% scouting mark</b> — ' +
             'the median thermometer is at ' + r(med) + '%, the warmest tenth at ' + r(high) + '%. ' +
             'Other regions are on their own schedule; switch region above to see them.';
-      text += ' <i>This is timing from accumulated heat, on UNL\u2019s published model. It ' +
-        'does not say whether moths are in your field, and it does not say how bad it is. ' +
-        'That needs a trap count or a walk through the rows.</i>';
+      /* THE WINDOW IS THE ONLY ACTIONABLE THING HERE, so it is stated as dates and put
+       * first. UNL NebGuide G2013: "the application should be made 10 to 21 days after the
+       * peak moth flight". Peak flight is the 50% mark the model already computes.
+       *
+       * And the sentence after it is not a disclaimer, it is the other half of the decision.
+       * G2013 again: "Dry beans cannot be effectively scouted for western bean cutworm eggs
+       * or small larvae." There is no egg threshold for beans — the 5-8% figure people quote
+       * is for CORN. What decides WHETHER to spray is a moth trap the grower runs, and this
+       * site cannot supply that number. Saying so is what makes the window honest. */
+      var wbcW = ((S.pest && S.pest.regions && rgn && S.pest.regions[rgn]) || {}).spray_window;
+      if (wbcW) {
+        text += ' <b>If a trap says spray, the window is ' + niceDate(wbcW.opens) +
+          ' to ' + niceDate(wbcW.closes) + '</b> — 10 to 21 days after peak flight on ' +
+          niceDate(wbcW.peak_flight) + '.';
+      }
+      text += ' <i>This is timing only, from accumulated heat on UNL\u2019s published model. ' +
+        'Whether to spray at all is decided by a moth trap you run: cumulative catch at peak ' +
+        'flight in a milk jug trap, under 700 is low risk, 700\u20131,000 moderate, over ' +
+        '1,000 high. We cannot see that number. Dry beans cannot be scouted for eggs \u2014 ' +
+        'that is a corn practice \u2014 so after the window, look for pod damage: 0.5\u20131% ' +
+        'or more is worth acting on. (UNL NebGuide G2013)</i>';
     } else if (S.view === 'stage') {
       // Past 110% the percentage stops being the useful number. A grower whose lentils finished
       // in July does not need to hear "168% of maturity"; they need to hear that it is standing.
@@ -1673,10 +1691,12 @@
       fetch('assets/data/usda-class-acres.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
       fetch('assets/data/irrigation.json?v=' + build())
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch('assets/data/pest-wbc-2026.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11]; S.pest = res[12];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;

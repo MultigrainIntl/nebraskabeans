@@ -185,6 +185,32 @@ if d:
     check("cutworm timing runs south to north", bool(ks and bh) and ks < bh,
           "northwest Kansas %s before Big Horn %s" % (ks, bh) if ks and bh else "missing a region")
 
+    # The spray window is the only actionable output here, so it is checked like one.
+    # UNL NebGuide G2013: apply 10 to 21 days after peak moth flight.
+    from datetime import date as _d
+    wbad = []
+    for rk, r in regs.items():
+        w = r.get("spray_window") or {}
+        if not w.get("opens"):
+            wbad.append("%s has no window" % rk); continue
+        pk = _d.fromisoformat(w["peak_flight"])
+        if (_d.fromisoformat(w["opens"]) - pk).days != 10 or (_d.fromisoformat(w["closes"]) - pk).days != 21:
+            wbad.append("%s window is not 10-21 days after peak" % rk)
+    check("spray window follows UNL G2013", regs and not wbad,
+          "%d regions, each 10-21 days after its own peak flight" % len(regs)
+          if not wbad else "; ".join(wbad[:3]))
+
+    # The 5-8% egg-mass threshold is CORN. G2013: dry beans cannot be scouted for eggs at all.
+    # Publishing it against beans would send growers looking for something they cannot find.
+    pages = ""
+    for f in ("assets/i18n.js", "assets/decision-map.js", "index.html"):
+        fp = os.path.join(HERE, "..", f)
+        if os.path.exists(fp):
+            pages += open(fp, encoding="utf-8").read()
+    check("no corn egg threshold shown for beans", "egg mass" not in pages.lower()
+          or "cannot be scouted for eggs" in pages.lower(),
+          "the corn egg threshold is not presented as a bean threshold")
+
     # The thresholds are UNL's. If they are ever edited they must be edited against the source.
     t = {m["threshold_dd"] for r in regs.values() for m in r.get("marks", {}).values()}
     check("UNL thresholds unchanged", t == {2577, 2704, 2838},

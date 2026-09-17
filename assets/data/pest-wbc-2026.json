@@ -16,6 +16,12 @@
   "api_key_required": false
  },
  "forecast_method": "Observed heat to date, then this region's own 2015-2025 daily normals for the rest of the season. Backtested on 2026: standing on 1 June the 25% date came out within 1 day in the Panhandle, 0 in southwest Nebraska, 1 in northeast Colorado and 4 in southeast Wyoming.",
+ "spray_decision": {
+  "when": "10-21 days after peak moth flight \u2014 modelled here, per region",
+  "whether": "a moth trap the grower runs. Milk jug trap, cumulative catch at peak flight: <700 low risk, 700-1,000 moderate, >1,000 high. This site cannot supply that number.",
+  "after": "0.5-1% or more pod damage justifies considering an application",
+  "source": "UNL NebGuide G2013, Seymour, Hein & Wright, April 2010"
+ },
  "limits": [
   "Timing only. Presence and severity are not modelled and must not be inferred.",
   "1-14 March is estimated from normals because the station file opens on 15 March. That is 36-79 DD, about 1% of the scouting threshold.",
@@ -31,6 +37,14 @@
  },
  "regions": {
   "big-horn": {
+   "spray_window": {
+    "opens": "2026-08-07",
+    "closes": "2026-08-18",
+    "peak_flight": "2026-07-28",
+    "rule": "10 to 21 days after peak moth flight (UNL NebGuide G2013)",
+    "conditional_on": "A trap count decides WHETHER to spray, not this model. Cumulative catch at peak flight in a milk jug trap: under 700 low risk, 700-1,000 moderate, over 1,000 high.",
+    "not_applicable": "The 5-8% egg-mass threshold is for CORN. UNL G2013: dry beans cannot be effectively scouted for eggs or small larvae."
+   },
    "stations_used": 20,
    "stations_flagged_as_outliers": 1,
    "mean_dd_to_date": 4224,
@@ -353,6 +367,14 @@
    ]
   },
   "ne-colorado": {
+   "spray_window": {
+    "opens": "2026-07-23",
+    "closes": "2026-08-03",
+    "peak_flight": "2026-07-13",
+    "rule": "10 to 21 days after peak moth flight (UNL NebGuide G2013)",
+    "conditional_on": "A trap count decides WHETHER to spray, not this model. Cumulative catch at peak flight in a milk jug trap: under 700 low risk, 700-1,000 moderate, over 1,000 high.",
+    "not_applicable": "The 5-8% egg-mass threshold is for CORN. UNL G2013: dry beans cannot be effectively scouted for eggs or small larvae."
+   },
    "stations_used": 15,
    "stations_flagged_as_outliers": 0,
    "mean_dd_to_date": 4893,
@@ -605,6 +627,14 @@
    ]
   },
   "ne-panhandle": {
+   "spray_window": {
+    "opens": "2026-07-28",
+    "closes": "2026-08-08",
+    "peak_flight": "2026-07-18",
+    "rule": "10 to 21 days after peak moth flight (UNL NebGuide G2013)",
+    "conditional_on": "A trap count decides WHETHER to spray, not this model. Cumulative catch at peak flight in a milk jug trap: under 700 low risk, 700-1,000 moderate, over 1,000 high.",
+    "not_applicable": "The 5-8% egg-mass threshold is for CORN. UNL G2013: dry beans cannot be effectively scouted for eggs or small larvae."
+   },
    "stations_used": 11,
    "stations_flagged_as_outliers": 0,
    "mean_dd_to_date": 4592,
@@ -801,6 +831,14 @@
    ]
   },
   "nw-kansas": {
+   "spray_window": {
+    "opens": "2026-07-11",
+    "closes": "2026-07-22",
+    "peak_flight": "2026-07-01",
+    "rule": "10 to 21 days after peak moth flight (UNL NebGuide G2013)",
+    "conditional_on": "A trap count decides WHETHER to spray, not this model. Cumulative catch at peak flight in a milk jug trap: under 700 low risk, 700-1,000 moderate, over 1,000 high.",
+    "not_applicable": "The 5-8% egg-mass threshold is for CORN. UNL G2013: dry beans cannot be effectively scouted for eggs or small larvae."
+   },
    "stations_used": 19,
    "stations_flagged_as_outliers": 0,
    "mean_dd_to_date": 5350,
@@ -1109,6 +1147,14 @@
    ]
   },
   "se-wyoming": {
+   "spray_window": {
+    "opens": "2026-07-27",
+    "closes": "2026-08-07",
+    "peak_flight": "2026-07-17",
+    "rule": "10 to 21 days after peak moth flight (UNL NebGuide G2013)",
+    "conditional_on": "A trap count decides WHETHER to spray, not this model. Cumulative catch at peak flight in a milk jug trap: under 700 low risk, 700-1,000 moderate, over 1,000 high.",
+    "not_applicable": "The 5-8% egg-mass threshold is for CORN. UNL G2013: dry beans cannot be effectively scouted for eggs or small larvae."
+   },
    "stations_used": 4,
    "stations_flagged_as_outliers": 0,
    "mean_dd_to_date": 4576,
@@ -1207,6 +1253,14 @@
    ]
   },
   "sw-nebraska": {
+   "spray_window": {
+    "opens": "2026-07-19",
+    "closes": "2026-07-30",
+    "peak_flight": "2026-07-09",
+    "rule": "10 to 21 days after peak moth flight (UNL NebGuide G2013)",
+    "conditional_on": "A trap count decides WHETHER to spray, not this model. Cumulative catch at peak flight in a milk jug trap: under 700 low risk, 700-1,000 moderate, over 1,000 high.",
+    "not_applicable": "The 5-8% egg-mass threshold is for CORN. UNL G2013: dry beans cannot be effectively scouted for eggs or small larvae."
+   },
    "stations_used": 15,
    "stations_flagged_as_outliers": 0,
    "mean_dd_to_date": 5112,
@@ -1459,6 +1513,14 @@
    ]
   },
   "western-colorado": {
+   "spray_window": {
+    "opens": "2026-07-20",
+    "closes": "2026-07-31",
+    "peak_flight": "2026-07-10",
+    "rule": "10 to 21 days after peak moth flight (UNL NebGuide G2013)",
+    "conditional_on": "A trap count decides WHETHER to spray, not this model. Cumulative catch at peak flight in a milk jug trap: under 700 low risk, 700-1,000 moderate, over 1,000 high.",
+    "not_applicable": "The 5-8% egg-mass threshold is for CORN. UNL G2013: dry beans cannot be effectively scouted for eggs or small larvae."
+   },
    "stations_used": 26,
    "stations_flagged_as_outliers": 1,
    "mean_dd_to_date": 4997,

@@ -47,6 +47,24 @@ BASE_F, UPPER_F = 38.0, 75.0
 THRESHOLDS = [("scouting_25pct", 2577, 2416, 2749),
               ("peak_50pct",     2704, 2577, 2838),
               ("late_75pct",     2838, 2660, 3027)]
+
+# THE SPRAY WINDOW, AND WHY DRY BEANS ARE NOT CORN.
+# UNL NebGuide G2013, "Western Bean Cutworm in Corn and Dry Beans" (Seymour, Hein & Wright,
+# April 2010), states plainly: "Dry beans cannot be effectively scouted for western bean
+# cutworm eggs or small larvae." The 5-8% of plants with egg masses that gets quoted for this
+# pest is a CORN threshold and must never be shown against beans.
+#
+# The bean decision runs on two things instead:
+#   WHEN — "If an insecticide treatment is required, the application should be made 10 to 21
+#          days after the peak moth flight." Peak flight is the 50% mark this file already
+#          computes, so the window falls straight out of the model.
+#   WHETHER — a moth trap the grower runs. Cumulative catch at peak flight, milk jug trap:
+#          under 700 low risk, 700-1,000 moderate, over 1,000 high. Nothing here can supply
+#          that number. It is the one thing the model cannot know and a grower can.
+#   AND AFTERWARDS — "If pod feeding is noticeable (0.5 to 1 percent or more pod damage), an
+#          insecticide application should be considered."
+SPRAY_AFTER_PEAK_DAYS = (10, 21)
+TRAP_RISK_MILK_JUG = {"low_below": 700, "high_above": 1000}
 MIN_DAYS = 150            # a station with less than this cannot carry a season total
 MAX_KM = 160              # how far a station may be from a region's bean ground and still count
 ELEV_TOLERANCE_M = 250    # how far ABOVE the crop a station may sit and still describe its heat
@@ -213,7 +231,23 @@ def main():
                 "stations_reached": nobs, "stations_total": len(keep),
                 "status": "observed" if nobs > len(keep) / 2 else "forecast",
                 "threshold_dd": t, "threshold_dd_low": lo_t, "threshold_dd_high": hi_t}
+        # the window, as dates, from the peak-flight mark this model already produces
+        peak = (out_marks.get("peak_50pct") or {}).get("median_date")
+        window = None
+        if peak:
+            pk = date.fromisoformat(peak)
+            window = {
+                "opens": (pk + timedelta(days=SPRAY_AFTER_PEAK_DAYS[0])).isoformat(),
+                "closes": (pk + timedelta(days=SPRAY_AFTER_PEAK_DAYS[1])).isoformat(),
+                "peak_flight": peak,
+                "rule": "10 to 21 days after peak moth flight (UNL NebGuide G2013)",
+                "conditional_on": "A trap count decides WHETHER to spray, not this model. "
+                                  "Cumulative catch at peak flight in a milk jug trap: under "
+                                  "700 low risk, 700-1,000 moderate, over 1,000 high.",
+                "not_applicable": "The 5-8% egg-mass threshold is for CORN. UNL G2013: dry "
+                                  "beans cannot be effectively scouted for eggs or small larvae."}
         regions[rk] = {
+            "spray_window": window,
             "stations_used": len(keep), "stations_flagged_as_outliers": drop,
             "mean_dd_to_date": round(statistics.mean(r["dd_to_date"] for r in keep)),
             "marks": out_marks,
@@ -239,6 +273,13 @@ def main():
                            "on 1 June the 25% date came out within 1 day in the Panhandle, "
                            "0 in southwest Nebraska, 1 in northeast Colorado and 4 in "
                            "southeast Wyoming.",
+        "spray_decision": {
+            "when": "10-21 days after peak moth flight — modelled here, per region",
+            "whether": "a moth trap the grower runs. Milk jug trap, cumulative catch at peak "
+                       "flight: <700 low risk, 700-1,000 moderate, >1,000 high. This site "
+                       "cannot supply that number.",
+            "after": "0.5-1% or more pod damage justifies considering an application",
+            "source": "UNL NebGuide G2013, Seymour, Hein & Wright, April 2010"},
         "limits": [
             "Timing only. Presence and severity are not modelled and must not be inferred.",
             "1-14 March is estimated from normals because the station file opens on 15 March. "
