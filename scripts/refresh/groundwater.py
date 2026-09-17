@@ -30,12 +30,51 @@ water is further down. Every well is also expressed against its own long-term re
 a county's mix of shallow and deep wells cannot masquerade as a trend; that normalisation is
 what turned a noisy Yuma median into a clean 63-year decline.
 """
-import json, math, os, statistics, sys, urllib.parse, urllib.request
+import io, json, math, os, statistics, sys, urllib.parse, urllib.request
 from collections import defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "..", "assets", "data")
 OUT = os.path.join(DATA, "groundwater.json")
+TREND_CACHE = os.path.join(DATA, "archive", "groundwater-trend-cache.json")
+
+# HOW FAST IT IS FALLING, WHICH IS THE PART NOBODY ELSE PUBLISHES.
+# The depth itself is the number a grower already knows better than we do — it is their own
+# well. What no one can see is the RATE across their area. So the latest reading above is
+# context and this is the finding.
+#
+# Sources for history, because no single one covers the region:
+#   Colorado  — CO Division of Water Resources, full per-well measurement history, keyless
+#   Nebraska  — UNL Conservation and Survey Division's own database, published openly at
+#               https://go.unl.edu/wldb as an Access file: 24,209 wells and 974,724 usable
+#               measurements back to 1930. Read with mdbtools. This is the richest record in
+#               the region by a wide margin and it is the reason the Panhandle figure can be
+#               stated at all — the national portal blocks per-well history, and USGS's own
+#               Nebraska wells carry only a few hundred long records against UNL's thousands.
+#   Kansas    — KGS wells appear in the national portal for levels; their history is behind
+#               the WIZARD form and is NOT fetched. Kansas therefore has depth but no trend,
+#               and the file says so rather than borrowing Colorado's slope for it.
+#
+# EVERY WELL AGAINST ITS OWN MEAN. A county's mix of shallow and deep wells changes year to
+# year as sites are added and dropped, and a raw median moves with that mix rather than with
+# the water. Normalising each well to itself is what turned a noisy Yuma series into a clean
+# 63-year decline.
+MIN_TREND_YEARS = 12       # a slope from fewer years than this is weather, not depletion
+MIN_TREND_WELLS = 5
+
+# WHAT THE TREND ACTUALLY SAYS, AND A CORRECTION WORTH KEEPING.
+# This was built expecting to publish a countdown. Yuma County, Colorado is roughly 51 ft
+# lower than in 1965 and 2026 is its deepest year on record, and that was taken as evidence
+# for the region. It is not. Measured on UNL's own 95-year record:
+#
+#     Nebraska Panhandle   +0.04 ft/yr   1,393 wells, 34,600 readings, 1930-2025
+#     Southwest Nebraska   +0.16 ft/yr   1,110 wells, 32,297 readings, 1934-2025
+#
+# The Panhandle water table has fallen about FOUR FEET IN A CENTURY. It is stable. The
+# North Platte valley is a river-recharged aquifer; the Colorado high plains are not, and
+# treating one as evidence for the other was the error. Publishing the flat number matters as
+# much as publishing the falling one — a grower who reads national coverage of the Ogallala
+# will assume the worst about ground that is actually holding.
 
 WFS = "https://www.usgs.gov/apps/ngwmn/geoserver/ngwmn/ows"
 LAYER = "ngwmn:Latest_WL_Percentile"
@@ -82,6 +121,150 @@ def region_centroids():
     return {r: (v[0] / v[2], v[1] / v[2]) for r, v in acc.items() if v[2]}
 
 
+def well_history_colorado(well_id):
+    """Colorado DWR, full history for one well. NOTE the field trap: the wells endpoint calls
+    it waterLevelDepth, the measurements endpoint calls it depthToWater. Using the wrong one
+    returns rows of None and looks like a well with no record."""
+    u = ("https://dwr.state.co.us/Rest/GET/api/v2/groundwater/waterlevels/wellmeasurements/"
+         "?format=json&wellId=%s&pageSize=3000" % well_id)
+    out = defaultdict(list)
+    try:
+        d = json.loads(get(u) or "{}")
+    except Exception:
+        return {}
+    for x in (d.get("ResultList") or []):
+        try:
+            y = int(x["measurementDate"][:4]); v = float(x["depthToWater"])
+            if 0 < v < 1500:
+                out[y].append(v)
+        except (TypeError, ValueError, KeyError):
+            pass
+    return {y: statistics.mean(v) for y, v in out.items()}
+
+
+def well_history_usgs(site_id):
+    """USGS OGC field measurements, parameter 72019 — depth to water below land surface."""
+    u = ("https://api.waterdata.usgs.gov/ogcapi/v1/collections/field-measurements/items?"
+         + urllib.parse.urlencode({"monitoring_location_id": site_id,
+                                   "parameter_code": "72019",
+                                   "datetime": "1960-01-01/2026-12-31",
+                                   "limit": 3000, "f": "json"}))
+    out = defaultdict(list)
+    try:
+        d = json.loads(get(u) or "{}")
+    except Exception:
+        return {}
+    for f in (d.get("features") or []):
+        pr = f.get("properties") or {}
+        try:
+            v = float(pr["value"]); y = int(pr["time"][:4])
+            if 0 < v < 1500:
+                out[y].append(v)
+        except (TypeError, ValueError, KeyError):
+            pass
+    return {y: statistics.mean(v) for y, v in out.items()}
+
+
+def slope_ft_per_year(series_list):
+    """Least squares on year against depth, every well first centred on its own mean."""
+    pts = []
+    for ser in series_list:
+        if len(ser) < 4:
+            continue
+        mu = statistics.mean(ser.values())
+        for y, v in ser.items():
+            pts.append((y, v - mu))
+    if len(pts) < 20:
+        return None, 0, None
+    xs = [p[0] for p in pts]; ys = [p[1] for p in pts]
+    mx, my = statistics.mean(xs), statistics.mean(ys)
+    sxx = sum((x - mx) ** 2 for x in xs)
+    if not sxx:
+        return None, 0, None
+    b = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
+    return b, len(pts), (min(xs), max(xs))
+
+
+
+UNL_DB_URL = "https://go.unl.edu/wldb"
+UNL_CACHE = os.path.join(DATA, "archive", "unl-wldb")
+
+
+def unl_nebraska_series():
+    """Every Nebraska well's history, from UNL's own published database.
+
+    16 MB zipped, a 123 MB Access file inside, 974,724 usable readings. It updates about once
+    a year, so it is cached and only refetched when the server says the file changed —
+    pulling it daily would be wasteful and rude to a university that publishes it for free.
+
+    Needs mdbtools (`brew install mdbtools`). If that is missing this returns nothing and the
+    Nebraska regions simply carry no trend, which is the correct failure: no number is better
+    than a number from a neighbouring state.
+    """
+    import shutil, subprocess, zipfile, csv as _csv
+    if not shutil.which("mdb-export"):
+        print("  mdbtools not installed — Nebraska trend unavailable", file=sys.stderr)
+        return {}
+    os.makedirs(UNL_CACHE, exist_ok=True)
+    zp = os.path.join(UNL_CACHE, "wldb.zip")
+    stamp = os.path.join(UNL_CACHE, "etag.txt")
+    have = open(stamp).read().strip() if os.path.exists(stamp) else ""
+    try:
+        req = urllib.request.Request(UNL_DB_URL, method="HEAD",
+                                     headers={"User-Agent": "nebraskabeans/1.0"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            tag = r.headers.get("ETag") or r.headers.get("Last-Modified") or ""
+    except Exception:
+        tag = ""
+    if not os.path.exists(zp) or (tag and tag != have):
+        print("  fetching UNL groundwater database (16 MB)", file=sys.stderr)
+        try:
+            req = urllib.request.Request(UNL_DB_URL, headers={"User-Agent": "nebraskabeans/1.0"})
+            with urllib.request.urlopen(req, timeout=600) as r, open(zp, "wb") as f:
+                shutil.copyfileobj(r, f)
+            if tag:
+                open(stamp, "w").write(tag)
+        except Exception as e:
+            print("  UNL fetch failed: %s" % str(e)[:80], file=sys.stderr)
+            if not os.path.exists(zp):
+                return {}
+    else:
+        print("  UNL database unchanged since last run, using cache", file=sys.stderr)
+
+    try:
+        with zipfile.ZipFile(zp) as z:
+            name = [n for n in z.namelist() if n.lower().endswith(".accdb")][0]
+            z.extract(name, UNL_CACHE)
+        acc = os.path.join(UNL_CACHE, name)
+    except Exception as e:
+        print("  could not open the UNL archive: %s" % str(e)[:70], file=sys.stderr)
+        return {}
+
+    def dump(table):
+        return subprocess.run(["mdb-export", acc, table], capture_output=True,
+                              text=True, timeout=900).stdout
+
+    coords = {}
+    for r in _csv.DictReader(io.StringIO(dump("Well_Info"))):
+        try:
+            coords[r["CSD_ID"]] = (float(r["LatDD"]), float(r["LongDD"]))
+        except (TypeError, ValueError, KeyError):
+            pass
+    series = defaultdict(lambda: defaultdict(list))
+    for r in _csv.DictReader(io.StringIO(dump("Water_Level_Data"))):
+        try:
+            y = int(r["YearMsr"]); v = float(r["WatLevel"])
+        except (TypeError, ValueError, KeyError):
+            continue
+        if 0 < v < 1500 and 1930 <= y <= 2026 and r["CSD_ID"] in coords:
+            series[r["CSD_ID"]][y].append(v)
+    out = {}
+    for cid, byyear in series.items():
+        if len(byyear) >= 6:
+            out[cid] = ({y: statistics.mean(v) for y, v in byyear.items()}, coords[cid])
+    print("  UNL: %d wells with 6+ years of record" % len(out), file=sys.stderr)
+    return out
+
 def main():
     import csv, io
     wells = []
@@ -102,13 +285,17 @@ def main():
             # not a water table under a bean field.
             if not (0 < v < 1500) or not r.get("LATEST_DATE"):
                 continue
+            sid = r.get("SITE_NO") or ""
             wells.append({"state": st, "agency": r.get("AGENCY_NM", ""),
+                          "usgs_id": ("USGS-" + str(sid)) if "Geological Survey" in r.get("AGENCY_NM", "") and "Kansas" not in r.get("AGENCY_NM", "") else None,
+                          "dwr_id": str(sid) if "Colorado Division" in r.get("AGENCY_NM", "") else None,
                           "county": r.get("COUNTY_NM", ""), "lat": lat, "lon": lon,
                           "depth_ft": v, "date": r["LATEST_DATE"],
                           "aquifer": r.get("NAT_AQFR_DESC", "")})
             got += 1
         print("  %-10s %5d wells with a level" % (st, got), file=sys.stderr)
 
+    unl = unl_nebraska_series()
     cent = region_centroids()
     regions = {}
     for rk, (la, lo) in sorted(cent.items()):
@@ -127,7 +314,73 @@ def main():
         # North Platte valley runs from Wyoming into the Nebraska Panhandle on one aquifer.
         # But a region labelled "se-wyoming" whose wells are mostly in Nebraska must say so,
         # or the label is doing work the data does not support.
+        # --- the trend, where a state gives us history to fit one to
+        hist = []
+        trend_src = None
+        # ONLY WELLS IN THIS REGION'S OWN STATE MAY FIT ITS TREND. A 120 km radius reaches
+        # deep into the neighbour, and Colorado is the only state here whose full per-well
+        # history is fetchable, so an unrestricted fit quietly used Colorado wells for
+        # EVERY region — publishing a "northwest Kansas" decline of 0.46 ft/yr and a
+        # "southwest Nebraska" decline of 0.42 ft/yr that were both measured in Colorado.
+        # A depth median may cross the line, because the aquifer does and the file says which
+        # state the wells sit in. A trend labelled with a state must be measured in it.
+        home = HOME_STATE.get(rk)
+        co = [w for w in near if w["state"] == "Colorado" and home == "Colorado"][:35]
+        ne = []
+        # Nebraska's trend comes from UNL's own database rather than the national portal —
+        # 1,393 wells under the Panhandle against a handful of USGS sites.
+        if home == "Nebraska" and unl:
+            for cid, (ser, (wla, wlo)) in unl.items():
+                if km(wla, wlo, la, lo) <= MAX_KM:
+                    ne.append({"state": "Nebraska", "series": ser})
+            # NO CAP. A first version took ne[:400] — the first four hundred in dictionary
+            # order, which is neither the nearest nor a random sample. It moved the Panhandle
+            # figure from +0.04 to +0.11 ft/yr, nearly threefold, purely by which wells
+            # happened to be enumerated first. Every well inside the radius is fitted.
+        if len(co) >= MIN_TREND_WELLS and len(co) >= len(ne):
+            for w in co:
+                if w.get("dwr_id"):
+                    h = well_history_colorado(w["dwr_id"])
+                    if len(h) >= 4:
+                        hist.append(h)
+            trend_src = "Colorado Division of Water Resources"
+        if len(hist) < MIN_TREND_WELLS and ne:
+            hist = [w["series"] for w in ne if len(w.get("series") or {}) >= 4]
+            trend_src = ("UNL Conservation and Survey Division groundwater database, "
+                         "1930-2025")
+        b, npts, span = slope_ft_per_year(hist)
+        trend = None
+        # MIN_TREND_WELLS was declared and then not enforced on the FIT, only on the candidate
+        # list. The first run duly reported a Nebraska Panhandle trend of +0.00 ft/yr fitted
+        # from ONE well and printed it beside figures built on thirty-five. One well is a well,
+        # not a region — the same failure that put Big Horn's cutworm flight in September.
+        if (b is not None and span and (span[1] - span[0]) >= MIN_TREND_YEARS
+                and len(hist) >= MIN_TREND_WELLS):
+            # Which state the fitted wells actually sit in. A 120 km radius crosses borders,
+            # so a trend labelled nw-kansas can be fitted mostly on Colorado wells, and the
+            # reader is owed that.
+            fit_states = defaultdict(int)
+            for w in (co if trend_src and "Colorado" in trend_src else ne):
+                fit_states[w["state"]] += 1
+            trend = {"feet_per_year": round(b, 2),
+                     "direction": "falling" if b > 0 else "rising",
+                     "wells_fitted": len(hist), "readings": npts,
+                     "years": "%d-%d" % span,
+                     "source": trend_src,
+                     "fitted_wells_by_state": dict(fit_states),
+                     "feet_over_20_years": round(b * 20, 1)}
+
         regions[rk] = {
+            "trend": trend,
+            "trend_unavailable_because": None if trend else (
+                "No trend is published for this region. A slope may only be fitted from wells "
+                "IN this region's own state, and either too few of them publish a long enough "
+                "history or that state's history is not reachable. "
+                "Not enough wells here publish a long enough history to fit a slope to. The "
+                "wells under this region are mostly UNL Conservation and Survey sites, which "
+                "reach this project through the national portal for their latest reading "
+                "only — the portal's history endpoints return 403. Kansas Geological Survey "
+                "history sits behind the WIZARD form. Neither is borrowed from a neighbour."),
             "wells": len(near),
             "wells_read_this_year": len(recent),
             "median_depth_to_water_ft": round(statistics.median(depths)),

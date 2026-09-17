@@ -20,6 +20,8 @@
  "wells_total": 8648,
  "regions": {
   "big-horn": {
+   "trend": null,
+   "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 1,
    "wells_read_this_year": 1,
    "median_depth_to_water_ft": 19,
@@ -38,6 +40,19 @@
    "note": "A median of 1 wells is an anecdote, not a regional figure."
   },
   "ne-colorado": {
+   "trend": {
+    "feet_per_year": 0.24,
+    "direction": "falling",
+    "wells_fitted": 35,
+    "readings": 1469,
+    "years": "1929-2026",
+    "source": "Colorado Division of Water Resources",
+    "fitted_wells_by_state": {
+     "Colorado": 35
+    },
+    "feet_over_20_years": 4.7
+   },
+   "trend_unavailable_because": null,
    "wells": 531,
    "wells_read_this_year": 275,
    "median_depth_to_water_ft": 120,
@@ -59,6 +74,19 @@
    "note": null
   },
   "ne-panhandle": {
+   "trend": {
+    "feet_per_year": 0.04,
+    "direction": "falling",
+    "wells_fitted": 1393,
+    "readings": 34600,
+    "years": "1930-2025",
+    "source": "UNL Conservation and Survey Division groundwater database, 1930-2025",
+    "fitted_wells_by_state": {
+     "Nebraska": 1393
+    },
+    "feet_over_20_years": 0.9
+   },
+   "trend_unavailable_because": null,
    "wells": 1111,
    "wells_read_this_year": 146,
    "median_depth_to_water_ft": 33,
@@ -78,6 +106,8 @@
    "note": null
   },
   "nw-kansas": {
+   "trend": null,
+   "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 827,
    "wells_read_this_year": 695,
    "median_depth_to_water_ft": 162,
@@ -100,6 +130,8 @@
    "note": null
   },
   "se-wyoming": {
+   "trend": null,
+   "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 766,
    "wells_read_this_year": 73,
    "median_depth_to_water_ft": 30,
@@ -120,6 +152,19 @@
    "note": null
   },
   "sw-nebraska": {
+   "trend": {
+    "feet_per_year": 0.16,
+    "direction": "falling",
+    "wells_fitted": 1110,
+    "readings": 32297,
+    "years": "1934-2025",
+    "source": "UNL Conservation and Survey Division groundwater database, 1930-2025",
+    "fitted_wells_by_state": {
+     "Nebraska": 1110
+    },
+    "feet_over_20_years": 3.1
+   },
+   "trend_unavailable_because": null,
    "wells": 1269,
    "wells_read_this_year": 609,
    "median_depth_to_water_ft": 139,
@@ -142,6 +187,19 @@
    "note": null
   },
   "western-colorado": {
+   "trend": {
+    "feet_per_year": -0.09,
+    "direction": "rising",
+    "wells_fitted": 7,
+    "readings": 203,
+    "years": "1974-2026",
+    "source": "Colorado Division of Water Resources",
+    "fitted_wells_by_state": {
+     "Colorado": 7
+    },
+    "feet_over_20_years": -1.8
+   },
+   "trend_unavailable_because": null,
    "wells": 7,
    "wells_read_this_year": 5,
    "median_depth_to_water_ft": 102,

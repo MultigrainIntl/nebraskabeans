@@ -1052,6 +1052,26 @@
       txt += ' Most of these wells are in ' + r.mostly_from_another_state +
         '; the aquifer crosses the state line even where the name does not.';
     }
+    /* THE RATE IS THE PART NOBODY ELSE PUBLISHES, and for this region it is reassuring
+     * rather than alarming — which is exactly why it is worth saying. A grower reading
+     * national coverage of the Ogallala will assume the worst about ground that is holding.
+     * The Panhandle has fallen about four feet in ninety-five years. */
+    var tr = r.trend;
+    if (tr) {
+      var per20 = Math.abs(tr.feet_over_20_years);
+      txt += ' <b>Over ' + tr.years + ' it has ' +
+        (tr.direction === 'falling' ? 'fallen' : 'risen') + ' about ' +
+        Math.abs(tr.feet_per_year).toFixed(2) + ' ft a year</b> \u2014 ' +
+        (per20 < 3
+          ? 'roughly ' + per20.toFixed(0) + ' ft in twenty years, which is close to steady.'
+          : 'about ' + per20.toFixed(0) + ' ft every twenty years at that pace.') +
+        ' Measured across ' + tr.wells_fitted.toLocaleString() +
+        ' wells, each against its own average. Source: ' + tr.source + '.';
+    } else {
+      txt += ' <b>No rate is published for this region.</b> A trend may only be fitted from ' +
+        'wells in this region\u2019s own state, and not enough of them publish a long enough ' +
+        'history. It is not borrowed from a neighbour.';
+    }
     txt += ' <i>This is what is measured, not a forecast. We tested whether a falling water ' +
       'table predicts yield and it does not \u2014 the decline is steady enough that a trend ' +
       'line already accounts for it. It is here because it is worth knowing on its own.</i>';

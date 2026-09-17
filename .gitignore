@@ -11,3 +11,8 @@ artifacts/
 # have no business in a repository that deploys on every commit.
 assets/data/archive/cdl-county-cache/
 
+
+# UNL's groundwater database: a 16 MB zip holding a 123 MB Access file, refetched only when
+# UNL republishes it. It is a source, not a result — the few kilobytes of trend it produces
+# are what belong in git.
+assets/data/archive/unl-wldb/
