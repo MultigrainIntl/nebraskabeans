@@ -173,6 +173,20 @@ if d:
           "every region below 8 wells says so" if not unflagged
           else "UNFLAGGED: " + ", ".join(unflagged))
 
+    # A TREND THAT VANISHES QUIETLY IS THE FAILURE MODE HERE. groundwater.py skips the
+    # Nebraska trend when mdbtools is absent, which is the right way to fail — no number
+    # beats a wrong one — but it fails SILENTLY, and on the CI runner mdbtools is an
+    # apt-get line somebody could drop. UNL publishes 1,393 wells under the Panhandle and
+    # 1,110 under southwest Nebraska with records back to 1930; if either region loses its
+    # rate, the reader is not looking at new information about water, they are looking at a
+    # broken build.
+    for rk in ("ne-panhandle", "sw-nebraska"):
+        t = (regs.get(rk) or {}).get("trend")
+        check("%s publishes a water-table rate" % rk, bool(t),
+              "%+.2f ft/yr from %d wells, %s" % (t["feet_per_year"], t["wells_fitted"], t["years"])
+              if t else "NO TREND — is mdbtools installed? UNL's database is the only source "
+                        "rich enough to fit one here.")
+
     # R1 territory: this failed the skill test and must not become a forecast input.
     src = ""
     for f in ("scripts/refresh/yield_index.py", "scripts/refresh/yield_all.py",

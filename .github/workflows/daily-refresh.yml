@@ -37,6 +37,20 @@ jobs:
       - name: Install dependencies
         run: pip install --quiet numpy pillow shapely
 
+      # NEBRASKA'S GROUNDWATER RECORD IS A MICROSOFT ACCESS FILE. UNL publishes the whole
+      # thing openly — 24,209 wells, 974,724 readings back to 1930 — and it is the only
+      # source rich enough to state a Panhandle trend at all. Nothing in Python's standard
+      # library reads .accdb, so mdbtools does it. It is installed on the maintainer's Mac
+      # via Homebrew; without this line the runner would not have it, groundwater.py would
+      # skip the Nebraska trend, and the rates would quietly vanish from the site overnight
+      # with every check still green — the failure is silent by design, which is correct
+      # behaviour and exactly why it has to be installed here rather than relied upon.
+      - name: Install mdbtools (reads UNL's Access groundwater database)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq mdbtools
+
+      - name: Confirm mdbtools is present
+        run: mdb-export --version || (echo "mdbtools missing — Nebraska groundwater trends would be dropped" && exit 1)
+
       - name: Rebuild every dataset
         run: python3 scripts/refresh/run.py
 
