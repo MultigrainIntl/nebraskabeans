@@ -1162,18 +1162,30 @@
          has been validated. It has not. */
       '<p class="nbEstLimit nbEstCaveat"><b>What we cannot claim.</b> ' +
         T.t('estimate.neverBeatenTrend') + '</p>' +
-      '<p class="nbEstLimit">' + T.t('estimate.whyItMisses') + '</p>' +
-      '<p class="nbEstLimit">' + T.t('estimate.bandMeans') + ' ' +
-        T.t('estimate.heatNotPriced') + ' ' + T.t('estimate.heatSeedSize') + '</p>' +
-      '<p class="nbEstLimit">' + T.t('estimate.weakestPart') + '</p>' +
-      '<p class="nbEstLimit">' + T.t('estimate.classLevels') + '</p>' +
       '<p class="nbEstLimit"><b>When to trust your own field instead.</b> ' +
         T.t('estimate.yourField') + '</p>' +
-      proxyLine() +
-      irrigationLine() +
-      groundwaterLine() +
-      '<p class="nbEstNext">' + T.t('estimate.wouldSharpen') + '</p>' +
-      '<p class="nbEstNext">' + T.t('estimate.whatWouldFixIt') + '</p>';
+      /* NOTHING REMOVED, JUST ONE CLICK AWAY. Ten caveat paragraphs were stacked here at equal
+       * weight, so the two that can change a decision — the estimate has never beaten a trend
+       * line, and when to believe your own field over it — carried no more emphasis than the
+       * note about how bean classes are levelled. A reader skims that, and skimming is how a
+       * caveat gets missed.
+       *
+       * The two that matter stay above, always visible. The rest fold into one disclosure,
+       * open with a click, every word intact. GAJ's standing rule is that every extra panel is
+       * a fault, and he asked whether the page could be simplified WITHOUT LOSING CONTENT.
+       * This is the only honest way to do that: change the weight, not the words. */
+      '<details class="nbEstMore"><summary>Everything else this number cannot see</summary>' +
+        '<p class="nbEstLimit">' + T.t('estimate.whyItMisses') + '</p>' +
+        '<p class="nbEstLimit">' + T.t('estimate.bandMeans') + ' ' +
+          T.t('estimate.heatNotPriced') + ' ' + T.t('estimate.heatSeedSize') + '</p>' +
+        '<p class="nbEstLimit">' + T.t('estimate.weakestPart') + '</p>' +
+        '<p class="nbEstLimit">' + T.t('estimate.classLevels') + '</p>' +
+        proxyLine() +
+        irrigationLine() +
+        groundwaterLine() +
+        '<p class="nbEstNext">' + T.t('estimate.wouldSharpen') + '</p>' +
+        '<p class="nbEstNext">' + T.t('estimate.whatWouldFixIt') + '</p>' +
+      '</details>';
     el.hidden = false;
   }
 

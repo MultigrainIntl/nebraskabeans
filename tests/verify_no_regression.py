@@ -233,6 +233,24 @@ check("the water line is in the top answer block", "waterLine()" in af and "nbA-
 check("the answer block hears the region picker", "e.target.id === 'region'" in af,
       "without it the water line names one region whichever you pick")
 
+# ---------------------------------------------------------------------------
+# 13. FOLDING IS NOT DELETING, AND THE TWO THAT MATTER STAY OUT (17 Sep 2026).
+# Ten caveat paragraphs sat at equal weight, so "this estimate has never beaten a trend line"
+# carried no more emphasis than a note on how bean classes are levelled. 585 words moved
+# behind one disclosure. Both of those must stay VISIBLE, and the fold must stay a fold —
+# if these ever become deletions the page gets shorter by losing its honesty.
+dm4 = read("assets", "decision-map.js")
+check("the trend-line caveat is not folded away",
+      "nbEstCaveat" in dm4 and dm4.index("nbEstCaveat") < dm4.index("nbEstMore"),
+      "shown above the fold, where a skimming reader meets it")
+check("'trust your own field' is not folded away",
+      dm4.index("estimate.yourField") < dm4.index("nbEstMore"),
+      "shown above the fold")
+for key in ("estimate.whyItMisses", "estimate.weakestPart", "estimate.classLevels",
+            "estimate.whatWouldFixIt"):
+    check("%s is folded, not deleted" % key.split(".")[1], key in dm4,
+          "still rendered inside the disclosure")
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))

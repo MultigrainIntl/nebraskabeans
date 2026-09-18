@@ -922,3 +922,23 @@ canvas.nbSurface {
 @media (prefers-color-scheme: dark) {
   .nbA-water { background: #16262c; border-left-color: #4a9dc0; }
 }
+
+/* The caveats that do not change a decision, folded so the two that do can be seen. Every word
+   is still here — GAJ asked to simplify WITHOUT losing content, and weight is the only thing
+   that can honestly be changed. */
+.nbEstMore { margin-top: 10px; }
+.nbEstMore > summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #4a5b52;
+  padding: 8px 0;
+  list-style: none;
+}
+.nbEstMore > summary::-webkit-details-marker { display: none; }
+.nbEstMore > summary::before { content: "▸ "; }
+.nbEstMore[open] > summary::before { content: "▾ "; }
+.nbEstMore > summary:hover { color: #17794a; }
+@media (prefers-color-scheme: dark) { .nbEstMore > summary { color: #9db3a7; } }
