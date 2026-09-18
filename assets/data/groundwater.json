@@ -21,6 +21,7 @@
  "regions": {
   "big-horn": {
    "this_year": null,
+   "this_year_percentile": null,
    "trend": null,
    "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 1,
@@ -48,6 +49,14 @@
     "year": 2026,
     "baseline": "each well's own 2015-2025 average",
     "source": "Colorado Division of Water Resources"
+   },
+   "this_year_percentile": {
+    "percentile": 0,
+    "wells": 162,
+    "year": 2026,
+    "reading": "much lower than usual",
+    "means": "the rank of this year's level against this well's own whole record, computed by USGS. 0 is the lowest water ever recorded there.",
+    "source": "USGS National Ground-Water Monitoring Network"
    },
    "trend": {
     "feet_per_year": 0.24,
@@ -90,6 +99,14 @@
     "year": 2026,
     "baseline": "each well's own 2015-2025 average"
    },
+   "this_year_percentile": {
+    "percentile": 19,
+    "wells": 119,
+    "year": 2026,
+    "reading": "lower than usual",
+    "means": "the rank of this year's level against this well's own whole record, computed by USGS. 0 is the lowest water ever recorded there.",
+    "source": "USGS National Ground-Water Monitoring Network"
+   },
    "trend": {
     "feet_per_year": 0.04,
     "direction": "falling",
@@ -123,6 +140,14 @@
   },
   "nw-kansas": {
    "this_year": null,
+   "this_year_percentile": {
+    "percentile": 5,
+    "wells": 514,
+    "year": 2026,
+    "reading": "much lower than usual",
+    "means": "the rank of this year's level against this well's own whole record, computed by USGS. 0 is the lowest water ever recorded there.",
+    "source": "USGS National Ground-Water Monitoring Network"
+   },
    "trend": null,
    "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 827,
@@ -154,6 +179,14 @@
     "year": 2026,
     "baseline": "each well's own 2015-2025 average"
    },
+   "this_year_percentile": {
+    "percentile": 24,
+    "wells": 56,
+    "year": 2026,
+    "reading": "lower than usual",
+    "means": "the rank of this year's level against this well's own whole record, computed by USGS. 0 is the lowest water ever recorded there.",
+    "source": "USGS National Ground-Water Monitoring Network"
+   },
    "trend": null,
    "trend_unavailable_because": "No trend is published for this region. A slope may only be fitted from wells IN this region's own state, and either too few of them publish a long enough history or that state's history is not reachable. Not enough wells here publish a long enough history to fit a slope to. The wells under this region are mostly UNL Conservation and Survey sites, which reach this project through the national portal for their latest reading only \u2014 the portal's history endpoints return 403. Kansas Geological Survey history sits behind the WIZARD form. Neither is borrowed from a neighbour.",
    "wells": 766,
@@ -182,6 +215,14 @@
     "wells": 37,
     "year": 2026,
     "baseline": "each well's own 2015-2025 average"
+   },
+   "this_year_percentile": {
+    "percentile": 0,
+    "wells": 445,
+    "year": 2026,
+    "reading": "much lower than usual",
+    "means": "the rank of this year's level against this well's own whole record, computed by USGS. 0 is the lowest water ever recorded there.",
+    "source": "USGS National Ground-Water Monitoring Network"
    },
    "trend": {
     "feet_per_year": 0.16,
@@ -219,6 +260,7 @@
   },
   "western-colorado": {
    "this_year": null,
+   "this_year_percentile": null,
    "trend": {
     "feet_per_year": -0.09,
     "direction": "rising",

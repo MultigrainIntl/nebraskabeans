@@ -365,6 +365,52 @@ def colorado_anomaly(la, lo, year=2026, sample=150):
             "baseline": "each well's own 2015-2025 average",
             "source": "Colorado Division of Water Resources"}
 
+
+def usgs_percentile(portal_rows, la, lo, year=2026):
+    """Where this year's level sits in each well's OWN record, as USGS already ranks it.
+
+    KANSAS WAS THE LAST HOLE AND THIS CLOSED IT WITHOUT SCRAPING ANYTHING. The Geological
+    Survey's 1,284 Kansas wells publish their history only through the WIZARD web form — a
+    paginated ColdFusion session, fragile to scrape and rude to hammer. But the national
+    portal already carries LATEST_PCTILE: the rank of the newest reading against that well's
+    own history, computed by USGS. 927 Kansas wells have both a percentile and a 2026 reading.
+
+    DIRECTION, CHECKED RATHER THAN ASSUMED. Cross-validated against the foot-anomalies
+    computed independently from UNL and Colorado DWR data:
+
+        southwest Nebraska   4.67 ft lower than normal   ->   0th percentile
+        northeast Colorado   3.34 ft lower               ->   0th
+        southeast Wyoming    0.87 ft lower               ->  24th
+        Nebraska Panhandle   1.07 ft lower               ->  19th
+
+    The ordering matches exactly, so a LOW percentile means LOW water. Two independent
+    methods agreeing is the strongest check available here — one is feet against a
+    2015-2025 mean, the other is a rank over the well's whole record, and neither was
+    derived from the other.
+    """
+    ps = []
+    for r in portal_rows:
+        pct = (r.get("LATEST_PCTILE") or "").strip()
+        if not pct or (r.get("LATEST_DATE") or "") < "%d-01-01" % year:
+            continue
+        try:
+            lat = float(r["DEC_LAT_VA"]); lon = float(r["DEC_LONG_VA"]); v = float(pct)
+        except (TypeError, ValueError, KeyError):
+            continue
+        if 0 <= v <= 100 and km(lat, lon, la, lo) <= MAX_KM:
+            ps.append(v)
+    if len(ps) < MIN_ANOM_WELLS:
+        return None
+    m = statistics.median(ps)
+    return {"percentile": round(m),
+            "wells": len(ps), "year": year,
+            "reading": ("much lower than usual" if m <= 10 else
+                        "lower than usual" if m <= 25 else
+                        "about normal" if m <= 75 else "higher than usual"),
+            "means": "the rank of this year's level against this well's own whole record, "
+                     "computed by USGS. 0 is the lowest water ever recorded there.",
+            "source": "USGS National Ground-Water Monitoring Network"}
+
 def main():
     import csv, io
     wells = []
@@ -477,6 +523,7 @@ def main():
 
         regions[rk] = {
             "this_year": anomaly,
+            "this_year_percentile": usgs_percentile(portal_rows, la, lo),
             "trend": trend,
             "trend_unavailable_because": None if trend else (
                 "No trend is published for this region. A slope may only be fitted from wells "

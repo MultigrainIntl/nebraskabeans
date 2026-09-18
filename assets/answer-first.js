@@ -125,20 +125,35 @@
     var rk = sel && sel.value;
     var r = GW && GW.regions && rk && GW.regions[rk];
     if (!r || r.median_depth_to_water_ft == null) return '';
-    var t = r.trend, a = r.this_year;
+    var t = r.trend, a = r.this_year, p = r.this_year_percentile;
     var txt = 'Water is <b>' + r.median_depth_to_water_ft + ' ft down</b>';
     /* THIS YEAR FIRST. The long-run slope is the durable fact, but a grower is standing in
      * one season and wants to know whether the water is where it usually is. In 2026
      * southwest Nebraska sits 4.67 ft below its own 2015-2025 normal — about thirty years of
      * its own decline in a single season, which is this winter's dryness and not depletion.
      * Saying only the century rate would have hidden that completely. */
+    /* The percentile carries regions the foot-anomaly cannot reach — northwest Kansas has 514
+     * ranked wells and no fetchable history, because the Geological Survey publishes it only
+     * through a web form. USGS computes the rank itself. Where both exist the feet are shown,
+     * because "4.7 ft lower" is plainer than "0th percentile"; where only the rank exists it
+     * is stated in words. Direction was cross-checked, not assumed: the two methods order the
+     * regions identically. */
+    if (!a && p) {
+      txt += ' — the water is <b>' + p.reading + '</b> for this time of year' +
+        (p.percentile <= 10 ? ', close to the lowest ever recorded here' : '') +
+        ' (' + p.wells.toLocaleString() + ' wells ranked against their own records by USGS)';
+    }
     if (a) {
       var ft = Math.abs(a.feet_vs_own_normal);
       txt += ft < 0.5
         ? ' — about where it normally sits this year'
         : ' — <b>' + ft.toFixed(1) + ' ft ' + a.direction + ' than normal this year</b>' +
           (a.direction === 'lower' && ft >= 3 ? ', a dry season showing up in the aquifer' : '');
-      txt += ' (' + a.wells + ' wells against their own ' + '2015\u201325 average).';
+      txt += ' (' + a.wells + ' wells against their own 2015\u201325 average' +
+        (p && p.percentile <= 10
+          ? ', and ' + p.wells.toLocaleString() + ' more put it close to the lowest ever ' +
+            'recorded here'
+          : '') + ').';
     }
     if (t) {
       var per20 = Math.abs(t.feet_over_20_years);

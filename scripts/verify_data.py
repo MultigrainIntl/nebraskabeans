@@ -206,6 +206,30 @@ if d:
               "season %+.2f ft against a trend of %+.2f ft/yr"
               % (a["feet_vs_own_normal"], t["feet_per_year"]))
 
+    # KANSAS HAS NO FETCHABLE HISTORY AND ITS CURRENT READING COMES ENTIRELY FROM THE USGS
+    # PERCENTILE. If that field empties, northwest Kansas — a real bean region with 514 ranked
+    # wells — silently loses its only current-season number.
+    kp = (regs.get("nw-kansas") or {}).get("this_year_percentile")
+    check("northwest Kansas has a current reading", bool(kp),
+          "%d%% — %s, from %d wells" % (kp["percentile"], kp["reading"], kp["wells"]) if kp
+          else "NO PERCENTILE — Kansas has no other route to a current-season figure")
+
+    # The two methods must keep agreeing. They are independent — one is feet against a
+    # 2015-2025 mean from state databases, the other a rank over the whole record computed by
+    # USGS — and they were cross-checked when the percentile was adopted: the region 4.67 ft
+    # below normal ranks 0th, the one 1.07 ft below ranks 19th. If a region ever shows water
+    # well below normal while ranking high, one of the two has flipped its sign.
+    for rk, r in regs.items():
+        a, pc = r.get("this_year"), r.get("this_year_percentile")
+        if a and pc and a["feet_vs_own_normal"] >= 3 and pc["percentile"] > 50:
+            check("%s: feet and percentile agree" % rk, False,
+                  "%.1f ft below normal but ranked %d%% — the two disagree on direction"
+                  % (a["feet_vs_own_normal"], pc["percentile"]))
+            break
+    else:
+        check("feet and percentile agree on direction", True,
+              "no region is far below normal while ranking high")
+
     # R1 territory: this failed the skill test and must not become a forecast input.
     src = ""
     for f in ("scripts/refresh/yield_index.py", "scripts/refresh/yield_all.py",
