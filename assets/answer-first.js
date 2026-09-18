@@ -186,6 +186,41 @@
    * These lines describe MECHANISM and DIRECTION and stop. They never convert to pounds. That
    * boundary was learned on 18 September, when an explanation that crossed it was published
    * here and withdrawn the same hour. */
+  /* THE ANSWER FIRST, BEFORE ANY EVIDENCE.
+   *
+   * GAJ, 18 September 2026: "Where do you list likely impact on yield (up or down)?" — and the
+   * answer was nowhere. The page listed 24 hot days in a 31-day flowering window and explained
+   * pod abortion, and never said whether the crop is lighter or heavier than usual. He is a
+   * commodity trader. Direction IS the question; everything else is support for it.
+   *
+   * "WE MUST ALWAYS START WITH THE ANSWER TO THAT QUESTION."
+   *
+   * Direction is sayable where size is not. The bean yield numbers were withdrawn because the
+   * model could not beat guessing on HOW FAR. That heat at flowering costs pods is established
+   * and directional. "Likely lighter, size unknown" is honest; "down 23%" is not — and this
+   * line must never acquire a number. */
+  function directionLine() {
+    var sel = document.getElementById('region');
+    var cropSel = document.getElementById('nbCrop') || document.getElementById('crop');
+    var rk = sel && sel.value;
+    var crop = (cropSel && cropSel.value) || 'PINTO';
+    var regs = YI && (YI.regions || YI);
+    var c = regs && rk && regs[rk] && (regs[rk].classes || {})[crop];
+    if (!c || !c.yield_direction) return '';
+    var cls = c.yield_direction === 'down' ? 'nbDirDown'
+      : c.yield_direction === 'up' ? 'nbDirUp' : 'nbDirFlat';
+    var n = c.yield_direction_counts || {};
+    var tot = (n.down || 0) + (n.up || 0) + (n.neutral || 0);
+    var hit = n.down > n.up ? n.down : n.up;
+    var basis = (n.down || n.up)
+      ? (hit === tot ? ' — everything we measured points that way'
+                     : ' — ' + hit + ' of the ' + tot + ' things we measured point that way')
+      : '';
+    return '<p class="nbDirection ' + cls + '"><b>' + crop + ': ' +
+      c.yield_direction_says + '</b>' + basis + '. <span class="nbQuiet">' +
+      (c.yield_direction_caveat || '') + '</span></p>';
+  }
+
   function stressBlock() {
     var sel = document.getElementById('region');
     var cropSel = document.getElementById('nbCrop') || document.getElementById('crop');
@@ -358,6 +393,7 @@
       (h.yieldBasis ? '<p class="nbA-basis">' + h.yieldBasis + '</p>' : '') +
       (h.moistLine ? '<p class="nbA-moist">' + h.moistLine + '</p>' : '') +
       (h.watch ? '<p class="nbA-watch">Watch — ' + h.watch + '</p>' : '') +
+      directionLine() +
       heatRiskLine() +
       stressBlock() +
       twoWaysLine() +

@@ -642,6 +642,26 @@ def water_two_ways(power_series, smap_series, year, window):
 # None of that exists here, and no sentence below may imply it does.
 #
 # Every impact line is hedged because every one of them is a hedge. "Likely" is not padding.
+# WHICH WAY EACH STRESS PUSHES THE YIELD. Down, up or neutral — never a size.
+#
+# GAJ, 18 September 2026: "WE MUST ALWAYS START WITH THE ANSWER TO THAT QUESTION." The page
+# listed 24 hot days in a 31-day flowering window and explained pod abortion, and never said the
+# one thing a buyer needs: is this crop lighter or heavier than usual. He had to infer it.
+#
+# DIRECTION IS SAYABLE WHERE MAGNITUDE IS NOT, and that distinction is the whole licence for
+# this. The bean yield numbers were withdrawn because the model could not beat guessing on SIZE.
+# That heat at flowering costs pods, and a short profile costs pod number, is established
+# agronomy and directional. "Likely down, size unknown" is honest. "Down 23%" is not, and
+# nothing here may drift back into one.
+STRESS_DIRECTION = {
+    "Heat during flowering": "down",
+    "Soil water": "down",           # flipped to up below when the season is WETTER than normal
+    "Winter recharge": "down",
+    "Warm nights during flowering": "down",
+    "Early maturity": "down",
+    "Nothing running against this crop": "neutral",
+}
+
 STRESS_IMPACT = {
     "flowering_heat": {
         "DRY BEANS": "Heat while the crop is flowering aborts flowers and blasts pods. The "
@@ -777,6 +797,18 @@ def stress_report(commodity, hot, hot_normal, window, warm_nights, water2, winte
                              "we measure.",
             "confidence": "An all-clear on five measurements, not an all-clear on the season."})
 
+    for item in out:
+        d = STRESS_DIRECTION.get(item["stress"], "neutral")
+        # Soil water is the one stress that genuinely points either way, and a cooler than usual
+        # flowering is a help rather than a harm. Everything else here only ever hurts.
+        if item["stress"] == "Soil water" and (item.get("vs_normal_pct") or 0) > 0:
+            d = "up"
+        if item["stress"] == "Heat during flowering" and (item.get("vs_normal_pct") or 0) < 0:
+            d = "up"
+        item["yield_direction"] = d
+        item["yield_direction_says"] = {
+            "down": "less yield", "up": "more yield",
+            "neutral": "no effect either way"}[d]
     return out
 
 def canopy_on(canopy, md):
@@ -1305,11 +1337,41 @@ def main():
             mat_norm = None
             if matured_hist:
                 mat_norm = sorted(matured_hist)[len(matured_hist) // 2]
+            # THE ANSWER, BEFORE THE EVIDENCE. Rolled up from the stresses so the page can open
+            # with it. Counted, not weighted: we have no defensible weighting, and inventing one
+            # would smuggle magnitude back in through the side door.
             per[cls]["stresses"] = stress_report(
                 commodity, got[3], (statistics.mean(hot_hist) if hot_hist else None), got[4],
                 got[5], water_now, (WINTER.get("regions", {}).get(region, {})
                                     or {}).get("pct_of_normal"),
                 got[2], mat_norm)
+
+            _st = per[cls]["stresses"]
+            _dn = sum(1 for x in _st if x["yield_direction"] == "down")
+            _up = sum(1 for x in _st if x["yield_direction"] == "up")
+            # SAY WHAT IT MEANS, NOT WHAT SOUNDS TECHNICAL. The first version read "Likely
+            # LIGHTER than normal" and GAJ, who buys and sells this crop, asked what it meant —
+            # in the grain trade "light" is test weight, which is a different thing entirely
+            # from a smaller crop. If the trader cannot read it at a glance it has failed,
+            # however precise it feels.
+            if _dn and not _up:
+                _dir, _say = "down", "we expect LESS yield than usual"
+            elif _up and not _dn:
+                _dir, _say = "up", "we expect MORE yield than usual"
+            elif _dn and _up:
+                _dir, _say = "mixed", "some things point up, some down — no clear call"
+            else:
+                _dir, _say = "neutral", "nothing we measure is pushing yield either way"
+            per[cls]["yield_direction"] = _dir
+            per[cls]["yield_direction_says"] = _say
+            per[cls]["yield_direction_counts"] = {"down": _dn, "up": _up,
+                                                  "neutral": len(_st) - _dn - _up}
+            per[cls]["yield_direction_caveat"] = (
+                "We can say which way. We cannot say how much: tested against every USDA "
+                "harvest for this crop in these states, our model could not call the size."
+                if withdrawn else
+                "Direction from the measured stresses; the number above comes from the "
+                "flowering model and carries its own tested skill.")
 
             per[cls].setdefault("yield_withdrawn", withdrawn)
             per[cls]["yield_withdrawn"] = per[cls].get("yield_withdrawn", withdrawn)

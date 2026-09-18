@@ -958,3 +958,13 @@ canvas.nbSurface {
 @media (prefers-color-scheme: dark) {
   .nbStresses li { background: rgba(255,255,255,.04); }
 }
+
+/* THE ANSWER, ABOVE EVERYTHING ELSE. Up or down is the question a buyer opens this page with;
+   the measurements below are support for it, not a substitute. Colour carries direction only —
+   there is deliberately no number here, because the size is the part we could not defend. */
+.nbDirection { font-size: 1.05rem; margin: .6rem 0 1rem; padding: .7rem .9rem;
+               border-left: 4px solid #8a8f98; border-radius: 0 4px 4px 0; line-height: 1.5; }
+.nbDirDown { border-left-color: #b4531a; background: rgba(180,83,26,.07); }
+.nbDirUp   { border-left-color: #1f7a6d; background: rgba(31,122,109,.07); }
+.nbDirFlat { border-left-color: #8a8f98; background: rgba(0,0,0,.03); }
+@media (prefers-color-scheme: dark) { .nbDirFlat { background: rgba(255,255,255,.05); } }

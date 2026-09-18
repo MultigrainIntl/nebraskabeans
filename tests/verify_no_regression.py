@@ -576,6 +576,36 @@ check("no published range is narrower than the model's own year-to-year spread",
       "a thin band would claim a precision the test disproved"
       if not _thin else "suspiciously thin: " + ", ".join(_thin[:4]))
 
+# ---------------------------------------------------------------------------
+# 23. THE ANSWER COMES FIRST — UP OR DOWN (18 Sep 2026). STANDING ORDER.
+# GAJ: "Where do you list likely impact on yield (up or down)?" The answer was nowhere. The page
+# listed 24 hot days in a 31-day flowering window and explained pod abortion, and never said
+# whether the crop is lighter or heavier than usual. He is a commodity trader; direction IS the
+# question. "WE MUST ALWAYS START WITH THE ANSWER TO THAT QUESTION."
+#
+# Direction is sayable where size is not, and that is the whole licence for it: the bean yields
+# were withdrawn because the model could not call HOW FAR, not which way. This gate keeps the
+# direction present AND keeps a number out of it.
+_nodir = ["%s/%s" % (rk, cls) for rk, cls, c in _cls_all if not c.get("yield_direction")]
+check("every crop says which way yield is likely to go",
+      not _nodir,
+      "direction on all %d crop-regions" % len(_cls_all)
+      if not _nodir else "missing for " + ", ".join(_nodir[:4]))
+check("every individual stress says which way it pushes",
+      all(x.get("yield_direction") for _, _, c in _cls_all for x in (c.get("stresses") or [])),
+      "each measurement resolves to up, down or neither")
+_afd = read("assets", "answer-first.js")
+check("the direction is rendered BEFORE the evidence",
+      "directionLine" in _afd
+      and _afd.index("directionLine() +") < _afd.index("heatRiskLine() +")
+      and _afd.index("heatRiskLine() +") < _afd.index("stressBlock() +"),
+      "answer first, then the measurements that support it")
+import re as _re2
+_dirtext = " ".join((c.get("yield_direction_says") or "") for _, _, c in _cls_all)
+check("the direction never carries a number",
+      not _re2.search(r"\d", _dirtext),
+      "direction only — the size is the part that could not be defended")
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))
