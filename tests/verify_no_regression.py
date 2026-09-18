@@ -471,6 +471,69 @@ check("a class on the flowering model shows the canopy reading too",
           for _rk, _cls in _owned),
       "the signal it replaced stays visible beside it")
 
+# ---------------------------------------------------------------------------
+# 20. NO CAUSAL CLAIM WITHOUT THE MEASUREMENT THAT WOULD SUPPORT IT (18 Sep 2026).
+# An outside review took apart our explanation of why a heat model works for peas and not for
+# beans. Every leg failed against our own files: the flowering windows were 29-34 days for pinto
+# against 27-29 for peas, not the 36-versus-27 we published (that came from a long-run average,
+# not this crop); the irrigation shares were quoted selectively as 31-51% against 9-21% when the
+# real ranges are 20.7-50.9% and 9.4-68.0%, with western Colorado peas MORE irrigated than any
+# bean region; and the hot-day counts were compared between crops using different thresholds,
+# 90F for pinto and 82F for peas, so they were never comparable.
+#
+# The deeper error was the conclusion. Irrigation does not stop reproductive heat injury —
+# controlled common bean work with water stress deliberately eliminated still lost pods and seed
+# at 32/25C, and night leaf temperature tracks the air exactly. We had evidence of heat
+# EXPOSURE and claimed evidence that beans absorbed it HARMLESSLY.
+#
+# This gate keeps the withdrawal in place. The site may describe what it measured; it may not
+# again assert that irrigation shielded the crop, or that beans grew out of the heat, without
+# the reproductive measurement that would show it.
+_pages2 = " ".join(read(f) for f in ("index.html", "about.html", "methodology.html")
+                   if os.path.exists(os.path.join(ROOT, f))).lower()
+_banned = [
+    ("beans flower for 36 days", "a window figure taken from a long-run average, not this crop"),
+    ("so the pivot cools the crop", "irrigation was never observed, only surrounding ground"),
+    ("the heat never reache", "we measured exposure, never absorption"),
+]
+# As with the soil-moisture rule, the words have to be sayable in order to be withdrawn — the
+# defect log quotes the claim in order to retract it. What is banned is ASSERTING it, so each
+# occurrence must sit downstream of a retraction marker.
+_RETRACT = ("we said", "we published", "we claimed", "withdrawn", "did not survive",
+            "was wrong", "not supported", "explanation for this")
+_live = []
+for _w, _ in _banned:
+    _i = _pages2.find(_w)
+    while _i != -1:
+        _before = _pages2[max(0, _i - 400):_i]
+        if not any(_m in _before for _m in _RETRACT):
+            _live.append(_w)
+            break
+        _i = _pages2.find(_w, _i + 1)
+check("the withdrawn heat explanation has not returned",
+      not _live,
+      "no unsupported causal claim about irrigation and heat"
+      if not _live else "RETURNED: " + "; ".join(_live))
+check("the withdrawal is on the record, not just deleted",
+      "did not survive review" in _pages2 and "evidence of heat exposure" in _pages2,
+      "the reader is told what was claimed and why it was wrong")
+
+# ---------------------------------------------------------------------------
+# 21. WITHHOLDING A NUMBER MUST NOT WITHHOLD THE RISK (18 Sep 2026).
+# GAJ: "IF YIELD IS IMPACTED, IT MUST BE LISTED ON THE WEBSITE."
+# Dry beans publish no pounds per acre, because the model could not beat guessing. But pulling
+# the number quietly pulled the warning with it: every region ran hotter through flowering than
+# normal — Big Horn 72% above, the Panhandle 37% — and the page said nothing at all. Heat while
+# a bean is flowering costs pods. Refusing to guess what it costs is right; saying nothing about
+# it is not, and is the more damaging of the two.
+_afh = read("assets", "answer-first.js")
+check("flowering heat is stated even where no yield is published",
+      "heatRiskLine" in _afh and "heatRiskLine() +" in _afh,
+      "the risk is on the page, not only in the data")
+check("the heat line refuses to convert itself into pounds",
+      "not going to guess it in pounds" in _afh,
+      "exposure is reported; absorption is not invented")
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))

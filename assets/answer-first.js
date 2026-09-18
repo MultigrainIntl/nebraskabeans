@@ -141,6 +141,50 @@
    *
    * This is the shape every region on every future site inherits, including countries with no
    * instruments in the ground — both products are global and neither needs an account. */
+  /* HEAT AT FLOWERING, ON THE PAGE, EVEN WHERE WE PUBLISH NO YIELD.
+   *
+   * GAJ, 18 September 2026: "IF YIELD IS IMPACTED, IT MUST BE LISTED ON THE WEBSITE."
+   *
+   * Dry beans publish no pounds per acre here, because the yield model could not beat guessing
+   * and the historical average is not an answer. But withholding the NUMBER had quietly
+   * withheld the RISK too: every region ran hotter through flowering than it normally does —
+   * Big Horn 72% more hot days than usual, the Panhandle 37% — and a grower reading this page
+   * saw none of it. Heat while a bean is flowering costs pods. That is worth saying even when
+   * we cannot say what it costs in pounds, and saying nothing was the worse error.
+   *
+   * WHAT THIS LINE MUST NEVER DO is turn a count of hot days into a yield. We measured that the
+   * crop was EXPOSED to heat. We have no measurement of what it absorbed — that needs pod
+   * counts, seed set, hourly temperatures including nights, and real irrigation records, none
+   * of which we have. An explanation built on less than that was published here on 18 September
+   * and withdrawn the same day. */
+  function heatRiskLine() {
+    var rows = regionRows();
+    if (!rows || !rows.length) return '';
+    var hot = rows.filter(function (r) { return r.hotPct != null && r.hotPct > 10; });
+    if (!hot.length) return '';
+    hot.sort(function (a, b) { return b.hotPct - a.hotPct; });
+    var worst = hot[0];
+    return '<p class="nbHeatRisk"><b>Heat during flowering ran above normal in ' +
+      hot.length + ' of ' + rows.length + ' areas</b> — worst in ' + worst.name + ', ' +
+      Math.round(worst.hotPct) + '% more hot days than usual. Heat while beans are flowering ' +
+      'costs pods. <span class="nbQuiet">We measured the heat. We have not measured what it ' +
+      'cost, and we are not going to guess it in pounds. ' +
+      '<a href="methodology.html">Why not</a>.</span></p>';
+  }
+
+  function regionRows() {
+    var regs = YI && (YI.regions || YI);
+    if (!regs) return [];
+    var out = [];
+    Object.keys(regs).forEach(function (rk) {
+      var c = (regs[rk].classes || {}).PINTO || {};
+      var h = c.flowering_hot_days, n = c.flowering_hot_days_normal;
+      out.push({ key: rk, name: regs[rk].name || rk,
+                 hotPct: (h != null && n) ? (100 * (h / n - 1)) : null });
+    });
+    return out;
+  }
+
   function twoWaysLine() {
     var sel = document.getElementById('region');
     var rk = sel && sel.value;
@@ -261,6 +305,7 @@
       (h.yieldBasis ? '<p class="nbA-basis">' + h.yieldBasis + '</p>' : '') +
       (h.moistLine ? '<p class="nbA-moist">' + h.moistLine + '</p>' : '') +
       (h.watch ? '<p class="nbA-watch">Watch — ' + h.watch + '</p>' : '') +
+      heatRiskLine() +
       twoWaysLine() +
       waterLine() +
       '<p class="nbA-q"><b>What sets the price:</b> ' + (data.classes[crop].quality_driver || '') + '</p>' +
