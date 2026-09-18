@@ -1,0 +1,84 @@
+{
+ "schema": "nebraskabeans.model-calibration.v1",
+ "fitted_on": [
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025
+ ],
+ "variant": "gwet",
+ "what": "How far this model's swing may be trusted. The model's departure from its own normal, regressed on the crop's departure from its normal, over every year USDA has published a yield. 1 means the swing was the right size; 0.2 means four fifths of it was noise.",
+ "why": "Published without it, the model moved several times harder than ten years of harvests support, and was worse than assuming an average year in six of seven crop-and-state combinations.",
+ "how_to_read_it": "published index = 1 + scale x (raw index - 1). A scale of 0 publishes a normal year, which is the honest answer when the model has shown no skill for that crop in that state.",
+ "not_fitted_to_the_year_it_predicts": "Fitted on 2015-2025 and applied to 2026, which is not in the fit. The held-out skill column is the number to judge it by: each year scored by a scaling fitted without it.",
+ "backwards_models_are_switched_off": "Negative scalings are floored at zero. The inversion was tested (--inverted) and did not survive out of sample, so a model that points backwards is turned off, not turned around.",
+ "reproduce": "python3 scripts/backtest.py --write-calibration gwet",
+ "by_state_class": {
+  "CO": {
+   "LIGHT RED KIDNEY": {
+    "years": 8,
+    "correlation": -0.25,
+    "scale": 0.0,
+    "held_out_skill_pct": 0.0,
+    "raw_skill_pct": -141.5
+   },
+   "PINTO": {
+    "years": 10,
+    "correlation": -0.351,
+    "scale": 0.0,
+    "held_out_skill_pct": 0.0,
+    "raw_skill_pct": -120.1
+   }
+  },
+  "NE": {
+   "GREAT NORTHERN": {
+    "years": 10,
+    "correlation": -0.679,
+    "scale": 0.0,
+    "held_out_skill_pct": 0.0,
+    "raw_skill_pct": -135.0
+   },
+   "LIGHT RED KIDNEY": {
+    "years": 9,
+    "correlation": -0.341,
+    "scale": 0.0,
+    "held_out_skill_pct": 0.0,
+    "raw_skill_pct": -45.3
+   },
+   "PEAS": {
+    "years": 10,
+    "correlation": 0.588,
+    "scale": 1.02,
+    "held_out_skill_pct": 12.2,
+    "raw_skill_pct": 17.9
+   },
+   "PINTO": {
+    "years": 10,
+    "correlation": -0.445,
+    "scale": 0.0,
+    "held_out_skill_pct": 0.0,
+    "raw_skill_pct": -105.7
+   }
+  },
+  "WY": {
+   "PINTO": {
+    "years": 8,
+    "correlation": 0.38,
+    "scale": 0.139,
+    "held_out_skill_pct": -12.9,
+    "raw_skill_pct": -163.5
+   }
+  }
+ },
+ "by_commodity": {
+  "DRY BEANS": 0.023,
+  "PEAS": 1.02
+ }
+}

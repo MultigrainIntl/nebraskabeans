@@ -89,17 +89,41 @@ PAR_FRACTION = 0.48
 # STILL UNSOURCED IN THIS TABLE: every heat threshold, every light-use efficiency, every
 # harvest index, and the GDD for navy, black, small red, pink, cranberry and small white.
 # Those remain chosen, not read. Do not cite this comment as covering them.
+# GDD TO MATURITY IS NOW THE MEASURED MEDIAN OF THE VARIETIES GROWERS ACTUALLY BUY.
+#
+# GAJ: "WE DON'T NEED TO KNOW (EXACTLY) WHAT WAS PLANTED. WE DO KNOW GENERALLY WHAT HAS BEEN
+# PLANTED... I WANT FUCKING ESTIMATES FOR PRODUCTS IN THE CHOSEN REGION." Right, and the data
+# supports exactly that. UNL's 2022 trials at Scottsbluff and Mitchell measured 102 varieties;
+# stripping the breeding lines (NE-, EX-, and bare numbers, which nobody plants commercially)
+# leaves the named releases a grower can buy, and their median is the estimate for that class
+# on this ground:
+#
+#     PINTO             20 commercial varieties   2,078 GDD   (2,024-2,162 at the 10th-90th)
+#     GREAT NORTHERN     9                        2,063       (2,049-2,110)
+#     NAVY               9                        2,156       (2,136-2,180)
+#     BLACK              6                        2,146       (2,054-2,172)
+#     LIGHT RED KIDNEY   8                        2,107       (2,014-2,204)
+#
+# Every one is 350-500 GDD ABOVE what this table used to carry, and the old numbers were
+# chosen rather than read — PLAN.md 3.9 says so outright. The bias was flagged once, in the
+# commit that corrected kidney and great northern: measured GDD came out 12-23% higher at both
+# sites and only the RATIOS were changed, because absolutes move with station choice. Across
+# 102 varieties it is plainly systematic, and leaving it was the wrong call.
+#
+# THIS MOVES PUBLISHED NUMBERS AND IS NOT A TIDY-UP. A too-low maturity target ends the
+# accumulation early, so the season is cut short before the crop stops filling. Dark red kidney
+# carries light red kidney's figure because UNL trialled no dark red kidney.
 ALL_CLASSES = {
-    "PINTO":              (50, 90, 1700, "06-01", 1.45, 0.45, "DRY BEANS"),
-    "GREAT NORTHERN":     (50, 88, 1700, "06-01", 1.45, 0.45, "DRY BEANS"),
-    "NAVY":               (50, 88, 1650, "06-01", 1.45, 0.46, "DRY BEANS"),
-    "BLACK":              (50, 92, 1750, "06-01", 1.50, 0.45, "DRY BEANS"),
-    "LIGHT RED KIDNEY":   (50, 86, 1755, "06-01", 1.40, 0.42, "DRY BEANS"),
+    "PINTO":              (50, 90, 2078, "06-01", 1.45, 0.45, "DRY BEANS"),
+    "GREAT NORTHERN":     (50, 88, 2063, "06-01", 1.45, 0.45, "DRY BEANS"),
+    "NAVY":               (50, 88, 2156, "06-01", 1.45, 0.46, "DRY BEANS"),
+    "BLACK":              (50, 92, 2146, "06-01", 1.50, 0.45, "DRY BEANS"),
+    "LIGHT RED KIDNEY":   (50, 86, 2107, "06-01", 1.40, 0.42, "DRY BEANS"),
     # Dark red kidney carries light red kidney's figure. UNL's 2022 trial had no dark red
     # kidney entries, so this is not measured here — but WSU variety trials put dark red
     # kidney at 101-111 days against light red kidney's 106-112, i.e. if anything faster,
     # so 1,755 is the generous end rather than an invention in the wrong direction.
-    "DARK RED KIDNEY":    (50, 86, 1755, "06-01", 1.40, 0.42, "DRY BEANS"),
+    "DARK RED KIDNEY":    (50, 86, 2107, "06-01", 1.40, 0.42, "DRY BEANS"),
     "SMALL RED":          (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
     "PINK":               (50, 90, 1650, "06-01", 1.45, 0.45, "DRY BEANS"),
     "CRANBERRY":          (50, 88, 1800, "06-01", 1.40, 0.43, "DRY BEANS"),
@@ -170,6 +194,115 @@ def cultivar_spec(cls, variety, fallback):
         "difference_from_class": hit["gdd_to_maturity"] - _gdd,
         "measured_at": "UNL Panhandle REEC 2022 variety trials, %d site(s)" % hit["sites"]}
 
+
+def haversine_km(la1, lo1, la2, lo2):
+    """Great-circle distance in kilometres. Used to keep a station near the crop it stands for."""
+    r = math.pi / 180
+    h = (0.5 - math.cos((la2 - la1) * r) / 2 + math.cos(la1 * r) * math.cos(la2 * r)
+         * (1 - math.cos((lo2 - lo1) * r)) / 2)
+    return 12742 * math.asin(math.sqrt(h))
+
+
+# ---------------------------------------------------------------- water, PLAN.md 3.5
+# THE THIRD LEG OF THE GROWTH MODEL, MISSING UNTIL NOW.
+#
+# Biomass was RUE x solar x PAR x fAPAR x tstress — light and heat, and nothing else. On the
+# High Plains, in a year with the driest winter in thirty-one years, the limiting factor was
+# not in the model at all. GAJ: "Have you forgotten to use the growth stage modeling formulas
+# again?" Yes.
+#
+# It was not a design choice. season-history.json carried radiation and temperature and no
+# rainfall, so water could not be computed for past seasons, and a term on one side of a ratio
+# and absent on the other biases rather than cancels. The correct fix was to fetch the
+# rainfall, which ACIS has served all along — 4,383 days per region, free, the same endpoint
+# the winter work used. The file now carries it.
+#
+# Implements PLAN.md 3.5 exactly as specified, no invented constants:
+#   ET0  = Hargreaves(Tmax, Tmin, latitude, day of year)
+#   ETc  = Kc(stage) x ET0                                   FAO-56 form
+#   balance = cumulative rainfall - cumulative ETc
+# Hargreaves: Allen et al. 1998, FAO Irrigation and Drainage Paper 56, eq. 52. The Kc curve is
+# the one written into PLAN.md 3.5 and is reproduced here unchanged.
+#
+# WHAT THIS IS STILL NOT. PLAN.md calls rainfall-minus-reference-ET a known defect and requires
+# measured ETa/ETp from OpenET instead, because a balance of this kind cannot see irrigation —
+# and much of this ground is under pivot. This is the specified interim, not the target, and it
+# must not be described as water stress measured.
+
+def hargreaves_et0(tmax_f, tmin_f, lat_deg, doy):
+    """Reference evapotranspiration, mm/day. FAO-56 eq. 52."""
+    tmax = (tmax_f - 32) / 1.8
+    tmin = (tmin_f - 32) / 1.8
+    tmean = (tmax + tmin) / 2.0
+    if tmax <= tmin:
+        return 0.0
+    phi = math.pi / 180 * lat_deg
+    dr = 1 + 0.033 * math.cos(2 * math.pi * doy / 365)
+    dec = 0.409 * math.sin(2 * math.pi * doy / 365 - 1.39)
+    try:
+        ws = math.acos(-math.tan(phi) * math.tan(dec))
+    except ValueError:
+        return 0.0
+    ra = (24 * 60 / math.pi) * 0.0820 * dr * (
+        ws * math.sin(phi) * math.sin(dec) + math.cos(phi) * math.cos(dec) * math.sin(ws))
+    return max(0.0023 * (tmean + 17.8) * math.sqrt(tmax - tmin) * ra * 0.408, 0.0)
+
+
+def crop_coefficient(progress):
+    """Kc against fraction of maturity — PLAN.md 3.5, reproduced unchanged."""
+    p = progress
+    if p <= 0:
+        return 0.15
+    if p < 0.25:
+        return 0.30 + (p / 0.25) * 0.35
+    if p < 0.55:
+        return 0.65 + ((p - 0.25) / 0.30) * 0.50
+    if p < 0.85:
+        return 1.15
+    return max(0.45, 1.15 - (p - 0.85) * 2.0)
+
+
+# The root zone, and how much of it a bean may use before it feels the shortage.
+#
+# TAW_MM is CHOSEN, not read from a publication: 120 mm of plant-available water is what a
+# 0.6 m bean root zone holds in a medium-textured High Plains soil. It belongs in UNSOURCED.md
+# and is named here so it cannot hide. DEPLETION_FRACTION is not chosen — FAO-56 Table 22
+# gives p = 0.45 for beans, meaning the crop draws the first 45% of that water without
+# suffering and feels every drop after it.
+TAW_MM = 120.0
+DEPLETION_FRACTION = 0.45
+
+
+def water_stress(depletion_mm, taw_mm=TAW_MM):
+    """FAO-56 eq. 84. One where the crop has water, falling to zero as the root zone empties.
+
+    Returns 1.0 while depletion stays inside the readily available water, then straight down
+    to 0 at an empty profile. No floor and no fudge: the damping for irrigation happens
+    outside this function, where it can be seen, rather than being smuggled in as a minimum.
+    """
+    raw = DEPLETION_FRACTION * taw_mm
+    if depletion_mm <= raw:
+        return 1.0
+    if depletion_mm >= taw_mm:
+        return 0.0
+    return (taw_mm - depletion_mm) / (taw_mm - raw)
+
+
+def opening_depletion(winter_mm, taw_mm=TAW_MM, efficiency=0.30):
+    """How empty the profile is on planting day, from the winter that preceded the season.
+
+    WHY IT IS NOT ZERO. A balance that starts full assumes every season begins with a charged
+    profile, and the winter of 2025-26 was the driest in thirty-one years across most of this
+    ground — starting it full would erase the single largest water story of the season. A
+    balance that starts empty assumes the opposite and is just as wrong.
+
+    Only part of winter precipitation reaches the root zone; the rest runs off, sublimates off
+    a snowpack in wind, or drains past. The 0.30 efficiency is CHOSEN and belongs in
+    UNSOURCED.md with TAW_MM.
+    """
+    return max(taw_mm - min(winter_mm * efficiency, taw_mm), 0.0)
+
+
 def station_on_crop_ground(field, lat, lon, hist_name=None, radius_km=110, tolerance_m=250):
     """The weather station that stands on the ground this crop is grown on.
 
@@ -194,14 +327,7 @@ def station_on_crop_ground(field, lat, lon, hist_name=None, radius_km=110, toler
          where that ground is the 20th percentile of elevations within `radius_km` — beans
          here are irrigated valley bottom, so the low end of the local spread is the crop
     """
-    import math
-
-    def _km(la1, lo1, la2, lo2):
-        r = math.pi / 180
-        h = (0.5 - math.cos((la2 - la1) * r) / 2 + math.cos(la1 * r) * math.cos(la2 * r)
-             * (1 - math.cos((lo2 - lo1) * r)) / 2)
-        return 12742 * math.asin(math.sqrt(h))
-
+    _km = haversine_km
     warm = [s for s in field["stations"] if s.get("has_temp")]
     if hist_name:
         want = hist_name.strip().upper()

@@ -251,6 +251,148 @@ for key in ("estimate.whyItMisses", "estimate.weakestPart", "estimate.classLevel
     check("%s is folded, not deleted" % key.split(".")[1], key in dm4,
           "still rendered inside the disclosure")
 
+# ---------------------------------------------------------------------------
+# 14. NOTHING REMOTELY SENSED MAY BE CALLED MEASURED SOIL MOISTURE (17 Sep 2026).
+# GAJ: "Satellites and drones provide indirect surface or crop-stress clues. They do not
+# measure actual root-zone moisture reliably... the tool must call its output an estimated
+# water-stress proxy, not measured soil moisture." A land-surface model checked against one
+# probe 15 km away is a good estimate and it is not a measurement, and the distinction is the
+# difference between a tool an agronomist can use and one he stops trusting. This was ALREADY
+# caught once by an independent review, on the rainfall-minus-evaporation layer, which was
+# labelled soil moisture until someone outside this project read it.
+import json as _json
+idx = _json.load(open(os.path.join(ROOT, "assets", "data", "yield-index-2026.json")))
+_regions = idx.get("regions", idx) or {}
+_bad = []
+for _rk, _v in _regions.items():
+    for _cls, _c in (_v.get("classes") or {}).items():
+        if "water_stress_proxy" in _c and _c.get("water_stress_proxy_is") != \
+                "estimated water-stress proxy":
+            _bad.append("%s/%s" % (_rk, _cls))
+check("the water figure calls itself a proxy in the data",
+      not _bad and any("water_stress_proxy" in (_c or {})
+                       for _v in _regions.values()
+                       for _c in (_v.get("classes") or {}).values()),
+      "every published water figure carries the label, not just the page")
+
+# The phrase itself is not banned — it has to be sayable in order to be denied, and the defect
+# log and the method page both deny it at length. What is banned is CLAIMING it. Every
+# occurrence must sit inside a negation: "not measured soil moisture", "nothing here measures",
+# "fails if any page calls a remote figure measured soil moisture". A bare claim fails.
+_NEG = ("not ", "never ", "nothing ", "no ", "cannot ", "isn't", "is not", "fails if",
+        "calls a", "called a", "must not", "do not", "does not", "denied", "stop ", "as though")
+_claims = []
+for _f in ("index.html", "about.html", "methodology.html"):
+    _path = os.path.join(ROOT, _f)
+    if not os.path.exists(_path):
+        continue
+    _t = read(_f).lower()
+    _i = _t.find("measured soil moisture")
+    while _i != -1:
+        _before = _t[max(0, _i - 90):_i]
+        if not any(_n in _before for _n in _NEG):
+            _claims.append("%s:%d" % (_f, _i))
+        _i = _t.find("measured soil moisture", _i + 1)
+check("no page claims to measure soil moisture",
+      not _claims,
+      "the phrase appears only inside a denial" if not _claims
+      else "bare claim at " + ", ".join(_claims))
+
+# ---------------------------------------------------------------------------
+# 15. THE PUBLISHED SWING MUST BE THE TESTED SWING (17 Sep 2026).
+# The index moved several times harder than ten years of harvests support, and was worse than
+# assuming an average year in six of seven crop-and-state combinations. It is now scaled by a
+# factor fitted against those harvests. If the calibration file goes missing the model must
+# fall back to publishing NO swing, never to publishing full confidence.
+check("every published class carries its scaling and its raw figure",
+      all(("swing_scale" in _c and "raw_index" in _c and "index_is_calibrated" in _c)
+          for _v in _regions.values() for _c in (_v.get("classes") or {}).values()),
+      "the reader can always see what was taken out")
+_cal = _json.load(open(os.path.join(ROOT, "assets", "data", "model-calibration.json")))
+check("the calibration is not fitted to the year it predicts",
+      max(_cal.get("fitted_on") or [0]) < 2026,
+      "fitted on %s, applied to 2026" % (_cal.get("fitted_on") or [])[-1:])
+check("a model that points backwards is switched off, not turned around",
+      all((x.get("scale") or 0) >= 0
+          for d in (_cal.get("by_state_class") or {}).values() for x in d.values()),
+      "no negative scaling is published")
+
+# ---------------------------------------------------------------------------
+# 16. THE METHOD PAGE IS GENERATED, NOT REMEMBERED (17 Sep 2026).
+# methodology.html described "GISit v1, a regularized equation trained on 92 published
+# state-year pinto-yield outcomes" months after no such model ran here. It was not wrong by a
+# detail; it described a different system. A reviewer who checks the code against a stale
+# method page concludes the code is broken. It is now generated from the live data files.
+_meth = read("methodology.html")
+check("the method page is generated from the data",
+      "generated from the live data files" in _meth,
+      "not hand-written prose that drifts")
+check("the method page shows the calibration table",
+      "Scale we publish" in _meth and "Skill when held out" in _meth,
+      "the reader sees how much of the swing survived testing")
+check("the method page names what we do not have",
+      "tensiometers" in _meth and "buried probes" in _meth,
+      "buried probes, tensiometers, hand probes and irrigation records — none of which we have")
+check("the method page prints the commands that reproduce it",
+      "scripts/backtest.py" in _meth and "scripts/refresh/soils.py" in _meth,
+      "an independent professional can rerun every step")
+# The page itself promises: "If the model changes and this page is not rebuilt, the build gate
+# fails." A promise printed on a public page and not enforced anywhere is exactly the kind of
+# claim this project exists to stop making. So it is enforced: regenerate into a scratch copy
+# and compare. Only the datestamp line may differ.
+import subprocess as _sp, tempfile as _tf, re as _re, shutil as _sh
+_live = os.path.join(ROOT, "methodology.html")
+_keep = _tf.mktemp(suffix=".html")
+_sh.copy(_live, _keep)
+try:
+    _sp.run([sys.executable, os.path.join(ROOT, "scripts", "refresh", "methods_page.py")],
+            capture_output=True, timeout=120)
+    _fresh = open(_live, encoding="utf-8").read()
+    _old = open(_keep, encoding="utf-8").read()
+    _strip = lambda t: _re.sub(r"Regenerated \d{4}-\d{2}-\d{2}", "", t)
+    _same = _strip(_fresh) == _strip(_old)
+finally:
+    _sh.copy(_keep, _live)
+    os.unlink(_keep)
+check("the method page matches the data it describes",
+      _same,
+      "regenerating it from the live data files changes nothing")
+
+check("the method page describes the model that is actually running",
+      "GISit v1" not in _meth and "92 published state-year" not in _meth,
+      "the withdrawn regularized-equation model is gone from it")
+
+# ---------------------------------------------------------------------------
+# 17. BOTH REMOTE SOIL PRODUCTS, ALWAYS (18 Sep 2026). STANDING ORDER.
+# GAJ: "I NEED YOU TO CONTINUALLY COMPARE THE TWO SO THAT WE CAN MAKE BETTER ESTIMATIONS IN
+# OTHER REGIONS." I had reported a "we did not switch" decision he never asked for, having been
+# asked to USE remote sensing and make it ready for countries with no instruments. Choosing a
+# winner throws away the disagreement between them, which is the most portable thing we have:
+# where a land-surface model and a satellite part company is where a reader should widen the
+# band, and that is the judgement a region with no probes cannot make for itself.
+_w2 = {rk: (v.get("water_two_ways") or {}) for rk, v in _regions.items()}
+_have_both = [rk for rk, w in _w2.items() if "power" in w and "smap" in w]
+check("every region carries both the model and the satellite",
+      len(_have_both) == len(_regions) and _regions,
+      "%d of %d regions publish both" % (len(_have_both), len(_regions)))
+check("the disagreement between them is published, not hidden",
+      all((w.get("agreement") or {}).get("read_this_as") for w in _w2.values()),
+      "a reader can see where the two products part company")
+_hist = os.path.join(ROOT, "assets", "data", "archive", "season-history.json")
+_arch = _json.load(open(_hist))
+_af2 = read("assets", "answer-first.js")
+check("both readings appear in the answer block, not just in the data",
+      "twoWaysLine" in _af2 and "waterLine() +" in _af2 and "nbTwoWays" in _af2,
+      "a reader sees both without opening a file")
+check("a disagreement is stated, never averaged away",
+      "disagree here" in _af2,
+      "where the two products part company the sentence says so")
+
+check("the archive holds both products for every region",
+      set(_arch.get("smap") or {}) == set((_arch.get("soil") or {})) and (_arch.get("smap")),
+      "%d regions of satellite, %d of model"
+      % (len(_arch.get("smap") or {}), len(_arch.get("soil") or {})))
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))

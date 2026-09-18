@@ -86,13 +86,20 @@
     var watch = (worst.c.status === 'AT RISK' || worst.c.status === 'STRESSED')
       ? worst.name + ' — ' + worst.c.call + '.' : null;
 
-    // soil moisture and the direction of travel are requirements, not detail
+    /* NOT "soil moisture". GAJ, 17 September 2026: "Satellites and drones provide indirect
+     * surface or crop-stress clues. They do not measure actual root-zone moisture reliably...
+     * the tool must call its output an estimated water-stress proxy, not measured soil
+     * moisture." This is the first line a broker reads, and it called a remote estimate soil
+     * moisture in the site's most prominent sentence while the map beside it carried a careful
+     * disclaimer nobody scrolls to. The estimate is unchanged; what it is called is corrected. */
     var dry = rows.filter(function (r) { return r.moisture && /drier/.test(r.moisture.state); }).length;
     var improving = rows.filter(function (r) { return r.moisture && r.moisture.trend === 'improving'; }).length;
     var green = rows.filter(function (r) { return r.vegetation && r.vegetation.trend === 'greening'; }).length;
     var moistLine = null;
     if (rows.some(function (r) { return r.moisture; })) {
-      moistLine = 'Soil moisture ' + (dry > rows.length / 2 ? 'drier than normal' : 'about normal') +
+      moistLine = 'Estimated water stress ' +
+        (dry > rows.length / 2 ? 'above normal — the ground reads drier than usual'
+                               : 'about normal') +
         ' in ' + (dry || rows.length - dry) + ' of ' + rows.length + ' regions, ' +
         (improving > rows.length / 2 ? 'improving' : 'still drying') + '. Crop is ' +
         (green > rows.length / 2 ? 'greening' : 'declining') + ' week on week.';
@@ -121,6 +128,37 @@
     .then(function (j) { WIN = j; }).catch(function () { WIN = null; });
   fetch('assets/data/groundwater.json').then(function (r) { return r.ok ? r.json() : null; })
     .then(function (j) { GW = j; }).catch(function () { GW = null; });
+  var YI = null;
+  fetch('assets/data/yield-index-2026.json').then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { YI = j; }).catch(function () { YI = null; });
+
+  /* TWO INDEPENDENT READINGS OF THE SOIL WATER, IN THE ANSWER BLOCK.
+   *
+   * A land-surface model and the SMAP satellite, each against its own eleven-year average for
+   * the same stretch of the calendar. Neither is preferred. Where they agree, a reader can lean
+   * on the number; where they part company, that IS the finding and the sentence says so rather
+   * than averaging the two into a false middle.
+   *
+   * This is the shape every region on every future site inherits, including countries with no
+   * instruments in the ground — both products are global and neither needs an account. */
+  function twoWaysLine() {
+    var sel = document.getElementById('region');
+    var rk = sel && sel.value;
+    var regs = YI && (YI.regions || YI);
+    var w = regs && rk && regs[rk] && regs[rk].water_two_ways;
+    if (!w || !w.power || !w.smap) return '';
+    var pc = w.power.vs_normal_pct, sc = w.smap.vs_normal_pct, ag = w.agreement || {};
+    var say = function (v) {
+      return v <= -1 ? '<b>' + Math.abs(Math.round(v)) + '% below normal</b>'
+           : v >= 1 ? '<b>' + Math.round(v) + '% above normal</b>' : '<b>normal</b>'; };
+    var lead = ag.gap_points != null && ag.gap_points > 12
+      ? 'Our two ways of reading the soil water <b>disagree here</b>, so treat it as uncertain: '
+      : 'Two independent readings of the soil water agree: ';
+    return '<p class="nbTwoWays">' + lead +
+      'the weather model says ' + say(pc) + ', the satellite says ' + say(sc) + '. ' +
+      '<span class="nbQuiet">Both are estimates, not a probe in your field. ' +
+      '<a href="methodology.html">How we check them</a>.</span></p>';
+  }
 
   function waterLine() {
     var sel = document.getElementById('region');
@@ -223,6 +261,7 @@
       (h.yieldBasis ? '<p class="nbA-basis">' + h.yieldBasis + '</p>' : '') +
       (h.moistLine ? '<p class="nbA-moist">' + h.moistLine + '</p>' : '') +
       (h.watch ? '<p class="nbA-watch">Watch — ' + h.watch + '</p>' : '') +
+      twoWaysLine() +
       waterLine() +
       '<p class="nbA-q"><b>What sets the price:</b> ' + (data.classes[crop].quality_driver || '') + '</p>' +
       '<details class="nbA-more"><summary>Region by region</summary>' +

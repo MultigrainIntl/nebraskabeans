@@ -16,257 +16,308 @@
    "name": "Nebraska Panhandle",
    "classes": {
     "PINTO": {
-     "index": 0.8765,
-     "vs_normal_pct": -12.4,
+     "index": 0.9991,
+     "vs_normal_pct": -0.1,
+     "raw_index": 1.0543,
+     "raw_vs_normal_pct": 5.4,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.9,
-     "days_counted": 86,
-     "matured_on": "2026-08-22",
-     "flowering_hot_days": 20,
-     "flowering_window_days": 26,
-     "flowering_hot_days_normal": 15.3,
-     "flowering_hot_days_by_year": {
-      "2015": {
-       "hot": 16,
-       "window": 32,
-       "warm_nights": 0
-      },
-      "2016": {
-       "hot": 15,
-       "window": 31,
-       "warm_nights": 0
-      },
-      "2017": {
-       "hot": 16,
-       "window": 29,
-       "warm_nights": 0
-      },
-      "2018": {
-       "hot": 12,
-       "window": 34,
-       "warm_nights": 0
-      },
-      "2019": {
-       "hot": 12,
-       "window": 31,
-       "warm_nights": 0
-      },
-      "2020": {
-       "hot": 15,
-       "window": 29,
-       "warm_nights": 0
-      },
-      "2021": {
-       "hot": 17,
-       "window": 27,
-       "warm_nights": 1
-      },
-      "2022": {
-       "hot": 20,
-       "window": 27,
-       "warm_nights": 0
-      },
-      "2023": {
-       "hot": 9,
-       "window": 32,
-       "warm_nights": 0
-      },
-      "2024": {
-       "hot": 23,
-       "window": 27,
-       "warm_nights": 0
-      },
-      "2025": {
-       "hot": 13,
-       "window": 29,
-       "warm_nights": 0
-      }
-     },
-     "flowering_warm_nights": 3,
-     "commodity": "DRY BEANS",
-     "level_is_usda_published": true,
-     "level_kind": "published",
-     "level_proxy_note": null,
-     "lb_ac": 2100,
-     "lb_ac_low": 1787,
-     "lb_ac_high": 2413,
-     "baseline_lb_ac": 2396,
-     "index_own_class": 0.872,
-     "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 15.2,
-     "spread_is_shared_across_classes": true
-    },
-    "GREAT NORTHERN": {
-     "index": 0.8765,
-     "vs_normal_pct": -12.4,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.9,
-     "days_counted": 81,
-     "matured_on": "2026-08-18",
-     "flowering_hot_days": 21,
-     "flowering_window_days": 23,
+     "model_year_to_year_spread_pct": 11.2,
+     "days_counted": 100,
+     "matured_on": "2026-09-02",
+     "flowering_hot_days": 24,
+     "flowering_window_days": 31,
      "flowering_hot_days_normal": 17.5,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 19,
-       "window": 32,
+       "hot": 20,
+       "window": 42,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 17,
-       "window": 28,
+       "hot": 16,
+       "window": 39,
        "warm_nights": 0
       },
       "2017": {
-       "hot": 19,
-       "window": 25,
+       "hot": 13,
+       "window": 41,
        "warm_nights": 0
       },
       "2018": {
-       "hot": 14,
-       "window": 30,
+       "hot": 10,
+       "window": 46,
        "warm_nights": 0
       },
       "2019": {
-       "hot": 18,
-       "window": 27,
+       "hot": 12,
+       "window": 40,
        "warm_nights": 0
       },
       "2020": {
-       "hot": 20,
-       "window": 26,
+       "hot": 19,
+       "window": 35,
        "warm_nights": 0
       },
       "2021": {
-       "hot": 19,
-       "window": 25,
-       "warm_nights": 0
+       "hot": 23,
+       "window": 34,
+       "warm_nights": 1
       },
       "2022": {
-       "hot": 20,
-       "window": 25,
+       "hot": 23,
+       "window": 33,
        "warm_nights": 0
       },
       "2023": {
-       "hot": 12,
-       "window": 29,
+       "hot": 18,
+       "window": 37,
        "warm_nights": 0
       },
       "2024": {
-       "hot": 20,
-       "window": 27,
-       "warm_nights": 0
+       "hot": 22,
+       "window": 36,
+       "warm_nights": 1
       },
       "2025": {
-       "hot": 15,
-       "window": 27,
+       "hot": 17,
+       "window": 35,
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 3,
+     "flowering_warm_nights": 2,
+     "water_stress_proxy": 0.725,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 99.0,
+     "soil": "Mitchell silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 3.5,
+     "irrigated_share_of_ground_pct": 42.2,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 2048,
-     "lb_ac_low": 1742,
-     "lb_ac_high": 2353,
-     "baseline_lb_ac": 2336,
-     "index_own_class": 0.818,
+     "lb_ac": 2394,
+     "lb_ac_low": 2125,
+     "lb_ac_high": 2663,
+     "baseline_lb_ac": 2396,
+     "index_own_class": 1.0,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 15.8,
+     "model_year_to_year_spread_own_class_pct": 14.9,
      "spread_is_shared_across_classes": true
     },
-    "LIGHT RED KIDNEY": {
-     "index": 0.8765,
-     "vs_normal_pct": -12.4,
+    "GREAT NORTHERN": {
+     "index": 0.9991,
+     "vs_normal_pct": -0.1,
+     "raw_index": 1.0543,
+     "raw_vs_normal_pct": 5.4,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.9,
-     "days_counted": 94,
-     "matured_on": "2026-08-31",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 28,
-     "flowering_hot_days_normal": 23.2,
+     "model_year_to_year_spread_pct": 11.2,
+     "days_counted": 100,
+     "matured_on": "2026-09-01",
+     "flowering_hot_days": 27,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 21.5,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 26,
-       "window": 35,
+       "hot": 25,
+       "window": 42,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 21,
-       "window": 34,
-       "warm_nights": 0
-      },
-      "2017": {
        "hot": 20,
-       "window": 36,
-       "warm_nights": 0
-      },
-      "2018": {
-       "hot": 23,
        "window": 39,
        "warm_nights": 0
       },
+      "2017": {
+       "hot": 16,
+       "window": 41,
+       "warm_nights": 0
+      },
+      "2018": {
+       "hot": 18,
+       "window": 44,
+       "warm_nights": 0
+      },
       "2019": {
-       "hot": 20,
-       "window": 34,
+       "hot": 17,
+       "window": 39,
        "warm_nights": 0
       },
       "2020": {
-       "hot": 25,
-       "window": 32,
+       "hot": 23,
+       "window": 35,
        "warm_nights": 0
       },
       "2021": {
-       "hot": 27,
-       "window": 31,
+       "hot": 24,
+       "window": 34,
        "warm_nights": 1
       },
       "2022": {
-       "hot": 25,
-       "window": 30,
-       "warm_nights": 0
-      },
-      "2023": {
-       "hot": 22,
-       "window": 34,
-       "warm_nights": 0
-      },
-      "2024": {
        "hot": 25,
        "window": 33,
        "warm_nights": 0
       },
+      "2023": {
+       "hot": 20,
+       "window": 36,
+       "warm_nights": 0
+      },
+      "2024": {
+       "hot": 25,
+       "window": 36,
+       "warm_nights": 1
+      },
       "2025": {
-       "hot": 21,
-       "window": 32,
+       "hot": 23,
+       "window": 35,
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 3,
+     "flowering_warm_nights": 2,
+     "water_stress_proxy": 0.725,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 99.0,
+     "soil": "Mitchell silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 3.5,
+     "irrigated_share_of_ground_pct": 42.2,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 1780,
-     "lb_ac_low": 1515,
-     "lb_ac_high": 2045,
-     "baseline_lb_ac": 2031,
-     "index_own_class": 0.94,
+     "lb_ac": 2334,
+     "lb_ac_low": 2071,
+     "lb_ac_high": 2597,
+     "baseline_lb_ac": 2336,
+     "index_own_class": 1.0,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 14.7,
+     "model_year_to_year_spread_own_class_pct": 14.9,
+     "spread_is_shared_across_classes": true
+    },
+    "LIGHT RED KIDNEY": {
+     "index": 0.9991,
+     "vs_normal_pct": -0.1,
+     "raw_index": 1.0543,
+     "raw_vs_normal_pct": 5.4,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 11.2,
+     "days_counted": 100,
+     "matured_on": "2026-09-03",
+     "flowering_hot_days": 28,
+     "flowering_window_days": 32,
+     "flowering_hot_days_normal": 25.7,
+     "flowering_hot_days_by_year": {
+      "2015": {
+       "hot": 27,
+       "window": 42,
+       "warm_nights": 0
+      },
+      "2016": {
+       "hot": 24,
+       "window": 39,
+       "warm_nights": 0
+      },
+      "2017": {
+       "hot": 22,
+       "window": 42,
+       "warm_nights": 0
+      },
+      "2018": {
+       "hot": 25,
+       "window": 47,
+       "warm_nights": 0
+      },
+      "2019": {
+       "hot": 21,
+       "window": 40,
+       "warm_nights": 0
+      },
+      "2020": {
+       "hot": 28,
+       "window": 36,
+       "warm_nights": 0
+      },
+      "2021": {
+       "hot": 31,
+       "window": 34,
+       "warm_nights": 1
+      },
+      "2022": {
+       "hot": 26,
+       "window": 33,
+       "warm_nights": 0
+      },
+      "2023": {
+       "hot": 25,
+       "window": 38,
+       "warm_nights": 0
+      },
+      "2024": {
+       "hot": 29,
+       "window": 37,
+       "warm_nights": 1
+      },
+      "2025": {
+       "hot": 25,
+       "window": 35,
+       "warm_nights": 0
+      }
+     },
+     "flowering_warm_nights": 2,
+     "water_stress_proxy": 0.725,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 99.0,
+     "soil": "Mitchell silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 3.5,
+     "irrigated_share_of_ground_pct": 42.2,
+     "commodity": "DRY BEANS",
+     "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
+     "lb_ac": 2029,
+     "lb_ac_low": 1801,
+     "lb_ac_high": 2258,
+     "baseline_lb_ac": 2031,
+     "index_own_class": 1.0,
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 14.9,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.8765,
-     "vs_normal_pct": -12.4,
+     "index": 0.9991,
+     "vs_normal_pct": -0.1,
+     "raw_index": 0.852,
+     "raw_vs_normal_pct": -14.8,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 14.9,
-     "days_counted": 92,
-     "matured_on": "2026-08-24",
-     "flowering_hot_days": 12,
-     "flowering_window_days": 27,
+     "model_year_to_year_spread_pct": 11.2,
+     "days_counted": 88,
+     "matured_on": "2026-08-17",
+     "flowering_hot_days": 14,
+     "flowering_window_days": 26,
      "flowering_hot_days_normal": 7.8,
      "flowering_hot_days_by_year": {
       "2015": {
@@ -325,25 +376,40 @@
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 3,
+     "flowering_warm_nights": 2,
+     "water_stress_proxy": 0.751,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 99.0,
+     "soil": "Mitchell silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 3.5,
+     "irrigated_share_of_ground_pct": 42.2,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.876,
+     "index_own_class": 0.9966,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 13.9,
+     "model_year_to_year_spread_own_class_pct": 0.3,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
-     "index": 0.777,
-     "vs_normal_pct": -22.3,
+     "index": 0.8043,
+     "vs_normal_pct": -19.6,
+     "raw_index": 0.8082,
+     "raw_vs_normal_pct": -19.2,
+     "swing_scale": 1.02,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.6,
-     "days_counted": 109,
-     "matured_on": "2026-07-22",
-     "flowering_hot_days": 16,
-     "flowering_window_days": 31,
+     "model_year_to_year_spread_pct": 20.0,
+     "days_counted": 107,
+     "matured_on": "2026-07-18",
+     "flowering_hot_days": 18,
+     "flowering_window_days": 29,
      "flowering_hot_days_normal": 18.6,
      "flowering_hot_days_by_year": {
       "2015": {
@@ -403,24 +469,39 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.694,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 99.0,
+     "soil": "Mitchell silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 3.5,
+     "irrigated_share_of_ground_pct": 14.3,
      "commodity": "PEAS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 1227,
-     "lb_ac_low": 986,
-     "lb_ac_high": 1468,
+     "lb_ac": 1270,
+     "lb_ac_low": 1016,
+     "lb_ac_high": 1524,
      "baseline_lb_ac": 1579
     },
     "CHICKPEAS": {
-     "index": 0.706,
-     "vs_normal_pct": -29.4,
+     "index": 0.7003,
+     "vs_normal_pct": -30.0,
+     "raw_index": 0.7003,
+     "raw_vs_normal_pct": -30.0,
+     "swing_scale": null,
+     "index_is_calibrated": false,
+     "swing_scale_from": "no harvest record for this crop in these states",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 21.1,
-     "days_counted": 118,
-     "matured_on": "2026-08-11",
-     "flowering_hot_days": 22,
-     "flowering_window_days": 31,
+     "days_counted": 114,
+     "matured_on": "2026-08-07",
+     "flowering_hot_days": 25,
+     "flowering_window_days": 32,
      "flowering_hot_days_normal": 22.1,
      "flowering_hot_days_by_year": {
       "2015": {
@@ -479,15 +560,44 @@
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 2,
+     "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.653,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 99.0,
+     "soil": "Mitchell silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 3.5,
+     "irrigated_share_of_ground_pct": 11.3,
      "commodity": "CHICKPEAS",
      "level_is_usda_published": false,
      "level_kind": "proxy",
      "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
-     "lb_ac": 822,
-     "lb_ac_low": 649,
-     "lb_ac_high": 995,
+     "lb_ac": 815,
+     "lb_ac_low": 643,
+     "lb_ac_high": 987,
      "baseline_lb_ac": 1164
+    }
+   },
+   "water_two_ways": {
+    "power": {
+     "vs_normal_pct": -15.6,
+     "this_season": 0.3203,
+     "normal": 0.3793,
+     "years_compared": 11
+    },
+    "smap": {
+     "vs_normal_pct": -12.6,
+     "this_season": 0.057,
+     "normal": 0.0652,
+     "years_compared": 11
+    },
+    "agreement": {
+     "gap_points": 3.0,
+     "same_direction": true,
+     "read_this_as": "Both agree",
+     "why_two": "A land-surface model and a satellite, computed independently. Where they part company, trust neither far."
     }
    }
   },
@@ -495,256 +605,307 @@
    "name": "Southwest Nebraska",
    "classes": {
     "PINTO": {
-     "index": 1.075,
-     "vs_normal_pct": 7.5,
+     "index": 1.0001,
+     "vs_normal_pct": 0.0,
+     "raw_index": 1.0474,
+     "raw_vs_normal_pct": 4.7,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.0,
-     "days_counted": 79,
-     "matured_on": "2026-08-12",
-     "flowering_hot_days": 18,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 15.7,
+     "model_year_to_year_spread_pct": 8.8,
+     "days_counted": 91,
+     "matured_on": "2026-08-24",
+     "flowering_hot_days": 20,
+     "flowering_window_days": 30,
+     "flowering_hot_days_normal": 16.7,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 16,
-       "window": 29,
+       "hot": 18,
+       "window": 36,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 15,
-       "window": 26,
-       "warm_nights": 1
+       "hot": 18,
+       "window": 33,
+       "warm_nights": 2
       },
       "2017": {
-       "hot": 17,
-       "window": 24,
+       "hot": 13,
+       "window": 34,
        "warm_nights": 1
       },
       "2018": {
-       "hot": 10,
-       "window": 29,
+       "hot": 8,
+       "window": 39,
        "warm_nights": 0
       },
       "2019": {
-       "hot": 16,
-       "window": 26,
+       "hot": 17,
+       "window": 33,
        "warm_nights": 0
       },
       "2020": {
-       "hot": 22,
-       "window": 26,
-       "warm_nights": 0
+       "hot": 21,
+       "window": 32,
+       "warm_nights": 1
       },
       "2021": {
-       "hot": 15,
-       "window": 27,
-       "warm_nights": 2
+       "hot": 20,
+       "window": 31,
+       "warm_nights": 5
       },
       "2022": {
        "hot": 18,
-       "window": 23,
+       "window": 28,
        "warm_nights": 4
       },
       "2023": {
-       "hot": 14,
-       "window": 27,
+       "hot": 15,
+       "window": 34,
        "warm_nights": 3
       },
       "2024": {
-       "hot": 14,
-       "window": 28,
-       "warm_nights": 2
+       "hot": 19,
+       "window": 31,
+       "warm_nights": 1
       },
       "2025": {
-       "hot": 16,
-       "window": 25,
+       "hot": 17,
+       "window": 32,
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 1,
+     "flowering_warm_nights": 5,
+     "water_stress_proxy": 0.705,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 61.3,
+     "soil": "Valent sand, 3 to 9 percent slopes",
+     "slope_pct_mean": 7.0,
+     "irrigated_share_of_ground_pct": 30.7,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 2576,
-     "lb_ac_low": 2242,
-     "lb_ac_high": 2909,
+     "lb_ac": 2396,
+     "lb_ac_low": 2185,
+     "lb_ac_high": 2607,
      "baseline_lb_ac": 2396,
-     "index_own_class": 1.076,
+     "index_own_class": 1.0,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 13.0,
+     "model_year_to_year_spread_own_class_pct": 11.6,
      "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 1.075,
-     "vs_normal_pct": 7.5,
+     "index": 1.0001,
+     "vs_normal_pct": 0.0,
+     "raw_index": 1.0424,
+     "raw_vs_normal_pct": 4.2,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.0,
-     "days_counted": 74,
-     "matured_on": "2026-08-09",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 17.8,
+     "model_year_to_year_spread_pct": 8.8,
+     "days_counted": 90,
+     "matured_on": "2026-08-23",
+     "flowering_hot_days": 26,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 21.3,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 16,
-       "window": 27,
+       "hot": 21,
+       "window": 36,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 21,
-       "window": 24,
-       "warm_nights": 1
+       "hot": 26,
+       "window": 33,
+       "warm_nights": 2
       },
       "2017": {
-       "hot": 21,
-       "window": 23,
+       "hot": 19,
+       "window": 34,
        "warm_nights": 1
       },
       "2018": {
-       "hot": 14,
-       "window": 27,
+       "hot": 16,
+       "window": 37,
        "warm_nights": 0
       },
       "2019": {
-       "hot": 17,
-       "window": 24,
+       "hot": 21,
+       "window": 32,
        "warm_nights": 0
       },
       "2020": {
-       "hot": 21,
-       "window": 24,
-       "warm_nights": 0
+       "hot": 24,
+       "window": 33,
+       "warm_nights": 1
       },
       "2021": {
-       "hot": 16,
-       "window": 27,
-       "warm_nights": 1
+       "hot": 24,
+       "window": 31,
+       "warm_nights": 5
       },
       "2022": {
-       "hot": 18,
-       "window": 21,
-       "warm_nights": 3
+       "hot": 20,
+       "window": 29,
+       "warm_nights": 4
       },
       "2023": {
-       "hot": 15,
-       "window": 26,
-       "warm_nights": 1
+       "hot": 20,
+       "window": 34,
+       "warm_nights": 3
       },
       "2024": {
-       "hot": 16,
-       "window": 26,
-       "warm_nights": 2
+       "hot": 23,
+       "window": 32,
+       "warm_nights": 1
       },
       "2025": {
-       "hot": 21,
-       "window": 25,
+       "hot": 20,
+       "window": 32,
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 0,
+     "flowering_warm_nights": 5,
+     "water_stress_proxy": 0.706,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 61.3,
+     "soil": "Valent sand, 3 to 9 percent slopes",
+     "slope_pct_mean": 7.0,
+     "irrigated_share_of_ground_pct": 30.7,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 2511,
-     "lb_ac_low": 2186,
-     "lb_ac_high": 2836,
+     "lb_ac": 2336,
+     "lb_ac_low": 2131,
+     "lb_ac_high": 2542,
      "baseline_lb_ac": 2336,
-     "index_own_class": 1.065,
+     "index_own_class": 1.0,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 14.0,
+     "model_year_to_year_spread_own_class_pct": 11.7,
      "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
-     "index": 1.075,
-     "vs_normal_pct": 7.5,
+     "index": 1.0001,
+     "vs_normal_pct": 0.0,
+     "raw_index": 1.0539,
+     "raw_vs_normal_pct": 5.4,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.0,
-     "days_counted": 88,
-     "matured_on": "2026-08-20",
+     "model_year_to_year_spread_pct": 8.8,
+     "days_counted": 92,
+     "matured_on": "2026-08-25",
      "flowering_hot_days": 27,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 23,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 24.5,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 23,
-       "window": 33,
+       "hot": 27,
+       "window": 38,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 24,
-       "window": 30,
+       "hot": 27,
+       "window": 35,
        "warm_nights": 2
       },
       "2017": {
-       "hot": 27,
-       "window": 29,
+       "hot": 24,
+       "window": 35,
        "warm_nights": 1
       },
       "2018": {
-       "hot": 20,
-       "window": 33,
+       "hot": 21,
+       "window": 40,
        "warm_nights": 0
       },
       "2019": {
-       "hot": 22,
-       "window": 30,
+       "hot": 24,
+       "window": 33,
        "warm_nights": 0
       },
       "2020": {
        "hot": 25,
-       "window": 29,
+       "window": 33,
        "warm_nights": 1
       },
       "2021": {
-       "hot": 24,
-       "window": 29,
+       "hot": 27,
+       "window": 32,
        "warm_nights": 5
       },
       "2022": {
-       "hot": 22,
-       "window": 26,
+       "hot": 23,
+       "window": 29,
        "warm_nights": 4
       },
       "2023": {
-       "hot": 22,
-       "window": 29,
+       "hot": 23,
+       "window": 34,
        "warm_nights": 3
       },
       "2024": {
-       "hot": 22,
-       "window": 30,
-       "warm_nights": 1
+       "hot": 25,
+       "window": 32,
+       "warm_nights": 2
       },
       "2025": {
-       "hot": 22,
-       "window": 29,
+       "hot": 24,
+       "window": 33,
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 2,
+     "flowering_warm_nights": 5,
+     "water_stress_proxy": 0.705,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 61.3,
+     "soil": "Valent sand, 3 to 9 percent slopes",
+     "slope_pct_mean": 7.0,
+     "irrigated_share_of_ground_pct": 30.7,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 2183,
-     "lb_ac_low": 1901,
-     "lb_ac_high": 2466,
+     "lb_ac": 2031,
+     "lb_ac_low": 1853,
+     "lb_ac_high": 2210,
      "baseline_lb_ac": 2031,
-     "index_own_class": 1.079,
+     "index_own_class": 1.0,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 12.1,
+     "model_year_to_year_spread_own_class_pct": 11.6,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 1.075,
-     "vs_normal_pct": 7.5,
+     "index": 1.0001,
+     "vs_normal_pct": 0.0,
+     "raw_index": 1.0219,
+     "raw_vs_normal_pct": 2.2,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 13.0,
-     "days_counted": 89,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 6,
+     "model_year_to_year_spread_pct": 8.8,
+     "days_counted": 85,
+     "matured_on": "2026-08-07",
+     "flowering_hot_days": 3,
      "flowering_window_days": 28,
      "flowering_hot_days_normal": 9.9,
      "flowering_hot_days_by_year": {
@@ -805,23 +966,38 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.713,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 61.3,
+     "soil": "Valent sand, 3 to 9 percent slopes",
+     "slope_pct_mean": 7.0,
+     "irrigated_share_of_ground_pct": 30.7,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 1.08,
+     "index_own_class": 1.0005,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 12.7,
+     "model_year_to_year_spread_own_class_pct": 0.3,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
-     "index": 1.154,
-     "vs_normal_pct": 15.4,
+     "index": 1.0289,
+     "vs_normal_pct": 2.9,
+     "raw_index": 1.0283,
+     "raw_vs_normal_pct": 2.8,
+     "swing_scale": 1.02,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 23.2,
-     "days_counted": 102,
-     "matured_on": "2026-07-09",
-     "flowering_hot_days": 21,
+     "model_year_to_year_spread_pct": 23.7,
+     "days_counted": 98,
+     "matured_on": "2026-07-06",
+     "flowering_hot_days": 20,
      "flowering_window_days": 28,
      "flowering_hot_days_normal": 19.3,
      "flowering_hot_days_by_year": {
@@ -882,23 +1058,38 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.686,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 61.3,
+     "soil": "Valent sand, 3 to 9 percent slopes",
+     "slope_pct_mean": 7.0,
+     "irrigated_share_of_ground_pct": 21.4,
      "commodity": "PEAS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 1821,
-     "lb_ac_low": 1399,
-     "lb_ac_high": 2244,
+     "lb_ac": 1625,
+     "lb_ac_low": 1240,
+     "lb_ac_high": 2009,
      "baseline_lb_ac": 1579
     },
     "CHICKPEAS": {
-     "index": 0.917,
-     "vs_normal_pct": -8.3,
+     "index": 0.9007,
+     "vs_normal_pct": -9.9,
+     "raw_index": 0.9007,
+     "raw_vs_normal_pct": -9.9,
+     "swing_scale": null,
+     "index_is_calibrated": false,
+     "swing_scale_from": "no harvest record for this crop in these states",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 19.0,
-     "days_counted": 110,
-     "matured_on": "2026-07-30",
-     "flowering_hot_days": 25,
+     "days_counted": 105,
+     "matured_on": "2026-07-27",
+     "flowering_hot_days": 20,
      "flowering_window_days": 34,
      "flowering_hot_days_normal": 21.6,
      "flowering_hot_days_by_year": {
@@ -959,14 +1150,43 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.647,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 61.3,
+     "soil": "Valent sand, 3 to 9 percent slopes",
+     "slope_pct_mean": 7.0,
+     "irrigated_share_of_ground_pct": 13.1,
      "commodity": "CHICKPEAS",
      "level_is_usda_published": false,
      "level_kind": "proxy",
      "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
-     "lb_ac": 1067,
-     "lb_ac_low": 864,
-     "lb_ac_high": 1270,
+     "lb_ac": 1048,
+     "lb_ac_low": 849,
+     "lb_ac_high": 1248,
      "baseline_lb_ac": 1164
+    }
+   },
+   "water_two_ways": {
+    "power": {
+     "vs_normal_pct": -6.3,
+     "this_season": 0.3201,
+     "normal": 0.3415,
+     "years_compared": 11
+    },
+    "smap": {
+     "vs_normal_pct": -1.2,
+     "this_season": 0.0657,
+     "normal": 0.0665,
+     "years_compared": 11
+    },
+    "agreement": {
+     "gap_points": 5.1,
+     "same_direction": true,
+     "read_this_as": "Broadly agree",
+     "why_two": "A land-surface model and a satellite, computed independently. Where they part company, trust neither far."
     }
    }
   },
@@ -974,249 +1194,300 @@
    "name": "Northeast Colorado",
    "classes": {
     "PINTO": {
-     "index": 0.7284,
-     "vs_normal_pct": -27.2,
+     "index": 0.9972,
+     "vs_normal_pct": -0.3,
+     "raw_index": 0.7755,
+     "raw_vs_normal_pct": -22.5,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.4,
-     "days_counted": 78,
-     "matured_on": "2026-08-11",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 19.6,
+     "model_year_to_year_spread_pct": 7.6,
+     "days_counted": 96,
+     "matured_on": "2026-08-27",
+     "flowering_hot_days": 26,
+     "flowering_window_days": 30,
+     "flowering_hot_days_normal": 23.1,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 18,
-       "window": 31,
+       "hot": 23,
+       "window": 35,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 22,
-       "window": 27,
+       "hot": 25,
+       "window": 34,
        "warm_nights": 0
       },
       "2017": {
-       "hot": 20,
-       "window": 26,
+       "hot": 19,
+       "window": 37,
        "warm_nights": 0
       },
       "2018": {
-       "hot": 19,
-       "window": 27,
+       "hot": 22,
+       "window": 36,
        "warm_nights": 0
       },
       "2019": {
-       "hot": 21,
-       "window": 26,
+       "hot": 25,
+       "window": 32,
        "warm_nights": 0
       },
       "2020": {
-       "hot": 21,
-       "window": 25,
+       "hot": 24,
+       "window": 33,
        "warm_nights": 0
       },
       "2021": {
-       "hot": 22,
-       "window": 26,
+       "hot": 26,
+       "window": 33,
        "warm_nights": 0
       },
       "2022": {
-       "hot": 19,
-       "window": 24,
-       "warm_nights": 0
-      },
-      "2023": {
-       "hot": 13,
-       "window": 29,
-       "warm_nights": 0
-      },
-      "2024": {
-       "hot": 21,
+       "hot": 22,
        "window": 30,
        "warm_nights": 0
       },
+      "2023": {
+       "hot": 19,
+       "window": 36,
+       "warm_nights": 1
+      },
+      "2024": {
+       "hot": 28,
+       "window": 35,
+       "warm_nights": 0
+      },
       "2025": {
-       "hot": 20,
-       "window": 28,
+       "hot": 21,
+       "window": 36,
        "warm_nights": 0
       }
      },
      "flowering_warm_nights": 1,
+     "water_stress_proxy": 0.751,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 75.5,
+     "soil": "Haxtun loamy sand, 0 to 3 percent slopes",
+     "slope_pct_mean": 2.8,
+     "irrigated_share_of_ground_pct": 43.0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 1440,
-     "lb_ac_low": 1190,
-     "lb_ac_high": 1691,
+     "lb_ac": 1971,
+     "lb_ac_low": 1821,
+     "lb_ac_high": 2122,
      "baseline_lb_ac": 1977,
-     "index_own_class": 0.73,
+     "index_own_class": 1.0,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 17.6,
+     "model_year_to_year_spread_own_class_pct": 15.0,
      "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.7284,
-     "vs_normal_pct": -27.2,
+     "index": 0.9972,
+     "vs_normal_pct": -0.3,
+     "raw_index": 0.7633,
+     "raw_vs_normal_pct": -23.7,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.4,
-     "days_counted": 73,
-     "matured_on": "2026-08-08",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 20.5,
+     "model_year_to_year_spread_pct": 7.6,
+     "days_counted": 95,
+     "matured_on": "2026-08-26",
+     "flowering_hot_days": 29,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 25.5,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 17,
-       "window": 30,
-       "warm_nights": 0
-      },
-      "2016": {
-       "hot": 23,
-       "window": 26,
-       "warm_nights": 0
-      },
-      "2017": {
-       "hot": 20,
-       "window": 24,
-       "warm_nights": 0
-      },
-      "2018": {
-       "hot": 21,
-       "window": 24,
-       "warm_nights": 0
-      },
-      "2019": {
-       "hot": 20,
-       "window": 24,
-       "warm_nights": 0
-      },
-      "2020": {
-       "hot": 22,
-       "window": 24,
-       "warm_nights": 0
-      },
-      "2021": {
-       "hot": 20,
-       "window": 25,
-       "warm_nights": 0
-      },
-      "2022": {
-       "hot": 21,
-       "window": 23,
-       "warm_nights": 0
-      },
-      "2023": {
-       "hot": 19,
-       "window": 27,
-       "warm_nights": 0
-      },
-      "2024": {
-       "hot": 20,
-       "window": 28,
-       "warm_nights": 0
-      },
-      "2025": {
-       "hot": 22,
-       "window": 26,
-       "warm_nights": 0
-      }
-     },
-     "flowering_warm_nights": 0,
-     "commodity": "DRY BEANS",
-     "level_is_usda_published": false,
-     "level_kind": null,
-     "level_proxy_note": null,
-     "index_own_class": 0.71,
-     "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 18.2,
-     "spread_is_shared_across_classes": true
-    },
-    "LIGHT RED KIDNEY": {
-     "index": 0.7284,
-     "vs_normal_pct": -27.2,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.4,
-     "days_counted": 87,
-     "matured_on": "2026-08-20",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 26.2,
-     "flowering_hot_days_by_year": {
-      "2015": {
-       "hot": 29,
-       "window": 34,
-       "warm_nights": 0
-      },
-      "2016": {
-       "hot": 27,
-       "window": 31,
-       "warm_nights": 0
-      },
-      "2017": {
-       "hot": 24,
-       "window": 32,
-       "warm_nights": 0
-      },
-      "2018": {
-       "hot": 23,
-       "window": 32,
-       "warm_nights": 0
-      },
-      "2019": {
-       "hot": 27,
-       "window": 29,
-       "warm_nights": 0
-      },
-      "2020": {
-       "hot": 26,
-       "window": 30,
-       "warm_nights": 0
-      },
-      "2021": {
-       "hot": 26,
-       "window": 30,
-       "warm_nights": 0
-      },
-      "2022": {
-       "hot": 25,
-       "window": 27,
-       "warm_nights": 0
-      },
-      "2023": {
        "hot": 27,
        "window": 35,
        "warm_nights": 0
       },
-      "2024": {
+      "2016": {
+       "hot": 27,
+       "window": 33,
+       "warm_nights": 0
+      },
+      "2017": {
+       "hot": 22,
+       "window": 37,
+       "warm_nights": 0
+      },
+      "2018": {
+       "hot": 23,
+       "window": 36,
+       "warm_nights": 0
+      },
+      "2019": {
        "hot": 26,
        "window": 32,
        "warm_nights": 0
       },
-      "2025": {
+      "2020": {
+       "hot": 27,
+       "window": 33,
+       "warm_nights": 0
+      },
+      "2021": {
+       "hot": 27,
+       "window": 34,
+       "warm_nights": 0
+      },
+      "2022": {
+       "hot": 25,
+       "window": 30,
+       "warm_nights": 0
+      },
+      "2023": {
+       "hot": 24,
+       "window": 36,
+       "warm_nights": 1
+      },
+      "2024": {
        "hot": 28,
-       "window": 32,
+       "window": 34,
+       "warm_nights": 0
+      },
+      "2025": {
+       "hot": 25,
+       "window": 36,
        "warm_nights": 0
       }
      },
      "flowering_warm_nights": 1,
+     "water_stress_proxy": 0.751,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 75.5,
+     "soil": "Haxtun loamy sand, 0 to 3 percent slopes",
+     "slope_pct_mean": 2.8,
+     "irrigated_share_of_ground_pct": 43.0,
+     "commodity": "DRY BEANS",
+     "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
+     "index_own_class": 0.9946,
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 0.3,
+     "spread_is_shared_across_classes": true
+    },
+    "LIGHT RED KIDNEY": {
+     "index": 0.9972,
+     "vs_normal_pct": -0.3,
+     "raw_index": 0.7873,
+     "raw_vs_normal_pct": -21.3,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 7.6,
+     "days_counted": 97,
+     "matured_on": "2026-08-28",
+     "flowering_hot_days": 29,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 29.1,
+     "flowering_hot_days_by_year": {
+      "2015": {
+       "hot": 33,
+       "window": 37,
+       "warm_nights": 0
+      },
+      "2016": {
+       "hot": 28,
+       "window": 34,
+       "warm_nights": 0
+      },
+      "2017": {
+       "hot": 28,
+       "window": 38,
+       "warm_nights": 0
+      },
+      "2018": {
+       "hot": 27,
+       "window": 37,
+       "warm_nights": 0
+      },
+      "2019": {
+       "hot": 31,
+       "window": 33,
+       "warm_nights": 0
+      },
+      "2020": {
+       "hot": 29,
+       "window": 33,
+       "warm_nights": 0
+      },
+      "2021": {
+       "hot": 29,
+       "window": 34,
+       "warm_nights": 0
+      },
+      "2022": {
+       "hot": 27,
+       "window": 30,
+       "warm_nights": 0
+      },
+      "2023": {
+       "hot": 29,
+       "window": 37,
+       "warm_nights": 1
+      },
+      "2024": {
+       "hot": 29,
+       "window": 35,
+       "warm_nights": 0
+      },
+      "2025": {
+       "hot": 30,
+       "window": 36,
+       "warm_nights": 0
+      }
+     },
+     "flowering_warm_nights": 1,
+     "water_stress_proxy": 0.75,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 75.5,
+     "soil": "Haxtun loamy sand, 0 to 3 percent slopes",
+     "slope_pct_mean": 2.8,
+     "irrigated_share_of_ground_pct": 43.0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 1880,
-     "lb_ac_low": 1553,
-     "lb_ac_high": 2207,
+     "lb_ac": 2574,
+     "lb_ac_low": 2377,
+     "lb_ac_high": 2771,
      "baseline_lb_ac": 2581,
-     "index_own_class": 0.725,
+     "index_own_class": 1.0,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 17.0,
+     "model_year_to_year_spread_own_class_pct": 14.9,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.7284,
-     "vs_normal_pct": -27.2,
+     "index": 0.9972,
+     "vs_normal_pct": -0.3,
+     "raw_index": 0.7488,
+     "raw_vs_normal_pct": -25.1,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 17.4,
+     "model_year_to_year_spread_pct": 7.6,
      "days_counted": 90,
      "matured_on": "2026-08-11",
      "flowering_hot_days": 12,
@@ -1280,20 +1551,35 @@
       }
      },
      "flowering_warm_nights": 1,
+     "water_stress_proxy": 0.762,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 75.5,
+     "soil": "Haxtun loamy sand, 0 to 3 percent slopes",
+     "slope_pct_mean": 2.8,
+     "irrigated_share_of_ground_pct": 43.0,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.749,
+     "index_own_class": 0.9942,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 16.8,
+     "model_year_to_year_spread_own_class_pct": 0.4,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
-     "index": 0.99,
+     "index": 0.9901,
      "vs_normal_pct": -1.0,
+     "raw_index": 0.9903,
+     "raw_vs_normal_pct": -1.0,
+     "swing_scale": 1.02,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 27.1,
+     "model_year_to_year_spread_pct": 27.7,
      "days_counted": 105,
      "matured_on": "2026-07-13",
      "flowering_hot_days": 24,
@@ -1357,14 +1643,29 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.642,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 75.5,
+     "soil": "Haxtun loamy sand, 0 to 3 percent slopes",
+     "slope_pct_mean": 2.8,
+     "irrigated_share_of_ground_pct": 9.4,
      "commodity": "PEAS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null
     },
     "CHICKPEAS": {
-     "index": 0.828,
+     "index": 0.8278,
      "vs_normal_pct": -17.2,
+     "raw_index": 0.8278,
+     "raw_vs_normal_pct": -17.2,
+     "swing_scale": null,
+     "index_is_calibrated": false,
+     "swing_scale_from": "no harvest record for this crop in these states",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 17.0,
      "days_counted": 111,
@@ -1430,6 +1731,15 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.7,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 75.5,
+     "soil": "Haxtun loamy sand, 0 to 3 percent slopes",
+     "slope_pct_mean": 2.8,
+     "irrigated_share_of_ground_pct": 26.1,
      "commodity": "CHICKPEAS",
      "level_is_usda_published": false,
      "level_kind": "proxy",
@@ -1439,255 +1749,326 @@
      "lb_ac_high": 1128,
      "baseline_lb_ac": 1164
     }
+   },
+   "water_two_ways": {
+    "power": {
+     "vs_normal_pct": -9.3,
+     "this_season": 0.3206,
+     "normal": 0.3536,
+     "years_compared": 11
+    },
+    "smap": {
+     "vs_normal_pct": -7.0,
+     "this_season": 0.1293,
+     "normal": 0.1391,
+     "years_compared": 11
+    },
+    "agreement": {
+     "gap_points": 2.3,
+     "same_direction": true,
+     "read_this_as": "Both agree",
+     "why_two": "A land-surface model and a satellite, computed independently. Where they part company, trust neither far."
+    }
    }
   },
   "western-colorado": {
    "name": "Western Colorado",
    "classes": {
     "PINTO": {
-     "index": 0.8969,
-     "vs_normal_pct": -10.3,
+     "index": 0.9987,
+     "vs_normal_pct": -0.1,
+     "raw_index": 0.9008,
+     "raw_vs_normal_pct": -9.9,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.9,
-     "days_counted": 85,
-     "matured_on": "2026-08-18",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 26,
-     "flowering_hot_days_normal": 19,
+     "model_year_to_year_spread_pct": 10.9,
+     "days_counted": 101,
+     "matured_on": "2026-09-06",
+     "flowering_hot_days": 27,
+     "flowering_window_days": 34,
+     "flowering_hot_days_normal": 23.5,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 11,
+       "hot": 12,
+       "window": 38,
+       "warm_nights": 0
+      },
+      "2016": {
+       "hot": 25,
        "window": 32,
        "warm_nights": 1
       },
-      "2016": {
-       "hot": 19,
-       "window": 28,
-       "warm_nights": 0
-      },
       "2017": {
-       "hot": 20,
-       "window": 25,
+       "hot": 22,
+       "window": 31,
        "warm_nights": 0
       },
       "2018": {
-       "hot": 22,
-       "window": 23,
-       "warm_nights": 2
-      },
-      "2019": {
-       "hot": 18,
-       "window": 25,
-       "warm_nights": 1
-      },
-      "2020": {
-       "hot": 18,
-       "window": 25,
-       "warm_nights": 1
-      },
-      "2021": {
-       "hot": 18,
-       "window": 23,
-       "warm_nights": 3
-      },
-      "2022": {
-       "hot": 19,
-       "window": 23,
-       "warm_nights": 5
-      },
-      "2023": {
-       "hot": 22,
-       "window": 22,
-       "warm_nights": 3
-      },
-      "2024": {
-       "hot": 22,
-       "window": 25,
-       "warm_nights": 1
-      },
-      "2025": {
-       "hot": 20,
-       "window": 25,
-       "warm_nights": 2
-      }
-     },
-     "flowering_warm_nights": 0,
-     "commodity": "DRY BEANS",
-     "level_is_usda_published": true,
-     "level_kind": "published",
-     "level_proxy_note": null,
-     "lb_ac": 1773,
-     "lb_ac_low": 1402,
-     "lb_ac_high": 2145,
-     "baseline_lb_ac": 1977,
-     "index_own_class": 0.899,
-     "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 21.3,
-     "spread_is_shared_across_classes": true
-    },
-    "GREAT NORTHERN": {
-     "index": 0.8969,
-     "vs_normal_pct": -10.3,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.9,
-     "days_counted": 80,
-     "matured_on": "2026-08-13",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 19.5,
-     "flowering_hot_days_by_year": {
-      "2015": {
-       "hot": 10,
-       "window": 29,
-       "warm_nights": 1
-      },
-      "2016": {
-       "hot": 20,
-       "window": 26,
-       "warm_nights": 0
-      },
-      "2017": {
-       "hot": 22,
-       "window": 23,
-       "warm_nights": 0
-      },
-      "2018": {
-       "hot": 23,
-       "window": 23,
-       "warm_nights": 0
-      },
-      "2019": {
-       "hot": 21,
-       "window": 24,
-       "warm_nights": 1
-      },
-      "2020": {
-       "hot": 20,
-       "window": 25,
-       "warm_nights": 1
-      },
-      "2021": {
-       "hot": 17,
-       "window": 23,
-       "warm_nights": 1
-      },
-      "2022": {
-       "hot": 19,
-       "window": 23,
-       "warm_nights": 4
-      },
-      "2023": {
-       "hot": 21,
-       "window": 21,
-       "warm_nights": 2
-      },
-      "2024": {
-       "hot": 21,
-       "window": 24,
-       "warm_nights": 1
-      },
-      "2025": {
-       "hot": 21,
-       "window": 24,
-       "warm_nights": 2
-      }
-     },
-     "flowering_warm_nights": 0,
-     "commodity": "DRY BEANS",
-     "level_is_usda_published": false,
-     "level_kind": null,
-     "level_proxy_note": null,
-     "index_own_class": 0.906,
-     "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 21.0,
-     "spread_is_shared_across_classes": true
-    },
-    "LIGHT RED KIDNEY": {
-     "index": 0.8969,
-     "vs_normal_pct": -10.3,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.9,
-     "days_counted": 96,
-     "matured_on": "2026-08-27",
-     "flowering_hot_days": 29,
-     "flowering_window_days": 29,
-     "flowering_hot_days_normal": 24.9,
-     "flowering_hot_days_by_year": {
-      "2015": {
-       "hot": 18,
-       "window": 36,
-       "warm_nights": 0
-      },
-      "2016": {
-       "hot": 26,
-       "window": 28,
-       "warm_nights": 1
-      },
-      "2017": {
-       "hot": 25,
-       "window": 28,
-       "warm_nights": 0
-      },
-      "2018": {
-       "hot": 26,
-       "window": 26,
-       "warm_nights": 4
-      },
-      "2019": {
        "hot": 27,
        "window": 28,
+       "warm_nights": 4
+      },
+      "2019": {
+       "hot": 24,
+       "window": 31,
        "warm_nights": 1
       },
       "2020": {
-       "hot": 25,
-       "window": 28,
-       "warm_nights": 1
+       "hot": 24,
+       "window": 30,
+       "warm_nights": 2
       },
       "2021": {
-       "hot": 24,
-       "window": 25,
+       "hot": 23,
+       "window": 29,
        "warm_nights": 3
       },
       "2022": {
-       "hot": 23,
-       "window": 27,
+       "hot": 20,
+       "window": 28,
        "warm_nights": 5
       },
       "2023": {
-       "hot": 25,
-       "window": 26,
+       "hot": 27,
+       "window": 28,
        "warm_nights": 3
       },
       "2024": {
        "hot": 28,
-       "window": 28,
+       "window": 29,
        "warm_nights": 1
       },
       "2025": {
        "hot": 27,
-       "window": 28,
+       "window": 30,
        "warm_nights": 2
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.851,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 89.7,
+     "soil": "Mesa clay loam, 0 to 2 percent slopes",
+     "slope_pct_mean": 7.1,
+     "irrigated_share_of_ground_pct": 34.5,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 2315,
-     "lb_ac_low": 1830,
-     "lb_ac_high": 2800,
-     "baseline_lb_ac": 2581,
-     "index_own_class": 0.922,
+     "lb_ac": 1974,
+     "lb_ac_low": 1759,
+     "lb_ac_high": 2190,
+     "baseline_lb_ac": 1977,
+     "index_own_class": 1.0,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 21.0,
+     "model_year_to_year_spread_own_class_pct": 21.5,
+     "spread_is_shared_across_classes": true
+    },
+    "GREAT NORTHERN": {
+     "index": 0.9987,
+     "vs_normal_pct": -0.1,
+     "raw_index": 0.9054,
+     "raw_vs_normal_pct": -9.5,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 10.9,
+     "days_counted": 101,
+     "matured_on": "2026-09-05",
+     "flowering_hot_days": 27,
+     "flowering_window_days": 33,
+     "flowering_hot_days_normal": 25.6,
+     "flowering_hot_days_by_year": {
+      "2015": {
+       "hot": 14,
+       "window": 39,
+       "warm_nights": 0
+      },
+      "2016": {
+       "hot": 26,
+       "window": 31,
+       "warm_nights": 1
+      },
+      "2017": {
+       "hot": 26,
+       "window": 31,
+       "warm_nights": 0
+      },
+      "2018": {
+       "hot": 28,
+       "window": 28,
+       "warm_nights": 4
+      },
+      "2019": {
+       "hot": 27,
+       "window": 30,
+       "warm_nights": 1
+      },
+      "2020": {
+       "hot": 27,
+       "window": 30,
+       "warm_nights": 2
+      },
+      "2021": {
+       "hot": 25,
+       "window": 28,
+       "warm_nights": 3
+      },
+      "2022": {
+       "hot": 24,
+       "window": 29,
+       "warm_nights": 5
+      },
+      "2023": {
+       "hot": 28,
+       "window": 29,
+       "warm_nights": 3
+      },
+      "2024": {
+       "hot": 29,
+       "window": 29,
+       "warm_nights": 1
+      },
+      "2025": {
+       "hot": 28,
+       "window": 30,
+       "warm_nights": 2
+      }
+     },
+     "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.851,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 89.7,
+     "soil": "Mesa clay loam, 0 to 2 percent slopes",
+     "slope_pct_mean": 7.1,
+     "irrigated_share_of_ground_pct": 34.5,
+     "commodity": "DRY BEANS",
+     "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
+     "index_own_class": 0.9978,
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 0.5,
+     "spread_is_shared_across_classes": true
+    },
+    "LIGHT RED KIDNEY": {
+     "index": 0.9987,
+     "vs_normal_pct": -0.1,
+     "raw_index": 0.8915,
+     "raw_vs_normal_pct": -10.8,
+     "swing_scale": 0.0,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 10.9,
+     "days_counted": 101,
+     "matured_on": "2026-09-08",
+     "flowering_hot_days": 31,
+     "flowering_window_days": 34,
+     "flowering_hot_days_normal": 27.5,
+     "flowering_hot_days_by_year": {
+      "2015": {
+       "hot": 22,
+       "window": 39,
+       "warm_nights": 0
+      },
+      "2016": {
+       "hot": 28,
+       "window": 33,
+       "warm_nights": 1
+      },
+      "2017": {
+       "hot": 28,
+       "window": 32,
+       "warm_nights": 0
+      },
+      "2018": {
+       "hot": 29,
+       "window": 29,
+       "warm_nights": 4
+      },
+      "2019": {
+       "hot": 30,
+       "window": 32,
+       "warm_nights": 1
+      },
+      "2020": {
+       "hot": 28,
+       "window": 31,
+       "warm_nights": 2
+      },
+      "2021": {
+       "hot": 28,
+       "window": 30,
+       "warm_nights": 3
+      },
+      "2022": {
+       "hot": 25,
+       "window": 29,
+       "warm_nights": 5
+      },
+      "2023": {
+       "hot": 27,
+       "window": 29,
+       "warm_nights": 3
+      },
+      "2024": {
+       "hot": 29,
+       "window": 29,
+       "warm_nights": 1
+      },
+      "2025": {
+       "hot": 29,
+       "window": 30,
+       "warm_nights": 2
+      }
+     },
+     "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.851,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 89.7,
+     "soil": "Mesa clay loam, 0 to 2 percent slopes",
+     "slope_pct_mean": 7.1,
+     "irrigated_share_of_ground_pct": 34.5,
+     "commodity": "DRY BEANS",
+     "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
+     "lb_ac": 2578,
+     "lb_ac_low": 2297,
+     "lb_ac_high": 2858,
+     "baseline_lb_ac": 2581,
+     "index_own_class": 1.0,
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 21.1,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.8969,
-     "vs_normal_pct": -10.3,
+     "index": 0.9987,
+     "vs_normal_pct": -0.1,
+     "raw_index": 0.8613,
+     "raw_vs_normal_pct": -13.9,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.9,
+     "model_year_to_year_spread_pct": 10.9,
      "days_counted": 97,
      "matured_on": "2026-08-18",
      "flowering_hot_days": 11,
@@ -1751,20 +2132,35 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.862,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 89.7,
+     "soil": "Mesa clay loam, 0 to 2 percent slopes",
+     "slope_pct_mean": 7.1,
+     "irrigated_share_of_ground_pct": 34.5,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.861,
+     "index_own_class": 0.9968,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 20.5,
+     "model_year_to_year_spread_own_class_pct": 0.5,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
-     "index": 0.917,
-     "vs_normal_pct": -8.3,
+     "index": 0.9154,
+     "vs_normal_pct": -8.5,
+     "raw_index": 0.917,
+     "raw_vs_normal_pct": -8.3,
+     "swing_scale": 1.02,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.2,
+     "model_year_to_year_spread_pct": 16.5,
      "days_counted": 107,
      "matured_on": "2026-07-16",
      "flowering_hot_days": 28,
@@ -1828,10 +2224,39 @@
       }
      },
      "flowering_warm_nights": 1,
+     "water_stress_proxy": 0.954,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 89.7,
+     "soil": "Mesa clay loam, 0 to 2 percent slopes",
+     "slope_pct_mean": 7.1,
+     "irrigated_share_of_ground_pct": 68.0,
      "commodity": "PEAS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null
+    }
+   },
+   "water_two_ways": {
+    "power": {
+     "vs_normal_pct": -4.8,
+     "this_season": 0.4691,
+     "normal": 0.4929,
+     "years_compared": 11
+    },
+    "smap": {
+     "vs_normal_pct": -1.7,
+     "this_season": 0.1695,
+     "normal": 0.1725,
+     "years_compared": 11
+    },
+    "agreement": {
+     "gap_points": 3.1,
+     "same_direction": true,
+     "read_this_as": "Both agree",
+     "why_two": "A land-surface model and a satellite, computed independently. Where they part company, trust neither far."
     }
    }
   },
@@ -1839,249 +2264,300 @@
    "name": "Southeast Wyoming",
    "classes": {
     "PINTO": {
-     "index": 0.7831,
-     "vs_normal_pct": -21.7,
+     "index": 0.9914,
+     "vs_normal_pct": -0.9,
+     "raw_index": 0.8398,
+     "raw_vs_normal_pct": -16.0,
+     "swing_scale": 0.139,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.0,
-     "days_counted": 77,
-     "matured_on": "2026-08-10",
-     "flowering_hot_days": 20,
-     "flowering_window_days": 22,
-     "flowering_hot_days_normal": 18.2,
+     "model_year_to_year_spread_pct": 0.7,
+     "days_counted": 94,
+     "matured_on": "2026-08-25",
+     "flowering_hot_days": 24,
+     "flowering_window_days": 29,
+     "flowering_hot_days_normal": 21.4,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 17,
-       "window": 32,
+       "hot": 22,
+       "window": 35,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 19,
-       "window": 27,
+       "hot": 22,
+       "window": 33,
        "warm_nights": 0
       },
       "2017": {
-       "hot": 21,
-       "window": 25,
+       "hot": 18,
+       "window": 35,
        "warm_nights": 1
       },
       "2018": {
-       "hot": 15,
-       "window": 28,
+       "hot": 20,
+       "window": 37,
        "warm_nights": 1
       },
       "2019": {
        "hot": 19,
-       "window": 27,
+       "window": 35,
        "warm_nights": 0
       },
       "2020": {
-       "hot": 21,
-       "window": 26,
+       "hot": 20,
+       "window": 33,
        "warm_nights": 2
       },
       "2021": {
-       "hot": 19,
-       "window": 26,
-       "warm_nights": 0
-      },
-      "2022": {
-       "hot": 19,
-       "window": 25,
+       "hot": 22,
+       "window": 32,
        "warm_nights": 1
       },
+      "2022": {
+       "hot": 23,
+       "window": 30,
+       "warm_nights": 2
+      },
       "2023": {
-       "hot": 15,
-       "window": 29,
+       "hot": 21,
+       "window": 35,
        "warm_nights": 0
       },
       "2024": {
-       "hot": 18,
-       "window": 27,
-       "warm_nights": 0
+       "hot": 27,
+       "window": 30,
+       "warm_nights": 1
       },
       "2025": {
-       "hot": 17,
-       "window": 28,
+       "hot": 21,
+       "window": 34,
        "warm_nights": 1
       }
      },
      "flowering_warm_nights": 3,
+     "water_stress_proxy": 0.727,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 85.8,
+     "soil": "Dacono-Albinas complex, 1 to 3 percent slopes",
+     "slope_pct_mean": 4.3,
+     "irrigated_share_of_ground_pct": 37.6,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 1794,
-     "lb_ac_low": 1508,
-     "lb_ac_high": 2081,
+     "lb_ac": 2271,
+     "lb_ac_low": 2255,
+     "lb_ac_high": 2287,
      "baseline_lb_ac": 2291,
-     "index_own_class": 0.761,
+     "index_own_class": 0.9777,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 16.3,
+     "model_year_to_year_spread_own_class_pct": 1.8,
      "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.7831,
-     "vs_normal_pct": -21.7,
+     "index": 0.9914,
+     "vs_normal_pct": -0.9,
+     "raw_index": 0.8333,
+     "raw_vs_normal_pct": -16.7,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.0,
-     "days_counted": 72,
-     "matured_on": "2026-08-07",
-     "flowering_hot_days": 20,
-     "flowering_window_days": 22,
-     "flowering_hot_days_normal": 18.8,
-     "flowering_hot_days_by_year": {
-      "2015": {
-       "hot": 16,
-       "window": 29,
-       "warm_nights": 0
-      },
-      "2016": {
-       "hot": 16,
-       "window": 25,
-       "warm_nights": 0
-      },
-      "2017": {
-       "hot": 21,
-       "window": 23,
-       "warm_nights": 1
-      },
-      "2018": {
-       "hot": 18,
-       "window": 26,
-       "warm_nights": 1
-      },
-      "2019": {
-       "hot": 21,
-       "window": 26,
-       "warm_nights": 0
-      },
-      "2020": {
-       "hot": 21,
-       "window": 24,
-       "warm_nights": 2
-      },
-      "2021": {
-       "hot": 19,
-       "window": 25,
-       "warm_nights": 0
-      },
-      "2022": {
-       "hot": 20,
-       "window": 23,
-       "warm_nights": 1
-      },
-      "2023": {
-       "hot": 19,
-       "window": 26,
-       "warm_nights": 0
-      },
-      "2024": {
-       "hot": 17,
-       "window": 26,
-       "warm_nights": 0
-      },
-      "2025": {
-       "hot": 19,
-       "window": 26,
-       "warm_nights": 1
-      }
-     },
-     "flowering_warm_nights": 1,
-     "commodity": "DRY BEANS",
-     "level_is_usda_published": true,
-     "level_kind": "published",
-     "level_proxy_note": null,
-     "lb_ac": 1698,
-     "lb_ac_low": 1427,
-     "lb_ac_high": 1969,
-     "baseline_lb_ac": 2168,
-     "index_own_class": 0.796,
-     "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 17.3,
-     "spread_is_shared_across_classes": true
-    },
-    "LIGHT RED KIDNEY": {
-     "index": 0.7831,
-     "vs_normal_pct": -21.7,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.0,
-     "days_counted": 86,
-     "matured_on": "2026-08-18",
-     "flowering_hot_days": 24,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 24.1,
+     "model_year_to_year_spread_pct": 0.7,
+     "days_counted": 93,
+     "matured_on": "2026-08-25",
+     "flowering_hot_days": 25,
+     "flowering_window_days": 29,
+     "flowering_hot_days_normal": 23.5,
      "flowering_hot_days_by_year": {
       "2015": {
        "hot": 27,
-       "window": 33,
+       "window": 35,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 25,
-       "window": 29,
+       "hot": 22,
+       "window": 32,
        "warm_nights": 0
       },
       "2017": {
-       "hot": 24,
-       "window": 30,
+       "hot": 19,
+       "window": 34,
        "warm_nights": 1
       },
       "2018": {
-       "hot": 21,
-       "window": 32,
+       "hot": 22,
+       "window": 36,
        "warm_nights": 1
       },
       "2019": {
        "hot": 21,
-       "window": 31,
+       "window": 35,
        "warm_nights": 0
       },
       "2020": {
        "hot": 26,
-       "window": 31,
+       "window": 33,
        "warm_nights": 2
       },
       "2021": {
-       "hot": 24,
-       "window": 29,
+       "hot": 26,
+       "window": 32,
        "warm_nights": 1
       },
       "2022": {
-       "hot": 24,
-       "window": 27,
-       "warm_nights": 1
+       "hot": 23,
+       "window": 29,
+       "warm_nights": 2
       },
       "2023": {
-       "hot": 25,
-       "window": 33,
+       "hot": 24,
+       "window": 35,
        "warm_nights": 0
       },
       "2024": {
-       "hot": 25,
+       "hot": 26,
        "window": 29,
-       "warm_nights": 0
+       "warm_nights": 1
       },
       "2025": {
        "hot": 23,
-       "window": 31,
+       "window": 33,
        "warm_nights": 1
       }
      },
      "flowering_warm_nights": 3,
+     "water_stress_proxy": 0.728,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 85.8,
+     "soil": "Dacono-Albinas complex, 1 to 3 percent slopes",
+     "slope_pct_mean": 4.3,
+     "irrigated_share_of_ground_pct": 37.6,
+     "commodity": "DRY BEANS",
+     "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
+     "lb_ac": 2149,
+     "lb_ac_low": 2134,
+     "lb_ac_high": 2164,
+     "baseline_lb_ac": 2168,
+     "index_own_class": 0.9962,
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 0.3,
+     "spread_is_shared_across_classes": true
+    },
+    "LIGHT RED KIDNEY": {
+     "index": 0.9914,
+     "vs_normal_pct": -0.9,
+     "raw_index": 0.8466,
+     "raw_vs_normal_pct": -15.3,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 0.7,
+     "days_counted": 95,
+     "matured_on": "2026-08-27",
+     "flowering_hot_days": 26,
+     "flowering_window_days": 29,
+     "flowering_hot_days_normal": 26.5,
+     "flowering_hot_days_by_year": {
+      "2015": {
+       "hot": 30,
+       "window": 36,
+       "warm_nights": 0
+      },
+      "2016": {
+       "hot": 26,
+       "window": 33,
+       "warm_nights": 0
+      },
+      "2017": {
+       "hot": 23,
+       "window": 36,
+       "warm_nights": 1
+      },
+      "2018": {
+       "hot": 26,
+       "window": 38,
+       "warm_nights": 1
+      },
+      "2019": {
+       "hot": 23,
+       "window": 36,
+       "warm_nights": 0
+      },
+      "2020": {
+       "hot": 28,
+       "window": 34,
+       "warm_nights": 2
+      },
+      "2021": {
+       "hot": 28,
+       "window": 32,
+       "warm_nights": 1
+      },
+      "2022": {
+       "hot": 27,
+       "window": 31,
+       "warm_nights": 2
+      },
+      "2023": {
+       "hot": 27,
+       "window": 35,
+       "warm_nights": 0
+      },
+      "2024": {
+       "hot": 27,
+       "window": 31,
+       "warm_nights": 1
+      },
+      "2025": {
+       "hot": 27,
+       "window": 35,
+       "warm_nights": 1
+      }
+     },
+     "flowering_warm_nights": 3,
+     "water_stress_proxy": 0.727,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 85.8,
+     "soil": "Dacono-Albinas complex, 1 to 3 percent slopes",
+     "slope_pct_mean": 4.3,
+     "irrigated_share_of_ground_pct": 37.6,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.788,
+     "index_own_class": 0.9965,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 13.8,
+     "model_year_to_year_spread_own_class_pct": 0.3,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.7831,
-     "vs_normal_pct": -21.7,
+     "index": 0.9914,
+     "vs_normal_pct": -0.9,
+     "raw_index": 0.7881,
+     "raw_vs_normal_pct": -21.2,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.0,
+     "model_year_to_year_spread_pct": 0.7,
      "days_counted": 87,
      "matured_on": "2026-08-08",
      "flowering_hot_days": 14,
@@ -2145,20 +2621,35 @@
       }
      },
      "flowering_warm_nights": 1,
+     "water_stress_proxy": 0.751,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 85.8,
+     "soil": "Dacono-Albinas complex, 1 to 3 percent slopes",
+     "slope_pct_mean": 4.3,
+     "irrigated_share_of_ground_pct": 37.6,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.788,
+     "index_own_class": 0.9951,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 16.4,
+     "model_year_to_year_spread_own_class_pct": 0.4,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
-     "index": 0.681,
-     "vs_normal_pct": -31.9,
+     "index": 0.6743,
+     "vs_normal_pct": -32.6,
+     "raw_index": 0.6807,
+     "raw_vs_normal_pct": -31.9,
+     "swing_scale": 1.02,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 22.0,
+     "model_year_to_year_spread_pct": 22.4,
      "days_counted": 102,
      "matured_on": "2026-07-11",
      "flowering_hot_days": 17,
@@ -2222,14 +2713,29 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.709,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 85.8,
+     "soil": "Dacono-Albinas complex, 1 to 3 percent slopes",
+     "slope_pct_mean": 4.3,
+     "irrigated_share_of_ground_pct": 20.8,
      "commodity": "PEAS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null
     },
     "CHICKPEAS": {
-     "index": 0.72,
+     "index": 0.7201,
      "vs_normal_pct": -28.0,
+     "raw_index": 0.7201,
+     "raw_vs_normal_pct": -28.0,
+     "swing_scale": null,
+     "index_is_calibrated": false,
+     "swing_scale_from": "no harvest record for this crop in these states",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
      "model_year_to_year_spread_pct": 25.5,
      "days_counted": 109,
@@ -2295,6 +2801,15 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.674,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 85.8,
+     "soil": "Dacono-Albinas complex, 1 to 3 percent slopes",
+     "slope_pct_mean": 4.3,
+     "irrigated_share_of_ground_pct": 13.8,
      "commodity": "CHICKPEAS",
      "level_is_usda_published": false,
      "level_kind": "proxy",
@@ -2304,244 +2819,315 @@
      "lb_ac_high": 1052,
      "baseline_lb_ac": 1164
     }
+   },
+   "water_two_ways": {
+    "power": {
+     "vs_normal_pct": -12.3,
+     "this_season": 0.3263,
+     "normal": 0.3723,
+     "years_compared": 11
+    },
+    "smap": {
+     "vs_normal_pct": -16.4,
+     "this_season": 0.1098,
+     "normal": 0.1313,
+     "years_compared": 11
+    },
+    "agreement": {
+     "gap_points": 4.1,
+     "same_direction": true,
+     "read_this_as": "Both agree",
+     "why_two": "A land-surface model and a satellite, computed independently. Where they part company, trust neither far."
+    }
    }
   },
   "big-horn": {
    "name": "Big Horn Basin",
    "classes": {
     "PINTO": {
-     "index": 0.7865,
-     "vs_normal_pct": -21.4,
+     "index": 0.996,
+     "vs_normal_pct": -0.4,
+     "raw_index": 0.9392,
+     "raw_vs_normal_pct": -6.1,
+     "swing_scale": 0.139,
+     "index_is_calibrated": true,
+     "swing_scale_from": "this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.1,
-     "days_counted": 99,
-     "matured_on": "2026-09-10",
-     "flowering_hot_days": 16,
+     "model_year_to_year_spread_pct": 0.9,
+     "days_counted": 100,
+     "matured_on": "2026-09-02",
+     "flowering_hot_days": 25,
      "flowering_window_days": 30,
-     "flowering_hot_days_normal": 13.5,
+     "flowering_hot_days_normal": 14.5,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 6,
-       "window": 38,
+       "hot": 12,
+       "window": 47,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 17,
-       "window": 31,
+       "hot": 21,
+       "window": 39,
        "warm_nights": 0
       },
       "2017": {
-       "hot": 13,
-       "window": 31,
-       "warm_nights": 3
+       "hot": 10,
+       "window": 41,
+       "warm_nights": 2
       },
       "2018": {
-       "hot": 10,
-       "window": 32,
+       "hot": 9,
+       "window": 46,
        "warm_nights": 0
       },
       "2019": {
-       "hot": 8,
-       "window": 33,
+       "hot": 9,
+       "window": 42,
        "warm_nights": 0
       },
       "2020": {
-       "hot": 16,
-       "window": 29,
+       "hot": 18,
+       "window": 35,
        "warm_nights": 0
       },
       "2021": {
-       "hot": 19,
-       "window": 27,
+       "hot": 23,
+       "window": 34,
        "warm_nights": 2
       },
       "2022": {
-       "hot": 17,
-       "window": 27,
+       "hot": 14,
+       "window": 36,
        "warm_nights": 2
       },
       "2023": {
-       "hot": 15,
-       "window": 31,
+       "hot": 16,
+       "window": 39,
        "warm_nights": 1
       },
       "2024": {
-       "hot": 14,
-       "window": 35,
+       "hot": 13,
+       "window": 48,
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 2,
+     "flowering_warm_nights": 7,
+     "water_stress_proxy": 0.856,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 87.6,
+     "soil": "Garland-Emblem complex, 0 to 3 percent slopes -- Draft",
+     "slope_pct_mean": 3.9,
+     "irrigated_share_of_ground_pct": 50.9,
      "commodity": "DRY BEANS",
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "lb_ac": 1802,
-     "lb_ac_low": 1476,
-     "lb_ac_high": 2128,
+     "lb_ac": 2282,
+     "lb_ac_low": 2261,
+     "lb_ac_high": 2303,
      "baseline_lb_ac": 2291,
-     "index_own_class": 0.788,
+     "index_own_class": 0.9916,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 18.4,
+     "model_year_to_year_spread_own_class_pct": 2.5,
      "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
-     "index": 0.7865,
-     "vs_normal_pct": -21.4,
+     "index": 0.996,
+     "vs_normal_pct": -0.4,
+     "raw_index": 0.9392,
+     "raw_vs_normal_pct": -6.1,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.1,
-     "days_counted": 99,
-     "matured_on": "2026-09-01",
-     "flowering_hot_days": 20,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 18.1,
+     "model_year_to_year_spread_pct": 0.9,
+     "days_counted": 100,
+     "matured_on": "2026-09-02",
+     "flowering_hot_days": 25,
+     "flowering_window_days": 29,
+     "flowering_hot_days_normal": 21,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 10,
-       "window": 37,
+       "hot": 16,
+       "window": 47,
        "warm_nights": 0
       },
       "2016": {
-       "hot": 18,
-       "window": 30,
-       "warm_nights": 0
-      },
-      "2017": {
-       "hot": 21,
-       "window": 27,
-       "warm_nights": 3
-      },
-      "2018": {
-       "hot": 15,
-       "window": 31,
-       "warm_nights": 0
-      },
-      "2019": {
-       "hot": 16,
-       "window": 30,
-       "warm_nights": 0
-      },
-      "2020": {
-       "hot": 23,
-       "window": 29,
-       "warm_nights": 0
-      },
-      "2021": {
-       "hot": 23,
-       "window": 26,
-       "warm_nights": 1
-      },
-      "2022": {
-       "hot": 20,
-       "window": 26,
-       "warm_nights": 2
-      },
-      "2023": {
-       "hot": 16,
-       "window": 30,
-       "warm_nights": 0
-      },
-      "2024": {
-       "hot": 19,
-       "window": 30,
-       "warm_nights": 0
-      }
-     },
-     "flowering_warm_nights": 2,
-     "commodity": "DRY BEANS",
-     "level_is_usda_published": true,
-     "level_kind": "published",
-     "level_proxy_note": null,
-     "lb_ac": 1705,
-     "lb_ac_low": 1397,
-     "lb_ac_high": 2014,
-     "baseline_lb_ac": 2168,
-     "index_own_class": 0.8,
-     "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 18.0,
-     "spread_is_shared_across_classes": true
-    },
-    "LIGHT RED KIDNEY": {
-     "index": 0.7865,
-     "vs_normal_pct": -21.4,
-     "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.1,
-     "days_counted": 99,
-     "matured_on": null,
-     "flowering_hot_days": 23,
-     "flowering_window_days": 34,
-     "flowering_hot_days_normal": 24.3,
-     "flowering_hot_days_by_year": {
-      "2015": {
-       "hot": 23,
-       "window": 44,
-       "warm_nights": 0
-      },
-      "2016": {
-       "hot": 26,
-       "window": 34,
-       "warm_nights": 0
-      },
-      "2017": {
-       "hot": 20,
-       "window": 37,
-       "warm_nights": 2
-      },
-      "2018": {
-       "hot": 20,
-       "window": 37,
-       "warm_nights": 0
-      },
-      "2019": {
-       "hot": 23,
+       "hot": 25,
        "window": 38,
        "warm_nights": 0
       },
+      "2017": {
+       "hot": 17,
+       "window": 42,
+       "warm_nights": 2
+      },
+      "2018": {
+       "hot": 15,
+       "window": 45,
+       "warm_nights": 0
+      },
+      "2019": {
+       "hot": 19,
+       "window": 43,
+       "warm_nights": 0
+      },
       "2020": {
-       "hot": 29,
-       "window": 34,
+       "hot": 27,
+       "window": 35,
        "warm_nights": 0
       },
       "2021": {
        "hot": 27,
-       "window": 30,
+       "window": 33,
+       "warm_nights": 2
+      },
+      "2022": {
+       "hot": 25,
+       "window": 37,
+       "warm_nights": 2
+      },
+      "2023": {
+       "hot": 20,
+       "window": 38,
+       "warm_nights": 1
+      },
+      "2024": {
+       "hot": 19,
+       "window": 46,
+       "warm_nights": 0
+      }
+     },
+     "flowering_warm_nights": 7,
+     "water_stress_proxy": 0.856,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 87.6,
+     "soil": "Garland-Emblem complex, 0 to 3 percent slopes -- Draft",
+     "slope_pct_mean": 3.9,
+     "irrigated_share_of_ground_pct": 50.9,
+     "commodity": "DRY BEANS",
+     "level_is_usda_published": true,
+     "level_kind": "published",
+     "level_proxy_note": null,
+     "lb_ac": 2159,
+     "lb_ac_low": 2139,
+     "lb_ac_high": 2179,
+     "baseline_lb_ac": 2168,
+     "index_own_class": 0.9986,
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 0.4,
+     "spread_is_shared_across_classes": true
+    },
+    "LIGHT RED KIDNEY": {
+     "index": 0.996,
+     "vs_normal_pct": -0.4,
+     "raw_index": 0.9392,
+     "raw_vs_normal_pct": -6.1,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
+     "years_of_model_history": 10,
+     "model_year_to_year_spread_pct": 0.9,
+     "days_counted": 100,
+     "matured_on": "2026-09-04",
+     "flowering_hot_days": 25,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 25.4,
+     "flowering_hot_days_by_year": {
+      "2015": {
+       "hot": 25,
+       "window": 48,
+       "warm_nights": 0
+      },
+      "2016": {
+       "hot": 29,
+       "window": 41,
+       "warm_nights": 0
+      },
+      "2017": {
+       "hot": 22,
+       "window": 42,
+       "warm_nights": 2
+      },
+      "2018": {
+       "hot": 19,
+       "window": 48,
+       "warm_nights": 0
+      },
+      "2019": {
+       "hot": 24,
+       "window": 43,
+       "warm_nights": 0
+      },
+      "2020": {
+       "hot": 28,
+       "window": 34,
+       "warm_nights": 0
+      },
+      "2021": {
+       "hot": 29,
+       "window": 34,
        "warm_nights": 2
       },
       "2022": {
        "hot": 29,
-       "window": 31,
+       "window": 37,
        "warm_nights": 2
       },
       "2023": {
-       "hot": 22,
-       "window": 35,
+       "hot": 25,
+       "window": 40,
        "warm_nights": 1
       },
       "2024": {
        "hot": 24,
-       "window": 40,
+       "window": 47,
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 2,
+     "flowering_warm_nights": 7,
+     "water_stress_proxy": 0.856,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 87.6,
+     "soil": "Garland-Emblem complex, 0 to 3 percent slopes -- Draft",
+     "slope_pct_mean": 3.9,
+     "irrigated_share_of_ground_pct": 50.9,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.784,
+     "index_own_class": 0.9986,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 17.8,
+     "model_year_to_year_spread_own_class_pct": 0.4,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.7865,
-     "vs_normal_pct": -21.4,
+     "index": 0.996,
+     "vs_normal_pct": -0.4,
+     "raw_index": 0.7889,
+     "raw_vs_normal_pct": -21.1,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 18.1,
-     "days_counted": 101,
-     "matured_on": null,
-     "flowering_hot_days": 6,
-     "flowering_window_days": 33,
+     "model_year_to_year_spread_pct": 0.9,
+     "days_counted": 87,
+     "matured_on": "2026-08-18",
+     "flowering_hot_days": 17,
+     "flowering_window_days": 23,
      "flowering_hot_days_normal": 3.6,
      "flowering_hot_days_by_year": {
       "2015": {
@@ -2595,15 +3181,44 @@
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 2,
+     "flowering_warm_nights": 8,
+     "water_stress_proxy": 0.875,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 87.6,
+     "soil": "Garland-Emblem complex, 0 to 3 percent slopes -- Draft",
+     "slope_pct_mean": 3.9,
+     "irrigated_share_of_ground_pct": 50.9,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.774,
+     "index_own_class": 0.9951,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 18.2,
+     "model_year_to_year_spread_own_class_pct": 0.4,
      "spread_is_shared_across_classes": true
+    }
+   },
+   "water_two_ways": {
+    "power": {
+     "vs_normal_pct": -15.0,
+     "this_season": 0.443,
+     "normal": 0.5209,
+     "years_compared": 11
+    },
+    "smap": {
+     "vs_normal_pct": -16.1,
+     "this_season": 0.1087,
+     "normal": 0.1295,
+     "years_compared": 11
+    },
+    "agreement": {
+     "gap_points": 1.1,
+     "same_direction": true,
+     "read_this_as": "Both agree",
+     "why_two": "A land-surface model and a satellite, computed independently. Where they part company, trust neither far."
     }
    }
   },
@@ -2611,244 +3226,295 @@
    "name": "Northwest Kansas",
    "classes": {
     "PINTO": {
-     "index": 0.904,
-     "vs_normal_pct": -9.6,
+     "index": 0.9957,
+     "vs_normal_pct": -0.4,
+     "raw_index": 0.7686,
+     "raw_vs_normal_pct": -23.1,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.1,
-     "days_counted": 74,
-     "matured_on": "2026-08-08",
-     "flowering_hot_days": 22,
-     "flowering_window_days": 25,
-     "flowering_hot_days_normal": 15.9,
+     "model_year_to_year_spread_pct": 0.4,
+     "days_counted": 88,
+     "matured_on": "2026-08-21",
+     "flowering_hot_days": 24,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 18.5,
      "flowering_hot_days_by_year": {
       "2015": {
-       "hot": 14,
-       "window": 25,
+       "hot": 20,
+       "window": 32,
        "warm_nights": 1
       },
       "2016": {
-       "hot": 19,
-       "window": 25,
-       "warm_nights": 2
-      },
-      "2017": {
-       "hot": 17,
-       "window": 25,
-       "warm_nights": 3
-      },
-      "2018": {
-       "hot": 16,
-       "window": 25,
-       "warm_nights": 1
-      },
-      "2019": {
-       "hot": 17,
-       "window": 25,
-       "warm_nights": 2
-      },
-      "2020": {
-       "hot": 19,
-       "window": 25,
-       "warm_nights": 3
-      },
-      "2021": {
-       "hot": 11,
-       "window": 28,
-       "warm_nights": 0
-      },
-      "2022": {
-       "hot": 19,
-       "window": 22,
-       "warm_nights": 6
-      },
-      "2023": {
-       "hot": 15,
-       "window": 26,
-       "warm_nights": 3
-      },
-      "2024": {
-       "hot": 13,
-       "window": 27,
-       "warm_nights": 1
-      },
-      "2025": {
-       "hot": 15,
-       "window": 26,
-       "warm_nights": 0
-      }
-     },
-     "flowering_warm_nights": 0,
-     "commodity": "DRY BEANS",
-     "level_is_usda_published": false,
-     "level_kind": null,
-     "level_proxy_note": null,
-     "index_own_class": 0.907,
-     "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 19.1,
-     "spread_is_shared_across_classes": true
-    },
-    "GREAT NORTHERN": {
-     "index": 0.904,
-     "vs_normal_pct": -9.6,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.1,
-     "days_counted": 70,
-     "matured_on": "2026-08-04",
-     "flowering_hot_days": 23,
-     "flowering_window_days": 24,
-     "flowering_hot_days_normal": 17.5,
-     "flowering_hot_days_by_year": {
-      "2015": {
-       "hot": 16,
-       "window": 25,
-       "warm_nights": 1
-      },
-      "2016": {
-       "hot": 19,
-       "window": 24,
-       "warm_nights": 1
-      },
-      "2017": {
-       "hot": 15,
-       "window": 24,
-       "warm_nights": 1
-      },
-      "2018": {
-       "hot": 19,
-       "window": 23,
-       "warm_nights": 1
-      },
-      "2019": {
-       "hot": 17,
-       "window": 23,
-       "warm_nights": 2
-      },
-      "2020": {
-       "hot": 22,
-       "window": 24,
-       "warm_nights": 3
-      },
-      "2021": {
-       "hot": 16,
-       "window": 27,
-       "warm_nights": 0
-      },
-      "2022": {
-       "hot": 19,
-       "window": 20,
-       "warm_nights": 5
-      },
-      "2023": {
-       "hot": 14,
-       "window": 26,
-       "warm_nights": 3
-      },
-      "2024": {
-       "hot": 17,
-       "window": 25,
-       "warm_nights": 1
-      },
-      "2025": {
-       "hot": 18,
-       "window": 24,
-       "warm_nights": 0
-      }
-     },
-     "flowering_warm_nights": 0,
-     "commodity": "DRY BEANS",
-     "level_is_usda_published": false,
-     "level_kind": null,
-     "level_proxy_note": null,
-     "index_own_class": 0.977,
-     "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 19.9,
-     "spread_is_shared_across_classes": true
-    },
-    "LIGHT RED KIDNEY": {
-     "index": 0.904,
-     "vs_normal_pct": -9.6,
-     "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.1,
-     "days_counted": 82,
-     "matured_on": "2026-08-15",
-     "flowering_hot_days": 27,
-     "flowering_window_days": 27,
-     "flowering_hot_days_normal": 22.5,
-     "flowering_hot_days_by_year": {
-      "2015": {
-       "hot": 21,
-       "window": 29,
-       "warm_nights": 1
-      },
-      "2016": {
-       "hot": 22,
-       "window": 27,
-       "warm_nights": 2
-      },
-      "2017": {
-       "hot": 21,
-       "window": 28,
-       "warm_nights": 3
-      },
-      "2018": {
-       "hot": 22,
-       "window": 29,
-       "warm_nights": 1
-      },
-      "2019": {
        "hot": 24,
-       "window": 28,
+       "window": 29,
        "warm_nights": 2
       },
-      "2020": {
-       "hot": 23,
-       "window": 28,
-       "warm_nights": 5
+      "2017": {
+       "hot": 13,
+       "window": 33,
+       "warm_nights": 3
       },
-      "2021": {
+      "2018": {
+       "hot": 16,
+       "window": 33,
+       "warm_nights": 1
+      },
+      "2019": {
        "hot": 24,
        "window": 30,
-       "warm_nights": 1
+       "warm_nights": 2
+      },
+      "2020": {
+       "hot": 17,
+       "window": 32,
+       "warm_nights": 5
+      },
+      "2021": {
+       "hot": 17,
+       "window": 32,
+       "warm_nights": 2
       },
       "2022": {
-       "hot": 24,
-       "window": 25,
+       "hot": 20,
+       "window": 29,
        "warm_nights": 7
       },
       "2023": {
-       "hot": 22,
-       "window": 29,
-       "warm_nights": 3
+       "hot": 15,
+       "window": 33,
+       "warm_nights": 2
       },
       "2024": {
-       "hot": 22,
-       "window": 30,
-       "warm_nights": 1
+       "hot": 20,
+       "window": 32,
+       "warm_nights": 2
       },
       "2025": {
-       "hot": 23,
-       "window": 30,
+       "hot": 18,
+       "window": 32,
        "warm_nights": 0
       }
      },
-     "flowering_warm_nights": 1,
+     "flowering_warm_nights": 3,
+     "water_stress_proxy": 0.741,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 117.9,
+     "soil": "Keith silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 1.3,
+     "irrigated_share_of_ground_pct": 20.7,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.801,
+     "index_own_class": 0.9947,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 17.8,
+     "model_year_to_year_spread_own_class_pct": 0.4,
+     "spread_is_shared_across_classes": true
+    },
+    "GREAT NORTHERN": {
+     "index": 0.9957,
+     "vs_normal_pct": -0.4,
+     "raw_index": 0.773,
+     "raw_vs_normal_pct": -22.7,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 0.4,
+     "days_counted": 88,
+     "matured_on": "2026-08-20",
+     "flowering_hot_days": 25,
+     "flowering_window_days": 30,
+     "flowering_hot_days_normal": 21.5,
+     "flowering_hot_days_by_year": {
+      "2015": {
+       "hot": 23,
+       "window": 32,
+       "warm_nights": 1
+      },
+      "2016": {
+       "hot": 24,
+       "window": 29,
+       "warm_nights": 2
+      },
+      "2017": {
+       "hot": 14,
+       "window": 33,
+       "warm_nights": 3
+      },
+      "2018": {
+       "hot": 23,
+       "window": 32,
+       "warm_nights": 1
+      },
+      "2019": {
+       "hot": 25,
+       "window": 30,
+       "warm_nights": 2
+      },
+      "2020": {
+       "hot": 23,
+       "window": 32,
+       "warm_nights": 5
+      },
+      "2021": {
+       "hot": 22,
+       "window": 31,
+       "warm_nights": 2
+      },
+      "2022": {
+       "hot": 23,
+       "window": 28,
+       "warm_nights": 7
+      },
+      "2023": {
+       "hot": 17,
+       "window": 33,
+       "warm_nights": 3
+      },
+      "2024": {
+       "hot": 22,
+       "window": 32,
+       "warm_nights": 2
+      },
+      "2025": {
+       "hot": 20,
+       "window": 31,
+       "warm_nights": 0
+      }
+     },
+     "flowering_warm_nights": 3,
+     "water_stress_proxy": 0.741,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 117.9,
+     "soil": "Keith silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 1.3,
+     "irrigated_share_of_ground_pct": 20.7,
+     "commodity": "DRY BEANS",
+     "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
+     "index_own_class": 0.9948,
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 0.4,
+     "spread_is_shared_across_classes": true
+    },
+    "LIGHT RED KIDNEY": {
+     "index": 0.9957,
+     "vs_normal_pct": -0.4,
+     "raw_index": 0.7655,
+     "raw_vs_normal_pct": -23.5,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
+     "years_of_model_history": 11,
+     "model_year_to_year_spread_pct": 0.4,
+     "days_counted": 89,
+     "matured_on": "2026-08-21",
+     "flowering_hot_days": 27,
+     "flowering_window_days": 31,
+     "flowering_hot_days_normal": 24.4,
+     "flowering_hot_days_by_year": {
+      "2015": {
+       "hot": 25,
+       "window": 32,
+       "warm_nights": 1
+      },
+      "2016": {
+       "hot": 26,
+       "window": 30,
+       "warm_nights": 2
+      },
+      "2017": {
+       "hot": 18,
+       "window": 35,
+       "warm_nights": 3
+      },
+      "2018": {
+       "hot": 25,
+       "window": 33,
+       "warm_nights": 1
+      },
+      "2019": {
+       "hot": 25,
+       "window": 30,
+       "warm_nights": 2
+      },
+      "2020": {
+       "hot": 23,
+       "window": 32,
+       "warm_nights": 5
+      },
+      "2021": {
+       "hot": 27,
+       "window": 33,
+       "warm_nights": 2
+      },
+      "2022": {
+       "hot": 25,
+       "window": 29,
+       "warm_nights": 7
+      },
+      "2023": {
+       "hot": 24,
+       "window": 34,
+       "warm_nights": 2
+      },
+      "2024": {
+       "hot": 25,
+       "window": 32,
+       "warm_nights": 2
+      },
+      "2025": {
+       "hot": 25,
+       "window": 32,
+       "warm_nights": 0
+      }
+     },
+     "flowering_warm_nights": 3,
+     "water_stress_proxy": 0.741,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 117.9,
+     "soil": "Keith silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 1.3,
+     "irrigated_share_of_ground_pct": 20.7,
+     "commodity": "DRY BEANS",
+     "level_is_usda_published": false,
+     "level_kind": null,
+     "level_proxy_note": null,
+     "index_own_class": 0.9946,
+     "index_is_shared_across_classes": true,
+     "model_year_to_year_spread_own_class_pct": 0.4,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
-     "index": 0.904,
-     "vs_normal_pct": -9.6,
+     "index": 0.9957,
+     "vs_normal_pct": -0.4,
+     "raw_index": 0.9333,
+     "raw_vs_normal_pct": -6.7,
+     "swing_scale": 0.023,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 19.1,
-     "days_counted": 84,
-     "matured_on": "2026-08-06",
-     "flowering_hot_days": 9,
+     "model_year_to_year_spread_pct": 0.4,
+     "days_counted": 83,
+     "matured_on": "2026-08-05",
+     "flowering_hot_days": 5,
      "flowering_window_days": 27,
      "flowering_hot_days_normal": 9.1,
      "flowering_hot_days_by_year": {
@@ -2909,23 +3575,38 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.735,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 117.9,
+     "soil": "Keith silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 1.3,
+     "irrigated_share_of_ground_pct": 20.7,
      "commodity": "DRY BEANS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
-     "index_own_class": 0.932,
+     "index_own_class": 0.9985,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 19.4,
+     "model_year_to_year_spread_own_class_pct": 0.4,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
-     "index": 1.131,
-     "vs_normal_pct": 13.1,
+     "index": 1.1364,
+     "vs_normal_pct": 13.6,
+     "raw_index": 1.1337,
+     "raw_vs_normal_pct": 13.4,
+     "swing_scale": 1.02,
+     "index_is_calibrated": true,
+     "swing_scale_from": "the commodity average, no record for this class in this state",
+     "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 29.6,
-     "days_counted": 98,
-     "matured_on": "2026-07-06",
-     "flowering_hot_days": 23,
+     "model_year_to_year_spread_pct": 30.2,
+     "days_counted": 95,
+     "matured_on": "2026-07-05",
+     "flowering_hot_days": 22,
      "flowering_window_days": 27,
      "flowering_hot_days_normal": 18.9,
      "flowering_hot_days_by_year": {
@@ -2986,10 +3667,39 @@
       }
      },
      "flowering_warm_nights": 0,
+     "water_stress_proxy": 0.7,
+     "water_stress_proxy_is": "estimated water-stress proxy",
+     "water_stress_proxy_note": "Estimated from a land-surface model and the USDA soil survey. It is NOT measured soil moisture. Growers measure the root zone with buried probes at several depths, tensiometers or Watermark sensors, a hand probe, and their own rain and irrigation-flow records. This has none of those. 1.00 means no estimated shortage; lower means more.",
+     "water_source": "gwet",
+     "water_applied_to_yield": false,
+     "root_zone_available_water_mm": 117.9,
+     "soil": "Keith silt loam, 0 to 1 percent slopes",
+     "slope_pct_mean": 1.3,
+     "irrigated_share_of_ground_pct": 12.4,
      "commodity": "PEAS",
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null
+    }
+   },
+   "water_two_ways": {
+    "power": {
+     "vs_normal_pct": -4.3,
+     "this_season": 0.3659,
+     "normal": 0.3825,
+     "years_compared": 11
+    },
+    "smap": {
+     "vs_normal_pct": -8.3,
+     "this_season": 0.2129,
+     "normal": 0.2321,
+     "years_compared": 11
+    },
+    "agreement": {
+     "gap_points": 4.0,
+     "same_direction": true,
+     "read_this_as": "Both agree",
+     "why_two": "A land-surface model and a satellite, computed independently. Where they part company, trust neither far."
     }
    }
   }

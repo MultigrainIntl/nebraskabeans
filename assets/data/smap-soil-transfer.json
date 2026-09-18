@@ -1,0 +1,1673 @@
+{
+ "schema": "nebraskabeans.remote-soil-transfer.v1",
+ "what": "Leave-one-station-out test of whether a remote soil-moisture correction can be carried to ground with no probes in it.",
+ "units": "volumetric water content, percentage points",
+ "stations_tested": 181,
+ "neighbours_voting": 8,
+ "excluded_within_km": 500.0,
+ "held_out_error": {
+  "climatology": {
+   "mean": 13.763,
+   "median": 13.007,
+   "skill_vs_climatology_pct": 0.0
+  },
+  "uncorrected": {
+   "mean": 10.158,
+   "median": 8.091,
+   "skill_vs_climatology_pct": 26.2
+  },
+  "global_mean": {
+   "mean": 10.624,
+   "median": 8.696,
+   "skill_vs_climatology_pct": 22.8
+  },
+  "transferred": {
+   "mean": 10.355,
+   "median": 7.594,
+   "skill_vs_climatology_pct": 24.8
+  },
+  "own_station": {
+   "mean": 3.918,
+   "median": 3.69,
+   "skill_vs_climatology_pct": 71.5
+  }
+ },
+ "transferred_beats_climatology_at": 130,
+ "transferred_beats_global_correction_at": 106,
+ "verdict": "The correction does NOT travel. Fitting a local correction from similar places beat the raw remote figure only while nearby stations were allowed to vote; with 500 km of separation the simplest method \u2014 the remote figure with one fixed scaling and no fitting at all \u2014 wins. What we carry to ground with no probes is that raw figure and an honest band, not a clever local adjustment.",
+ "best_method_for_unmeasured_ground": "uncorrected",
+ "quote_this_uncertainty_vwc_points": 10.16,
+ "a_probe_on_site_would_give": 3.92,
+ "reproduce": "python3 scripts/refresh/remote_soil_calibration.py && python3 scripts/remote_soil_transfer.py",
+ "by_station": [
+  {
+   "station": "AAMU-JTG",
+   "state": "AL",
+   "r": 0.464,
+   "climatology": 19.33,
+   "global_mean": 8.81,
+   "transferred": 5.77,
+   "own_station": 2.68
+  },
+  {
+   "station": "Abrams",
+   "state": "KS",
+   "r": 0.498,
+   "climatology": 6.27,
+   "global_mean": 4.8,
+   "transferred": 5.32,
+   "own_station": 4.74
+  },
+  {
+   "station": "Adams Ranch #1",
+   "state": "NM",
+   "r": 0.323,
+   "climatology": 13.71,
+   "global_mean": 8.62,
+   "transferred": 5.71,
+   "own_station": 4.91
+  },
+  {
+   "station": "Alcalde",
+   "state": "NM",
+   "r": 0.157,
+   "climatology": 13.38,
+   "global_mean": 6.48,
+   "transferred": 6.67,
+   "own_station": 2.97
+  },
+  {
+   "station": "Alkali Mesa",
+   "state": "UT",
+   "r": 0.512,
+   "climatology": 11.62,
+   "global_mean": 6.86,
+   "transferred": 4.47,
+   "own_station": 3.01
+  },
+  {
+   "station": "Allen Farms",
+   "state": "TN",
+   "r": 0.721,
+   "climatology": 15.96,
+   "global_mean": 5.81,
+   "transferred": 7.89,
+   "own_station": 5.6
+  },
+  {
+   "station": "Ames",
+   "state": "IA",
+   "r": 0.747,
+   "climatology": 22.92,
+   "global_mean": 17.53,
+   "transferred": 15.81,
+   "own_station": 3.51
+  },
+  {
+   "station": "Ash Valley",
+   "state": "CA",
+   "r": 0.773,
+   "climatology": 13.08,
+   "global_mean": 10.72,
+   "transferred": 10.12,
+   "own_station": 8.02
+  },
+  {
+   "station": "Beasley Lake",
+   "state": "MS",
+   "r": 0.374,
+   "climatology": 31.38,
+   "global_mean": 21.65,
+   "transferred": 23.75,
+   "own_station": 4.61
+  },
+  {
+   "station": "Beaumont",
+   "state": "TX",
+   "r": 0.376,
+   "climatology": 18.81,
+   "global_mean": 14.33,
+   "transferred": 23.39,
+   "own_station": 6.31
+  },
+  {
+   "station": "Blue Creek",
+   "state": "UT",
+   "r": 0.738,
+   "climatology": 5.86,
+   "global_mean": 5.34,
+   "transferred": 3.39,
+   "own_station": 3.35
+  },
+  {
+   "station": "Bodie Hills",
+   "state": "CA",
+   "r": 0.765,
+   "climatology": 20.39,
+   "global_mean": 24.62,
+   "transferred": 21.15,
+   "own_station": 2.36
+  },
+  {
+   "station": "Bragg Farm",
+   "state": "AL",
+   "r": 0.535,
+   "climatology": 11.52,
+   "global_mean": 5.38,
+   "transferred": 6.17,
+   "own_station": 3.78
+  },
+  {
+   "station": "Broad Acres",
+   "state": "AL",
+   "r": 0.694,
+   "climatology": 30.36,
+   "global_mean": 16.74,
+   "transferred": 6.77,
+   "own_station": 6.53
+  },
+  {
+   "station": "Buckhorn",
+   "state": "NV",
+   "r": 0.721,
+   "climatology": 8.96,
+   "global_mean": 7.89,
+   "transferred": 12.54,
+   "own_station": 5.15
+  },
+  {
+   "station": "Buffalo Jump",
+   "state": "UT",
+   "r": 0.715,
+   "climatology": 16.67,
+   "global_mean": 12.33,
+   "transferred": 3.33,
+   "own_station": 3.28
+  },
+  {
+   "station": "Bushland #1",
+   "state": "TX",
+   "r": 0.8,
+   "climatology": 8.79,
+   "global_mean": 8.22,
+   "transferred": 9.36,
+   "own_station": 5.27
+  },
+  {
+   "station": "Cache Junction",
+   "state": "UT",
+   "r": 0.622,
+   "climatology": 10.99,
+   "global_mean": 11.09,
+   "transferred": 15.89,
+   "own_station": 2.76
+  },
+  {
+   "station": "Cave Valley",
+   "state": "UT",
+   "r": 0.706,
+   "climatology": 24.11,
+   "global_mean": 23.4,
+   "transferred": 15.79,
+   "own_station": 1.99
+  },
+  {
+   "station": "Centralia Lake",
+   "state": "KS",
+   "r": 0.22,
+   "climatology": 14.82,
+   "global_mean": 7.18,
+   "transferred": 6.93,
+   "own_station": 3.58
+  },
+  {
+   "station": "Charkiln",
+   "state": "NV",
+   "r": 0.766,
+   "climatology": 9.09,
+   "global_mean": 7.39,
+   "transferred": 12.13,
+   "own_station": 4.58
+  },
+  {
+   "station": "Chicken Ridge",
+   "state": "UT",
+   "r": 0.846,
+   "climatology": 13.38,
+   "global_mean": 8.61,
+   "transferred": 5.39,
+   "own_station": 3.31
+  },
+  {
+   "station": "Circleville",
+   "state": "UT",
+   "r": 0.384,
+   "climatology": 17.21,
+   "global_mean": 13.36,
+   "transferred": 4.86,
+   "own_station": 3.1
+  },
+  {
+   "station": "CMRB LTAR-MO",
+   "state": "MO",
+   "r": 0.715,
+   "climatology": 19.42,
+   "global_mean": 6.5,
+   "transferred": 7.7,
+   "own_station": 5.31
+  },
+  {
+   "station": "Cochora Ranch",
+   "state": "CA",
+   "r": 0.664,
+   "climatology": 16.34,
+   "global_mean": 7.09,
+   "transferred": 6.2,
+   "own_station": 2.08
+  },
+  {
+   "station": "Combate",
+   "state": "PR",
+   "r": 0.535,
+   "climatology": 7.17,
+   "global_mean": 5.33,
+   "transferred": 6.97,
+   "own_station": 3.94
+  },
+  {
+   "station": "Conrad Ag Rc",
+   "state": "MT",
+   "r": 0.04,
+   "climatology": 6.23,
+   "global_mean": 6.7,
+   "transferred": 10.46,
+   "own_station": 4.52
+  },
+  {
+   "station": "Cook Farm Field D",
+   "state": "WA",
+   "r": 0.896,
+   "climatology": 15.17,
+   "global_mean": 9.28,
+   "transferred": 15.23,
+   "own_station": 4.65
+  },
+  {
+   "station": "Corozal",
+   "state": "PR",
+   "r": 0.648,
+   "climatology": 22.34,
+   "global_mean": 26.72,
+   "transferred": 23.56,
+   "own_station": 5.27
+  },
+  {
+   "station": "CPER",
+   "state": "CO",
+   "r": 0.562,
+   "climatology": 13.01,
+   "global_mean": 8.06,
+   "transferred": 2.66,
+   "own_station": 2.5
+  },
+  {
+   "station": "Crescent Lake #1",
+   "state": "MN",
+   "r": 0.494,
+   "climatology": 15.41,
+   "global_mean": 7.85,
+   "transferred": 6.73,
+   "own_station": 2.9
+  },
+  {
+   "station": "Crossroads",
+   "state": "NM",
+   "r": 0.379,
+   "climatology": 14.6,
+   "global_mean": 5.18,
+   "transferred": 3.05,
+   "own_station": 2.43
+  },
+  {
+   "station": "Cullman-NAHRC",
+   "state": "AL",
+   "r": 0.776,
+   "climatology": 7.65,
+   "global_mean": 7.05,
+   "transferred": 3.96,
+   "own_station": 3.73
+  },
+  {
+   "station": "Death Valley Jct",
+   "state": "CA",
+   "r": 0.26,
+   "climatology": 13.03,
+   "global_mean": 8.86,
+   "transferred": 13.48,
+   "own_station": 8.34
+  },
+  {
+   "station": "Dee River Ranch",
+   "state": "AL",
+   "r": 0.394,
+   "climatology": 35.48,
+   "global_mean": 19.54,
+   "transferred": 11.2,
+   "own_station": 6.09
+  },
+  {
+   "station": "Deep Springs",
+   "state": "CA",
+   "r": 0.634,
+   "climatology": 18.7,
+   "global_mean": 14.15,
+   "transferred": 8.27,
+   "own_station": 1.62
+  },
+  {
+   "station": "Desert Center",
+   "state": "CA",
+   "r": 0.477,
+   "climatology": 17.88,
+   "global_mean": 7.07,
+   "transferred": 5.03,
+   "own_station": 2.58
+  },
+  {
+   "station": "Dexter",
+   "state": "MO",
+   "r": 0.68,
+   "climatology": 7.25,
+   "global_mean": 4.0,
+   "transferred": 5.77,
+   "own_station": 1.71
+  },
+  {
+   "station": "Doe Ridge",
+   "state": "CA",
+   "r": 0.761,
+   "climatology": 20.78,
+   "global_mean": 20.84,
+   "transferred": 16.3,
+   "own_station": 1.83
+  },
+  {
+   "station": "Eagle Lake",
+   "state": "CA",
+   "r": 0.716,
+   "climatology": 21.57,
+   "global_mean": 24.6,
+   "transferred": 22.9,
+   "own_station": 1.38
+  },
+  {
+   "station": "Eastland",
+   "state": "UT",
+   "r": 0.646,
+   "climatology": 8.8,
+   "global_mean": 6.18,
+   "transferred": 5.61,
+   "own_station": 3.66
+  },
+  {
+   "station": "Eastview Farm",
+   "state": "TN",
+   "r": 0.68,
+   "climatology": 10.71,
+   "global_mean": 7.45,
+   "transferred": 8.78,
+   "own_station": 2.08
+  },
+  {
+   "station": "Elsberry PMC",
+   "state": "MO",
+   "r": 0.573,
+   "climatology": 16.3,
+   "global_mean": 10.4,
+   "transferred": 10.58,
+   "own_station": 3.79
+  },
+  {
+   "station": "Enterprise",
+   "state": "UT",
+   "r": 0.754,
+   "climatology": 11.19,
+   "global_mean": 5.17,
+   "transferred": 4.0,
+   "own_station": 3.21
+  },
+  {
+   "station": "Ephraim",
+   "state": "UT",
+   "r": 0.479,
+   "climatology": 6.01,
+   "global_mean": 5.23,
+   "transferred": 9.21,
+   "own_station": 5.0
+  },
+  {
+   "station": "Eros Data Center",
+   "state": "SD",
+   "r": 0.636,
+   "climatology": 5.44,
+   "global_mean": 7.4,
+   "transferred": 4.74,
+   "own_station": 3.72
+  },
+  {
+   "station": "Essex",
+   "state": "CA",
+   "r": 0.496,
+   "climatology": 22.42,
+   "global_mean": 8.31,
+   "transferred": 6.81,
+   "own_station": 1.48
+  },
+  {
+   "station": "Ford Dry Lake",
+   "state": "CA",
+   "r": 0.2,
+   "climatology": 14.33,
+   "global_mean": 3.74,
+   "transferred": 1.9,
+   "own_station": 1.52
+  },
+  {
+   "station": "Fort Assiniboine #1",
+   "state": "MT",
+   "r": 0.391,
+   "climatology": 4.38,
+   "global_mean": 6.61,
+   "transferred": 3.81,
+   "own_station": 3.77
+  },
+  {
+   "station": "Fort Reno #1",
+   "state": "OK",
+   "r": 0.747,
+   "climatology": 6.39,
+   "global_mean": 5.79,
+   "transferred": 8.46,
+   "own_station": 3.47
+  },
+  {
+   "station": "Fortuna",
+   "state": "PR",
+   "r": 0.568,
+   "climatology": 5.54,
+   "global_mean": 5.12,
+   "transferred": 7.62,
+   "own_station": 4.52
+  },
+  {
+   "station": "French Gulch",
+   "state": "CA",
+   "r": 0.913,
+   "climatology": 8.02,
+   "global_mean": 6.53,
+   "transferred": 8.69,
+   "own_station": 2.19
+  },
+  {
+   "station": "Geneva #1",
+   "state": "NY",
+   "r": 0.698,
+   "climatology": 8.41,
+   "global_mean": 5.53,
+   "transferred": 6.73,
+   "own_station": 5.25
+  },
+  {
+   "station": "Glacial Ridge",
+   "state": "MN",
+   "r": 0.67,
+   "climatology": 13.24,
+   "global_mean": 18.4,
+   "transferred": 11.32,
+   "own_station": 5.6
+  },
+  {
+   "station": "Goodwin Ck Pasture",
+   "state": "MS",
+   "r": 0.772,
+   "climatology": 19.57,
+   "global_mean": 9.4,
+   "transferred": 12.28,
+   "own_station": 4.3
+  },
+  {
+   "station": "Goodwin Ck Timber",
+   "state": "MS",
+   "r": 0.721,
+   "climatology": 10.47,
+   "global_mean": 6.96,
+   "transferred": 5.92,
+   "own_station": 5.83
+  },
+  {
+   "station": "Green River",
+   "state": "UT",
+   "r": 0.261,
+   "climatology": 19.34,
+   "global_mean": 15.03,
+   "transferred": 9.82,
+   "own_station": 1.63
+  },
+  {
+   "station": "Grouse Creek",
+   "state": "UT",
+   "r": 0.713,
+   "climatology": 9.63,
+   "global_mean": 8.2,
+   "transferred": 4.94,
+   "own_station": 4.19
+  },
+  {
+   "station": "Guilarte Forest",
+   "state": "PR",
+   "r": 0.043,
+   "climatology": 19.55,
+   "global_mean": 13.71,
+   "transferred": 9.58,
+   "own_station": 3.08
+  },
+  {
+   "station": "Hals Canyon",
+   "state": "UT",
+   "r": 0.566,
+   "climatology": 23.35,
+   "global_mean": 14.86,
+   "transferred": 7.37,
+   "own_station": 1.53
+  },
+  {
+   "station": "Harms Way",
+   "state": "UT",
+   "r": 0.569,
+   "climatology": 14.62,
+   "global_mean": 5.99,
+   "transferred": 5.23,
+   "own_station": 3.01
+  },
+  {
+   "station": "Hodges",
+   "state": "AL",
+   "r": 0.782,
+   "climatology": 9.95,
+   "global_mean": 8.46,
+   "transferred": 4.65,
+   "own_station": 3.21
+  },
+  {
+   "station": "Holden",
+   "state": "UT",
+   "r": 0.641,
+   "climatology": 15.58,
+   "global_mean": 4.88,
+   "transferred": 2.64,
+   "own_station": 1.81
+  },
+  {
+   "station": "Hubbard Brook",
+   "state": "NH",
+   "r": 0.778,
+   "climatology": 4.72,
+   "global_mean": 3.45,
+   "transferred": 4.91,
+   "own_station": 2.89
+  },
+  {
+   "station": "Isabela",
+   "state": "PR",
+   "r": -0.245,
+   "climatology": 12.45,
+   "global_mean": 9.8,
+   "transferred": 8.17,
+   "own_station": 6.5
+  },
+  {
+   "station": "Isbell Farms",
+   "state": "AL",
+   "r": 0.274,
+   "climatology": 25.1,
+   "global_mean": 20.11,
+   "transferred": 13.79,
+   "own_station": 6.88
+  },
+  {
+   "station": "Johnson Farm",
+   "state": "NE",
+   "r": 0.596,
+   "climatology": 8.39,
+   "global_mean": 6.0,
+   "transferred": 3.72,
+   "own_station": 3.16
+  },
+  {
+   "station": "Jordan",
+   "state": "MT",
+   "r": 0.642,
+   "climatology": 5.11,
+   "global_mean": 9.2,
+   "transferred": 6.7,
+   "own_station": 3.6
+  },
+  {
+   "station": "Jornada Exp Range",
+   "state": "NM",
+   "r": 0.388,
+   "climatology": 22.22,
+   "global_mean": 11.57,
+   "transferred": 2.84,
+   "own_station": 0.88
+  },
+  {
+   "station": "Journagan Ranch",
+   "state": "MO",
+   "r": 0.706,
+   "climatology": 10.43,
+   "global_mean": 14.75,
+   "transferred": 11.54,
+   "own_station": 6.55
+  },
+  {
+   "station": "Kanuti Lake",
+   "state": "AK",
+   "r": -0.245,
+   "climatology": 9.33,
+   "global_mean": 53.05,
+   "transferred": 56.82,
+   "own_station": 9.03
+  },
+  {
+   "station": "Kingsville",
+   "state": "TX",
+   "r": 0.629,
+   "climatology": 11.03,
+   "global_mean": 11.34,
+   "transferred": 9.27,
+   "own_station": 7.92
+  },
+  {
+   "station": "Knox City",
+   "state": "TX",
+   "r": 0.756,
+   "climatology": 9.06,
+   "global_mean": 12.42,
+   "transferred": 16.32,
+   "own_station": 3.08
+  },
+  {
+   "station": "Koptis Farms",
+   "state": "AL",
+   "r": 0.293,
+   "climatology": 3.36,
+   "global_mean": 5.0,
+   "transferred": 11.62,
+   "own_station": 2.91
+  },
+  {
+   "station": "Ku-Nesa",
+   "state": "KS",
+   "r": 0.683,
+   "climatology": 22.51,
+   "global_mean": 12.63,
+   "transferred": 13.65,
+   "own_station": 6.44
+  },
+  {
+   "station": "Kukuihaele",
+   "state": "HI",
+   "r": 0.412,
+   "climatology": 11.48,
+   "global_mean": 12.58,
+   "transferred": 8.97,
+   "own_station": 4.03
+  },
+  {
+   "station": "Kyle Canyon",
+   "state": "NV",
+   "r": 0.824,
+   "climatology": 20.39,
+   "global_mean": 6.94,
+   "transferred": 2.82,
+   "own_station": 1.84
+  },
+  {
+   "station": "Lehman",
+   "state": "TX",
+   "r": 0.338,
+   "climatology": 16.83,
+   "global_mean": 12.71,
+   "transferred": 5.9,
+   "own_station": 1.27
+  },
+  {
+   "station": "Levelland",
+   "state": "TX",
+   "r": 0.638,
+   "climatology": 13.37,
+   "global_mean": 9.28,
+   "transferred": 3.4,
+   "own_station": 2.65
+  },
+  {
+   "station": "Lind #1",
+   "state": "WA",
+   "r": 0.881,
+   "climatology": 15.0,
+   "global_mean": 14.23,
+   "transferred": 8.41,
+   "own_station": 1.97
+  },
+  {
+   "station": "Lindsay",
+   "state": "MT",
+   "r": -0.094,
+   "climatology": 12.38,
+   "global_mean": 10.04,
+   "transferred": 7.12,
+   "own_station": 6.78
+  },
+  {
+   "station": "Little Red Fox",
+   "state": "UT",
+   "r": 0.61,
+   "climatology": 7.8,
+   "global_mean": 6.27,
+   "transferred": 6.82,
+   "own_station": 5.63
+  },
+  {
+   "station": "Livingston-UWA",
+   "state": "AL",
+   "r": 0.557,
+   "climatology": 21.65,
+   "global_mean": 9.16,
+   "transferred": 8.78,
+   "own_station": 5.53
+  },
+  {
+   "station": "Los Lunas PMC",
+   "state": "NM",
+   "r": 0.168,
+   "climatology": 8.32,
+   "global_mean": 4.09,
+   "transferred": 10.47,
+   "own_station": 3.94
+  },
+  {
+   "station": "Lovelock NNR",
+   "state": "NV",
+   "r": 0.252,
+   "climatology": 9.69,
+   "global_mean": 20.26,
+   "transferred": 30.11,
+   "own_station": 2.32
+  },
+  {
+   "station": "Lye Brook",
+   "state": "VT",
+   "r": 0.568,
+   "climatology": 10.42,
+   "global_mean": 8.91,
+   "transferred": 9.5,
+   "own_station": 8.34
+  },
+  {
+   "station": "Mahantango Ck",
+   "state": "PA",
+   "r": 0.632,
+   "climatology": 6.09,
+   "global_mean": 10.24,
+   "transferred": 16.79,
+   "own_station": 3.08
+  },
+  {
+   "station": "Mammoth Cave",
+   "state": "KY",
+   "r": 0.357,
+   "climatology": 19.56,
+   "global_mean": 14.35,
+   "transferred": 13.21,
+   "own_station": 4.04
+  },
+  {
+   "station": "Mana House",
+   "state": "HI",
+   "r": 0.608,
+   "climatology": 5.41,
+   "global_mean": 6.61,
+   "transferred": 15.88,
+   "own_station": 4.24
+  },
+  {
+   "station": "Mandan #1",
+   "state": "ND",
+   "r": 0.713,
+   "climatology": 4.89,
+   "global_mean": 3.62,
+   "transferred": 10.44,
+   "own_station": 3.32
+  },
+  {
+   "station": "Manderfield",
+   "state": "UT",
+   "r": 0.484,
+   "climatology": 15.03,
+   "global_mean": 10.08,
+   "transferred": 3.83,
+   "own_station": 3.8
+  },
+  {
+   "station": "Marble Creek",
+   "state": "CA",
+   "r": 0.723,
+   "climatology": 22.61,
+   "global_mean": 11.89,
+   "transferred": 3.11,
+   "own_station": 2.25
+  },
+  {
+   "station": "Maricao Forest",
+   "state": "PR",
+   "r": 0.405,
+   "climatology": 11.04,
+   "global_mean": 7.14,
+   "transferred": 4.68,
+   "own_station": 4.21
+  },
+  {
+   "station": "Mascoma River",
+   "state": "NH",
+   "r": 0.521,
+   "climatology": 10.25,
+   "global_mean": 7.35,
+   "transferred": 8.18,
+   "own_station": 7.08
+  },
+  {
+   "station": "Mason #1",
+   "state": "IL",
+   "r": 0.547,
+   "climatology": 9.76,
+   "global_mean": 4.19,
+   "transferred": 4.05,
+   "own_station": 3.16
+  },
+  {
+   "station": "Mayday",
+   "state": "MS",
+   "r": 0.115,
+   "climatology": 35.03,
+   "global_mean": 27.06,
+   "transferred": 24.87,
+   "own_station": 7.97
+  },
+  {
+   "station": "McAllister Farm",
+   "state": "TN",
+   "r": 0.796,
+   "climatology": 12.11,
+   "global_mean": 4.95,
+   "transferred": 7.42,
+   "own_station": 2.54
+  },
+  {
+   "station": "Mccracken Mesa",
+   "state": "UT",
+   "r": 0.582,
+   "climatology": 11.59,
+   "global_mean": 9.76,
+   "transferred": 6.72,
+   "own_station": 2.84
+  },
+  {
+   "station": "Moccasin",
+   "state": "MT",
+   "r": 0.766,
+   "climatology": 8.89,
+   "global_mean": 7.2,
+   "transferred": 4.74,
+   "own_station": 2.82
+  },
+  {
+   "station": "Molly Caren #1",
+   "state": "OH",
+   "r": 0.846,
+   "climatology": 17.45,
+   "global_mean": 10.8,
+   "transferred": 6.79,
+   "own_station": 3.9
+  },
+  {
+   "station": "Monocline Ridge",
+   "state": "CA",
+   "r": 0.278,
+   "climatology": 4.48,
+   "global_mean": 5.6,
+   "transferred": 5.77,
+   "own_station": 4.14
+  },
+  {
+   "station": "Morgan",
+   "state": "UT",
+   "r": 0.385,
+   "climatology": 8.77,
+   "global_mean": 12.26,
+   "transferred": 7.59,
+   "own_station": 4.65
+  },
+  {
+   "station": "Morris Farms",
+   "state": "AL",
+   "r": 0.607,
+   "climatology": 15.14,
+   "global_mean": 8.01,
+   "transferred": 5.38,
+   "own_station": 4.88
+  },
+  {
+   "station": "Mount Mansfield",
+   "state": "VT",
+   "r": 0.493,
+   "climatology": 14.55,
+   "global_mean": 9.84,
+   "transferred": 11.93,
+   "own_station": 5.06
+  },
+  {
+   "station": "Mountain Home",
+   "state": "UT",
+   "r": 0.561,
+   "climatology": 14.28,
+   "global_mean": 5.5,
+   "transferred": 9.58,
+   "own_station": 3.29
+  },
+  {
+   "station": "Mt Vernon",
+   "state": "MO",
+   "r": 0.555,
+   "climatology": 9.6,
+   "global_mean": 7.52,
+   "transferred": 9.02,
+   "own_station": 7.45
+  },
+  {
+   "station": "N Piedmont Arec",
+   "state": "VA",
+   "r": 0.617,
+   "climatology": 13.13,
+   "global_mean": 7.46,
+   "transferred": 5.23,
+   "own_station": 1.52
+  },
+  {
+   "station": "Nephi",
+   "state": "UT",
+   "r": 0.7,
+   "climatology": 15.38,
+   "global_mean": 12.02,
+   "transferred": 6.48,
+   "own_station": 3.53
+  },
+  {
+   "station": "North Issaquena",
+   "state": "MS",
+   "r": -0.107,
+   "climatology": 25.44,
+   "global_mean": 13.94,
+   "transferred": 19.98,
+   "own_station": 7.02
+  },
+  {
+   "station": "Nunn #1",
+   "state": "CO",
+   "r": 0.494,
+   "climatology": 10.1,
+   "global_mean": 4.4,
+   "transferred": 6.95,
+   "own_station": 3.23
+  },
+  {
+   "station": "Onward",
+   "state": "MS",
+   "r": 0.252,
+   "climatology": 18.66,
+   "global_mean": 6.58,
+   "transferred": 6.3,
+   "own_station": 1.71
+  },
+  {
+   "station": "Orchard Range Site",
+   "state": "ID",
+   "r": 0.458,
+   "climatology": 14.89,
+   "global_mean": 13.99,
+   "transferred": 9.08,
+   "own_station": 4.65
+  },
+  {
+   "station": "Panguitch",
+   "state": "UT",
+   "r": 0.389,
+   "climatology": 8.69,
+   "global_mean": 3.64,
+   "transferred": 10.78,
+   "own_station": 3.55
+  },
+  {
+   "station": "Pee Dee",
+   "state": "SC",
+   "r": 0.706,
+   "climatology": 6.12,
+   "global_mean": 8.53,
+   "transferred": 5.79,
+   "own_station": 2.27
+  },
+  {
+   "station": "Perdido Riv Farms",
+   "state": "AL",
+   "r": 0.327,
+   "climatology": 7.02,
+   "global_mean": 6.48,
+   "transferred": 5.87,
+   "own_station": 3.69
+  },
+  {
+   "station": "Perthshire",
+   "state": "MS",
+   "r": 0.247,
+   "climatology": 26.07,
+   "global_mean": 18.14,
+   "transferred": 23.91,
+   "own_station": 8.41
+  },
+  {
+   "station": "Phillipsburg",
+   "state": "KS",
+   "r": 0.696,
+   "climatology": 6.54,
+   "global_mean": 5.77,
+   "transferred": 8.76,
+   "own_station": 3.84
+  },
+  {
+   "station": "Pine Nut",
+   "state": "NV",
+   "r": 0.863,
+   "climatology": 18.46,
+   "global_mean": 8.8,
+   "transferred": 3.0,
+   "own_station": 1.99
+  },
+  {
+   "station": "Powder Mill",
+   "state": "MD",
+   "r": 0.606,
+   "climatology": 9.52,
+   "global_mean": 13.96,
+   "transferred": 19.91,
+   "own_station": 3.2
+  },
+  {
+   "station": "Powell Gardens",
+   "state": "MO",
+   "r": 0.756,
+   "climatology": 20.71,
+   "global_mean": 10.27,
+   "transferred": 11.43,
+   "own_station": 5.23
+  },
+  {
+   "station": "Prairie View #1",
+   "state": "TX",
+   "r": 0.745,
+   "climatology": 8.0,
+   "global_mean": 11.66,
+   "transferred": 11.32,
+   "own_station": 5.08
+  },
+  {
+   "station": "Price",
+   "state": "UT",
+   "r": 0.515,
+   "climatology": 12.53,
+   "global_mean": 9.35,
+   "transferred": 4.04,
+   "own_station": 2.98
+  },
+  {
+   "station": "Princeton #1",
+   "state": "KY",
+   "r": 0.603,
+   "climatology": 14.95,
+   "global_mean": 7.98,
+   "transferred": 5.94,
+   "own_station": 5.37
+  },
+  {
+   "station": "Reese Center",
+   "state": "TX",
+   "r": 0.663,
+   "climatology": 8.93,
+   "global_mean": 6.92,
+   "transferred": 2.75,
+   "own_station": 2.51
+  },
+  {
+   "station": "Reynolds Homestead",
+   "state": "VA",
+   "r": 0.529,
+   "climatology": 13.19,
+   "global_mean": 5.94,
+   "transferred": 5.8,
+   "own_station": 5.73
+  },
+  {
+   "station": "Riesel",
+   "state": "TX",
+   "r": 0.787,
+   "climatology": 24.16,
+   "global_mean": 14.24,
+   "transferred": 24.2,
+   "own_station": 7.53
+  },
+  {
+   "station": "River Road Farms",
+   "state": "AL",
+   "r": 0.346,
+   "climatology": 5.34,
+   "global_mean": 55.59,
+   "transferred": 60.73,
+   "own_station": 4.95
+  },
+  {
+   "station": "Rock Springs Pa",
+   "state": "PA",
+   "r": 0.596,
+   "climatology": 7.39,
+   "global_mean": 7.39,
+   "transferred": 2.88,
+   "own_station": 2.62
+  },
+  {
+   "station": "Rogers Farm #1",
+   "state": "NE",
+   "r": 0.612,
+   "climatology": 18.07,
+   "global_mean": 10.82,
+   "transferred": 8.65,
+   "own_station": 6.38
+  },
+  {
+   "station": "San Angelo",
+   "state": "TX",
+   "r": 0.616,
+   "climatology": 11.76,
+   "global_mean": 9.11,
+   "transferred": 14.48,
+   "own_station": 6.48
+  },
+  {
+   "station": "Sand Hollow",
+   "state": "UT",
+   "r": 0.475,
+   "climatology": 26.44,
+   "global_mean": 13.08,
+   "transferred": 6.57,
+   "own_station": 1.74
+  },
+  {
+   "station": "Sandy Ridge",
+   "state": "MS",
+   "r": 0.647,
+   "climatology": 5.63,
+   "global_mean": 17.17,
+   "transferred": 12.49,
+   "own_station": 3.86
+  },
+  {
+   "station": "Schell-Osage",
+   "state": "MO",
+   "r": 0.49,
+   "climatology": 22.02,
+   "global_mean": 16.34,
+   "transferred": 15.25,
+   "own_station": 6.73
+  },
+  {
+   "station": "Scott",
+   "state": "MS",
+   "r": 0.648,
+   "climatology": 20.73,
+   "global_mean": 11.35,
+   "transferred": 14.67,
+   "own_station": 4.03
+  },
+  {
+   "station": "Sellers Lake #1",
+   "state": "FL",
+   "r": 0.386,
+   "climatology": 20.39,
+   "global_mean": 8.05,
+   "transferred": 10.1,
+   "own_station": 1.43
+  },
+  {
+   "station": "Selma",
+   "state": "AL",
+   "r": 0.492,
+   "climatology": 11.99,
+   "global_mean": 24.43,
+   "transferred": 35.95,
+   "own_station": 2.6
+  },
+  {
+   "station": "Sevilleta",
+   "state": "NM",
+   "r": 0.269,
+   "climatology": 16.03,
+   "global_mean": 11.11,
+   "transferred": 5.91,
+   "own_station": 3.22
+  },
+  {
+   "station": "Shadow Mtns",
+   "state": "CA",
+   "r": 0.27,
+   "climatology": 18.6,
+   "global_mean": 5.15,
+   "transferred": 2.24,
+   "own_station": 1.81
+  },
+  {
+   "station": "Shagbark Hills",
+   "state": "IA",
+   "r": 0.645,
+   "climatology": 10.81,
+   "global_mean": 4.0,
+   "transferred": 5.37,
+   "own_station": 3.99
+  },
+  {
+   "station": "Shenandoah",
+   "state": "VA",
+   "r": 0.634,
+   "climatology": 7.29,
+   "global_mean": 11.17,
+   "transferred": 15.28,
+   "own_station": 3.72
+  },
+  {
+   "station": "Sidney",
+   "state": "MT",
+   "r": 0.511,
+   "climatology": 7.98,
+   "global_mean": 7.28,
+   "transferred": 3.0,
+   "own_station": 2.76
+  },
+  {
+   "station": "Silver City",
+   "state": "MS",
+   "r": 0.648,
+   "climatology": 21.93,
+   "global_mean": 6.55,
+   "transferred": 5.7,
+   "own_station": 3.39
+  },
+  {
+   "station": "Spickard",
+   "state": "MO",
+   "r": 0.751,
+   "climatology": 16.39,
+   "global_mean": 6.14,
+   "transferred": 7.25,
+   "own_station": 2.68
+  },
+  {
+   "station": "Split Mountain",
+   "state": "UT",
+   "r": 0.631,
+   "climatology": 15.05,
+   "global_mean": 17.68,
+   "transferred": 12.3,
+   "own_station": 2.53
+  },
+  {
+   "station": "Spooky",
+   "state": "UT",
+   "r": 0.394,
+   "climatology": 23.3,
+   "global_mean": 12.09,
+   "transferred": 7.07,
+   "own_station": 1.25
+  },
+  {
+   "station": "Stanley Farm",
+   "state": "AL",
+   "r": 0.753,
+   "climatology": 14.56,
+   "global_mean": 11.34,
+   "transferred": 6.57,
+   "own_station": 3.75
+  },
+  {
+   "station": "Starkville",
+   "state": "MS",
+   "r": 0.292,
+   "climatology": 25.29,
+   "global_mean": 11.72,
+   "transferred": 7.91,
+   "own_station": 4.76
+  },
+  {
+   "station": "Stephenville",
+   "state": "TX",
+   "r": 0.686,
+   "climatology": 9.68,
+   "global_mean": 7.23,
+   "transferred": 10.77,
+   "own_station": 6.61
+  },
+  {
+   "station": "Stubblefield",
+   "state": "CA",
+   "r": 0.62,
+   "climatology": 10.93,
+   "global_mean": 3.26,
+   "transferred": 11.68,
+   "own_station": 2.78
+  },
+  {
+   "station": "Sudduth Farms",
+   "state": "AL",
+   "r": 0.708,
+   "climatology": 8.0,
+   "global_mean": 8.7,
+   "transferred": 5.5,
+   "own_station": 5.03
+  },
+  {
+   "station": "Table Mountain",
+   "state": "MT",
+   "r": 0.4,
+   "climatology": 5.58,
+   "global_mean": 6.11,
+   "transferred": 11.73,
+   "own_station": 4.95
+  },
+  {
+   "station": "Tidewater #1",
+   "state": "NC",
+   "r": 0.685,
+   "climatology": 9.84,
+   "global_mean": 5.41,
+   "transferred": 4.25,
+   "own_station": 2.59
+  },
+  {
+   "station": "Tnc Fort Bayou",
+   "state": "MS",
+   "r": 0.526,
+   "climatology": 5.78,
+   "global_mean": 5.25,
+   "transferred": 5.99,
+   "own_station": 4.55
+  },
+  {
+   "station": "Torrington #1",
+   "state": "WY",
+   "r": 0.539,
+   "climatology": 18.87,
+   "global_mean": 5.47,
+   "transferred": 5.08,
+   "own_station": 2.3
+  },
+  {
+   "station": "Trough Springs",
+   "state": "NV",
+   "r": 0.802,
+   "climatology": 15.12,
+   "global_mean": 5.52,
+   "transferred": 3.49,
+   "own_station": 2.61
+  },
+  {
+   "station": "Tunica",
+   "state": "MS",
+   "r": 0.379,
+   "climatology": 24.09,
+   "global_mean": 10.26,
+   "transferred": 13.01,
+   "own_station": 7.09
+  },
+  {
+   "station": "Tuskegee",
+   "state": "AL",
+   "r": 0.638,
+   "climatology": 5.9,
+   "global_mean": 10.05,
+   "transferred": 19.78,
+   "own_station": 4.32
+  },
+  {
+   "station": "Uapb Campus-PB",
+   "state": "AR",
+   "r": 0.793,
+   "climatology": 8.67,
+   "global_mean": 3.98,
+   "transferred": 3.61,
+   "own_station": 3.4
+  },
+  {
+   "station": "Uapb Dewitt",
+   "state": "AR",
+   "r": 0.754,
+   "climatology": 13.88,
+   "global_mean": 5.27,
+   "transferred": 4.59,
+   "own_station": 4.48
+  },
+  {
+   "station": "Uapb Point Remove",
+   "state": "AR",
+   "r": 0.655,
+   "climatology": 12.99,
+   "global_mean": 9.93,
+   "transferred": 4.17,
+   "own_station": 2.6
+  },
+  {
+   "station": "Uapb-Earle",
+   "state": "AR",
+   "r": 0.129,
+   "climatology": 19.7,
+   "global_mean": 13.6,
+   "transferred": 11.31,
+   "own_station": 4.73
+  },
+  {
+   "station": "Uapb-Lonoke Farm",
+   "state": "AR",
+   "r": 0.82,
+   "climatology": 15.61,
+   "global_mean": 10.89,
+   "transferred": 9.08,
+   "own_station": 3.94
+  },
+  {
+   "station": "Uapb-Marianna",
+   "state": "AR",
+   "r": 0.834,
+   "climatology": 19.28,
+   "global_mean": 13.91,
+   "transferred": 11.54,
+   "own_station": 3.25
+  },
+  {
+   "station": "Upper Bethlehem",
+   "state": "VI",
+   "r": 0.368,
+   "climatology": 11.84,
+   "global_mean": 9.51,
+   "transferred": 6.46,
+   "own_station": 2.57
+  },
+  {
+   "station": "Uvalde",
+   "state": "TX",
+   "r": 0.602,
+   "climatology": 9.54,
+   "global_mean": 7.09,
+   "transferred": 10.94,
+   "own_station": 4.59
+  },
+  {
+   "station": "UW Platteville",
+   "state": "WI",
+   "r": 0.548,
+   "climatology": 13.6,
+   "global_mean": 4.98,
+   "transferred": 4.33,
+   "own_station": 3.84
+  },
+  {
+   "station": "Vance",
+   "state": "MS",
+   "r": 0.66,
+   "climatology": 21.13,
+   "global_mean": 13.89,
+   "transferred": 15.21,
+   "own_station": 3.76
+  },
+  {
+   "station": "Vermillion",
+   "state": "UT",
+   "r": 0.765,
+   "climatology": 20.02,
+   "global_mean": 13.12,
+   "transferred": 4.3,
+   "own_station": 2.88
+  },
+  {
+   "station": "Vernon",
+   "state": "TX",
+   "r": 0.605,
+   "climatology": 11.54,
+   "global_mean": 15.71,
+   "transferred": 13.99,
+   "own_station": 6.13
+  },
+  {
+   "station": "Violett",
+   "state": "MT",
+   "r": 0.391,
+   "climatology": 12.38,
+   "global_mean": 14.62,
+   "transferred": 9.62,
+   "own_station": 3.7
+  },
+  {
+   "station": "Wabeno #1",
+   "state": "WI",
+   "r": 0.776,
+   "climatology": 10.74,
+   "global_mean": 63.3,
+   "transferred": 90.18,
+   "own_station": 2.19
+  },
+  {
+   "station": "Waimea Plain",
+   "state": "HI",
+   "r": 0.565,
+   "climatology": 5.17,
+   "global_mean": 4.32,
+   "transferred": 6.2,
+   "own_station": 4.25
+  },
+  {
+   "station": "Wakulla #1",
+   "state": "FL",
+   "r": 0.35,
+   "climatology": 18.94,
+   "global_mean": 11.06,
+   "transferred": 31.22,
+   "own_station": 2.21
+  },
+  {
+   "station": "Walnut Gulch #1",
+   "state": "AZ",
+   "r": 0.532,
+   "climatology": 16.12,
+   "global_mean": 3.58,
+   "transferred": 6.64,
+   "own_station": 1.68
+  },
+  {
+   "station": "Watkinsville #1",
+   "state": "GA",
+   "r": 0.577,
+   "climatology": 8.02,
+   "global_mean": 19.87,
+   "transferred": 23.16,
+   "own_station": 5.93
+  },
+  {
+   "station": "Wedowee",
+   "state": "AL",
+   "r": 0.635,
+   "climatology": 5.91,
+   "global_mean": 12.1,
+   "transferred": 20.29,
+   "own_station": 4.16
+  },
+  {
+   "station": "Weslaco",
+   "state": "TX",
+   "r": 0.713,
+   "climatology": 4.39,
+   "global_mean": 3.32,
+   "transferred": 6.27,
+   "own_station": 3.06
+  },
+  {
+   "station": "West Summit",
+   "state": "UT",
+   "r": 0.427,
+   "climatology": 10.54,
+   "global_mean": 8.22,
+   "transferred": 5.1,
+   "own_station": 3.21
+  },
+  {
+   "station": "Willow Wells",
+   "state": "NM",
+   "r": 0.581,
+   "climatology": 20.34,
+   "global_mean": 12.77,
+   "transferred": 5.28,
+   "own_station": 1.66
+  },
+  {
+   "station": "Wtars",
+   "state": "AL",
+   "r": 0.751,
+   "climatology": 11.61,
+   "global_mean": 4.01,
+   "transferred": 5.48,
+   "own_station": 3.25
+  },
+  {
+   "station": "Youmans Farm",
+   "state": "SC",
+   "r": 0.18,
+   "climatology": 4.48,
+   "global_mean": 5.94,
+   "transferred": 11.74,
+   "own_station": 4.14
+  }
+ ]
+}

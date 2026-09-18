@@ -41,7 +41,7 @@ shows.
 """
 import json, math, os, statistics, sys, time, urllib.parse, urllib.request
 from collections import defaultdict
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "..", "assets", "data")
@@ -81,7 +81,74 @@ SEASON = ("03-01", "10-31")
 
 sys.path.insert(0, HERE)
 from yield_all import (CLASSES, NAMES, PAR_FRACTION, fpar, tstress, soil_threshold,
-                       derive_planting, station_on_crop_ground)
+                       derive_planting, station_on_crop_ground, haversine_km,
+                       hargreaves_et0, crop_coefficient, water_stress, opening_depletion,
+                       TAW_MM)
+
+# How far from the crop a rain gauge may sit and still be pooled into the region's rainfall.
+# Wider than the single thermometer's reach on purpose: rain is patchy, and averaging more
+# gauges is what makes the regional figure stand for the fields rather than for one storm.
+PRECIP_POOL_KM = 90.0
+
+# DOES THE WATER TERM MULTIPLY INTO THE PUBLISHED INDEX? Measured on 17 September 2026: no.
+#
+# The term was built exactly as PLAN.md 3.5 specifies — Hargreaves reference ET, an FAO-56 crop
+# coefficient curve, a root-zone balance opened by the winter's recharge — and then tested
+# against every USDA harvest these seven regions have on record, by scripts/backtest.py,
+# leaving each year out of its own baseline. It made the forecast WORSE in all seven
+# state-classes:
+#
+#     no water   mean skill  -89%   beats guessing in 1 of 7
+#     with water mean skill -158%   beats guessing in 0 of 7
+#
+# The obvious excuse was tested and failed. If the term hurt because the model assumed these
+# fields were rainfed when dry beans here are largely a pivot crop, then muting it with a high
+# irrigated share should have recovered the skill. Running it at 85% irrigated gives -95%,
+# still worse than not having it; running it at 0% irrigated gives -792%. The damage scales
+# with how much water influence is let in. That is not a calibration problem, it is the term
+# being wrong for this ground.
+#
+# WHY IT PROBABLY FAILS, stated as a hypothesis and not as a finding: a rainfall-minus-ET
+# balance cannot see a centre pivot, and on irrigated ground the dry years it penalises hardest
+# are the years the grower simply ran more water. PLAN.md says this in its own words and calls
+# for measured ETa/ETp from OpenET instead. That is the next thing to try, and until it is
+# tried the honest state is "not proven".
+#
+# The term is still computed and still published, because a grower with a rainfed field wants
+# to know his profile is empty whether or not it predicts a state average. It is an
+# observation, like the flowering heat days, and observations do not get to move a yield.
+WATER_IN_INDEX = False
+
+# WHICH WATER. "balance" is the inferred rainfall-minus-reference-ET term that failed every
+# test above. "gwet" is NASA's root-zone soil wetness, which is a land-surface model run
+# against observed weather rather than a formula applied to a rain gauge, and which agrees
+# with the USDA probe 15 km from the Wyoming bean ground at r = +0.62 across 3,801 days.
+# Neither is allowed into the published index until scripts/backtest.py says it earns it.
+WATER_MODE = "gwet"
+
+# Stress begins when the root zone falls below this share of its capacity. It is the FAO-56
+# depletion fraction for beans, p = 0.45, read as "the crop draws the first 45% freely",
+# applied to NASA's wetness fraction instead of to a modelled depletion. Applying a soil-water
+# depletion threshold to a saturation fraction is an ASSUMPTION about what the two scales have
+# in common, and it belongs in UNSOURCED.md.
+GWET_CRITICAL = 0.55
+
+# WHAT THIS NUMBER IS ALLOWED TO BE CALLED.
+#
+# GAJ, 17 September 2026, and he is right: "Satellites and drones provide indirect surface or
+# crop-stress clues. They do not measure actual root-zone moisture reliably. With remote data
+# alone, the tool must call its output an estimated water-stress proxy, not measured soil
+# moisture."
+#
+# Commercial growers here measure the root zone with buried probes at several depths, with
+# tensiometers or Watermark sensors reading how hard the water is to pull, with a hand probe
+# and a shovel, and with their own rain and irrigation-flow records. This site has none of
+# those. What it has is a land-surface model, a satellite and a soil survey. That combination
+# estimates stress. It does not measure moisture, and it must never say it does.
+#
+# The name is enforced, not merely intended: tests/verify_no_regression.py fails the build if
+# the published data or any page calls a remotely-derived figure measured soil moisture.
+WATER_LABEL = "estimated water-stress proxy"
 
 USDA_CLASS = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern",
               "LIGHT RED KIDNEY": "Light red kidney", "DARK RED KIDNEY": "Dark red kidney",
@@ -184,6 +251,40 @@ def power_history(lon, lat, years):
             for k, v in got.items() if float(v) > -900}
 
 
+# What the land surface is actually doing, from the same keyless service that has been giving
+# this site its sunlight since the beginning.
+#
+# THE MISS. A water term was built on 17 September 2026 by INFERRING the soil's state from
+# rainfall minus a reference-evaporation formula, and it failed every test. The inference was
+# never necessary. NASA POWER serves root-zone soil wetness and actual evapotranspiration for
+# any point on earth, daily, back to 1981, on the same URL that was already being called for
+# radiation — one extra word in the query string. GAJ: "You should be able to calculate soil
+# moisture throughout the year. I KNOW IT CAN BE DONE. What are you missing?" This was.
+#
+# WHAT THESE NUMBERS ARE. MERRA-2/GEOS land data assimilation: a physical land-surface model
+# run against observed weather and satellite input. Not a probe in the ground, and it must
+# never be called one. It IS checked against probes — scripts/refresh/soil_probes.py scores it
+# against the USDA in-ground sensors at Torrington and Johnson Farm, which have measured this
+# ground hourly since 1997.
+SOIL_PARAMS = ["GWETROOT", "GWETPROF", "GWETTOP", "PRECTOTCORR", "EVPTRNS"]
+
+
+def power_soil(lon, lat, start, end):
+    """Root-zone soil wetness, profile wetness, corrected rainfall and actual ET, daily."""
+    q = urllib.parse.urlencode({
+        "parameters": ",".join(SOIL_PARAMS), "community": "AG",
+        "longitude": round(lon, 3), "latitude": round(lat, 3),
+        "start": start, "end": end, "format": "JSON"})
+    with urllib.request.urlopen("%s?%s" % (POWER, q), timeout=600) as r:
+        got = json.loads(r.read().decode())["properties"]["parameter"]
+    out = {}
+    for name in SOIL_PARAMS:
+        block = got.get(name) or {}
+        out[name] = {"%s-%s-%s" % (k[:4], k[4:6], k[6:]): float(v)
+                     for k, v in block.items() if float(v) > -900}
+    return out
+
+
 def acis_history(state, lon, lat):
     """ONE station, every season, in one request.
 
@@ -249,9 +350,181 @@ def load_history():
     return {"radiation": {}, "temperature": {}}
 
 
+
+
+# BOTH PRODUCTS, ALWAYS, EVERYWHERE. A STANDING ORDER, NOT A PREFERENCE.
+#
+# GAJ, 18 September 2026: "I NEED YOU TO CONTINUALLY COMPARE THE TWO SO THAT WE CAN MAKE BETTER
+# ESTIMATIONS IN OTHER REGIONS."
+#
+# I had reported a "we did not switch" decision he never asked for. He had asked for remote
+# sensing to be USED, and to be ready for countries with no instruments in them. Choosing a
+# winner throws away the single most portable thing we have: WHERE THE TWO DISAGREE. A model and
+# a satellite arriving at the same answer is worth more than either alone, and a place where
+# they diverge is a place to widen the band — which is exactly the judgement a region with no
+# probes cannot make for itself.
+#
+# Both are global and neither needs an account, so both travel to Turkey or Alberta unchanged.
+SMAP_SERVICE = ("https://geo.fas.usda.gov/arcgis2/rest/services/G_SMAP/"
+                "Rootzone_SM_Daily/ImageServer/getSamples")
+SMAP_SLICES = 20        # the service returns at most 20 days per request, whatever you ask for
+
+
+def smap_history(points, start, end):
+    """SMAP L4 root-zone soil moisture for many points at once, walking 20 days at a time.
+
+    points is a list of (key, lat, lon). Returns {key: {iso: m3/m3}}.
+    """
+    out = {}
+    body_pts = {"points": [[lo, la] for _, la, lo in points],
+                "spatialReference": {"wkid": 4326}}
+    d0 = start
+    while d0 <= end:
+        d1 = min(d0 + timedelta(days=SMAP_SLICES - 1), end)
+        ms = lambda d: int(datetime(d.year, d.month, d.day,
+                                    tzinfo=timezone.utc).timestamp() * 1000)
+        form = urllib.parse.urlencode({
+            "f": "json", "geometry": json.dumps(body_pts),
+            "geometryType": "esriGeometryMultipoint", "returnFirstValueOnly": "false",
+            "outFields": "Name", "time": "%d,%d" % (ms(d0), ms(d1)),
+            "sampleCount": "100000"}).encode()
+        try:
+            req = urllib.request.Request(
+                SMAP_SERVICE, data=form,
+                headers={"Content-Type": "application/x-www-form-urlencoded"})
+            with urllib.request.urlopen(req, timeout=300) as r:
+                got = json.loads(r.read())
+            for smp in got.get("samples") or []:
+                name = ((smp.get("attributes") or {}).get("Name") or "")
+                if len(name) < 8 or not name[-8:].isdigit():
+                    continue
+                iso = "%s-%s-%s" % (name[-8:-4], name[-4:-2], name[-2:])
+                key = points[smp["locationId"]][0]
+                out.setdefault(key, {})[iso] = float(smp["value"])
+        except Exception as e:
+            print("  SMAP %s failed: %s" % (d0, str(e)[:50]), file=sys.stderr)
+        d0 = d1 + timedelta(days=1)
+        time.sleep(0.15)
+    return out
+
+def acis_precip_history(state, lon, lat):
+    """Daily rainfall for the whole record, pooled across every gauge that carries it.
+
+    NOT one station, unlike temperature. Temperature over a region is smooth enough that one
+    thermometer stands for the area; rain is not. A single July thunderstorm can drop an inch
+    on one gauge and nothing five miles away, so one gauge would make a region look drowned or
+    parched on the strength of where a cell happened to track. Averaging every gauge within
+    reach of the crop is the closer measure of what the FIELDS got.
+
+    The gauges are still fixed once and carried through every year, for the same reason the
+    thermometer is: a pool that changes between years compares this season against a different
+    instrument, which is not a comparison at all.
+    """
+    body = json.dumps({
+        "state": state,
+        "sdate": "%d-01-01" % min(YEARS), "edate": "%d-12-31" % max(YEARS),
+        "elems": [{"name": "pcpn", "interval": "dly"}],
+        "meta": ["ll", "name"]}).encode()
+    req = urllib.request.Request(ACIS, data=body, headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=900) as r:
+        d = json.loads(r.read().decode())
+
+    start_d = date(min(YEARS), 1, 1)
+    want = (date(max(YEARS), 12, 31) - start_d).days + 1
+    kept, names = [], []
+    for st in d.get("data", []):
+        meta = st.get("meta") or {}
+        ll = meta.get("ll")
+        rows = st.get("data") or []
+        if not ll or len(rows) < want * 0.95:
+            continue
+        if haversine_km(lat, lon, ll[1], ll[0]) > PRECIP_POOL_KM:
+            continue
+        series, good = {}, 0
+        for i, x in enumerate(rows):
+            v = x[0] if isinstance(x, list) else x
+            if v in ("T", "t"):          # a trace is rain that fell and did not measure
+                v = 0.0
+            try:
+                val = float(v)
+            except (TypeError, ValueError):
+                continue
+            series[(start_d + timedelta(days=i)).isoformat()] = val
+            good += 1
+        if good < want * 0.90:           # a gauge must carry the WHOLE record, not most of it
+            continue
+        kept.append(series)
+        names.append(meta.get("name"))
+    if not kept:
+        return None, []
+    pooled = {}
+    for day in set().union(*[set(k) for k in kept]):
+        vals = [k[day] for k in kept if day in k]
+        pooled[day] = round(sum(vals) / len(vals), 3)
+    return pooled, names
+
+
+def acis_precip_current(state, names, year):
+    """This season's rainfall, from the SAME gauges the history was pooled from.
+
+    Not from whatever happens to be reporting today. The index divides this season's growth by
+    the average of eleven past ones, and a term computed from one set of instruments over a
+    term computed from another does not cancel — it just moves the answer. Same gauges, same
+    arithmetic, or no water term at all.
+    """
+    want = {n.strip().upper() for n in names if n}
+    if not want:
+        return {}
+    body = json.dumps({
+        "state": state,
+        "sdate": "%d-01-01" % year, "edate": date.today().isoformat(),
+        "elems": [{"name": "pcpn", "interval": "dly"}],
+        "meta": ["name"]}).encode()
+    req = urllib.request.Request(ACIS, data=body, headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=600) as r:
+        d = json.loads(r.read().decode())
+    start_d = date(year, 1, 1)
+    per_day = {}
+    for st in d.get("data", []):
+        if (st.get("meta") or {}).get("name", "").strip().upper() not in want:
+            continue
+        for i, x in enumerate(st.get("data") or []):
+            v = x[0] if isinstance(x, list) else x
+            if v in ("T", "t"):
+                v = 0.0
+            try:
+                val = float(v)
+            except (TypeError, ValueError):
+                continue
+            per_day.setdefault((start_d + timedelta(days=i)).isoformat(), []).append(val)
+    return {k: round(sum(v) / len(v), 3) for k, v in per_day.items()}
+
 def build_history(centres):
     """Fetch once, keep forever. A past season does not change."""
     h = load_history()
+
+    # SMAP for every region in one sweep, because the service takes unlimited points and only
+    # twenty days at a time — so it is cheaper to ask for all seven regions at once than to
+    # walk them one by one inside the loop below.
+    smap_reach = min((max(v, default="") for v in (h.get("smap") or {}).values()),
+                     default="")
+    if smap_reach < (date.today() - timedelta(days=4)).isoformat():
+        print("  SMAP root zone, all regions, %d-now..." % min(YEARS),
+              file=sys.stderr, end="", flush=True)
+        pts = [(rk, la, lo) for rk, (lo, la) in sorted(centres.items())]
+        got = smap_history(pts, max(date(min(YEARS), 1, 1), date(2015, 4, 1)), date.today())
+        if got:
+            h.setdefault("smap", {})
+            for rk, series in got.items():
+                h["smap"].setdefault(rk, {}).update(series)
+            print(" %d regions, %d days each"
+                  % (len(got), len(next(iter(got.values())))), file=sys.stderr)
+        else:
+            print(" FAILED — the satellite half of the comparison is missing",
+                  file=sys.stderr)
+        os.makedirs(ARCHIVE, exist_ok=True)
+        json.dump(h, open(HIST, "w"), separators=(",", ":"))
+
     for region, (lon, lat) in centres.items():
         if region not in h["radiation"]:
             print("  %-18s radiation 2000-2025..." % region, file=sys.stderr, end="", flush=True)
@@ -272,10 +545,88 @@ def build_history(centres):
                 print(" NO SINGLE STATION COVERS THE RECORD — region not indexed",
                       file=sys.stderr)
             time.sleep(1.0)
+        # SOIL, for the whole record in one call. Refetched when it does not reach today,
+        # because unlike a finished season the current one keeps growing.
+        soil = h.setdefault("soil", {}).get(region) or {}
+        reach = max((soil.get("GWETROOT") or {}), default="")
+        if reach < (date.today() - timedelta(days=4)).isoformat():
+            print("  %-18s soil moisture and actual ET %d-now..."
+                  % (region, min(YEARS)), file=sys.stderr, end="", flush=True)
+            try:
+                got = power_soil(lon, lat, "%d0101" % min(YEARS),
+                                 date.today().strftime("%Y%m%d"))
+                h["soil"][region] = got
+                print(" %d days" % len(got.get("GWETROOT") or {}), file=sys.stderr)
+            except Exception as e:
+                print(" FAILED %s" % str(e)[:60], file=sys.stderr)
+            time.sleep(1.0)
+        if region not in h.setdefault("precipitation", {}) or \
+                not h["precipitation"][region].get("gauges"):
+            print("  %-18s rainfall, every gauge in reach..." % region,
+                  file=sys.stderr, end="", flush=True)
+            series, names = acis_precip_history(STATE_OF[region], lon, lat)
+            if series:
+                h["precipitation"][region] = {"gauges": names, "daily": series}
+                print(" %d gauges, %d days" % (len(names), len(series)), file=sys.stderr)
+            else:
+                print(" NO GAUGE COVERS THE RECORD — region has no water term",
+                      file=sys.stderr)
+            time.sleep(1.0)
         os.makedirs(ARCHIVE, exist_ok=True)
         json.dump(h, open(HIST, "w"), separators=(",", ":"))
     return h
 
+
+
+def water_two_ways(power_series, smap_series, year, window):
+    """This season's water against its own normal, measured twice, independently.
+
+    WHY A RATIO AND NOT A THRESHOLD. The published POWER proxy compares wetness against a fixed
+    cut-off, and that cut-off is a number we chose. A ratio needs no such number: each product
+    is compared against ITS OWN eleven-year average over the same stretch of the calendar, so
+    the units cancel and a model and a satellite become directly comparable. It also travels —
+    a region in Turkey has its own eleven years and needs nothing from Nebraska.
+
+    THE DISAGREEMENT IS THE POINT. Two independent products landing on the same answer is worth
+    more than either alone. Where they diverge is where a reader should widen the band, and that
+    judgement is exactly what a region with no probes in it cannot make for itself.
+
+    window is (first_md, last_md) — the stretch of the year this season has actually reached.
+    """
+    lo, hi = window
+
+    def season_mean(series, yr):
+        vals = [v for k, v in series.items()
+                if k.startswith("%d-" % yr) and lo <= k[5:] <= hi]
+        return sum(vals) / len(vals) if len(vals) >= 20 else None
+
+    out = {}
+    for name, series in (("power", power_series), ("smap", smap_series)):
+        if not series:
+            continue
+        now = season_mean(series, year)
+        past = [m for m in (season_mean(series, y) for y in YEARS if y != year)
+                if m is not None]
+        if now is None or len(past) < 7:
+            continue
+        normal = sum(past) / len(past)
+        if normal <= 0:
+            continue
+        out[name] = {"vs_normal_pct": round(100 * (now / normal - 1), 1),
+                     "this_season": round(now, 4), "normal": round(normal, 4),
+                     "years_compared": len(past)}
+    if len(out) == 2:
+        gap = abs(out["power"]["vs_normal_pct"] - out["smap"]["vs_normal_pct"])
+        out["agreement"] = {
+            "gap_points": round(gap, 1),
+            "same_direction": (out["power"]["vs_normal_pct"] >= 0) ==
+                              (out["smap"]["vs_normal_pct"] >= 0),
+            "read_this_as": ("Both agree" if gap <= 5 else
+                             "Broadly agree" if gap <= 12 else
+                             "THEY DISAGREE — treat the water reading here as uncertain"),
+            "why_two": "A land-surface model and a satellite, computed independently. Where "
+                       "they part company, trust neither far."}
+    return out or None
 
 def canopy_on(canopy, md):
     """Canopy on this day, interpolated between the readings either side of it."""
@@ -294,8 +645,29 @@ def canopy_on(canopy, md):
     return canopy[lo] + (canopy[hi] - canopy[lo]) * (step / span)
 
 
+def winter_before(precip, year):
+    """Millimetres of precipitation from 1 October to 31 March, the recharge the season opens
+    with. Returns None when the record does not reach back that far — the first year of the
+    archive has no winter in front of it."""
+    if not precip:
+        return None
+    first = min(precip)
+    if "%d-10-01" % (year - 1) < first:
+        return None
+    tot, days = 0.0, 0
+    d, stop = date(year - 1, 10, 1), date(year, 3, 31)
+    while d <= stop:
+        v = precip.get(d.isoformat())
+        if v is not None:
+            tot += v
+            days += 1
+        d += timedelta(days=1)
+    return tot * 25.4 if days >= 150 else None
+
+
 def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting,
-                   stop_md=None):
+                   stop_md=None, precip=None, lat=None, irrigated_share=0.0, soil=None,
+                   awc_mm=None):
     """The same arithmetic every year, over the same stretch of the calendar.
 
     stop_md truncates a past season to the day of year this one has reached. Without it a
@@ -314,6 +686,16 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
     bio, gdd, n = 0.0, 0.0, 0
     matured_on = None
     repro_hot = repro_days = repro_warm_nights = 0
+    # WATER. PLAN.md 3.5, and the leg this model ran without until 17 September 2026.
+    # depletion is millimetres the root zone is short; it opens at whatever the winter left
+    # and moves each day by that day's rain against that day's crop water use.
+    winter_mm = winter_before(precip, year)
+    have_balance = precip is not None and lat is not None and winter_mm is not None
+    have_gwet = bool(soil)
+    have_water = have_gwet if WATER_MODE == "gwet" else have_balance
+    taw = awc_mm or TAW_MM
+    depletion = opening_depletion(winter_mm, taw) if have_balance else 0.0
+    wsum = wdays = 0
     for i, iso in enumerate(days_iso):
         d = date.fromisoformat(iso)
         if d < start:
@@ -358,9 +740,44 @@ def season_biomass(cls, spec, region, year, canopy, rad, temps, grn_for_planting
         g = canopy_on(canopy, iso[5:])
         if g is None:
             continue
-        bio += rue * mj * PAR_FRACTION * fpar(g) * tstress(hi_f, lo_f, heat, reproductive=repro)
+        # THE WATER TERM.
+        #
+        # ks is the rainfed crop's water stress, 1 down to 0, from the running balance.
+        # Irrigation is then allowed for OUT IN THE OPEN rather than as a floor inside the
+        # stress curve: the irrigated share of the ground is taken to feel no shortage, the
+        # rest feels all of it. irrigation.json says plainly that its share is the share of
+        # GROUND that is irrigated and not the share of THIS crop that is watered, so this is
+        # an assumption about bean fields made from a figure about all fields, and it is
+        # written down here rather than buried.
+        #
+        # A region with no usable rain record gets w = 1 and is marked in the output. It is
+        # not quietly given average water — a missing input has to be visible.
+        w = 1.0
+        ks = None
+        if WATER_MODE == "gwet" and have_gwet:
+            # MEASURED-SIDE WATER. No rain gauge, no evaporation formula, no guess at what the
+            # winter left behind: the state of the root zone itself, every day.
+            gw = soil.get(iso)
+            if gw is not None:
+                ks = min(gw / GWET_CRITICAL, 1.0)
+        elif WATER_MODE == "balance" and have_balance:
+            et0 = hargreaves_et0(hi_f, lo_f, lat, d.timetuple().tm_yday)
+            etc = crop_coefficient(min(gdd / gdd_mat, 1.0)) * et0
+            rain_mm = (precip.get(iso) or 0.0) * 25.4
+            depletion = min(max(depletion - rain_mm + etc, 0.0), taw)
+            ks = water_stress(depletion, taw)
+        if ks is not None:
+            w = irrigated_share + (1.0 - irrigated_share) * ks
+            wsum += w
+            wdays += 1
+        bio += (rue * mj * PAR_FRACTION * fpar(g)
+                * tstress(hi_f, lo_f, heat, reproductive=repro)
+                * (w if WATER_IN_INDEX else 1.0))
         n += 1
-    return (bio, n, matured_on, repro_hot, repro_days, repro_warm_nights) if n >= 60 else None
+    if n < 60:
+        return None
+    return (bio, n, matured_on, repro_hot, repro_days, repro_warm_nights,
+            (wsum / wdays) if wdays else None)
 
 
 def main():
@@ -376,6 +793,21 @@ def main():
     answers_doc = json.load(open(os.path.join(DATA, "region-answers.json")))
     answers = answers_doc["regions"]
     pulses = json.load(open(os.path.join(ARCHIVE, "canopy-pulses.json")))["commodities"]
+    IRRIGATION = json.load(open(os.path.join(DATA, "irrigation.json")))["crops"]
+    try:
+        SOILS = json.load(open(os.path.join(DATA, "soils.json")))
+    except Exception:
+        SOILS = {"regions": {}}
+        print("NO SOILS FILE — falling back to one invented root-zone capacity. Run "
+              "scripts/refresh/soils.py", file=sys.stderr)
+    try:
+        CALIBRATION = json.load(open(os.path.join(DATA, "model-calibration.json")))
+    except Exception:
+        # No calibration file means nothing has been tested against harvests, and an untested
+        # swing is not published. Zero is the safe failure, not full confidence.
+        CALIBRATION = {"by_state_class": {}, "by_commodity": {}}
+        print("NO CALIBRATION FILE — every swing scaled to zero. Run "
+              "scripts/backtest.py --write-calibration gwet", file=sys.stderr)
 
     out = {}
     for region in NAMES:
@@ -383,6 +815,35 @@ def main():
         temp_all = (h["temperature"].get(region) or {}).get("daily") or {}
         if not rad_all or not temp_all:
             continue
+
+        # WATER, FOR EVERY YEAR INCLUDING THIS ONE. The archive holds 2015-2025 pooled from
+        # gauges that carry the whole record; the current season is pulled from those same
+        # gauges every run. They go into one series so that the winter of 2025-26 — which
+        # straddles the two — can be totalled at all.
+        soil_root = ((h.get("soil") or {}).get(region) or {}).get("GWETROOT") or {}
+        smap_root = (h.get("smap") or {}).get(region) or {}
+        # THE GROUND ITSELF, measured by the USDA soil survey rather than assumed. The old
+        # code held one root-zone capacity, 120 mm, for all seven regions, and that number was
+        # invented. Measured, they run from 61 mm on the Valent sands of southwest Nebraska to
+        # 118 mm on the Keith silt loams of northwest Kansas — a field that holds half as much
+        # water reaches stress in half the time, and the model could not see that at all.
+        srec = (SOILS.get("regions") or {}).get(region) or {}
+        awc_mm = srec.get("available_water_mm_root_zone")
+        pblk = (h.get("precipitation") or {}).get(region) or {}
+        precip = dict(pblk.get("daily") or {})
+        if precip and pblk.get("gauges"):
+            try:
+                precip.update(acis_precip_current(STATE_OF[region], pblk["gauges"], THIS_YEAR))
+            except Exception as e:
+                print("  %s: current rainfall failed, %s" % (region, str(e)[:60]),
+                      file=sys.stderr)
+        # The centre of the crop, weighted by acres — needed for the sun angle in the
+        # reference-ET calculation, and computed once for the region rather than per class.
+        cells = [c for c in json.load(open(os.path.join(HERE, "bean-cells-by-county.json")))
+                 if c["region"] == region]
+        aw = sum(max(c["acres"], 0.01) for c in cells) or 1
+        lat = sum(c["lat"] * max(c["acres"], 0.01) for c in cells) / aw
+        lon = sum(c["lon"] * max(c["acres"], 0.01) for c in cells) / aw
 
         def canopy_for(year, commodity):
             if commodity == "DRY BEANS":
@@ -398,6 +859,12 @@ def main():
         per = {}
         for cls, spec in CLASSES.items():
             commodity = spec[6]
+            # The share of this crop's ground that is irrigated, which is taken to feel no
+            # water shortage. irrigation.json states outright that this is the share of GROUND
+            # and not of this crop's fields; the assumption is recorded in the output.
+            irr = ((IRRIGATION.get(commodity) or {}).get(region) or {}).get(
+                "irrigated_share_of_ground")
+            irr_share = (irr / 100.0) if irr is not None else 0.0
             now_canopy = canopy_for(THIS_YEAR, commodity)
             if not now_canopy:
                 continue                      # no observation of this crop here
@@ -412,7 +879,9 @@ def main():
                 if not t or not c:
                     continue
                 r = {k: v for k, v in rad_all.items() if k.startswith(str(y))}
-                got = season_biomass(cls, spec, region, y, c, r, t, c, stop_md=reach)
+                got = season_biomass(cls, spec, region, y, c, r, t, c, stop_md=reach,
+                                     precip=precip, lat=lat, irrigated_share=irr_share,
+                                     soil=soil_root, awc_mm=awc_mm)
                 if got:
                     hist.append(got[0])
                     hot_hist.append(got[3])
@@ -427,11 +896,6 @@ def main():
             now_temp = {}
             field = json.load(open(os.path.join(DATA, "station-field.json")))
             hist_temp = json.load(open(HIST))["temperature"]
-            pts = [c for c in json.load(open(os.path.join(HERE, "bean-cells-by-county.json")))
-                   if c["region"] == region]
-            w = sum(max(c["acres"], 0.01) for c in pts) or 1
-            lat = sum(c["lat"] * max(c["acres"], 0.01) for c in pts) / w
-            lon = sum(c["lon"] * max(c["acres"], 0.01) for c in pts) / w
             # ONE RULE, ONE PLACE — station_on_crop_ground() in yield_all.py. The history
             # station wins when this season carries it, because the ratio only cancels its
             # uncalibrated constants when both halves read the same ground; otherwise the
@@ -449,7 +913,8 @@ def main():
             now_rad = json.load(open(os.path.join(ARCHIVE, "solar-radiation.json")))
             now_r = now_rad["regions"].get(region, {}).get("mj_m2_day", {})
             got = season_biomass(cls, spec, region, THIS_YEAR, now_canopy, now_r, now_temp,
-                                 now_canopy)
+                                 now_canopy, precip=precip, lat=lat,
+                                 irrigated_share=irr_share, soil=soil_root, awc_mm=awc_mm)
             if not got:
                 continue
 
@@ -466,11 +931,58 @@ def main():
             # estimate one, which is precisely the kind of number that cannot be defended to
             # an agronomist. Condition and the seasonal index are still published — those are
             # measured — but the weight is not.
+            # SCALE IT BACK TO WHAT THE HARVEST RECORD SUPPORTS.
+            #
+            # The raw index is how far this season's modelled growth sits from the model's own
+            # eleven-year normal. Tested against every USDA harvest here, that swing was far
+            # too big: publishing it raw was worse than assuming an average year in six of
+            # seven crop-and-state combinations. assets/data/model-calibration.json holds, per
+            # crop and state, how much of the swing survived that test — fitted on 2015-2025
+            # and applied to a year that is not in the fit.
+            #
+            # For dry beans in Nebraska and Colorado that scaling is ZERO. The model has shown
+            # no ability to call a bean year on this ground, so the honest published answer is
+            # a normal year, and the raw figure stays visible beside it rather than being
+            # deleted. For peas it is 1.02 — the model's swing was the right size all along.
+            # This is not smoothing towards a trend. Nothing is fitted to a trend line; the
+            # comparison is always against the mean of the other harvested years.
+            cal = (CALIBRATION.get("by_state_class", {}).get(STATE_OF[region], {}) or {}).get(cls)
+            if cal:
+                scale, scale_from = cal["scale"], "this class in this state"
+            else:
+                scale = CALIBRATION.get("by_commodity", {}).get(commodity)
+                scale_from = "the commodity average, no record for this class in this state"
+            raw_index = index
+            # UNTESTED IS NOT THE SAME AS TESTED AND FOUND WANTING.
+            #
+            # A scaling of zero for Nebraska pinto means the model was measured against ten
+            # harvests and could not call the year, so a normal year is the honest answer.
+            # Chickpeas have no USDA yield record in any of these states, so there is nothing
+            # to measure against at all — and flattening them to zero would print a confident
+            # "normal" that no evidence supports. Those keep the raw figure and are marked
+            # uncalibrated, so the reader can tell "we checked and it is about normal" from
+            # "we have never been able to check this".
+            calibrated = scale is not None
+            if not calibrated:
+                scale, scale_from = None, "no harvest record for this crop in these states"
+            else:
+                index = 1 + scale * (raw_index - 1)
+                spread = spread * scale if scale else spread
+
             base, level_kind, proxy_note = usda_level(cls, region)
             unsourced = base is None
             per[cls] = {
-                "index": round(index, 3),
+                "index": round(index, 4),
                 "vs_normal_pct": round(100 * (index - 1), 1),
+                "raw_index": round(raw_index, 4),
+                "raw_vs_normal_pct": round(100 * (raw_index - 1), 1),
+                "swing_scale": (round(scale, 3) if scale is not None else None),
+                "index_is_calibrated": calibrated,
+                "swing_scale_from": scale_from,
+                "swing_scale_why": "How much of the model's movement survived being tested "
+                                   "against every USDA harvest in this state. 0 means it has "
+                                   "shown no ability to call this crop here, so a normal year "
+                                   "is the honest answer.",
                 "years_of_model_history": len(hist),
                 "model_year_to_year_spread_pct": round(100 * spread, 1),
                 "days_counted": got[1],
@@ -482,6 +994,26 @@ def main():
                                               if hot_hist else None),
                 "flowering_hot_days_by_year": hot_by_year,
                 "flowering_warm_nights": got[5],
+                # THE WATER TERM, PUBLISHED RATHER THAN HIDDEN. 1.00 means the crop was never
+                # short; lower means growth was held back by the running rainfall-against-crop
+                # -water-use balance. null means this region has no gauge covering the whole
+                # record, so no water was applied at all — which the reader is entitled to
+                # know, because a missing input looks exactly like a comfortable one.
+                "water_stress_proxy": (round(got[6], 3) if got[6] is not None else None),
+                "water_stress_proxy_is": WATER_LABEL,
+                "water_stress_proxy_note":
+                    "Estimated from a land-surface model and the USDA soil survey. It is NOT "
+                    "measured soil moisture. Growers measure the root zone with buried probes "
+                    "at several depths, tensiometers or Watermark sensors, a hand probe, and "
+                    "their own rain and irrigation-flow records. This has none of those. "
+                    "1.00 means no estimated shortage; lower means more.",
+                "water_source": WATER_MODE,
+                "water_applied_to_yield": WATER_IN_INDEX,
+                "root_zone_available_water_mm": awc_mm,
+                "soil": (srec.get("top_soils") or [{}])[0].get("soil"),
+                "slope_pct_mean": srec.get("slope_pct_mean"),
+                "irrigated_share_of_ground_pct": (round(100 * irr_share, 1)
+                                                  if irr is not None else None),
                 "commodity": commodity,
                 "level_is_usda_published": level_kind == "published",
                 "level_kind": level_kind,
@@ -541,7 +1073,16 @@ def main():
                     r["lb_ac_low"] = round(b * shared * (1 - shared_spread))
                     r["lb_ac_high"] = round(b * shared * (1 + shared_spread))
         if per:
+            # BOTH PRODUCTS, PUBLISHED SIDE BY SIDE, EVERY RUN. Region level, because the water
+            # signal is regional and does not differ between bean classes.
+            reach_md = max((max(c) for c in (canopy_for(THIS_YEAR, sp[6])
+                                             for sp in CLASSES.values()) if c), default=None)
+            water2 = None
+            if reach_md:
+                water2 = water_two_ways(soil_root, smap_root, THIS_YEAR, ("03-01", reach_md))
             out[region] = {"name": NAMES[region], "classes": per}
+            if water2:
+                out[region]["water_two_ways"] = water2
 
     # Push today's USDA-sourced figures into the file the headline reads, and DELETE any
     # yield block whose level USDA does not publish. A missing number is honest; an invented

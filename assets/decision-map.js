@@ -74,6 +74,34 @@
      * capacity, no runoff and no drainage. In a region where much of the bean crop is under
      * pivot, calling it soil moisture and saying the crop drew down stored water was wrong in
      * a way that could have moved an irrigation decision. */
+    /* ESTIMATED SOIL WATER. The one layer on this map whose spatial detail is real rather
+     * than interpolated from a handful of instruments: it is drawn from the USDA soil survey
+     * at the centre of every one of the bean cells, so the pattern you see is the pattern of
+     * the ground itself — the Valent sands of southwest Nebraska really do hold about half
+     * what the Keith silt loams of northwest Kansas hold.
+     *
+     *   value = available water capacity of THIS cell's soil, 0-60 cm   (USDA SSURGO)
+     *           x  the region's estimated water-stress proxy            (NASA POWER GWETROOT)
+     *
+     * WHAT IT IS NOT, and this matters more than what it is. IT IS NOT MEASURED SOIL MOISTURE.
+     * The capacity is surveyed on the ground and is solid. The wetness is a land-surface model,
+     * one figure for a whole region, checked against the USDA probe at Torrington across 3,801
+     * days at r = +0.62 — good agreement for a model, and still a model. Growers measure a root
+     * zone with buried probes at several depths, with tensiometers or Watermark sensors, with a
+     * hand probe, and with their own rain and irrigation-flow records. This map has none of
+     * those and cannot replace them.
+     *
+     * It also cannot see a centre pivot. On irrigated ground the estimate will read dry when
+     * the crop is not. Read it as "how much water this ground can hold, and how short the
+     * weather has been", not as "how wet your field is." */
+    soilwater: {
+      label: 'Estimated soil water',
+      unit: 'mm of plant-available water in the root zone \u2014 ESTIMATED from soil survey and a land-surface model, NOT measured',
+      loLabel: 'Little water the crop can reach', hiLabel: 'Root zone near capacity',
+      ramp: [[0, '#b4531a'], [0.3, '#e0913a'], [0.6, '#cbd46e'], [0.8, '#5fae86'], [1, '#1f7a6d']],
+      cellSource: true,
+      question: 'Where can the ground hold water for this crop, and where has it run short?'
+    },
     moisture: {
       label: 'Rain minus evaporation',
       unit: 'mm since planting, up to 30 days · rainfall less THIS crop’s water use',
@@ -292,7 +320,34 @@
     return ceil == null || st.elev_m == null || st.elev_m <= ceil;
   }
 
+  /* Soil cells, not weather stations. Every other layer interpolates between instruments;
+   * this one has a surveyed value at each bean cell, which is a great deal more of them. */
+  function soilCellValues() {
+    var out = [], rings = cropRings();
+    var cells = (S.soils && S.soils.cells) || [];
+    var reg = (S.yieldIndex && (S.yieldIndex.regions || S.yieldIndex)) || {};
+    var proxy = {};
+    Object.keys(reg).forEach(function (rk) {
+      var cls = (reg[rk] && reg[rk].classes) || {};
+      var k = Object.keys(cls)[0];
+      // every class in a region shares one commodity signal, so any of them carries the proxy
+      if (k && cls[k] && cls[k].water_stress_proxy != null) proxy[rk] = cls[k].water_stress_proxy;
+    });
+    for (var i = 0; i < cells.length; i++) {
+      var c = cells[i];
+      if (c.awc_mm == null) continue;
+      var w = proxy[c.region];
+      if (w == null) continue;
+      out.push({ x: c.lon, y: c.lat, v: c.awc_mm * w,
+                 name: (c.soil || 'soil') + ' \u2014 ' + c.awc_mm + ' mm capacity' +
+                       (c.slope_pct != null ? ', ' + c.slope_pct + '% slope' : ''),
+                 inCrop: inRings(c.lon, c.lat, rings), onGround: true });
+    }
+    return out;
+  }
+
   function stationValues(day) {
+    if (S.view === 'soilwater') return soilCellValues();
     var spec = CLASSES[S.crop] || CLASSES.PINTO;
     var p0 = plantIndex(spec);
     var all = S.field.stations;
@@ -838,6 +893,12 @@
     if (S.layers.stations) S.map.removeLayer(S.layers.stations);
     var rings = [];
     cropOutline().forEach(function (f) { rings = rings.concat(ringsOf(f)); });
+    if (VIEWS[S.view] && VIEWS[S.view].cellSource) {
+      // The dots on this layer would be thermometers, and the layer is not made of
+      // thermometers. Showing them would say the soil figure came from them.
+      S.stationsShown = 0;
+      return;
+    }
     var wanted = S.view === 'moisture' ? 'has_precip' : 'has_temp';
     var on = S.field.stations.filter(function (st) {
       return st[wanted] && inRings(st.lon, st.lat, rings);
@@ -1476,6 +1537,29 @@
         : S.crop + ' is at <b>' + r(med) + '% of the heat it needs</b> at the median gauge on ' +
           'this crop, from ' + r(low) + '% in the slowest tenth to ' + r(high) + '% in the ' +
           'fastest.';
+    } else if (S.view === 'soilwater') {
+      /* Its own sentence, because falling through to the rainfall wording made this layer
+       * describe rain gauges and thermometers — which is not where a single figure on it comes
+       * from. The first version of this shipped exactly that until the page was opened and
+       * read, which is the whole argument for opening the page and reading it. */
+      var srec = (S.soils && S.soils.regions) || {};
+      var rk = S.region || Object.keys(srec)[0];
+      var sr = srec[rk] || {};
+      var cap = sr.available_water_mm_root_zone;
+      text = 'Across this crop\u2019s ground the soil survey gives a root zone holding <b>' +
+        (cap != null ? r(cap) + ' mm' : 'an unrecorded amount') + '</b> of water the roots can ' +
+        'reach when full' +
+        (sr.top_soils && sr.top_soils[0] ? ', mostly ' + sr.top_soils[0].soil.toLowerCase() : '') +
+        (sr.slope_pct_mean != null ? ', on ' + sr.slope_pct_mean + '% slopes' : '') +
+        '. The map shades what we <b>estimate</b> is in it now: <b>' + r(med) + ' mm</b> at the ' +
+        'typical cell, from ' + r(low) + ' to ' + r(high) + '.' +
+        note('This is not measured soil moisture and must not be used as though it were. The ' +
+             'capacity is surveyed on the ground and is solid. The wetness is a land-surface ' +
+             'model, one figure for the whole region, checked against the USDA buried probe at ' +
+             'Torrington across 3,801 days. It cannot see a centre pivot, so on watered ground ' +
+             'it will read dry when the crop is not. To know your own field you need a probe in ' +
+             'it \u2014 buried sensors at several depths, a tensiometer or Watermark, or a hand ' +
+             'probe and a shovel.');
     } else if (S.view === 'heat') {
       text = window.NB_TEXT.t('heat.reading', {
         crop: S.crop, days: '<b>' + r(med) + '</b>',
@@ -1499,7 +1583,8 @@
      * and not temperature, so claiming the full network behind a growing-degree-day figure
      * would overstate what is holding it up. */
     el.innerHTML = text + ' <span class="nbStationCount">' + vals.length +
-      (S.view === 'moisture' ? ' rain gauges' : ' reporting thermometers') + '</span>';
+      (S.view === 'soilwater' ? ' surveyed soil samples'
+        : S.view === 'moisture' ? ' rain gauges' : ' reporting thermometers') + '</span>';
   }
 
   function updateLegend() {
@@ -1772,10 +1857,12 @@
       fetch('assets/data/pest-wbc-2026.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
       fetch('assets/data/groundwater.json?v=' + build())
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch('assets/data/soils.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11]; S.pest = res[12]; S.groundwater = res[13];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11]; S.pest = res[12]; S.groundwater = res[13]; S.soils = res[14];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;
