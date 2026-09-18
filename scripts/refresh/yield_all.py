@@ -128,6 +128,48 @@ USDA_NAME = {"PINTO": "Pinto", "GREAT NORTHERN": "Great northern", "NAVY": "Navy
 
 
 
+
+CULTIVARS = os.path.join(HERE, "..", "..", "assets", "data", "cultivars.json")
+
+
+def cultivar_spec(cls, variety, fallback):
+    """The GDD requirement for a NAMED VARIETY, where one has been measured.
+
+    WHY THIS EXISTS. The class table gives one number per market class, and that is the wrong
+    granularity. Measured on UNL's 2022 trials at Scottsbluff and Mitchell, varieties inside a
+    single class differ by up to 394 GDD — pinto runs 1,808 to 2,202 — while the gap BETWEEN
+    classes in the shipped table is 55 GDD. Variety matters about seven times more than class.
+
+    Flowering is the sharper case. Inside light red kidney, CELRK flowers at 833 GDD and
+    L1032326 at 1,237: weeks apart. Flowering is when heat aborts pods while the canopy stays
+    green, so staging the wrong variety does not shift the answer slightly, it puts the heat
+    window over the wrong fortnight.
+
+    GAJ, repeatedly: "we NEED to do the best estimates with ALL data sets and remote sensing
+    with accurate cultivar specific GDD models". The data for it was sitting in the trial
+    tables while only two class medians were taken from them.
+
+    Returns the class spec unchanged when the variety is unknown, which is the normal case —
+    nothing here can see what was planted. A grower can.
+    """
+    if not variety:
+        return fallback, None
+    try:
+        tbl = json.load(open(CULTIVARS))["classes"]
+    except Exception:
+        return fallback, None
+    hit = (tbl.get(cls) or {}).get(variety)
+    if not hit:
+        return fallback, None
+    base, heat, _gdd, plant, rue, hi, com = fallback
+    return (base, heat, hit["gdd_to_maturity"], plant, rue, hi, com), {
+        "variety": variety,
+        "gdd_to_maturity": hit["gdd_to_maturity"],
+        "gdd_to_flower": hit["gdd_to_flower"],
+        "class_default": _gdd,
+        "difference_from_class": hit["gdd_to_maturity"] - _gdd,
+        "measured_at": "UNL Panhandle REEC 2022 variety trials, %d site(s)" % hit["sites"]}
+
 def station_on_crop_ground(field, lat, lon, hist_name=None, radius_km=110, tolerance_m=250):
     """The weather station that stands on the ground this crop is grown on.
 

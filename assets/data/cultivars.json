@@ -1,0 +1,945 @@
+{
+ "schema": "nebraskabeans.cultivars.v1",
+ "what": "Growing degrees to flowering and to maturity for individual VARIETIES, measured on this project's own ground rather than assumed from the class.",
+ "why": "The class model uses one number per market class. Measured, varieties inside a single class differ by up to 394 GDD \u2014 pinto runs from 1,808 (NE2-21-7) to 2,202 (91216-5) \u2014 while the gap BETWEEN classes in the shipped table is 55 GDD. Variety matters about seven times more than class, and flowering is worse: inside light red kidney, CELRK flowers at 833 GDD and L1032326 at 1,237, which are weeks apart. Flowering is when heat aborts pods, so staging the wrong variety puts the heat window in the wrong place entirely.",
+ "source": {
+  "name": "UNL Panhandle REEC, 2022 Nebraska Dry Edible Bean Variety Trials (EC3064), Urrea",
+  "url": "https://extensionpubs.unl.edu/publication/2110/html/view",
+  "sites": "Scottsbluff Ag Lab (planted 8 June 2022) and Mitchell Ag Lab (3 June), both irrigated",
+  "api_key_required": false,
+  "method": "UNL's own DTF and DTM \u2014 days to 50% flowering and to 80% of plants ready to harvest \u2014 converted to growing degrees base 50 F over the Alliance Municipal Airport ASOS daily record for 2022."
+ },
+ "limits": [
+  "ONE SEASON, 2022, at two sites five miles apart. A variety's requirement is a physiological constant in principle; one year is not enough to publish it as one.",
+  "These are the varieties UNL trialled, not the varieties actually planted in any field. Nothing here knows what a given grower planted \u2014 the satellite cannot see variety and USDA does not publish it. That is the gap this table cannot close on its own.",
+  "Entries beginning NE, EX or a bare number are breeding lines, not commercial releases."
+ ],
+ "classes": {
+  "BLACK": {
+   "17715": {
+    "gdd_to_flower": 1142,
+    "gdd_to_maturity": 2148,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     104
+    ]
+   },
+   "B303350": {
+    "gdd_to_flower": 1066,
+    "gdd_to_maturity": 2100,
+    "sites": 2,
+    "days_to_maturity": [
+     88,
+     103
+    ]
+   },
+   "B3036381": {
+    "gdd_to_flower": 1111,
+    "gdd_to_maturity": 2148,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     104
+    ]
+   },
+   "Black Bear": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2156,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     105
+    ]
+   },
+   "Black Tails": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2054,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     100
+    ]
+   },
+   "BlackBeard": {
+    "gdd_to_flower": 1122,
+    "gdd_to_maturity": 2137,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     103
+    ]
+   },
+   "Eclipse": {
+    "gdd_to_flower": 1066,
+    "gdd_to_maturity": 2094,
+    "sites": 2,
+    "days_to_maturity": [
+     90,
+     97
+    ]
+   },
+   "NE14-20-6": {
+    "gdd_to_flower": 1040,
+    "gdd_to_maturity": 2134,
+    "sites": 2,
+    "days_to_maturity": [
+     92,
+     100
+    ]
+   },
+   "NE14-20-8": {
+    "gdd_to_flower": 1076,
+    "gdd_to_maturity": 2023,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     94
+    ]
+   },
+   "Nimbus": {
+    "gdd_to_flower": 1142,
+    "gdd_to_maturity": 2172,
+    "sites": 2,
+    "days_to_maturity": [
+     93,
+     104
+    ]
+   },
+   "Spectre": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2175,
+    "sites": 2,
+    "days_to_maturity": [
+     92,
+     106
+    ]
+   }
+  },
+  "GREAT NORTHERN": {
+   "15215": {
+    "gdd_to_flower": 1056,
+    "gdd_to_maturity": 2125,
+    "sites": 2,
+    "days_to_maturity": [
+     90,
+     103
+    ]
+   },
+   "17215": {
+    "gdd_to_flower": 936,
+    "gdd_to_maturity": 2091,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     104
+    ]
+   },
+   "17227": {
+    "gdd_to_flower": 920,
+    "gdd_to_maturity": 2042,
+    "sites": 2,
+    "days_to_maturity": [
+     83,
+     102
+    ]
+   },
+   "18215": {
+    "gdd_to_flower": 942,
+    "gdd_to_maturity": 2091,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     103
+    ]
+   },
+   "Andromeda": {
+    "gdd_to_flower": 814,
+    "gdd_to_maturity": 2060,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     103
+    ]
+   },
+   "Aries": {
+    "gdd_to_flower": 920,
+    "gdd_to_maturity": 2054,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     100
+    ]
+   },
+   "Draco": {
+    "gdd_to_flower": 1076,
+    "gdd_to_maturity": 2100,
+    "sites": 2,
+    "days_to_maturity": [
+     88,
+     103
+    ]
+   },
+   "Hydra": {
+    "gdd_to_flower": 1056,
+    "gdd_to_maturity": 2102,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     104
+    ]
+   },
+   "Lyra": {
+    "gdd_to_flower": 992,
+    "gdd_to_maturity": 2063,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     102
+    ]
+   },
+   "NE1-17-29": {
+    "gdd_to_flower": 942,
+    "gdd_to_maturity": 2080,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     103
+    ]
+   },
+   "NE1-17-31": {
+    "gdd_to_flower": 980,
+    "gdd_to_maturity": 2091,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     103
+    ]
+   },
+   "NE1-17-36": {
+    "gdd_to_flower": 982,
+    "gdd_to_maturity": 2091,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     103
+    ]
+   },
+   "NE1-17-41": {
+    "gdd_to_flower": 1004,
+    "gdd_to_maturity": 2053,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     102
+    ]
+   },
+   "NE1-17-9": {
+    "gdd_to_flower": 1028,
+    "gdd_to_maturity": 2074,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     102
+    ]
+   },
+   "NE1-20-21": {
+    "gdd_to_flower": 1008,
+    "gdd_to_maturity": 2156,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     105
+    ]
+   },
+   "NE1-20-31": {
+    "gdd_to_flower": 920,
+    "gdd_to_maturity": 2099,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     105
+    ]
+   },
+   "Panhandle Pride": {
+    "gdd_to_flower": 992,
+    "gdd_to_maturity": 2110,
+    "sites": 2,
+    "days_to_maturity": [
+     88,
+     104
+    ]
+   },
+   "Powderhorn": {
+    "gdd_to_flower": 920,
+    "gdd_to_maturity": 2005,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     95
+    ]
+   },
+   "Virgo": {
+    "gdd_to_flower": 1004,
+    "gdd_to_maturity": 2136,
+    "sites": 2,
+    "days_to_maturity": [
+     90,
+     104
+    ]
+   },
+   "White Pearl": {
+    "gdd_to_flower": 1054,
+    "gdd_to_maturity": 2049,
+    "sites": 2,
+    "days_to_maturity": [
+     83,
+     103
+    ]
+   }
+  },
+  "LIGHT RED KIDNEY": {
+   "15923": {
+    "gdd_to_flower": 871,
+    "gdd_to_maturity": 2060,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     103
+    ]
+   },
+   "161014": {
+    "gdd_to_flower": 1168,
+    "gdd_to_maturity": 2162,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     106
+    ]
+   },
+   "161041": {
+    "gdd_to_flower": 1226,
+    "gdd_to_maturity": 2204,
+    "sites": 2,
+    "days_to_maturity": [
+     95,
+     108
+    ]
+   },
+   "Big Red 1": {
+    "gdd_to_flower": 846,
+    "gdd_to_maturity": 2063,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     102
+    ]
+   },
+   "CELRK": {
+    "gdd_to_flower": 833,
+    "gdd_to_maturity": 2004,
+    "sites": 2,
+    "days_to_maturity": [
+     80,
+     99
+    ]
+   },
+   "Clouseau": {
+    "gdd_to_flower": 942,
+    "gdd_to_maturity": 2070,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     103
+    ]
+   },
+   "L1032326": {
+    "gdd_to_flower": 1237,
+    "gdd_to_maturity": 2214,
+    "sites": 2,
+    "days_to_maturity": [
+     94,
+     109
+    ]
+   },
+   "Panhandle Red": {
+    "gdd_to_flower": 1006,
+    "gdd_to_maturity": 2144,
+    "sites": 2,
+    "days_to_maturity": [
+     90,
+     105
+    ]
+   },
+   "Pink Panther": {
+    "gdd_to_flower": 984,
+    "gdd_to_maturity": 2150,
+    "sites": 2,
+    "days_to_maturity": [
+     90,
+     106
+    ]
+   },
+   "Red Dawn": {
+    "gdd_to_flower": 850,
+    "gdd_to_maturity": 2014,
+    "sites": 2,
+    "days_to_maturity": [
+     81,
+     99
+    ]
+   },
+   "Red Zone": {
+    "gdd_to_flower": 1190,
+    "gdd_to_maturity": 2204,
+    "sites": 2,
+    "days_to_maturity": [
+     95,
+     108
+    ]
+   },
+   "Ronnie's Red": {
+    "gdd_to_flower": 1170,
+    "gdd_to_maturity": 2204,
+    "sites": 2,
+    "days_to_maturity": [
+     95,
+     108
+    ]
+   }
+  },
+  "NAVY": {
+   "Alpena": {
+    "gdd_to_flower": 1111,
+    "gdd_to_maturity": 2160,
+    "sites": 2,
+    "days_to_maturity": [
+     92,
+     104
+    ]
+   },
+   "Armada": {
+    "gdd_to_flower": 1099,
+    "gdd_to_maturity": 2148,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     104
+    ]
+   },
+   "Blizzard": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2136,
+    "sites": 2,
+    "days_to_maturity": [
+     90,
+     104
+    ]
+   },
+   "EX1802-N": {
+    "gdd_to_flower": 1076,
+    "gdd_to_maturity": 1960,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     91
+    ]
+   },
+   "EX1803-N": {
+    "gdd_to_flower": 1040,
+    "gdd_to_maturity": 2042,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     99
+    ]
+   },
+   "EX1804-N": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2062,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     99
+    ]
+   },
+   "HMS Bounty": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2172,
+    "sites": 2,
+    "days_to_maturity": [
+     93,
+     104
+    ]
+   },
+   "HMS Medalist": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2180,
+    "sites": 2,
+    "days_to_maturity": [
+     93,
+     105
+    ]
+   },
+   "HMS Victory": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2092,
+    "sites": 2,
+    "days_to_maturity": [
+     88,
+     102
+    ]
+   },
+   "Liberty": {
+    "gdd_to_flower": 1099,
+    "gdd_to_maturity": 2181,
+    "sites": 2,
+    "days_to_maturity": [
+     94,
+     105
+    ]
+   },
+   "SV1893GH": {
+    "gdd_to_flower": 1153,
+    "gdd_to_maturity": 2156,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     105
+    ]
+   },
+   "T9905": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2150,
+    "sites": 2,
+    "days_to_maturity": [
+     92,
+     103
+    ]
+   }
+  },
+  "PINTO": {
+   "20-250": {
+    "gdd_to_flower": 1076,
+    "gdd_to_maturity": 2156,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     105
+    ]
+   },
+   "20-308": {
+    "gdd_to_flower": 1076,
+    "gdd_to_maturity": 2118,
+    "sites": 2,
+    "days_to_maturity": [
+     90,
+     102
+    ]
+   },
+   "20-310": {
+    "gdd_to_flower": 1076,
+    "gdd_to_maturity": 2070,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     103
+    ]
+   },
+   "30837": {
+    "gdd_to_flower": 1054,
+    "gdd_to_maturity": 2122,
+    "sites": 2,
+    "days_to_maturity": [
+     89,
+     104
+    ]
+   },
+   "32330-14": {
+    "gdd_to_flower": 1190,
+    "gdd_to_maturity": 2180,
+    "sites": 2,
+    "days_to_maturity": [
+     92,
+     107
+    ]
+   },
+   "33503-5": {
+    "gdd_to_flower": 1111,
+    "gdd_to_maturity": 2148,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     104
+    ]
+   },
+   "52646-14": {
+    "gdd_to_flower": 1076,
+    "gdd_to_maturity": 2084,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     102
+    ]
+   },
+   "91216-5": {
+    "gdd_to_flower": 1092,
+    "gdd_to_maturity": 2202,
+    "sites": 1,
+    "days_to_maturity": [
+     102
+    ]
+   },
+   "Bronco": {
+    "gdd_to_flower": 936,
+    "gdd_to_maturity": 2122,
+    "sites": 2,
+    "days_to_maturity": [
+     89,
+     104
+    ]
+   },
+   "Cancun": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2100,
+    "sites": 2,
+    "days_to_maturity": [
+     88,
+     103
+    ]
+   },
+   "Cowboy": {
+    "gdd_to_flower": 1040,
+    "gdd_to_maturity": 2154,
+    "sites": 1,
+    "days_to_maturity": [
+     97
+    ]
+   },
+   "EX1844-P": {
+    "gdd_to_flower": 1040,
+    "gdd_to_maturity": 2060,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     103
+    ]
+   },
+   "EX1845-P": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2001,
+    "sites": 2,
+    "days_to_maturity": [
+     81,
+     97
+    ]
+   },
+   "EX1947-P": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2080,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     103
+    ]
+   },
+   "EX2143-P": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2084,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     102
+    ]
+   },
+   "EX2146-P": {
+    "gdd_to_flower": 1028,
+    "gdd_to_maturity": 2084,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     102
+    ]
+   },
+   "EX2147-P": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2074,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     102
+    ]
+   },
+   "Gaucho": {
+    "gdd_to_flower": 936,
+    "gdd_to_maturity": 2016,
+    "sites": 2,
+    "days_to_maturity": [
+     81,
+     100
+    ]
+   },
+   "Gleam": {
+    "gdd_to_flower": 1054,
+    "gdd_to_maturity": 2112,
+    "sites": 2,
+    "days_to_maturity": [
+     89,
+     103
+    ]
+   },
+   "La Paz": {
+    "gdd_to_flower": 1111,
+    "gdd_to_maturity": 2082,
+    "sites": 2,
+    "days_to_maturity": [
+     88,
+     99
+    ]
+   },
+   "Lumen": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2063,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     102
+    ]
+   },
+   "Monterrey": {
+    "gdd_to_flower": 1088,
+    "gdd_to_maturity": 2074,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     102
+    ]
+   },
+   "Mystic": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2074,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     102
+    ]
+   },
+   "ND-Palomino": {
+    "gdd_to_flower": 1089,
+    "gdd_to_maturity": 2187,
+    "sites": 2,
+    "days_to_maturity": [
+     93,
+     106
+    ]
+   },
+   "NE2-17-37": {
+    "gdd_to_flower": 1028,
+    "gdd_to_maturity": 2160,
+    "sites": 2,
+    "days_to_maturity": [
+     92,
+     104
+    ]
+   },
+   "NE2-20-12": {
+    "gdd_to_flower": 970,
+    "gdd_to_maturity": 2026,
+    "sites": 2,
+    "days_to_maturity": [
+     82,
+     100
+    ]
+   },
+   "NE2-20-14": {
+    "gdd_to_flower": 996,
+    "gdd_to_maturity": 2070,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     103
+    ]
+   },
+   "NE2-20-3": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2190,
+    "sites": 2,
+    "days_to_maturity": [
+     95,
+     106
+    ]
+   },
+   "NE2-21-20": {
+    "gdd_to_flower": 958,
+    "gdd_to_maturity": 2063,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     102
+    ]
+   },
+   "NE2-21-25": {
+    "gdd_to_flower": 1066,
+    "gdd_to_maturity": 2092,
+    "sites": 2,
+    "days_to_maturity": [
+     88,
+     102
+    ]
+   },
+   "NE2-21-26": {
+    "gdd_to_flower": 984,
+    "gdd_to_maturity": 2136,
+    "sites": 2,
+    "days_to_maturity": [
+     90,
+     104
+    ]
+   },
+   "NE2-21-3": {
+    "gdd_to_flower": 1118,
+    "gdd_to_maturity": 2187,
+    "sites": 2,
+    "days_to_maturity": [
+     93,
+     106
+    ]
+   },
+   "NE2-21-38": {
+    "gdd_to_flower": 942,
+    "gdd_to_maturity": 2074,
+    "sites": 2,
+    "days_to_maturity": [
+     86,
+     102
+    ]
+   },
+   "NE2-21-7": {
+    "gdd_to_flower": 920,
+    "gdd_to_maturity": 1808,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     76
+    ]
+   },
+   "NE4-17-10": {
+    "gdd_to_flower": 948,
+    "gdd_to_maturity": 2148,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     104
+    ]
+   },
+   "NE4-17-6": {
+    "gdd_to_flower": 954,
+    "gdd_to_maturity": 2110,
+    "sites": 2,
+    "days_to_maturity": [
+     88,
+     104
+    ]
+   },
+   "NE4-18-55": {
+    "gdd_to_flower": 1004,
+    "gdd_to_maturity": 2162,
+    "sites": 2,
+    "days_to_maturity": [
+     93,
+     103
+    ]
+   },
+   "Radiant": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2053,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     102
+    ]
+   },
+   "Rustler": {
+    "gdd_to_flower": 942,
+    "gdd_to_maturity": 2044,
+    "sites": 2,
+    "days_to_maturity": [
+     84,
+     100
+    ]
+   },
+   "SV6139GR": {
+    "gdd_to_flower": 1008,
+    "gdd_to_maturity": 2063,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     102
+    ]
+   },
+   "Santa Maria": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 2024,
+    "sites": 2,
+    "days_to_maturity": [
+     82,
+     99
+    ]
+   },
+   "Staybright": {
+    "gdd_to_flower": 1120,
+    "gdd_to_maturity": 2175,
+    "sites": 2,
+    "days_to_maturity": [
+     92,
+     106
+    ]
+   },
+   "Torreon": {
+    "gdd_to_flower": 1018,
+    "gdd_to_maturity": 1998,
+    "sites": 2,
+    "days_to_maturity": [
+     82,
+     96
+    ]
+   },
+   "USDA-Diamondback": {
+    "gdd_to_flower": 1066,
+    "gdd_to_maturity": 2162,
+    "sites": 2,
+    "days_to_maturity": [
+     91,
+     106
+    ]
+   },
+   "USDA-Rattler": {
+    "gdd_to_flower": 1076,
+    "gdd_to_maturity": 2112,
+    "sites": 2,
+    "days_to_maturity": [
+     89,
+     103
+    ]
+   },
+   "Vibrant B": {
+    "gdd_to_flower": 954,
+    "gdd_to_maturity": 2054,
+    "sites": 2,
+    "days_to_maturity": [
+     85,
+     100
+    ]
+   },
+   "Winbreaker": {
+    "gdd_to_flower": 980,
+    "gdd_to_maturity": 2084,
+    "sites": 2,
+    "days_to_maturity": [
+     87,
+     102
+    ]
+   }
+  }
+ }
+}
