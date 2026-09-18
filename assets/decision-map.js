@@ -1234,17 +1234,56 @@
           worstYield: idxFor(worstY.id).lb_ac.toLocaleString() + ' lb/ac' }) + '</p>' : '') +
       '<p class="nbEstNum">' + T.t('flower.heat', {
           threshold: T.temp((heatF - 32) * 5 / 9), crop: S.crop.toLowerCase() }) + ' ' +
-        T.t('flower.disagree') + '</p>' +
-      '<p class="nbEstLimit"><b>What this is.</b> ' + T.t('estimate.whatItIs') + ' ' +
-        T.t('estimate.howBuilt') + '</p>' +
+        T.t('flower.disagree') +
+        /* This sentence says hot years have not yielded less here, which is measured and
+         * correct, and it sat under a headline blaming the heat. Both cannot stand unexplained
+         * on one page. The tension is now named rather than left for the reader to trip over —
+         * it is a genuine disagreement between the agronomy and our own harvest record, and
+         * saying so is more useful than quietly dropping one side. */
+        ' <b>This cuts against what you may expect.</b> Heat at flowering is known to cost ' +
+        'pods, and this season ran hot in every area we cover. But across ten years of real ' +
+        'harvests on THIS ground, hot years have not come in lighter. We report both, and we ' +
+        'do not pretend the disagreement is settled.</p>' +
+      /* THIS WHOLE BLOCK WAS WRITTEN FOR A NUMBER THAT IS NO LONGER HERE.
+       *
+       * With dry bean yields withdrawn the panel still read "This is an educated estimate...",
+       * "Read this before you use the number", "The range shows how much this signal moves",
+       * "Hot days are not subtracted from this number" — four references to a figure that is
+       * not on the page. Worse, it told the reader that hot years have not yielded less here,
+       * which is TRUE and measured, directly underneath a headline that had just blamed the
+       * heat. The page argued with itself and the newer half was the wrong half.
+       *
+       * So the text now follows the number. Where a yield is published the original wording
+       * stands unchanged. Where it is withdrawn the panel says what it actually is: a set of
+       * measurements, with our own finding that none of them has been shown to predict this
+       * crop's yield on this ground. */
+      (anyYield
+        ? '<p class="nbEstLimit"><b>What this is.</b> ' + T.t('estimate.whatItIs') + ' ' +
+            T.t('estimate.howBuilt') + '</p>'
+        : '<p class="nbEstLimit"><b>What this is.</b> A set of measurements. It is <b>not a ' +
+            'forecast we have proved</b>, and it is not a measurement of your field. We run the ' +
+            'same model over this season and over the last 11 seasons and compare the two, ' +
+            'which cancels out the parts we cannot measure well \u2014 but for this crop that ' +
+            'comparison has never beaten simply assuming an average year, so we publish no ' +
+            'figure from it. The columns above are what we measured.</p>') +
       /* THE HESITATION GOES FIRST, NOT IN A FOOTNOTE. The county skill test finished on
          17 September 2026 and this estimate lost to a straight line through past yields in
          five of seven state-by-state tests, and tied in the other two. GAJ's call is to keep
          publishing the number — it is the best reading available before harvest — and to say
          plainly what it is worth. A number without this paragraph reads like a forecast that
          has been validated. It has not. */
-      '<p class="nbEstLimit nbEstCaveat"><b>What we cannot claim.</b> ' +
-        T.t('estimate.neverBeatenTrend') + '</p>' +
+      (anyYield
+        ? '<p class="nbEstLimit nbEstCaveat"><b>What we cannot claim.</b> ' +
+            T.t('estimate.neverBeatenTrend') + '</p>'
+        : '<p class="nbEstLimit nbEstCaveat"><b>What we cannot claim.</b> We tested whether ' +
+            'anything we measure predicts this crop\u2019s yield here \u2014 heat during ' +
+            'flowering, soil water from two independent readings, winter recharge, warm ' +
+            'nights, how far the water table has fallen. Scored against every harvest USDA has ' +
+            'published for this crop in these states, with each year held out of its own ' +
+            'baseline, none of them beat simply assuming an average year. That is why there is ' +
+            'no number above and why we do not tell you which way the crop is going. The ' +
+            'measurements are real. What they are worth for predicting your yield, on this ' +
+            'ground, we have not been able to show.</p>') +
       '<p class="nbEstLimit"><b>When to trust your own field instead.</b> ' +
         T.t('estimate.yourField') + '</p>' +
       /* NOTHING REMOVED, JUST ONE CLICK AWAY. Ten caveat paragraphs were stacked here at equal
@@ -1257,9 +1296,12 @@
        * open with a click, every word intact. GAJ's standing rule is that every extra panel is
        * a fault, and he asked whether the page could be simplified WITHOUT LOSING CONTENT.
        * This is the only honest way to do that: change the weight, not the words. */
-      '<details class="nbEstMore"><summary>Everything else this number cannot see</summary>' +
+      '<details class="nbEstMore"><summary>' +
+        (anyYield ? 'Everything else this number cannot see'
+                  : 'Everything else these measurements cannot see') + '</summary>' +
         '<p class="nbEstLimit">' + T.t('estimate.whyItMisses') + '</p>' +
-        '<p class="nbEstLimit">' + T.t('estimate.bandMeans') + ' ' +
+        '<p class="nbEstLimit">' +
+          (anyYield ? T.t('estimate.bandMeans') + ' ' : '') +
           T.t('estimate.heatNotPriced') + ' ' + T.t('estimate.heatSeedSize') + '</p>' +
         '<p class="nbEstLimit">' + T.t('estimate.weakestPart') + '</p>' +
         '<p class="nbEstLimit">' + T.t('estimate.classLevels') + '</p>' +

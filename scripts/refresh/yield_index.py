@@ -1346,20 +1346,83 @@ def main():
                                     or {}).get("pct_of_normal"),
                 got[2], mat_norm)
 
+            # ONLY A STRESS THAT HAS BEEN SHOWN TO MOVE YIELD *HERE* MAY SET THE DIRECTION.
+            #
+            # The first version let flowering heat point this crop down, and that contradicted
+            # our own evidence twice over. Tested against USDA harvests on 16 September: hot
+            # days versus bean yield gave r = +0.16 — nothing, and POSITIVE. Tested again today
+            # through the flowering model: heat skill is NEGATIVE for pinto in every state
+            # (-7%, -16%, -21%) and for great northern (-13%). It works only for peas (+34%).
+            # Meanwhile the panel lower down the same page still said, correctly, that hot
+            # years have not yielded less on this ground. The page contradicted itself, and the
+            # half that was wrong was the new half.
+            #
+            # A stress is REPORTED whenever we measure it — a grower wants to know the crop
+            # flowered through 24 hot days. It only gets a VOTE on the direction where it has
+            # demonstrated skill for that crop in that state. Everything else is listed as
+            # measured, with its effect here recorded as unproven. This is the same rule that
+            # governs the yield number itself.
             _st = per[cls]["stresses"]
-            _dn = sum(1 for x in _st if x["yield_direction"] == "down")
-            _up = sum(1 for x in _st if x["yield_direction"] == "up")
+            # THE SAME RULE FOR EVERY STRESS, not just the one that embarrassed us.
+            #
+            # Applying it to heat alone still left four stresses voting the crop down, and every
+            # one of them has ALSO been tested here and failed:
+            #   soil water      both remote products made the yield forecast WORSE (-99%, -158%)
+            #   winter recharge weather features failed at state level and again at county level
+            #   warm nights     counted for a season and predicted nothing
+            #   early maturity  never tested against a harvest at all
+            # Letting them vote while excluding heat would be picking the evidence that suited
+            # the conclusion. For dry beans on this ground NOTHING we measure has been shown to
+            # predict yield, and the honest direction is that we cannot call it.
+            #
+            # This is the cost of the rule and it is the rule working. Peas keep their direction
+            # because flowering heat earned it there: +34% against held-out harvests.
+            _proven = {
+                "Heat during flowering": bool(fm),
+                "Soil water": False,
+                "Winter recharge": False,
+                "Warm nights during flowering": False,
+                "Early maturity": False,
+                "Nothing running against this crop": True,
+            }
+            for _x in _st:
+                if _x["stress"] in _proven and not _proven[_x["stress"]]:
+                    _x["counts_toward_direction"] = False
+                    _x["why_it_does_not_count"] = (
+                        "We measure this and we report it. It does not move our direction here, "
+                        "because tested against every USDA harvest for this crop in this state "
+                        "it did not predict yield — twice, by two different methods. Elsewhere "
+                        "it clearly matters. On this ground we cannot show that it does.")
+                else:
+                    _x["counts_toward_direction"] = True
+            _dn = sum(1 for x in _st
+                      if x["yield_direction"] == "down" and x.get("counts_toward_direction"))
+            _up = sum(1 for x in _st
+                      if x["yield_direction"] == "up" and x.get("counts_toward_direction"))
             # SAY WHAT IT MEANS, NOT WHAT SOUNDS TECHNICAL. The first version read "Likely
             # LIGHTER than normal" and GAJ, who buys and sells this crop, asked what it meant —
             # in the grain trade "light" is test weight, which is a different thing entirely
             # from a smaller crop. If the trader cannot read it at a glance it has failed,
             # however precise it feels.
-            if _dn and not _up:
+            # A TESTED NUMBER OUTRANKS THE STRESS LIST. Where a model has earned the right to
+            # publish a yield, the direction is simply which side of normal that yield sits on —
+            # that is the strongest evidence we have, and it already survived being scored on
+            # years it had never seen. Peas came out "cannot call" from the stresses alone while
+            # carrying a tested figure 17% above normal, which was absurd.
+            if per[cls].get("lb_ac") and per[cls].get("vs_normal_pct") is not None:
+                _v = per[cls]["vs_normal_pct"]
+                _dir = "down" if _v <= -2 else "up" if _v >= 2 else "neutral"
+                _say = {"down": "we expect LESS yield than usual",
+                        "up": "we expect MORE yield than usual",
+                        "neutral": "we expect about a normal yield"}[_dir]
+            elif _dn and not _up:
                 _dir, _say = "down", "we expect LESS yield than usual"
             elif _up and not _dn:
                 _dir, _say = "up", "we expect MORE yield than usual"
             elif _dn and _up:
                 _dir, _say = "mixed", "some things point up, some down — no clear call"
+            elif any(not x.get("counts_toward_direction") for x in _st):
+                _dir, _say = "unknown", "we cannot call which way yield will go"
             else:
                 _dir, _say = "neutral", "nothing we measure is pushing yield either way"
             per[cls]["yield_direction"] = _dir
@@ -1367,11 +1430,15 @@ def main():
             per[cls]["yield_direction_counts"] = {"down": _dn, "up": _up,
                                                   "neutral": len(_st) - _dn - _up}
             per[cls]["yield_direction_caveat"] = (
-                "We can say which way. We cannot say how much: tested against every USDA "
-                "harvest for this crop in these states, our model could not call the size."
+                ("The stresses below are real and measured. None of them has been shown to "
+                 "predict this crop's yield on this ground, so we will not claim a direction "
+                 "from them."
+                 if _dir == "unknown" else
+                 "We can say which way. We cannot say how much: tested against every USDA "
+                 "harvest for this crop in these states, our model could not call the size.")
                 if withdrawn else
-                "Direction from the measured stresses; the number above comes from the "
-                "flowering model and carries its own tested skill.")
+                "From the tested model above, which beat guessing by %s%% on years it had "
+                "never seen." % (per[cls].get("yield_model_skill_pct") or "?"))
 
             per[cls].setdefault("yield_withdrawn", withdrawn)
             per[cls]["yield_withdrawn"] = per[cls].get("yield_withdrawn", withdrawn)
