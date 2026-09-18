@@ -41,7 +41,14 @@
    "note": "A median of 1 wells is an anecdote, not a regional figure."
   },
   "ne-colorado": {
-   "this_year": null,
+   "this_year": {
+    "feet_vs_own_normal": 3.34,
+    "direction": "lower",
+    "wells": 128,
+    "year": 2026,
+    "baseline": "each well's own 2015-2025 average",
+    "source": "Colorado Division of Water Resources"
+   },
    "trend": {
     "feet_per_year": 0.24,
     "direction": "falling",

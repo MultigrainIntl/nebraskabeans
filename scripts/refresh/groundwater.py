@@ -314,6 +314,57 @@ def this_year_anomaly(unl, portal_rows, la, lo, year=2026):
             "wells": len(anoms), "year": year,
             "baseline": "each well's own 2015-2025 average"}
 
+
+def colorado_anomaly(la, lo, year=2026, sample=150):
+    """This year against each Colorado well's own recent normal.
+
+    COLORADO WAS MISSING AND IT SHOULD NOT HAVE BEEN. The anomaly was first built by joining
+    UNL's history to the national portal, which is Nebraska-only, so northeast and western
+    Colorado came back with five wells and none. Colorado's Division of Water Resources
+    publishes both the history AND the current reading itself — Yuma County alone lists 1,434
+    wells with 289 read in 2024 or later. GAJ: "How about Colorado? You are missing
+    information."
+
+    Same normalisation as everywhere else: each well against ITSELF, so the changing set of
+    measured wells cannot masquerade as a change in the water.
+    """
+    import urllib.parse as _up
+    counties = {"ne-colorado": ["YUMA", "WASHINGTON", "LOGAN", "PHILLIPS", "MORGAN", "SEDGWICK",
+                                "KIT CARSON"],
+                "western-colorado": ["MONTROSE", "DELTA", "MESA", "OURAY"]}
+    which = "ne-colorado" if lo > -106 else "western-colorado"
+    anoms = []
+    for cty in counties[which]:
+        d = get("https://dwr.state.co.us/Rest/GET/api/v2/groundwater/waterlevels/wells/"
+                "?format=json&county=%s&pageSize=5000" % _up.quote(cty))
+        try:
+            rows = (json.loads(d or "{}").get("ResultList") or [])
+        except Exception:
+            continue
+        recent = [w for w in rows
+                  if (w.get("measurementDate") or "")[:4] >= str(year) and w.get("wellId")]
+        for w in recent[:sample // max(1, len(counties[which]))]:
+            try:
+                now = float(w["waterLevelDepth"])
+            except (TypeError, ValueError, KeyError):
+                continue
+            if not (0 < now < 1500):
+                continue
+            h = well_history_colorado(w["wellId"])
+            base = {y: v for y, v in h.items() if 2015 <= y <= 2025}
+            if len(base) >= 5:
+                anoms.append(now - statistics.mean(base.values()))
+        if len(anoms) >= sample:
+            break
+    if len(anoms) < MIN_ANOM_WELLS:
+        return None
+    m = statistics.median(anoms)
+    return {"feet_vs_own_normal": round(m, 2),
+            "direction": "lower" if m > 0 else "higher",
+            "wells": len(anoms), "year": year,
+            "baseline": "each well's own 2015-2025 average",
+            "source": "Colorado Division of Water Resources"}
+
 def main():
     import csv, io
     wells = []
@@ -400,6 +451,8 @@ def main():
             trend_src = ("UNL Conservation and Survey Division groundwater database, "
                          "1930-2025")
         anomaly = this_year_anomaly(unl, portal_rows, la, lo) if unl else None
+        if anomaly is None and HOME_STATE.get(rk) == "Colorado":
+            anomaly = colorado_anomaly(la, lo)
         b, npts, span = slope_ft_per_year(hist)
         trend = None
         # MIN_TREND_WELLS was declared and then not enforced on the FIT, only on the candidate
