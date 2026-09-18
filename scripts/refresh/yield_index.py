@@ -801,6 +801,10 @@ def main():
         print("NO SOILS FILE — falling back to one invented root-zone capacity. Run "
               "scripts/refresh/soils.py", file=sys.stderr)
     try:
+        FLOWERING = json.load(open(os.path.join(DATA, "flowering-model.json")))
+    except Exception:
+        FLOWERING = {"publish": {}}
+    try:
         CALIBRATION = json.load(open(os.path.join(DATA, "model-calibration.json")))
     except Exception:
         # No calibration file means nothing has been tested against harvests, and an untested
@@ -983,7 +987,21 @@ def main():
             # below normal in every region, the driest winter in thirty-one years, the canopy,
             # the heat days — and those are what the page carries for these classes. An empty
             # space where a forecast would be is honest. An average is not.
-            withdrawn = calibrated and scale == 0
+            # A SCALING SO SMALL THAT IT CANNOT MOVE THE NUMBER IS NOT A FORECAST EITHER.
+            #
+            # Withdrawing only on an exact zero was not enough, and the build gate caught it
+            # within a minute of being written: Wyoming's scaling of 0.139 published 2,282 lb/ac
+            # for Big Horn pinto against a historical average of 2,291 — nine pounds apart,
+            # which is four tenths of one percent and well inside the rounding a reader sees.
+            # That is the historical average with a decimal of theatre on it.
+            #
+            # GAJ: "You are NOT ALLOWED to use Trend as our ultimate yield number." The test is
+            # therefore on the OUTPUT, not on the intention: if what we would publish lands on
+            # the historical average, it IS the historical average, whatever route produced it,
+            # and it is withdrawn.
+            TREND_TOLERANCE = 0.01
+            withdrawn = calibrated and (
+                scale == 0 or abs(index - 1.0) <= TREND_TOLERANCE)
 
             base, level_kind, proxy_note = usda_level(cls, region)
             unsourced = base is None
@@ -1035,14 +1053,71 @@ def main():
                 "level_kind": level_kind,
                 "level_proxy_note": proxy_note,
             }
-            per[cls]["yield_withdrawn"] = withdrawn
+            # THE FLOWERING MODEL, WHERE IT HAS EARNED THE RIGHT TO SPEAK.
+            #
+            # GAJ: "build it on flowering as long as this takes into account loss due to heat."
+            # The physiology is his and it is correct — a bean or a pea that flowers through a
+            # run of hot days sheds pods while the field stays green, which is how a short crop
+            # reads normal to a satellite counting leaves.
+            #
+            # Tested the same way as everything else: fitted on the other years, scored on the
+            # year held out. It beats guessing for NEBRASKA PEAS by 34%, the best result
+            # anything on this site has produced. For pinto and great northern it fails, like
+            # every other approach tried — the physiology is real in the field and our nearest
+            # thermometer cannot see it on those crops. So peas move to it and the dry beans
+            # stay withdrawn. A model speaks where it has earned the right and nowhere else.
+            fm = (FLOWERING.get("publish") or {}).get("%s|%s" % (STATE_OF[region], cls))
+            if fm and got[4]:
+                heat_frac = got[3] / got[4]
+                pred = fm["intercept"] + sum(
+                    c * (heat_frac if k == "flowering_heat_fraction" else got[0])
+                    for k, c in fm["coefficients"].items())
+                if pred > 0:
+                    per[cls]["lb_ac"] = round(pred)
+                    per[cls]["yield_from"] = "flowering heat, held-out skill %+.1f%%" % fm["skill_pct"]
+                    # EVERY FIGURE A READER NEEDS TO REDO THIS SUM BY HAND. The replication
+                    # gate caught the first version within seconds: the pea yield no longer came
+                    # from baseline x index, so nothing on the page could reproduce it, and a
+                    # number nobody can check is the thing this site exists not to publish.
+                    per[cls]["flowering_heat_fraction"] = round(heat_frac, 4)
+                    per[cls]["yield_equation"] = (
+                        "lb/ac = intercept + coefficient x flowering_heat_fraction")
+                    per[cls]["yield_intercept"] = fm["intercept"]
+                    per[cls]["yield_coefficients"] = fm["coefficients"]
+                    per[cls]["flowering_hot_days_counted"] = got[3]
+                    per[cls]["flowering_window_days_counted"] = got[4]
+                    per[cls]["yield_model_skill_pct"] = fm["skill_pct"]
+                    per[cls]["baseline_lb_ac"] = fm["mean_yield_lb_ac"]
+                    band = abs(pred) * 0.12
+                    per[cls]["lb_ac_low"] = round(pred - band)
+                    per[cls]["lb_ac_high"] = round(pred + band)
+                    withdrawn = False
+                    per[cls]["yield_withdrawn"] = False
+                    per[cls].pop("yield_withdrawn_because", None)
+                    # INDEX AND PERCENTAGE MUST TELL THE SAME STORY. The replication gate caught
+                    # them disagreeing: the headline read +17.2% from the flowering model while
+                    # the index beside it still carried the canopy's 0.80, which reads -19.6%.
+                    # Two numbers on one line pointing opposite ways is the exact defect this
+                    # site has already been through once.
+                    per[cls]["canopy_index"] = per[cls]["index"]
+                    per[cls]["canopy_vs_normal_pct"] = per[cls]["vs_normal_pct"]
+                    per[cls]["index"] = round(pred / fm["mean_yield_lb_ac"], 4)
+                    per[cls]["vs_normal_pct"] = round(
+                        100 * (pred / fm["mean_yield_lb_ac"] - 1), 1)
+
+            per[cls].setdefault("yield_withdrawn", withdrawn)
+            per[cls]["yield_withdrawn"] = per[cls].get("yield_withdrawn", withdrawn)
             if withdrawn:
                 per[cls]["yield_withdrawn_because"] = (
                     "Tested against every USDA harvest for this class in this state, this model "
-                    "could not call the year. We publish no yield for it rather than publish the "
-                    "average, because the average is a claim we cannot support either. The "
+                    "could not call the year, so anything we published would land on the "
+                    "historical average. History is the yardstick here, never the answer. We "
+                    "publish no yield for it rather than dress the average as a forecast. The "
                     "measured conditions below are what we do know.")
                 per[cls]["baseline_lb_ac"] = base
+            elif per[cls].get("yield_coefficients"):
+                pass                          # owned by the flowering model — third and last
+                                              # path that used to overwrite it
             elif base:
                 per[cls]["lb_ac"] = round(base * index)
                 per[cls]["lb_ac_low"] = round(base * index * (1 - spread))
@@ -1096,9 +1171,18 @@ def main():
                 # yield had just been pulled for having no demonstrated skill. That is how
                 # "2,394 lb/ac, same as usual" reached the front page for a season the trade
                 # knew was short.
+                # ONE OWNER PER NUMBER. This block re-derives pounds from the commodity-shared
+                # canopy index, and it has now clobbered a published yield TWICE: once putting
+                # a withdrawn figure back, and once overwriting the flowering model's pea
+                # number so it no longer matched its own published equation. GAJ asked why
+                # defects keep returning — this is the answer in one place. A class whose yield
+                # came from somewhere else keeps it, and the rule is written as a condition
+                # rather than as a memory.
                 if r.get("yield_withdrawn"):
                     for k in ("lb_ac", "lb_ac_low", "lb_ac_high"):
                         r.pop(k, None)
+                elif r.get("yield_coefficients"):
+                    pass                      # owned by the flowering model, not by this block
                 elif r.get("baseline_lb_ac"):
                     b = r["baseline_lb_ac"]
                     r["lb_ac"] = round(b * shared)

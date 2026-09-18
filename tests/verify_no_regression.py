@@ -393,6 +393,84 @@ check("the archive holds both products for every region",
       "%d regions of satellite, %d of model"
       % (len(_arch.get("smap") or {}), len(_arch.get("soil") or {})))
 
+# ---------------------------------------------------------------------------
+# 18. HISTORY IS THE YARDSTICK, NEVER THE ANSWER (18 Sep 2026). GAJ, verbatim:
+# "You are NOT ALLOWED to use Trend as our ultimate yield number. it should be used ONLY for
+# comparison to our real time modeling."
+#
+# THE FAILURE THIS CATCHES. A model with no demonstrated skill was scaled to zero, and scaling
+# to zero publishes the historical mean. The front page then read "2,394 lb/ac" for Panhandle
+# pinto against a ten-year average of 2,396 — the average, wearing the clothes of a forecast,
+# in a season the trade knew was short. A second code path re-derived the pounds from the
+# commodity index and put the number back after it had been withdrawn once.
+#
+# So this is checked from the OUTPUT, not from the intention. Any published yield that lands on
+# its own historical baseline is the baseline, whatever route it took to get there, and the
+# build stops.
+_tol = 0.005
+_trend_as_answer = []
+for _rk, _v in _regions.items():
+    for _cls, _c in (_v.get("classes") or {}).items():
+        _lb, _bl = _c.get("lb_ac"), _c.get("baseline_lb_ac")
+        if _lb is None or not _bl:
+            continue
+        if abs(_lb - _bl) <= max(1.0, _bl * _tol):
+            _trend_as_answer.append("%s/%s %s vs baseline %s" % (_rk, _cls, _lb, _bl))
+check("no published yield is just the historical average",
+      not _trend_as_answer,
+      "history is the yardstick, never the answer"
+      if not _trend_as_answer else "TREND PUBLISHED AS THE ANSWER: "
+      + "; ".join(_trend_as_answer[:4]))
+
+# And the route that produced it: a scaling of zero means the model could not call the crop, so
+# the yield must be WITHDRAWN. It must never quietly become the mean.
+_zero_but_published = ["%s/%s" % (_rk, _cls)
+                       for _rk, _v in _regions.items()
+                       for _cls, _c in (_v.get("classes") or {}).items()
+                       if _c.get("swing_scale") == 0 and _c.get("lb_ac") is not None]
+check("a model with no skill publishes no yield at all",
+      not _zero_but_published,
+      "a zero scaling withdraws the number"
+      if not _zero_but_published else "published anyway: " + ", ".join(_zero_but_published[:4]))
+
+check("a withdrawn yield says why, in the data",
+      all(_c.get("yield_withdrawn_because")
+          for _v in _regions.values() for _c in (_v.get("classes") or {}).values()
+          if _c.get("yield_withdrawn")),
+      "the reason travels with the withdrawal")
+
+# ---------------------------------------------------------------------------
+# 19. ONE OWNER PER PUBLISHED NUMBER (18 Sep 2026).
+# GAJ: "why do you keep regressing?" This is the answer, made into a test. yield_index.py has
+# THREE places that write lb_ac — the flowering model, the per-class block and the
+# commodity-shared block — and on 18 September the later two overwrote the first twice in one
+# hour: once restoring a yield that had just been withdrawn, once replacing the flowering
+# model's pea figure so it no longer matched the equation published beside it. Fixing the
+# instance did not stop it; only a condition on every writer did.
+#
+# The check is on the OUTPUT: whatever wrote a number last, it must reproduce from the figures
+# printed with it. verify_replication.py proves the arithmetic; this proves the ownership.
+_owned = [(rk, cls) for rk, v in _regions.items()
+          for cls, c in (v.get("classes") or {}).items()
+          if c.get("yield_coefficients")]
+_clobbered = []
+for _rk, _cls in _owned:
+    _c = _regions[_rk]["classes"][_cls]
+    _eq = _c["yield_intercept"] + sum(
+        _v * _c["flowering_heat_fraction"] for _k, _v in _c["yield_coefficients"].items()
+        if _k == "flowering_heat_fraction")
+    if _c.get("lb_ac") is None or abs(round(_eq) - _c["lb_ac"]) > 1:
+        _clobbered.append("%s/%s" % (_rk, _cls))
+check("a yield from the flowering model is not overwritten downstream",
+      not _clobbered and _owned,
+      "%d classes own their number and keep it" % len(_owned)
+      if not _clobbered else "OVERWRITTEN: " + ", ".join(_clobbered[:4]))
+
+check("a class on the flowering model shows the canopy reading too",
+      all(_regions[_rk]["classes"][_cls].get("canopy_vs_normal_pct") is not None
+          for _rk, _cls in _owned),
+      "the signal it replaced stays visible beside it")
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))

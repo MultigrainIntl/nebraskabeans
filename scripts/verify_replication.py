@@ -68,6 +68,26 @@ for (rk, com), items in groups.items():
               abs(round(100 * (c["index"] - 1), 1) - c["vs_normal_pct"]) <= 0.1,
               "published %s%%, index %s implies %.1f%%"
               % (c["vs_normal_pct"], c["index"], 100 * (c["index"] - 1)))
+        # A CLASS ON THE FLOWERING MODEL DOES NOT COME FROM baseline x index, so it is checked
+        # against ITS OWN published arithmetic instead. The rule is unchanged and is the point
+        # of this file: whatever produced the number, a reader must be able to redo it from the
+        # figures printed beside it.
+        if c.get("yield_coefficients") and c.get("lb_ac"):
+            eq = c["yield_intercept"] + sum(
+                v * (c["flowering_heat_fraction"] if k == "flowering_heat_fraction"
+                     else c.get("index", 0))
+                for k, v in c["yield_coefficients"].items())
+            check("Yield figures", tag + " flowering equation",
+                  abs(round(eq) - c["lb_ac"]) <= 1,
+                  "published %s, intercept %s + %s = %.1f"
+                  % (c["lb_ac"], c["yield_intercept"], c["yield_coefficients"], eq))
+            check("Yield figures", tag + " heat fraction",
+                  abs(c["flowering_hot_days_counted"] / c["flowering_window_days_counted"]
+                      - c["flowering_heat_fraction"]) <= 0.001,
+                  "%s hot days in a %s day window = %.4f"
+                  % (c["flowering_hot_days_counted"], c["flowering_window_days_counted"],
+                     c["flowering_heat_fraction"]))
+            continue
         if not c.get("lb_ac"):
             continue
         b, i = c["baseline_lb_ac"], c["index"]

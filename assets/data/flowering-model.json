@@ -1,0 +1,110 @@
+{
+ "schema": "nebraskabeans.flowering-model.v1",
+ "publish": {
+  "NE|PEAS": {
+   "model": "heat",
+   "skill_pct": 34.2,
+   "years": 10,
+   "intercept": 3600.931,
+   "coefficients": {
+    "flowering_heat_fraction": -2819.406931
+   },
+   "mean_yield_lb_ac": 1579.0,
+   "note": "Fitted on 2016-2025, applied to a year not in the fit. Skill is the held-out figure: each year predicted by a fit that never saw it."
+  }
+ },
+ "publish_rule": "Only a state-class with POSITIVE held-out skill appears here. Everything else publishes no yield at all \u2014 never the historical average, which is the yardstick and not the answer.",
+ "what": "Yield predicted from canopy biomass, from heat during flowering, and from both, each fitted on the other years and scored on the year held out.",
+ "why": "The canopy signal reads leaves. Heat during flowering sheds pods while the field stays green, which is how a short crop can look normal.",
+ "bar": "Must beat the naive forecast: this year yields what the other years averaged.",
+ "reproduce": "python3 scripts/flowering_model.py",
+ "by_state_class": {
+  "CO|LIGHT RED KIDNEY": {
+   "years": 8,
+   "naive_mae": 278.6,
+   "biomass": 314.4,
+   "heat": 265.0,
+   "both": 314.5,
+   "biomass_skill_pct": -12.9,
+   "heat_skill_pct": 4.9,
+   "both_skill_pct": -12.9
+  },
+  "CO|PINTO": {
+   "years": 10,
+   "naive_mae": 195.1,
+   "biomass": 201.1,
+   "heat": 208.8,
+   "both": 221.5,
+   "biomass_skill_pct": -3.1,
+   "heat_skill_pct": -7.0,
+   "both_skill_pct": -13.5
+  },
+  "NE|GREAT NORTHERN": {
+   "years": 10,
+   "naive_mae": 187.6,
+   "biomass": 186.1,
+   "heat": 212.3,
+   "both": 208.3,
+   "biomass_skill_pct": 0.8,
+   "heat_skill_pct": -13.2,
+   "both_skill_pct": -11.0
+  },
+  "NE|LIGHT RED KIDNEY": {
+   "years": 9,
+   "naive_mae": 333.9,
+   "biomass": 371.0,
+   "heat": 371.6,
+   "both": 404.7,
+   "biomass_skill_pct": -11.1,
+   "heat_skill_pct": -11.3,
+   "both_skill_pct": -21.2
+  },
+  "NE|PEAS": {
+   "years": 10,
+   "naive_mae": 443.3,
+   "biomass": 540.9,
+   "heat": 291.5,
+   "both": 396.7,
+   "biomass_skill_pct": -22.0,
+   "heat_skill_pct": 34.2,
+   "both_skill_pct": 10.5
+  },
+  "NE|PINTO": {
+   "years": 10,
+   "naive_mae": 202.2,
+   "biomass": 235.7,
+   "heat": 234.1,
+   "both": 275.7,
+   "biomass_skill_pct": -16.5,
+   "heat_skill_pct": -15.8,
+   "both_skill_pct": -36.3
+  },
+  "WY|PINTO": {
+   "years": 8,
+   "naive_mae": 110.0,
+   "biomass": 122.4,
+   "heat": 132.7,
+   "both": 138.0,
+   "biomass_skill_pct": -11.2,
+   "heat_skill_pct": -20.6,
+   "both_skill_pct": -25.5
+  }
+ },
+ "summary": {
+  "biomass": {
+   "beats_guessing": 1,
+   "of": 7,
+   "mean_skill_pct": -10.9
+  },
+  "heat": {
+   "beats_guessing": 2,
+   "of": 7,
+   "mean_skill_pct": -4.1
+  },
+  "both": {
+   "beats_guessing": 1,
+   "of": 7,
+   "mean_skill_pct": -15.7
+  }
+ }
+}

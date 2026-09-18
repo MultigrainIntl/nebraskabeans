@@ -98,12 +98,12 @@
     },
     "PEAS": {
      "yield": {
-      "low": 1016,
-      "high": 1524,
-      "mid": 1270,
-      "baseline": 1579,
+      "low": 1629,
+      "high": 2073,
+      "mid": 1851,
+      "baseline": 1579.0,
       "years": 11,
-      "adjust_pct": -19.6,
+      "adjust_pct": 17.2,
       "level_kind": "published",
       "level_note": null,
       "level_source": "USDA published yield for this class in this state"
@@ -234,12 +234,12 @@
     },
     "PEAS": {
      "yield": {
-      "low": 1240,
-      "high": 2009,
-      "mid": 1625,
-      "baseline": 1579,
+      "low": 1397,
+      "high": 1778,
+      "mid": 1587,
+      "baseline": 1579.0,
       "years": 11,
-      "adjust_pct": 2.9,
+      "adjust_pct": 0.5,
       "level_kind": "published",
       "level_note": null,
       "level_source": "USDA published yield for this class in this state"
@@ -531,17 +531,7 @@
    "soil_awc": 0.16,
    "classes": {
     "PINTO": {
-     "yield": {
-      "low": 2261,
-      "high": 2303,
-      "mid": 2282,
-      "baseline": 2291,
-      "years": 10,
-      "adjust_pct": -0.4,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "beyond the 16-day forecast",
       "gdd_still_needed": 550,
@@ -557,17 +547,7 @@
      "stations": 197
     },
     "GREAT NORTHERN": {
-     "yield": {
-      "low": 2139,
-      "high": 2179,
-      "mid": 2159,
-      "baseline": 2168,
-      "years": 10,
-      "adjust_pct": -0.4,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "beyond the 16-day forecast",
       "gdd_still_needed": 450,
@@ -661,17 +641,7 @@
      "stations": 197
     },
     "GREAT NORTHERN": {
-     "yield": {
-      "low": 2134,
-      "high": 2164,
-      "mid": 2149,
-      "baseline": 2168,
-      "years": 11,
-      "adjust_pct": -0.9,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "beyond the 16-day forecast",
       "gdd_still_needed": 450,
