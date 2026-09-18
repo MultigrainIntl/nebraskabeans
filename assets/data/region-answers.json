@@ -33,17 +33,7 @@
    "soil_awc": 0.21,
    "classes": {
     "PINTO": {
-     "yield": {
-      "low": 2125,
-      "high": 2663,
-      "mid": 2394,
-      "baseline": 2396,
-      "years": 11,
-      "adjust_pct": -0.1,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -59,17 +49,7 @@
      "stations": 116
     },
     "GREAT NORTHERN": {
-     "yield": {
-      "low": 2071,
-      "high": 2597,
-      "mid": 2334,
-      "baseline": 2336,
-      "years": 11,
-      "adjust_pct": -0.1,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -85,17 +65,7 @@
      "stations": 116
     },
     "LIGHT RED KIDNEY": {
-     "yield": {
-      "low": 1801,
-      "high": 2258,
-      "mid": 2029,
-      "baseline": 2031,
-      "years": 11,
-      "adjust_pct": -0.1,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -199,17 +169,7 @@
    "soil_awc": 0.21,
    "classes": {
     "PINTO": {
-     "yield": {
-      "low": 2185,
-      "high": 2607,
-      "mid": 2396,
-      "baseline": 2396,
-      "years": 11,
-      "adjust_pct": 0.0,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -225,17 +185,7 @@
      "stations": 116
     },
     "GREAT NORTHERN": {
-     "yield": {
-      "low": 2131,
-      "high": 2542,
-      "mid": 2336,
-      "baseline": 2336,
-      "years": 11,
-      "adjust_pct": 0.0,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -251,17 +201,7 @@
      "stations": 116
     },
     "LIGHT RED KIDNEY": {
-     "yield": {
-      "low": 1853,
-      "high": 2210,
-      "mid": 2031,
-      "baseline": 2031,
-      "years": 11,
-      "adjust_pct": 0.0,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -365,17 +305,7 @@
    "soil_awc": 0.15,
    "classes": {
     "PINTO": {
-     "yield": {
-      "low": 1821,
-      "high": 2122,
-      "mid": 1971,
-      "baseline": 1977,
-      "years": 11,
-      "adjust_pct": -0.3,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -407,17 +337,7 @@
      "stations": 437
     },
     "LIGHT RED KIDNEY": {
-     "yield": {
-      "low": 2377,
-      "high": 2771,
-      "mid": 2574,
-      "baseline": 2581,
-      "years": 11,
-      "adjust_pct": -0.3,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "2026-09-18",
       "gdd_still_needed": 120,
@@ -511,17 +431,7 @@
    "soil_awc": 0.15,
    "classes": {
     "PINTO": {
-     "yield": {
-      "low": 1759,
-      "high": 2190,
-      "mid": 1974,
-      "baseline": 1977,
-      "years": 11,
-      "adjust_pct": -0.1,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "now",
       "gdd_still_needed": 0,
@@ -553,17 +463,7 @@
      "stations": 437
     },
     "LIGHT RED KIDNEY": {
-     "yield": {
-      "low": 2297,
-      "high": 2858,
-      "mid": 2578,
-      "baseline": 2581,
-      "years": 11,
-      "adjust_pct": -0.1,
-      "level_kind": "published",
-      "level_note": null,
-      "level_source": "USDA published yield for this class in this state"
-     },
+     "yield": null,
      "harvest": {
       "ready": "2026-09-24",
       "gdd_still_needed": 120,

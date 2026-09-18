@@ -969,6 +969,22 @@ def main():
                 index = 1 + scale * (raw_index - 1)
                 spread = spread * scale if scale else spread
 
+            # A SCALE OF ZERO MEANS WE CANNOT CALL THIS CROP. IT DOES NOT MEAN AN AVERAGE YEAR.
+            #
+            # Scaling a failed model to zero publishes the mean, and the mean is a CLAIM. On
+            # 18 September 2026 that put "2,394 lb/ac, same as usual" on the front page for
+            # Panhandle pinto. GAJ, who buys and sells this crop: "THIS WAS NOT A NORMAL YEAR."
+            # He is right, and I had no evidence for normal either — I had evidence only that
+            # our swing could not be trusted. Publishing the average dressed a total absence of
+            # skill as a confident forecast, which is worse than the wrong swing it replaced,
+            # because it looks reassuring.
+            #
+            # So a zero scale now WITHDRAWS the number. The measured conditions stay — water
+            # below normal in every region, the driest winter in thirty-one years, the canopy,
+            # the heat days — and those are what the page carries for these classes. An empty
+            # space where a forecast would be is honest. An average is not.
+            withdrawn = calibrated and scale == 0
+
             base, level_kind, proxy_note = usda_level(cls, region)
             unsourced = base is None
             per[cls] = {
@@ -1019,7 +1035,15 @@ def main():
                 "level_kind": level_kind,
                 "level_proxy_note": proxy_note,
             }
-            if base:
+            per[cls]["yield_withdrawn"] = withdrawn
+            if withdrawn:
+                per[cls]["yield_withdrawn_because"] = (
+                    "Tested against every USDA harvest for this class in this state, this model "
+                    "could not call the year. We publish no yield for it rather than publish the "
+                    "average, because the average is a claim we cannot support either. The "
+                    "measured conditions below are what we do know.")
+                per[cls]["baseline_lb_ac"] = base
+            elif base:
                 per[cls]["lb_ac"] = round(base * index)
                 per[cls]["lb_ac_low"] = round(base * index * (1 - spread))
                 per[cls]["lb_ac_high"] = round(base * index * (1 + spread))
@@ -1067,7 +1091,15 @@ def main():
                 r["model_year_to_year_spread_own_class_pct"] = r["model_year_to_year_spread_pct"]
                 r["model_year_to_year_spread_pct"] = round(100 * shared_spread, 1)
                 r["spread_is_shared_across_classes"] = True
-                if r.get("baseline_lb_ac"):
+                # A WITHDRAWN YIELD STAYS WITHDRAWN. This block re-derives the pounds from the
+                # commodity-shared index, and it put the number straight back on a class whose
+                # yield had just been pulled for having no demonstrated skill. That is how
+                # "2,394 lb/ac, same as usual" reached the front page for a season the trade
+                # knew was short.
+                if r.get("yield_withdrawn"):
+                    for k in ("lb_ac", "lb_ac_low", "lb_ac_high"):
+                        r.pop(k, None)
+                elif r.get("baseline_lb_ac"):
                     b = r["baseline_lb_ac"]
                     r["lb_ac"] = round(b * shared)
                     r["lb_ac_low"] = round(b * shared * (1 - shared_spread))
