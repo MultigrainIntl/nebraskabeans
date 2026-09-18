@@ -606,6 +606,66 @@ check("the direction never carries a number",
       not _re2.search(r"\d", _dirtext),
       "direction only — the size is the part that could not be defended")
 
+# ---------------------------------------------------------------------------
+# 24. A NULL RESULT ONLY COVERS THE GROUND IT WAS MEASURED ON (18 Sep 2026).
+# The page answered "we cannot call which way yield will go" for every dry bean, because every
+# stress we carry has been tested here and none beat assuming an average year. GAJ: "What the
+# fuck is this noncommittal shit?" He was right, and the reason is specific rather than a matter
+# of nerve: those tests measured 2015-2025, and 2026 is outside that range. The Panhandle
+# flowered through 24 hot days against a tested range of 10-23, Big Horn 25 against 9-23, and
+# four regions had their driest winter in thirty-one years. A null measured inside a narrow band
+# cannot settle a year beyond it — extrapolating it there is the same overreach as claiming an
+# effect we never measured, pointing the other way.
+#
+# Three states, and they must stay distinguishable: a stress inside the tested range where we
+# found nothing (a finding — "about normal"); a stress beyond it (counted, and flagged as a
+# judgement our data cannot check); a stress never evaluated at all (the only honest "cannot
+# call").
+_shrug = ["%s/%s" % (rk, cls) for rk, cls, c in _cls_all
+          if c.get("yield_direction") == "unknown"]
+_outside = [(rk, cls, x) for rk, cls, c in _cls_all
+            for x in (c.get("stresses") or []) if x.get("outside_tested_range")]
+check("a stress beyond the tested range still gets its vote",
+      bool(_outside),
+      "%d stresses are outside the range our harvest record covers" % len(_outside))
+check("a stress counted from beyond the tested range says so",
+      all(x.get("why_it_counts_anyway") for _, _, x in _outside),
+      "flagged as a judgement our own data cannot check, not as a result")
+check("most crops get an actual call, not a shrug",
+      len(_shrug) <= len(_cls_all) // 4,
+      "%d of %d crop-regions decline to call it" % (len(_shrug), len(_cls_all)))
+check("an ordinary season reads as normal, not as ignorance",
+      all(c.get("yield_direction") != "unknown"
+          for _, _, c in _cls_all
+          if c.get("stresses") and all(x.get("counts_toward_direction") is False
+                                       for x in c["stresses"])
+          and not any(x.get("outside_tested_range") for x in c["stresses"])),
+      "tested-and-found-nothing is a finding; only a never-tested stress withholds the call")
+
+# ---------------------------------------------------------------------------
+# 25. A TEMPORAL LAYER MUST CHANGE WITH THE DATE (18 Sep 2026).
+# The "Estimated soil water" layer drew the same picture on every date on the slider, because it
+# multiplied each cell's surveyed capacity by ONE season-average figure for the whole region.
+# Dragging the timeline from planting to harvest changed nothing. That is worse than having no
+# temporal layer: it quietly asserts the ground held the same water in June as in September,
+# which is the opposite of what the timeline exists to show. Caught by GAJ, from a screenshot,
+# not by any test here.
+_dm5 = read("assets", "decision-map.js")
+check("the soil water layer reads the day it is asked for",
+      "function soilCellValues(day)" in _dm5 and "soilCellValues(day)" in _dm5
+      and "S.soilDaily" in _dm5,
+      "the surface is driven by the timeline, not by one season average")
+_swd = _json.load(open(os.path.join(ROOT, "assets", "data", "soil-water-daily.json")))
+_reg_daily = _swd.get("regions") or {}
+check("daily soil water exists for every region",
+      len(_reg_daily) == len(_regions) and _regions,
+      "%d regions carry a daily series" % len(_reg_daily))
+_flat = [rk for rk, d in _reg_daily.items() if len(set(d.values())) < 20]
+check("the daily series actually varies across the season",
+      not _flat,
+      "every region moves through the year"
+      if not _flat else "suspiciously flat: " + ", ".join(_flat[:4]))
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))

@@ -113,8 +113,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -139,8 +140,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -169,14 +171,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 2,
       "up": 0,
-      "neutral": 5
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2396,
@@ -283,8 +285,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -309,8 +312,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -339,14 +343,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 2,
       "up": 0,
-      "neutral": 5
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2336,
@@ -466,8 +470,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -496,14 +501,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2031,
@@ -636,8 +641,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -666,14 +672,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 5
+      "neutral": 4
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -810,8 +816,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -830,9 +837,9 @@
      "yield_direction": "up",
      "yield_direction_says": "we expect MORE yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 3
+      "neutral": 2
      },
      "yield_direction_caveat": "From the tested model above, which beat guessing by 34.2% on years it had never seen."
     },
@@ -960,8 +967,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -977,14 +985,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "USDA publishes no yield for this crop in these states, so there is no harvest record to test our model against and no honest way to check a number before printing it. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1164
@@ -1125,8 +1133,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -1155,14 +1164,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2396,
@@ -1269,8 +1278,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Winter recharge",
@@ -1282,8 +1292,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -1312,14 +1323,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 2,
       "up": 0,
-      "neutral": 4
+      "neutral": 2
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2336,
@@ -1426,8 +1437,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -1456,14 +1468,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 3
+      "neutral": 2
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2031,
@@ -1583,8 +1595,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -1600,14 +1613,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 3
+      "neutral": 2
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -1731,8 +1744,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -1751,9 +1765,9 @@
      "yield_direction": "neutral",
      "yield_direction_says": "we expect about a normal yield",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 2
+      "neutral": 1
      },
      "yield_direction_caveat": "From the tested model above, which beat guessing by 34.2% on years it had never seen."
     },
@@ -1855,8 +1869,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -1872,14 +1887,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 2
+      "neutral": 1
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "USDA publishes no yield for this crop in these states, so there is no harvest record to test our model against and no honest way to check a number before printing it. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1164
@@ -2033,8 +2048,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -2063,14 +2079,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 5
+      "neutral": 4
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1977,
@@ -2177,8 +2193,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -2203,8 +2220,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -2233,14 +2251,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 2,
       "up": 0,
-      "neutral": 5
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -2360,8 +2378,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -2390,14 +2409,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2581,
@@ -2517,8 +2536,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -2547,14 +2567,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -2661,8 +2681,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -2687,8 +2708,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -2704,14 +2726,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 2,
       "up": 0,
-      "neutral": 4
+      "neutral": 2
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null
@@ -2814,8 +2836,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -2840,8 +2863,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -2857,14 +2881,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 2,
       "up": 0,
-      "neutral": 4
+      "neutral": 2
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "USDA publishes no yield for this crop in these states, so there is no harvest record to test our model against and no honest way to check a number before printing it. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1164
@@ -2996,14 +3020,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "neutral",
+     "yield_direction_says": "we expect about a normal yield",
      "yield_direction_counts": {
       "down": 0,
       "up": 0,
       "neutral": 1
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "The stresses below are real and measured, and every one of them sits inside the range we tested against ten years of harvests here \u2014 where it did not move yield. That is a finding, not a shrug.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1977,
@@ -3114,13 +3138,13 @@
       }
      ],
      "yield_direction": "neutral",
-     "yield_direction_says": "nothing we measure is pushing yield either way",
+     "yield_direction_says": "we expect about a normal yield",
      "yield_direction_counts": {
       "down": 0,
       "up": 0,
       "neutral": 1
      },
-     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
+     "yield_direction_caveat": "The stresses below are real and measured, and every one of them sits inside the range we tested against ten years of harvests here \u2014 where it did not move yield. That is a finding, not a shrug.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -3227,18 +3251,19 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 1
+      "neutral": 0
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2581,
@@ -3349,13 +3374,13 @@
       }
      ],
      "yield_direction": "neutral",
-     "yield_direction_says": "nothing we measure is pushing yield either way",
+     "yield_direction_says": "we expect about a normal yield",
      "yield_direction_counts": {
       "down": 0,
       "up": 0,
       "neutral": 1
      },
-     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
+     "yield_direction_caveat": "The stresses below are real and measured, and every one of them sits inside the range we tested against ten years of harvests here \u2014 where it did not move yield. That is a finding, not a shrug.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -3462,8 +3487,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -3479,12 +3505,12 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 2
+      "neutral": 1
      },
      "yield_direction_caveat": "From the tested model above, which beat guessing by ?% on years it had never seen.",
      "yield_withdrawn": false
@@ -3638,8 +3664,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -3668,12 +3695,12 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 5
+      "neutral": 4
      },
      "yield_direction_caveat": "From the tested model above, which beat guessing by ?% on years it had never seen.",
      "yield_withdrawn": true,
@@ -3795,8 +3822,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -3825,14 +3853,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2168,
@@ -3952,8 +3980,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -3969,14 +3998,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 3
+      "neutral": 2
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -4083,8 +4112,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -4109,8 +4139,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Warm nights during flowering",
@@ -4139,14 +4170,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 2,
       "up": 0,
-      "neutral": 5
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -4279,8 +4310,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -4296,12 +4328,12 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
      "yield_direction_caveat": "From the tested model above, which beat guessing by ?% on years it had never seen.",
      "yield_withdrawn": false
@@ -4430,8 +4462,9 @@
        "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Early maturity",
@@ -4447,14 +4480,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "USDA publishes no yield for this crop in these states, so there is no harvest record to test our model against and no honest way to check a number before printing it. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1164
@@ -4577,8 +4610,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -4607,14 +4641,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 3
+      "neutral": 2
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2291,
@@ -4746,14 +4780,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "neutral",
+     "yield_direction_says": "we expect about a normal yield",
      "yield_direction_counts": {
       "down": 0,
       "up": 0,
       "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "The stresses below are real and measured, and every one of them sits inside the range we tested against ten years of harvests here \u2014 where it did not move yield. That is a finding, not a shrug.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2168,
@@ -4872,14 +4906,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "neutral",
+     "yield_direction_says": "we expect about a normal yield",
      "yield_direction_counts": {
       "down": 0,
       "up": 0,
       "neutral": 2
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "The stresses below are real and measured, and every one of them sits inside the range we tested against ten years of harvests here \u2014 where it did not move yield. That is a finding, not a shrug.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -4981,8 +5015,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -5024,14 +5059,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -5163,8 +5198,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -5219,14 +5255,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 5
+      "neutral": 4
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -5333,8 +5369,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -5389,14 +5426,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 5
+      "neutral": 4
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -5503,8 +5540,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -5559,14 +5597,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 5
+      "neutral": 4
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "We can say which way. We cannot say how much: tested against every USDA harvest for this crop in these states, our model could not call the size.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -5716,14 +5754,14 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "neutral",
+     "yield_direction_says": "we expect about a normal yield",
      "yield_direction_counts": {
       "down": 0,
       "up": 0,
       "neutral": 4
      },
-     "yield_direction_caveat": "The stresses below are real and measured. None of them has been shown to predict this crop's yield on this ground, so we will not claim a direction from them.",
+     "yield_direction_caveat": "The stresses below are real and measured, and every one of them sits inside the range we tested against ten years of harvests here \u2014 where it did not move yield. That is a finding, not a shrug.",
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
@@ -5830,8 +5868,9 @@
        "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it.",
        "yield_direction": "down",
        "yield_direction_says": "less yield",
-       "counts_toward_direction": false,
-       "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
+       "outside_tested_range": true,
+       "why_it_counts_anyway": "This year is beyond anything in the record we tested against, so our finding that this stress did not move yield here cannot speak to it. We count it, and we mark it as a judgement our own data cannot check.",
+       "counts_toward_direction": true
       },
       {
        "stress": "Soil water",
@@ -5873,12 +5912,12 @@
        "why_it_does_not_count": "We measure this and we report it. It does not move our direction here, because tested against every USDA harvest for this crop in this state it did not predict yield \u2014 twice, by two different methods. Elsewhere it clearly matters. On this ground we cannot show that it does."
       }
      ],
-     "yield_direction": "unknown",
-     "yield_direction_says": "we cannot call which way yield will go",
+     "yield_direction": "down",
+     "yield_direction_says": "we expect LESS yield than usual",
      "yield_direction_counts": {
-      "down": 0,
+      "down": 1,
       "up": 0,
-      "neutral": 4
+      "neutral": 3
      },
      "yield_direction_caveat": "From the tested model above, which beat guessing by ?% on years it had never seen.",
      "yield_withdrawn": false

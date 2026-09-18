@@ -322,10 +322,24 @@
 
   /* Soil cells, not weather stations. Every other layer interpolates between instruments;
    * this one has a surveyed value at each bean cell, which is a great deal more of them. */
-  function soilCellValues() {
+  function soilCellValues(day) {
+    /* THIS LAYER MUST MOVE WITH THE TIMELINE.
+     *
+     * The first version multiplied each cell's surveyed capacity by ONE season-average figure
+     * per region, so the surface was identical on every date on the slider — planting, pod
+     * fill, harvest, all the same picture. A temporal map that does not vary with time is worse
+     * than no temporal map, because it quietly asserts the ground held the same water in June
+     * as in September.
+     *
+     * The spatial pattern still comes from the soil survey, cell by cell. The movement over
+     * time now comes from soil-water-daily.json: for each region and each day, how much of its
+     * usual water the root zone held, averaged across the land-surface model and the satellite.
+     * Falls back to the season average only if that file is missing. */
     var out = [], rings = cropRings();
     var cells = (S.soils && S.soils.cells) || [];
     var reg = (S.yieldIndex && (S.yieldIndex.regions || S.yieldIndex)) || {};
+    var iso = S.dates && S.dates[day == null ? S.day : day];
+    var daily = (S.soilDaily && S.soilDaily.regions) || null;
     var proxy = {};
     Object.keys(reg).forEach(function (rk) {
       var cls = (reg[rk] && reg[rk].classes) || {};
@@ -333,6 +347,17 @@
       // every class in a region shares one commodity signal, so any of them carries the proxy
       if (k && cls[k] && cls[k].water_stress_proxy != null) proxy[rk] = cls[k].water_stress_proxy;
     });
+    if (daily && iso) {
+      Object.keys(daily).forEach(function (rk) {
+        var v = daily[rk][iso];
+        if (v == null) {                       // nearest earlier day this region reported
+          var ks = Object.keys(daily[rk]).filter(function (d) { return d <= iso; });
+          if (ks.length) v = daily[rk][ks[ks.length - 1]];
+        }
+        // a fraction of normal, capped so a wet week cannot fill the profile past capacity
+        if (v != null) proxy[rk] = Math.min(v, 1.0);
+      });
+    }
     for (var i = 0; i < cells.length; i++) {
       var c = cells[i];
       if (c.awc_mm == null) continue;
@@ -347,7 +372,7 @@
   }
 
   function stationValues(day) {
-    if (S.view === 'soilwater') return soilCellValues();
+    if (S.view === 'soilwater') return soilCellValues(day);
     var spec = CLASSES[S.crop] || CLASSES.PINTO;
     var p0 = plantIndex(spec);
     var all = S.field.stations;
@@ -1923,10 +1948,12 @@
       fetch('assets/data/groundwater.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
       fetch('assets/data/soils.json?v=' + build())
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch('assets/data/soil-water-daily.json?v=' + build())
         .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       S.outlines = res[0]; S.field = res[1]; S.dates = S.field.dates;
-      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11]; S.pest = res[12]; S.groundwater = res[13]; S.soils = res[14];
+      S.cropOutlines = res[2]; S.counties = res[3]; S.answers = res[4]; S.outlook = res[5]; S.vsHistory = res[6]; S.estimate = res[7]; S.yieldAll = res[8]; S.yieldIndex = res[9]; S.usdaAcres = res[10]; S.irrigation = res[11]; S.pest = res[12]; S.groundwater = res[13]; S.soils = res[14]; S.soilDaily = res[15];
       var sl = $('nbSlider'); sl.max = S.dates.length - 1; sl.value = S.dates.length - 1;
       var picked = document.getElementById('nbCrop');
       if (picked && CLASSES[picked.value]) S.crop = picked.value;

@@ -1377,6 +1377,10 @@ def main():
             #
             # This is the cost of the rule and it is the rule working. Peas keep their direction
             # because flowering heat earned it there: +34% against held-out harvests.
+            # Stresses we have actually scored against harvests here and found no effect from,
+            # as distinct from ones nobody has ever evaluated.
+            _TESTED_AND_NULL = {"Heat during flowering", "Soil water", "Winter recharge",
+                                "Warm nights during flowering"}
             _proven = {
                 "Heat during flowering": bool(fm),
                 "Soil water": False,
@@ -1385,6 +1389,49 @@ def main():
                 "Early maturity": False,
                 "Nothing running against this crop": True,
             }
+
+            # A NULL RESULT ONLY COVERS THE GROUND IT WAS MEASURED ON.
+            #
+            # GAJ: "What the fuck is this noncommittal shit?" — and he was right. Our tests show
+            # these stresses did not move bean yield ACROSS 2015-2025. They cannot show what
+            # happens outside that range, and 2026 is outside it: the Panhandle flowered through
+            # 24 hot days against a tested range of 10 to 23, Big Horn through 25 against 9 to
+            # 23, and four regions had their driest winter in thirty-one years. Treating a null
+            # measured inside a narrow band as settling an extreme year is extrapolating past the
+            # data — the same error as claiming an effect we never measured, pointing the other
+            # way. Refusing to call it was not caution, it was a different overreach.
+            #
+            # So a stress that has broken out of the range we could test gets its vote back, and
+            # is labelled as a judgement our model cannot check rather than as a result. The
+            # agronomy is not in doubt: heat at flowering costs pods. What our harvest record
+            # cannot tell us is what it costs HERE in a year like this one.
+            for _x in _st:
+                _by = per[cls].get("flowering_hot_days_by_year") or {}
+                _outside = False
+                if _x["stress"] == "Heat during flowering" and _by:
+                    _past = [b["hot"] for y, b in _by.items()
+                             if y != str(THIS_YEAR) and b.get("hot") is not None]
+                    # AT the record counts, not only past it. Northwest Kansas flowered
+                    # through 24 hot days against a tested maximum of exactly 24 — tying the
+                    # worst year on record, and a strict "greater than" quietly treated that as
+                    # ordinary. The edge of the tested range is precisely where a null result
+                    # stops being able to speak.
+                    _outside = bool(_past) and got[3] is not None and got[3] >= max(_past)
+                if _x["stress"] == "Winter recharge":
+                    # Top three of thirty-one, not the single driest. A winter that is second
+                    # driest in three decades is no more "inside the tested range" than the
+                    # first, and our yield record only covers eleven of those winters anyway.
+                    _wr = (WINTER.get("regions", {}).get(region) or {})
+                    _outside = bool(_wr.get("driest_on_record_here")) or (
+                        (_wr.get("rank") or 99) <= 3)
+                if _outside:
+                    _proven[_x["stress"]] = True
+                    _x["outside_tested_range"] = True
+                    _x["why_it_counts_anyway"] = (
+                        "This year is beyond anything in the record we tested against, so our "
+                        "finding that this stress did not move yield here cannot speak to it. "
+                        "We count it, and we mark it as a judgement our own data cannot check."
+                    )
             for _x in _st:
                 if _x["stress"] in _proven and not _proven[_x["stress"]]:
                     _x["counts_toward_direction"] = False
@@ -1421,18 +1468,41 @@ def main():
                 _dir, _say = "up", "we expect MORE yield than usual"
             elif _dn and _up:
                 _dir, _say = "mixed", "some things point up, some down — no clear call"
-            elif any(not x.get("counts_toward_direction") for x in _st):
-                _dir, _say = "unknown", "we cannot call which way yield will go"
+            elif not _st or all(x["yield_direction"] == "neutral" for x in _st):
+                # NOTHING UNUSUAL IS AN ANSWER, NOT A SHRUG. Western Colorado came through with
+                # a winter at 86% of normal, flowering heat mid-range and soil water within 5%
+                # of its own average, and the page told a buyer "we cannot call which way" —
+                # which reads as ignorance when the truth is that the season there was ordinary.
+                _dir, _say = "neutral", "we expect about a normal yield"
+            # TESTED-AND-FOUND-NOTHING IS A RESULT. NEVER-TESTED IS IGNORANCE. They are not
+            # the same and they must not produce the same sentence.
+            #
+            # Western Colorado carried one stress — heat at flowering, at 27 days inside a
+            # tested range of 12 to 28 — and the page said "we cannot call which way". But we
+            # DID test heat at that level, against every harvest on record, and it did not move
+            # yield. Saying so is a finding: at this level, on this ground, it has not mattered.
+            # "We cannot call it" belongs only where the stress has never been evaluated at all.
+            # ONE UNTESTED STRESS DOES NOT VETO AN OTHERWISE EVIDENCED CALL. Northwest Kansas
+            # blackeye carried four stresses — three of them tested here and found not to move
+            # yield, one (early maturity) never scored against a harvest at all — and that single
+            # unevaluated item turned the whole answer into "we cannot call it", while pinto on
+            # the SAME ground read "less yield". A buyer cannot use that. We withhold the call
+            # only when we have no tested evidence on this crop whatsoever.
+            elif any(x["stress"] in _TESTED_AND_NULL for x in _st):
+                _dir, _say = "neutral", "we expect about a normal yield"
             else:
-                _dir, _say = "neutral", "nothing we measure is pushing yield either way"
+                _dir, _say = "unknown", "we cannot call which way yield will go"
             per[cls]["yield_direction"] = _dir
             per[cls]["yield_direction_says"] = _say
             per[cls]["yield_direction_counts"] = {"down": _dn, "up": _up,
                                                   "neutral": len(_st) - _dn - _up}
             per[cls]["yield_direction_caveat"] = (
-                ("The stresses below are real and measured. None of them has been shown to "
-                 "predict this crop's yield on this ground, so we will not claim a direction "
-                 "from them."
+                ("The stresses below are real and measured, and every one of them sits inside "
+                 "the range we tested against ten years of harvests here \u2014 where it did "
+                 "not move yield. That is a finding, not a shrug."
+                 if _dir == "neutral" else
+                 "One of the stresses below has never been scored against a harvest at all, so "
+                 "we will not claim a direction from it."
                  if _dir == "unknown" else
                  "We can say which way. We cannot say how much: tested against every USDA "
                  "harvest for this crop in these states, our model could not call the size.")
