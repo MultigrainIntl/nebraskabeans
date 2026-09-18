@@ -111,12 +111,30 @@ check("every script is cache-busted", not stale,
 # 7. The published defect log must keep pace with the defects (GAJ, 17 Sep 2026:
 # "make sure you are continually updating this section").
 about = read("about.html")
-rows = about.count("<tr>")
-for needle, why in (("region", "the region picker defect"),
+import re as _re
+_tbl = _re.search(r"What we have gotten wrong.*?</table>", about, _re.S)
+_rows = len(_re.findall(r"<tr><td>", _tbl.group(0))) if _tbl else 0
+
+for needle, why in (("region picker", "the region picker defect"),
                     ("More detail", "the empty panel defect"),
-                    ("two yield", "the second yield model")):
+                    ("two yield", "the second yield model"),
+                    ("mountain weather", "the map coloured by mountains"),
+                    ("weather station moved", "the station mismatch"),
+                    ("could not see winter", "the missing winter"),
+                    ("buried the water", "burying the water data"),
+                    ("Colorado was left out", "Colorado missing from this year"),
+                    ("stale acreage", "the stale chickpea acreage")):
     check("defect log records %s" % why, needle.lower() in about.lower(),
-          "present in about.html" if needle.lower() in about.lower() else "NOT PUBLISHED")
+          "published" if needle.lower() in about.lower() else "NOT PUBLISHED")
+
+# THE LOG MAY GROW BUT NEVER SHRINK. This is the honest limit of the guard: it can stop a
+# published defect being quietly deleted, and it cannot know about one that was never written
+# down. Four of today's were missed until GAJ asked "are you keeping it updated with every
+# advancement and correction?" — the answer was no, and no test could have told him. That part
+# is discipline, not automation, and pretending otherwise would be its own false claim.
+check("the defect log has not shrunk", _rows >= 18,
+      "%d defects published" % _rows if _rows >= 18
+      else "WAS 18, NOW %d — a published defect has been removed" % _rows)
 
 # ---------------------------------------------------------------------------
 # 8. The two halves of the yield ratio read DIFFERENT WEATHER STATIONS (found 17 Sep 2026).
