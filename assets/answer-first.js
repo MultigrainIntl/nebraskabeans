@@ -116,7 +116,9 @@
    *
    * Not a forecast, and it never becomes one: groundwater failed the yield-skill test on
    * 17 Sep 2026 and a check in verify_data.py stops any forecasting script reading the file. */
-  var GW = null;
+  var GW = null, WIN = null;
+  fetch('assets/data/winter-recharge.json').then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { WIN = j; }).catch(function () { WIN = null; });
   fetch('assets/data/groundwater.json').then(function (r) { return r.ok ? r.json() : null; })
     .then(function (j) { GW = j; }).catch(function () { GW = null; });
 
@@ -165,6 +167,19 @@
       txt += ' From ' + t.wells_fitted.toLocaleString() + ' wells.';
     } else {
       txt += '. No long record here, so we publish no rate rather than borrowing one.';
+    }
+    /* THE CAUSE, NOT JUST THE EFFECT. The site opened on 15 March and carried no winter at
+     * all — yet winter is what recharges these aquifers, and four of seven regions had their
+     * DRIEST in thirty-one years. Saying the water is low without saying why leaves a grower
+     * to assume depletion, when in the Panhandle the aquifer is steady over a century and it
+     * was this one winter that did it. The two facts belong in one sentence. */
+    var w = WIN && WIN.regions && WIN.regions[rk];
+    if (w) {
+      txt += ' Last winter brought <b>' + w.inches.toFixed(1) + ' in</b>, ' +
+        w.pct_of_normal + '% of normal' +
+        (w.driest_on_record_here
+          ? ' — <b>the driest of the last ' + w.of_years + ' winters here</b>'
+          : w.rank <= 5 ? ' — the ' + w.rank + 'th driest of ' + w.of_years : '') + '.';
     }
     return '<p class="nbA-water">' + txt + '</p>';
   }

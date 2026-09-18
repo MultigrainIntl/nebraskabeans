@@ -150,6 +150,34 @@ if d:
         check("solar has plausible mean", 8 <= (sum(summer)/len(summer)) <= 30,
               "mean %.1f MJ/m2/day over %d station-days" % (sum(summer)/len(summer), len(summer)))
 
+# ---------------------------------------------------------------- winter recharge
+d = load("winter-recharge.json")
+if d:
+    regs = d.get("regions", {})
+    # Independent check: an Oct-Mar total on the High Plains runs roughly 1 to 12 inches.
+    # Outside that it is a units error or a station reporting something else — the same class
+    # of mistake that once made an all-crops acreage row into a bean yield.
+    bad = ["%s=%.1f" % (rk, r["inches"]) for rk, r in regs.items()
+           if not (0.3 <= r["inches"] <= 20)]
+    check("winter totals are plausible", regs and not bad,
+          "%d regions, %.1f-%.1f in" % (len(regs), min(r["inches"] for r in regs.values()),
+                                        max(r["inches"] for r in regs.values()))
+          if not bad else "OUT OF RANGE: " + ", ".join(bad))
+
+    # A "driest on record" claim must rest on a long record. Ten years would let a dry decade
+    # manufacture a record; the window was widened to thirty for exactly that reason and must
+    # not quietly shrink back.
+    short = ["%s (%d yrs)" % (rk, r["of_years"]) for rk, r in regs.items() if r["of_years"] < 20]
+    check("the winter comparison window is long", not short,
+          "every region compared against 20+ winters"
+          if not short else "TOO SHORT: " + ", ".join(short))
+
+    # The mountain regions had ordinary winters while the plains had their driest. If every
+    # region ever came out identical, the per-region county selection has collapsed.
+    ranks = {r["rank"] for r in regs.values()}
+    check("winters differ between regions", len(ranks) > 1,
+          "%d distinct ranks across %d regions" % (len(ranks), len(regs)))
+
 # ---------------------------------------------------------------- groundwater
 d = load("groundwater.json")
 if d:

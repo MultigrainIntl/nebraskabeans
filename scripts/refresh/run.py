@@ -52,6 +52,11 @@ STEPS = [
     # OBSERVATION ONLY. Groundwater failed the yield-skill test on 17 Sep 2026 and must never
     # feed a forecast. It ships because a grower deciding whether to drill deeper is owed the
     # number — 8,648 wells, four states, read as recently as today.
+    # THE CAUSE BEHIND THE WATER TABLE. The site opened on 15 March and carried no winter at
+    # all, while winter is what recharges these aquifers — four of seven regions had their
+    # driest in 31 years. Observation only; weather failed the yield-skill test twice.
+    ("winter_recharge.py", "winter-recharge.json", 30,
+     "Oct-Mar precipitation by region against its own 30 previous winters"),
     ("groundwater.py", "groundwater.json", 25,
      "USGS National Ground-Water Monitoring Network — depth to water under each region"),
     ("pest_wbc.py", "pest-wbc-2026.json", 20,
