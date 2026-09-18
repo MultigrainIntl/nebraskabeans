@@ -25,7 +25,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 11.2,
+     "model_year_to_year_spread_pct": 14.6,
      "days_counted": 100,
      "matured_on": "2026-09-02",
      "flowering_hot_days": 24,
@@ -102,6 +102,53 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "24 hot days in a 31-day flowering window",
+       "normal": "17.5 days is normal here",
+       "vs_normal_pct": 36.8,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.6%, satellite -12.6% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.1,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 3.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "44% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -56,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "2 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-09-02",
+       "normal": "usually around 09-04 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2396,
@@ -120,7 +167,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 11.2,
+     "model_year_to_year_spread_pct": 14.6,
      "days_counted": 100,
      "matured_on": "2026-09-01",
      "flowering_hot_days": 27,
@@ -197,6 +244,53 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "27 hot days in a 31-day flowering window",
+       "normal": "21.5 days is normal here",
+       "vs_normal_pct": 25.8,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.6%, satellite -12.6% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.1,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 3.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "44% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -56,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "2 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-09-01",
+       "normal": "usually around 09-03 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2336,
@@ -215,7 +309,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 11.2,
+     "model_year_to_year_spread_pct": 14.6,
      "days_counted": 100,
      "matured_on": "2026-09-03",
      "flowering_hot_days": 28,
@@ -292,6 +386,44 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.6%, satellite -12.6% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.1,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 3.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "44% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -56,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "2 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-09-03",
+       "normal": "usually around 09-05 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2031,
@@ -310,7 +442,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 11.2,
+     "model_year_to_year_spread_pct": 14.6,
      "days_counted": 88,
      "matured_on": "2026-08-17",
      "flowering_hot_days": 14,
@@ -387,12 +519,59 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "14 hot days in a 26-day flowering window",
+       "normal": "7.8 days is normal here",
+       "vs_normal_pct": 79.1,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.6%, satellite -12.6% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.1,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 3.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "44% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -56,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "2 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-17",
+       "normal": "usually around 08-27 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9966,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.3,
+     "model_year_to_year_spread_own_class_pct": 13.9,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
@@ -405,7 +584,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 20.0,
+     "model_year_to_year_spread_pct": 19.6,
      "days_counted": 107,
      "matured_on": "2026-07-18",
      "flowering_hot_days": 18,
@@ -498,7 +677,36 @@
      "lb_ac_high": 2073,
      "yield_withdrawn": false,
      "canopy_index": 0.8043,
-     "canopy_vs_normal_pct": -19.6
+     "canopy_vs_normal_pct": -19.6,
+     "stresses": [
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.6%, satellite -12.6% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.1,
+       "direction": "drier than normal",
+       "likely_impact": "Peas finish early and draw on stored winter moisture more than summer rain, so a dry profile at planting matters more to them than a dry July.",
+       "confidence": "Two independent estimates, 3.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "44% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -56,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-07-18",
+       "normal": "usually around 07-22 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish in peas usually means lighter seed and a lower bushel weight.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ]
     },
     "CHICKPEAS": {
      "index": 0.7003,
@@ -587,10 +795,46 @@
      "level_is_usda_published": false,
      "level_kind": "proxy",
      "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
-     "yield_withdrawn": false,
-     "lb_ac": 815,
-     "lb_ac_low": 643,
-     "lb_ac_high": 987,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "25 hot days in a 32-day flowering window",
+       "normal": "22.1 days is normal here",
+       "vs_normal_pct": 13.2,
+       "direction": "worse than normal",
+       "likely_impact": "Chickpeas abort flowers above roughly 35C and set pods poorly in a hot spell. We have no chickpea harvest record in these states to test that against, so this is agronomy, not a measurement of our own.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.6%, satellite -12.6% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.1,
+       "direction": "drier than normal",
+       "likely_impact": "Chickpeas root deeper than beans and tolerate a dry finish better. The risk of a wet one is worse: humidity in the canopy brings ascochyta.",
+       "confidence": "Two independent estimates, 3.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "44% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -56,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-07",
+       "normal": "usually around 08-11 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish drops calibre, and calibre is most of the price in chickpeas.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
+     "yield_withdrawn": true,
+     "yield_withdrawn_because": "USDA publishes no yield for this crop in these states, so there is no harvest record to test our model against and no honest way to check a number before printing it. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1164
     }
    },
@@ -628,7 +872,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 8.8,
+     "model_year_to_year_spread_pct": 11.9,
      "days_counted": 91,
      "matured_on": "2026-08-24",
      "flowering_hot_days": 20,
@@ -705,6 +949,44 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "20 hot days in a 30-day flowering window",
+       "normal": "16.7 days is normal here",
+       "vs_normal_pct": 19.6,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "39% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -61,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "5 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-24",
+       "normal": "usually around 08-25 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2396,
@@ -723,7 +1005,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 8.8,
+     "model_year_to_year_spread_pct": 11.9,
      "days_counted": 90,
      "matured_on": "2026-08-23",
      "flowering_hot_days": 26,
@@ -800,6 +1082,44 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "26 hot days in a 31-day flowering window",
+       "normal": "21.3 days is normal here",
+       "vs_normal_pct": 22.2,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "39% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -61,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "5 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-23",
+       "normal": "usually around 08-25 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2336,
@@ -818,7 +1138,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 8.8,
+     "model_year_to_year_spread_pct": 11.9,
      "days_counted": 92,
      "matured_on": "2026-08-25",
      "flowering_hot_days": 27,
@@ -895,6 +1215,35 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Winter recharge",
+       "measured": "39% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -61,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "5 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-25",
+       "normal": "usually around 08-26 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2031,
@@ -913,7 +1262,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 8.8,
+     "model_year_to_year_spread_pct": 11.9,
      "days_counted": 85,
      "matured_on": "2026-08-07",
      "flowering_hot_days": 3,
@@ -990,12 +1339,41 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "3 hot days in a 28-day flowering window",
+       "normal": "9.9 days is normal here",
+       "vs_normal_pct": -69.7,
+       "direction": "better than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "39% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -61,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-07",
+       "normal": "usually around 08-15 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 1.0005,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.3,
+     "model_year_to_year_spread_own_class_pct": 12.7,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
@@ -1008,7 +1386,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 23.7,
+     "model_year_to_year_spread_pct": 23.2,
      "days_counted": 98,
      "matured_on": "2026-07-06",
      "flowering_hot_days": 20,
@@ -1101,7 +1479,27 @@
      "lb_ac_high": 1778,
      "yield_withdrawn": false,
      "canopy_index": 1.0289,
-     "canopy_vs_normal_pct": 2.9
+     "canopy_vs_normal_pct": 2.9,
+     "stresses": [
+      {
+       "stress": "Winter recharge",
+       "measured": "39% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -61,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-07-06",
+       "normal": "usually around 07-12 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish in peas usually means lighter seed and a lower bushel weight.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ]
     },
     "CHICKPEAS": {
      "index": 0.9007,
@@ -1190,10 +1588,28 @@
      "level_is_usda_published": false,
      "level_kind": "proxy",
      "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
-     "yield_withdrawn": false,
-     "lb_ac": 1048,
-     "lb_ac_low": 849,
-     "lb_ac_high": 1248,
+     "stresses": [
+      {
+       "stress": "Winter recharge",
+       "measured": "39% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -61,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-07-27",
+       "normal": "usually around 08-02 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish drops calibre, and calibre is most of the price in chickpeas.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
+     "yield_withdrawn": true,
+     "yield_withdrawn_because": "USDA publishes no yield for this crop in these states, so there is no harvest record to test our model against and no honest way to check a number before printing it. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1164
     }
    },
@@ -1231,7 +1647,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 7.6,
+     "model_year_to_year_spread_pct": 15.5,
      "days_counted": 96,
      "matured_on": "2026-08-27",
      "flowering_hot_days": 26,
@@ -1308,6 +1724,53 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "26 hot days in a 30-day flowering window",
+       "normal": "23.1 days is normal here",
+       "vs_normal_pct": 12.6,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -9.3%, satellite -7.0% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -8.2,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 2.3 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "43% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -57,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "1 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-27",
+       "normal": "usually around 08-31 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1977,
@@ -1326,7 +1789,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 7.6,
+     "model_year_to_year_spread_pct": 15.5,
      "days_counted": 95,
      "matured_on": "2026-08-26",
      "flowering_hot_days": 29,
@@ -1403,12 +1866,59 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "29 hot days in a 31-day flowering window",
+       "normal": "25.5 days is normal here",
+       "vs_normal_pct": 13.5,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -9.3%, satellite -7.0% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -8.2,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 2.3 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "43% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -57,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "1 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-26",
+       "normal": "usually around 08-30 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9946,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.3,
+     "model_year_to_year_spread_own_class_pct": 15.2,
      "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
@@ -1421,7 +1931,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 7.6,
+     "model_year_to_year_spread_pct": 15.5,
      "days_counted": 97,
      "matured_on": "2026-08-28",
      "flowering_hot_days": 29,
@@ -1498,6 +2008,44 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Soil water",
+       "measured": "weather model -9.3%, satellite -7.0% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -8.2,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 2.3 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "43% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -57,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "1 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-28",
+       "normal": "usually around 09-01 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2581,
@@ -1516,7 +2064,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 7.6,
+     "model_year_to_year_spread_pct": 15.5,
      "days_counted": 90,
      "matured_on": "2026-08-11",
      "flowering_hot_days": 12,
@@ -1593,12 +2141,50 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Soil water",
+       "measured": "weather model -9.3%, satellite -7.0% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -8.2,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 2.3 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "43% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -57,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "1 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-11",
+       "normal": "usually around 08-16 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9942,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 16.8,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
@@ -1611,7 +2197,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 27.7,
+     "model_year_to_year_spread_pct": 27.1,
      "days_counted": 105,
      "matured_on": "2026-07-13",
      "flowering_hot_days": 24,
@@ -1688,6 +2274,44 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "24 hot days in a 28-day flowering window",
+       "normal": "21.1 days is normal here",
+       "vs_normal_pct": 13.8,
+       "direction": "worse than normal",
+       "likely_impact": "Peas are the most heat-sensitive crop on this list at flowering. Terminal heat shortens the reproductive period and aborts flowers and young pods. This is the one stress here with measured skill against harvests: it explains 34% more of the pea record than guessing.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -9.3%, satellite -7.0% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -8.2,
+       "direction": "drier than normal",
+       "likely_impact": "Peas finish early and draw on stored winter moisture more than summer rain, so a dry profile at planting matters more to them than a dry July.",
+       "confidence": "Two independent estimates, 2.3 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "43% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -57,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-07-13",
+       "normal": "usually around 07-17 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish in peas usually means lighter seed and a lower bushel weight.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null
@@ -1779,10 +2403,46 @@
      "level_is_usda_published": false,
      "level_kind": "proxy",
      "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
-     "yield_withdrawn": false,
-     "lb_ac": 964,
-     "lb_ac_low": 799,
-     "lb_ac_high": 1128,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "30 hot days in a 32-day flowering window",
+       "normal": "24.2 days is normal here",
+       "vs_normal_pct": 24.1,
+       "direction": "worse than normal",
+       "likely_impact": "Chickpeas abort flowers above roughly 35C and set pods poorly in a hot spell. We have no chickpea harvest record in these states to test that against, so this is agronomy, not a measurement of our own.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -9.3%, satellite -7.0% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -8.2,
+       "direction": "drier than normal",
+       "likely_impact": "Chickpeas root deeper than beans and tolerate a dry finish better. The risk of a wet one is worse: humidity in the canopy brings ascochyta.",
+       "confidence": "Two independent estimates, 2.3 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "43% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -57,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-01",
+       "normal": "usually around 08-06 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish drops calibre, and calibre is most of the price in chickpeas.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
+     "yield_withdrawn": true,
+     "yield_withdrawn_because": "USDA publishes no yield for this crop in these states, so there is no harvest record to test our model against and no honest way to check a number before printing it. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1164
     }
    },
@@ -1820,7 +2480,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 10.9,
+     "model_year_to_year_spread_pct": 21.2,
      "days_counted": 101,
      "matured_on": "2026-09-06",
      "flowering_hot_days": 27,
@@ -1897,6 +2557,17 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "27 hot days in a 34-day flowering window",
+       "normal": "23.5 days is normal here",
+       "vs_normal_pct": 14.7,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1977,
@@ -1915,7 +2586,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 10.9,
+     "model_year_to_year_spread_pct": 21.2,
      "days_counted": 101,
      "matured_on": "2026-09-05",
      "flowering_hot_days": 27,
@@ -1992,12 +2663,23 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Nothing running against this crop",
+       "measured": "heat at flowering, soil water, winter recharge, warm nights and maturity date all within their normal range here",
+       "normal": "this region's own record",
+       "vs_normal_pct": null,
+       "direction": "normal",
+       "likely_impact": "None of the stresses we can measure is running against this crop in this area. That is not the same as a good crop \u2014 disease, hail, weeds, stand and what the grower actually did are all outside what we measure.",
+       "confidence": "An all-clear on five measurements, not an all-clear on the season."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9978,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.5,
+     "model_year_to_year_spread_own_class_pct": 21.7,
      "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
@@ -2010,7 +2692,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 10.9,
+     "model_year_to_year_spread_pct": 21.2,
      "days_counted": 101,
      "matured_on": "2026-09-08",
      "flowering_hot_days": 31,
@@ -2087,6 +2769,17 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "31 hot days in a 34-day flowering window",
+       "normal": "27.5 days is normal here",
+       "vs_normal_pct": 12.5,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2581,
@@ -2105,7 +2798,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 10.9,
+     "model_year_to_year_spread_pct": 21.2,
      "days_counted": 97,
      "matured_on": "2026-08-18",
      "flowering_hot_days": 11,
@@ -2182,12 +2875,23 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Nothing running against this crop",
+       "measured": "heat at flowering, soil water, winter recharge, warm nights and maturity date all within their normal range here",
+       "normal": "this region's own record",
+       "vs_normal_pct": null,
+       "direction": "normal",
+       "likely_impact": "None of the stresses we can measure is running against this crop in this area. That is not the same as a good crop \u2014 disease, hail, weeds, stand and what the grower actually did are all outside what we measure.",
+       "confidence": "An all-clear on five measurements, not an all-clear on the season."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9968,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.5,
+     "model_year_to_year_spread_own_class_pct": 20.5,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
@@ -2200,7 +2904,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 16.5,
+     "model_year_to_year_spread_pct": 16.2,
      "days_counted": 107,
      "matured_on": "2026-07-16",
      "flowering_hot_days": 28,
@@ -2277,6 +2981,26 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "28 hot days in a 29-day flowering window",
+       "normal": "20.7 days is normal here",
+       "vs_normal_pct": 35.1,
+       "direction": "worse than normal",
+       "likely_impact": "Peas are the most heat-sensitive crop on this list at flowering. Terminal heat shortens the reproductive period and aborts flowers and young pods. This is the one stress here with measured skill against harvests: it explains 34% more of the pea record than guessing.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "1 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Warm nights shorten grain fill in pulses.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      }
+     ],
      "yield_withdrawn": false
     }
    },
@@ -2314,7 +3038,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 0.7,
+     "model_year_to_year_spread_pct": 13.7,
      "days_counted": 94,
      "matured_on": "2026-08-25",
      "flowering_hot_days": 24,
@@ -2391,15 +3115,60 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
-     "yield_withdrawn": false,
-     "lb_ac": 2271,
-     "lb_ac_low": 2255,
-     "lb_ac_high": 2287,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "24 hot days in a 29-day flowering window",
+       "normal": "21.4 days is normal here",
+       "vs_normal_pct": 12.3,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -12.3%, satellite -16.4% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.3,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 4.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "53% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -47,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "3 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-25",
+       "normal": "usually around 08-26 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
+     "yield_withdrawn": true,
      "baseline_lb_ac": 2291,
      "index_own_class": 0.9777,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 1.8,
-     "spread_is_shared_across_classes": true
+     "model_year_to_year_spread_own_class_pct": 13.0,
+     "spread_is_shared_across_classes": true,
+     "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know."
     },
     "GREAT NORTHERN": {
      "index": 0.9914,
@@ -2411,7 +3180,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 0.7,
+     "model_year_to_year_spread_pct": 13.7,
      "days_counted": 93,
      "matured_on": "2026-08-25",
      "flowering_hot_days": 25,
@@ -2488,12 +3257,50 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Soil water",
+       "measured": "weather model -12.3%, satellite -16.4% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.3,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 4.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "53% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -47,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "3 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-25",
+       "normal": "usually around 08-31 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2168,
      "index_own_class": 0.9962,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.3,
+     "model_year_to_year_spread_own_class_pct": 12.9,
      "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
@@ -2506,7 +3313,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 0.7,
+     "model_year_to_year_spread_pct": 13.7,
      "days_counted": 95,
      "matured_on": "2026-08-27",
      "flowering_hot_days": 26,
@@ -2583,12 +3390,41 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Soil water",
+       "measured": "weather model -12.3%, satellite -16.4% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.3,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 4.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "53% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -47,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "3 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9965,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.3,
+     "model_year_to_year_spread_own_class_pct": 12.6,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
@@ -2601,7 +3437,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 0.7,
+     "model_year_to_year_spread_pct": 13.7,
      "days_counted": 87,
      "matured_on": "2026-08-08",
      "flowering_hot_days": 14,
@@ -2678,12 +3514,59 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "14 hot days in a 25-day flowering window",
+       "normal": "9.6 days is normal here",
+       "vs_normal_pct": 45.3,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -12.3%, satellite -16.4% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.3,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 4.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "53% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -47,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "1 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-08",
+       "normal": "usually around 08-14 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9951,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 16.4,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
@@ -2696,7 +3579,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 22.4,
+     "model_year_to_year_spread_pct": 22.0,
      "days_counted": 102,
      "matured_on": "2026-07-11",
      "flowering_hot_days": 17,
@@ -2773,6 +3656,44 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "17 hot days in a 29-day flowering window",
+       "normal": "19.7 days is normal here",
+       "vs_normal_pct": -13.8,
+       "direction": "better than normal",
+       "likely_impact": "Peas are the most heat-sensitive crop on this list at flowering. Terminal heat shortens the reproductive period and aborts flowers and young pods. This is the one stress here with measured skill against harvests: it explains 34% more of the pea record than guessing.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -12.3%, satellite -16.4% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.3,
+       "direction": "drier than normal",
+       "likely_impact": "Peas finish early and draw on stored winter moisture more than summer rain, so a dry profile at planting matters more to them than a dry July.",
+       "confidence": "Two independent estimates, 4.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "53% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -47,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-07-11",
+       "normal": "usually around 07-15 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish in peas usually means lighter seed and a lower bushel weight.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": false
     },
     "CHICKPEAS": {
@@ -2862,10 +3783,46 @@
      "level_is_usda_published": false,
      "level_kind": "proxy",
      "level_proxy_note": "USDA does not estimate chickpea yield in these states. This uses Montana, which plants more chickpeas than any other state \u2014 260,000 acres in 2025 against 141,000 in Washington, the next biggest (USDA NASS State Agriculture Overview, 2025). Dry peas are published in both Montana and Nebraska and differ by 3%, which is the evidence that Montana transfers here.",
-     "yield_withdrawn": false,
-     "lb_ac": 838,
-     "lb_ac_low": 625,
-     "lb_ac_high": 1052,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "20 hot days in a 33-day flowering window",
+       "normal": "22.4 days is normal here",
+       "vs_normal_pct": -10.6,
+       "direction": "better than normal",
+       "likely_impact": "Chickpeas abort flowers above roughly 35C and set pods poorly in a hot spell. We have no chickpea harvest record in these states to test that against, so this is agronomy, not a measurement of our own.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -12.3%, satellite -16.4% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -14.3,
+       "direction": "drier than normal",
+       "likely_impact": "Chickpeas root deeper than beans and tolerate a dry finish better. The risk of a wet one is worse: humidity in the canopy brings ascochyta.",
+       "confidence": "Two independent estimates, 4.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "53% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -47,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-07-30",
+       "normal": "usually around 08-04 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish drops calibre, and calibre is most of the price in chickpeas.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
+     "yield_withdrawn": true,
+     "yield_withdrawn_because": "USDA publishes no yield for this crop in these states, so there is no harvest record to test our model against and no honest way to check a number before printing it. The measured conditions below are what we do know.",
      "baseline_lb_ac": 1164
     }
    },
@@ -2903,7 +3860,7 @@
      "swing_scale_from": "this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 0.9,
+     "model_year_to_year_spread_pct": 17.9,
      "days_counted": 100,
      "matured_on": "2026-09-02",
      "flowering_hot_days": 25,
@@ -2975,12 +3932,41 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "25 hot days in a 30-day flowering window",
+       "normal": "14.5 days is normal here",
+       "vs_normal_pct": 72.4,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.0%, satellite -16.1% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -15.6,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 1.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "7 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2291,
      "index_own_class": 0.9916,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 2.5,
+     "model_year_to_year_spread_own_class_pct": 17.8,
      "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
@@ -2993,7 +3979,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 0.9,
+     "model_year_to_year_spread_pct": 17.9,
      "days_counted": 100,
      "matured_on": "2026-09-02",
      "flowering_hot_days": 25,
@@ -3065,12 +4051,41 @@
      "level_is_usda_published": true,
      "level_kind": "published",
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "25 hot days in a 29-day flowering window",
+       "normal": "21.0 days is normal here",
+       "vs_normal_pct": 19.0,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.0%, satellite -16.1% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -15.6,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 1.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "7 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": 2168,
      "index_own_class": 0.9986,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 17.8,
      "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
@@ -3083,7 +4098,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 0.9,
+     "model_year_to_year_spread_pct": 17.9,
      "days_counted": 100,
      "matured_on": "2026-09-04",
      "flowering_hot_days": 25,
@@ -3155,12 +4170,32 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.0%, satellite -16.1% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -15.6,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 1.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "7 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9986,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 17.8,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
@@ -3173,7 +4208,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 10,
-     "model_year_to_year_spread_pct": 0.9,
+     "model_year_to_year_spread_pct": 17.9,
      "days_counted": 87,
      "matured_on": "2026-08-18",
      "flowering_hot_days": 17,
@@ -3245,12 +4280,50 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "17 hot days in a 23-day flowering window",
+       "normal": "3.6 days is normal here",
+       "vs_normal_pct": 372.2,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -15.0%, satellite -16.1% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -15.6,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 1.1 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "8 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-18",
+       "normal": "usually around 09-01 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9951,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 18.2,
      "spread_is_shared_across_classes": true
     }
    },
@@ -3288,7 +4361,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 0.4,
+     "model_year_to_year_spread_pct": 17.1,
      "days_counted": 88,
      "matured_on": "2026-08-21",
      "flowering_hot_days": 24,
@@ -3365,12 +4438,59 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "24 hot days in a 31-day flowering window",
+       "normal": "18.5 days is normal here",
+       "vs_normal_pct": 29.4,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -4.3%, satellite -8.3% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -6.3,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 4.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "62% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -38,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "3 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-21",
+       "normal": "usually around 08-23 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9947,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 16.4,
      "spread_is_shared_across_classes": true
     },
     "GREAT NORTHERN": {
@@ -3383,7 +4503,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 0.4,
+     "model_year_to_year_spread_pct": 17.1,
      "days_counted": 88,
      "matured_on": "2026-08-20",
      "flowering_hot_days": 25,
@@ -3460,12 +4580,59 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "25 hot days in a 30-day flowering window",
+       "normal": "21.5 days is normal here",
+       "vs_normal_pct": 16.5,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -4.3%, satellite -8.3% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -6.3,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 4.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "62% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -38,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "3 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-20",
+       "normal": "usually around 08-23 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9948,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 16.5,
      "spread_is_shared_across_classes": true
     },
     "LIGHT RED KIDNEY": {
@@ -3478,7 +4645,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 0.4,
+     "model_year_to_year_spread_pct": 17.1,
      "days_counted": 89,
      "matured_on": "2026-08-21",
      "flowering_hot_days": 27,
@@ -3555,12 +4722,59 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "27 hot days in a 31-day flowering window",
+       "normal": "24.4 days is normal here",
+       "vs_normal_pct": 10.8,
+       "direction": "worse than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -4.3%, satellite -8.3% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -6.3,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 4.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "62% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -38,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Warm nights during flowering",
+       "measured": "3 nights at or above 68F during flowering",
+       "normal": "almost never happens on this ground",
+       "vs_normal_pct": null,
+       "direction": "worse than normal",
+       "likely_impact": "Nights that stay warm through flowering stop the crop cooling off and are reported to fail pollen in common bean. On this ground they almost never occur, so we count them and expect nothing from them.",
+       "confidence": "Counted as an observation. Tested against ten years of harvests here it predicted nothing, so nothing is subtracted for it."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-21",
+       "normal": "usually around 08-25 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9946,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 16.2,
      "spread_is_shared_across_classes": true
     },
     "BLACKEYE": {
@@ -3573,7 +4787,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 0.4,
+     "model_year_to_year_spread_pct": 17.1,
      "days_counted": 83,
      "matured_on": "2026-08-05",
      "flowering_hot_days": 5,
@@ -3650,12 +4864,50 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "5 hot days in a 27-day flowering window",
+       "normal": "9.1 days is normal here",
+       "vs_normal_pct": -45.0,
+       "direction": "better than normal",
+       "likely_impact": "Heat while the crop is flowering aborts flowers and blasts pods. The field can stay green and full while the pods in it are fewer \u2014 which is exactly how a short crop reads normal from a satellite counting leaves. Expect pod number to carry the loss before seed size does.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -4.3%, satellite -8.3% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -6.3,
+       "direction": "drier than normal",
+       "likely_impact": "Beans are shallow-rooted and run short before most row crops do. On dryland ground a short profile at flowering and pod fill cuts pod number first, then seed size. Under a pivot the grower can cover this, and our figure cannot see whether they did.",
+       "confidence": "Two independent estimates, 4.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "62% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -38,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-08-05",
+       "normal": "usually around 08-07 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "A hot season pushes the crop to maturity sooner, and less time filling means smaller seed. Smaller screen size costs more in this market than tonnage does.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": true,
      "yield_withdrawn_because": "Tested against every USDA harvest for this class in this state, this model could not call the year, so anything we published would land on the historical average. History is the yardstick here, never the answer. We publish no yield for it rather than dress the average as a forecast. The measured conditions below are what we do know.",
      "baseline_lb_ac": null,
      "index_own_class": 0.9985,
      "index_is_shared_across_classes": true,
-     "model_year_to_year_spread_own_class_pct": 0.4,
+     "model_year_to_year_spread_own_class_pct": 19.4,
      "spread_is_shared_across_classes": true
     },
     "PEAS": {
@@ -3668,7 +4920,7 @@
      "swing_scale_from": "the commodity average, no record for this class in this state",
      "swing_scale_why": "How much of the model's movement survived being tested against every USDA harvest in this state. 0 means it has shown no ability to call this crop here, so a normal year is the honest answer.",
      "years_of_model_history": 11,
-     "model_year_to_year_spread_pct": 30.2,
+     "model_year_to_year_spread_pct": 29.6,
      "days_counted": 95,
      "matured_on": "2026-07-05",
      "flowering_hot_days": 22,
@@ -3745,6 +4997,44 @@
      "level_is_usda_published": false,
      "level_kind": null,
      "level_proxy_note": null,
+     "stresses": [
+      {
+       "stress": "Heat during flowering",
+       "measured": "22 hot days in a 27-day flowering window",
+       "normal": "18.9 days is normal here",
+       "vs_normal_pct": 16.3,
+       "direction": "worse than normal",
+       "likely_impact": "Peas are the most heat-sensitive crop on this list at flowering. Terminal heat shortens the reproductive period and aborts flowers and young pods. This is the one stress here with measured skill against harvests: it explains 34% more of the pea record than guessing.",
+       "confidence": "We measured the heat the crop was exposed to. We have not measured what it cost, and we will not put a number on it."
+      },
+      {
+       "stress": "Soil water",
+       "measured": "weather model -4.3%, satellite -8.3% against their own eleven-year averages",
+       "normal": "the same stretch of the calendar in 2015-2025",
+       "vs_normal_pct": -6.3,
+       "direction": "drier than normal",
+       "likely_impact": "Peas finish early and draw on stored winter moisture more than summer rain, so a dry profile at planting matters more to them than a dry July.",
+       "confidence": "Two independent estimates, 4.0 points apart. Neither is a probe in your field, and neither can see a centre pivot."
+      },
+      {
+       "stress": "Winter recharge",
+       "measured": "62% of normal October-March precipitation",
+       "normal": "that region's own previous thirty winters",
+       "vs_normal_pct": -38,
+       "direction": "drier than normal",
+       "likely_impact": "The profile the crop started on was short before a seed went in. It is the cause behind a low water table rather than a separate problem, and it matters most to dryland ground.",
+       "confidence": "Measured at the gauges. Winter catch is the hardest measurement in this dataset \u2014 gauges under-catch snow in wind, and this is windy country."
+      },
+      {
+       "stress": "Early maturity",
+       "measured": "reached maturity 2026-07-05",
+       "normal": "usually around 07-07 here",
+       "vs_normal_pct": null,
+       "direction": "earlier than normal",
+       "likely_impact": "An early finish in peas usually means lighter seed and a lower bushel weight.",
+       "confidence": "Modelled from growing degree days, not observed in the field."
+      }
+     ],
      "yield_withdrawn": false
     }
    },

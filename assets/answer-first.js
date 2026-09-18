@@ -78,7 +78,24 @@
         : readyNow + ' of ' + rows.length + ' regions ready to cut now.';
 
     var heat = Math.round(rows.reduce(function (s, r) { return s + r.c.heat_days; }, 0) / rows.length);
-    var size = heat >= 50 ? 'Expect smaller seed.' : heat >= 30 ? 'Expect some size pressure.' : 'Size should be normal.';
+    /* "Size should be normal" sat directly above a warning that the crop flowered through 24
+     * hot days against a normal of 17. Both lines were computed correctly and the page still
+     * contradicted itself, because this one counts heat during FILL and says nothing about
+     * flowering. A reader does not parse that distinction from two sentences in a row; they
+     * read the reassurance and stop.
+     *
+     * The two are now reconciled: a season that ran hot through flowering cannot be described
+     * as normal here, whatever the fill-period count says. */
+    var flowHot = (function () {
+      var rs = regionRows().filter(function (r) { return r.hotPct != null; });
+      if (!rs.length) return null;
+      return rs.reduce(function (a, r) { return a + r.hotPct; }, 0) / rs.length;
+    })();
+    var size = heat >= 50 ? 'Expect smaller seed.'
+      : heat >= 30 ? 'Expect some size pressure.'
+        : (flowHot != null && flowHot > 10)
+          ? 'Fill period was not unusually hot, but flowering was — see below.'
+          : 'Size should be normal.';
 
     var byRank = rows.slice();
     var majority = byRank[Math.floor(byRank.length / 2)].c.status;
@@ -157,6 +174,42 @@
    * counts, seed set, hourly temperatures including nights, and real irrigation records, none
    * of which we have. An explanation built on less than that was published here on 18 September
    * and withdrawn the same day. */
+  /* WHAT WE FOUND, AND WHAT IT LIKELY DOES — for every crop, whether or not it carries a
+   * number. GAJ: "I want you to have a description on ALL commodities of a 'likely impact' on
+   * whatever stresses we identify."
+   *
+   * The crops with no yield are exactly the ones where this IS the product. A grower who opens
+   * the page for great northern and finds an empty space has been given nothing; the same
+   * grower told that the crop flowered through 24 hot days against a normal of 17, on a profile
+   * that started the season at 44% of its usual winter recharge, has something to act on.
+   *
+   * These lines describe MECHANISM and DIRECTION and stop. They never convert to pounds. That
+   * boundary was learned on 18 September, when an explanation that crossed it was published
+   * here and withdrawn the same hour. */
+  function stressBlock() {
+    var sel = document.getElementById('region');
+    var cropSel = document.getElementById('nbCrop') || document.getElementById('crop');
+    var rk = sel && sel.value;
+    var crop = (cropSel && cropSel.value) || 'PINTO';
+    var regs = YI && (YI.regions || YI);
+    var c = regs && rk && regs[rk] && (regs[rk].classes || {})[crop];
+    var st = c && c.stresses;
+    if (!st || !st.length) return '';
+    var items = st.map(function (x) {
+      var dir = /worse|drier/.test(x.direction) ? 'nbStressBad' : 'nbStressOk';
+      return '<li class="' + dir + '"><b>' + x.stress + '</b> — ' + x.measured +
+        ' <span class="nbQuiet">(' + x.normal + ')</span><br>' +
+        x.likely_impact +
+        ' <span class="nbQuiet">' + x.confidence + '</span></li>';
+    }).join('');
+    var lead = c.lb_ac
+      ? 'What we found, and what it likely does:'
+      : 'We publish no yield for ' + crop.toLowerCase() + '. Here is what we did measure, and ' +
+        'what it likely does:';
+    return '<div class="nbStresses"><p class="nbStressLead">' + lead + '</p><ul>' +
+      items + '</ul></div>';
+  }
+
   function heatRiskLine() {
     var rows = regionRows();
     if (!rows || !rows.length) return '';
@@ -306,6 +359,7 @@
       (h.moistLine ? '<p class="nbA-moist">' + h.moistLine + '</p>' : '') +
       (h.watch ? '<p class="nbA-watch">Watch — ' + h.watch + '</p>' : '') +
       heatRiskLine() +
+      stressBlock() +
       twoWaysLine() +
       waterLine() +
       '<p class="nbA-q"><b>What sets the price:</b> ' + (data.classes[crop].quality_driver || '') + '</p>' +

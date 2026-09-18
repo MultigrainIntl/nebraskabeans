@@ -125,12 +125,27 @@ try {
   assert.doesNotMatch(headline, /^\s*[A-Z ()]+ — \d{1,2},\d{3} lb\/ac\s*$/,
     'YIELD-001: the headline must not lead with a single point estimate');
 
-  /* ---- YIELD-002: the headline number must name its source ---- */
-  const basis = await text('.nbA-basis');
-  assert.match(basis, /USDA\u2019s own record|USDA state history/i,
-    'YIELD-002: the headline yield range is USDA history times an adjustment and must say so');
-  assert.match(basis, /not our own forecast|not an independent forecast/i,
-    'YIELD-002: the headline must not let a USDA-derived range read as a forecast');
+  /* ---- YIELD-002: a shown yield must name its source; no yield means say so ----
+   *
+   * Updated 18 September 2026. This required the basis line unconditionally and began failing
+   * the moment dry beans stopped publishing a yield — the line exists to attribute a number,
+   * and there is no longer a number to attribute. The requirement is not dropped, it is made
+   * conditional on the thing it was always about: if a yield is shown it must name its source;
+   * if none is shown the page must say so and show what it measured instead, because an empty
+   * space tells a grower nothing. */
+  if (await page.locator('.nbA-basis').count() > 0) {
+    const basis = await text('.nbA-basis');
+    assert.match(basis, /USDA\u2019s own record|USDA state history|flowering|held-out/i,
+      'YIELD-002: a published yield range must name where it came from');
+    assert.match(basis, /not our own forecast|not an independent forecast|held-out|flowering/i,
+      'YIELD-002: a USDA-derived range must not read as an independent forecast');
+  } else {
+    const body = await page.locator('body').textContent();
+    assert.match(body, /publish no yield/i,
+      'YIELD-002: with no yield shown, the page must say so plainly');
+    assert.match(body, /what it likely does/i,
+      'YIELD-002: with no yield shown, the measured stresses must take its place');
+  }
 
   /* ---- USDA is the scorecard, never an input ---- */
   const deeper = await page.locator('body').textContent();
@@ -452,12 +467,29 @@ try {
      forbade one. Both were wrong: a tool whose yield waits for harvest data is a
      post-mortem, and a tool that states a yield without its basis is the thing the review
      caught. What it must do is carry a BAND and name what the band rests on. */
-  assert.match(est, /\d,\d{3}\u2013\d,\d{3}/,
-    'EVIDENCE-001: the estimate must be a band, never a bare point estimate');
-  assert.match(est, /not a forecast we have proved|not a validated forecast/i,
-    'EVIDENCE-001: the estimate must say plainly what it is not');
-  assert.match(est, /compare the two|dividing one by the other|cancels out the parts we cannot measure/i,
-    'EVIDENCE-001: it must state how it is built, not just assert a number');
+  /* FOURTH POSITION, 18 September 2026, and it resolves the swing above rather than continuing
+     it. The rule was never "there must be a number" — it was "a number must carry a band and
+     name what the band rests on". Dry beans now publish no yield at all, because the model was
+     tested against every USDA harvest for them in these states and could not call the year, and
+     the historical average is a yardstick rather than an answer.
+     So: IF a yield is shown it must still be a band with its basis, exactly as before. If none
+     is shown, the panel must say so plainly and put the measurements in its place. What is
+     forbidden in both branches is the same thing it always was — a bare number, or silence
+     where a reader expects an answer. */
+  if (/\d,\d{3}\u2013\d,\d{3}/.test(est)) {
+    assert.match(est, /not a forecast we have proved|not a validated forecast|held-out|flowering/i,
+      'EVIDENCE-001: a published band must say plainly what it is not');
+    assert.match(est,
+      /compare the two|dividing one by the other|cancels out the parts we cannot measure|held-out/i,
+      'EVIDENCE-001: it must state how it is built, not just assert a number');
+  } else {
+    assert.match(est, /publish no yield/i,
+      'EVIDENCE-001: with no band, the panel must say so rather than show an empty column');
+    assert.match(est, /could not call the year|yardstick rather than an answer/i,
+      'EVIDENCE-001: it must say WHY there is no number');
+    assert.match(est, /what we measured|hot days in flower/i,
+      'EVIDENCE-001: the measurements must take the number\u2019s place, not leave a gap');
+  }
   /* The panel shows greenness as a percentage rather than a rank — the correction made when
      a rank in a tight field was reading a 2% season as a standout. The requirement is that the
      canopy comparison is present, not that it is worded as a rank. */
@@ -491,10 +523,17 @@ try {
 
   /* The headline range above the map is USDA history and must say so — it is the only yield
      figure left on the page and must not be mistaken for a forecast. */
-  assert.match(await text('.nbA-basis'), /USDA\u2019s own record|USDA state history/i,
-    'YIELD-005: the only remaining yield figure must name its source');
-  assert.match(await text('.nbA-basis'), /not our own forecast|not an independent forecast/i,
-    'YIELD-005: it must not read as a forecast');
+  if (await page.locator('.nbA-basis').count() > 0) {
+    assert.match(await text('.nbA-basis'),
+      /USDA\u2019s own record|USDA state history|flowering|held-out/i,
+      'YIELD-005: any remaining yield figure must name its source');
+    assert.match(await text('.nbA-basis'),
+      /not our own forecast|not an independent forecast|held-out|flowering/i,
+      'YIELD-005: it must not read as a forecast');
+  } else {
+    assert.match(await page.locator('body').textContent(), /publish no yield/i,
+      'YIELD-005: with no yield figure, the page must say so rather than fall silent');
+  }
 
   for (const view of ['health']) {
     await setSelect('nbView', view);

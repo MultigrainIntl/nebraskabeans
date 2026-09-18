@@ -628,6 +628,157 @@ def water_two_ways(power_series, smap_series, year, window):
                        "they part company, trust neither far."}
     return out or None
 
+
+# WHAT EACH STRESS LIKELY DOES TO THIS CROP, in the grower's own terms.
+#
+# GAJ, 18 September 2026: "I want you to have a description on ALL commodities of a 'likely
+# impact' on whatever stresses we identify."
+#
+# WHAT THIS IS ALLOWED TO SAY, and the line was drawn the hard way. Earlier the same day an
+# explanation was published here claiming irrigated beans had shrugged off the heat; it was
+# withdrawn within the hour because we had measured heat EXPOSURE and asserted heat ABSORPTION.
+# So these describe the MECHANISM and the DIRECTION and stop there. What a stress cost in pounds
+# needs pod counts, seed set, hourly temperatures including nights, and real irrigation records.
+# None of that exists here, and no sentence below may imply it does.
+#
+# Every impact line is hedged because every one of them is a hedge. "Likely" is not padding.
+STRESS_IMPACT = {
+    "flowering_heat": {
+        "DRY BEANS": "Heat while the crop is flowering aborts flowers and blasts pods. The "
+                     "field can stay green and full while the pods in it are fewer — which is "
+                     "exactly how a short crop reads normal from a satellite counting leaves. "
+                     "Expect pod number to carry the loss before seed size does.",
+        "PEAS": "Peas are the most heat-sensitive crop on this list at flowering. Terminal heat "
+                "shortens the reproductive period and aborts flowers and young pods. This is "
+                "the one stress here with measured skill against harvests: it explains 34% more "
+                "of the pea record than guessing.",
+        "CHICKPEAS": "Chickpeas abort flowers above roughly 35C and set pods poorly in a hot "
+                     "spell. We have no chickpea harvest record in these states to test that "
+                     "against, so this is agronomy, not a measurement of our own.",
+    },
+    "water": {
+        "DRY BEANS": "Beans are shallow-rooted and run short before most row crops do. On "
+                     "dryland ground a short profile at flowering and pod fill cuts pod number "
+                     "first, then seed size. Under a pivot the grower can cover this, and our "
+                     "figure cannot see whether they did.",
+        "PEAS": "Peas finish early and draw on stored winter moisture more than summer rain, so "
+                "a dry profile at planting matters more to them than a dry July.",
+        "CHICKPEAS": "Chickpeas root deeper than beans and tolerate a dry finish better. The "
+                     "risk of a wet one is worse: humidity in the canopy brings ascochyta.",
+    },
+    "warm_nights": {
+        "DRY BEANS": "Nights that stay warm through flowering stop the crop cooling off and are "
+                     "reported to fail pollen in common bean. On this ground they almost never "
+                     "occur, so we count them and expect nothing from them.",
+        "PEAS": "Warm nights shorten grain fill in pulses.",
+        "CHICKPEAS": "Warm nights shorten grain fill in pulses.",
+    },
+    "early_maturity": {
+        "DRY BEANS": "A hot season pushes the crop to maturity sooner, and less time filling "
+                     "means smaller seed. Smaller screen size costs more in this market than "
+                     "tonnage does.",
+        "PEAS": "An early finish in peas usually means lighter seed and a lower bushel weight.",
+        "CHICKPEAS": "An early finish drops calibre, and calibre is most of the price in "
+                     "chickpeas.",
+    },
+}
+
+
+def stress_report(commodity, hot, hot_normal, window, warm_nights, water2, winter_pct,
+                  matured_on, matured_normal_md):
+    """Every stress we actually measured for this crop here, and what it likely does.
+
+    Each entry carries the measurement, the comparison it is measured against, and the likely
+    effect. Nothing here converts into pounds per acre, and nothing here is published as a
+    finding about what the crop absorbed.
+    """
+    out = []
+
+    if hot is not None and hot_normal and window:
+        over = 100 * (hot / hot_normal - 1)
+        if abs(over) >= 10:
+            out.append({
+                "stress": "Heat during flowering",
+                "measured": "%d hot days in a %d-day flowering window" % (hot, window),
+                "normal": "%.1f days is normal here" % hot_normal,
+                "vs_normal_pct": round(over, 1),
+                "direction": "worse than normal" if over > 0 else "better than normal",
+                "likely_impact": STRESS_IMPACT["flowering_heat"].get(commodity, ""),
+                "confidence": "We measured the heat the crop was exposed to. We have not "
+                              "measured what it cost, and we will not put a number on it."})
+
+    if water2 and water2.get("power") and water2.get("smap"):
+        p, sm = water2["power"]["vs_normal_pct"], water2["smap"]["vs_normal_pct"]
+        avg = (p + sm) / 2
+        if abs(avg) >= 5:
+            agree = (water2.get("agreement") or {}).get("gap_points")
+            out.append({
+                "stress": "Soil water",
+                "measured": "weather model %+.1f%%, satellite %+.1f%% against their own "
+                            "eleven-year averages" % (p, sm),
+                "normal": "the same stretch of the calendar in 2015-2025",
+                "vs_normal_pct": round(avg, 1),
+                "direction": "drier than normal" if avg < 0 else "wetter than normal",
+                "likely_impact": STRESS_IMPACT["water"].get(commodity, ""),
+                "confidence": "Two independent estimates, %s points apart. Neither is a probe "
+                              "in your field, and neither can see a centre pivot."
+                              % (round(agree, 1) if agree is not None else "?")})
+
+    if winter_pct is not None and winter_pct < 85:
+        out.append({
+            "stress": "Winter recharge",
+            "measured": "%d%% of normal October-March precipitation" % winter_pct,
+            "normal": "that region's own previous thirty winters",
+            "vs_normal_pct": winter_pct - 100,
+            "direction": "drier than normal",
+            "likely_impact": "The profile the crop started on was short before a seed went in. "
+                             "It is the cause behind a low water table rather than a separate "
+                             "problem, and it matters most to dryland ground.",
+            "confidence": "Measured at the gauges. Winter catch is the hardest measurement in "
+                          "this dataset — gauges under-catch snow in wind, and this is windy "
+                          "country."})
+
+    if warm_nights:
+        out.append({
+            "stress": "Warm nights during flowering",
+            "measured": "%d nights at or above 68F during flowering" % warm_nights,
+            "normal": "almost never happens on this ground",
+            "vs_normal_pct": None,
+            "direction": "worse than normal",
+            "likely_impact": STRESS_IMPACT["warm_nights"].get(commodity, ""),
+            "confidence": "Counted as an observation. Tested against ten years of harvests here "
+                          "it predicted nothing, so nothing is subtracted for it."})
+
+    if matured_on and matured_normal_md and matured_on[5:] < matured_normal_md:
+        out.append({
+            "stress": "Early maturity",
+            "measured": "reached maturity %s" % matured_on,
+            "normal": "usually around %s here" % matured_normal_md,
+            "vs_normal_pct": None,
+            "direction": "earlier than normal",
+            "likely_impact": STRESS_IMPACT["early_maturity"].get(commodity, ""),
+            "confidence": "Modelled from growing degree days, not observed in the field."})
+
+    # AN ALL-CLEAR IS INFORMATION AND MUST BE SAID. Two crops in western Colorado came back with
+    # every measurement inside its normal range, and the page showed them an empty space —
+    # which a grower reads as "nothing here", not as "nothing wrong here". Those are opposite
+    # meanings and only one of them is true.
+    if not out:
+        out.append({
+            "stress": "Nothing running against this crop",
+            "measured": "heat at flowering, soil water, winter recharge, warm nights and "
+                        "maturity date all within their normal range here",
+            "normal": "this region's own record",
+            "vs_normal_pct": None,
+            "direction": "normal",
+            "likely_impact": "None of the stresses we can measure is running against this crop "
+                             "in this area. That is not the same as a good crop — disease, hail, "
+                             "weeds, stand and what the grower actually did are all outside what "
+                             "we measure.",
+            "confidence": "An all-clear on five measurements, not an all-clear on the season."})
+
+    return out
+
 def canopy_on(canopy, md):
     """Canopy on this day, interpolated between the readings either side of it."""
     before = [k for k in canopy if k <= md]
@@ -792,6 +943,10 @@ def main():
     # the headline and the model cannot drift apart and no unsourced level can survive in it.
     answers_doc = json.load(open(os.path.join(DATA, "region-answers.json")))
     answers = answers_doc["regions"]
+    try:
+        WINTER = json.load(open(os.path.join(DATA, "winter-recharge.json")))
+    except Exception:
+        WINTER = {"regions": {}}
     pulses = json.load(open(os.path.join(ARCHIVE, "canopy-pulses.json")))["commodities"]
     IRRIGATION = json.load(open(os.path.join(DATA, "irrigation.json")))["crops"]
     try:
@@ -860,6 +1015,18 @@ def main():
                     if k.startswith(str(year)) and region in v
                     and (not isinstance(v[region], dict) or v[region].get("q") != "suspect")}
 
+        # The water comparison is regional and does not differ by class, so it is computed once
+        # here rather than after the loop — the stress descriptions inside the loop need it.
+        water_now = None
+        _reach = None
+        for _sp in CLASSES.values():
+            _c = canopy_for(THIS_YEAR, _sp[6])
+            if _c:
+                _m = max(_c)
+                _reach = _m if _reach is None else max(_reach, _m)
+        if _reach:
+            water_now = water_two_ways(soil_root, smap_root, THIS_YEAR, ("03-01", _reach))
+
         per = {}
         for cls, spec in CLASSES.items():
             commodity = spec[6]
@@ -877,6 +1044,7 @@ def main():
             reach = max(now_canopy)
             hist, hot_hist = [], []
             hot_by_year = {}
+            matured_hist = []
             for y in YEARS:
                 t = {k: v for k, v in temp_all.items() if k.startswith(str(y))}
                 c = canopy_for(y, commodity)
@@ -893,6 +1061,8 @@ def main():
                     # harvested yields is the only way to find what a hot flowering day costs
                     # without inventing the figure.
                     hot_by_year[str(y)] = {"hot": got[3], "window": got[4], "warm_nights": got[5]}
+                    if got[2]:
+                        matured_hist.append(got[2][5:])
             if len(hist) < 7:
                 continue                      # too little history to divide by
 
@@ -969,9 +1139,26 @@ def main():
             calibrated = scale is not None
             if not calibrated:
                 scale, scale_from = None, "no harvest record for this crop in these states"
+                # NEVER TESTED MEANS NEVER PUBLISHED. Chickpeas were the only crop still
+                # printing a yield, and the only crop that CANNOT be tested — USDA publishes no
+                # chickpea yield in Nebraska, Colorado or Wyoming, so there is nothing to score
+                # against. Meanwhile pinto, which we did test, published nothing because it
+                # failed. An untested crop outranking a tested one is indefensible, and GAJ's
+                # answer when it was put to him was one word: "Drop it."
+                #
+                # The condition figures stay. Every stress we measure is still described below.
+                # What goes is the pounds per acre nobody can check.
             else:
                 index = 1 + scale * (raw_index - 1)
-                spread = spread * scale if scale else spread
+                # THE BAND MUST NOT NARROW WHEN CONFIDENCE FALLS.
+                #
+                # Scaling the spread along with the swing made a model we trust LESS look more
+                # precise: Wyoming pinto published 2,255-2,287 lb/ac, a band of plus or minus
+                # seven tenths of one percent, from a model with 14% of its swing surviving the
+                # test. GAJ: "There is NO FUCKING WAY this is correct." He is right — a razor
+                # thin range is a claim of precision, and precision is the one thing that
+                # scaling proves we do not have. The spread stays as the model measured it.
+                pass
 
             # A SCALE OF ZERO MEANS WE CANNOT CALL THIS CROP. IT DOES NOT MEAN AN AVERAGE YEAR.
             #
@@ -1000,8 +1187,15 @@ def main():
             # the historical average, it IS the historical average, whatever route produced it,
             # and it is withdrawn.
             TREND_TOLERANCE = 0.01
-            withdrawn = calibrated and (
+            withdrawn = (not calibrated) or (
                 scale == 0 or abs(index - 1.0) <= TREND_TOLERANCE)
+            if not calibrated:
+                per_reason = ("USDA publishes no yield for this crop in these states, so there "
+                              "is no harvest record to test our model against and no honest way "
+                              "to check a number before printing it. The measured conditions "
+                              "below are what we do know.")
+            else:
+                per_reason = None
 
             base, level_kind, proxy_note = usda_level(cls, region)
             unsourced = base is None
@@ -1105,10 +1299,22 @@ def main():
                     per[cls]["vs_normal_pct"] = round(
                         100 * (pred / fm["mean_yield_lb_ac"] - 1), 1)
 
+            # EVERY CROP GETS ITS STRESSES DESCRIBED, WHETHER OR NOT IT GETS A NUMBER.
+            # The crops with no yield are precisely the ones where this is the only thing the
+            # page has to offer, so it is not an extra — it is the product.
+            mat_norm = None
+            if matured_hist:
+                mat_norm = sorted(matured_hist)[len(matured_hist) // 2]
+            per[cls]["stresses"] = stress_report(
+                commodity, got[3], (statistics.mean(hot_hist) if hot_hist else None), got[4],
+                got[5], water_now, (WINTER.get("regions", {}).get(region, {})
+                                    or {}).get("pct_of_normal"),
+                got[2], mat_norm)
+
             per[cls].setdefault("yield_withdrawn", withdrawn)
             per[cls]["yield_withdrawn"] = per[cls].get("yield_withdrawn", withdrawn)
             if withdrawn:
-                per[cls]["yield_withdrawn_because"] = (
+                per[cls]["yield_withdrawn_because"] = per_reason or (
                     "Tested against every USDA harvest for this class in this state, this model "
                     "could not call the year, so anything we published would land on the "
                     "historical average. History is the yardstick here, never the answer. We "
@@ -1178,6 +1384,24 @@ def main():
                 # defects keep returning — this is the answer in one place. A class whose yield
                 # came from somewhere else keeps it, and the rule is written as a condition
                 # rather than as a memory.
+                # AND TEST IT AGAIN HERE, ON THE NUMBER THAT WILL ACTUALLY BE PUBLISHED.
+                #
+                # The withdrawal was decided on the per-class index, and THIS block then replaced
+                # that index with the commodity-shared one. Southeast Wyoming pinto was outside
+                # tolerance when the decision was taken and landed at 0.9914 afterwards — within
+                # a percent of its own historical average — so a withdrawn-in-spirit number went
+                # to the headline. The test now runs on the final figure, because the final
+                # figure is what a reader acts on.
+                if (not r.get("yield_coefficients")
+                        and r.get("swing_scale") is not None
+                        and abs(shared - 1.0) <= 0.01):
+                    r["yield_withdrawn"] = True
+                    r["yield_withdrawn_because"] = (
+                        "Tested against every USDA harvest for this class in this state, this "
+                        "model could not call the year, so anything we published would land on "
+                        "the historical average. History is the yardstick here, never the "
+                        "answer. We publish no yield for it rather than dress the average as a "
+                        "forecast. The measured conditions below are what we do know.")
                 if r.get("yield_withdrawn"):
                     for k in ("lb_ac", "lb_ac_low", "lb_ac_high"):
                         r.pop(k, None)
@@ -1191,14 +1415,9 @@ def main():
         if per:
             # BOTH PRODUCTS, PUBLISHED SIDE BY SIDE, EVERY RUN. Region level, because the water
             # signal is regional and does not differ between bean classes.
-            reach_md = max((max(c) for c in (canopy_for(THIS_YEAR, sp[6])
-                                             for sp in CLASSES.values()) if c), default=None)
-            water2 = None
-            if reach_md:
-                water2 = water_two_ways(soil_root, smap_root, THIS_YEAR, ("03-01", reach_md))
             out[region] = {"name": NAMES[region], "classes": per}
-            if water2:
-                out[region]["water_two_ways"] = water2
+            if water_now:
+                out[region]["water_two_ways"] = water_now
 
     # Push today's USDA-sourced figures into the file the headline reads, and DELETE any
     # yield block whose level USDA does not publish. A missing number is honest; an invented

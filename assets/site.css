@@ -942,3 +942,19 @@ canvas.nbSurface {
 .nbEstMore[open] > summary::before { content: "▾ "; }
 .nbEstMore > summary:hover { color: #17794a; }
 @media (prefers-color-scheme: dark) { .nbEstMore > summary { color: #9db3a7; } }
+
+/* WHAT WE FOUND AND WHAT IT LIKELY DOES. Shown for every crop, and the only content on the
+   page for the crops whose yield is withdrawn — so it is styled as a primary block, not as a
+   footnote. Red marks a stress running against the crop; it is a direction, never a quantity. */
+.nbStresses { margin: 1rem 0 1.4rem; }
+.nbStressLead { font-weight: 600; margin: 0 0 .5rem; }
+.nbStresses ul { list-style: none; padding: 0; margin: 0; }
+.nbStresses li { padding: .7rem .9rem; margin: 0 0 .5rem; border-left: 3px solid #c9ced6;
+                 background: rgba(0,0,0,.025); border-radius: 0 4px 4px 0; line-height: 1.5; }
+.nbStressBad { border-left-color: #b4531a; }
+.nbStressOk  { border-left-color: #2a9d9a; }
+.nbHeatRisk { margin: .8rem 0; padding-left: .9rem; border-left: 3px solid #b4531a; }
+.nbTwoWays  { margin: .8rem 0; }
+@media (prefers-color-scheme: dark) {
+  .nbStresses li { background: rgba(255,255,255,.04); }
+}

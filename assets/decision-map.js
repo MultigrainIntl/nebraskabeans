@@ -1172,14 +1172,24 @@
     var worstRank = ranked[0], bestRank = ranked[ranked.length - 1];
     if (!bestRank) { el.hidden = true; return; }
 
+    /* Does ANY region publish pounds for this crop? If none does, the two yield columns are not
+     * filled with dashes — they are not drawn at all. */
+    var anyYield = regions.some(function (x) {
+      var i = idxFor(x.id);
+      return i && typeof i.lb_ac_low === 'number';
+    });
+
     var rows = regions.map(function (x) {
       var ix = idxFor(x.id);
       return '<tr><td>' + x.r.name + '</td>' +
-        '<td class="nbNum">' + (ix && typeof ix.lb_ac_low === 'number'
-          ? ix.lb_ac_low.toLocaleString() + '\u2013' + ix.lb_ac_high.toLocaleString() : '—') +
-        '</td>' +
-        '<td class="nbNum">' + (ix && ix.vs_normal_pct != null
-          ? (ix.vs_normal_pct > 0 ? '+' : '') + Math.round(ix.vs_normal_pct) + '%' : '—') + '</td>' +
+        (anyYield
+          ? '<td class="nbNum">' + (ix && typeof ix.lb_ac_low === 'number'
+              ? ix.lb_ac_low.toLocaleString() + '\u2013' + ix.lb_ac_high.toLocaleString()
+              : 'not published') + '</td>' +
+            '<td class="nbNum">' + (ix && ix.vs_normal_pct != null && ix.lb_ac
+              ? (ix.vs_normal_pct > 0 ? '+' : '') + Math.round(ix.vs_normal_pct) + '%' : '—') +
+            '</td>'
+          : '') +
         '<td class="nbNum">' + (x.c.flowering_window_days
           ? x.c.flowering_hot_days + ' of ' + x.c.flowering_window_days : '—') + '</td>' +
         // SAME SOURCE AS THE MAP. This column read a single satellite date out of
@@ -1199,10 +1209,22 @@
     var heatF = best.c.heat_threshold_f || 90;
     el.innerHTML =
       '<h3>' + S.crop + ' 2026 \u2014 where the crop stands now</h3>' +
-      '<p class="nbEstLead">' + T.t('estimate.lead2') + '</p>' +
+      '<p class="nbEstLead">' + (anyYield ? T.t('estimate.lead2')
+        : 'We publish no yield estimate for ' + S.crop.toLowerCase() + '. Tested against every '
+          + 'harvest USDA has published for it in these states, our model could not call the '
+          + 'year, and the historical average is a yardstick rather than an answer. What '
+          + 'follows is what we measured.') + '</p>' +
       '<div class="nbTableWrap">' +
-      '<table class="nbYieldTable"><thead><tr><th>region</th><th>est. lb/ac</th>' +
-      '<th>vs normal</th><th>hot days in flower</th><th>greenness vs normal</th>' +
+      /* THE POUNDS COLUMN DISAPPEARS WHEN THERE ARE NO POUNDS.
+       *
+       * Dry beans stopped publishing a yield on 18 September, and this table kept its "est.
+       * lb/ac" heading and filled every cell with an em dash and "0%". Seven rows of nothing,
+       * under a heading promising a number. Withdrawing a figure has to withdraw the column it
+       * lived in, or the page still promises what it no longer delivers — and "0%" reads as
+       * "normal", which is the exact claim we removed the number to avoid making. */
+      '<table class="nbYieldTable"><thead><tr><th>region</th>' +
+      (anyYield ? '<th>est. lb/ac</th><th>vs normal</th>' : '') +
+      '<th>hot days in flower</th><th>greenness vs normal</th>' +
       '<th>of heat needed</th></tr></thead>' +
       '<tbody>' + rows + '</tbody></table></div>' +
       (bestY ? '<p class="nbEstNum">' + T.t('estimate.bestWorst', {

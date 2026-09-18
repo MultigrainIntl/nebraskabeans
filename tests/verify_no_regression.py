@@ -534,6 +534,48 @@ check("the heat line refuses to convert itself into pounds",
       "not going to guess it in pounds" in _afh,
       "exposure is reported; absorption is not invented")
 
+# ---------------------------------------------------------------------------
+# 22. EVERY CROP CARRIES ITS STRESSES AND WHAT THEY LIKELY DO (18 Sep 2026).
+# GAJ: "I want you to have a description on ALL commodities of a 'likely impact' on whatever
+# stresses we identify." The crops with no published yield are exactly the ones where this is
+# the only thing the page has to offer — an empty space gives a grower nothing.
+_cls_all = [(rk, cls, c) for rk, v in _regions.items()
+            for cls, c in (v.get("classes") or {}).items()]
+_no_stress = ["%s/%s" % (rk, cls) for rk, cls, c in _cls_all if not c.get("stresses")]
+check("every crop in every region describes its stresses",
+      not _no_stress,
+      "%d crop-regions carry a stress report" % len(_cls_all)
+      if not _no_stress else "missing for " + ", ".join(_no_stress[:4]))
+check("every stress says what it likely does and how sure we are",
+      all(x.get("likely_impact") and x.get("confidence")
+          for _, _, c in _cls_all for x in (c.get("stresses") or [])),
+      "mechanism and hedge travel with every measurement")
+_afs = read("assets", "answer-first.js")
+check("the stress block reaches the page",
+      "stressBlock" in _afs and "stressBlock() +" in _afs,
+      "shown, not merely stored")
+
+# An untested crop must never outrank a tested one. Chickpeas were the only crop that CANNOT be
+# tested — USDA publishes no chickpea yield in these states — and the only one still printing a
+# number, while pinto, which was tested and failed, printed none. GAJ: "Drop it."
+_untested_with_number = ["%s/%s" % (rk, cls) for rk, cls, c in _cls_all
+                         if c.get("index_is_calibrated") is False and c.get("lb_ac")]
+check("a crop we cannot test publishes no yield",
+      not _untested_with_number,
+      "untested means unpublished"
+      if not _untested_with_number else "published: " + ", ".join(_untested_with_number[:4]))
+
+# And the band must not narrow as confidence falls. Wyoming pinto published 2,255-2,287 lb/ac —
+# plus or minus 0.7% — from a model with 14% of its swing surviving, because the spread was
+# scaled along with the swing. A thin range is a claim of precision.
+_thin = ["%s/%s" % (rk, cls) for rk, cls, c in _cls_all
+         if c.get("lb_ac") and c.get("model_year_to_year_spread_pct") is not None
+         and c["model_year_to_year_spread_pct"] < 3]
+check("no published range is narrower than the model's own year-to-year spread",
+      not _thin,
+      "a thin band would claim a precision the test disproved"
+      if not _thin else "suspiciously thin: " + ", ".join(_thin[:4]))
+
 print()
 if fails:
     print("REGRESSION: %d defect(s) have returned — %s" % (len(fails), ", ".join(fails)))
