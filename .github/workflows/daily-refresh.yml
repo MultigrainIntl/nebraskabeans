@@ -11,7 +11,7 @@ name: Daily data refresh
 
 on:
   schedule:
-    - cron: '20 11 * * *'      # 05:20 Mountain — after the overnight satellite passes land
+    - cron: '20 11 1 * *'      # 05:20 Mountain — after the overnight satellite passes land
   workflow_dispatch:
 
 permissions:
